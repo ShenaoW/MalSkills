@@ -1,0 +1,17 @@
+[project]
+name = "skillguard"
+version = "0.1.0"
+description = "Neuro-symbolic static analyzer for malicious agent skills"
+requires-python = ">=3.9"
+authors = [{ name = "OpenCode" }]
+readme = "README.md"
+
+[project.scripts]
+analyze-skill = "skillguard.cli:main"
+build-benchmark-index = "skillguard.cli:main"
+run-eval = "skillguard.cli:main"
+gen-mutations = "skillguard.cli:main"
+render-report = "skillguard.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,81 @@
+# Claude Skill Security Scanner Configuration
+# All paths are relative to project root
+
+project:
+  name: "claude-skill-security"
+  version: "1.0.0"
+
+# Directory paths (relative to project root)
+paths:
+  project_root: "."
+  data_dir: "./data"
+  workspace_dir: "./workspace"
+  scan_results_dir: "./scan_results"
+  execution_logs_dir: "./execution_logs"
+  tasks_dir: "./tasks"
+  scripts_dir: "./scripts"
+
+# Crawler configuration
+crawler:
+  skills_rest:
+    api_url: "https://skills.rest/api/skills"
+    enabled: true
+    limit: 60
+    max_limit: 300000
+
+  skillsmp:
+    api_url: "https://skillsmp.com/api/v1/skills/search"
+    enabled: true
+    require_api_key: true
+
+# Download configuration
+download:
+  github_token_env: "GITHUB_TOKEN"
+  max_workers: 10
+  timeout: 300
+  branch_fallback: true
+  concurrent_downloads: 15
+
+# Static scanner configuration
+scanner:
+  max_workers: 5
+  timeout: 60
+  batch_size: 100
+
+  # Risk score thresholds
+  thresholds:
+    critical: 8
+    high: 6
+    medium: 4
+    low: 2
+
+# CC Analyzer configuration
+analyzer:
+  jobs: 10
+  max_retries: 3
+  prompt_file: "./analyzer/prompts/audit_prompt.txt"
+  output_suffix: "_audit.json"
+
+  # API configuration
+  api:
+    key_env: "ANTHROPIC_API_KEY"
+    base_url_env: "ANTHROPIC_BASE_URL"
+    default_base_url: "https://api.anthropic.com"
+
+# Executor configuration
+executor:
+  docker_image: "claude-skill-sandbox"
+  max_workers: 3
+  timeout: 900
+  use_nova: true
+  nova_block: false
+
+  # API key pool
+  api_key_pool:
+    enabled: true
+    pool_file: "./api_keys.conf"
+
+# Logging
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"

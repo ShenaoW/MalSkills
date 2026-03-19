@@ -1,0 +1,117 @@
+rules:
+  - id: skillguard.javascript.env-read
+    message: JavaScript environment variable access
+    languages: [javascript, typescript]
+    severity: INFO
+    patterns:
+      - pattern-either:
+          - pattern: process.env.$KEY
+          - pattern: process.env[$KEY]
+    metadata:
+      skillguard_evidence_type: data_object
+      skillguard_subtype: env_read
+      skillguard_value_metavar: $KEY
+
+  - id: skillguard.javascript.file-read
+    message: JavaScript file read
+    languages: [javascript, typescript]
+    severity: INFO
+    patterns:
+      - pattern-either:
+          - pattern: fs.readFileSync($PATH, ...)
+          - pattern: fs.readFile($PATH, ...)
+          - pattern: Bun.file($PATH)
+    metadata:
+      skillguard_evidence_type: data_object
+      skillguard_subtype: file_read
+      skillguard_value_metavar: $PATH
+
+  - id: skillguard.javascript.list-dir
+    message: JavaScript directory listing
+    languages: [javascript, typescript]
+    severity: INFO
+    patterns:
+      - pattern-either:
+          - pattern: fs.readdirSync($PATH, ...)
+          - pattern: fs.readdir($PATH, ...)
+    metadata:
+      skillguard_evidence_type: operation
+      skillguard_subtype: list_dir
+      skillguard_value_metavar: $PATH
+
+  - id: skillguard.javascript.network-send
+    message: JavaScript network send
+    languages: [javascript, typescript]
+    severity: WARNING
+    patterns:
+      - pattern-either:
+          - pattern: axios.post($URL, ...)
+          - pattern: axios.put($URL, ...)
+          - pattern: axios.patch($URL, ...)
+          - pattern: axios.delete($URL, ...)
+          - pattern: 'fetch($URL, { ..., method: $METHOD, ... })'
+          - pattern: $CLIENT.send($URL, ...)
+    metadata:
+      skillguard_evidence_type: channel_object
+      skillguard_subtype: network_send
+      skillguard_value_metavar: $URL
+
+  - id: skillguard.javascript.network-fetch
+    message: JavaScript network fetch
+    languages: [javascript, typescript]
+    severity: INFO
+    patterns:
+      - pattern-either:
+          - pattern: axios.get($URL, ...)
+          - pattern: fetch($URL)
+          - pattern: http.request($URL, ...)
+          - pattern: https.request($URL, ...)
+    metadata:
+      skillguard_evidence_type: channel_object
+      skillguard_subtype: network_fetch
+      skillguard_value_metavar: $URL
+
+  - id: skillguard.javascript.shell-exec
+    message: JavaScript shell execution
+    languages: [javascript, typescript]
+    severity: ERROR
+    patterns:
+      - pattern-either:
+          - pattern: child_process.exec($CMD, ...)
+          - pattern: child_process.execSync($CMD, ...)
+          - pattern: child_process.spawn($CMD, ...)
+          - pattern: child_process.spawnSync($CMD, ...)
+          - pattern: exec($CMD, ...)
+          - pattern: execSync($CMD, ...)
+    metadata:
+      skillguard_evidence_type: channel_object
+      skillguard_subtype: shell_exec
+      skillguard_value_metavar: $CMD
+
+  - id: skillguard.javascript.dynamic-load
+    message: JavaScript dynamic module load
+    languages: [javascript, typescript]
+    severity: WARNING
+    patterns:
+      - pattern-either:
+          - pattern: require($MOD)
+          - pattern: import($MOD)
+    metadata:
+      skillguard_evidence_type: channel_object
+      skillguard_subtype: dynamic_load
+      skillguard_value_metavar: $MOD
+
+  - id: skillguard.javascript.config-ref
+    message: JavaScript config object reference
+    languages: [javascript, typescript]
+    severity: INFO
+    patterns:
+      - pattern-either:
+          - pattern: cfg.$KEY
+          - pattern: config.$KEY
+          - pattern: settings.$KEY
+    metadata:
+      skillguard_evidence_type: reference
+      skillguard_subtype: config_ref
+      skillguard_value_metavar: $KEY
+      skillguard_confidence: "0.82"

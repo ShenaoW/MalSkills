@@ -1,0 +1,136 @@
+from __future__ import annotations
+
+import hashlib
+import json
+import re
+import os
+from pathlib import Path
+from typing import Any, Iterable
+
+
+def sha256_text(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8", errors="ignore")).hexdigest()
+
+
+def sha256_bytes(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
+def try_read_text(path: Path) -> tuple[bool, str | None]:
+    try:
+        data = path.read_bytes()
+    except OSError:
+        return False, None
+    if b"\x00" in data:
+        return False, None
+    try:
+        return True, data.decode("utf-8")
+    except UnicodeDecodeError:
+        try:
+            return True, data.decode("latin-1")
+        except UnicodeDecodeError:
+            return False, None
+
+
+def flatten_mapping(value: Any, prefix: str = "") -> list[tuple[str, Any]]:
+    items: list[tuple[str, Any]] = []
+    if isinstance(value, dict):
+        for key, child in value.items():
+            child_prefix = f"{prefix}.{key}" if prefix else str(key)
+            items.extend(flatten_mapping(child, child_prefix))
+        return items
+    if isinstance(value, list):
+        for index, child in enumerate(value):
+            child_prefix = f"{prefix}[{index}]"
+            items.extend(flatten_mapping(child, child_prefix))
+        return items
+    items.append((prefix, value))
+    return items
+
+
+def safe_json_loads(text: str) -> Any | None:
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        return None
+
+
+def load_key_value_lines(text: str) -> list[tuple[str, str]]:
+    pairs: list[tuple[str, str]] = []
+    for line in text.splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        if "=" in stripped:
+            key, value = stripped.split("=", 1)
+            pairs.append((key.strip(), value.strip().strip('"').strip("'")))
+        elif ":" in stripped and not stripped.startswith("http"):
+            key, value = stripped.split(":", 1)
+            pairs.append((key.strip(), value.strip().strip('"').strip("'")))
+    return pairs
+
+
+def iter_code_fences(text: str) -> Iterable[tuple[str, str, int, int]]:
+    pattern = re.compile(r"```([A-Za-z0-9_+-]*)\r?\n(.*?)```", re.DOTALL)
+    for match in pattern.finditer(text):
+        language = match.group(1).strip().lower()
+        body = match.group(2)
+        start_line = text.count("\n", 0, match.start()) + 1
+        end_line = start_line + body.count("\n") + 1
+        yield language, body, start_line, end_line
+
+
+def find_urls(text: str) -> list[str]:
+    return re.findall(r"https?://[^\s)>'\"]+", text)
+
+
+def dotted_name(node: Any) -> str | None:
+    name_parts: list[str] = []
+    while node is not None:
+        if hasattr(node, "id"):
+            name_parts.append(node.id)
+            break
+        if hasattr(node, "attr"):
+            name_parts.append(node.attr)
+            node = getattr(node, "value", None)
+            continue
+        if hasattr(node, "func"):
+            node = node.func
+            continue
+        break
+    if not name_parts:
+        return None
+    return ".".join(reversed(name_parts))
+
+
+def literal_string(node: Any) -> str | None:
+    value = getattr(node, "value", None)
+    if isinstance(value, str):
+        return value
+    if hasattr(node, "s") and isinstance(node.s, str):
+        return node.s
+    return None
+
+
+def ensure_dir(path: Path) -> None:
+    path.mkdir(parents=True, exist_ok=True)
+
+
+def load_env_file(start: str | Path | None = None) -> dict[str, str]:
+    base = Path(start).resolve() if start else Path.cwd().resolve()
+    candidates = [base, *base.parents]
+    for directory in candidates:
+        env_path = directory / ".env"
+        if not env_path.exists():
+            continue
+        values: dict[str, str] = {}
+        for line in env_path.read_text(encoding="utf-8").splitlines():
+            stripped = line.strip()
+            if not stripped or stripped.startswith("#") or "=" not in stripped:
+                continue
+            key, value = stripped.split("=", 1)
+            values[key.strip()] = value.strip().strip('"').strip("'")
+        for key, value in values.items():
+            os.environ.setdefault(key, value)
+        return values
+    return {}

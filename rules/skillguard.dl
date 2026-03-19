@@ -1,0 +1,34 @@
+.decl artifact(id:symbol, kind:symbol, path:symbol)
+.decl artifact_meta(id:symbol, key:symbol, value:symbol)
+.decl evidence(id:symbol, artifact_id:symbol, kind:symbol, subtype:symbol, value:symbol)
+.decl evidence_span(id:symbol, start:number, end:number)
+.decl evidence_confidence(id:symbol, confidence:symbol)
+.decl evidence_attr(id:symbol, key:symbol, value:symbol)
+.decl graph_edge(src:symbol, dst:symbol, kind:symbol)
+.decl primitive(id:symbol, kind:symbol)
+.decl primitive_param(id:symbol, key:symbol, value:symbol)
+.decl primitive_evidence(id:symbol, evidence:symbol)
+.decl primitive_confidence(id:symbol, confidence:symbol)
+.decl pattern_match(id:symbol, name:symbol, severity:symbol)
+.decl pattern_support(id:symbol, primitive_id:symbol)
+.decl analysis_meta(key:symbol, value:symbol)
+.decl verdict(label:symbol, score:symbol)
+
+.input artifact
+.input artifact_meta
+.input evidence
+.input evidence_span
+.input evidence_confidence
+.input evidence_attr
+.input graph_edge
+.input primitive
+.input primitive_param
+.input primitive_evidence
+.input primitive_confidence
+.input pattern_match
+.input pattern_support
+.input analysis_meta
+.input verdict
+
+.output pattern_match
+.output verdict
