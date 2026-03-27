@@ -102,6 +102,10 @@ logs
 *.db
 *.sqlite
 data/*
+!data/ground_truth/
+!data/ground_truth/**
+data/ground_truth/malicious/skillsmp
+data/ground_truth/malicious/skillsrest
 
 # Build outputs
 /backend/dist/
@@ -136,10 +140,23 @@ config/local.json
 __pycache__/
 *.pyc
 
-/data/
 .skillguard_cache/
 /output/
 baseline/MASB/scan_results/
 baseline/MASB/workspace/
 
 /paper/
+
+.pytest_cache/
+.ralphy/
+
+/repo/
+/tmp/
+
+/PLANS.md
+/PRD.md
+/AGENTS.md
+
+/ralphy/
+
+/docs/

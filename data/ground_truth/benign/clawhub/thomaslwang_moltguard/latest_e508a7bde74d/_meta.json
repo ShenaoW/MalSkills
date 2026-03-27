@@ -1,0 +1,77 @@
+{
+  "owner": "thomaslwang",
+  "slug": "moltguard",
+  "displayName": "MoltGuard - Security & Antivirus & Guardrails",
+  "latest": {
+    "version": "6.8.16",
+    "publishedAt": 1773211534466,
+    "commit": "https://github.com/openclaw/skills/commit/c7bc6fe7a96aec57c8af6b2c2ef220a3fa45d09e"
+  },
+  "history": [
+    {
+      "version": "6.7.23",
+      "publishedAt": 1772700486820,
+      "commit": "https://github.com/openclaw/skills/commit/d2e94a992f9ad145380bd39e7599524418898233"
+    },
+    {
+      "version": "6.6.17",
+      "publishedAt": 1772102431016,
+      "commit": "https://github.com/openclaw/skills/commit/d0b49ced8cdcb8cb9d290a4af1a420aa1eab4c7e"
+    },
+    {
+      "version": "6.6.5",
+      "publishedAt": 1771840981522,
+      "commit": "https://github.com/openclaw/skills/commit/4d4baa497f33d9b306d01189c91fd0ef2d7e8fb7"
+    },
+    {
+      "version": "6.5.20",
+      "publishedAt": 1771778864931,
+      "commit": "https://github.com/openclaw/skills/commit/49b5d1257e3fcaa168225b25233f72919d648320"
+    },
+    {
+      "version": "6.5.17",
+      "publishedAt": 1771775692801,
+      "commit": "https://github.com/openclaw/skills/commit/40fc6a7a6b957150092fe1fb8ccca9cb4a41c0f3"
+    },
+    {
+      "version": "6.5.16",
+      "publishedAt": 1771775449414,
+      "commit": "https://github.com/openclaw/skills/commit/45d89736487b3b0ebeb9c1714038f9eed8063983"
+    },
+    {
+      "version": "6.0.2",
+      "publishedAt": 1770989110667,
+      "commit": "https://github.com/openclaw/skills/commit/6d6e9a6ade25cbadc13517a8f97e5c997f46e6ec"
+    },
+    {
+      "version": "5.0.2",
+      "publishedAt": 1770912190963,
+      "commit": "https://github.com/openclaw/skills/commit/95246d23f5c26c4cde9951cab278761cdf5079b2"
+    },
+    {
+      "version": "3.0.5",
+      "publishedAt": 1770552908249,
+      "commit": "https://github.com/openclaw/skills/commit/e3f0e01f110f43d2f8efb152d3bd14320f07281b"
+    },
+    {
+      "version": "3.0.4",
+      "publishedAt": 1770422429980,
+      "commit": "https://github.com/openclaw/skills/commit/af304d9b1e192d4ce6f371e867cbeda487db5e97"
+    },
+    {
+      "version": "2.0.1",
+      "publishedAt": 1770378286178,
+      "commit": "https://github.com/openclaw/skills/commit/0af5745cb83ee90f852aab421da638f6bca7af55"
+    },
+    {
+      "version": "1.1.0",
+      "publishedAt": 1770306512990,
+      "commit": "https://github.com/clawdbot/skills/commit/a1b3bcb16ccd09932d1f1a60bd74c94655106e9c"
+    },
+    {
+      "version": "1.0.0",
+      "publishedAt": 1769912401534,
+      "commit": "https://github.com/clawdbot/skills/commit/1ea3e95053b56c505f0c4ae6cb9ea2b6d04476f4"
+    }
+  ]
+}

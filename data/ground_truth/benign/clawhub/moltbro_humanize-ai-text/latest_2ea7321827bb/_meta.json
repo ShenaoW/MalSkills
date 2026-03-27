@@ -1,0 +1,17 @@
+{
+  "owner": "moltbro",
+  "slug": "humanize-ai-text",
+  "displayName": "Humanize AI text",
+  "latest": {
+    "version": "1.0.1",
+    "publishedAt": 1771756867954,
+    "commit": "https://github.com/openclaw/skills/commit/4ce2a3ac7c2428160e1dfcd12a85d11316678936"
+  },
+  "history": [
+    {
+      "version": "1.0.0",
+      "publishedAt": 1769995006129,
+      "commit": "https://github.com/clawdbot/skills/commit/bdf7b27ec886921d48d934c1104fe38c4f84b26e"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "owner": "gzlicanyi",
+  "slug": "imap-smtp-email",
+  "displayName": "imap-smtp-email",
+  "latest": {
+    "version": "0.0.10",
+    "publishedAt": 1773646380130,
+    "commit": "https://github.com/openclaw/skills/commit/a80cb7e7094bb39e5b87b5090893cabddb2c4cc7"
+  },
+  "history": [
+    {
+      "version": "0.0.9",
+      "publishedAt": 1772525235079,
+      "commit": "https://github.com/openclaw/skills/commit/b49b20e1a5d8fb63749c6c7eea3b7c935bbf651b"
+    },
+    {
+      "version": "0.0.2",
+      "publishedAt": 1770100563279,
+      "commit": "https://github.com/clawdbot/skills/commit/8cf2c2892a34b44dc3a6b2e76973f759c57db820"
+    },
+    {
+      "version": "0.0.1",
+      "publishedAt": 1769680455625,
+      "commit": "https://github.com/clawdbot/skills/commit/23bdc32f1bea032ab595d644b81f295601776f57"
+    }
+  ]
+}

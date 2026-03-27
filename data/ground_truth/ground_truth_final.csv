@@ -1,0 +1,201 @@
+Source,Registry,Skill_name,Label,Ground_truth_path
+Koi Security,clawhub,aslaep123/base-agent,malicious,data/ground_truth/malicious/clawhub/aslaep123_base-agent
+Koi Security,clawhub,aslaep123/bybit-agent,malicious,data/ground_truth/malicious/clawhub/aslaep123_bybit-agent
+Koi Security,clawhub,aslaep123/polymarket-traiding-bot,malicious,data/ground_truth/malicious/clawhub/aslaep123_polymarket-traiding-bot
+Koi Security,clawhub,aslaep123/reddit-trends,malicious,data/ground_truth/malicious/clawhub/aslaep123_reddit-trends
+Koi Security,clawhub,gpaitai/polymarket-bot,malicious,data/ground_truth/malicious/clawhub/gpaitai_polymarket-bot
+Koi Security,clawhub,hightower6eu/auto-updater-161ks,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-161ks
+Koi Security,clawhub,hightower6eu/auto-updater-96ys3,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-96ys3
+Koi Security,clawhub,hightower6eu/autoupdate,malicious,data/ground_truth/malicious/clawhub/hightower6eu_autoupdate
+Koi Security,clawhub,hightower6eu/clawhub-6yr3b,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-6yr3b
+Koi Security,clawhub,hightower6eu/clawhubb,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhubb
+Koi Security,clawhub,hightower6eu/ethereum-gas-tracker-abxf0,malicious,data/ground_truth/malicious/clawhub/hightower6eu_ethereum-gas-tracker-abxf0
+Koi Security,clawhub,hightower6eu/google-workspace-2z5dp,malicious,data/ground_truth/malicious/clawhub/hightower6eu_google-workspace-2z5dp
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-1a7pi,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-1a7pi
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-r6wya,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-r6wya
+Koi Security,clawhub,hightower6eu/lost-bitcoin-10li1,malicious,data/ground_truth/malicious/clawhub/hightower6eu_lost-bitcoin-10li1
+Koi Security,clawhub,hightower6eu/openclaw-backup-dnkxm,malicious,data/ground_truth/malicious/clawhub/hightower6eu_openclaw-backup-dnkxm
+Koi Security,clawhub,hightower6eu/openclaw-backup-wrxw0,malicious,data/ground_truth/malicious/clawhub/hightower6eu_openclaw-backup-wrxw0
+Koi Security,clawhub,hightower6eu/pdf-1wso5,malicious,data/ground_truth/malicious/clawhub/hightower6eu_pdf-1wso5
+Koi Security,clawhub,hightower6eu/phantom-0jcvy,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-0jcvy
+Koi Security,clawhub,hightower6eu/phantom-bdacv,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-bdacv
+Koi Security,clawhub,hightower6eu/polym,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polym
+Koi Security,clawhub,hightower6eu/polymarket-25nwy,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-25nwy
+Koi Security,clawhub,hightower6eu/polymarket-cexex,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-cexex
+Koi Security,clawhub,hightower6eu/solana-07bcb,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-07bcb
+Koi Security,clawhub,hightower6eu/solana-9lplb,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-9lplb
+Koi Security,clawhub,hightower6eu/updater,malicious,data/ground_truth/malicious/clawhub/hightower6eu_updater
+Koi Security,clawhub,hightower6eu/wallet-tracker-0ghsk,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-0ghsk
+Koi Security,clawhub,hightower6eu/x-trends-0heof,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-0heof
+Koi Security,clawhub,hightower6eu/yahoo-finance-1h2ji,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-1h2ji
+Koi Security,clawhub,hightower6eu/youtube-summarize-11y0i,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-11y0i
+Koi Security,clawhub,hightower6eu/youtube-summarize-35o20,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-35o20
+Koi Security,clawhub,hightower6eu/youtube-summarize-ebw5x,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-ebw5x
+Koi Security,clawhub,hightower6eu/youtube-thumbnail-grabber-2dp6g,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-thumbnail-grabber-2dp6g
+Koi Security,clawhub,hightower6eu/youtube-thumbnail-grabber-sq374,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-thumbnail-grabber-sq374
+Koi Security,clawhub,hightower6eu/youtube-video-downloader-5qfuw,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-video-downloader-5qfuw
+Koi Security,clawhub,hightower6eu/youtube-video-downloader-fnkxw,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-video-downloader-fnkxw
+Koi Security,clawhub,moonshine-100rze/excel-1kl,malicious,data/ground_truth/malicious/clawhub/moonshine-100rze_excel-1kl
+Koi Security,clawhub,moonshine-100rze/moltbook-lm8,malicious,data/ground_truth/malicious/clawhub/moonshine-100rze_moltbook-lm8
+Koi Security,clawhub,moonshine-100rze/twitter-6ql,malicious,data/ground_truth/malicious/clawhub/moonshine-100rze_twitter-6ql
+Koi Security,clawhub,mosonchan2023/polymarket-market-maker,malicious,data/ground_truth/malicious/clawhub/mosonchan2023_polymarket-market-maker
+Koi Security,clawhub,noreplyboter/better-polymarket,malicious,data/ground_truth/malicious/clawhub/noreplyboter_better-polymarket
+Koi Security,clawhub,pepe276/publish-dist,malicious,data/ground_truth/malicious/clawhub/pepe276_publish-dist
+Koi Security,clawhub,rjnpage/rankaj,malicious,data/ground_truth/malicious/clawhub/rjnpage_rankaj
+Koi Security,clawhub,sakaen736jih/agent-browser-6aigix9qi2tu,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_agent-browser-6aigix9qi2tu
+Koi Security,clawhub,sakaen736jih/agent-browser-b2x7tvcmbjgp,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_agent-browser-b2x7tvcmbjgp
+Koi Security,clawhub,sakaen736jih/agent-browser-fopzsipap75u,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_agent-browser-fopzsipap75u
+Koi Security,clawhub,sakaen736jih/auto-updater-3miomc4dvir,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-3miomc4dvir
+Koi Security,clawhub,sakaen736jih/auto-updater-ah1,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-ah1
+Koi Security,clawhub,sakaen736jih/auto-updater-ek1qviijfp1,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-ek1qviijfp1
+Koi Security,clawhub,sakaen736jih/bird-0p,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-0p
+Koi Security,clawhub,sakaen736jih/bird-ag,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-ag
+Koi Security,clawhub,sakaen736jih/clawdhub-0ds2em57jf,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_clawdhub-0ds2em57jf
+Koi Security,clawhub,sakaen736jih/clawdhub-2trnbtcgyo,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_clawdhub-2trnbtcgyo
+Koi Security,clawhub,sakaen736jih/coding-agent-4ilvlj7rs,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-4ilvlj7rs
+Koi Security,clawhub,sakaen736jih/coding-agent-7k8p1tijc,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-7k8p1tijc
+Koi Security,clawhub,sakaen736jih/coding-agent-pekjzav3x,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-pekjzav3x
+Koi Security,clawhub,sakaen736jih/deep-research-eejukdjn,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_deep-research-eejukdjn
+Koi Security,clawhub,sakaen736jih/deep-research-eoo5vd95,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_deep-research-eoo5vd95
+Koi Security,clawhub,sakaen736jih/deep-research-kgenr3rn,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_deep-research-kgenr3rn
+Koi Security,clawhub,sakaen736jih/deep-research-v2h55k2w,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_deep-research-v2h55k2w
+Koi Security,clawhub,sakaen736jih/ethereum,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_ethereum
+Koi Security,clawhub,sakaen736jih/gas-tracker,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_gas-tracker
+Koi Security,clawhub,sakaen736jih/gog-5w7zvby,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_gog-5w7zvby
+Koi Security,clawhub,sakaen736jih/gog-g7ksras,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_gog-g7ksras
+Koi Security,clawhub,sakaen736jih/leo-wallet,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_leo-wallet
+Koi Security,clawhub,sakaen736jih/metamask,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_metamask
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-8ap3x7,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-8ap3x7
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-fxgpbf,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-fxgpbf
+Koi Security,clawhub,sakaen736jih/nano-pdf-9j7bj,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-pdf-9j7bj
+Koi Security,clawhub,sakaen736jih/nano-pdf-cr79t,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-pdf-cr79t
+Koi Security,clawhub,sakaen736jih/solana,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_solana
+Koi Security,clawhub,sakaen736jih/summarize-177r,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_summarize-177r
+Koi Security,clawhub,sakaen736jih/summarize-nrqj,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_summarize-nrqj
+Koi Security,clawhub,sakaen736jih/wacli-1sk,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-1sk
+Koi Security,clawhub,sakaen736jih/wacli-5qi,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-5qi
+Koi Security,clawhub,sakaen736jih/wacli-xcb,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-xcb
+Koi Security,clawhub,sakaen736jih/youtube-watchar,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watchar
+Koi Security,clawhub,sakaen736jih/youtube-watcher-7,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watcher-7
+Koi Security,clawhub,sakaen736jih/youtube-watcher-a,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watcher-a
+Koi Security,clawhub,sakaen736jih/youtube-watcher-k,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watcher-k
+Koi Security,clawhub,zaycv/autoupdater,malicious,data/ground_truth/malicious/clawhub/zaycv_autoupdater
+Koi Security,clawhub,zaycv/blrd,malicious,data/ground_truth/malicious/clawhub/zaycv_blrd
+Koi Security,clawhub,zaycv/browserautomation,malicious,data/ground_truth/malicious/clawhub/zaycv_browserautomation
+Koi Security,clawhub,zaycv/clawbhub,malicious,data/ground_truth/malicious/clawhub/zaycv_clawbhub
+Koi Security,clawhub,zaycv/clawdhab,malicious,data/ground_truth/malicious/clawhub/zaycv_clawdhab
+Koi Security,clawhub,zaycv/clawhub,malicious,data/ground_truth/malicious/clawhub/zaycv_clawhub
+Koi Security,clawhub,zaycv/codingagent,malicious,data/ground_truth/malicious/clawhub/zaycv_codingagent
+Koi Security,clawhub,zaycv/deepresearch,malicious,data/ground_truth/malicious/clawhub/zaycv_deepresearch
+Koi Security,clawhub,zaycv/googleworkspace,malicious,data/ground_truth/malicious/clawhub/zaycv_googleworkspace
+Koi Security,clawhub,zaycv/linkedin-job-application,malicious,data/ground_truth/malicious/clawhub/zaycv_linkedin-job-application
+Koi Security,clawhub,zaycv/nano-bananapro,malicious,data/ground_truth/malicious/clawhub/zaycv_nano-bananapro
+Koi Security,clawhub,zaycv/nanobanana-pro,malicious,data/ground_truth/malicious/clawhub/zaycv_nanobanana-pro
+Koi Security,clawhub,zaycv/nanopdf,malicious,data/ground_truth/malicious/clawhub/zaycv_nanopdf
+Koi Security,clawhub,zaycv/polymarket-assistant,malicious,data/ground_truth/malicious/clawhub/zaycv_polymarket-assistant
+Koi Security,clawhub,zaycv/polymarket-trading,malicious,data/ground_truth/malicious/clawhub/zaycv_polymarket-trading
+Koi Security,clawhub,zaycv/scalekit-agent,malicious,data/ground_truth/malicious/clawhub/zaycv_scalekit-agent
+Koi Security,clawhub,zaycv/shield,malicious,data/ground_truth/malicious/clawhub/zaycv_shield
+Koi Security,clawhub,zaycv/summarlze,malicious,data/ground_truth/malicious/clawhub/zaycv_summarlze
+Koi Security,clawhub,zaycv/whatsapp,malicious,data/ground_truth/malicious/clawhub/zaycv_whatsapp
+Koi Security,clawhub,zaycv/youtubewatcher,malicious,data/ground_truth/malicious/clawhub/zaycv_youtubewatcher
+ClawHub,clawhub,pskoett/self-improving-agent,benign,data/ground_truth/benign/clawhub/pskoett_self-improving-agent
+ClawHub,clawhub,steipete/summarize,benign,data/ground_truth/benign/clawhub/steipete_summarize
+ClawHub,clawhub,steipete/gog,benign,data/ground_truth/benign/clawhub/steipete_gog
+ClawHub,clawhub,thesethrose/agent-browser,benign,data/ground_truth/benign/clawhub/thesethrose_agent-browser
+ClawHub,clawhub,ivangdavila/self-improving,benign,data/ground_truth/benign/clawhub/ivangdavila_self-improving
+ClawHub,clawhub,spclaudehome/skill-vetter,benign,data/ground_truth/benign/clawhub/spclaudehome_skill-vetter
+ClawHub,clawhub,halthelobster/proactive-agent,benign,data/ground_truth/benign/clawhub/halthelobster_proactive-agent
+ClawHub,clawhub,biostartechnology/humanizer,benign,data/ground_truth/benign/clawhub/biostartechnology_humanizer
+ClawHub,clawhub,steipete/github,benign,data/ground_truth/benign/clawhub/steipete_github
+ClawHub,clawhub,gpyangyoujun/multi-search-engine,benign,data/ground_truth/benign/clawhub/gpyangyoujun_multi-search-engine
+ClawHub,clawhub,oswalpalash/ontology,benign,data/ground_truth/benign/clawhub/oswalpalash_ontology
+ClawHub,clawhub,steipete/weather,benign,data/ground_truth/benign/clawhub/steipete_weather
+ClawHub,clawhub,maximeprades/auto-updater,benign,data/ground_truth/benign/clawhub/maximeprades_auto-updater
+ClawHub,clawhub,byungkyu/api-gateway,benign,data/ground_truth/benign/clawhub/byungkyu_api-gateway
+ClawHub,clawhub,steipete/nano-banana-pro,benign,data/ground_truth/benign/clawhub/steipete_nano-banana-pro
+ClawHub,clawhub,steipete/obsidian,benign,data/ground_truth/benign/clawhub/steipete_obsidian
+ClawHub,clawhub,nicholasspisak/clawddocs,benign,data/ground_truth/benign/clawhub/nicholasspisak_clawddocs
+ClawHub,clawhub,matagul/desktop-control,benign,data/ground_truth/benign/clawhub/matagul_desktop-control
+ClawHub,clawhub,steipete/openai-whisper,benign,data/ground_truth/benign/clawhub/steipete_openai-whisper
+ClawHub,clawhub,michaelgathara/youtube-watcher,benign,data/ground_truth/benign/clawhub/michaelgathara_youtube-watcher
+ClawHub,clawhub,jk-0001/automation-workflows,benign,data/ground_truth/benign/clawhub/jk-0001_automation-workflows
+ClawHub,clawhub,steipete/notion,benign,data/ground_truth/benign/clawhub/steipete_notion
+ClawHub,clawhub,steipete/clawdhub,benign,data/ground_truth/benign/clawhub/steipete_clawdhub
+ClawHub,clawhub,chindden/skill-creator,benign,data/ground_truth/benign/clawhub/chindden_skill-creator
+ClawHub,clawhub,fly0pants/admapix,benign,data/ground_truth/benign/clawhub/fly0pants_admapix
+ClawHub,clawhub,udiedrichsen/stock-analysis,benign,data/ground_truth/benign/clawhub/udiedrichsen_stock-analysis
+ClawHub,clawhub,steipete/nano-pdf,benign,data/ground_truth/benign/clawhub/steipete_nano-pdf
+ClawHub,clawhub,asleep123/caldav-calendar,benign,data/ground_truth/benign/clawhub/asleep123_caldav-calendar
+ClawHub,clawhub,jacky1n7/openclaw-tavily-search,benign,data/ground_truth/benign/clawhub/jacky1n7_openclaw-tavily-search
+ClawHub,clawhub,ide-rea/baidu-search,benign,data/ground_truth/benign/clawhub/ide-rea_baidu-search
+ClawHub,clawhub,steipete/brave-search,benign,data/ground_truth/benign/clawhub/steipete_brave-search
+ClawHub,clawhub,matrixy/agent-browser-clawdbot,benign,data/ground_truth/benign/clawhub/matrixy_agent-browser-clawdbot
+ClawHub,clawhub,nextfrontierbuilds/elite-longterm-memory,benign,data/ground_truth/benign/clawhub/nextfrontierbuilds_elite-longterm-memory
+ClawHub,clawhub,fly0pants/ecomseer,benign,data/ground_truth/benign/clawhub/fly0pants_ecomseer
+ClawHub,clawhub,moltbro/humanize-ai-text,benign,data/ground_truth/benign/clawhub/moltbro_humanize-ai-text
+ClawHub,clawhub,ivangdavila/word-docx,benign,data/ground_truth/benign/clawhub/ivangdavila_word-docx
+ClawHub,clawhub,steipete/markdown-converter,benign,data/ground_truth/benign/clawhub/steipete_markdown-converter
+ClawHub,clawhub,steipete/mcporter,benign,data/ground_truth/benign/clawhub/steipete_mcporter
+ClawHub,clawhub,kys42/stock-market-pro,benign,data/ground_truth/benign/clawhub/kys42_stock-market-pro
+ClawHub,clawhub,rhyssullivan/answeroverflow,benign,data/ground_truth/benign/clawhub/rhyssullivan_answeroverflow
+ClawHub,clawhub,olliewazza/larry,benign,data/ground_truth/benign/clawhub/olliewazza_larry
+ClawHub,clawhub,mpociot/superdesign,benign,data/ground_truth/benign/clawhub/mpociot_superdesign
+ClawHub,clawhub,thesethrose/marketing-mode,benign,data/ground_truth/benign/clawhub/thesethrose_marketing-mode
+ClawHub,clawhub,ivangdavila/excel-xlsx,benign,data/ground_truth/benign/clawhub/ivangdavila_excel-xlsx
+ClawHub,clawhub,byungkyu/youtube-api-skill,benign,data/ground_truth/benign/clawhub/byungkyu_youtube-api-skill
+ClawHub,clawhub,steipete/trello,benign,data/ground_truth/benign/clawhub/steipete_trello
+ClawHub,clawhub,borye/xiaohongshu-mcp,benign,data/ground_truth/benign/clawhub/borye_xiaohongshu-mcp
+ClawHub,clawhub,meituskills/meitu-skills,benign,data/ground_truth/benign/clawhub/meituskills_meitu-skills
+ClawHub,clawhub,lowesyang/minara,benign,data/ground_truth/benign/clawhub/lowesyang_minara
+ClawHub,clawhub,steipete/slack,benign,data/ground_truth/benign/clawhub/steipete_slack
+ClawHub,clawhub,byteroverinc/byterover,benign,data/ground_truth/benign/clawhub/byteroverinc_byterover
+ClawHub,clawhub,xobi667/ui-ux-pro-max,benign,data/ground_truth/benign/clawhub/xobi667_ui-ux-pro-max
+ClawHub,clawhub,jrbobbyhansen-pixel/memory-setup,benign,data/ground_truth/benign/clawhub/jrbobbyhansen-pixel_memory-setup
+ClawHub,clawhub,kowl64/n8n-workflow-automation,benign,data/ground_truth/benign/clawhub/kowl64_n8n-workflow-automation
+ClawHub,clawhub,spiceman161/playwright-mcp,benign,data/ground_truth/benign/clawhub/spiceman161_playwright-mcp
+ClawHub,clawhub,steipete/model-usage,benign,data/ground_truth/benign/clawhub/steipete_model-usage
+ClawHub,clawhub,joargp/news-summary,benign,data/ground_truth/benign/clawhub/joargp_news-summary
+ClawHub,clawhub,steipete/video-frames,benign,data/ground_truth/benign/clawhub/steipete_video-frames
+ClawHub,clawhub,thomaslwang/moltguard,benign,data/ground_truth/benign/clawhub/thomaslwang_moltguard
+ClawHub,clawhub,aigsec/edgeone-clawscan,benign,data/ground_truth/benign/clawhub/aigsec_edgeone-clawscan
+ClawHub,clawhub,jchopard69/marketing-skills,benign,data/ground_truth/benign/clawhub/jchopard69_marketing-skills
+ClawHub,clawhub,steipete/qmd,benign,data/ground_truth/benign/clawhub/steipete_qmd
+ClawHub,clawhub,autogame-17/evolver,benign,data/ground_truth/benign/clawhub/autogame-17_evolver
+ClawHub,clawhub,robbyczgw-cla/web-search-plus,benign,data/ground_truth/benign/clawhub/robbyczgw-cla_web-search-plus
+ClawHub,clawhub,jeffjhunter/ai-persona-os,benign,data/ground_truth/benign/clawhub/jeffjhunter_ai-persona-os
+ClawHub,clawhub,gzlicanyi/imap-smtp-email,benign,data/ground_truth/benign/clawhub/gzlicanyi_imap-smtp-email
+ClawHub,clawhub,marmikcfc/memory-manager,benign,data/ground_truth/benign/clawhub/marmikcfc_memory-manager
+ClawHub,clawhub,shawnpana/browser-use,benign,data/ground_truth/benign/clawhub/shawnpana_browser-use
+ClawHub,clawhub,robin797860/stock-watcher,benign,data/ground_truth/benign/clawhub/robin797860_stock-watcher
+ClawHub,clawhub,gtrusler/clawdbot-filesystem,benign,data/ground_truth/benign/clawhub/gtrusler_clawdbot-filesystem
+ClawHub,clawhub,financial-ai-analyst/mx-stocks-screener,benign,data/ground_truth/benign/clawhub/financial-ai-analyst_mx-stocks-screener
+ClawHub,clawhub,koharu885/ai-business-search,benign,data/ground_truth/benign/clawhub/koharu885_ai-business-search
+ClawHub,clawhub,shreefentsar/remotion-video-toolkit,benign,data/ground_truth/benign/clawhub/shreefentsar_remotion-video-toolkit
+ClawHub,clawhub,ryancampbell/agent-autonomy-kit,benign,data/ground_truth/benign/clawhub/ryancampbell_agent-autonomy-kit
+ClawHub,clawhub,karatla/opencode-controller,benign,data/ground_truth/benign/clawhub/karatla_opencode-controller
+ClawHub,clawhub,steipete/peekaboo,benign,data/ground_truth/benign/clawhub/steipete_peekaboo
+ClawHub,clawhub,whiteknight07/exa-web-search-free,benign,data/ground_truth/benign/clawhub/whiteknight07_exa-web-search-free
+ClawHub,clawhub,byungkyu/gmail,benign,data/ground_truth/benign/clawhub/byungkyu_gmail
+ClawHub,clawhub,cnyezi/a-stock-analysis,benign,data/ground_truth/benign/clawhub/cnyezi_a-stock-analysis
+ClawHub,clawhub,gaosq856/tuya-smart-control,benign,data/ground_truth/benign/clawhub/gaosq856_tuya-smart-control
+ClawHub,clawhub,tomstools11/prompt-engineering-expert,benign,data/ground_truth/benign/clawhub/tomstools11_prompt-engineering-expert
+ClawHub,clawhub,steipete/video-transcript-downloader,benign,data/ground_truth/benign/clawhub/steipete_video-transcript-downloader
+ClawHub,clawhub,financial-ai-analyst/mx-macro-data,benign,data/ground_truth/benign/clawhub/financial-ai-analyst_mx-macro-data
+ClawHub,clawhub,guohongbin-git/skill-finder-cn,benign,data/ground_truth/benign/clawhub/guohongbin-git_skill-finder-cn
+ClawHub,clawhub,ivangdavila/powerpoint-pptx,benign,data/ground_truth/benign/clawhub/ivangdavila_powerpoint-pptx
+ClawHub,clawhub,alex3alex/openclaw-backup,benign,data/ground_truth/benign/clawhub/alex3alex_openclaw-backup
+ClawHub,clawhub,parags/deep-research-pro,benign,data/ground_truth/benign/clawhub/parags_deep-research-pro
+ClawHub,clawhub,lamelas/himalaya,benign,data/ground_truth/benign/clawhub/lamelas_himalaya
+ClawHub,clawhub,kesslerio/frontend-design-ultimate,benign,data/ground_truth/benign/clawhub/kesslerio_frontend-design-ultimate
+ClawHub,clawhub,ivangdavila/playwright,benign,data/ground_truth/benign/clawhub/ivangdavila_playwright
+ClawHub,clawhub,ivangdavila/data-analysis,benign,data/ground_truth/benign/clawhub/ivangdavila_data-analysis
+ClawHub,clawhub,shawn92/ftshare-market-data,benign,data/ground_truth/benign/clawhub/shawn92_ftshare-market-data
+ClawHub,clawhub,matthew77/liang-tavily-search,benign,data/ground_truth/benign/clawhub/matthew77_liang-tavily-search
+ClawHub,clawhub,steipete/discord,benign,data/ground_truth/benign/clawhub/steipete_discord
+ClawHub,clawhub,jontsai/openclaw-command-center,benign,data/ground_truth/benign/clawhub/jontsai_openclaw-command-center
+ClawHub,clawhub,hi-yu/rednote,benign,data/ground_truth/benign/clawhub/hi-yu_rednote
+ClawHub,clawhub,financial-ai-analyst/mx-finance-data,benign,data/ground_truth/benign/clawhub/financial-ai-analyst_mx-finance-data
+ClawHub,clawhub,deanpress/polymarket-odds,benign,data/ground_truth/benign/clawhub/deanpress_polymarket-odds
+ClawHub,clawhub,wwlyzzyorg/ppt-generator,benign,data/ground_truth/benign/clawhub/wwlyzzyorg_ppt-generator
+ClawHub,clawhub,ivangdavila/market-research,benign,data/ground_truth/benign/clawhub/ivangdavila_market-research
