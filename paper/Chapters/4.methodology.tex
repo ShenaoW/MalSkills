@@ -1,14 +1,6 @@
 \section{Methodology}
 
-\begin{figure*}[t]
-    \centering
-    \includegraphics[width=0.99\linewidth]{Figures/malskills.pdf}
-    \caption{The overall workflow of \toolname}
-    \label{fig:malskills}
-\end{figure*}
-
-
-In this work, we propose a neuro-symbolic framework for malicious skill detection that combines symbolic program analysis and LLM-assisted semantic reasoning. As illustrated in \autoref{fig:malskills}, \toolname consists of three stages: security-sensitive operation~(SSO) extraction, skill dependency graph (SDG) generation, and neuro-symbolic reasoning.  First, \emph{SSO extractor} identifies security-sensitive operations from heterogeneous skill artifacts, including source code, prompts, and manifests. Second, \emph{SDG generator} resolves the operands associated with these operations and constructs an operand-centric SDG. Third, \emph{neuro-symbolic reasoner} converts the graph into relational facts and performs declarative reasoning to detect malicious behavior patterns. Throughout the pipeline, we use language-model-based inference as a complement to symbolic analysis, and we feed stable neural findings back into reusable symbolic rules.
+To address these challenges, we propose a neuro-symbolic framework for malicious skill detection. As illustrated in \autoref{fig:malskills}, \toolname consists of three stages: security-sensitive operation~(SSO) extraction, skill dependency graph (SDG) generation, and neuro-symbolic reasoning. First, \emph{SSO extractor} identifies security-sensitive operations from heterogeneous skill artifacts, including source code, prompts, and manifests. Second, \emph{SDG generator} resolves the operands associated with these operations and constructs an operand-centric SDG. Third, \emph{neuro-symbolic reasoner} converts the graph into relational facts and performs declarative reasoning to detect malicious behavior patterns. Throughout the pipeline, we use LLM-based inference as a complement to symbolic analysis, and we feed stable neural findings back into reusable symbolic rules.
 
 \subsection{Security-Sensitive Operation Extraction}
 
@@ -64,10 +56,9 @@ The goal of the first stage is to extract \emph{security-sensitive operation} (S
 \end{table}
 
 \noindent \textbf{Parsing-based Symbolic Extractor.} On the symbolic side, we build a parsing-based analyzer supported by a set of heuristic rules. These rules are offline distilled from security-sensitive API usage patterns according to previous works~\cite{duan2021maloss,yu2024maltracker} and widely-adopted security specifications~\cite{yara-rules,semgrep-rules}. ~\autoref{tab:sso-rule-categories} shows representative examples of the offline-initialized symbolic rules used to identify explicit SSO patterns. Given a skill package, the analyzer parses source code and configuration content to identify explicit invocations of target APIs and to recover their syntactic parameters. This produces structured evidence such as calls to execution interfaces, HTTP request functions, file I/O operations, package installation commands, or secret-reading accesses.
+However, some malicious skills invoke equivalent behaviors through third-party libraries, living-off-the-land techniques, wrapper functions, or non-standard interfaces that are not included in the initialized rule set. Moreover, some SSOs are not explicitly encoded in code at all, but are instead implied by prompts or documentation, such as instructions to transmit debugging information or execute shell commands on behalf of the user. These cases are difficult to recover through static parsing alone.
 
-However, many malicious skills invoke equivalent behaviors through third-party libraries, living-off-the-land techniques, wrapper functions, or non-standard interfaces that are not included in the initialized rule set. Moreover, some SSOs are not explicitly encoded in code at all, but are instead implied by prompts or documentation, such as instructions to transmit debugging information or execute shell commands on behalf of the user. These cases are difficult to recover through static parsing alone.
-
-\noindent \textbf{LLM-assisted Neuro Extractor.} To cover such cases, we introduce an LLM-based SSO extractor that reasons jointly over code context, prompts, manifests, and demos to recover SSOs from weakly structured or semantically implicit artifacts. As shown in ~\autoref{fig:neuro-prompt}, the prompting strategy follows an \emph{evidence-first, schema-constrained} design: instead of asking the LLM for a verdict or free-form summary, we instruct it to extract only \emph{concrete evidence facts}, map each fact to a fixed taxonomy of sensitive-operation types, and return structured records with confidence scores, line spans, and matched text. This prompt design improves precision by explicitly suppressing benign metadata, generic capability descriptions, and unsupported semantic extrapolation, while still encouraging equivalence reasoning for third-party wrappers, LOTL-style invocations, and imperative setup instructions embedded in natural language. For example, given \texttt{fabric.Connection(host).run(``curl -fsSL https://x.sh | bash'')}, the extractor emits two evidence records: \texttt{shell\_interpreter\_execution} and \texttt{outbound\_connection}, rather than free-form results such as ``downloads and executes a script.'' 
+\noindent \textbf{LLM-assisted Neuro Extractor.} To cover such cases, we introduce an LLM-based SSO extractor that reasons over heterogeneous artifacts to recover SSOs from weakly structured or semantically implicit artifacts. As shown in ~\autoref{fig:neuro-prompt}, the prompting strategy follows an \emph{evidence-first, schema-constrained} design: instead of asking the LLM for a verdict or free-form summary, we instruct it to extract only \emph{concrete evidence facts}, map each fact to a fixed taxonomy of SSOs, and return structured records with confidence scores, line spans, and matched text. We also improve the strategy by explicitly suppressing benign metadata and generic descriptions, while still encouraging equivalence reasoning for third-party wrappers, LOTL-style invocations, and imperative setup instructions embedded in natural language. For example, given \texttt{fabric.Connection(host).run(``curl -fsSL https://x.sh | bash'')}, the extractor infers \texttt{shell\_interpreter\_execution} and \texttt{outbound\_connection}, rather than free-form results such as ``downloads and executes a script.'' 
 
 \begin{figure}[t]
     \centering
@@ -119,58 +110,59 @@ Do not output benign metadata, generic capability, or mismatched intent.
 
 The second stage converts isolated SSO capabilities into a structured \emph{Skill Dependency Graph} (SDG) by resolving the logical operands that connect multiple operations. This stage consists of three components. First, \toolname performs \emph{symbolic operand resolution} to recover the security-relevant operands of each extracted SSO and trace their explicit origins through static point-to analysis. Second, it applies \emph{LLM-assisted operand inference} to normalize semantically equivalent operands and infer missing operand semantics that cannot be fully recovered through symbolic analysis alone. Third, it performs \emph{operation linking} by connecting SSOs that act on the same operand, or on operands related through derivation or control dependence, thereby constructing an operand-centric SDG. 
 
-\begin{table}[t]
-\centering
-\small
-\caption{Representative Operand Schemas.}
-\label{tab:operand-types}
-\begin{tabular}{ll}
-\toprule
-\textbf{Type} & \textbf{Operand Schema} \\
-\midrule
-\textbf{Exec} 
-& \texttt{\{cmd, interpreter, argv, target\}} \\
+% \begin{table}[t]
+% \centering
+% \small
+% \caption{Representative Operand Schemas.}
+% \label{tab:operand-types}
+% \begin{tabular}{ll}
+% \toprule
+% \textbf{Type} & \textbf{Operand Schema} \\
+% \midrule
+% \textbf{Exec} 
+% & \texttt{\{cmd, interpreter, argv, target\}} \\
 
-\textbf{Net} 
-& \texttt{\{endpoint, method, payload, response\}} \\
+% \textbf{Net} 
+% & \texttt{\{endpoint, method, payload, response\}} \\
 
-\textbf{File} 
-& \texttt{\{path, mode, content\}} \\
+% \textbf{File} 
+% & \texttt{\{path, mode, content\}} \\
 
-\textbf{Env} 
-& \texttt{\{name, value\}} \\
+% \textbf{Env} 
+% & \texttt{\{name, value\}} \\
 
-\textbf{Install} 
-& \texttt{\{package, source, install\_cmd\}} \\
+% \textbf{Install} 
+% & \texttt{\{package, source, install\_cmd\}} \\
 
-\textbf{Crypto} 
-& \texttt{\{algorithm, key, input, output\}} \\
+% \textbf{Crypto} 
+% & \texttt{\{algorithm, key, input, output\}} \\
 
-\bottomrule
-\end{tabular}
-\end{table}
+% \bottomrule
+% \end{tabular}
+% \end{table}
 
-\noindent \textbf{Symbolic Operand Resolution.} For each SSO record, we first recover the operand slots relevant to security reasoning according to the operation type. As summarized in \autoref{tab:operand-types}, each major SSO category is associated with a canonical operand schema. For example, execution operations expose command-oriented operands, file operations expose path- and content-oriented operands, and network operations expose endpoint- and payload-oriented operands. We then leverage an existing points-to analysis engine~\cite{yasa-engine,wang2026yasa} to determine the source of these operands and whether multiple operations refer to the same underlying object. Specifically, \toolname traces assignments, aliases, parameter passing, return values, wrapper calls, and inter-procedural data dependencies within and across files. This allows \toolname to recover explicit operand propagation chains, such as a secret read from \texttt{os.getenv(...)} being stored in a variable and later passed into \texttt{requests.post(...)}. 
+\noindent \textbf{Symbolic Operand Resolution.} For each SSO record, we first recover the operand slots relevant to security reasoning according to the operation type. 
+% As summarized in \autoref{tab:operand-types}, 
+Each major SSO category is associated with a canonical operand schema. For example, execution operations expose command-oriented operands, file operations expose path- and content-oriented operands, and network operations expose endpoint- and payload-oriented operands. We then leverage an existing points-to analysis engine~\cite{yasa-engine,wang2026yasa} to determine the source of these operands and whether multiple operations refer to the same underlying object. Specifically, \toolname traces assignments, aliases, parameter passing, return values, wrapper calls, and inter-procedural data dependencies within and across files. This allows \toolname to recover explicit operand propagation chains, such as a secret read from \texttt{os.getenv(...)} being stored in a variable and later passed into \texttt{requests.post(...)}. 
 
 \noindent \textbf{LLM-assisted Operand Inference.} Symbolic resolution is effective when operand propagation is explicit, but real-world skills are often incomplete, weakly typed, multi-file, or mixed with prompts, manifests, and setup instructions. As a result, some operand identities or semantic roles cannot be fully recovered through static analysis alone. To address this, we introduce an LLM-assisted operand inference component that normalizes semantically equivalent operands, infers missing operand semantics from local context and demonstrations, and bridges the gaps left by symbolic analysis. For instance, the model may infer that a variable named \texttt{token}, a prompt phrase such as ``API key,'' and a manifest field for credentials all denote the same secret-bearing operand class, even when no direct syntactic flow is visible. Likewise, it can normalize different textual descriptions of remote resources, shell commands, or installation targets into comparable operand representations. 
-
-\noindent \textbf{SDG Construction.}  
-After extracting SSO records and resolving their security-relevant operands, \toolname organizes them into a Security Dependency Graph (SDG), which captures how dispersed security-sensitive operations are related through structural containment, operand association, recovered value-flow dependencies, and shared operand references. Formally, we model the SDG as a typed directed graph \(G = (V, E, \phi_V, \phi_E)\), where \(\phi_V\) and \(\phi_E\) assign semantic types to nodes and edges, respectively. ~\autoref{fig:sdg-rules} summarizes the node and edge construction rules used to instantiate the SDG.
 
 \begin{figure}[t]
 \centering
 \fbox{
-\begin{minipage}{0.92\linewidth}
+\begin{minipage}{0.99\linewidth}
 \footnotesize
 \textbf{Notations:}
 \begin{itemize}[leftmargin=15pt]
-    \item \(a \in \mathcal{A}\): A program artifact, such as SKILL.md or other analysis unit.
+    \item \(a \in \mathcal{A}\): An artifact, such as \texttt{SKILL.md}, \texttt{config.yaml}, or a script file.
     \item \(r \in \mathcal{R}\): A normalized SSO record.
-    \item \(o \in \mathcal{O}\): A resolved operand object.
-    \item \(\mathrm{artifact}(x)\): The artifact from which node \(x\) originates.
-    \item \(\mathrm{opnds}(r)\): The set of operands associated with SSO record \(r\).
+    \item \(o \in \mathcal{O}\): A resolved security-relevant operand object.
+    \item \(v \in \mathcal{V}\): A value representing concrete or abstract data.
+    \item \(\mathrm{artifact}(r)\): The artifact from which SSO record \(r\) originates.
+    \item \(\mathrm{opnds}(r)\): The set of operand references associated with SSO record \(r\).
     \item \(\mathrm{resolve}(x)\): The operand object resolved from operand reference \(x\).
-    \item \(o_1 \leadsto o_2\): A recovered value-flow dependency indicating that the value represented by \(o_1\) may propagate to \(o_2\).
+    \item \(\mathrm{bind}(o)\): The value entity directly associated with operand object \(o\).
+    \item \(v_1 \leadsto v_2\): A value-flow indicating that the value \(v_1\) may propagate to \(v_2\).
 \end{itemize}
 
 \textbf{Node Types:}
@@ -179,108 +171,87 @@ After extracting SSO records and resolving their security-relevant operands, \to
     \[
     a \in \mathcal{A}
     \quad \Rightarrow \quad
-    \mathrm{type}(a) = \textsc{Artifact}
+    \mathrm{type}(a)=\textsc{Artifact}
     \]
 
     \item \textbf{SSO Node:}
     \[
     r \in \mathcal{R}
     \quad \Rightarrow \quad
-    \mathrm{type}(r) = \textsc{SSO}
+    \mathrm{type}(r)=\textsc{SSO}
     \]
 
     \item \textbf{Operand Node:}
     \[
     o \in \mathcal{O}
     \quad \Rightarrow \quad
-    \mathrm{type}(o) = \textsc{Operand}
+    \mathrm{type}(o)=\textsc{Operand}
+    \]
+
+    \item \textbf{Value Node:}
+    \[
+    v \in \mathcal{V}
+    \quad \Rightarrow \quad
+    \mathrm{type}(v)=\textsc{Value}
     \]
 \end{enumerate}
 
 \textbf{Edge Construction Rules:}
 \begin{enumerate}[leftmargin=15pt, label=\arabic*.]
-    \item \textbf{Containment Edge:}
+    \item \textbf{Evidence Edge:}
     \[
     \mathrm{artifact}(r)=a
     \quad \Rightarrow \quad
-    (a, \textit{contains}, r) \in E
-    \]
-    \[
-    \mathrm{artifact}(o)=a
-    \quad \Rightarrow \quad
-    (a, \textit{contains}, o) \in E
+    (a,\textit{contains},r)\in E
     \]
 
-    \item \textbf{Operand Association Edge:}
+    \item \textbf{Operand Edge:}
     \[
-    x \in \mathrm{opnds}(r), \; \mathrm{resolve}(x)=o
+    x \in \mathrm{opnds}(r),\;\mathrm{resolve}(x)=o
     \quad \Rightarrow \quad
-    (r, \textit{has\_operand}, o) \in E
+    (r,\textit{has\_opnd},o)\in E
     \]
 
-    \item \textbf{Value-flow Dependency Edge:}
+    \item \textbf{Value-flow Edge:}
     \[
-    o_1 \leadsto o_2
+    \mathrm{bind}(o)=v
     \quad \Rightarrow \quad
-    (o_1, \textit{flows\_to}, o_2) \in E
+    (o,\textit{value\_flow},v)\in E
     \]
-
-    \item \textbf{Shared-operand Edge:}
     \[
-    \begin{aligned}
-    &\exists o \in \mathcal{O}, \;
-    (r_1, \textit{has\_operand}, o) \in E, \\
-    &(r_2, \textit{has\_operand}, o) \in E, \;
-    r_1 \neq r_2 \\
-    &\Rightarrow
-    (r_1, \textit{same\_operand}, r_2) \in E
-    \end{aligned}
+    v_1 \leadsto v_2
+    \quad \Rightarrow \quad
+    (v_1,\textit{value\_flow},v_2)\in E
     \]
 \end{enumerate}
 \end{minipage}
 }
-\caption{Node and Edge Types in SDG Construction.}
+\caption{Node and edge construction rules for the SDG.}
 \label{fig:sdg-rules}
 \end{figure}
 
-The node set \(V\) contains three categories. \emph{Artifact} nodes represent source-level program artifacts, such as files, modules, or other analysis units. \emph{SSO} nodes represent normalized security-sensitive operations extracted by \toolname. \emph{Operand} nodes represent resolved abstract operand objects corresponding to security-relevant operands referenced by SSO records. The edge set \(E\) contains four relation types. A \emph{contains} edge links an artifact node to an SSO node or operand node originating from that artifact. A \emph{has\_operand} edge links an SSO node to an operand node when that operand is explicitly referenced by the operation. A \emph{flows\_to} edge links two operand nodes when the value represented by one operand may propagate to the other through assignments, aliases, parameter passing, return-value binding, wrapper calls, or inter-procedural propagation. A \emph{same\_operand} edge links two SSO nodes when they reference the same resolved operand object after normalization and alias reconciliation; this is a derived correlation relation that makes operation-level sharing explicit in the graph.
 
-The resulting SDG lifts isolated local observations into higher-level security-relevant behavior chains. For example, if a value obtained from \texttt{os.getenv(...)} is propagated through assignments and parameter passing into \texttt{requests.post(...)}, \toolname creates SSO nodes for the corresponding secret-access and network-transmission operations, operand nodes for the associated abstract values, and \emph{flows\_to} edges capturing the recovered propagation between operands. If both operations reference the same resolved operand object, the corresponding SSO nodes are additionally linked by a \emph{same\_operand} edge. This representation enables \toolname to reason about multi-step behaviors such as secret collection followed by exfiltration, suspicious command construction followed by execution, and file discovery followed by content access.
+\noindent \textbf{SDG Construction.}  
+After extracting SSO records and resolving their security-relevant operands, \toolname organizes them into a Security Dependency Graph (SDG), which captures how dispersed security-sensitive operations are grounded in artifacts, linked to their relevant operands, and connected through recovered value propagation. Formally, we model the SDG as a typed directed graph \(G=(V,E,\phi_V,\phi_E)\), where \(\phi_V\) and \(\phi_E\) assign semantic types to nodes and edges, respectively. \autoref{fig:sdg-rules} summarizes the node and edge construction rules used to instantiate the SDG.
 
+The node set \(V\) contains four categories. \emph{Artifact} nodes represent source-level program artifacts, such as prompt files, manifests, scripts, or other analysis units. \emph{SSO} nodes represent normalized security-sensitive operations extracted by \toolname. \emph{Operand} nodes represent resolved security-relevant operand objects referenced by SSO records, such as files, endpoints, commands, or payload handles. \emph{Value} nodes represent the concrete or abstract data entities associated with operands and intermediate computations, serving as the carrier of recovered propagation semantics.
+The edge set \(E\) contains three relation types. A \emph{contains} edge links an artifact node to an SSO node originating from that artifact. A \emph{has\_operand} edge links an SSO node to an operand node when that operand is explicitly referenced by the operation. A \emph{value\_flow} edge captures data propagation semantics: it either links an operand node to its directly associated value node, or links one value node to another when \toolname recovers a possible propagation relation through assignments, aliases, parameter passing, return-value binding, wrapper calls, or inter-procedural transfer. 
+~\autoref{fig:sdg-example} illustrates an example SDG that shows how dispersed SSOs extracted from multiple artifacts are connected to their resolved operands and further linked through recovered value-flow dependencies. The resulting SDG lifts isolated observations into a unified context that supports subsequent reasoning over security-relevant facts.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{Figures/SDG.pdf}
+    \caption{The SDG corresponding to the skill in ~\autoref{fig:motivation}. The \textcolor{red}{red} edge denotes the key value-flow dependency that connects the sensitive file access to the outbound transmission.}
+    \label{fig:sdg-example}
+\end{figure}
 
 \subsection{Neuro-Symbolic Reasoning}
 \label{subsec:neuro_symbolic_reasoning}
 
-The third stage performs malicious-skill detection by combining formal Datalog reasoning with language-model-based reasoning in a neuro-symbolic loop. It takes the SDG produced in the previous stage and determines whether the observed operations and dependency structure instantiate known malicious patterns or suggest previously unseen ones.
+The third stage performs malicious-skill detection through a neuro-symbolic reasoning process built on top of the SDG. \toolname combines the pattern-based symbolic reasoning with LLM-assisted semantic interpretation. 
 
-\subsubsection{Fact Base Construction}
-\label{subsubsec:fact_base}
+\noindent \textbf{Pattern-based Symbolic Reasoning.}
+\toolname initializes symbolic detection with a curated set of predefined risk patterns that capture common and security-critical malicious behaviors observed in real-world skills. Rather than relying on isolated SSO co-occurrence, each pattern is defined over connected SDG evidence and requires that the participating SSOs be semantically linked through operand dependencies, propagated values, or source-to-sink structure. At initialization, these patterns cover major classes of malicious behavior, including execution-and-delivery chains, persistence establishment, privilege escalation and identity abuse, injection and covert residency, information theft, command-and-control activity, lateral movement, defense evasion and anti-forensics, and destructive or ransomware-like actions. In essence, the symbolic component checks whether the recovered SDG contains a behaviorally coherent subgraph whose operation sequence and dependency structure satisfy one of these known malicious templates. For example, in ~\autoref{fig:sdg-example}, the SDG links the secret-access operation reading \texttt{\textasciitilde/.aws/cred} to the outbound \texttt{axios.post} operation through the intermediate payload object and the value-flow edge~(highlighted in \textbf{\textcolor{red}{red}}), indicating that the sensitive content obtained from the local credential file is propagated into data sent to a remote destination.
 
-We first convert the SDG into a relational \emph{fact base}. The fact base contains three categories of facts:
-\begin{itemize}
-    \item \textbf{Primitive operation facts}, which encode resolved security-sensitive actions such as environment reads, file writes, network sends, execution, dynamic loading, or package installation.
-    \item \textbf{Operand relation facts}, which describe identity, derivation, and dependency relations among operands recovered during SDG generation.
-    \item \textbf{Semantic annotation facts}, which specify security-relevant classes such as sensitive keys, external destinations, executable paths, code-like objects, startup-related locations, or externally controlled sources.
-\end{itemize}
-
-These facts form the extensional knowledge on which formal reasoning operates. Because all primitives are linked to explicit operands, the fact base preserves the object-centric semantics required to distinguish harmless capability co-occurrence from malicious data or control flows.
-
-\subsubsection{Rule Base Encoding}
-\label{subsubsec:rule_base}
-
-On top of the fact base, we define a curated \emph{rule base} in Datalog. The rule base is designed offline and encodes reusable malicious behavior patterns as declarative logic rules. Rather than merely checking whether risky primitives co-occur in the same skill, these rules explicitly require that the relevant operations share the same operand or manipulate operands linked through derivation or dependency relations.
-
-The rules are organized into multiple layers. The first layer consists of object-linking rules that compute transitive and semantic relations among operands, such as aliasing and derivation closure. The second layer derives intermediate semantic concepts from primitive facts, such as whether an object is secret-bearing, externally controlled, code-like, persistence-related, or destined for an external endpoint. The third layer encodes malicious behavior patterns such as secret exfiltration, downloader-installer behavior, remote code execution, dynamic sink injection, unauthorized persistence, and capability mismatch. The final layer maps one or more matched malicious patterns to final maliciousness labels and detection categories.
-
-Because the rule base is explicit and declarative, each detection result remains inspectable and auditable: one can trace which primitive facts and which rules jointly contributed to the final conclusion.
-
-\subsubsection{Datalog-Based Reasoning and Neural Feedback}
-\label{subsubsec:datalog_and_feedback}
-
-Given a fact base and a rule base, a Datalog engine performs least-fixed-point evaluation to derive all entailed conclusions. The outputs include triggered malicious-pattern labels, final maliciousness decisions, and derivation traces that function as auditable proof chains. This formal reasoning process provides the symbolic backbone of our system.
-
-However, no finite rule base can enumerate all malicious behaviors encountered in practice. To address this limitation, we incorporate a complementary language-model-based reasoning component for \emph{unknown-pattern skills}, namely skills whose SDGs exhibit suspicious structure but do not confidently match existing symbolic rules.
-
-This neural component serves two purposes. First, it provides online semantic assessment when symbolic reasoning is inconclusive but the skill exhibits non-trivial suspicious behavior. Second, when the model repeatedly identifies a high-value pattern across multiple samples, the pattern can be abstracted into reusable \emph{demo rules and patterns}, reviewed by analysts, and promoted into either the Datalog rule base or the capability-extraction heuristics. This yields a second neuro-to-symbolic feedback loop at the reasoning stage: neural analysis helps discover new malicious behaviors, while stable high-confidence findings are eventually codified into explicit symbolic rules.
-
-The final output of the framework is a structured detection report containing the maliciousness decision, matched malicious-pattern categories, supporting facts, triggered rules, and the proof chain connecting low-level evidence to the final judgment.
+\noindent \textbf{LLM-based Neuro Reasoning.}
+Obviously, predefined patterns cannot exhaustively cover the diversity of malicious behaviors found in practice. Some skills may only partially match existing symbolic templates, while others may realize suspicious intent through previously unseen combinations of SSOs and dependency structures. To handle such cases, \toolname incorporates an LLM-based neuro reasoning component. Given the SDG and the symbolic matching results, the LLM is prompted with a normalized summary of the relevant subgraph, including the involved artifacts, the extracted SSOs, the resolved operands, and the value-flow paths connecting them. In this way, the neural component complements symbolic reasoning by providing semantic interpretation over incomplete, weakly matched, or previously unseen behavior patterns, while remaining anchored to explicit graph evidence rather than raw repository text. When the LLM repeatedly identifies a recurring suspicious workflow that is not well covered by the current predefined patterns, \toolname records the corresponding SDG subgraphs, operation sequences, and dependency signatures as candidate emerging patterns. These candidates can then be reviewed and distilled into new symbolic templates, which are added to the predefined pattern inventory in subsequent iterations. 
