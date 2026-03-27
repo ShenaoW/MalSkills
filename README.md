@@ -8,7 +8,7 @@ It works in three stages:
 2. **Skill Dependency Graph generation**: recover the operands of those operations and connect them through object identity and value-flow relations.
 3. **Neuro-symbolic reasoning**: detect malicious behavior patterns or suspicious workflows from the graph.
 
-![MalSkills pipeline](assets/malskills.pdf)
+![MalSkills pipeline](assets/malskills.png)
 
 ## What the repository contains
 
