@@ -1,0 +1,38 @@
+rules:
+- id: no-http-proxy-createProxy
+  languages:
+  - javascript
+  message: Avoid using http-proxy.createProxy(), as it can lead to potential issues with network access.
+  metadata:
+    api: http-proxy.createProxy()
+    category: Network Access
+  pattern-either:
+  - pattern: http-proxy.createProxy(...)
+  - pattern: $VAR = http-proxy.createProxy
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http-proxy-createProxyServer
+  languages:
+  - javascript
+  message: Avoid using http-proxy.createProxyServer(), as it can lead to potential issues with network access.
+  metadata:
+    api: http-proxy.createProxyServer()
+    category: Network Access
+  pattern-either:
+  - pattern: http-proxy.createProxyServer(...)
+  - pattern: $VAR = http-proxy.createProxyServer
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-require-http-proxy
+  languages:
+  - javascript
+  message: Avoid using require('http-proxy'), as it can lead to potential issues with network access.
+  metadata:
+    api: require('http-proxy')
+    category: Network Access
+  pattern: require('http-proxy')
+  severity: WARNING
+  tags:
+  - Network Access

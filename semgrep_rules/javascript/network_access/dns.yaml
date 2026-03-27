@@ -1,0 +1,285 @@
+rules:
+- id: no-dns-Resolver
+  languages:
+  - javascript
+  message: Avoid using dns.Resolver(), as it can lead to potential issues with network access.
+  metadata:
+    api: dns.Resolver()
+    category: Network Access
+  pattern-either:
+  - pattern: dns.Resolver(...)
+  - pattern: $VAR = dns.Resolver
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-dns-getDefaultResultOrder
+  languages:
+  - javascript
+  message: Avoid using dns.getDefaultResultOrder(), as it can lead to potential issues with network access.
+  metadata:
+    api: dns.getDefaultResultOrder()
+    category: Network Access
+  pattern-either:
+  - pattern: dns.getDefaultResultOrder(...)
+  - pattern: $VAR = dns.getDefaultResultOrder
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-dns-getServers
+  languages:
+  - javascript
+  message: Avoid using dns.getServers(), as it can lead to potential issues with network access.
+  metadata:
+    api: dns.getServers()
+    category: Network Access
+  pattern-either:
+  - pattern: dns.getServers(...)
+  - pattern: $VAR = dns.getServers
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-dns-lookup
+  languages:
+  - javascript
+  message: Avoid using dns.lookup(), as it can lead to potential issues with network access.
+  metadata:
+    api: dns.lookup()
+    category: Network Access
+  pattern-either:
+  - pattern: dns.lookup(...)
+  - pattern: $VAR = dns.lookup
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-dns-lookupService
+  languages:
+  - javascript
+  message: Avoid using dns.lookupService(), as it can lead to potential issues with network access.
+  metadata:
+    api: dns.lookupService()
+    category: Network Access
+  pattern-either:
+  - pattern: dns.lookupService(...)
+  - pattern: $VAR = dns.lookupService
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-dns-resolve
+  languages:
+  - javascript
+  message: Avoid using dns.resolve(), as it can lead to potential issues with network access.
+  metadata:
+    api: dns.resolve()
+    category: Network Access
+  pattern-either:
+  - pattern: dns.resolve(...)
+  - pattern: $VAR = dns.resolve
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-dns-resolve4
+  languages:
+  - javascript
+  message: Avoid using dns.resolve4(), as it can lead to potential issues with network access.
+  metadata:
+    api: dns.resolve4()
+    category: Network Access
+  pattern-either:
+  - pattern: dns.resolve4(...)
+  - pattern: $VAR = dns.resolve4
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-dns-resolve6
+  languages:
+  - javascript
+  message: Avoid using dns.resolve6(), as it can lead to potential issues with network access.
+  metadata:
+    api: dns.resolve6()
+    category: Network Access
+  pattern-either:
+  - pattern: dns.resolve6(...)
+  - pattern: $VAR = dns.resolve6
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-dns-resolveAny
+  languages:
+  - javascript
+  message: Avoid using dns.resolveAny(), as it can lead to potential issues with network access.
+  metadata:
+    api: dns.resolveAny()
+    category: Network Access
+  pattern-either:
+  - pattern: dns.resolveAny(...)
+  - pattern: $VAR = dns.resolveAny
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-dns-resolveCaa
+  languages:
+  - javascript
+  message: Avoid using dns.resolveCaa(), as it can lead to potential issues with network access.
+  metadata:
+    api: dns.resolveCaa()
+    category: Network Access
+  pattern-either:
+  - pattern: dns.resolveCaa(...)
+  - pattern: $VAR = dns.resolveCaa
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-dns-resolveCname
+  languages:
+  - javascript
+  message: Avoid using dns.resolveCname(), as it can lead to potential issues with network access.
+  metadata:
+    api: dns.resolveCname()
+    category: Network Access
+  pattern-either:
+  - pattern: dns.resolveCname(...)
+  - pattern: $VAR = dns.resolveCname
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-dns-resolveMx
+  languages:
+  - javascript
+  message: Avoid using dns.resolveMx(), as it can lead to potential issues with network access.
+  metadata:
+    api: dns.resolveMx()
+    category: Network Access
+  pattern-either:
+  - pattern: dns.resolveMx(...)
+  - pattern: $VAR = dns.resolveMx
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-dns-resolveNaptr
+  languages:
+  - javascript
+  message: Avoid using dns.resolveNaptr(), as it can lead to potential issues with network access.
+  metadata:
+    api: dns.resolveNaptr()
+    category: Network Access
+  pattern-either:
+  - pattern: dns.resolveNaptr(...)
+  - pattern: $VAR = dns.resolveNaptr
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-dns-resolveNs
+  languages:
+  - javascript
+  message: Avoid using dns.resolveNs(), as it can lead to potential issues with network access.
+  metadata:
+    api: dns.resolveNs()
+    category: Network Access
+  pattern-either:
+  - pattern: dns.resolveNs(...)
+  - pattern: $VAR = dns.resolveNs
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-dns-resolvePtr
+  languages:
+  - javascript
+  message: Avoid using dns.resolvePtr(), as it can lead to potential issues with network access.
+  metadata:
+    api: dns.resolvePtr()
+    category: Network Access
+  pattern-either:
+  - pattern: dns.resolvePtr(...)
+  - pattern: $VAR = dns.resolvePtr
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-dns-resolveSoa
+  languages:
+  - javascript
+  message: Avoid using dns.resolveSoa(), as it can lead to potential issues with network access.
+  metadata:
+    api: dns.resolveSoa()
+    category: Network Access
+  pattern-either:
+  - pattern: dns.resolveSoa(...)
+  - pattern: $VAR = dns.resolveSoa
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-dns-resolveSrv
+  languages:
+  - javascript
+  message: Avoid using dns.resolveSrv(), as it can lead to potential issues with network access.
+  metadata:
+    api: dns.resolveSrv()
+    category: Network Access
+  pattern-either:
+  - pattern: dns.resolveSrv(...)
+  - pattern: $VAR = dns.resolveSrv
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-dns-resolveTxt
+  languages:
+  - javascript
+  message: Avoid using dns.resolveTxt(), as it can lead to potential issues with network access.
+  metadata:
+    api: dns.resolveTxt()
+    category: Network Access
+  pattern-either:
+  - pattern: dns.resolveTxt(...)
+  - pattern: $VAR = dns.resolveTxt
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-dns-reverse
+  languages:
+  - javascript
+  message: Avoid using dns.reverse(), as it can lead to potential issues with network access.
+  metadata:
+    api: dns.reverse()
+    category: Network Access
+  pattern-either:
+  - pattern: dns.reverse(...)
+  - pattern: $VAR = dns.reverse
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-dns-setDefaultResultOrder
+  languages:
+  - javascript
+  message: Avoid using dns.setDefaultResultOrder(), as it can lead to potential issues with network access.
+  metadata:
+    api: dns.setDefaultResultOrder()
+    category: Network Access
+  pattern-either:
+  - pattern: dns.setDefaultResultOrder(...)
+  - pattern: $VAR = dns.setDefaultResultOrder
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-dns-setServers
+  languages:
+  - javascript
+  message: Avoid using dns.setServers(), as it can lead to potential issues with network access.
+  metadata:
+    api: dns.setServers()
+    category: Network Access
+  pattern-either:
+  - pattern: dns.setServers(...)
+  - pattern: $VAR = dns.setServers
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-require-dns
+  languages:
+  - javascript
+  message: Avoid using require('dns'), as it can lead to potential issues with network access.
+  metadata:
+    api: require('dns')
+    category: Network Access
+  pattern: require('dns')
+  severity: WARNING
+  tags:
+  - Network Access

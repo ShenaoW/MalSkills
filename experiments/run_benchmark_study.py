@@ -19,10 +19,20 @@ from skillguard.utils import ensure_dir
 
 DEFAULT_ABLATIONS = [
     "benchmark_full",
-    "benchmark_static_only",
-    "benchmark_no_formal_reasoning",
+    "benchmark_semgrep_evidence_only",
+    "benchmark_llm_evidence_only",
+    "benchmark_formal_reasoning_only",
+    "benchmark_llm_reasoning_only",
+    "benchmark_no_yasa",
     "benchmark_no_cross_artifact_resolution",
-    "benchmark_no_capability_mismatch",
+    "benchmark_static_only",
+    "benchmark_codex_agent_baseline",
+    "benchmark_skill_security_audit_baseline",
+    "benchmark_skill_security_scan_baseline",
+    "benchmark_skills_security_audit_baseline",
+    "benchmark_caterpillar_baseline",
+    "benchmark_clawscan_baseline",
+    "benchmark_skill_scanner_baseline",
 ]
 
 

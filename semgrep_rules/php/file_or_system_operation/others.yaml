@@ -1,0 +1,376 @@
+rules:
+- id: no-chgrp
+  languages:
+  - php
+  message: Avoid using chgrp(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: chgrp()
+    category: File or System Operation
+  pattern-either:
+  - pattern: chgrp(...)
+  - pattern: $VAR = chgrp(...)
+  - pattern: $VAR = "chgrp"
+  - pattern: $VAR = 'chgrp'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-chmod
+  languages:
+  - php
+  message: Avoid using chmod(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: chmod()
+    category: File or System Operation
+  pattern-either:
+  - pattern: chmod(...)
+  - pattern: $VAR = chmod(...)
+  - pattern: $VAR = "chmod"
+  - pattern: $VAR = 'chmod'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-chown
+  languages:
+  - php
+  message: Avoid using chown(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: chown()
+    category: File or System Operation
+  pattern-either:
+  - pattern: chown(...)
+  - pattern: $VAR = chown(...)
+  - pattern: $VAR = "chown"
+  - pattern: $VAR = 'chown'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-closedir
+  languages:
+  - php
+  message: Avoid using closedir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: closedir()
+    category: File or System Operation
+  pattern-either:
+  - pattern: closedir(...)
+  - pattern: $VAR = closedir(...)
+  - pattern: $VAR = "closedir"
+  - pattern: $VAR = 'closedir'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fclose
+  languages:
+  - php
+  message: Avoid using fclose(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fclose()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fclose(...)
+  - pattern: $VAR = fclose(...)
+  - pattern: $VAR = "fclose"
+  - pattern: $VAR = 'fclose'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-file
+  languages:
+  - php
+  message: Avoid using file(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: file()
+    category: File or System Operation
+  pattern-either:
+  - pattern: file(...)
+  - pattern: $VAR = file(...)
+  - pattern: $VAR = "file"
+  - pattern: $VAR = 'file'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-file_exists
+  languages:
+  - php
+  message: Avoid using file_exists(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: file_exists()
+    category: File or System Operation
+  pattern-either:
+  - pattern: file_exists(...)
+  - pattern: $VAR = file_exists(...)
+  - pattern: $VAR = "file_exists"
+  - pattern: $VAR = 'file_exists'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-filegroup
+  languages:
+  - php
+  message: Avoid using filegroup(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: filegroup()
+    category: File or System Operation
+  pattern-either:
+  - pattern: filegroup(...)
+  - pattern: $VAR = filegroup(...)
+  - pattern: $VAR = "filegroup"
+  - pattern: $VAR = 'filegroup'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fileowner
+  languages:
+  - php
+  message: Avoid using fileowner(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fileowner()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fileowner(...)
+  - pattern: $VAR = fileowner(...)
+  - pattern: $VAR = "fileowner"
+  - pattern: $VAR = 'fileowner'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fileperms
+  languages:
+  - php
+  message: Avoid using fileperms(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fileperms()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fileperms(...)
+  - pattern: $VAR = fileperms(...)
+  - pattern: $VAR = "fileperms"
+  - pattern: $VAR = 'fileperms'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fopen
+  languages:
+  - php
+  message: Avoid using fopen(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fopen()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fopen(...)
+  - pattern: $VAR = fopen(...)
+  - pattern: $VAR = "fopen"
+  - pattern: $VAR = 'fopen'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fread
+  languages:
+  - php
+  message: Avoid using fread(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fread()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fread(...)
+  - pattern: $VAR = fread(...)
+  - pattern: $VAR = "fread"
+  - pattern: $VAR = 'fread'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fwrite
+  languages:
+  - php
+  message: Avoid using fwrite(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fwrite()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fwrite(...)
+  - pattern: $VAR = fwrite(...)
+  - pattern: $VAR = "fwrite"
+  - pattern: $VAR = 'fwrite'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-glob
+  languages:
+  - php
+  message: Avoid using glob(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: glob()
+    category: File or System Operation
+  pattern-either:
+  - pattern: glob(...)
+  - pattern: $VAR = glob(...)
+  - pattern: $VAR = "glob"
+  - pattern: $VAR = 'glob'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-is_dir
+  languages:
+  - php
+  message: Avoid using is_dir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: is_dir()
+    category: File or System Operation
+  pattern-either:
+  - pattern: is_dir(...)
+  - pattern: $VAR = is_dir(...)
+  - pattern: $VAR = "is_dir"
+  - pattern: $VAR = 'is_dir'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-is_file
+  languages:
+  - php
+  message: Avoid using is_file(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: is_file()
+    category: File or System Operation
+  pattern-either:
+  - pattern: is_file(...)
+  - pattern: $VAR = is_file(...)
+  - pattern: $VAR = "is_file"
+  - pattern: $VAR = 'is_file'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-mkdir
+  languages:
+  - php
+  message: Avoid using mkdir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: mkdir()
+    category: File or System Operation
+  pattern-either:
+  - pattern: mkdir(...)
+  - pattern: $VAR = mkdir(...)
+  - pattern: $VAR = "mkdir"
+  - pattern: $VAR = 'mkdir'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-opendir
+  languages:
+  - php
+  message: Avoid using opendir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: opendir()
+    category: File or System Operation
+  pattern-either:
+  - pattern: opendir(...)
+  - pattern: $VAR = opendir(...)
+  - pattern: $VAR = "opendir"
+  - pattern: $VAR = 'opendir'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-readdir
+  languages:
+  - php
+  message: Avoid using readdir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: readdir()
+    category: File or System Operation
+  pattern-either:
+  - pattern: readdir(...)
+  - pattern: $VAR = readdir(...)
+  - pattern: $VAR = "readdir"
+  - pattern: $VAR = 'readdir'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-rename
+  languages:
+  - php
+  message: Avoid using rename(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: rename()
+    category: File or System Operation
+  pattern-either:
+  - pattern: rename(...)
+  - pattern: $VAR = rename(...)
+  - pattern: $VAR = "rename"
+  - pattern: $VAR = 'rename'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-rmdir
+  languages:
+  - php
+  message: Avoid using rmdir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: rmdir()
+    category: File or System Operation
+  pattern-either:
+  - pattern: rmdir(...)
+  - pattern: $VAR = rmdir(...)
+  - pattern: $VAR = "rmdir"
+  - pattern: $VAR = 'rmdir'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-scandir
+  languages:
+  - php
+  message: Avoid using scandir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: scandir()
+    category: File or System Operation
+  pattern-either:
+  - pattern: scandir(...)
+  - pattern: $VAR = scandir(...)
+  - pattern: $VAR = "scandir"
+  - pattern: $VAR = 'scandir'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-stat
+  languages:
+  - php
+  message: Avoid using stat(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: stat()
+    category: File or System Operation
+  pattern-either:
+  - pattern: stat(...)
+  - pattern: $VAR = stat(...)
+  - pattern: $VAR = "stat"
+  - pattern: $VAR = 'stat'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-touch
+  languages:
+  - php
+  message: Avoid using touch(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: touch()
+    category: File or System Operation
+  pattern-either:
+  - pattern: touch(...)
+  - pattern: $VAR = touch(...)
+  - pattern: $VAR = "touch"
+  - pattern: $VAR = 'touch'
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-unlink
+  languages:
+  - php
+  message: Avoid using unlink(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: unlink()
+    category: File or System Operation
+  pattern-either:
+  - pattern: unlink(...)
+  - pattern: $VAR = unlink(...)
+  - pattern: $VAR = "unlink"
+  - pattern: $VAR = 'unlink'
+  severity: WARNING
+  tags:
+  - File or System Operation

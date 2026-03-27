@@ -1,0 +1,168 @@
+rules:
+- id: no-url-URL
+  languages:
+  - javascript
+  message: Avoid using url.URL(), as it can lead to potential issues with network access.
+  metadata:
+    api: url.URL()
+    category: Network Access
+  pattern-either:
+  - pattern: url.URL(...)
+  - pattern: $VAR = url.URL
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-url-URLSearchParams
+  languages:
+  - javascript
+  message: Avoid using url.URLSearchParams(), as it can lead to potential issues with network access.
+  metadata:
+    api: url.URLSearchParams()
+    category: Network Access
+  pattern-either:
+  - pattern: url.URLSearchParams(...)
+  - pattern: $VAR = url.URLSearchParams
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-url-Url
+  languages:
+  - javascript
+  message: Avoid using url.Url(), as it can lead to potential issues with network access.
+  metadata:
+    api: url.Url()
+    category: Network Access
+  pattern-either:
+  - pattern: url.Url(...)
+  - pattern: $VAR = url.Url
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-url-domainToASCII
+  languages:
+  - javascript
+  message: Avoid using url.domainToASCII(), as it can lead to potential issues with network access.
+  metadata:
+    api: url.domainToASCII()
+    category: Network Access
+  pattern-either:
+  - pattern: url.domainToASCII(...)
+  - pattern: $VAR = url.domainToASCII
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-url-domainToUnicode
+  languages:
+  - javascript
+  message: Avoid using url.domainToUnicode(), as it can lead to potential issues with network access.
+  metadata:
+    api: url.domainToUnicode()
+    category: Network Access
+  pattern-either:
+  - pattern: url.domainToUnicode(...)
+  - pattern: $VAR = url.domainToUnicode
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-url-fileURLToPath
+  languages:
+  - javascript
+  message: Avoid using url.fileURLToPath(), as it can lead to potential issues with network access.
+  metadata:
+    api: url.fileURLToPath()
+    category: Network Access
+  pattern-either:
+  - pattern: url.fileURLToPath(...)
+  - pattern: $VAR = url.fileURLToPath
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-url-format
+  languages:
+  - javascript
+  message: Avoid using url.format(), as it can lead to potential issues with network access.
+  metadata:
+    api: url.format()
+    category: Network Access
+  pattern-either:
+  - pattern: url.format(...)
+  - pattern: $VAR = url.format
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-url-parse
+  languages:
+  - javascript
+  message: Avoid using url.parse(), as it can lead to potential issues with network access.
+  metadata:
+    api: url.parse()
+    category: Network Access
+  pattern-either:
+  - pattern: url.parse(...)
+  - pattern: $VAR = url.parse
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-url-pathToFileURL
+  languages:
+  - javascript
+  message: Avoid using url.pathToFileURL(), as it can lead to potential issues with network access.
+  metadata:
+    api: url.pathToFileURL()
+    category: Network Access
+  pattern-either:
+  - pattern: url.pathToFileURL(...)
+  - pattern: $VAR = url.pathToFileURL
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-url-resolve
+  languages:
+  - javascript
+  message: Avoid using url.resolve(), as it can lead to potential issues with network access.
+  metadata:
+    api: url.resolve()
+    category: Network Access
+  pattern-either:
+  - pattern: url.resolve(...)
+  - pattern: $VAR = url.resolve
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-url-resolveObject
+  languages:
+  - javascript
+  message: Avoid using url.resolveObject(), as it can lead to potential issues with network access.
+  metadata:
+    api: url.resolveObject()
+    category: Network Access
+  pattern-either:
+  - pattern: url.resolveObject(...)
+  - pattern: $VAR = url.resolveObject
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-url-urlToHttpOptions
+  languages:
+  - javascript
+  message: Avoid using url.urlToHttpOptions(), as it can lead to potential issues with network access.
+  metadata:
+    api: url.urlToHttpOptions()
+    category: Network Access
+  pattern-either:
+  - pattern: url.urlToHttpOptions(...)
+  - pattern: $VAR = url.urlToHttpOptions
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-require-url
+  languages:
+  - javascript
+  message: Avoid using require('url'), as it can lead to potential issues with network access.
+  metadata:
+    api: require('url')
+    category: Network Access
+  pattern: require('url')
+  severity: WARNING
+  tags:
+  - Network Access

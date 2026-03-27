@@ -1,0 +1,29 @@
+rules:
+- id: no-Cipher
+  languages:
+  - java
+  message: Avoid using Cipher(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: Cipher()
+    category: Cryptography
+  pattern-either:
+  - pattern: new Cipher(...)
+  - pattern: Cipher(...)
+  - pattern: $VAR = Cipher
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-KeyGenerator
+  languages:
+  - java
+  message: Avoid using KeyGenerator(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: KeyGenerator()
+    category: Cryptography
+  pattern-either:
+  - pattern: new KeyGenerator(...)
+  - pattern: KeyGenerator(...)
+  - pattern: $VAR = KeyGenerator
+  severity: WARNING
+  tags:
+  - Cryptography

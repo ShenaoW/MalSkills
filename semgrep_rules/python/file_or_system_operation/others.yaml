@@ -1,0 +1,42 @@
+rules:
+- id: no-open
+  languages:
+  - python
+  message: Avoid using open(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: open()
+    category: File or System Operation
+  pattern-either:
+  - pattern: open(...)
+  - pattern: $VAR = open
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-bz2-open
+  languages:
+  - python
+  message: Avoid using bz2.open(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: bz2.open()
+    category: File or System Operation
+  pattern-either:
+  - pattern: bz2.open(...)
+  - pattern: $VAR = bz2.open
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-zipfile-ZipFile-__init__
+  languages:
+  - python
+  message: Avoid using zipfile.ZipFile.__init__(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: zipfile.ZipFile.__init__()
+    category: File or System Operation
+  pattern-either:
+  - pattern: zipfile.ZipFile.__init__(...)
+  - pattern: $VAR = zipfile.ZipFile.__init__
+  - pattern: ZipFile.__init__(...)
+  - pattern: $VAR = ZipFile.__init__
+  severity: WARNING
+  tags:
+  - File or System Operation

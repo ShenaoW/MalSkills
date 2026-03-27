@@ -1,0 +1,181 @@
+rules:
+- id: no-http-Agent
+  languages:
+  - javascript
+  message: Avoid using http.Agent(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.Agent()
+    category: Network Access
+  pattern-either:
+  - pattern: http.Agent(...)
+  - pattern: $VAR = http.Agent
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http-ClientRequest
+  languages:
+  - javascript
+  message: Avoid using http.ClientRequest(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.ClientRequest()
+    category: Network Access
+  pattern-either:
+  - pattern: http.ClientRequest(...)
+  - pattern: $VAR = http.ClientRequest
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http-IncomingMessage
+  languages:
+  - javascript
+  message: Avoid using http.IncomingMessage(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.IncomingMessage()
+    category: Network Access
+  pattern-either:
+  - pattern: http.IncomingMessage(...)
+  - pattern: $VAR = http.IncomingMessage
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http-OutgoingMessage
+  languages:
+  - javascript
+  message: Avoid using http.OutgoingMessage(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.OutgoingMessage()
+    category: Network Access
+  pattern-either:
+  - pattern: http.OutgoingMessage(...)
+  - pattern: $VAR = http.OutgoingMessage
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http-Server
+  languages:
+  - javascript
+  message: Avoid using http.Server(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.Server()
+    category: Network Access
+  pattern-either:
+  - pattern: http.Server(...)
+  - pattern: $VAR = http.Server
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http-ServerResponse
+  languages:
+  - javascript
+  message: Avoid using http.ServerResponse(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.ServerResponse()
+    category: Network Access
+  pattern-either:
+  - pattern: http.ServerResponse(...)
+  - pattern: $VAR = http.ServerResponse
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http-_connectionListener
+  languages:
+  - javascript
+  message: Avoid using http._connectionListener(), as it can lead to potential issues with network access.
+  metadata:
+    api: http._connectionListener()
+    category: Network Access
+  pattern-either:
+  - pattern: http._connectionListener(...)
+  - pattern: $VAR = http._connectionListener
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http-createServer
+  languages:
+  - javascript
+  message: Avoid using http.createServer(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.createServer()
+    category: Network Access
+  pattern-either:
+  - pattern: http.createServer(...)
+  - pattern: $VAR = http.createServer
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http-get
+  languages:
+  - javascript
+  message: Avoid using http.get(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.get()
+    category: Network Access
+  pattern-either:
+  - pattern: http.get(...)
+  - pattern: $VAR = http.get
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http-request
+  languages:
+  - javascript
+  message: Avoid using http.request(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.request()
+    category: Network Access
+  pattern-either:
+  - pattern: http.request(...)
+  - pattern: $VAR = http.request
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http-setMaxIdleHTTPParsers
+  languages:
+  - javascript
+  message: Avoid using http.setMaxIdleHTTPParsers(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.setMaxIdleHTTPParsers()
+    category: Network Access
+  pattern-either:
+  - pattern: http.setMaxIdleHTTPParsers(...)
+  - pattern: $VAR = http.setMaxIdleHTTPParsers
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http-validateHeaderName
+  languages:
+  - javascript
+  message: Avoid using http.validateHeaderName(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.validateHeaderName()
+    category: Network Access
+  pattern-either:
+  - pattern: http.validateHeaderName(...)
+  - pattern: $VAR = http.validateHeaderName
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http-validateHeaderValue
+  languages:
+  - javascript
+  message: Avoid using http.validateHeaderValue(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.validateHeaderValue()
+    category: Network Access
+  pattern-either:
+  - pattern: http.validateHeaderValue(...)
+  - pattern: $VAR = http.validateHeaderValue
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-require-http
+  languages:
+  - javascript
+  message: Avoid using require('http'), as it can lead to potential issues with network access.
+  metadata:
+    api: require('http')
+    category: Network Access
+  pattern: require('http')
+  severity: WARNING
+  tags:
+  - Network Access

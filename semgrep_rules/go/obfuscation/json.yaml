@@ -1,0 +1,27 @@
+rules:
+- id: no-json.Marshal
+  languages:
+  - go
+  message: Avoid using json.Marshal(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: json.Marshal()
+    category: Obfuscation
+  pattern-either:
+  - pattern: json.Marshal(...)
+  - pattern: $VAR = json.Marshal
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-json.Unmarshal
+  languages:
+  - go
+  message: Avoid using json.Unmarshal(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: json.Unmarshal()
+    category: Obfuscation
+  pattern-either:
+  - pattern: json.Unmarshal(...)
+  - pattern: $VAR = json.Unmarshal
+  severity: WARNING
+  tags:
+  - Obfuscation

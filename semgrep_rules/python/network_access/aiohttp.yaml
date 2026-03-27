@@ -1,0 +1,121 @@
+rules:
+- id: no-aiohttp-client-ClientSession
+  languages:
+  - python
+  message: Avoid using aiohttp.client.ClientSession(), as it can lead to potential issues with network access.
+  metadata:
+    api: aiohttp.client.ClientSession()
+    category: Network Access
+  pattern-either:
+  - pattern: aiohttp.client.ClientSession(...)
+  - pattern: $VAR = aiohttp.client.ClientSession
+  - pattern: client.ClientSession(...)
+  - pattern: $VAR = client.ClientSession
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-aiohttp-client-delete
+  languages:
+  - python
+  message: Avoid using aiohttp.client.delete(), as it can lead to potential issues with network access.
+  metadata:
+    api: aiohttp.client.delete()
+    category: Network Access
+  pattern-either:
+  - pattern: aiohttp.client.delete(...)
+  - pattern: $VAR = aiohttp.client.delete
+  - pattern: client.delete(...)
+  - pattern: $VAR = client.delete
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-aiohttp-client-get
+  languages:
+  - python
+  message: Avoid using aiohttp.client.get(), as it can lead to potential issues with network access.
+  metadata:
+    api: aiohttp.client.get()
+    category: Network Access
+  pattern-either:
+  - pattern: aiohttp.client.get(...)
+  - pattern: $VAR = aiohttp.client.get
+  - pattern: client.get(...)
+  - pattern: $VAR = client.get
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-aiohttp-client-head
+  languages:
+  - python
+  message: Avoid using aiohttp.client.head(), as it can lead to potential issues with network access.
+  metadata:
+    api: aiohttp.client.head()
+    category: Network Access
+  pattern-either:
+  - pattern: aiohttp.client.head(...)
+  - pattern: $VAR = aiohttp.client.head
+  - pattern: client.head(...)
+  - pattern: $VAR = client.head
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-aiohttp-client-options
+  languages:
+  - python
+  message: Avoid using aiohttp.client.options(), as it can lead to potential issues with network access.
+  metadata:
+    api: aiohttp.client.options()
+    category: Network Access
+  pattern-either:
+  - pattern: aiohttp.client.options(...)
+  - pattern: $VAR = aiohttp.client.options
+  - pattern: client.options(...)
+  - pattern: $VAR = client.options
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-aiohttp-client-post
+  languages:
+  - python
+  message: Avoid using aiohttp.client.post(), as it can lead to potential issues with network access.
+  metadata:
+    api: aiohttp.client.post()
+    category: Network Access
+  pattern-either:
+  - pattern: aiohttp.client.post(...)
+  - pattern: $VAR = aiohttp.client.post
+  - pattern: client.post(...)
+  - pattern: $VAR = client.post
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-aiohttp-client-put
+  languages:
+  - python
+  message: Avoid using aiohttp.client.put(), as it can lead to potential issues with network access.
+  metadata:
+    api: aiohttp.client.put()
+    category: Network Access
+  pattern-either:
+  - pattern: aiohttp.client.put(...)
+  - pattern: $VAR = aiohttp.client.put
+  - pattern: client.put(...)
+  - pattern: $VAR = client.put
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-aiohttp-client-request
+  languages:
+  - python
+  message: Avoid using aiohttp.client.request(), as it can lead to potential issues with network access.
+  metadata:
+    api: aiohttp.client.request()
+    category: Network Access
+  pattern-either:
+  - pattern: aiohttp.client.request(...)
+  - pattern: $VAR = aiohttp.client.request
+  - pattern: client.request(...)
+  - pattern: $VAR = client.request
+  severity: WARNING
+  tags:
+  - Network Access

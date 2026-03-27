@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# CC (Claude Code) Security Analyzer v1.0
-# Performs detailed security analysis on skills using Claude Code API
+# Codex Security Analyzer v1.0
+# Performs detailed security analysis on skills using Codex via an OpenAI-compatible API
 #
 
 set -e
@@ -22,6 +22,17 @@ export NC='\033[0m'
 # Get script directory
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+SEARCH_DIR="$PROJECT_ROOT"
+while [ "$SEARCH_DIR" != "/" ]; do
+    ENV_FILE="$SEARCH_DIR/.env"
+    if [ -f "$ENV_FILE" ]; then
+        set -a
+        source "$ENV_FILE"
+        set +a
+        break
+    fi
+    SEARCH_DIR="$(dirname "$SEARCH_DIR")"
+done
 
 # Source config loader
 source "$PROJECT_ROOT/scripts/lib.sh"
@@ -44,8 +55,8 @@ SKIPPED_LOG="$OUTPUT_DIR/logs/skipped.log"
 
 # API Key configuration
 API_KEY_CONF="$PROJECT_ROOT/api_keys.conf"
-KEY_INDEX_FILE="/tmp/cc_api_key_index.txt"
-LOCK_FILE="/tmp/cc_api_key_index.lock"
+KEY_INDEX_FILE="$PROJECT_ROOT/scan_results/logs/cc_api_key_index.txt"
+LOCK_FILE="$PROJECT_ROOT/scan_results/logs/cc_api_key_index.lock"
 
 # Initialize API key index
 mkdir -p "$(dirname "$KEY_INDEX_FILE")" 2>/dev/null
@@ -103,14 +114,23 @@ analyze_single_skill() {
     # Get API key
     local current_api_key=""
     if current_api_key=$(get_next_api_key 2>/dev/null); then
-        export ANTHROPIC_AUTH_TOKEN="$current_api_key"
+        export OPENAI_API_KEY="$current_api_key"
+    elif [ -n "${PACKY_API_KEY:-}" ]; then
+        export OPENAI_API_KEY="$PACKY_API_KEY"
     fi
+    export OPENAI_BASE_URL="${OPENAI_BASE_URL:-${PACKY_API_URL:-https://www.packyapi.com/v1}}"
+    local codex_model="${OPENAI_MODEL:-${LLM_MODEL:-gpt-5.3-codex-medium}}"
 
-    # Execute Claude Code analysis
-    claude -p \
-        --output-format json \
-        --append-system-prompt "$custom_prompt" \
-        "Analyze Skill Directory: ${skill_dir}" > "$tmp_out" 2>&1 < /dev/null
+    # Execute Codex analysis
+    codex exec \
+        --skip-git-repo-check \
+        --dangerously-bypass-approvals-and-sandbox \
+        --model "$codex_model" \
+        -C "$skill_dir" \
+        --output-last-message "$tmp_out" \
+        "$custom_prompt
+
+Analyze the current skill directory using static analysis only. Return strict JSON only." > /dev/null 2>&1 < /dev/null
 
     local exit_code=$?
 
@@ -168,10 +188,21 @@ except:
 
         # Validate and save
         if echo "$clean_json" | jq . >/dev/null 2>&1; then
-            local status=$(echo "$clean_json" | jq -r '.audit_summary.intent_alignment_status' | tr -d '[:space:]')
+            local enriched_json
+            enriched_json=$(echo "$clean_json" | jq \
+                --arg skill_path "$skill_dir" \
+                --arg repo_id "$repo_id" \
+                --arg skill_name "$skill_name" \
+                '. + {
+                    skill_path: $skill_path,
+                    repo_id: $repo_id,
+                    skill_name: $skill_name
+                }')
+
+            local status=$(echo "$enriched_json" | jq -r '.audit_summary.intent_alignment_status' | tr -d '[:space:]')
 
             if [ -z "$status" ] || [ "$status" == "null" ]; then
-                echo "$clean_json" > "${OUTPUT_DIR}/ERROR/${filename}.status_missing.err"
+                echo "$enriched_json" > "${OUTPUT_DIR}/ERROR/${filename}.status_missing.err"
                 echo "ERROR|$repo_id|$skill_name|STATUS_MISSING"
             else
                 local target_dir="$OUTPUT_DIR/ERROR"
@@ -181,7 +212,7 @@ except:
                     "MALICIOUS") target_dir="$OUTPUT_DIR/MALICIOUS" ;;
                     *) target_dir="$OUTPUT_DIR/ERROR" ;;
                 esac
-                echo "$clean_json" > "${target_dir}/${filename}"
+                echo "$enriched_json" > "${target_dir}/${filename}"
                 echo "DONE|$repo_id|$skill_name|$status"
             fi
         else
@@ -195,6 +226,7 @@ except:
     rm -f "$tmp_out"
 }
 
+export OUTPUT_DIR OUTPUT_SUFFIX PROJECT_ROOT PACKY_API_KEY PACKY_API_URL OPENAI_API_KEY OPENAI_BASE_URL OPENAI_MODEL LLM_MODEL
 export -f analyze_single_skill get_next_api_key
 
 # Main execution
@@ -287,13 +319,13 @@ print(f'TODO count: {todo_count}')
 
         if [ "$status" == "DONE" ]; then
             case "$verdict" in
-                "SAFE") ((COUNT_SAFE++)); log "[$PROCESSED/$TOTAL_TODO] ${BLUE}${repo}_${skill}${NC} -> ${GREEN}[SAFE]${NC}" ;;
-                "SUSPICIOUS") ((COUNT_SUSP++)); log "[$PROCESSED/$TOTAL_TODO] ${BLUE}${repo}_${skill}${NC} -> ${YELLOW}[SUSPICIOUS]${NC}" ;;
-                "MALICIOUS") ((COUNT_MAL++)); log "[$PROCESSED/$TOTAL_TODO] ${BLUE}${repo}_${skill}${NC} -> ${RED}[MALICIOUS]${NC}" ;;
-                *) ((COUNT_ERR++)); log "[$PROCESSED/$TOTAL_TODO] ${repo}_${skill} -> ${CYAN}[${verdict}]${NC}" ;;
+                "SAFE") COUNT_SAFE=$((COUNT_SAFE + 1)); log "[$PROCESSED/$TOTAL_TODO] ${BLUE}${repo}_${skill}${NC} -> ${GREEN}[SAFE]${NC}" ;;
+                "SUSPICIOUS") COUNT_SUSP=$((COUNT_SUSP + 1)); log "[$PROCESSED/$TOTAL_TODO] ${BLUE}${repo}_${skill}${NC} -> ${YELLOW}[SUSPICIOUS]${NC}" ;;
+                "MALICIOUS") COUNT_MAL=$((COUNT_MAL + 1)); log "[$PROCESSED/$TOTAL_TODO] ${BLUE}${repo}_${skill}${NC} -> ${RED}[MALICIOUS]${NC}" ;;
+                *) COUNT_ERR=$((COUNT_ERR + 1)); log "[$PROCESSED/$TOTAL_TODO] ${repo}_${skill} -> ${CYAN}[${verdict}]${NC}" ;;
             esac
         else
-            ((COUNT_ERR++))
+            COUNT_ERR=$((COUNT_ERR + 1))
             log "[$PROCESSED/$TOTAL_TODO] ${RED}Failed: ${repo}_${skill}${NC}"
         fi
 

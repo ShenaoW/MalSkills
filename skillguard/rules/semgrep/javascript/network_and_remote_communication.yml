@@ -1,0 +1,67 @@
+rules:
+  - id: javascript.network_and_remote_communication.outbound_http
+    languages: [javascript]
+    message: JavaScript outbound network connection
+    severity: WARNING
+    metadata:
+      skillguard_subtype: outbound_connection
+      skillguard_evidence_type: network_and_remote_communication
+      skillguard_value_metavar: $URL
+    pattern-either:
+      - pattern: fetch($URL, ...)
+      - pattern: axios.get($URL, ...)
+      - pattern: axios.post($URL, ...)
+      - pattern: got($URL, ...)
+      - pattern: got.post($URL, ...)
+      - pattern: http.get($URL, ...)
+      - pattern: http.request($URL, ...)
+      - pattern: https.get($URL, ...)
+      - pattern: https.request($URL, ...)
+
+  - id: javascript.network_and_remote_communication.socket_connect
+    languages: [javascript]
+    message: JavaScript outbound socket or DNS communication
+    severity: WARNING
+    metadata:
+      skillguard_subtype: outbound_connection
+      skillguard_evidence_type: network_and_remote_communication
+    pattern-either:
+      - pattern: net.connect(...)
+      - pattern: tls.connect(...)
+      - pattern: dns.lookup(...)
+      - pattern: dns.resolve(...)
+
+  - id: javascript.network_and_remote_communication.listener
+    languages: [javascript]
+    message: JavaScript listener or receive socket
+    severity: WARNING
+    metadata:
+      skillguard_subtype: listener_and_receive
+      skillguard_evidence_type: network_and_remote_communication
+    pattern-either:
+      - pattern: net.createServer(...)
+      - pattern: http.createServer(...)
+      - pattern: https.createServer(...)
+
+  - id: javascript.network_and_remote_communication.tunnel
+    languages: [javascript]
+    message: JavaScript tunneling or forwarding
+    severity: WARNING
+    metadata:
+      skillguard_subtype: tunneling_and_forwarding
+      skillguard_evidence_type: network_and_remote_communication
+    pattern-either:
+      - pattern: ssh2.Client(...)
+      - pattern: new SocksProxyAgent(...)
+
+  - id: javascript.network_and_remote_communication.encrypted_comm
+    languages: [javascript]
+    message: JavaScript encrypted or encapsulated network communication
+    severity: WARNING
+    metadata:
+      skillguard_subtype: protocol_encapsulation_or_encrypted_comm
+      skillguard_evidence_type: network_and_remote_communication
+    pattern-either:
+      - pattern: tls.connect(...)
+      - pattern: https.request(...)
+      - pattern: WebSocket($URL, ...)

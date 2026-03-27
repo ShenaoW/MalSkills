@@ -1,0 +1,335 @@
+rules:
+- id: no-requests-api-delete
+  languages:
+  - python
+  message: Avoid using requests.api.delete(), as it can lead to potential issues with network access.
+  metadata:
+    api: requests.api.delete()
+    category: Network Access
+  pattern-either:
+  - pattern: requests.api.delete(...)
+  - pattern: $VAR = requests.api.delete
+  - pattern: api.delete(...)
+  - pattern: $VAR = api.delete
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-requests-api-get
+  languages:
+  - python
+  message: Avoid using requests.api.get(), as it can lead to potential issues with network access.
+  metadata:
+    api: requests.api.get()
+    category: Network Access
+  pattern-either:
+  - pattern: requests.api.get(...)
+  - pattern: $VAR = requests.api.get
+  - pattern: api.get(...)
+  - pattern: $VAR = api.get
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-requests-api-head
+  languages:
+  - python
+  message: Avoid using requests.api.head(), as it can lead to potential issues with network access.
+  metadata:
+    api: requests.api.head()
+    category: Network Access
+  pattern-either:
+  - pattern: requests.api.head(...)
+  - pattern: $VAR = requests.api.head
+  - pattern: api.head(...)
+  - pattern: $VAR = api.head
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-requests-api-options
+  languages:
+  - python
+  message: Avoid using requests.api.options(), as it can lead to potential issues with network access.
+  metadata:
+    api: requests.api.options()
+    category: Network Access
+  pattern-either:
+  - pattern: requests.api.options(...)
+  - pattern: $VAR = requests.api.options
+  - pattern: api.options(...)
+  - pattern: $VAR = api.options
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-requests-api-patch
+  languages:
+  - python
+  message: Avoid using requests.api.patch(), as it can lead to potential issues with network access.
+  metadata:
+    api: requests.api.patch()
+    category: Network Access
+  pattern-either:
+  - pattern: requests.api.patch(...)
+  - pattern: $VAR = requests.api.patch
+  - pattern: api.patch(...)
+  - pattern: $VAR = api.patch
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-requests-api-post
+  languages:
+  - python
+  message: Avoid using requests.api.post(), as it can lead to potential issues with network access.
+  metadata:
+    api: requests.api.post()
+    category: Network Access
+  pattern-either:
+  - pattern: requests.api.post(...)
+  - pattern: $VAR = requests.api.post
+  - pattern: api.post(...)
+  - pattern: $VAR = api.post
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-requests-api-put
+  languages:
+  - python
+  message: Avoid using requests.api.put(), as it can lead to potential issues with network access.
+  metadata:
+    api: requests.api.put()
+    category: Network Access
+  pattern-either:
+  - pattern: requests.api.put(...)
+  - pattern: $VAR = requests.api.put
+  - pattern: api.put(...)
+  - pattern: $VAR = api.put
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-requests-api-request
+  languages:
+  - python
+  message: Avoid using requests.api.request(), as it can lead to potential issues with network access.
+  metadata:
+    api: requests.api.request()
+    category: Network Access
+  pattern-either:
+  - pattern: requests.api.request(...)
+  - pattern: $VAR = requests.api.request
+  - pattern: api.request(...)
+  - pattern: $VAR = api.request
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-requests-delete
+  languages:
+  - python
+  message: Avoid using requests.delete(), as it can lead to potential issues with network access.
+  metadata:
+    api: requests.delete()
+    category: Network Access
+  pattern-either:
+  - pattern: requests.delete(...)
+  - pattern: $VAR = requests.delete
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-requests-get
+  languages:
+  - python
+  message: Avoid using requests.get(), as it can lead to potential issues with network access.
+  metadata:
+    api: requests.get()
+    category: Network Access
+  pattern-either:
+  - pattern: requests.get(...)
+  - pattern: $VAR = requests.get
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-requests-head
+  languages:
+  - python
+  message: Avoid using requests.head(), as it can lead to potential issues with network access.
+  metadata:
+    api: requests.head()
+    category: Network Access
+  pattern-either:
+  - pattern: requests.head(...)
+  - pattern: $VAR = requests.head
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-requests-options
+  languages:
+  - python
+  message: Avoid using requests.options(), as it can lead to potential issues with network access.
+  metadata:
+    api: requests.options()
+    category: Network Access
+  pattern-either:
+  - pattern: requests.options(...)
+  - pattern: $VAR = requests.options
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-requests-post
+  languages:
+  - python
+  message: Avoid using requests.post(), as it can lead to potential issues with network access.
+  metadata:
+    api: requests.post()
+    category: Network Access
+  pattern-either:
+  - pattern: requests.post(...)
+  - pattern: $VAR = requests.post
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-requests-put
+  languages:
+  - python
+  message: Avoid using requests.put(), as it can lead to potential issues with network access.
+  metadata:
+    api: requests.put()
+    category: Network Access
+  pattern-either:
+  - pattern: requests.put(...)
+  - pattern: $VAR = requests.put
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-requests-sessions-Session-delete
+  languages:
+  - python
+  message: Avoid using requests.sessions.Session.delete(), as it can lead to potential issues with network access.
+  metadata:
+    api: requests.sessions.Session.delete()
+    category: Network Access
+  pattern-either:
+  - pattern: requests.sessions.Session.delete(...)
+  - pattern: $VAR = requests.sessions.Session.delete
+  - pattern: sessions.Session.delete(...)
+  - pattern: $VAR = sessions.Session.delete
+  - pattern: Session.delete(...)
+  - pattern: $VAR = Session.delete
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-requests-sessions-Session-get
+  languages:
+  - python
+  message: Avoid using requests.sessions.Session.get(), as it can lead to potential issues with network access.
+  metadata:
+    api: requests.sessions.Session.get()
+    category: Network Access
+  pattern-either:
+  - pattern: requests.sessions.Session.get(...)
+  - pattern: $VAR = requests.sessions.Session.get
+  - pattern: sessions.Session.get(...)
+  - pattern: $VAR = sessions.Session.get
+  - pattern: Session.get(...)
+  - pattern: $VAR = Session.get
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-requests-sessions-Session-head
+  languages:
+  - python
+  message: Avoid using requests.sessions.Session.head(), as it can lead to potential issues with network access.
+  metadata:
+    api: requests.sessions.Session.head()
+    category: Network Access
+  pattern-either:
+  - pattern: requests.sessions.Session.head(...)
+  - pattern: $VAR = requests.sessions.Session.head
+  - pattern: sessions.Session.head(...)
+  - pattern: $VAR = sessions.Session.head
+  - pattern: Session.head(...)
+  - pattern: $VAR = Session.head
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-requests-sessions-Session-options
+  languages:
+  - python
+  message: Avoid using requests.sessions.Session.options(), as it can lead to potential issues with network access.
+  metadata:
+    api: requests.sessions.Session.options()
+    category: Network Access
+  pattern-either:
+  - pattern: requests.sessions.Session.options(...)
+  - pattern: $VAR = requests.sessions.Session.options
+  - pattern: sessions.Session.options(...)
+  - pattern: $VAR = sessions.Session.options
+  - pattern: Session.options(...)
+  - pattern: $VAR = Session.options
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-requests-sessions-Session-patch
+  languages:
+  - python
+  message: Avoid using requests.sessions.Session.patch(), as it can lead to potential issues with network access.
+  metadata:
+    api: requests.sessions.Session.patch()
+    category: Network Access
+  pattern-either:
+  - pattern: requests.sessions.Session.patch(...)
+  - pattern: $VAR = requests.sessions.Session.patch
+  - pattern: sessions.Session.patch(...)
+  - pattern: $VAR = sessions.Session.patch
+  - pattern: Session.patch(...)
+  - pattern: $VAR = Session.patch
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-requests-sessions-Session-post
+  languages:
+  - python
+  message: Avoid using requests.sessions.Session.post(), as it can lead to potential issues with network access.
+  metadata:
+    api: requests.sessions.Session.post()
+    category: Network Access
+  pattern-either:
+  - pattern: requests.sessions.Session.post(...)
+  - pattern: $VAR = requests.sessions.Session.post
+  - pattern: sessions.Session.post(...)
+  - pattern: $VAR = sessions.Session.post
+  - pattern: Session.post(...)
+  - pattern: $VAR = Session.post
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-requests-sessions-Session-put
+  languages:
+  - python
+  message: Avoid using requests.sessions.Session.put(), as it can lead to potential issues with network access.
+  metadata:
+    api: requests.sessions.Session.put()
+    category: Network Access
+  pattern-either:
+  - pattern: requests.sessions.Session.put(...)
+  - pattern: $VAR = requests.sessions.Session.put
+  - pattern: sessions.Session.put(...)
+  - pattern: $VAR = sessions.Session.put
+  - pattern: Session.put(...)
+  - pattern: $VAR = Session.put
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-requests-sessions-Session-request
+  languages:
+  - python
+  message: Avoid using requests.sessions.Session.request(), as it can lead to potential issues with network access.
+  metadata:
+    api: requests.sessions.Session.request()
+    category: Network Access
+  pattern-either:
+  - pattern: requests.sessions.Session.request(...)
+  - pattern: $VAR = requests.sessions.Session.request
+  - pattern: sessions.Session.request(...)
+  - pattern: $VAR = sessions.Session.request
+  - pattern: Session.request(...)
+  - pattern: $VAR = Session.request
+  severity: WARNING
+  tags:
+  - Network Access

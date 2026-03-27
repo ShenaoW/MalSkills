@@ -1,0 +1,92 @@
+rules:
+- id: no-ftp.chdir
+  languages:
+  - ruby
+  message: Avoid using ftp.chdir(), as it can lead to potential issues with network access.
+  metadata:
+    api: ftp.chdir()
+    category: Network Access
+  pattern-either:
+  - pattern: ftp.chdir(...)
+  - pattern: $VAR = ftp.chdir
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-ftp.getbinaryfile
+  languages:
+  - ruby
+  message: Avoid using ftp.getbinaryfile(), as it can lead to potential issues with network access.
+  metadata:
+    api: ftp.getbinaryfile()
+    category: Network Access
+  pattern-either:
+  - pattern: ftp.getbinaryfile(...)
+  - pattern: $VAR = ftp.getbinaryfile
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-ftp.gettextfile
+  languages:
+  - ruby
+  message: Avoid using ftp.gettextfile(), as it can lead to potential issues with network access.
+  metadata:
+    api: ftp.gettextfile()
+    category: Network Access
+  pattern-either:
+  - pattern: ftp.gettextfile(...)
+  - pattern: $VAR = ftp.gettextfile
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-ftp.list
+  languages:
+  - ruby
+  message: Avoid using ftp.list(), as it can lead to potential issues with network access.
+  metadata:
+    api: ftp.list()
+    category: Network Access
+  pattern-either:
+  - pattern: ftp.list(...)
+  - pattern: $VAR = ftp.list
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-ftp.login
+  languages:
+  - ruby
+  message: Avoid using ftp.login(), as it can lead to potential issues with network access.
+  metadata:
+    api: ftp.login()
+    category: Network Access
+  pattern-either:
+  - pattern: ftp.login(...)
+  - pattern: $VAR = ftp.login
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-ftp.putbinaryfile
+  languages:
+  - ruby
+  message: Avoid using ftp.putbinaryfile(), as it can lead to potential issues with network access.
+  metadata:
+    api: ftp.putbinaryfile()
+    category: Network Access
+  pattern-either:
+  - pattern: ftp.putbinaryfile(...)
+  - pattern: $VAR = ftp.putbinaryfile
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-ftp.puttextfile
+  languages:
+  - ruby
+  message: Avoid using ftp.puttextfile(), as it can lead to potential issues with network access.
+  metadata:
+    api: ftp.puttextfile()
+    category: Network Access
+  pattern-either:
+  - pattern: ftp.puttextfile(...)
+  - pattern: $VAR = ftp.puttextfile
+  severity: WARNING
+  tags:
+  - Network Access

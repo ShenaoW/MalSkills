@@ -1,0 +1,365 @@
+rules:
+- id: no-os-access
+  languages:
+  - python
+  message: Avoid using os.access(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.access()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.access(...)
+  - pattern: $VAR = os.access
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-chdir
+  languages:
+  - python
+  message: Avoid using os.chdir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.chdir()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.chdir(...)
+  - pattern: $VAR = os.chdir
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-chflags
+  languages:
+  - python
+  message: Avoid using os.chflags(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.chflags()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.chflags(...)
+  - pattern: $VAR = os.chflags
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-chmod
+  languages:
+  - python
+  message: Avoid using os.chmod(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.chmod()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.chmod(...)
+  - pattern: $VAR = os.chmod
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-chown
+  languages:
+  - python
+  message: Avoid using os.chown(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.chown()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.chown(...)
+  - pattern: $VAR = os.chown
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-chroot
+  languages:
+  - python
+  message: Avoid using os.chroot(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.chroot()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.chroot(...)
+  - pattern: $VAR = os.chroot
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-fwalk
+  languages:
+  - python
+  message: Avoid using os.fwalk(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.fwalk()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.fwalk(...)
+  - pattern: $VAR = os.fwalk
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-lchflags
+  languages:
+  - python
+  message: Avoid using os.lchflags(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.lchflags()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.lchflags(...)
+  - pattern: $VAR = os.lchflags
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-lchmod
+  languages:
+  - python
+  message: Avoid using os.lchmod(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.lchmod()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.lchmod(...)
+  - pattern: $VAR = os.lchmod
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-lchown
+  languages:
+  - python
+  message: Avoid using os.lchown(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.lchown()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.lchown(...)
+  - pattern: $VAR = os.lchown
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-link
+  languages:
+  - python
+  message: Avoid using os.link(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.link()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.link(...)
+  - pattern: $VAR = os.link
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-makedirs
+  languages:
+  - python
+  message: Avoid using os.makedirs(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.makedirs()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.makedirs(...)
+  - pattern: $VAR = os.makedirs
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-mkdir
+  languages:
+  - python
+  message: Avoid using os.mkdir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.mkdir()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.mkdir(...)
+  - pattern: $VAR = os.mkdir
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-open
+  languages:
+  - python
+  message: Avoid using os.open(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.open()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.open(...)
+  - pattern: $VAR = os.open
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-putenv
+  languages:
+  - python
+  message: Avoid using os.putenv(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.putenv()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.putenv(...)
+  - pattern: $VAR = os.putenv
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-remove
+  languages:
+  - python
+  message: Avoid using os.remove(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.remove()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.remove(...)
+  - pattern: $VAR = os.remove
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-removedirs
+  languages:
+  - python
+  message: Avoid using os.removedirs(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.removedirs()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.removedirs(...)
+  - pattern: $VAR = os.removedirs
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-removexattr
+  languages:
+  - python
+  message: Avoid using os.removexattr(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.removexattr()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.removexattr(...)
+  - pattern: $VAR = os.removexattr
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-rename
+  languages:
+  - python
+  message: Avoid using os.rename(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.rename()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.rename(...)
+  - pattern: $VAR = os.rename
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-renames
+  languages:
+  - python
+  message: Avoid using os.renames(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.renames()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.renames(...)
+  - pattern: $VAR = os.renames
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-replace
+  languages:
+  - python
+  message: Avoid using os.replace(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.replace()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.replace(...)
+  - pattern: $VAR = os.replace
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-rmdir
+  languages:
+  - python
+  message: Avoid using os.rmdir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.rmdir()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.rmdir(...)
+  - pattern: $VAR = os.rmdir
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-setxattr
+  languages:
+  - python
+  message: Avoid using os.setxattr(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.setxattr()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.setxattr(...)
+  - pattern: $VAR = os.setxattr
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-truncate
+  languages:
+  - python
+  message: Avoid using os.truncate(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.truncate()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.truncate(...)
+  - pattern: $VAR = os.truncate
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-unlink
+  languages:
+  - python
+  message: Avoid using os.unlink(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.unlink()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.unlink(...)
+  - pattern: $VAR = os.unlink
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-unsetenv
+  languages:
+  - python
+  message: Avoid using os.unsetenv(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.unsetenv()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.unsetenv(...)
+  - pattern: $VAR = os.unsetenv
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-utime
+  languages:
+  - python
+  message: Avoid using os.utime(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.utime()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.utime(...)
+  - pattern: $VAR = os.utime
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os-walk
+  languages:
+  - python
+  message: Avoid using os.walk(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.walk()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.walk(...)
+  - pattern: $VAR = os.walk
+  severity: WARNING
+  tags:
+  - File or System Operation

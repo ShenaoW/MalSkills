@@ -1,0 +1,928 @@
+rules:
+- id: no-System-Net-Dns-BeginGetHostAddresses
+  languages:
+  - csharp
+  message: Avoid using System.Net.Dns.BeginGetHostAddresses(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Dns.BeginGetHostAddresses()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Dns.BeginGetHostAddresses(...)
+  - pattern: $VAR = System.Net.Dns.BeginGetHostAddresses
+  - pattern: Net.Dns.BeginGetHostAddresses(...)
+  - pattern: $VAR = Net.Dns.BeginGetHostAddresses
+  - pattern: Dns.BeginGetHostAddresses(...)
+  - pattern: $VAR = Dns.BeginGetHostAddresses
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Dns-EndGetHostAddresses
+  languages:
+  - csharp
+  message: Avoid using System.Net.Dns.EndGetHostAddresses(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Dns.EndGetHostAddresses()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Dns.EndGetHostAddresses(...)
+  - pattern: $VAR = System.Net.Dns.EndGetHostAddresses
+  - pattern: Net.Dns.EndGetHostAddresses(...)
+  - pattern: $VAR = Net.Dns.EndGetHostAddresses
+  - pattern: Dns.EndGetHostAddresses(...)
+  - pattern: $VAR = Dns.EndGetHostAddresses
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Dns-GetHostAddresses
+  languages:
+  - csharp
+  message: Avoid using System.Net.Dns.GetHostAddresses(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Dns.GetHostAddresses()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Dns.GetHostAddresses(...)
+  - pattern: $VAR = System.Net.Dns.GetHostAddresses
+  - pattern: Net.Dns.GetHostAddresses(...)
+  - pattern: $VAR = Net.Dns.GetHostAddresses
+  - pattern: Dns.GetHostAddresses(...)
+  - pattern: $VAR = Dns.GetHostAddresses
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Dns-GetHostEntry
+  languages:
+  - csharp
+  message: Avoid using System.Net.Dns.GetHostEntry(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Dns.GetHostEntry()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Dns.GetHostEntry(...)
+  - pattern: $VAR = System.Net.Dns.GetHostEntry
+  - pattern: Net.Dns.GetHostEntry(...)
+  - pattern: $VAR = Net.Dns.GetHostEntry
+  - pattern: Dns.GetHostEntry(...)
+  - pattern: $VAR = Dns.GetHostEntry
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Dns-GetHostName
+  languages:
+  - csharp
+  message: Avoid using System.Net.Dns.GetHostName(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Dns.GetHostName()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Dns.GetHostName(...)
+  - pattern: $VAR = System.Net.Dns.GetHostName
+  - pattern: Net.Dns.GetHostName(...)
+  - pattern: $VAR = Net.Dns.GetHostName
+  - pattern: Dns.GetHostName(...)
+  - pattern: $VAR = Dns.GetHostName
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-FtpWebRequest-GetResponse
+  languages:
+  - csharp
+  message: Avoid using System.Net.FtpWebRequest.GetResponse(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.FtpWebRequest.GetResponse()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.FtpWebRequest.GetResponse(...)
+  - pattern: $VAR = System.Net.FtpWebRequest.GetResponse
+  - pattern: Net.FtpWebRequest.GetResponse(...)
+  - pattern: $VAR = Net.FtpWebRequest.GetResponse
+  - pattern: FtpWebRequest.GetResponse(...)
+  - pattern: $VAR = FtpWebRequest.GetResponse
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Http-HttpClient-DeleteAsync
+  languages:
+  - csharp
+  message: Avoid using System.Net.Http.HttpClient.DeleteAsync(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Http.HttpClient.DeleteAsync()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Http.HttpClient.DeleteAsync(...)
+  - pattern: $VAR = System.Net.Http.HttpClient.DeleteAsync
+  - pattern: Net.Http.HttpClient.DeleteAsync(...)
+  - pattern: $VAR = Net.Http.HttpClient.DeleteAsync
+  - pattern: Http.HttpClient.DeleteAsync(...)
+  - pattern: $VAR = Http.HttpClient.DeleteAsync
+  - pattern: HttpClient.DeleteAsync(...)
+  - pattern: $VAR = HttpClient.DeleteAsync
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Http-HttpClient-GetAsync
+  languages:
+  - csharp
+  message: Avoid using System.Net.Http.HttpClient.GetAsync(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Http.HttpClient.GetAsync()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Http.HttpClient.GetAsync(...)
+  - pattern: $VAR = System.Net.Http.HttpClient.GetAsync
+  - pattern: Net.Http.HttpClient.GetAsync(...)
+  - pattern: $VAR = Net.Http.HttpClient.GetAsync
+  - pattern: Http.HttpClient.GetAsync(...)
+  - pattern: $VAR = Http.HttpClient.GetAsync
+  - pattern: HttpClient.GetAsync(...)
+  - pattern: $VAR = HttpClient.GetAsync
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Http-HttpClient-GetStreamAsync
+  languages:
+  - csharp
+  message: Avoid using System.Net.Http.HttpClient.GetStreamAsync(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Http.HttpClient.GetStreamAsync()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Http.HttpClient.GetStreamAsync(...)
+  - pattern: $VAR = System.Net.Http.HttpClient.GetStreamAsync
+  - pattern: Net.Http.HttpClient.GetStreamAsync(...)
+  - pattern: $VAR = Net.Http.HttpClient.GetStreamAsync
+  - pattern: Http.HttpClient.GetStreamAsync(...)
+  - pattern: $VAR = Http.HttpClient.GetStreamAsync
+  - pattern: HttpClient.GetStreamAsync(...)
+  - pattern: $VAR = HttpClient.GetStreamAsync
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Http-HttpClient-GetStringAsync
+  languages:
+  - csharp
+  message: Avoid using System.Net.Http.HttpClient.GetStringAsync(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Http.HttpClient.GetStringAsync()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Http.HttpClient.GetStringAsync(...)
+  - pattern: $VAR = System.Net.Http.HttpClient.GetStringAsync
+  - pattern: Net.Http.HttpClient.GetStringAsync(...)
+  - pattern: $VAR = Net.Http.HttpClient.GetStringAsync
+  - pattern: Http.HttpClient.GetStringAsync(...)
+  - pattern: $VAR = Http.HttpClient.GetStringAsync
+  - pattern: HttpClient.GetStringAsync(...)
+  - pattern: $VAR = HttpClient.GetStringAsync
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Http-HttpClient-PostAsync
+  languages:
+  - csharp
+  message: Avoid using System.Net.Http.HttpClient.PostAsync(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Http.HttpClient.PostAsync()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Http.HttpClient.PostAsync(...)
+  - pattern: $VAR = System.Net.Http.HttpClient.PostAsync
+  - pattern: Net.Http.HttpClient.PostAsync(...)
+  - pattern: $VAR = Net.Http.HttpClient.PostAsync
+  - pattern: Http.HttpClient.PostAsync(...)
+  - pattern: $VAR = Http.HttpClient.PostAsync
+  - pattern: HttpClient.PostAsync(...)
+  - pattern: $VAR = HttpClient.PostAsync
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Http-HttpClient-PutAsync
+  languages:
+  - csharp
+  message: Avoid using System.Net.Http.HttpClient.PutAsync(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Http.HttpClient.PutAsync()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Http.HttpClient.PutAsync(...)
+  - pattern: $VAR = System.Net.Http.HttpClient.PutAsync
+  - pattern: Net.Http.HttpClient.PutAsync(...)
+  - pattern: $VAR = Net.Http.HttpClient.PutAsync
+  - pattern: Http.HttpClient.PutAsync(...)
+  - pattern: $VAR = Http.HttpClient.PutAsync
+  - pattern: HttpClient.PutAsync(...)
+  - pattern: $VAR = HttpClient.PutAsync
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Http-HttpClient-Send
+  languages:
+  - csharp
+  message: Avoid using System.Net.Http.HttpClient.Send(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Http.HttpClient.Send()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Http.HttpClient.Send(...)
+  - pattern: $VAR = System.Net.Http.HttpClient.Send
+  - pattern: Net.Http.HttpClient.Send(...)
+  - pattern: $VAR = Net.Http.HttpClient.Send
+  - pattern: Http.HttpClient.Send(...)
+  - pattern: $VAR = Http.HttpClient.Send
+  - pattern: HttpClient.Send(...)
+  - pattern: $VAR = HttpClient.Send
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Http-HttpClient-SendAsync
+  languages:
+  - csharp
+  message: Avoid using System.Net.Http.HttpClient.SendAsync(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Http.HttpClient.SendAsync()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Http.HttpClient.SendAsync(...)
+  - pattern: $VAR = System.Net.Http.HttpClient.SendAsync
+  - pattern: Net.Http.HttpClient.SendAsync(...)
+  - pattern: $VAR = Net.Http.HttpClient.SendAsync
+  - pattern: Http.HttpClient.SendAsync(...)
+  - pattern: $VAR = Http.HttpClient.SendAsync
+  - pattern: HttpClient.SendAsync(...)
+  - pattern: $VAR = HttpClient.SendAsync
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-HttpWebRequest-BeginGetResponse
+  languages:
+  - csharp
+  message: Avoid using System.Net.HttpWebRequest.BeginGetResponse(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.HttpWebRequest.BeginGetResponse()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.HttpWebRequest.BeginGetResponse(...)
+  - pattern: $VAR = System.Net.HttpWebRequest.BeginGetResponse
+  - pattern: Net.HttpWebRequest.BeginGetResponse(...)
+  - pattern: $VAR = Net.HttpWebRequest.BeginGetResponse
+  - pattern: HttpWebRequest.BeginGetResponse(...)
+  - pattern: $VAR = HttpWebRequest.BeginGetResponse
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-HttpWebRequest-EndGetResponse
+  languages:
+  - csharp
+  message: Avoid using System.Net.HttpWebRequest.EndGetResponse(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.HttpWebRequest.EndGetResponse()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.HttpWebRequest.EndGetResponse(...)
+  - pattern: $VAR = System.Net.HttpWebRequest.EndGetResponse
+  - pattern: Net.HttpWebRequest.EndGetResponse(...)
+  - pattern: $VAR = Net.HttpWebRequest.EndGetResponse
+  - pattern: HttpWebRequest.EndGetResponse(...)
+  - pattern: $VAR = HttpWebRequest.EndGetResponse
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-HttpWebRequest-GetResponse
+  languages:
+  - csharp
+  message: Avoid using System.Net.HttpWebRequest.GetResponse(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.HttpWebRequest.GetResponse()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.HttpWebRequest.GetResponse(...)
+  - pattern: $VAR = System.Net.HttpWebRequest.GetResponse
+  - pattern: Net.HttpWebRequest.GetResponse(...)
+  - pattern: $VAR = Net.HttpWebRequest.GetResponse
+  - pattern: HttpWebRequest.GetResponse(...)
+  - pattern: $VAR = HttpWebRequest.GetResponse
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-NetworkInformation-Ping-Send
+  languages:
+  - csharp
+  message: Avoid using System.Net.NetworkInformation.Ping.Send(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.NetworkInformation.Ping.Send()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.NetworkInformation.Ping.Send(...)
+  - pattern: $VAR = System.Net.NetworkInformation.Ping.Send
+  - pattern: Net.NetworkInformation.Ping.Send(...)
+  - pattern: $VAR = Net.NetworkInformation.Ping.Send
+  - pattern: NetworkInformation.Ping.Send(...)
+  - pattern: $VAR = NetworkInformation.Ping.Send
+  - pattern: Ping.Send(...)
+  - pattern: $VAR = Ping.Send
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-NetworkInformation-Ping-SendPingAsync
+  languages:
+  - csharp
+  message: Avoid using System.Net.NetworkInformation.Ping.SendPingAsync(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.NetworkInformation.Ping.SendPingAsync()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.NetworkInformation.Ping.SendPingAsync(...)
+  - pattern: $VAR = System.Net.NetworkInformation.Ping.SendPingAsync
+  - pattern: Net.NetworkInformation.Ping.SendPingAsync(...)
+  - pattern: $VAR = Net.NetworkInformation.Ping.SendPingAsync
+  - pattern: NetworkInformation.Ping.SendPingAsync(...)
+  - pattern: $VAR = NetworkInformation.Ping.SendPingAsync
+  - pattern: Ping.SendPingAsync(...)
+  - pattern: $VAR = Ping.SendPingAsync
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Sockets-Socket-Accept
+  languages:
+  - csharp
+  message: Avoid using System.Net.Sockets.Socket.Accept(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Sockets.Socket.Accept()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Sockets.Socket.Accept(...)
+  - pattern: $VAR = System.Net.Sockets.Socket.Accept
+  - pattern: Net.Sockets.Socket.Accept(...)
+  - pattern: $VAR = Net.Sockets.Socket.Accept
+  - pattern: Sockets.Socket.Accept(...)
+  - pattern: $VAR = Sockets.Socket.Accept
+  - pattern: Socket.Accept(...)
+  - pattern: $VAR = Socket.Accept
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Sockets-Socket-BeginAccept
+  languages:
+  - csharp
+  message: Avoid using System.Net.Sockets.Socket.BeginAccept(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Sockets.Socket.BeginAccept()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Sockets.Socket.BeginAccept(...)
+  - pattern: $VAR = System.Net.Sockets.Socket.BeginAccept
+  - pattern: Net.Sockets.Socket.BeginAccept(...)
+  - pattern: $VAR = Net.Sockets.Socket.BeginAccept
+  - pattern: Sockets.Socket.BeginAccept(...)
+  - pattern: $VAR = Sockets.Socket.BeginAccept
+  - pattern: Socket.BeginAccept(...)
+  - pattern: $VAR = Socket.BeginAccept
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Sockets-Socket-BeginConnect
+  languages:
+  - csharp
+  message: Avoid using System.Net.Sockets.Socket.BeginConnect(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Sockets.Socket.BeginConnect()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Sockets.Socket.BeginConnect(...)
+  - pattern: $VAR = System.Net.Sockets.Socket.BeginConnect
+  - pattern: Net.Sockets.Socket.BeginConnect(...)
+  - pattern: $VAR = Net.Sockets.Socket.BeginConnect
+  - pattern: Sockets.Socket.BeginConnect(...)
+  - pattern: $VAR = Sockets.Socket.BeginConnect
+  - pattern: Socket.BeginConnect(...)
+  - pattern: $VAR = Socket.BeginConnect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Sockets-Socket-BeginReceive
+  languages:
+  - csharp
+  message: Avoid using System.Net.Sockets.Socket.BeginReceive(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Sockets.Socket.BeginReceive()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Sockets.Socket.BeginReceive(...)
+  - pattern: $VAR = System.Net.Sockets.Socket.BeginReceive
+  - pattern: Net.Sockets.Socket.BeginReceive(...)
+  - pattern: $VAR = Net.Sockets.Socket.BeginReceive
+  - pattern: Sockets.Socket.BeginReceive(...)
+  - pattern: $VAR = Sockets.Socket.BeginReceive
+  - pattern: Socket.BeginReceive(...)
+  - pattern: $VAR = Socket.BeginReceive
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Sockets-Socket-BeginSend
+  languages:
+  - csharp
+  message: Avoid using System.Net.Sockets.Socket.BeginSend(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Sockets.Socket.BeginSend()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Sockets.Socket.BeginSend(...)
+  - pattern: $VAR = System.Net.Sockets.Socket.BeginSend
+  - pattern: Net.Sockets.Socket.BeginSend(...)
+  - pattern: $VAR = Net.Sockets.Socket.BeginSend
+  - pattern: Sockets.Socket.BeginSend(...)
+  - pattern: $VAR = Sockets.Socket.BeginSend
+  - pattern: Socket.BeginSend(...)
+  - pattern: $VAR = Socket.BeginSend
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Sockets-Socket-Bind
+  languages:
+  - csharp
+  message: Avoid using System.Net.Sockets.Socket.Bind(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Sockets.Socket.Bind()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Sockets.Socket.Bind(...)
+  - pattern: $VAR = System.Net.Sockets.Socket.Bind
+  - pattern: Net.Sockets.Socket.Bind(...)
+  - pattern: $VAR = Net.Sockets.Socket.Bind
+  - pattern: Sockets.Socket.Bind(...)
+  - pattern: $VAR = Sockets.Socket.Bind
+  - pattern: Socket.Bind(...)
+  - pattern: $VAR = Socket.Bind
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Sockets-Socket-Connect
+  languages:
+  - csharp
+  message: Avoid using System.Net.Sockets.Socket.Connect(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Sockets.Socket.Connect()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Sockets.Socket.Connect(...)
+  - pattern: $VAR = System.Net.Sockets.Socket.Connect
+  - pattern: Net.Sockets.Socket.Connect(...)
+  - pattern: $VAR = Net.Sockets.Socket.Connect
+  - pattern: Sockets.Socket.Connect(...)
+  - pattern: $VAR = Sockets.Socket.Connect
+  - pattern: Socket.Connect(...)
+  - pattern: $VAR = Socket.Connect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Sockets-Socket-Listen
+  languages:
+  - csharp
+  message: Avoid using System.Net.Sockets.Socket.Listen(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Sockets.Socket.Listen()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Sockets.Socket.Listen(...)
+  - pattern: $VAR = System.Net.Sockets.Socket.Listen
+  - pattern: Net.Sockets.Socket.Listen(...)
+  - pattern: $VAR = Net.Sockets.Socket.Listen
+  - pattern: Sockets.Socket.Listen(...)
+  - pattern: $VAR = Sockets.Socket.Listen
+  - pattern: Socket.Listen(...)
+  - pattern: $VAR = Socket.Listen
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Sockets-Socket-Receive
+  languages:
+  - csharp
+  message: Avoid using System.Net.Sockets.Socket.Receive(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Sockets.Socket.Receive()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Sockets.Socket.Receive(...)
+  - pattern: $VAR = System.Net.Sockets.Socket.Receive
+  - pattern: Net.Sockets.Socket.Receive(...)
+  - pattern: $VAR = Net.Sockets.Socket.Receive
+  - pattern: Sockets.Socket.Receive(...)
+  - pattern: $VAR = Sockets.Socket.Receive
+  - pattern: Socket.Receive(...)
+  - pattern: $VAR = Socket.Receive
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Sockets-Socket-Send
+  languages:
+  - csharp
+  message: Avoid using System.Net.Sockets.Socket.Send(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Sockets.Socket.Send()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Sockets.Socket.Send(...)
+  - pattern: $VAR = System.Net.Sockets.Socket.Send
+  - pattern: Net.Sockets.Socket.Send(...)
+  - pattern: $VAR = Net.Sockets.Socket.Send
+  - pattern: Sockets.Socket.Send(...)
+  - pattern: $VAR = Sockets.Socket.Send
+  - pattern: Socket.Send(...)
+  - pattern: $VAR = Socket.Send
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Sockets-TcpClient-BeginConnect
+  languages:
+  - csharp
+  message: Avoid using System.Net.Sockets.TcpClient.BeginConnect(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Sockets.TcpClient.BeginConnect()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Sockets.TcpClient.BeginConnect(...)
+  - pattern: $VAR = System.Net.Sockets.TcpClient.BeginConnect
+  - pattern: Net.Sockets.TcpClient.BeginConnect(...)
+  - pattern: $VAR = Net.Sockets.TcpClient.BeginConnect
+  - pattern: Sockets.TcpClient.BeginConnect(...)
+  - pattern: $VAR = Sockets.TcpClient.BeginConnect
+  - pattern: TcpClient.BeginConnect(...)
+  - pattern: $VAR = TcpClient.BeginConnect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Sockets-TcpClient-Connect
+  languages:
+  - csharp
+  message: Avoid using System.Net.Sockets.TcpClient.Connect(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Sockets.TcpClient.Connect()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Sockets.TcpClient.Connect(...)
+  - pattern: $VAR = System.Net.Sockets.TcpClient.Connect
+  - pattern: Net.Sockets.TcpClient.Connect(...)
+  - pattern: $VAR = Net.Sockets.TcpClient.Connect
+  - pattern: Sockets.TcpClient.Connect(...)
+  - pattern: $VAR = Sockets.TcpClient.Connect
+  - pattern: TcpClient.Connect(...)
+  - pattern: $VAR = TcpClient.Connect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Sockets-TcpClient-GetStream
+  languages:
+  - csharp
+  message: Avoid using System.Net.Sockets.TcpClient.GetStream(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Sockets.TcpClient.GetStream()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Sockets.TcpClient.GetStream(...)
+  - pattern: $VAR = System.Net.Sockets.TcpClient.GetStream
+  - pattern: Net.Sockets.TcpClient.GetStream(...)
+  - pattern: $VAR = Net.Sockets.TcpClient.GetStream
+  - pattern: Sockets.TcpClient.GetStream(...)
+  - pattern: $VAR = Sockets.TcpClient.GetStream
+  - pattern: TcpClient.GetStream(...)
+  - pattern: $VAR = TcpClient.GetStream
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Sockets-TcpListener-AcceptTcpClient
+  languages:
+  - csharp
+  message: Avoid using System.Net.Sockets.TcpListener.AcceptTcpClient(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Sockets.TcpListener.AcceptTcpClient()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Sockets.TcpListener.AcceptTcpClient(...)
+  - pattern: $VAR = System.Net.Sockets.TcpListener.AcceptTcpClient
+  - pattern: Net.Sockets.TcpListener.AcceptTcpClient(...)
+  - pattern: $VAR = Net.Sockets.TcpListener.AcceptTcpClient
+  - pattern: Sockets.TcpListener.AcceptTcpClient(...)
+  - pattern: $VAR = Sockets.TcpListener.AcceptTcpClient
+  - pattern: TcpListener.AcceptTcpClient(...)
+  - pattern: $VAR = TcpListener.AcceptTcpClient
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Sockets-TcpListener-BeginAcceptTcpClient
+  languages:
+  - csharp
+  message: Avoid using System.Net.Sockets.TcpListener.BeginAcceptTcpClient(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Sockets.TcpListener.BeginAcceptTcpClient()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Sockets.TcpListener.BeginAcceptTcpClient(...)
+  - pattern: $VAR = System.Net.Sockets.TcpListener.BeginAcceptTcpClient
+  - pattern: Net.Sockets.TcpListener.BeginAcceptTcpClient(...)
+  - pattern: $VAR = Net.Sockets.TcpListener.BeginAcceptTcpClient
+  - pattern: Sockets.TcpListener.BeginAcceptTcpClient(...)
+  - pattern: $VAR = Sockets.TcpListener.BeginAcceptTcpClient
+  - pattern: TcpListener.BeginAcceptTcpClient(...)
+  - pattern: $VAR = TcpListener.BeginAcceptTcpClient
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Sockets-TcpListener-Start
+  languages:
+  - csharp
+  message: Avoid using System.Net.Sockets.TcpListener.Start(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Sockets.TcpListener.Start()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Sockets.TcpListener.Start(...)
+  - pattern: $VAR = System.Net.Sockets.TcpListener.Start
+  - pattern: Net.Sockets.TcpListener.Start(...)
+  - pattern: $VAR = Net.Sockets.TcpListener.Start
+  - pattern: Sockets.TcpListener.Start(...)
+  - pattern: $VAR = Sockets.TcpListener.Start
+  - pattern: TcpListener.Start(...)
+  - pattern: $VAR = TcpListener.Start
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Sockets-UdpClient-BeginReceive
+  languages:
+  - csharp
+  message: Avoid using System.Net.Sockets.UdpClient.BeginReceive(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Sockets.UdpClient.BeginReceive()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Sockets.UdpClient.BeginReceive(...)
+  - pattern: $VAR = System.Net.Sockets.UdpClient.BeginReceive
+  - pattern: Net.Sockets.UdpClient.BeginReceive(...)
+  - pattern: $VAR = Net.Sockets.UdpClient.BeginReceive
+  - pattern: Sockets.UdpClient.BeginReceive(...)
+  - pattern: $VAR = Sockets.UdpClient.BeginReceive
+  - pattern: UdpClient.BeginReceive(...)
+  - pattern: $VAR = UdpClient.BeginReceive
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Sockets-UdpClient-Receive
+  languages:
+  - csharp
+  message: Avoid using System.Net.Sockets.UdpClient.Receive(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Sockets.UdpClient.Receive()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Sockets.UdpClient.Receive(...)
+  - pattern: $VAR = System.Net.Sockets.UdpClient.Receive
+  - pattern: Net.Sockets.UdpClient.Receive(...)
+  - pattern: $VAR = Net.Sockets.UdpClient.Receive
+  - pattern: Sockets.UdpClient.Receive(...)
+  - pattern: $VAR = Sockets.UdpClient.Receive
+  - pattern: UdpClient.Receive(...)
+  - pattern: $VAR = UdpClient.Receive
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-Sockets-UdpClient-Send
+  languages:
+  - csharp
+  message: Avoid using System.Net.Sockets.UdpClient.Send(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.Sockets.UdpClient.Send()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.Sockets.UdpClient.Send(...)
+  - pattern: $VAR = System.Net.Sockets.UdpClient.Send
+  - pattern: Net.Sockets.UdpClient.Send(...)
+  - pattern: $VAR = Net.Sockets.UdpClient.Send
+  - pattern: Sockets.UdpClient.Send(...)
+  - pattern: $VAR = Sockets.UdpClient.Send
+  - pattern: UdpClient.Send(...)
+  - pattern: $VAR = UdpClient.Send
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-WebClient-DownloadData
+  languages:
+  - csharp
+  message: Avoid using System.Net.WebClient.DownloadData(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.WebClient.DownloadData()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.WebClient.DownloadData(...)
+  - pattern: $VAR = System.Net.WebClient.DownloadData
+  - pattern: Net.WebClient.DownloadData(...)
+  - pattern: $VAR = Net.WebClient.DownloadData
+  - pattern: WebClient.DownloadData(...)
+  - pattern: $VAR = WebClient.DownloadData
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-WebClient-DownloadFile
+  languages:
+  - csharp
+  message: Avoid using System.Net.WebClient.DownloadFile(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.WebClient.DownloadFile()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.WebClient.DownloadFile(...)
+  - pattern: $VAR = System.Net.WebClient.DownloadFile
+  - pattern: Net.WebClient.DownloadFile(...)
+  - pattern: $VAR = Net.WebClient.DownloadFile
+  - pattern: WebClient.DownloadFile(...)
+  - pattern: $VAR = WebClient.DownloadFile
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-WebClient-DownloadString
+  languages:
+  - csharp
+  message: Avoid using System.Net.WebClient.DownloadString(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.WebClient.DownloadString()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.WebClient.DownloadString(...)
+  - pattern: $VAR = System.Net.WebClient.DownloadString
+  - pattern: Net.WebClient.DownloadString(...)
+  - pattern: $VAR = Net.WebClient.DownloadString
+  - pattern: WebClient.DownloadString(...)
+  - pattern: $VAR = WebClient.DownloadString
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-WebClient-OpenRead
+  languages:
+  - csharp
+  message: Avoid using System.Net.WebClient.OpenRead(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.WebClient.OpenRead()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.WebClient.OpenRead(...)
+  - pattern: $VAR = System.Net.WebClient.OpenRead
+  - pattern: Net.WebClient.OpenRead(...)
+  - pattern: $VAR = Net.WebClient.OpenRead
+  - pattern: WebClient.OpenRead(...)
+  - pattern: $VAR = WebClient.OpenRead
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-WebClient-OpenWrite
+  languages:
+  - csharp
+  message: Avoid using System.Net.WebClient.OpenWrite(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.WebClient.OpenWrite()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.WebClient.OpenWrite(...)
+  - pattern: $VAR = System.Net.WebClient.OpenWrite
+  - pattern: Net.WebClient.OpenWrite(...)
+  - pattern: $VAR = Net.WebClient.OpenWrite
+  - pattern: WebClient.OpenWrite(...)
+  - pattern: $VAR = WebClient.OpenWrite
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-WebClient-UploadData
+  languages:
+  - csharp
+  message: Avoid using System.Net.WebClient.UploadData(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.WebClient.UploadData()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.WebClient.UploadData(...)
+  - pattern: $VAR = System.Net.WebClient.UploadData
+  - pattern: Net.WebClient.UploadData(...)
+  - pattern: $VAR = Net.WebClient.UploadData
+  - pattern: WebClient.UploadData(...)
+  - pattern: $VAR = WebClient.UploadData
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-WebClient-UploadFile
+  languages:
+  - csharp
+  message: Avoid using System.Net.WebClient.UploadFile(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.WebClient.UploadFile()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.WebClient.UploadFile(...)
+  - pattern: $VAR = System.Net.WebClient.UploadFile
+  - pattern: Net.WebClient.UploadFile(...)
+  - pattern: $VAR = Net.WebClient.UploadFile
+  - pattern: WebClient.UploadFile(...)
+  - pattern: $VAR = WebClient.UploadFile
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-WebClient-UploadString
+  languages:
+  - csharp
+  message: Avoid using System.Net.WebClient.UploadString(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.WebClient.UploadString()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.WebClient.UploadString(...)
+  - pattern: $VAR = System.Net.WebClient.UploadString
+  - pattern: Net.WebClient.UploadString(...)
+  - pattern: $VAR = Net.WebClient.UploadString
+  - pattern: WebClient.UploadString(...)
+  - pattern: $VAR = WebClient.UploadString
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-WebRequest-BeginGetResponse
+  languages:
+  - csharp
+  message: Avoid using System.Net.WebRequest.BeginGetResponse(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.WebRequest.BeginGetResponse()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.WebRequest.BeginGetResponse(...)
+  - pattern: $VAR = System.Net.WebRequest.BeginGetResponse
+  - pattern: Net.WebRequest.BeginGetResponse(...)
+  - pattern: $VAR = Net.WebRequest.BeginGetResponse
+  - pattern: WebRequest.BeginGetResponse(...)
+  - pattern: $VAR = WebRequest.BeginGetResponse
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-WebRequest-Create
+  languages:
+  - csharp
+  message: Avoid using System.Net.WebRequest.Create(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.WebRequest.Create()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.WebRequest.Create(...)
+  - pattern: $VAR = System.Net.WebRequest.Create
+  - pattern: Net.WebRequest.Create(...)
+  - pattern: $VAR = Net.WebRequest.Create
+  - pattern: WebRequest.Create(...)
+  - pattern: $VAR = WebRequest.Create
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-WebRequest-EndGetResponse
+  languages:
+  - csharp
+  message: Avoid using System.Net.WebRequest.EndGetResponse(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.WebRequest.EndGetResponse()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.WebRequest.EndGetResponse(...)
+  - pattern: $VAR = System.Net.WebRequest.EndGetResponse
+  - pattern: Net.WebRequest.EndGetResponse(...)
+  - pattern: $VAR = Net.WebRequest.EndGetResponse
+  - pattern: WebRequest.EndGetResponse(...)
+  - pattern: $VAR = WebRequest.EndGetResponse
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-WebRequest-GetResponse
+  languages:
+  - csharp
+  message: Avoid using System.Net.WebRequest.GetResponse(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.WebRequest.GetResponse()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.WebRequest.GetResponse(...)
+  - pattern: $VAR = System.Net.WebRequest.GetResponse
+  - pattern: Net.WebRequest.GetResponse(...)
+  - pattern: $VAR = Net.WebRequest.GetResponse
+  - pattern: WebRequest.GetResponse(...)
+  - pattern: $VAR = WebRequest.GetResponse
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-System-Net-WebSockets-ClientWebSocket-ConnectAsync
+  languages:
+  - csharp
+  message: Avoid using System.Net.WebSockets.ClientWebSocket.ConnectAsync(), as it can lead to potential issues with network access.
+  metadata:
+    api: System.Net.WebSockets.ClientWebSocket.ConnectAsync()
+    category: Network Access
+  pattern-either:
+  - pattern: System.Net.WebSockets.ClientWebSocket.ConnectAsync(...)
+  - pattern: $VAR = System.Net.WebSockets.ClientWebSocket.ConnectAsync
+  - pattern: Net.WebSockets.ClientWebSocket.ConnectAsync(...)
+  - pattern: $VAR = Net.WebSockets.ClientWebSocket.ConnectAsync
+  - pattern: WebSockets.ClientWebSocket.ConnectAsync(...)
+  - pattern: $VAR = WebSockets.ClientWebSocket.ConnectAsync
+  - pattern: ClientWebSocket.ConnectAsync(...)
+  - pattern: $VAR = ClientWebSocket.ConnectAsync
+  severity: WARNING
+  tags:
+  - Network Access

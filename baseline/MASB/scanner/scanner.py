@@ -15,7 +15,10 @@ from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Dict, List, Any, Optional, Tuple
 
-from ..utils.config_loader import Config
+try:
+    from ..utils.config_loader import Config
+except ImportError:
+    from utils.config_loader import Config
 
 # Setup logging
 logging.basicConfig(
@@ -278,6 +281,9 @@ class RepoSecurityScanner:
         """Find all skill directories in repository"""
         skill_dirs = []
 
+        if repo_path.is_dir() and self._is_skill_dir(repo_path):
+            skill_dirs.append(repo_path)
+
         for item in repo_path.rglob('*'):
             if item.is_dir() and self._is_skill_dir(item):
                 skill_dirs.append(item)
@@ -296,7 +302,7 @@ class RepoSecurityScanner:
             temp_output = tempfile.mktemp(suffix='.json')
 
             cmd = [
-                sys.executable, '-m', 'skill_security_scan.src.cli',
+                sys.executable, '-m', 'src.cli',
                 'scan',
                 str(skill_dir),
                 '--format', 'json',
@@ -478,23 +484,29 @@ class RepoSecurityScanner:
         """Scan all repositories"""
         zip_files = list(self.zip_dir.glob('*.zip'))
         zip_files.sort(key=lambda x: self._extract_number(x.name))
+        repo_dirs = [p for p in self.repo_dir.iterdir() if p.is_dir()] if self.repo_dir.exists() else []
+        repo_dirs.sort(key=lambda x: self._extract_number(x.name))
 
-        zip_files = zip_files[start_from:]
+        items = zip_files if zip_files else repo_dirs
+        items = items[start_from:]
         if limit:
-            zip_files = zip_files[:limit]
+            items = items[:limit]
 
-        self.scan_stats['total'] = len(zip_files)
+        self.scan_stats['total'] = len(items)
 
-        logger.info(f"Starting scan: {len(zip_files)} repos, workers: {self.max_workers}")
+        logger.info(f"Starting scan: {len(items)} repos, workers: {self.max_workers}")
 
         batch_size = 100
         processed = 0
 
-        for i in range(0, len(zip_files), batch_size):
-            batch = zip_files[i:i + batch_size]
+        for i in range(0, len(items), batch_size):
+            batch = items[i:i + batch_size]
 
             with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
-                futures = {executor.submit(self.scan_repo, zf): zf for zf in batch}
+                if zip_files:
+                    futures = {executor.submit(self.scan_repo, item): item for item in batch}
+                else:
+                    futures = {executor.submit(self._scan_existing_repo_dir, item): item for item in batch}
 
                 for future in as_completed(futures):
                     try:
@@ -514,10 +526,50 @@ class RepoSecurityScanner:
                         logger.error(f"Scan error: {e}")
                         self.scan_stats['failed'] += 1
 
-            logger.info(f"Progress: {processed}/{len(zip_files)}")
+            logger.info(f"Progress: {processed}/{len(items)}")
             self._print_summary()
 
         return self.scan_stats
+
+    def _scan_existing_repo_dir(self, repo_path: Path) -> Tuple[str, str, int]:
+        """Scan an already-unpacked repository directory."""
+        repo_id = repo_path.name
+
+        for risk_dir in self.risk_dirs.values():
+            report_path = risk_dir / f"{repo_id}_report.json"
+            if report_path.exists():
+                try:
+                    with open(report_path, 'r') as f:
+                        existing_report = json.load(f)
+                        existing_risk = existing_report.get('risk_level', 'UNKNOWN')
+                except Exception:
+                    existing_risk = 'UNKNOWN'
+                return 'skipped', existing_risk, 0
+
+        skill_dirs = self.find_skill_dirs(repo_path)
+
+        if not skill_dirs:
+            logger.warning(f"[{repo_id}] No skills found")
+            return 'skipped', 'UNKNOWN', 0
+
+        logger.info(f"[{repo_id}] Found {len(skill_dirs)} skills")
+
+        skill_reports = []
+        for skill_dir in skill_dirs:
+            report = self.scan_skill(skill_dir, repo_id)
+            if report:
+                skill_reports.append(report)
+
+        repo_risk, risk_summary = self.calculate_repo_risk(skill_reports)
+        report = self._generate_report(repo_id, repo_path, repo_risk, risk_summary, skill_reports)
+
+        target_dir = self.risk_dirs.get(repo_risk, self.risk_dirs['LOW'])
+        report_path = target_dir / f"{repo_id}_report.json"
+        with open(report_path, 'w', encoding='utf-8') as f:
+            json.dump(report, f, indent=2, ensure_ascii=False)
+
+        logger.info(f"[{repo_id}] Scan complete: {repo_risk}, skills: {len(skill_dirs)}")
+        return 'scanned', repo_risk, len(skill_dirs)
 
     def _extract_number(self, filename: str) -> int:
         """Extract number ID from filename"""

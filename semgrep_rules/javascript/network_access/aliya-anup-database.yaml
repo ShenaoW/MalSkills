@@ -1,0 +1,51 @@
+rules:
+- id: no-aliya-anup-database-get
+  languages:
+  - javascript
+  message: Avoid using aliya-anup-database.get(), as it can lead to potential issues with network access.
+  metadata:
+    api: aliya-anup-database.get()
+    category: Network Access
+  pattern-either:
+  - pattern: aliya-anup-database.get(...)
+  - pattern: $VAR = aliya-anup-database.get
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-aliya-anup-database-has
+  languages:
+  - javascript
+  message: Avoid using aliya-anup-database.has(), as it can lead to potential issues with network access.
+  metadata:
+    api: aliya-anup-database.has()
+    category: Network Access
+  pattern-either:
+  - pattern: aliya-anup-database.has(...)
+  - pattern: $VAR = aliya-anup-database.has
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-aliya-anup-database-set
+  languages:
+  - javascript
+  message: Avoid using aliya-anup-database.set(), as it can lead to potential issues with network access.
+  metadata:
+    api: aliya-anup-database.set()
+    category: Network Access
+  pattern-either:
+  - pattern: aliya-anup-database.set(...)
+  - pattern: $VAR = aliya-anup-database.set
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-require-aliya-anup-database
+  languages:
+  - javascript
+  message: Avoid using require('aliya-anup-database'), as it can lead to potential issues with network access.
+  metadata:
+    api: require('aliya-anup-database')
+    category: Network Access
+  pattern: require('aliya-anup-database')
+  severity: WARNING
+  tags:
+  - Network Access

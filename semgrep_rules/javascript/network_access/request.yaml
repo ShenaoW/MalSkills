@@ -1,0 +1,77 @@
+rules:
+- id: no-request-delete
+  languages:
+  - javascript
+  message: Avoid using request.delete(), as it can lead to potential issues with network access.
+  metadata:
+    api: request.delete()
+    category: Network Access
+  pattern-either:
+  - pattern: request.delete(...)
+  - pattern: $VAR = request.delete
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-request-get
+  languages:
+  - javascript
+  message: Avoid using request.get(), as it can lead to potential issues with network access.
+  metadata:
+    api: request.get()
+    category: Network Access
+  pattern-either:
+  - pattern: request.get(...)
+  - pattern: $VAR = request.get
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-request-head
+  languages:
+  - javascript
+  message: Avoid using request.head(), as it can lead to potential issues with network access.
+  metadata:
+    api: request.head()
+    category: Network Access
+  pattern-either:
+  - pattern: request.head(...)
+  - pattern: $VAR = request.head
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-request-post
+  languages:
+  - javascript
+  message: Avoid using request.post(), as it can lead to potential issues with network access.
+  metadata:
+    api: request.post()
+    category: Network Access
+  pattern-either:
+  - pattern: request.post(...)
+  - pattern: $VAR = request.post
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-request-put
+  languages:
+  - javascript
+  message: Avoid using request.put(), as it can lead to potential issues with network access.
+  metadata:
+    api: request.put()
+    category: Network Access
+  pattern-either:
+  - pattern: request.put(...)
+  - pattern: $VAR = request.put
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-require-request
+  languages:
+  - javascript
+  message: Avoid using require('request'), as it can lead to potential issues with network access.
+  metadata:
+    api: require('request')
+    category: Network Access
+  pattern: require('request')
+  severity: WARNING
+  tags:
+  - Network Access

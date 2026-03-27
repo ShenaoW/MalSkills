@@ -1,0 +1,66 @@
+rules:
+- id: no-shelljs-cd
+  languages:
+  - javascript
+  message: Avoid using shelljs.cd(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: shelljs.cd()
+    category: File or System Operation
+  pattern-either:
+  - pattern: shelljs.cd(...)
+  - pattern: $VAR = shelljs.cd
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-shelljs-cp
+  languages:
+  - javascript
+  message: Avoid using shelljs.cp(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: shelljs.cp()
+    category: File or System Operation
+  pattern-either:
+  - pattern: shelljs.cp(...)
+  - pattern: $VAR = shelljs.cp
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-shelljs-ls
+  languages:
+  - javascript
+  message: Avoid using shelljs.ls(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: shelljs.ls()
+    category: File or System Operation
+  pattern-either:
+  - pattern: shelljs.ls(...)
+  - pattern: $VAR = shelljs.ls
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-shelljs-mkdir
+  languages:
+  - javascript
+  message: Avoid using shelljs.mkdir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: shelljs.mkdir()
+    category: File or System Operation
+  pattern-either:
+  - pattern: shelljs.mkdir(...)
+  - pattern: $VAR = shelljs.mkdir
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-shelljs-rm
+  languages:
+  - javascript
+  message: Avoid using shelljs.rm(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: shelljs.rm()
+    category: File or System Operation
+  pattern-either:
+  - pattern: shelljs.rm(...)
+  - pattern: $VAR = shelljs.rm
+  severity: WARNING
+  tags:
+  - File or System Operation

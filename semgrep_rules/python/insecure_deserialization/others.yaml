@@ -1,0 +1,14 @@
+rules:
+- id: no-shelve-open
+  languages:
+  - python
+  message: Avoid using shelve.open(), as it can lead to potential issues with insecure deserialization.
+  metadata:
+    api: shelve.open()
+    category: Insecure Deserialization
+  pattern-either:
+  - pattern: shelve.open(...)
+  - pattern: $VAR = shelve.open
+  severity: WARNING
+  tags:
+  - Insecure Deserialization

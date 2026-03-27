@@ -1,0 +1,40 @@
+rules:
+- id: no-ecdsa.GenerateKey
+  languages:
+  - go
+  message: Avoid using ecdsa.GenerateKey(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: ecdsa.GenerateKey()
+    category: Cryptography
+  pattern-either:
+  - pattern: ecdsa.GenerateKey(...)
+  - pattern: $VAR = ecdsa.GenerateKey
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-ecdsa.Sign
+  languages:
+  - go
+  message: Avoid using ecdsa.Sign(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: ecdsa.Sign()
+    category: Cryptography
+  pattern-either:
+  - pattern: ecdsa.Sign(...)
+  - pattern: $VAR = ecdsa.Sign
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-ecdsa.Verify
+  languages:
+  - go
+  message: Avoid using ecdsa.Verify(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: ecdsa.Verify()
+    category: Cryptography
+  pattern-either:
+  - pattern: ecdsa.Verify(...)
+  - pattern: $VAR = ecdsa.Verify
+  severity: WARNING
+  tags:
+  - Cryptography

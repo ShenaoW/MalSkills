@@ -1,0 +1,436 @@
+rules:
+- id: no-base64_decode
+  languages:
+  - php
+  message: Avoid using base64_decode(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: base64_decode()
+    category: Obfuscation
+  pattern-either:
+  - pattern: base64_decode(...)
+  - pattern: $VAR = base64_decode(...)
+  - pattern: $VAR = "base64_decode"
+  - pattern: $VAR = 'base64_decode'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-base64_encode
+  languages:
+  - php
+  message: Avoid using base64_encode(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: base64_encode()
+    category: Obfuscation
+  pattern-either:
+  - pattern: base64_encode(...)
+  - pattern: $VAR = base64_encode(...)
+  - pattern: $VAR = "base64_encode"
+  - pattern: $VAR = 'base64_encode'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-bin2hex
+  languages:
+  - php
+  message: Avoid using bin2hex(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: bin2hex()
+    category: Obfuscation
+  pattern-either:
+  - pattern: bin2hex(...)
+  - pattern: $VAR = bin2hex(...)
+  - pattern: $VAR = "bin2hex"
+  - pattern: $VAR = 'bin2hex'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-chr
+  languages:
+  - php
+  message: Avoid using chr(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: chr()
+    category: Obfuscation
+  pattern-either:
+  - pattern: chr(...)
+  - pattern: $VAR = chr(...)
+  - pattern: $VAR = "chr"
+  - pattern: $VAR = 'chr'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-crc32
+  languages:
+  - php
+  message: Avoid using crc32(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: crc32()
+    category: Obfuscation
+  pattern-either:
+  - pattern: crc32(...)
+  - pattern: $VAR = crc32(...)
+  - pattern: $VAR = "crc32"
+  - pattern: $VAR = 'crc32'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-gzcompress
+  languages:
+  - php
+  message: Avoid using gzcompress(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: gzcompress()
+    category: Obfuscation
+  pattern-either:
+  - pattern: gzcompress(...)
+  - pattern: $VAR = gzcompress(...)
+  - pattern: $VAR = "gzcompress"
+  - pattern: $VAR = 'gzcompress'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-gzdeflate
+  languages:
+  - php
+  message: Avoid using gzdeflate(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: gzdeflate()
+    category: Obfuscation
+  pattern-either:
+  - pattern: gzdeflate(...)
+  - pattern: $VAR = gzdeflate(...)
+  - pattern: $VAR = "gzdeflate"
+  - pattern: $VAR = 'gzdeflate'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-gzuncompress
+  languages:
+  - php
+  message: Avoid using gzuncompress(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: gzuncompress()
+    category: Obfuscation
+  pattern-either:
+  - pattern: gzuncompress(...)
+  - pattern: $VAR = gzuncompress(...)
+  - pattern: $VAR = "gzuncompress"
+  - pattern: $VAR = 'gzuncompress'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-hash
+  languages:
+  - php
+  message: Avoid using hash(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: hash()
+    category: Obfuscation
+  pattern-either:
+  - pattern: hash(...)
+  - pattern: $VAR = hash(...)
+  - pattern: $VAR = "hash"
+  - pattern: $VAR = 'hash'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-hash_hmac
+  languages:
+  - php
+  message: Avoid using hash_hmac(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: hash_hmac()
+    category: Obfuscation
+  pattern-either:
+  - pattern: hash_hmac(...)
+  - pattern: $VAR = hash_hmac(...)
+  - pattern: $VAR = "hash_hmac"
+  - pattern: $VAR = 'hash_hmac'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-hex2bin
+  languages:
+  - php
+  message: Avoid using hex2bin(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: hex2bin()
+    category: Obfuscation
+  pattern-either:
+  - pattern: hex2bin(...)
+  - pattern: $VAR = hex2bin(...)
+  - pattern: $VAR = "hex2bin"
+  - pattern: $VAR = 'hex2bin'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-mt_rand
+  languages:
+  - php
+  message: Avoid using mt_rand(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: mt_rand()
+    category: Obfuscation
+  pattern-either:
+  - pattern: mt_rand(...)
+  - pattern: $VAR = mt_rand(...)
+  - pattern: $VAR = "mt_rand"
+  - pattern: $VAR = 'mt_rand'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-ob_end_clean
+  languages:
+  - php
+  message: Avoid using ob_end_clean(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: ob_end_clean()
+    category: Obfuscation
+  pattern-either:
+  - pattern: ob_end_clean(...)
+  - pattern: $VAR = ob_end_clean(...)
+  - pattern: $VAR = "ob_end_clean"
+  - pattern: $VAR = 'ob_end_clean'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-ob_end_flush
+  languages:
+  - php
+  message: Avoid using ob_end_flush(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: ob_end_flush()
+    category: Obfuscation
+  pattern-either:
+  - pattern: ob_end_flush(...)
+  - pattern: $VAR = ob_end_flush(...)
+  - pattern: $VAR = "ob_end_flush"
+  - pattern: $VAR = 'ob_end_flush'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-ob_get_contents
+  languages:
+  - php
+  message: Avoid using ob_get_contents(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: ob_get_contents()
+    category: Obfuscation
+  pattern-either:
+  - pattern: ob_get_contents(...)
+  - pattern: $VAR = ob_get_contents(...)
+  - pattern: $VAR = "ob_get_contents"
+  - pattern: $VAR = 'ob_get_contents'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-ob_start
+  languages:
+  - php
+  message: Avoid using ob_start(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: ob_start()
+    category: Obfuscation
+  pattern-either:
+  - pattern: ob_start(...)
+  - pattern: $VAR = ob_start(...)
+  - pattern: $VAR = "ob_start"
+  - pattern: $VAR = 'ob_start'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-ord
+  languages:
+  - php
+  message: Avoid using ord(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: ord()
+    category: Obfuscation
+  pattern-either:
+  - pattern: ord(...)
+  - pattern: $VAR = ord(...)
+  - pattern: $VAR = "ord"
+  - pattern: $VAR = 'ord'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-pack
+  languages:
+  - php
+  message: Avoid using pack(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: pack()
+    category: Obfuscation
+  pattern-either:
+  - pattern: pack(...)
+  - pattern: $VAR = pack(...)
+  - pattern: $VAR = "pack"
+  - pattern: $VAR = 'pack'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-rand
+  languages:
+  - php
+  message: Avoid using rand(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: rand()
+    category: Obfuscation
+  pattern-either:
+  - pattern: rand(...)
+  - pattern: $VAR = rand(...)
+  - pattern: $VAR = "rand"
+  - pattern: $VAR = 'rand'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-random_bytes
+  languages:
+  - php
+  message: Avoid using random_bytes(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: random_bytes()
+    category: Obfuscation
+  pattern-either:
+  - pattern: random_bytes(...)
+  - pattern: $VAR = random_bytes(...)
+  - pattern: $VAR = "random_bytes"
+  - pattern: $VAR = 'random_bytes'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-serialize
+  languages:
+  - php
+  message: Avoid using serialize(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: serialize()
+    category: Obfuscation
+  pattern-either:
+  - pattern: serialize(...)
+  - pattern: $VAR = serialize(...)
+  - pattern: $VAR = "serialize"
+  - pattern: $VAR = 'serialize'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-str_rot13
+  languages:
+  - php
+  message: Avoid using str_rot13(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: str_rot13()
+    category: Obfuscation
+  pattern-either:
+  - pattern: str_rot13(...)
+  - pattern: $VAR = str_rot13(...)
+  - pattern: $VAR = "str_rot13"
+  - pattern: $VAR = 'str_rot13'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-str_shuffle
+  languages:
+  - php
+  message: Avoid using str_shuffle(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: str_shuffle()
+    category: Obfuscation
+  pattern-either:
+  - pattern: str_shuffle(...)
+  - pattern: $VAR = str_shuffle(...)
+  - pattern: $VAR = "str_shuffle"
+  - pattern: $VAR = 'str_shuffle'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-strrev
+  languages:
+  - php
+  message: Avoid using strrev(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: strrev()
+    category: Obfuscation
+  pattern-either:
+  - pattern: strrev(...)
+  - pattern: $VAR = strrev(...)
+  - pattern: $VAR = "strrev"
+  - pattern: $VAR = 'strrev'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-strtr
+  languages:
+  - php
+  message: Avoid using strtr(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: strtr()
+    category: Obfuscation
+  pattern-either:
+  - pattern: strtr(...)
+  - pattern: $VAR = strtr(...)
+  - pattern: $VAR = "strtr"
+  - pattern: $VAR = 'strtr'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-unpack
+  languages:
+  - php
+  message: Avoid using unpack(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: unpack()
+    category: Obfuscation
+  pattern-either:
+  - pattern: unpack(...)
+  - pattern: $VAR = unpack(...)
+  - pattern: $VAR = "unpack"
+  - pattern: $VAR = 'unpack'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-unserialize
+  languages:
+  - php
+  message: Avoid using unserialize(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: unserialize()
+    category: Obfuscation
+  pattern-either:
+  - pattern: unserialize(...)
+  - pattern: $VAR = unserialize(...)
+  - pattern: $VAR = "unserialize"
+  - pattern: $VAR = 'unserialize'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-urldecode
+  languages:
+  - php
+  message: Avoid using urldecode(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: urldecode()
+    category: Obfuscation
+  pattern-either:
+  - pattern: urldecode(...)
+  - pattern: $VAR = urldecode(...)
+  - pattern: $VAR = "urldecode"
+  - pattern: $VAR = 'urldecode'
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-urlencode
+  languages:
+  - php
+  message: Avoid using urlencode(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: urlencode()
+    category: Obfuscation
+  pattern-either:
+  - pattern: urlencode(...)
+  - pattern: $VAR = urlencode(...)
+  - pattern: $VAR = "urlencode"
+  - pattern: $VAR = 'urlencode'
+  severity: WARNING
+  tags:
+  - Obfuscation

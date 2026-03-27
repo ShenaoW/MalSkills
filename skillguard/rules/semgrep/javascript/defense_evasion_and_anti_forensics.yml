@@ -1,0 +1,51 @@
+rules:
+  - id: javascript.defense_evasion_and_anti_forensics.security_tool_impairment
+    languages: [javascript]
+    message: JavaScript disables security tooling through child_process
+    severity: WARNING
+    metadata:
+      skillguard_subtype: security_tool_impairment
+      skillguard_evidence_type: defense_evasion_and_anti_forensics
+      skillguard_value_metavar: $CMD
+    patterns:
+      - pattern-either:
+          - pattern: exec($CMD, ...)
+          - pattern: child_process.exec($CMD, ...)
+          - pattern: execSync($CMD, ...)
+          - pattern: child_process.execSync($CMD, ...)
+      - metavariable-regex:
+          metavariable: $CMD
+          regex: (?i).*(systemctl\s+stop|sc\s+stop|taskkill|killall).*(defender|falcon|crowdstrike|sentinel|edr|agent|audit).*
+
+  - id: javascript.defense_evasion_and_anti_forensics.logging_or_audit_suppression
+    languages: [javascript]
+    message: JavaScript suppresses logging or audit traces
+    severity: WARNING
+    metadata:
+      skillguard_subtype: logging_or_audit_suppression
+      skillguard_evidence_type: defense_evasion_and_anti_forensics
+      skillguard_value_metavar: $CMD
+    patterns:
+      - pattern-either:
+          - pattern: exec($CMD, ...)
+          - pattern: child_process.exec($CMD, ...)
+      - metavariable-regex:
+          metavariable: $CMD
+          regex: (?i).*(wevtutil\s+cl|journalctl\s+--vacuum|history\s+-c|unset\s+HISTFILE|rm\s+.*bash_history).*
+
+  - id: javascript.defense_evasion_and_anti_forensics.policy_or_access_control_weakening
+    languages: [javascript]
+    message: JavaScript weakens firewall or policy controls
+    severity: WARNING
+    metadata:
+      skillguard_subtype: policy_or_access_control_weakening
+      skillguard_evidence_type: defense_evasion_and_anti_forensics
+      skillguard_value_metavar: $CMD
+    patterns:
+      - pattern-either:
+          - pattern: exec($CMD, ...)
+          - pattern: child_process.exec($CMD, ...)
+      - metavariable-regex:
+          metavariable: $CMD
+          regex: (?i).*(ufw\s+disable|iptables\s+-F|setenforce\s+0).*
+

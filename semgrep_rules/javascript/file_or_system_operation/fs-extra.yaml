@@ -1,0 +1,289 @@
+rules:
+- id: no-fs-extra-appendFileSync
+  languages:
+  - javascript
+  message: Avoid using fs-extra.appendFileSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs-extra.appendFileSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fs-extra.appendFileSync(...)
+  - pattern: $VAR = fs-extra.appendFileSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fs-extra-chmodSync
+  languages:
+  - javascript
+  message: Avoid using fs-extra.chmodSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs-extra.chmodSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fs-extra.chmodSync(...)
+  - pattern: $VAR = fs-extra.chmodSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fs-extra-copyFileSync
+  languages:
+  - javascript
+  message: Avoid using fs-extra.copyFileSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs-extra.copyFileSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fs-extra.copyFileSync(...)
+  - pattern: $VAR = fs-extra.copyFileSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fs-extra-copySync
+  languages:
+  - javascript
+  message: Avoid using fs-extra.copySync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs-extra.copySync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fs-extra.copySync(...)
+  - pattern: $VAR = fs-extra.copySync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fs-extra-emptyDirSync
+  languages:
+  - javascript
+  message: Avoid using fs-extra.emptyDirSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs-extra.emptyDirSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fs-extra.emptyDirSync(...)
+  - pattern: $VAR = fs-extra.emptyDirSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fs-extra-ensureDirSync
+  languages:
+  - javascript
+  message: Avoid using fs-extra.ensureDirSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs-extra.ensureDirSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fs-extra.ensureDirSync(...)
+  - pattern: $VAR = fs-extra.ensureDirSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fs-extra-ensureFileSync
+  languages:
+  - javascript
+  message: Avoid using fs-extra.ensureFileSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs-extra.ensureFileSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fs-extra.ensureFileSync(...)
+  - pattern: $VAR = fs-extra.ensureFileSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fs-extra-mkdirSync
+  languages:
+  - javascript
+  message: Avoid using fs-extra.mkdirSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs-extra.mkdirSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fs-extra.mkdirSync(...)
+  - pattern: $VAR = fs-extra.mkdirSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fs-extra-outputFileSync
+  languages:
+  - javascript
+  message: Avoid using fs-extra.outputFileSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs-extra.outputFileSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fs-extra.outputFileSync(...)
+  - pattern: $VAR = fs-extra.outputFileSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fs-extra-promises-readFile
+  languages:
+  - javascript
+  message: Avoid using fs-extra.promises.readFile(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs-extra.promises.readFile()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fs-extra.promises.readFile(...)
+  - pattern: $VAR = fs-extra.promises.readFile
+  - pattern: promises.readFile(...)
+  - pattern: $VAR = promises.readFile
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fs-extra-promises-unlink
+  languages:
+  - javascript
+  message: Avoid using fs-extra.promises.unlink(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs-extra.promises.unlink()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fs-extra.promises.unlink(...)
+  - pattern: $VAR = fs-extra.promises.unlink
+  - pattern: promises.unlink(...)
+  - pattern: $VAR = promises.unlink
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fs-extra-readFileSync
+  languages:
+  - javascript
+  message: Avoid using fs-extra.readFileSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs-extra.readFileSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fs-extra.readFileSync(...)
+  - pattern: $VAR = fs-extra.readFileSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fs-extra-readJSONSync
+  languages:
+  - javascript
+  message: Avoid using fs-extra.readJSONSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs-extra.readJSONSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fs-extra.readJSONSync(...)
+  - pattern: $VAR = fs-extra.readJSONSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fs-extra-readJsonSync
+  languages:
+  - javascript
+  message: Avoid using fs-extra.readJsonSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs-extra.readJsonSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fs-extra.readJsonSync(...)
+  - pattern: $VAR = fs-extra.readJsonSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fs-extra-removeSync
+  languages:
+  - javascript
+  message: Avoid using fs-extra.removeSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs-extra.removeSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fs-extra.removeSync(...)
+  - pattern: $VAR = fs-extra.removeSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fs-extra-renameSync
+  languages:
+  - javascript
+  message: Avoid using fs-extra.renameSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs-extra.renameSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fs-extra.renameSync(...)
+  - pattern: $VAR = fs-extra.renameSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fs-extra-rmdirSync
+  languages:
+  - javascript
+  message: Avoid using fs-extra.rmdirSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs-extra.rmdirSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fs-extra.rmdirSync(...)
+  - pattern: $VAR = fs-extra.rmdirSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fs-extra-symlinkSync
+  languages:
+  - javascript
+  message: Avoid using fs-extra.symlinkSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs-extra.symlinkSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fs-extra.symlinkSync(...)
+  - pattern: $VAR = fs-extra.symlinkSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fs-extra-unlinkSync
+  languages:
+  - javascript
+  message: Avoid using fs-extra.unlinkSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs-extra.unlinkSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fs-extra.unlinkSync(...)
+  - pattern: $VAR = fs-extra.unlinkSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fs-extra-writeFileSync
+  languages:
+  - javascript
+  message: Avoid using fs-extra.writeFileSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs-extra.writeFileSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fs-extra.writeFileSync(...)
+  - pattern: $VAR = fs-extra.writeFileSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-fs-extra-writeJSONSync
+  languages:
+  - javascript
+  message: Avoid using fs-extra.writeJSONSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs-extra.writeJSONSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: fs-extra.writeJSONSync(...)
+  - pattern: $VAR = fs-extra.writeJSONSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-require-fs-extra
+  languages:
+  - javascript
+  message: Avoid using require('fs-extra'), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: require('fs-extra')
+    category: File or System Operation
+  pattern: require('fs-extra')
+  severity: WARNING
+  tags:
+  - File or System Operation

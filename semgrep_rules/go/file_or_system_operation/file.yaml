@@ -1,0 +1,79 @@
+rules:
+- id: no-file.Chmod
+  languages:
+  - go
+  message: Avoid using file.Chmod(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: file.Chmod()
+    category: File or System Operation
+  pattern-either:
+  - pattern: file.Chmod(...)
+  - pattern: $VAR = file.Chmod
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-file.Chown
+  languages:
+  - go
+  message: Avoid using file.Chown(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: file.Chown()
+    category: File or System Operation
+  pattern-either:
+  - pattern: file.Chown(...)
+  - pattern: $VAR = file.Chown
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-file.Close
+  languages:
+  - go
+  message: Avoid using file.Close(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: file.Close()
+    category: File or System Operation
+  pattern-either:
+  - pattern: file.Close(...)
+  - pattern: $VAR = file.Close
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-file.Read
+  languages:
+  - go
+  message: Avoid using file.Read(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: file.Read()
+    category: File or System Operation
+  pattern-either:
+  - pattern: file.Read(...)
+  - pattern: $VAR = file.Read
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-file.Stat
+  languages:
+  - go
+  message: Avoid using file.Stat(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: file.Stat()
+    category: File or System Operation
+  pattern-either:
+  - pattern: file.Stat(...)
+  - pattern: $VAR = file.Stat
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-file.Write
+  languages:
+  - go
+  message: Avoid using file.Write(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: file.Write()
+    category: File or System Operation
+  pattern-either:
+  - pattern: file.Write(...)
+  - pattern: $VAR = file.Write
+  severity: WARNING
+  tags:
+  - File or System Operation

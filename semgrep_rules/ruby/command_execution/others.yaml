@@ -1,0 +1,57 @@
+rules:
+- id: no-exec
+  languages:
+  - ruby
+  message: Avoid using exec(), as it can lead to potential issues with command execution.
+  metadata:
+    api: exec()
+    category: Command Execution
+  pattern-either:
+  - pattern: exec(...)
+  - pattern: $VAR = exec
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-system
+  languages:
+  - ruby
+  message: Avoid using system(), as it can lead to potential issues with command execution.
+  metadata:
+    api: system()
+    category: Command Execution
+  pattern-either:
+  - pattern: system(...)
+  - pattern: $VAR = system
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-IO.popen
+  languages:
+  - ruby
+  message: Avoid using IO.popen(), as it can lead to potential issues with command execution.
+  metadata:
+    api: IO.popen()
+    category: Command Execution
+  pattern-either:
+  - pattern: IO.popen(...)
+  - pattern: $VAR = IO.popen
+  - pattern: popen(...)
+  - pattern: $VAR = popen
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-PTY.spawn
+  languages:
+  - ruby
+  message: Avoid using PTY.spawn(), as it can lead to potential issues with command execution.
+  metadata:
+    api: PTY.spawn()
+    category: Command Execution
+  pattern-either:
+  - pattern: PTY.spawn(...)
+  - pattern: $VAR = PTY.spawn
+  - pattern: spawn(...)
+  - pattern: $VAR = spawn
+  severity: WARNING
+  tags:
+  - Command Execution

@@ -1,0 +1,27 @@
+rules:
+- id: no-hex.DecodeString
+  languages:
+  - go
+  message: Avoid using hex.DecodeString(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: hex.DecodeString()
+    category: Obfuscation
+  pattern-either:
+  - pattern: hex.DecodeString(...)
+  - pattern: $VAR = hex.DecodeString
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-hex.EncodeToString
+  languages:
+  - go
+  message: Avoid using hex.EncodeToString(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: hex.EncodeToString()
+    category: Obfuscation
+  pattern-either:
+  - pattern: hex.EncodeToString(...)
+  - pattern: $VAR = hex.EncodeToString
+  severity: WARNING
+  tags:
+  - Obfuscation

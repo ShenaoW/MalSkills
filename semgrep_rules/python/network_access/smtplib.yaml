@@ -1,0 +1,59 @@
+rules:
+- id: no-smtplib-SMTP
+  languages:
+  - python
+  message: Avoid using smtplib.SMTP(), as it can lead to potential issues with network access.
+  metadata:
+    api: smtplib.SMTP()
+    category: Network Access
+  pattern-either:
+  - pattern: smtplib.SMTP(...)
+  - pattern: $VAR = smtplib.SMTP
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-smtplib-SMTP-connect
+  languages:
+  - python
+  message: Avoid using smtplib.SMTP.connect(), as it can lead to potential issues with network access.
+  metadata:
+    api: smtplib.SMTP.connect()
+    category: Network Access
+  pattern-either:
+  - pattern: smtplib.SMTP.connect(...)
+  - pattern: $VAR = smtplib.SMTP.connect
+  - pattern: SMTP.connect(...)
+  - pattern: $VAR = SMTP.connect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-smtplib-SMTP-login
+  languages:
+  - python
+  message: Avoid using smtplib.SMTP.login(), as it can lead to potential issues with network access.
+  metadata:
+    api: smtplib.SMTP.login()
+    category: Network Access
+  pattern-either:
+  - pattern: smtplib.SMTP.login(...)
+  - pattern: $VAR = smtplib.SMTP.login
+  - pattern: SMTP.login(...)
+  - pattern: $VAR = SMTP.login
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-smtplib-SMTP-sendmail
+  languages:
+  - python
+  message: Avoid using smtplib.SMTP.sendmail(), as it can lead to potential issues with network access.
+  metadata:
+    api: smtplib.SMTP.sendmail()
+    category: Network Access
+  pattern-either:
+  - pattern: smtplib.SMTP.sendmail(...)
+  - pattern: $VAR = smtplib.SMTP.sendmail
+  - pattern: SMTP.sendmail(...)
+  - pattern: $VAR = SMTP.sendmail
+  severity: WARNING
+  tags:
+  - Network Access

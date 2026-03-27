@@ -27,9 +27,10 @@ task_count=$(wc -l < "$QUEUE_FILE")
 log_info "Found $task_count execution tasks"
 
 # Check Docker image
-if ! docker image inspect claude-skill-sandbox &>/dev/null; then
-    log_warn "Docker image 'claude-skill-sandbox' not found"
-    log_info "Please build the image first: docker build -t claude-skill-sandbox -f Dockerfile ."
+DOCKER_IMAGE="${DOCKER_IMAGE:-codex-skill-sandbox}"
+if ! docker image inspect "$DOCKER_IMAGE" &>/dev/null; then
+    log_warn "Docker image '$DOCKER_IMAGE' not found"
+    log_info "Please build the image first: docker build -t $DOCKER_IMAGE -f Dockerfile ."
     log_info "Skipping execution..."
     exit 0
 fi

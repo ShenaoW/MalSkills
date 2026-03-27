@@ -1,0 +1,53 @@
+rules:
+- id: no-Base64.decode64
+  languages:
+  - ruby
+  message: Avoid using Base64.decode64(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: Base64.decode64()
+    category: Obfuscation
+  pattern-either:
+  - pattern: Base64.decode64(...)
+  - pattern: $VAR = Base64.decode64
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-Base64.encode64
+  languages:
+  - ruby
+  message: Avoid using Base64.encode64(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: Base64.encode64()
+    category: Obfuscation
+  pattern-either:
+  - pattern: Base64.encode64(...)
+  - pattern: $VAR = Base64.encode64
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-Base64.strict_decode64
+  languages:
+  - ruby
+  message: Avoid using Base64.strict_decode64(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: Base64.strict_decode64()
+    category: Obfuscation
+  pattern-either:
+  - pattern: Base64.strict_decode64(...)
+  - pattern: $VAR = Base64.strict_decode64
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-Base64.strict_encode64
+  languages:
+  - ruby
+  message: Avoid using Base64.strict_encode64(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: Base64.strict_encode64()
+    category: Obfuscation
+  pattern-either:
+  - pattern: Base64.strict_encode64(...)
+  - pattern: $VAR = Base64.strict_encode64
+  severity: WARNING
+  tags:
+  - Obfuscation

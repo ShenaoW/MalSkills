@@ -1,0 +1,42 @@
+rules:
+- id: no-sudo-prompt-exec
+  languages:
+  - javascript
+  message: Avoid using sudo-prompt.exec(), as it can lead to potential issues with command execution.
+  metadata:
+    api: sudo-prompt.exec()
+    category: Command Execution
+  pattern-either:
+  - pattern: sudo-prompt.exec(...)
+  - pattern: $VAR = sudo-prompt.exec
+  - pattern: exec(...)
+  - pattern: $VAR = exec
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-sudo-prompt-exec-bind
+  languages:
+  - javascript
+  message: Avoid using sudo-prompt.exec.bind(), as it can lead to potential issues with command execution.
+  metadata:
+    api: sudo-prompt.exec.bind()
+    category: Command Execution
+  pattern-either:
+  - pattern: sudo-prompt.exec.bind(...)
+  - pattern: $VAR = sudo-prompt.exec.bind
+  - pattern: exec.bind(...)
+  - pattern: $VAR = exec.bind
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-require-sudo-prompt
+  languages:
+  - javascript
+  message: Avoid using require('sudo-prompt'), as it can lead to potential issues with command execution.
+  metadata:
+    api: require('sudo-prompt')
+    category: Command Execution
+  pattern: require('sudo-prompt')
+  severity: WARNING
+  tags:
+  - Command Execution

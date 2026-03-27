@@ -1,0 +1,341 @@
+rules:
+- id: no-java-security-KeyFactory-generatePrivate
+  languages:
+  - java
+  message: Avoid using java.security.KeyFactory.generatePrivate(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: java.security.KeyFactory.generatePrivate()
+    category: Cryptography
+  pattern-either:
+  - pattern: new java.security.KeyFactory.generatePrivate(...)
+  - pattern: java.security.KeyFactory.generatePrivate(...)
+  - pattern: $VAR = java.security.KeyFactory.generatePrivate
+  - pattern: new security.KeyFactory.generatePrivate(...)
+  - pattern: security.KeyFactory.generatePrivate(...)
+  - pattern: $VAR = security.KeyFactory.generatePrivate
+  - pattern: new KeyFactory.generatePrivate(...)
+  - pattern: KeyFactory.generatePrivate(...)
+  - pattern: $VAR = KeyFactory.generatePrivate
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-java-security-KeyFactory-generatePublic
+  languages:
+  - java
+  message: Avoid using java.security.KeyFactory.generatePublic(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: java.security.KeyFactory.generatePublic()
+    category: Cryptography
+  pattern-either:
+  - pattern: new java.security.KeyFactory.generatePublic(...)
+  - pattern: java.security.KeyFactory.generatePublic(...)
+  - pattern: $VAR = java.security.KeyFactory.generatePublic
+  - pattern: new security.KeyFactory.generatePublic(...)
+  - pattern: security.KeyFactory.generatePublic(...)
+  - pattern: $VAR = security.KeyFactory.generatePublic
+  - pattern: new KeyFactory.generatePublic(...)
+  - pattern: KeyFactory.generatePublic(...)
+  - pattern: $VAR = KeyFactory.generatePublic
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-java-security-KeyFactory-getInstance
+  languages:
+  - java
+  message: Avoid using java.security.KeyFactory.getInstance(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: java.security.KeyFactory.getInstance()
+    category: Cryptography
+  pattern-either:
+  - pattern: new java.security.KeyFactory.getInstance(...)
+  - pattern: java.security.KeyFactory.getInstance(...)
+  - pattern: $VAR = java.security.KeyFactory.getInstance
+  - pattern: new security.KeyFactory.getInstance(...)
+  - pattern: security.KeyFactory.getInstance(...)
+  - pattern: $VAR = security.KeyFactory.getInstance
+  - pattern: new KeyFactory.getInstance(...)
+  - pattern: KeyFactory.getInstance(...)
+  - pattern: $VAR = KeyFactory.getInstance
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-java-security-KeyPairGenerator-generateKeyPair
+  languages:
+  - java
+  message: Avoid using java.security.KeyPairGenerator.generateKeyPair(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: java.security.KeyPairGenerator.generateKeyPair()
+    category: Cryptography
+  pattern-either:
+  - pattern: new java.security.KeyPairGenerator.generateKeyPair(...)
+  - pattern: java.security.KeyPairGenerator.generateKeyPair(...)
+  - pattern: $VAR = java.security.KeyPairGenerator.generateKeyPair
+  - pattern: new security.KeyPairGenerator.generateKeyPair(...)
+  - pattern: security.KeyPairGenerator.generateKeyPair(...)
+  - pattern: $VAR = security.KeyPairGenerator.generateKeyPair
+  - pattern: new KeyPairGenerator.generateKeyPair(...)
+  - pattern: KeyPairGenerator.generateKeyPair(...)
+  - pattern: $VAR = KeyPairGenerator.generateKeyPair
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-java-security-KeyPairGenerator-getInstance
+  languages:
+  - java
+  message: Avoid using java.security.KeyPairGenerator.getInstance(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: java.security.KeyPairGenerator.getInstance()
+    category: Cryptography
+  pattern-either:
+  - pattern: new java.security.KeyPairGenerator.getInstance(...)
+  - pattern: java.security.KeyPairGenerator.getInstance(...)
+  - pattern: $VAR = java.security.KeyPairGenerator.getInstance
+  - pattern: new security.KeyPairGenerator.getInstance(...)
+  - pattern: security.KeyPairGenerator.getInstance(...)
+  - pattern: $VAR = security.KeyPairGenerator.getInstance
+  - pattern: new KeyPairGenerator.getInstance(...)
+  - pattern: KeyPairGenerator.getInstance(...)
+  - pattern: $VAR = KeyPairGenerator.getInstance
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-java-security-KeyPairGenerator-initialize
+  languages:
+  - java
+  message: Avoid using java.security.KeyPairGenerator.initialize(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: java.security.KeyPairGenerator.initialize()
+    category: Cryptography
+  pattern-either:
+  - pattern: new java.security.KeyPairGenerator.initialize(...)
+  - pattern: java.security.KeyPairGenerator.initialize(...)
+  - pattern: $VAR = java.security.KeyPairGenerator.initialize
+  - pattern: new security.KeyPairGenerator.initialize(...)
+  - pattern: security.KeyPairGenerator.initialize(...)
+  - pattern: $VAR = security.KeyPairGenerator.initialize
+  - pattern: new KeyPairGenerator.initialize(...)
+  - pattern: KeyPairGenerator.initialize(...)
+  - pattern: $VAR = KeyPairGenerator.initialize
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-java-security-MessageDigest-digest
+  languages:
+  - java
+  message: Avoid using java.security.MessageDigest.digest(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: java.security.MessageDigest.digest()
+    category: Cryptography
+  pattern-either:
+  - pattern: new java.security.MessageDigest.digest(...)
+  - pattern: java.security.MessageDigest.digest(...)
+  - pattern: $VAR = java.security.MessageDigest.digest
+  - pattern: new security.MessageDigest.digest(...)
+  - pattern: security.MessageDigest.digest(...)
+  - pattern: $VAR = security.MessageDigest.digest
+  - pattern: new MessageDigest.digest(...)
+  - pattern: MessageDigest.digest(...)
+  - pattern: $VAR = MessageDigest.digest
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-java-security-MessageDigest-getInstance
+  languages:
+  - java
+  message: Avoid using java.security.MessageDigest.getInstance(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: java.security.MessageDigest.getInstance()
+    category: Cryptography
+  pattern-either:
+  - pattern: new java.security.MessageDigest.getInstance(...)
+  - pattern: java.security.MessageDigest.getInstance(...)
+  - pattern: $VAR = java.security.MessageDigest.getInstance
+  - pattern: new security.MessageDigest.getInstance(...)
+  - pattern: security.MessageDigest.getInstance(...)
+  - pattern: $VAR = security.MessageDigest.getInstance
+  - pattern: new MessageDigest.getInstance(...)
+  - pattern: MessageDigest.getInstance(...)
+  - pattern: $VAR = MessageDigest.getInstance
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-java-security-SecureRandom-getInstance
+  languages:
+  - java
+  message: Avoid using java.security.SecureRandom.getInstance(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: java.security.SecureRandom.getInstance()
+    category: Cryptography
+  pattern-either:
+  - pattern: new java.security.SecureRandom.getInstance(...)
+  - pattern: java.security.SecureRandom.getInstance(...)
+  - pattern: $VAR = java.security.SecureRandom.getInstance
+  - pattern: new security.SecureRandom.getInstance(...)
+  - pattern: security.SecureRandom.getInstance(...)
+  - pattern: $VAR = security.SecureRandom.getInstance
+  - pattern: new SecureRandom.getInstance(...)
+  - pattern: SecureRandom.getInstance(...)
+  - pattern: $VAR = SecureRandom.getInstance
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-java-security-SecureRandom-nextBytes
+  languages:
+  - java
+  message: Avoid using java.security.SecureRandom.nextBytes(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: java.security.SecureRandom.nextBytes()
+    category: Cryptography
+  pattern-either:
+  - pattern: new java.security.SecureRandom.nextBytes(...)
+  - pattern: java.security.SecureRandom.nextBytes(...)
+  - pattern: $VAR = java.security.SecureRandom.nextBytes
+  - pattern: new security.SecureRandom.nextBytes(...)
+  - pattern: security.SecureRandom.nextBytes(...)
+  - pattern: $VAR = security.SecureRandom.nextBytes
+  - pattern: new SecureRandom.nextBytes(...)
+  - pattern: SecureRandom.nextBytes(...)
+  - pattern: $VAR = SecureRandom.nextBytes
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-java-security-SecureRandom-setSeed
+  languages:
+  - java
+  message: Avoid using java.security.SecureRandom.setSeed(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: java.security.SecureRandom.setSeed()
+    category: Cryptography
+  pattern-either:
+  - pattern: new java.security.SecureRandom.setSeed(...)
+  - pattern: java.security.SecureRandom.setSeed(...)
+  - pattern: $VAR = java.security.SecureRandom.setSeed
+  - pattern: new security.SecureRandom.setSeed(...)
+  - pattern: security.SecureRandom.setSeed(...)
+  - pattern: $VAR = security.SecureRandom.setSeed
+  - pattern: new SecureRandom.setSeed(...)
+  - pattern: SecureRandom.setSeed(...)
+  - pattern: $VAR = SecureRandom.setSeed
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-java-security-Signature-getInstance
+  languages:
+  - java
+  message: Avoid using java.security.Signature.getInstance(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: java.security.Signature.getInstance()
+    category: Cryptography
+  pattern-either:
+  - pattern: new java.security.Signature.getInstance(...)
+  - pattern: java.security.Signature.getInstance(...)
+  - pattern: $VAR = java.security.Signature.getInstance
+  - pattern: new security.Signature.getInstance(...)
+  - pattern: security.Signature.getInstance(...)
+  - pattern: $VAR = security.Signature.getInstance
+  - pattern: new Signature.getInstance(...)
+  - pattern: Signature.getInstance(...)
+  - pattern: $VAR = Signature.getInstance
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-java-security-Signature-initSign
+  languages:
+  - java
+  message: Avoid using java.security.Signature.initSign(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: java.security.Signature.initSign()
+    category: Cryptography
+  pattern-either:
+  - pattern: new java.security.Signature.initSign(...)
+  - pattern: java.security.Signature.initSign(...)
+  - pattern: $VAR = java.security.Signature.initSign
+  - pattern: new security.Signature.initSign(...)
+  - pattern: security.Signature.initSign(...)
+  - pattern: $VAR = security.Signature.initSign
+  - pattern: new Signature.initSign(...)
+  - pattern: Signature.initSign(...)
+  - pattern: $VAR = Signature.initSign
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-java-security-Signature-initVerify
+  languages:
+  - java
+  message: Avoid using java.security.Signature.initVerify(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: java.security.Signature.initVerify()
+    category: Cryptography
+  pattern-either:
+  - pattern: new java.security.Signature.initVerify(...)
+  - pattern: java.security.Signature.initVerify(...)
+  - pattern: $VAR = java.security.Signature.initVerify
+  - pattern: new security.Signature.initVerify(...)
+  - pattern: security.Signature.initVerify(...)
+  - pattern: $VAR = security.Signature.initVerify
+  - pattern: new Signature.initVerify(...)
+  - pattern: Signature.initVerify(...)
+  - pattern: $VAR = Signature.initVerify
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-java-security-Signature-sign
+  languages:
+  - java
+  message: Avoid using java.security.Signature.sign(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: java.security.Signature.sign()
+    category: Cryptography
+  pattern-either:
+  - pattern: new java.security.Signature.sign(...)
+  - pattern: java.security.Signature.sign(...)
+  - pattern: $VAR = java.security.Signature.sign
+  - pattern: new security.Signature.sign(...)
+  - pattern: security.Signature.sign(...)
+  - pattern: $VAR = security.Signature.sign
+  - pattern: new Signature.sign(...)
+  - pattern: Signature.sign(...)
+  - pattern: $VAR = Signature.sign
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-java-security-Signature-update
+  languages:
+  - java
+  message: Avoid using java.security.Signature.update(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: java.security.Signature.update()
+    category: Cryptography
+  pattern-either:
+  - pattern: new java.security.Signature.update(...)
+  - pattern: java.security.Signature.update(...)
+  - pattern: $VAR = java.security.Signature.update
+  - pattern: new security.Signature.update(...)
+  - pattern: security.Signature.update(...)
+  - pattern: $VAR = security.Signature.update
+  - pattern: new Signature.update(...)
+  - pattern: Signature.update(...)
+  - pattern: $VAR = Signature.update
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-java-security-Signature-verify
+  languages:
+  - java
+  message: Avoid using java.security.Signature.verify(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: java.security.Signature.verify()
+    category: Cryptography
+  pattern-either:
+  - pattern: new java.security.Signature.verify(...)
+  - pattern: java.security.Signature.verify(...)
+  - pattern: $VAR = java.security.Signature.verify
+  - pattern: new security.Signature.verify(...)
+  - pattern: security.Signature.verify(...)
+  - pattern: $VAR = security.Signature.verify
+  - pattern: new Signature.verify(...)
+  - pattern: Signature.verify(...)
+  - pattern: $VAR = Signature.verify
+  severity: WARNING
+  tags:
+  - Cryptography

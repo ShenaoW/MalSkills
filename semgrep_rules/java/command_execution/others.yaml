@@ -1,0 +1,43 @@
+rules:
+- id: no-Process
+  languages:
+  - java
+  message: Avoid using Process(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Process()
+    category: Command Execution
+  pattern-either:
+  - pattern: new Process(...)
+  - pattern: Process(...)
+  - pattern: $VAR = Process
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-ProcessBuilder
+  languages:
+  - java
+  message: Avoid using ProcessBuilder(), as it can lead to potential issues with command execution.
+  metadata:
+    api: ProcessBuilder()
+    category: Command Execution
+  pattern-either:
+  - pattern: new ProcessBuilder(...)
+  - pattern: ProcessBuilder(...)
+  - pattern: $VAR = ProcessBuilder
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-Runtime
+  languages:
+  - java
+  message: Avoid using Runtime(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Runtime()
+    category: Command Execution
+  pattern-either:
+  - pattern: new Runtime(...)
+  - pattern: Runtime(...)
+  - pattern: $VAR = Runtime
+  severity: WARNING
+  tags:
+  - Command Execution

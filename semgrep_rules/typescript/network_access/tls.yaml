@@ -1,0 +1,142 @@
+rules:
+- id: no-tls-SecureContext
+  languages:
+  - typescript
+  message: Avoid using tls.SecureContext(), as it can lead to potential issues with network access.
+  metadata:
+    api: tls.SecureContext()
+    category: Network Access
+  pattern-either:
+  - pattern: tls.SecureContext(...)
+  - pattern: $VAR = tls.SecureContext
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-tls-Server
+  languages:
+  - typescript
+  message: Avoid using tls.Server(), as it can lead to potential issues with network access.
+  metadata:
+    api: tls.Server()
+    category: Network Access
+  pattern-either:
+  - pattern: tls.Server(...)
+  - pattern: $VAR = tls.Server
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-tls-TLSSocket
+  languages:
+  - typescript
+  message: Avoid using tls.TLSSocket(), as it can lead to potential issues with network access.
+  metadata:
+    api: tls.TLSSocket()
+    category: Network Access
+  pattern-either:
+  - pattern: tls.TLSSocket(...)
+  - pattern: $VAR = tls.TLSSocket
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-tls-checkServerIdentity
+  languages:
+  - typescript
+  message: Avoid using tls.checkServerIdentity(), as it can lead to potential issues with network access.
+  metadata:
+    api: tls.checkServerIdentity()
+    category: Network Access
+  pattern-either:
+  - pattern: tls.checkServerIdentity(...)
+  - pattern: $VAR = tls.checkServerIdentity
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-tls-connect
+  languages:
+  - typescript
+  message: Avoid using tls.connect(), as it can lead to potential issues with network access.
+  metadata:
+    api: tls.connect()
+    category: Network Access
+  pattern-either:
+  - pattern: tls.connect(...)
+  - pattern: $VAR = tls.connect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-tls-convertALPNProtocols
+  languages:
+  - typescript
+  message: Avoid using tls.convertALPNProtocols(), as it can lead to potential issues with network access.
+  metadata:
+    api: tls.convertALPNProtocols()
+    category: Network Access
+  pattern-either:
+  - pattern: tls.convertALPNProtocols(...)
+  - pattern: $VAR = tls.convertALPNProtocols
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-tls-createSecureContext
+  languages:
+  - typescript
+  message: Avoid using tls.createSecureContext(), as it can lead to potential issues with network access.
+  metadata:
+    api: tls.createSecureContext()
+    category: Network Access
+  pattern-either:
+  - pattern: tls.createSecureContext(...)
+  - pattern: $VAR = tls.createSecureContext
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-tls-createSecurePair
+  languages:
+  - typescript
+  message: Avoid using tls.createSecurePair(), as it can lead to potential issues with network access.
+  metadata:
+    api: tls.createSecurePair()
+    category: Network Access
+  pattern-either:
+  - pattern: tls.createSecurePair(...)
+  - pattern: $VAR = tls.createSecurePair
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-tls-createServer
+  languages:
+  - typescript
+  message: Avoid using tls.createServer(), as it can lead to potential issues with network access.
+  metadata:
+    api: tls.createServer()
+    category: Network Access
+  pattern-either:
+  - pattern: tls.createServer(...)
+  - pattern: $VAR = tls.createServer
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-tls-getCiphers
+  languages:
+  - typescript
+  message: Avoid using tls.getCiphers(), as it can lead to potential issues with network access.
+  metadata:
+    api: tls.getCiphers()
+    category: Network Access
+  pattern-either:
+  - pattern: tls.getCiphers(...)
+  - pattern: $VAR = tls.getCiphers
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-require-tls
+  languages:
+  - typescript
+  message: Avoid using require('tls'), as it can lead to potential issues with network access.
+  metadata:
+    api: require('tls')
+    category: Network Access
+  pattern: require('tls')
+  severity: WARNING
+  tags:
+  - Network Access

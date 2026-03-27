@@ -1,0 +1,829 @@
+rules:
+- id: no-java-io-BufferedWriter-write
+  languages:
+  - java
+  message: Avoid using java.io.BufferedWriter.write(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.io.BufferedWriter.write()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.io.BufferedWriter.write(...)
+  - pattern: java.io.BufferedWriter.write(...)
+  - pattern: $VAR = java.io.BufferedWriter.write
+  - pattern: new io.BufferedWriter.write(...)
+  - pattern: io.BufferedWriter.write(...)
+  - pattern: $VAR = io.BufferedWriter.write
+  - pattern: new BufferedWriter.write(...)
+  - pattern: BufferedWriter.write(...)
+  - pattern: $VAR = BufferedWriter.write
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-io-File-canExecute
+  languages:
+  - java
+  message: Avoid using java.io.File.canExecute(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.io.File.canExecute()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.io.File.canExecute(...)
+  - pattern: java.io.File.canExecute(...)
+  - pattern: $VAR = java.io.File.canExecute
+  - pattern: new io.File.canExecute(...)
+  - pattern: io.File.canExecute(...)
+  - pattern: $VAR = io.File.canExecute
+  - pattern: new File.canExecute(...)
+  - pattern: File.canExecute(...)
+  - pattern: $VAR = File.canExecute
+  - pattern: new canExecute(...)
+  - pattern: canExecute(...)
+  - pattern: $VAR = canExecute
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-io-File-canRead
+  languages:
+  - java
+  message: Avoid using java.io.File.canRead(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.io.File.canRead()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.io.File.canRead(...)
+  - pattern: java.io.File.canRead(...)
+  - pattern: $VAR = java.io.File.canRead
+  - pattern: new io.File.canRead(...)
+  - pattern: io.File.canRead(...)
+  - pattern: $VAR = io.File.canRead
+  - pattern: new File.canRead(...)
+  - pattern: File.canRead(...)
+  - pattern: $VAR = File.canRead
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-io-File-canWrite
+  languages:
+  - java
+  message: Avoid using java.io.File.canWrite(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.io.File.canWrite()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.io.File.canWrite(...)
+  - pattern: java.io.File.canWrite(...)
+  - pattern: $VAR = java.io.File.canWrite
+  - pattern: new io.File.canWrite(...)
+  - pattern: io.File.canWrite(...)
+  - pattern: $VAR = io.File.canWrite
+  - pattern: new File.canWrite(...)
+  - pattern: File.canWrite(...)
+  - pattern: $VAR = File.canWrite
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-io-File-createNewFile
+  languages:
+  - java
+  message: Avoid using java.io.File.createNewFile(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.io.File.createNewFile()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.io.File.createNewFile(...)
+  - pattern: java.io.File.createNewFile(...)
+  - pattern: $VAR = java.io.File.createNewFile
+  - pattern: new io.File.createNewFile(...)
+  - pattern: io.File.createNewFile(...)
+  - pattern: $VAR = io.File.createNewFile
+  - pattern: new File.createNewFile(...)
+  - pattern: File.createNewFile(...)
+  - pattern: $VAR = File.createNewFile
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-io-File-createTempFile
+  languages:
+  - java
+  message: Avoid using java.io.File.createTempFile(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.io.File.createTempFile()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.io.File.createTempFile(...)
+  - pattern: java.io.File.createTempFile(...)
+  - pattern: $VAR = java.io.File.createTempFile
+  - pattern: new io.File.createTempFile(...)
+  - pattern: io.File.createTempFile(...)
+  - pattern: $VAR = io.File.createTempFile
+  - pattern: new File.createTempFile(...)
+  - pattern: File.createTempFile(...)
+  - pattern: $VAR = File.createTempFile
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-io-File-delete
+  languages:
+  - java
+  message: Avoid using java.io.File.delete(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.io.File.delete()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.io.File.delete(...)
+  - pattern: java.io.File.delete(...)
+  - pattern: $VAR = java.io.File.delete
+  - pattern: new io.File.delete(...)
+  - pattern: io.File.delete(...)
+  - pattern: $VAR = io.File.delete
+  - pattern: new File.delete(...)
+  - pattern: File.delete(...)
+  - pattern: $VAR = File.delete
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-io-File-exists
+  languages:
+  - java
+  message: Avoid using java.io.File.exists(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.io.File.exists()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.io.File.exists(...)
+  - pattern: java.io.File.exists(...)
+  - pattern: $VAR = java.io.File.exists
+  - pattern: new io.File.exists(...)
+  - pattern: io.File.exists(...)
+  - pattern: $VAR = io.File.exists
+  - pattern: new File.exists(...)
+  - pattern: File.exists(...)
+  - pattern: $VAR = File.exists
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-io-File-getAbsolutePath
+  languages:
+  - java
+  message: Avoid using java.io.File.getAbsolutePath(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.io.File.getAbsolutePath()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.io.File.getAbsolutePath(...)
+  - pattern: java.io.File.getAbsolutePath(...)
+  - pattern: $VAR = java.io.File.getAbsolutePath
+  - pattern: new io.File.getAbsolutePath(...)
+  - pattern: io.File.getAbsolutePath(...)
+  - pattern: $VAR = io.File.getAbsolutePath
+  - pattern: new File.getAbsolutePath(...)
+  - pattern: File.getAbsolutePath(...)
+  - pattern: $VAR = File.getAbsolutePath
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-io-File-getCanonicalPath
+  languages:
+  - java
+  message: Avoid using java.io.File.getCanonicalPath(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.io.File.getCanonicalPath()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.io.File.getCanonicalPath(...)
+  - pattern: java.io.File.getCanonicalPath(...)
+  - pattern: $VAR = java.io.File.getCanonicalPath
+  - pattern: new io.File.getCanonicalPath(...)
+  - pattern: io.File.getCanonicalPath(...)
+  - pattern: $VAR = io.File.getCanonicalPath
+  - pattern: new File.getCanonicalPath(...)
+  - pattern: File.getCanonicalPath(...)
+  - pattern: $VAR = File.getCanonicalPath
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-io-File-getName
+  languages:
+  - java
+  message: Avoid using java.io.File.getName(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.io.File.getName()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.io.File.getName(...)
+  - pattern: java.io.File.getName(...)
+  - pattern: $VAR = java.io.File.getName
+  - pattern: new io.File.getName(...)
+  - pattern: io.File.getName(...)
+  - pattern: $VAR = io.File.getName
+  - pattern: new File.getName(...)
+  - pattern: File.getName(...)
+  - pattern: $VAR = File.getName
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-io-File-getParent
+  languages:
+  - java
+  message: Avoid using java.io.File.getParent(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.io.File.getParent()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.io.File.getParent(...)
+  - pattern: java.io.File.getParent(...)
+  - pattern: $VAR = java.io.File.getParent
+  - pattern: new io.File.getParent(...)
+  - pattern: io.File.getParent(...)
+  - pattern: $VAR = io.File.getParent
+  - pattern: new File.getParent(...)
+  - pattern: File.getParent(...)
+  - pattern: $VAR = File.getParent
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-io-File-getPath
+  languages:
+  - java
+  message: Avoid using java.io.File.getPath(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.io.File.getPath()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.io.File.getPath(...)
+  - pattern: java.io.File.getPath(...)
+  - pattern: $VAR = java.io.File.getPath
+  - pattern: new io.File.getPath(...)
+  - pattern: io.File.getPath(...)
+  - pattern: $VAR = io.File.getPath
+  - pattern: new File.getPath(...)
+  - pattern: File.getPath(...)
+  - pattern: $VAR = File.getPath
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-io-File-list
+  languages:
+  - java
+  message: Avoid using java.io.File.list(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.io.File.list()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.io.File.list(...)
+  - pattern: java.io.File.list(...)
+  - pattern: $VAR = java.io.File.list
+  - pattern: new io.File.list(...)
+  - pattern: io.File.list(...)
+  - pattern: $VAR = io.File.list
+  - pattern: new File.list(...)
+  - pattern: File.list(...)
+  - pattern: $VAR = File.list
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-io-File-listFiles
+  languages:
+  - java
+  message: Avoid using java.io.File.listFiles(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.io.File.listFiles()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.io.File.listFiles(...)
+  - pattern: java.io.File.listFiles(...)
+  - pattern: $VAR = java.io.File.listFiles
+  - pattern: new io.File.listFiles(...)
+  - pattern: io.File.listFiles(...)
+  - pattern: $VAR = io.File.listFiles
+  - pattern: new File.listFiles(...)
+  - pattern: File.listFiles(...)
+  - pattern: $VAR = File.listFiles
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-io-File-mkdir
+  languages:
+  - java
+  message: Avoid using java.io.File.mkdir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.io.File.mkdir()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.io.File.mkdir(...)
+  - pattern: java.io.File.mkdir(...)
+  - pattern: $VAR = java.io.File.mkdir
+  - pattern: new io.File.mkdir(...)
+  - pattern: io.File.mkdir(...)
+  - pattern: $VAR = io.File.mkdir
+  - pattern: new File.mkdir(...)
+  - pattern: File.mkdir(...)
+  - pattern: $VAR = File.mkdir
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-io-File-mkdirs
+  languages:
+  - java
+  message: Avoid using java.io.File.mkdirs(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.io.File.mkdirs()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.io.File.mkdirs(...)
+  - pattern: java.io.File.mkdirs(...)
+  - pattern: $VAR = java.io.File.mkdirs
+  - pattern: new io.File.mkdirs(...)
+  - pattern: io.File.mkdirs(...)
+  - pattern: $VAR = io.File.mkdirs
+  - pattern: new File.mkdirs(...)
+  - pattern: File.mkdirs(...)
+  - pattern: $VAR = File.mkdirs
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-io-File-renameTo
+  languages:
+  - java
+  message: Avoid using java.io.File.renameTo(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.io.File.renameTo()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.io.File.renameTo(...)
+  - pattern: java.io.File.renameTo(...)
+  - pattern: $VAR = java.io.File.renameTo
+  - pattern: new io.File.renameTo(...)
+  - pattern: io.File.renameTo(...)
+  - pattern: $VAR = io.File.renameTo
+  - pattern: new File.renameTo(...)
+  - pattern: File.renameTo(...)
+  - pattern: $VAR = File.renameTo
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-io-FileInputStream-read
+  languages:
+  - java
+  message: Avoid using java.io.FileInputStream.read(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.io.FileInputStream.read()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.io.FileInputStream.read(...)
+  - pattern: java.io.FileInputStream.read(...)
+  - pattern: $VAR = java.io.FileInputStream.read
+  - pattern: new io.FileInputStream.read(...)
+  - pattern: io.FileInputStream.read(...)
+  - pattern: $VAR = io.FileInputStream.read
+  - pattern: new FileInputStream.read(...)
+  - pattern: FileInputStream.read(...)
+  - pattern: $VAR = FileInputStream.read
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-io-FileOutputStream-write
+  languages:
+  - java
+  message: Avoid using java.io.FileOutputStream.write(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.io.FileOutputStream.write()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.io.FileOutputStream.write(...)
+  - pattern: java.io.FileOutputStream.write(...)
+  - pattern: $VAR = java.io.FileOutputStream.write
+  - pattern: new io.FileOutputStream.write(...)
+  - pattern: io.FileOutputStream.write(...)
+  - pattern: $VAR = io.FileOutputStream.write
+  - pattern: new FileOutputStream.write(...)
+  - pattern: FileOutputStream.write(...)
+  - pattern: $VAR = FileOutputStream.write
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-io-FileReader-read
+  languages:
+  - java
+  message: Avoid using java.io.FileReader.read(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.io.FileReader.read()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.io.FileReader.read(...)
+  - pattern: java.io.FileReader.read(...)
+  - pattern: $VAR = java.io.FileReader.read
+  - pattern: new io.FileReader.read(...)
+  - pattern: io.FileReader.read(...)
+  - pattern: $VAR = io.FileReader.read
+  - pattern: new FileReader.read(...)
+  - pattern: FileReader.read(...)
+  - pattern: $VAR = FileReader.read
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-io-FileWriter-write
+  languages:
+  - java
+  message: Avoid using java.io.FileWriter.write(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.io.FileWriter.write()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.io.FileWriter.write(...)
+  - pattern: java.io.FileWriter.write(...)
+  - pattern: $VAR = java.io.FileWriter.write
+  - pattern: new io.FileWriter.write(...)
+  - pattern: io.FileWriter.write(...)
+  - pattern: $VAR = io.FileWriter.write
+  - pattern: new FileWriter.write(...)
+  - pattern: FileWriter.write(...)
+  - pattern: $VAR = FileWriter.write
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-lang-System-exit
+  languages:
+  - java
+  message: Avoid using java.lang.System.exit(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.lang.System.exit()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.lang.System.exit(...)
+  - pattern: java.lang.System.exit(...)
+  - pattern: $VAR = java.lang.System.exit
+  - pattern: new lang.System.exit(...)
+  - pattern: lang.System.exit(...)
+  - pattern: $VAR = lang.System.exit
+  - pattern: new System.exit(...)
+  - pattern: System.exit(...)
+  - pattern: $VAR = System.exit
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-lang-System-getProperty
+  languages:
+  - java
+  message: Avoid using java.lang.System.getProperty(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.lang.System.getProperty()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.lang.System.getProperty(...)
+  - pattern: java.lang.System.getProperty(...)
+  - pattern: $VAR = java.lang.System.getProperty
+  - pattern: new lang.System.getProperty(...)
+  - pattern: lang.System.getProperty(...)
+  - pattern: $VAR = lang.System.getProperty
+  - pattern: new System.getProperty(...)
+  - pattern: System.getProperty(...)
+  - pattern: $VAR = System.getProperty
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-lang-System-getenv
+  languages:
+  - java
+  message: Avoid using java.lang.System.getenv(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.lang.System.getenv()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.lang.System.getenv(...)
+  - pattern: java.lang.System.getenv(...)
+  - pattern: $VAR = java.lang.System.getenv
+  - pattern: new lang.System.getenv(...)
+  - pattern: lang.System.getenv(...)
+  - pattern: $VAR = lang.System.getenv
+  - pattern: new System.getenv(...)
+  - pattern: System.getenv(...)
+  - pattern: $VAR = System.getenv
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-nio-file-Files-copy
+  languages:
+  - java
+  message: Avoid using java.nio.file.Files.copy(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.nio.file.Files.copy()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.nio.file.Files.copy(...)
+  - pattern: java.nio.file.Files.copy(...)
+  - pattern: $VAR = java.nio.file.Files.copy
+  - pattern: new nio.file.Files.copy(...)
+  - pattern: nio.file.Files.copy(...)
+  - pattern: $VAR = nio.file.Files.copy
+  - pattern: new file.Files.copy(...)
+  - pattern: file.Files.copy(...)
+  - pattern: $VAR = file.Files.copy
+  - pattern: new Files.copy(...)
+  - pattern: Files.copy(...)
+  - pattern: $VAR = Files.copy
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-nio-file-Files-createDirectory
+  languages:
+  - java
+  message: Avoid using java.nio.file.Files.createDirectory(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.nio.file.Files.createDirectory()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.nio.file.Files.createDirectory(...)
+  - pattern: java.nio.file.Files.createDirectory(...)
+  - pattern: $VAR = java.nio.file.Files.createDirectory
+  - pattern: new nio.file.Files.createDirectory(...)
+  - pattern: nio.file.Files.createDirectory(...)
+  - pattern: $VAR = nio.file.Files.createDirectory
+  - pattern: new file.Files.createDirectory(...)
+  - pattern: file.Files.createDirectory(...)
+  - pattern: $VAR = file.Files.createDirectory
+  - pattern: new Files.createDirectory(...)
+  - pattern: Files.createDirectory(...)
+  - pattern: $VAR = Files.createDirectory
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-nio-file-Files-createFile
+  languages:
+  - java
+  message: Avoid using java.nio.file.Files.createFile(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.nio.file.Files.createFile()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.nio.file.Files.createFile(...)
+  - pattern: java.nio.file.Files.createFile(...)
+  - pattern: $VAR = java.nio.file.Files.createFile
+  - pattern: new nio.file.Files.createFile(...)
+  - pattern: nio.file.Files.createFile(...)
+  - pattern: $VAR = nio.file.Files.createFile
+  - pattern: new file.Files.createFile(...)
+  - pattern: file.Files.createFile(...)
+  - pattern: $VAR = file.Files.createFile
+  - pattern: new Files.createFile(...)
+  - pattern: Files.createFile(...)
+  - pattern: $VAR = Files.createFile
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-nio-file-Files-delete
+  languages:
+  - java
+  message: Avoid using java.nio.file.Files.delete(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.nio.file.Files.delete()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.nio.file.Files.delete(...)
+  - pattern: java.nio.file.Files.delete(...)
+  - pattern: $VAR = java.nio.file.Files.delete
+  - pattern: new nio.file.Files.delete(...)
+  - pattern: nio.file.Files.delete(...)
+  - pattern: $VAR = nio.file.Files.delete
+  - pattern: new file.Files.delete(...)
+  - pattern: file.Files.delete(...)
+  - pattern: $VAR = file.Files.delete
+  - pattern: new Files.delete(...)
+  - pattern: Files.delete(...)
+  - pattern: $VAR = Files.delete
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-nio-file-Files-exists
+  languages:
+  - java
+  message: Avoid using java.nio.file.Files.exists(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.nio.file.Files.exists()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.nio.file.Files.exists(...)
+  - pattern: java.nio.file.Files.exists(...)
+  - pattern: $VAR = java.nio.file.Files.exists
+  - pattern: new nio.file.Files.exists(...)
+  - pattern: nio.file.Files.exists(...)
+  - pattern: $VAR = nio.file.Files.exists
+  - pattern: new file.Files.exists(...)
+  - pattern: file.Files.exists(...)
+  - pattern: $VAR = file.Files.exists
+  - pattern: new Files.exists(...)
+  - pattern: Files.exists(...)
+  - pattern: $VAR = Files.exists
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-nio-file-Files-move
+  languages:
+  - java
+  message: Avoid using java.nio.file.Files.move(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.nio.file.Files.move()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.nio.file.Files.move(...)
+  - pattern: java.nio.file.Files.move(...)
+  - pattern: $VAR = java.nio.file.Files.move
+  - pattern: new nio.file.Files.move(...)
+  - pattern: nio.file.Files.move(...)
+  - pattern: $VAR = nio.file.Files.move
+  - pattern: new file.Files.move(...)
+  - pattern: file.Files.move(...)
+  - pattern: $VAR = file.Files.move
+  - pattern: new Files.move(...)
+  - pattern: Files.move(...)
+  - pattern: $VAR = Files.move
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-nio-file-Files-newBufferedReader
+  languages:
+  - java
+  message: Avoid using java.nio.file.Files.newBufferedReader(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.nio.file.Files.newBufferedReader()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.nio.file.Files.newBufferedReader(...)
+  - pattern: java.nio.file.Files.newBufferedReader(...)
+  - pattern: $VAR = java.nio.file.Files.newBufferedReader
+  - pattern: new nio.file.Files.newBufferedReader(...)
+  - pattern: nio.file.Files.newBufferedReader(...)
+  - pattern: $VAR = nio.file.Files.newBufferedReader
+  - pattern: new file.Files.newBufferedReader(...)
+  - pattern: file.Files.newBufferedReader(...)
+  - pattern: $VAR = file.Files.newBufferedReader
+  - pattern: new Files.newBufferedReader(...)
+  - pattern: Files.newBufferedReader(...)
+  - pattern: $VAR = Files.newBufferedReader
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-nio-file-Files-newBufferedWriter
+  languages:
+  - java
+  message: Avoid using java.nio.file.Files.newBufferedWriter(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.nio.file.Files.newBufferedWriter()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.nio.file.Files.newBufferedWriter(...)
+  - pattern: java.nio.file.Files.newBufferedWriter(...)
+  - pattern: $VAR = java.nio.file.Files.newBufferedWriter
+  - pattern: new nio.file.Files.newBufferedWriter(...)
+  - pattern: nio.file.Files.newBufferedWriter(...)
+  - pattern: $VAR = nio.file.Files.newBufferedWriter
+  - pattern: new file.Files.newBufferedWriter(...)
+  - pattern: file.Files.newBufferedWriter(...)
+  - pattern: $VAR = file.Files.newBufferedWriter
+  - pattern: new Files.newBufferedWriter(...)
+  - pattern: Files.newBufferedWriter(...)
+  - pattern: $VAR = Files.newBufferedWriter
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-nio-file-Files-readAllBytes
+  languages:
+  - java
+  message: Avoid using java.nio.file.Files.readAllBytes(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.nio.file.Files.readAllBytes()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.nio.file.Files.readAllBytes(...)
+  - pattern: java.nio.file.Files.readAllBytes(...)
+  - pattern: $VAR = java.nio.file.Files.readAllBytes
+  - pattern: new nio.file.Files.readAllBytes(...)
+  - pattern: nio.file.Files.readAllBytes(...)
+  - pattern: $VAR = nio.file.Files.readAllBytes
+  - pattern: new file.Files.readAllBytes(...)
+  - pattern: file.Files.readAllBytes(...)
+  - pattern: $VAR = file.Files.readAllBytes
+  - pattern: new Files.readAllBytes(...)
+  - pattern: Files.readAllBytes(...)
+  - pattern: $VAR = Files.readAllBytes
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-nio-file-Files-readAllLines
+  languages:
+  - java
+  message: Avoid using java.nio.file.Files.readAllLines(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.nio.file.Files.readAllLines()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.nio.file.Files.readAllLines(...)
+  - pattern: java.nio.file.Files.readAllLines(...)
+  - pattern: $VAR = java.nio.file.Files.readAllLines
+  - pattern: new nio.file.Files.readAllLines(...)
+  - pattern: nio.file.Files.readAllLines(...)
+  - pattern: $VAR = nio.file.Files.readAllLines
+  - pattern: new file.Files.readAllLines(...)
+  - pattern: file.Files.readAllLines(...)
+  - pattern: $VAR = file.Files.readAllLines
+  - pattern: new Files.readAllLines(...)
+  - pattern: Files.readAllLines(...)
+  - pattern: $VAR = Files.readAllLines
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-nio-file-Files-setPosixFilePermissions
+  languages:
+  - java
+  message: Avoid using java.nio.file.Files.setPosixFilePermissions(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.nio.file.Files.setPosixFilePermissions()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.nio.file.Files.setPosixFilePermissions(...)
+  - pattern: java.nio.file.Files.setPosixFilePermissions(...)
+  - pattern: $VAR = java.nio.file.Files.setPosixFilePermissions
+  - pattern: new nio.file.Files.setPosixFilePermissions(...)
+  - pattern: nio.file.Files.setPosixFilePermissions(...)
+  - pattern: $VAR = nio.file.Files.setPosixFilePermissions
+  - pattern: new file.Files.setPosixFilePermissions(...)
+  - pattern: file.Files.setPosixFilePermissions(...)
+  - pattern: $VAR = file.Files.setPosixFilePermissions
+  - pattern: new Files.setPosixFilePermissions(...)
+  - pattern: Files.setPosixFilePermissions(...)
+  - pattern: $VAR = Files.setPosixFilePermissions
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-nio-file-Files-write
+  languages:
+  - java
+  message: Avoid using java.nio.file.Files.write(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.nio.file.Files.write()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.nio.file.Files.write(...)
+  - pattern: java.nio.file.Files.write(...)
+  - pattern: $VAR = java.nio.file.Files.write
+  - pattern: new nio.file.Files.write(...)
+  - pattern: nio.file.Files.write(...)
+  - pattern: $VAR = nio.file.Files.write
+  - pattern: new file.Files.write(...)
+  - pattern: file.Files.write(...)
+  - pattern: $VAR = file.Files.write
+  - pattern: new Files.write(...)
+  - pattern: Files.write(...)
+  - pattern: $VAR = Files.write
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-nio-file-Paths-get
+  languages:
+  - java
+  message: Avoid using java.nio.file.Paths.get(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.nio.file.Paths.get()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.nio.file.Paths.get(...)
+  - pattern: java.nio.file.Paths.get(...)
+  - pattern: $VAR = java.nio.file.Paths.get
+  - pattern: new nio.file.Paths.get(...)
+  - pattern: nio.file.Paths.get(...)
+  - pattern: $VAR = nio.file.Paths.get
+  - pattern: new file.Paths.get(...)
+  - pattern: file.Paths.get(...)
+  - pattern: $VAR = file.Paths.get
+  - pattern: new Paths.get(...)
+  - pattern: Paths.get(...)
+  - pattern: $VAR = Paths.get
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-java-nio-file-attribute-PosixFilePermissions-fromString
+  languages:
+  - java
+  message: Avoid using java.nio.file.attribute.PosixFilePermissions.fromString(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: java.nio.file.attribute.PosixFilePermissions.fromString()
+    category: File or System Operation
+  pattern-either:
+  - pattern: new java.nio.file.attribute.PosixFilePermissions.fromString(...)
+  - pattern: java.nio.file.attribute.PosixFilePermissions.fromString(...)
+  - pattern: $VAR = java.nio.file.attribute.PosixFilePermissions.fromString
+  - pattern: new nio.file.attribute.PosixFilePermissions.fromString(...)
+  - pattern: nio.file.attribute.PosixFilePermissions.fromString(...)
+  - pattern: $VAR = nio.file.attribute.PosixFilePermissions.fromString
+  - pattern: new file.attribute.PosixFilePermissions.fromString(...)
+  - pattern: file.attribute.PosixFilePermissions.fromString(...)
+  - pattern: $VAR = file.attribute.PosixFilePermissions.fromString
+  - pattern: new attribute.PosixFilePermissions.fromString(...)
+  - pattern: attribute.PosixFilePermissions.fromString(...)
+  - pattern: $VAR = attribute.PosixFilePermissions.fromString
+  - pattern: new PosixFilePermissions.fromString(...)
+  - pattern: PosixFilePermissions.fromString(...)
+  - pattern: $VAR = PosixFilePermissions.fromString
+  severity: WARNING
+  tags:
+  - File or System Operation

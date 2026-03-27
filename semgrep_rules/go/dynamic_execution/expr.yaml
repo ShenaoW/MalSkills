@@ -1,0 +1,27 @@
+rules:
+- id: no-expr.Compile
+  languages:
+  - go
+  message: Avoid using expr.Compile(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: expr.Compile()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: expr.Compile(...)
+  - pattern: $VAR = expr.Compile
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: no-expr.Run
+  languages:
+  - go
+  message: Avoid using expr.Run(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: expr.Run()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: expr.Run(...)
+  - pattern: $VAR = expr.Run
+  severity: WARNING
+  tags:
+  - Dynamic Execution

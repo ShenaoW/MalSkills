@@ -1,0 +1,27 @@
+rules:
+- id: no-linecache-getline
+  languages:
+  - python
+  message: Avoid using linecache.getline(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: linecache.getline()
+    category: File or System Operation
+  pattern-either:
+  - pattern: linecache.getline(...)
+  - pattern: $VAR = linecache.getline
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-linecache-lazycache
+  languages:
+  - python
+  message: Avoid using linecache.lazycache(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: linecache.lazycache()
+    category: File or System Operation
+  pattern-either:
+  - pattern: linecache.lazycache(...)
+  - pattern: $VAR = linecache.lazycache
+  severity: WARNING
+  tags:
+  - File or System Operation

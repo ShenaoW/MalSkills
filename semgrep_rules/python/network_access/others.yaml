@@ -1,0 +1,16 @@
+rules:
+- id: no-discord-Webhook-from_url
+  languages:
+  - python
+  message: Avoid using discord.Webhook.from_url(), as it can lead to potential issues with network access.
+  metadata:
+    api: discord.Webhook.from_url()
+    category: Network Access
+  pattern-either:
+  - pattern: discord.Webhook.from_url(...)
+  - pattern: $VAR = discord.Webhook.from_url
+  - pattern: Webhook.from_url(...)
+  - pattern: $VAR = Webhook.from_url
+  severity: WARNING
+  tags:
+  - Network Access

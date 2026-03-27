@@ -1,0 +1,53 @@
+rules:
+- id: no-SecureRandom.base64
+  languages:
+  - ruby
+  message: Avoid using SecureRandom.base64(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: SecureRandom.base64()
+    category: Cryptography
+  pattern-either:
+  - pattern: SecureRandom.base64(...)
+  - pattern: $VAR = SecureRandom.base64
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-SecureRandom.hex
+  languages:
+  - ruby
+  message: Avoid using SecureRandom.hex(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: SecureRandom.hex()
+    category: Cryptography
+  pattern-either:
+  - pattern: SecureRandom.hex(...)
+  - pattern: $VAR = SecureRandom.hex
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-SecureRandom.random_bytes
+  languages:
+  - ruby
+  message: Avoid using SecureRandom.random_bytes(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: SecureRandom.random_bytes()
+    category: Cryptography
+  pattern-either:
+  - pattern: SecureRandom.random_bytes(...)
+  - pattern: $VAR = SecureRandom.random_bytes
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-SecureRandom.uuid
+  languages:
+  - ruby
+  message: Avoid using SecureRandom.uuid(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: SecureRandom.uuid()
+    category: Cryptography
+  pattern-either:
+  - pattern: SecureRandom.uuid(...)
+  - pattern: $VAR = SecureRandom.uuid
+  severity: WARNING
+  tags:
+  - Cryptography

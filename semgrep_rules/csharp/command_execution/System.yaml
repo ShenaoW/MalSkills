@@ -1,0 +1,417 @@
+rules:
+- id: no-System-Activator-CreateInstance
+  languages:
+  - csharp
+  message: Avoid using System.Activator.CreateInstance(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.Activator.CreateInstance()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.Activator.CreateInstance(...)
+  - pattern: $VAR = System.Activator.CreateInstance
+  - pattern: Activator.CreateInstance(...)
+  - pattern: $VAR = Activator.CreateInstance
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-System-AppDomain-ExecuteAssembly
+  languages:
+  - csharp
+  message: Avoid using System.AppDomain.ExecuteAssembly(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.AppDomain.ExecuteAssembly()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.AppDomain.ExecuteAssembly(...)
+  - pattern: $VAR = System.AppDomain.ExecuteAssembly
+  - pattern: AppDomain.ExecuteAssembly(...)
+  - pattern: $VAR = AppDomain.ExecuteAssembly
+  - pattern: ExecuteAssembly(...)
+  - pattern: $VAR = ExecuteAssembly
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-System-CodeDom-Compiler-CodeDomProvider-CompileAssemblyFromSource
+  languages:
+  - csharp
+  message: Avoid using System.CodeDom.Compiler.CodeDomProvider.CompileAssemblyFromSource(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.CodeDom.Compiler.CodeDomProvider.CompileAssemblyFromSource()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.CodeDom.Compiler.CodeDomProvider.CompileAssemblyFromSource(...)
+  - pattern: $VAR = System.CodeDom.Compiler.CodeDomProvider.CompileAssemblyFromSource
+  - pattern: CodeDom.Compiler.CodeDomProvider.CompileAssemblyFromSource(...)
+  - pattern: $VAR = CodeDom.Compiler.CodeDomProvider.CompileAssemblyFromSource
+  - pattern: Compiler.CodeDomProvider.CompileAssemblyFromSource(...)
+  - pattern: $VAR = Compiler.CodeDomProvider.CompileAssemblyFromSource
+  - pattern: CodeDomProvider.CompileAssemblyFromSource(...)
+  - pattern: $VAR = CodeDomProvider.CompileAssemblyFromSource
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-System-Diagnostics-Process-BeginErrorReadLine
+  languages:
+  - csharp
+  message: Avoid using System.Diagnostics.Process.BeginErrorReadLine(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.Diagnostics.Process.BeginErrorReadLine()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.Diagnostics.Process.BeginErrorReadLine(...)
+  - pattern: $VAR = System.Diagnostics.Process.BeginErrorReadLine
+  - pattern: Diagnostics.Process.BeginErrorReadLine(...)
+  - pattern: $VAR = Diagnostics.Process.BeginErrorReadLine
+  - pattern: Process.BeginErrorReadLine(...)
+  - pattern: $VAR = Process.BeginErrorReadLine
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-System-Diagnostics-Process-BeginOutputReadLine
+  languages:
+  - csharp
+  message: Avoid using System.Diagnostics.Process.BeginOutputReadLine(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.Diagnostics.Process.BeginOutputReadLine()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.Diagnostics.Process.BeginOutputReadLine(...)
+  - pattern: $VAR = System.Diagnostics.Process.BeginOutputReadLine
+  - pattern: Diagnostics.Process.BeginOutputReadLine(...)
+  - pattern: $VAR = Diagnostics.Process.BeginOutputReadLine
+  - pattern: Process.BeginOutputReadLine(...)
+  - pattern: $VAR = Process.BeginOutputReadLine
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-System-Diagnostics-Process-Kill
+  languages:
+  - csharp
+  message: Avoid using System.Diagnostics.Process.Kill(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.Diagnostics.Process.Kill()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.Diagnostics.Process.Kill(...)
+  - pattern: $VAR = System.Diagnostics.Process.Kill
+  - pattern: Diagnostics.Process.Kill(...)
+  - pattern: $VAR = Diagnostics.Process.Kill
+  - pattern: Process.Kill(...)
+  - pattern: $VAR = Process.Kill
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-System-Diagnostics-Process-Start
+  languages:
+  - csharp
+  message: Avoid using System.Diagnostics.Process.Start(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.Diagnostics.Process.Start()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.Diagnostics.Process.Start(...)
+  - pattern: $VAR = System.Diagnostics.Process.Start
+  - pattern: Diagnostics.Process.Start(...)
+  - pattern: $VAR = Diagnostics.Process.Start
+  - pattern: Process.Start(...)
+  - pattern: $VAR = Process.Start
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-System-Diagnostics-Process-WaitForExit
+  languages:
+  - csharp
+  message: Avoid using System.Diagnostics.Process.WaitForExit(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.Diagnostics.Process.WaitForExit()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.Diagnostics.Process.WaitForExit(...)
+  - pattern: $VAR = System.Diagnostics.Process.WaitForExit
+  - pattern: Diagnostics.Process.WaitForExit(...)
+  - pattern: $VAR = Diagnostics.Process.WaitForExit
+  - pattern: Process.WaitForExit(...)
+  - pattern: $VAR = Process.WaitForExit
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-System-IO-File-AppendAllText
+  languages:
+  - csharp
+  message: Avoid using System.IO.File.AppendAllText(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.IO.File.AppendAllText()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.IO.File.AppendAllText(...)
+  - pattern: $VAR = System.IO.File.AppendAllText
+  - pattern: IO.File.AppendAllText(...)
+  - pattern: $VAR = IO.File.AppendAllText
+  - pattern: File.AppendAllText(...)
+  - pattern: $VAR = File.AppendAllText
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-System-IO-File-CreateText
+  languages:
+  - csharp
+  message: Avoid using System.IO.File.CreateText(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.IO.File.CreateText()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.IO.File.CreateText(...)
+  - pattern: $VAR = System.IO.File.CreateText
+  - pattern: IO.File.CreateText(...)
+  - pattern: $VAR = IO.File.CreateText
+  - pattern: File.CreateText(...)
+  - pattern: $VAR = File.CreateText
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-System-IO-File-WriteAllBytes
+  languages:
+  - csharp
+  message: Avoid using System.IO.File.WriteAllBytes(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.IO.File.WriteAllBytes()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.IO.File.WriteAllBytes(...)
+  - pattern: $VAR = System.IO.File.WriteAllBytes
+  - pattern: IO.File.WriteAllBytes(...)
+  - pattern: $VAR = IO.File.WriteAllBytes
+  - pattern: File.WriteAllBytes(...)
+  - pattern: $VAR = File.WriteAllBytes
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-System-IO-File-WriteAllText
+  languages:
+  - csharp
+  message: Avoid using System.IO.File.WriteAllText(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.IO.File.WriteAllText()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.IO.File.WriteAllText(...)
+  - pattern: $VAR = System.IO.File.WriteAllText
+  - pattern: IO.File.WriteAllText(...)
+  - pattern: $VAR = IO.File.WriteAllText
+  - pattern: File.WriteAllText(...)
+  - pattern: $VAR = File.WriteAllText
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-System-IO-StreamWriter-WriteLine
+  languages:
+  - csharp
+  message: Avoid using System.IO.StreamWriter.WriteLine(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.IO.StreamWriter.WriteLine()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.IO.StreamWriter.WriteLine(...)
+  - pattern: $VAR = System.IO.StreamWriter.WriteLine
+  - pattern: IO.StreamWriter.WriteLine(...)
+  - pattern: $VAR = IO.StreamWriter.WriteLine
+  - pattern: StreamWriter.WriteLine(...)
+  - pattern: $VAR = StreamWriter.WriteLine
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-System-Management-ManagementClass-InvokeMethod
+  languages:
+  - csharp
+  message: Avoid using System.Management.ManagementClass.InvokeMethod(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.Management.ManagementClass.InvokeMethod()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.Management.ManagementClass.InvokeMethod(...)
+  - pattern: $VAR = System.Management.ManagementClass.InvokeMethod
+  - pattern: Management.ManagementClass.InvokeMethod(...)
+  - pattern: $VAR = Management.ManagementClass.InvokeMethod
+  - pattern: ManagementClass.InvokeMethod(...)
+  - pattern: $VAR = ManagementClass.InvokeMethod
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-System-Management-ManagementObject-InvokeMethod
+  languages:
+  - csharp
+  message: Avoid using System.Management.ManagementObject.InvokeMethod(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.Management.ManagementObject.InvokeMethod()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.Management.ManagementObject.InvokeMethod(...)
+  - pattern: $VAR = System.Management.ManagementObject.InvokeMethod
+  - pattern: Management.ManagementObject.InvokeMethod(...)
+  - pattern: $VAR = Management.ManagementObject.InvokeMethod
+  - pattern: ManagementObject.InvokeMethod(...)
+  - pattern: $VAR = ManagementObject.InvokeMethod
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-System-Reflection-Assembly-CreateInstance
+  languages:
+  - csharp
+  message: Avoid using System.Reflection.Assembly.CreateInstance(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.Reflection.Assembly.CreateInstance()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.Reflection.Assembly.CreateInstance(...)
+  - pattern: $VAR = System.Reflection.Assembly.CreateInstance
+  - pattern: Reflection.Assembly.CreateInstance(...)
+  - pattern: $VAR = Reflection.Assembly.CreateInstance
+  - pattern: Assembly.CreateInstance(...)
+  - pattern: $VAR = Assembly.CreateInstance
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-System-Reflection-Assembly-Load
+  languages:
+  - csharp
+  message: Avoid using System.Reflection.Assembly.Load(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.Reflection.Assembly.Load()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.Reflection.Assembly.Load(...)
+  - pattern: $VAR = System.Reflection.Assembly.Load
+  - pattern: Reflection.Assembly.Load(...)
+  - pattern: $VAR = Reflection.Assembly.Load
+  - pattern: Assembly.Load(...)
+  - pattern: $VAR = Assembly.Load
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-System-Reflection-Assembly-LoadFrom
+  languages:
+  - csharp
+  message: Avoid using System.Reflection.Assembly.LoadFrom(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.Reflection.Assembly.LoadFrom()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.Reflection.Assembly.LoadFrom(...)
+  - pattern: $VAR = System.Reflection.Assembly.LoadFrom
+  - pattern: Reflection.Assembly.LoadFrom(...)
+  - pattern: $VAR = Reflection.Assembly.LoadFrom
+  - pattern: Assembly.LoadFrom(...)
+  - pattern: $VAR = Assembly.LoadFrom
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-System-Reflection-MethodInfo-Invoke
+  languages:
+  - csharp
+  message: Avoid using System.Reflection.MethodInfo.Invoke(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.Reflection.MethodInfo.Invoke()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.Reflection.MethodInfo.Invoke(...)
+  - pattern: $VAR = System.Reflection.MethodInfo.Invoke
+  - pattern: Reflection.MethodInfo.Invoke(...)
+  - pattern: $VAR = Reflection.MethodInfo.Invoke
+  - pattern: MethodInfo.Invoke(...)
+  - pattern: $VAR = MethodInfo.Invoke
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-System-Runtime-InteropServices-Marshal-GetDelegateForFunctionPointer
+  languages:
+  - csharp
+  message: Avoid using System.Runtime.InteropServices.Marshal.GetDelegateForFunctionPointer(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.Runtime.InteropServices.Marshal.GetDelegateForFunctionPointer()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.Runtime.InteropServices.Marshal.GetDelegateForFunctionPointer(...)
+  - pattern: $VAR = System.Runtime.InteropServices.Marshal.GetDelegateForFunctionPointer
+  - pattern: Runtime.InteropServices.Marshal.GetDelegateForFunctionPointer(...)
+  - pattern: $VAR = Runtime.InteropServices.Marshal.GetDelegateForFunctionPointer
+  - pattern: InteropServices.Marshal.GetDelegateForFunctionPointer(...)
+  - pattern: $VAR = InteropServices.Marshal.GetDelegateForFunctionPointer
+  - pattern: Marshal.GetDelegateForFunctionPointer(...)
+  - pattern: $VAR = Marshal.GetDelegateForFunctionPointer
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-System-Runtime-InteropServices-Marshal-WriteIntPtr
+  languages:
+  - csharp
+  message: Avoid using System.Runtime.InteropServices.Marshal.WriteIntPtr(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.Runtime.InteropServices.Marshal.WriteIntPtr()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.Runtime.InteropServices.Marshal.WriteIntPtr(...)
+  - pattern: $VAR = System.Runtime.InteropServices.Marshal.WriteIntPtr
+  - pattern: Runtime.InteropServices.Marshal.WriteIntPtr(...)
+  - pattern: $VAR = Runtime.InteropServices.Marshal.WriteIntPtr
+  - pattern: InteropServices.Marshal.WriteIntPtr(...)
+  - pattern: $VAR = InteropServices.Marshal.WriteIntPtr
+  - pattern: Marshal.WriteIntPtr(...)
+  - pattern: $VAR = Marshal.WriteIntPtr
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-System-Threading-Tasks-Task-Run
+  languages:
+  - csharp
+  message: Avoid using System.Threading.Tasks.Task.Run(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.Threading.Tasks.Task.Run()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.Threading.Tasks.Task.Run(...)
+  - pattern: $VAR = System.Threading.Tasks.Task.Run
+  - pattern: Threading.Tasks.Task.Run(...)
+  - pattern: $VAR = Threading.Tasks.Task.Run
+  - pattern: Tasks.Task.Run(...)
+  - pattern: $VAR = Tasks.Task.Run
+  - pattern: Task.Run(...)
+  - pattern: $VAR = Task.Run
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-System-Threading-Tasks-TaskFactory-StartNew
+  languages:
+  - csharp
+  message: Avoid using System.Threading.Tasks.TaskFactory.StartNew(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.Threading.Tasks.TaskFactory.StartNew()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.Threading.Tasks.TaskFactory.StartNew(...)
+  - pattern: $VAR = System.Threading.Tasks.TaskFactory.StartNew
+  - pattern: Threading.Tasks.TaskFactory.StartNew(...)
+  - pattern: $VAR = Threading.Tasks.TaskFactory.StartNew
+  - pattern: Tasks.TaskFactory.StartNew(...)
+  - pattern: $VAR = Tasks.TaskFactory.StartNew
+  - pattern: TaskFactory.StartNew(...)
+  - pattern: $VAR = TaskFactory.StartNew
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-System-Threading-Thread-Start
+  languages:
+  - csharp
+  message: Avoid using System.Threading.Thread.Start(), as it can lead to potential issues with command execution.
+  metadata:
+    api: System.Threading.Thread.Start()
+    category: Command Execution
+  pattern-either:
+  - pattern: System.Threading.Thread.Start(...)
+  - pattern: $VAR = System.Threading.Thread.Start
+  - pattern: Threading.Thread.Start(...)
+  - pattern: $VAR = Threading.Thread.Start
+  - pattern: Thread.Start(...)
+  - pattern: $VAR = Thread.Start
+  severity: WARNING
+  tags:
+  - Command Execution

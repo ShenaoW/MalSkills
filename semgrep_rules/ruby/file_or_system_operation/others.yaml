@@ -1,0 +1,14 @@
+rules:
+- id: no-Tempfile.new
+  languages:
+  - ruby
+  message: Avoid using Tempfile.new(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: Tempfile.new()
+    category: File or System Operation
+  pattern-either:
+  - pattern: Tempfile.new(...)
+  - pattern: $VAR = Tempfile.new
+  severity: WARNING
+  tags:
+  - File or System Operation

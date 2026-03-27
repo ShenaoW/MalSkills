@@ -1,0 +1,51 @@
+rules:
+- id: no-webp-converter-cwebp
+  languages:
+  - javascript
+  message: Avoid using webp-converter.cwebp(), as it can lead to potential issues with command execution.
+  metadata:
+    api: webp-converter.cwebp()
+    category: Command Execution
+  pattern-either:
+  - pattern: webp-converter.cwebp(...)
+  - pattern: $VAR = webp-converter.cwebp
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-webp-converter-dwebp
+  languages:
+  - javascript
+  message: Avoid using webp-converter.dwebp(), as it can lead to potential issues with command execution.
+  metadata:
+    api: webp-converter.dwebp()
+    category: Command Execution
+  pattern-either:
+  - pattern: webp-converter.dwebp(...)
+  - pattern: $VAR = webp-converter.dwebp
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-webp-converter-webpmux_add
+  languages:
+  - javascript
+  message: Avoid using webp-converter.webpmux_add(), as it can lead to potential issues with command execution.
+  metadata:
+    api: webp-converter.webpmux_add()
+    category: Command Execution
+  pattern-either:
+  - pattern: webp-converter.webpmux_add(...)
+  - pattern: $VAR = webp-converter.webpmux_add
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-require-webp-converter
+  languages:
+  - javascript
+  message: Avoid using require('webp-converter'), as it can lead to potential issues with command execution.
+  metadata:
+    api: require('webp-converter')
+    category: Command Execution
+  pattern: require('webp-converter')
+  severity: WARNING
+  tags:
+  - Command Execution

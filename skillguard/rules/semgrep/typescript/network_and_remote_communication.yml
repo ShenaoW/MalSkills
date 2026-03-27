@@ -1,0 +1,28 @@
+rules:
+  - id: typescript.network_and_remote_communication.outbound_http
+    languages: [typescript]
+    message: TypeScript outbound network connection
+    severity: WARNING
+    metadata:
+      skillguard_subtype: outbound_connection
+      skillguard_evidence_type: network_and_remote_communication
+      skillguard_value_metavar: $URL
+    pattern-either:
+      - pattern: fetch($URL, ...)
+      - pattern: axios.get($URL, ...)
+      - pattern: axios.post($URL, ...)
+      - pattern: got($URL, ...)
+      - pattern: http.request($URL, ...)
+      - pattern: https.request($URL, ...)
+
+  - id: typescript.network_and_remote_communication.listener
+    languages: [typescript]
+    message: TypeScript listener or receive socket
+    severity: WARNING
+    metadata:
+      skillguard_subtype: listener_and_receive
+      skillguard_evidence_type: network_and_remote_communication
+    pattern-either:
+      - pattern: net.createServer(...)
+      - pattern: http.createServer(...)
+      - pattern: https.createServer(...)

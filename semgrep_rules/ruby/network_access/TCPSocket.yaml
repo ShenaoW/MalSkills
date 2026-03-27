@@ -1,0 +1,27 @@
+rules:
+- id: no-TCPSocket.new
+  languages:
+  - ruby
+  message: Avoid using TCPSocket.new(), as it can lead to potential issues with network access.
+  metadata:
+    api: TCPSocket.new()
+    category: Network Access
+  pattern-either:
+  - pattern: TCPSocket.new(...)
+  - pattern: $VAR = TCPSocket.new
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-TCPSocket.open
+  languages:
+  - ruby
+  message: Avoid using TCPSocket.open(), as it can lead to potential issues with network access.
+  metadata:
+    api: TCPSocket.open()
+    category: Network Access
+  pattern-either:
+  - pattern: TCPSocket.open(...)
+  - pattern: $VAR = TCPSocket.open
+  severity: WARNING
+  tags:
+  - Network Access

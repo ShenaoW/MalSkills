@@ -1,2 +1,167 @@
 # Ralphy Progress Log
 
+- [✓] 2026-03-19 16:57 - 为 JS / Python 中的 config reference、dynamic load、危险 sink 补充规则。
+- [✓] 2026-03-19 17:26 - 将仓库目录从按“静态分析 / 大模型 / formal”划分，改成按方法阶段划分。
+- [✓] 2026-03-19 17:33 - 建立 `skillguard/evidence/`，统一承载 `Semgrep + LLM` 的 evidence fact extraction。
+- [✓] 2026-03-19 18:28 - 建立 `skillguard/primitive/`，统一承载 `YASA + LLM` 的 object identity analysis 与 primitive facts compilation。
+- [✗] 2026-03-19 18:34 - 建立 `skillguard/reasoning/`，统一承载 Datalog 推理、pattern 判定与 Souffle 导出。
+- [✓] 2026-03-19 18:41 - 更新 pipeline、CLI、tests、实验脚本中的导入路径与模块边界。
+- [✓] 2026-03-19 18:48 - 把当前文档、实现和测试中的术语统一为 `evidence facts` 与 `primitive facts`。
+- [✓] 2026-03-19 19:00 - 明确 `Semgrep` 与 `LLM` 是并行的 evidence fact producer，而不是前后补丁关系。
+- [✓] 2026-03-19 19:15 - 让 `Semgrep` 与 `LLM` 输出保持同一个 evidence fact schema。
+- [✓] 2026-03-19 19:27 - 明确 evidence fact 的必要字段：producer、artifact、span、fact type、binding、attributes、confidence、provenance。
+- [✓] 2026-03-19 19:43 - 让代码、markdown、prompt、manifest、config、installer 片段都能进入统一 evidence fact 提取流程。
+- [✓] 2026-03-19 20:02 - 为 markdown / prompt 中的 setup、下载器、secret 请求补充更细的 generic 规则。
+- [✓] 2026-03-19 20:13 - 为 JS / Python 中的 config reference、dynamic load、危险 sink 补充规则。
+- [✓] 2026-03-19 20:27 - 将新增 parsing-based 检测优先固化到 `rules/semgrep/`，避免回退到 Python 手写扫描器。
+- [✓] 2026-03-19 20:35 - 每新增一类规则，都补一个 `tests/test_extractors.py` 回归样例。
+- [✓] 2026-03-19 20:47 - 让 LLM 对全部 artifact 并行分析，而不是只分析自然语言说明。
+- [✓] 2026-03-19 20:56 - 让 LLM 输出只包含结构化 evidence facts，不直接输出最终恶意结论。
+- [✓] 2026-03-19 21:14 - 覆盖 Semgrep 难以处理的第三方库函数、LOTL、语义伪装和文档/实现不一致场景。
+- [✓] 2026-03-19 21:34 - 识别模型发现但静态规则未覆盖的高价值 evidence facts。
+- [✓] 2026-03-19 21:44 - 为可复用模式生成新的 Semgrep 规则草案，形成 neuro-symbolic feedback。
+- [✓] 2026-03-19 21:59 - 明确哪些敏感 API / sink 需要 YASA 做参数与对象指向分析。
+- [✓] 2026-03-19 22:08 - 让 YASA 仅在 `Python / JavaScript / Go / Java` 代码对象上运行。
+- [✓] 2026-03-19 22:16 - 支持对 markdown / prompt 中提升出的代码片段按语言选择性调用 YASA。
+- [✓] 2026-03-19 22:26 - 明确 YASA 的输出如何进入 primitive compilation，而不是混入 evidence 快速扫描层。
+- [✗] 2026-03-19 22:32 - 为每个 YASA 规则补对应的参数解析与 flow 断言测试。
+- [✓] 2026-03-19 22:40 - 细化对象身份分析逻辑，明确何时两个操作作用于同一 logical object。
+- [✓] 2026-03-19 22:45 - 明确跨制品对象连接条件，如 `config_value -> config_ref -> network_send/fetch`。
+- [✓] 2026-03-19 22:59 - 让 `YASA + LLM` 在这一阶段共同补全敏感操作的参数对象绑定。
+- [✓] 2026-03-19 23:05 - 增加对 tool surface、endpoint class、secret class 的参数化映射。
+- [✓] 2026-03-19 23:14 - 把 primitive 表示收敛为 object-centric primitive facts。
+- [✓] 2026-03-19 23:19 - 保证 graph edge 能完整体现 `contains`、`supports`、`resolved_from`、`same_object` 等关系。
+- [✓] 2026-03-19 23:28 - 增加 graph 的可视化导出能力，例如 `.dot` 输出。
+- [✓] 2026-03-19 23:33 - 收紧 `Dynamic_Sink_Injection` 推理条件，减少误报。
+- [✓] 2026-03-19 23:38 - 完善 `Capability_Mismatch` 的 declared vs actual capability 比较逻辑。
+- [✓] 2026-03-20 00:06 - 增强 `Tool_Surface_Expansion` 与 `External_Service_Bootstrap` 规则覆盖。
+- [✓] 2026-03-20 00:15 - 让规则显式利用同一对象或关联对象上的操作链，而不只看 primitive 共现。
+- [✓] 2026-03-20 00:25 - 让 pattern 解释链稳定输出 `evidence fact -> primitive fact -> rule -> pattern -> verdict`。
+- [✓] 2026-03-20 00:31 - 为每个新增/修改的 pattern 补一个 `tests/test_pipeline.py` 端到端样例。
+- [✓] 2026-03-20 00:38 - 对每个新增 primitive fact family 增加 `evidence fact -> primitive fact` 断言测试。
+- [✓] 2026-03-20 00:41 - 对每个新增 malicious pattern 增加 `primitive fact -> pattern -> verdict` 断言测试。
+- [✓] 2026-03-20 00:47 - 确保输出中的 graph、facts、verdict 能直接支持论文里的解释样例。
+- [✓] 2026-03-20 00:53 - 固化代表性案例的中间产物路径，便于 benchmark、artifact 和论文复用。
+- [✗] 2026-03-20 15:06 - Re-read `docs/taxonomy.md`, `PLANS.md`, and `AGENTS.md` before changing code
+- [✗] 2026-03-20 15:06 - Keep the pipeline order fixed as `ingest -> evidence -> primitive -> reasoning -> reports`
+- [✗] 2026-03-20 15:06 - Treat the graph built after object extraction as the main intermediate representation for downstream reasoning
+- [✗] 2026-03-20 15:06 - Update tests together with any taxonomy, schema, primitive, or reasoning change
+- [✗] 2026-03-20 15:06 - Inventory the current evidence subtypes emitted by `skillguard/evidence/semgrep.py`
+- [✓] 2026-03-20 15:09 - Inventory the current evidence subtypes emitted by `skillguard/evidence/llm.py`
+- [✓] 2026-03-20 15:10 - Inventory the current primitive types emitted by `skillguard/primitive/compiler.py`
+- [✓] 2026-03-20 15:11 - Inventory the current pattern names emitted by `skillguard/reasoning/reasoner.py`
+- [✓] 2026-03-20 15:12 - Inventory the taxonomy in `docs/taxonomy.md`
+- [✓] 2026-03-20 15:13 - Inventory all current compiler-side heuristic object extraction and relation construction logic
+- [✓] 2026-03-20 15:13 - Inventory all current YASA outputs used by `skillguard/primitive/compiler.py`
+- [✓] 2026-03-20 15:15 - Inventory all current LLM object-analysis outputs used by `skillguard/primitive/compiler.py`
+- [✓] 2026-03-20 15:16 - Replace legacy evidence family definitions in `skillguard/evidence/schema.py`
+- [✓] 2026-03-20 15:17 - Add explicit code-level definitions for evidence `category` and `subtype`
+- [✓] 2026-03-20 15:18 - Ensure every normalized evidence record carries taxonomy-aligned `category`, `subtype`, `matched_text`, `span`, `producer`, and provenance fields
+- [✓] 2026-03-20 15:19 - Remove schema assumptions that privilege legacy semantic-only subtype names
+- [✓] 2026-03-20 15:20 - Remove evidence-stage requirements for extracted operand fields such as `value`, `path`, `url`, `command`, `env_key`, `config_key`, or inferred attributes
+- [✓] 2026-03-20 15:21 - Make `matched_text` the canonical evidence payload captured from both Semgrep and LLM producers
+- [✓] 2026-03-20 15:22 - Define which legacy subtypes are transitional aliases and which are removed
+- [✓] 2026-03-20 15:23 - Update evidence schema tests to assert taxonomy-aligned fields
+- [✓] 2026-03-20 15:24 - Audit all existing Semgrep rules under `skillguard/rules/semgrep/`
+- [✓] 2026-03-20 15:25 - Group existing Semgrep rules by the new evidence taxonomy categories
+- [✓] 2026-03-20 15:26 - Rewrite Python Semgrep rule metadata to emit taxonomy-aligned category/subtype values
+- [✓] 2026-03-20 15:44 - Rewrite JavaScript Semgrep rule metadata to emit taxonomy-aligned category/subtype values
+- [✓] 2026-03-20 15:45 - Rewrite generic text Semgrep rule metadata to emit taxonomy-aligned category/subtype values
+- [✓] 2026-03-20 15:47 - Update `skillguard/evidence/semgrep.py` to consume the new rule metadata format and emit only taxonomy-aligned sensitive-operation hits plus `matched_text`
+- [✓] 2026-03-20 15:48 - Remove evidence-stage operand extraction and attribute inference from `skillguard/evidence/semgrep.py`
+- [✓] 2026-03-20 15:49 - Update Semgrep-specific tests to assert taxonomy-aligned outputs
+- [✓] 2026-03-20 15:49 - Replace legacy allowed subtype definitions in `skillguard/evidence/llm.py`
+- [✓] 2026-03-20 15:50 - Rewrite the LLM system prompt to follow `docs/taxonomy.md` evidence taxonomy
+- [✓] 2026-03-20 15:51 - Rewrite the artifact prompt to request only sensitive-operation recognition with exact `matched_text`, not operand extraction or semantic conclusions
+- [✓] 2026-03-20 15:52 - Update LLM record validation to enforce taxonomy-aligned `category`, `subtype`, `matched_text`, and `span`
+- [✓] 2026-03-20 15:53 - Remove evidence-stage operand hints and inferred attributes from LLM output handling
+- [✓] 2026-03-20 15:54 - Update LLM evidence tests to assert taxonomy-aligned outputs
+- [✓] 2026-03-20 15:55 - Update evidence fusion keys to be taxonomy-aware
+- [✓] 2026-03-20 15:57 - Ensure evidence fusion preserves producer provenance after category/subtype migration
+- [✓] 2026-03-20 16:14 - Make evidence fusion operate on taxonomy fields plus `matched_text` and `span`, not inferred operand fields
+- [✓] 2026-03-20 16:15 - Add compatibility handling for mixed old/new evidence records during migration
+- [✓] 2026-03-20 16:16 - Add regression tests for cross-producer fusion under the new taxonomy
+- [✓] 2026-03-20 16:17 - Add a mechanism to identify `LLM-only` evidence hits after cross-producer fusion
+- [✓] 2026-03-20 16:18 - Aggregate `LLM-only` hits by `category`, `subtype`, and `artifact_type`
+- [✓] 2026-03-20 16:19 - Define a decision rule for when an `LLM-only` sensitive operation should become a new `Semgrep` rule
+- [✓] 2026-03-20 16:20 - Define a decision rule for when an `LLM-only` code-side object or flow gap should become a new `YASA` rule
+- [✓] 2026-03-20 16:21 - Add an output artifact or report section that summarizes taxonomy gaps discovered from `LLM-only` hits
+- [✓] 2026-03-20 16:22 - Ensure benchmark miss analysis records whether each miss is due to evidence taxonomy coverage, object extraction coverage, or reasoning coverage
+- [✓] 2026-03-20 16:23 - Add tests or fixtures for at least one `LLM-only -> Semgrep rule hardening` path
+- [✓] 2026-03-20 16:47 - Define the post-evidence object-analysis flow as `evidence -> YASA/LLM object extraction -> graph assembly -> reasoning`
+- [✓] 2026-03-20 16:48 - Define the target graph-centered primitive model in code comments or a local design note before editing compiler logic
+- [✓] 2026-03-20 16:49 - Separate operation detections, object bindings, and relation facts into distinct internal representations
+- [✓] 2026-03-20 16:49 - Preserve the current object identity graph machinery only where it supports the new graph-centered design
+- [✓] 2026-03-20 16:50 - Preserve YASA parameter-binding and taint-flow integration points
+- [✓] 2026-03-20 16:51 - Remove or demote semantic-only primitive outputs such as setup or prompt-intent primitives from the core primitive space
+- [✓] 2026-03-20 17:10 - Move all operand extraction, target extraction, and relation construction fully out of evidence extraction
+- [✓] 2026-03-20 17:14 - Remove compiler-side heuristic object recovery as a source of truth
+- [✓] 2026-03-20 17:15 - Make primitive compilation preserve upstream behavior taxonomy instead of inventing a parallel top-level behavior taxonomy
+- [✓] 2026-03-20 17:16 - Refactor YASA outputs so that code-object extraction results are emitted in a stable object-binding schema
+- [✓] 2026-03-20 17:20 - Refactor LLM object-analysis outputs so that all-artifact object extraction results are emitted in the same schema as YASA-compatible bindings where possible
+- [✓] 2026-03-20 17:21 - Ensure YASA is the only code-side structural source of object extraction for code artifacts
+- [✓] 2026-03-20 17:22 - Ensure LLM is the main source of object extraction and cross-artifact relation extraction for all artifacts
+- [✓] 2026-03-20 17:22 - Ensure object extraction outputs can represent concrete command, script, module, endpoint, credential, file, service, policy, process, and remote-node objects
+- [✓] 2026-03-20 17:39 - Ensure object extraction outputs can represent unresolved or unknown objects explicitly instead of relying on compiler heuristics
+- [✓] 2026-03-20 17:43 - Ensure every extracted operation can explain “what exact object is being operated on” when analysis succeeds
+- [✓] 2026-03-20 17:44 - Define the `skill_dependency_graph` schema before rewriting compiler logic
+- [✓] 2026-03-20 17:47 - Define graph node types for at least artifacts, operations, and objects
+- [✓] 2026-03-20 17:48 - Define graph edge types for at least containment, binding, flow, enablement, resolution, and same-object relations
+- [✓] 2026-03-20 17:49 - Refactor `skillguard/primitive/compiler.py` into a graph assembler or graph builder role
+- [✓] 2026-03-20 17:55 - Merge YASA and LLM object-analysis outputs into a unified dependency graph
+- [✓] 2026-03-20 17:56 - Remove compiler-side heuristic object recovery and heuristic cross-artifact linking
+- [✓] 2026-03-20 17:57 - Ensure taint-flow evidence is mapped into graph edges instead of ad hoc primitive params
+- [✓] 2026-03-20 17:58 - Ensure parameter bindings from YASA and LLM are mapped into graph edges instead of ad hoc primitive params
+- [✓] 2026-03-20 18:01 - Add tests for same-object linking across artifacts in the graph
+- [✓] 2026-03-20 18:02 - Add tests for source-to-sink linking across artifacts in the graph
+- [✓] 2026-03-20 18:03 - Add tests for graph assembly provenance preservation
+- [✓] 2026-03-20 18:04 - Remove the legacy overlapping reasoning pattern list from `skillguard/reasoning/reasoner.py`
+- [✓] 2026-03-20 18:04 - Introduce the target reasoning classes from `docs/taxonomy.md`
+- [✓] 2026-03-20 18:05 - Define the exact rule boundary for `Execution_and_Delivery`
+- [✓] 2026-03-20 18:06 - Define the exact rule boundary for `Persistence`
+- [✓] 2026-03-20 18:07 - Define the exact rule boundary for `Privilege_Escalation_and_Identity_Abuse`
+- [✓] 2026-03-20 18:08 - Define the exact rule boundary for `Injection_and_Covert_Residency`
+- [✓] 2026-03-20 18:09 - Define the exact rule boundary for `Information_Theft`
+- [✓] 2026-03-20 18:10 - Define the exact rule boundary for `Command_and_Control`
+- [✓] 2026-03-20 18:11 - Define the exact rule boundary for `Lateral_Movement`
+- [✓] 2026-03-20 18:12 - Define the exact rule boundary for `Defense_Evasion_and_Anti_Forensics`
+- [✓] 2026-03-20 18:13 - Define the exact rule boundary for `Destruction_and_Ransomware`
+- [✓] 2026-03-20 18:14 - Make reasoning consume the dependency graph as the main intermediate representation
+- [✓] 2026-03-20 18:15 - Implement graph-based rules for `Execution_and_Delivery`
+- [✓] 2026-03-20 18:16 - Implement graph-based rules for `Persistence`
+- [✓] 2026-03-20 18:17 - Implement graph-based rules for `Privilege_Escalation_and_Identity_Abuse`
+- [✓] 2026-03-20 18:17 - Implement graph-based rules for `Injection_and_Covert_Residency`
+- [✓] 2026-03-20 18:19 - Implement graph-based rules for `Information_Theft`
+- [✓] 2026-03-20 18:19 - Implement graph-based rules for `Command_and_Control`
+- [✓] 2026-03-20 18:20 - Implement graph-based rules for `Lateral_Movement`
+- [✓] 2026-03-20 18:21 - Implement graph-based rules for `Defense_Evasion_and_Anti_Forensics`
+- [✓] 2026-03-20 18:22 - Implement graph-based rules for `Destruction_and_Ransomware`
+- [✓] 2026-03-20 18:23 - Remove rules that directly depend on legacy setup-language or prompt-semantic pattern names
+- [✓] 2026-03-20 18:24 - Update heuristic reasoning mode to align with the new graph-centered primitive and reasoning taxonomy
+- [✓] 2026-03-20 18:24 - Audit all current exported relations in `skillguard/reasoning/souffle.py`
+- [✓] 2026-03-20 18:25 - Add or rename exported relations to reflect the new graph-centered primitive and relation model
+- [✓] 2026-03-20 18:32 - Ensure object identity is exported as first-class fact data
+- [✓] 2026-03-20 18:34 - Ensure source-to-sink, enablement, and resolution relations are exported as first-class fact data
+- [✓] 2026-03-20 18:35 - Export dependency-graph node and edge relations in a stable format
+- [✓] 2026-03-20 18:36 - Update `skillguard/rules/skillguard.dl` to align with the new exported fact layout
+- [✓] 2026-03-20 18:38 - Add tests that assert the expected exported fact relations for representative cases
+- [✓] 2026-03-20 18:39 - Replace legacy pattern names in `skillguard/reasoning/verdict.py`
+- [✓] 2026-03-20 18:39 - Rework severity grouping for the new reasoning taxonomy
+- [✓] 2026-03-20 18:40 - Update `skillguard/report.py` to summarize final security consequence classes
+- [✓] 2026-03-20 18:41 - Update graph payload generation to reflect the new reasoning taxonomy
+- [✓] 2026-03-20 18:42 - Update proof output to describe object-linked primitive chains instead of legacy semantic labels
+- [✓] 2026-03-20 18:44 - Update human-readable report sections to use the new taxonomy terminology
+- [✓] 2026-03-20 18:45 - Update evidence schema tests for the new evidence taxonomy
+- [✓] 2026-03-20 18:45 - Update extractor tests for the new primitive outputs
+- [✓] 2026-03-20 18:46 - Update object identity tests for the new primitive naming and relation model
+- [✓] 2026-03-20 18:47 - Update reasoning tests for the new final consequence taxonomy
+- [✓] 2026-03-20 18:48 - Add regression tests for representative evidence categories from `docs/taxonomy.md`
+- [✓] 2026-03-20 18:49 - Add regression tests for representative reasoning classes from `docs/taxonomy.md`
+- [✓] 2026-03-20 18:50 - Remove or rewrite tests that assert deprecated legacy pattern names
+- [✓] 2026-03-20 18:50 - Run targeted syntax checks after each major code stage
+- [✓] 2026-03-20 18:52 - Run the malicious benchmark gate after the evidence, primitive, and reasoning migration stabilizes
+- [✓] 2026-03-20 18:55 - Record major false negatives introduced by the migration and map them to evidence, primitive, or reasoning gaps
+- [✓] 2026-03-20 18:56 - Verify `docs/taxonomy.md`, `PLANS.md`, and `AGENTS.md` still match the implemented taxonomy
+- [✓] 2026-03-20 18:57 - Verify no new code path introduces a parallel top-level behavior taxonomy outside the documented one
+- [✓] 2026-03-20 18:58 - Verify reports, facts, and verdict outputs remain reproducible and machine-readable
+- [✓] 2026-03-20 19:02 - Summarize the migration impact, changed files, and benchmark outcomes in the final review note

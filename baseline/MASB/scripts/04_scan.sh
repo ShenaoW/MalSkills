@@ -16,17 +16,24 @@ log_info "=========================================="
 
 cd "$PROJECT_ROOT"
 
-# Check for ZIP files
+# Check inputs
 zip_count=$(find "$WORKSPACE_DIR/zip" -name "*.zip" 2>/dev/null | wc -l)
-if [ "$zip_count" -eq 0 ]; then
-    log_error "No ZIP files found in $WORKSPACE_DIR/zip"
-    log_error "Please run step 3 (download) first"
+repo_count=$(find "$WORKSPACE_DIR/repo" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | wc -l)
+if [ "$zip_count" -eq 0 ] && [ "$repo_count" -eq 0 ]; then
+    log_error "No ZIP files found in $WORKSPACE_DIR/zip and no unpacked repos found in $WORKSPACE_DIR/repo"
+    log_error "Please run step 3 (download) first or place unpacked samples in $WORKSPACE_DIR/repo"
     exit 1
 fi
 
-log_info "Found $zip_count ZIP files"
+if [ "$zip_count" -gt 0 ]; then
+    log_info "Found $zip_count ZIP files"
+else
+    log_info "Found $repo_count unpacked repositories"
+fi
 
 # Run scanner
+SCAN_LIMIT_VALUE="${SCAN_LIMIT:-None}"
+
 python3 -c "
 import sys
 sys.path.insert(0, '.')
@@ -36,14 +43,14 @@ from pathlib import Path
 config = Config()
 scanner = RepoSecurityScanner(config)
 
-# Get all ZIP files
 zip_files = list(Path('$WORKSPACE_DIR/zip').glob('*.zip'))
-zip_files.sort(key=lambda x: int(''.join(filter(str.isdigit, x.stem))) if ''.join(filter(str.isdigit, x.stem)) else 0)
-
-print(f'ZIPS to scan: {len(zip_files)}')
+repo_dirs = [p for p in Path('$WORKSPACE_DIR/repo').iterdir() if p.is_dir()] if Path('$WORKSPACE_DIR/repo').exists() else []
+print(f'ZIP inputs: {len(zip_files)}')
+print(f'Repo inputs: {len(repo_dirs)}')
 
 # Scan
-result = scanner.scan_all(limit=$SCAN_LIMIT)
+limit = $SCAN_LIMIT_VALUE
+result = scanner.scan_all(limit=limit)
 
 print(f\"\\nScan Results:\")
 print(f\"Total: {result['total']}\")

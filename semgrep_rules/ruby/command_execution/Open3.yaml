@@ -1,0 +1,55 @@
+rules:
+- id: no-Open3.capture2
+  languages:
+  - ruby
+  message: Avoid using Open3.capture2(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Open3.capture2()
+    category: Command Execution
+  pattern-either:
+  - pattern: Open3.capture2(...)
+  - pattern: $VAR = Open3.capture2
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-Open3.capture3
+  languages:
+  - ruby
+  message: Avoid using Open3.capture3(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Open3.capture3()
+    category: Command Execution
+  pattern-either:
+  - pattern: Open3.capture3(...)
+  - pattern: $VAR = Open3.capture3
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-Open3.pipeline
+  languages:
+  - ruby
+  message: Avoid using Open3.pipeline(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Open3.pipeline()
+    category: Command Execution
+  pattern-either:
+  - pattern: Open3.pipeline(...)
+  - pattern: $VAR = Open3.pipeline
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-Open3.popen3
+  languages:
+  - ruby
+  message: Avoid using Open3.popen3(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Open3.popen3()
+    category: Command Execution
+  pattern-either:
+  - pattern: Open3.popen3(...)
+  - pattern: $VAR = Open3.popen3
+  - pattern: popen3(...)
+  - pattern: $VAR = popen3
+  severity: WARNING
+  tags:
+  - Command Execution

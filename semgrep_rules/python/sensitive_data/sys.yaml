@@ -1,0 +1,27 @@
+rules:
+- id: no-sys-exit
+  languages:
+  - python
+  message: Avoid using sys.exit(), as it can lead to potential issues with sensitive data.
+  metadata:
+    api: sys.exit()
+    category: Sensitive Data
+  pattern-either:
+  - pattern: sys.exit(...)
+  - pattern: $VAR = sys.exit
+  severity: WARNING
+  tags:
+  - Sensitive Data
+- id: no-sys-path
+  languages:
+  - python
+  message: Avoid using sys.path(), as it can lead to potential issues with sensitive data.
+  metadata:
+    api: sys.path()
+    category: Sensitive Data
+  pattern-either:
+  - pattern: sys.path(...)
+  - pattern: $VAR = sys.path
+  severity: WARNING
+  tags:
+  - Sensitive Data

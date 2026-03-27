@@ -1,0 +1,246 @@
+rules:
+- id: no-net-BlockList
+  languages:
+  - javascript
+  message: Avoid using net.BlockList(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.BlockList()
+    category: Network Access
+  pattern-either:
+  - pattern: net.BlockList(...)
+  - pattern: $VAR = net.BlockList
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-net-Server
+  languages:
+  - javascript
+  message: Avoid using net.Server(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.Server()
+    category: Network Access
+  pattern-either:
+  - pattern: net.Server(...)
+  - pattern: $VAR = net.Server
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-net-Socket
+  languages:
+  - javascript
+  message: Avoid using net.Socket(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.Socket()
+    category: Network Access
+  pattern-either:
+  - pattern: net.Socket(...)
+  - pattern: $VAR = net.Socket
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-net-SocketAddress
+  languages:
+  - javascript
+  message: Avoid using net.SocketAddress(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.SocketAddress()
+    category: Network Access
+  pattern-either:
+  - pattern: net.SocketAddress(...)
+  - pattern: $VAR = net.SocketAddress
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-net-Stream
+  languages:
+  - javascript
+  message: Avoid using net.Stream(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.Stream()
+    category: Network Access
+  pattern-either:
+  - pattern: net.Stream(...)
+  - pattern: $VAR = net.Stream
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-net-_createServerHandle
+  languages:
+  - javascript
+  message: Avoid using net._createServerHandle(), as it can lead to potential issues with network access.
+  metadata:
+    api: net._createServerHandle()
+    category: Network Access
+  pattern-either:
+  - pattern: net._createServerHandle(...)
+  - pattern: $VAR = net._createServerHandle
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-net-_normalizeArgs
+  languages:
+  - javascript
+  message: Avoid using net._normalizeArgs(), as it can lead to potential issues with network access.
+  metadata:
+    api: net._normalizeArgs()
+    category: Network Access
+  pattern-either:
+  - pattern: net._normalizeArgs(...)
+  - pattern: $VAR = net._normalizeArgs
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-net-_setSimultaneousAccepts
+  languages:
+  - javascript
+  message: Avoid using net._setSimultaneousAccepts(), as it can lead to potential issues with network access.
+  metadata:
+    api: net._setSimultaneousAccepts()
+    category: Network Access
+  pattern-either:
+  - pattern: net._setSimultaneousAccepts(...)
+  - pattern: $VAR = net._setSimultaneousAccepts
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-net-connect
+  languages:
+  - javascript
+  message: Avoid using net.connect(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.connect()
+    category: Network Access
+  pattern-either:
+  - pattern: net.connect(...)
+  - pattern: $VAR = net.connect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-net-createConnection
+  languages:
+  - javascript
+  message: Avoid using net.createConnection(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.createConnection()
+    category: Network Access
+  pattern-either:
+  - pattern: net.createConnection(...)
+  - pattern: $VAR = net.createConnection
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-net-createServer
+  languages:
+  - javascript
+  message: Avoid using net.createServer(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.createServer()
+    category: Network Access
+  pattern-either:
+  - pattern: net.createServer(...)
+  - pattern: $VAR = net.createServer
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-net-getDefaultAutoSelectFamily
+  languages:
+  - javascript
+  message: Avoid using net.getDefaultAutoSelectFamily(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.getDefaultAutoSelectFamily()
+    category: Network Access
+  pattern-either:
+  - pattern: net.getDefaultAutoSelectFamily(...)
+  - pattern: $VAR = net.getDefaultAutoSelectFamily
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-net-getDefaultAutoSelectFamilyAttemptTimeout
+  languages:
+  - javascript
+  message: Avoid using net.getDefaultAutoSelectFamilyAttemptTimeout(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.getDefaultAutoSelectFamilyAttemptTimeout()
+    category: Network Access
+  pattern-either:
+  - pattern: net.getDefaultAutoSelectFamilyAttemptTimeout(...)
+  - pattern: $VAR = net.getDefaultAutoSelectFamilyAttemptTimeout
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-net-isIP
+  languages:
+  - javascript
+  message: Avoid using net.isIP(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.isIP()
+    category: Network Access
+  pattern-either:
+  - pattern: net.isIP(...)
+  - pattern: $VAR = net.isIP
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-net-isIPv4
+  languages:
+  - javascript
+  message: Avoid using net.isIPv4(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.isIPv4()
+    category: Network Access
+  pattern-either:
+  - pattern: net.isIPv4(...)
+  - pattern: $VAR = net.isIPv4
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-net-isIPv6
+  languages:
+  - javascript
+  message: Avoid using net.isIPv6(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.isIPv6()
+    category: Network Access
+  pattern-either:
+  - pattern: net.isIPv6(...)
+  - pattern: $VAR = net.isIPv6
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-net-setDefaultAutoSelectFamily
+  languages:
+  - javascript
+  message: Avoid using net.setDefaultAutoSelectFamily(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.setDefaultAutoSelectFamily()
+    category: Network Access
+  pattern-either:
+  - pattern: net.setDefaultAutoSelectFamily(...)
+  - pattern: $VAR = net.setDefaultAutoSelectFamily
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-net-setDefaultAutoSelectFamilyAttemptTimeout
+  languages:
+  - javascript
+  message: Avoid using net.setDefaultAutoSelectFamilyAttemptTimeout(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.setDefaultAutoSelectFamilyAttemptTimeout()
+    category: Network Access
+  pattern-either:
+  - pattern: net.setDefaultAutoSelectFamilyAttemptTimeout(...)
+  - pattern: $VAR = net.setDefaultAutoSelectFamilyAttemptTimeout
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-require-net
+  languages:
+  - javascript
+  message: Avoid using require('net'), as it can lead to potential issues with network access.
+  metadata:
+    api: require('net')
+    category: Network Access
+  pattern: require('net')
+  severity: WARNING
+  tags:
+  - Network Access

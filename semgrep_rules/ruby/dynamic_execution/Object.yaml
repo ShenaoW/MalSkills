@@ -1,0 +1,53 @@
+rules:
+- id: no-Object.const_get
+  languages:
+  - ruby
+  message: Avoid using Object.const_get(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: Object.const_get()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: Object.const_get(...)
+  - pattern: $VAR = Object.const_get
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: no-Object.const_set
+  languages:
+  - ruby
+  message: Avoid using Object.const_set(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: Object.const_set()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: Object.const_set(...)
+  - pattern: $VAR = Object.const_set
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: no-Object.public_send
+  languages:
+  - ruby
+  message: Avoid using Object.public_send(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: Object.public_send()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: Object.public_send(...)
+  - pattern: $VAR = Object.public_send
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: no-Object.send
+  languages:
+  - ruby
+  message: Avoid using Object.send(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: Object.send()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: Object.send(...)
+  - pattern: $VAR = Object.send
+  severity: WARNING
+  tags:
+  - Dynamic Execution

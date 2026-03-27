@@ -1,0 +1,92 @@
+rules:
+- id: no-std-bind
+  languages:
+  - cpp
+  message: Avoid using std::bind(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: std::bind()
+    category: Obfuscation
+  pattern-either:
+  - pattern: std::bind(...)
+  - pattern: $VAR = std::bind
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-std-function
+  languages:
+  - cpp
+  message: Avoid using std::function(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: std::function()
+    category: Obfuscation
+  pattern-either:
+  - pattern: std::function(...)
+  - pattern: $VAR = std::function
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-std-mem_fn
+  languages:
+  - cpp
+  message: Avoid using std::mem_fn(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: std::mem_fn()
+    category: Obfuscation
+  pattern-either:
+  - pattern: std::mem_fn(...)
+  - pattern: $VAR = std::mem_fn
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-std-rand
+  languages:
+  - cpp
+  message: Avoid using std::rand(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: std::rand()
+    category: Obfuscation
+  pattern-either:
+  - pattern: std::rand(...)
+  - pattern: $VAR = std::rand
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-std-random_device
+  languages:
+  - cpp
+  message: Avoid using std::random_device(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: std::random_device()
+    category: Obfuscation
+  pattern-either:
+  - pattern: std::random_device(...)
+  - pattern: $VAR = std::random_device
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-std-uniform_int_distribution
+  languages:
+  - cpp
+  message: Avoid using std::uniform_int_distribution(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: std::uniform_int_distribution()
+    category: Obfuscation
+  pattern-either:
+  - pattern: std::uniform_int_distribution(...)
+  - pattern: $VAR = std::uniform_int_distribution
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-std-uniform_real_distribution
+  languages:
+  - cpp
+  message: Avoid using std::uniform_real_distribution(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: std::uniform_real_distribution()
+    category: Obfuscation
+  pattern-either:
+  - pattern: std::uniform_real_distribution(...)
+  - pattern: $VAR = std::uniform_real_distribution
+  severity: WARNING
+  tags:
+  - Obfuscation

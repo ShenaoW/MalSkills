@@ -1,0 +1,41 @@
+rules:
+- id: no-groovy-lang-GroovyShell-evaluate
+  languages:
+  - java
+  message: Avoid using groovy.lang.GroovyShell.evaluate(), as it can lead to potential issues with command execution.
+  metadata:
+    api: groovy.lang.GroovyShell.evaluate()
+    category: Command Execution
+  pattern-either:
+  - pattern: new groovy.lang.GroovyShell.evaluate(...)
+  - pattern: groovy.lang.GroovyShell.evaluate(...)
+  - pattern: $VAR = groovy.lang.GroovyShell.evaluate
+  - pattern: new lang.GroovyShell.evaluate(...)
+  - pattern: lang.GroovyShell.evaluate(...)
+  - pattern: $VAR = lang.GroovyShell.evaluate
+  - pattern: new GroovyShell.evaluate(...)
+  - pattern: GroovyShell.evaluate(...)
+  - pattern: $VAR = GroovyShell.evaluate
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-groovy-lang-GroovyShell-parse
+  languages:
+  - java
+  message: Avoid using groovy.lang.GroovyShell.parse(), as it can lead to potential issues with command execution.
+  metadata:
+    api: groovy.lang.GroovyShell.parse()
+    category: Command Execution
+  pattern-either:
+  - pattern: new groovy.lang.GroovyShell.parse(...)
+  - pattern: groovy.lang.GroovyShell.parse(...)
+  - pattern: $VAR = groovy.lang.GroovyShell.parse
+  - pattern: new lang.GroovyShell.parse(...)
+  - pattern: lang.GroovyShell.parse(...)
+  - pattern: $VAR = lang.GroovyShell.parse
+  - pattern: new GroovyShell.parse(...)
+  - pattern: GroovyShell.parse(...)
+  - pattern: $VAR = GroovyShell.parse
+  severity: WARNING
+  tags:
+  - Command Execution

@@ -1,0 +1,174 @@
+rules:
+- id: no-http.Client.Do
+  languages:
+  - go
+  message: Avoid using http.Client.Do(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.Client.Do()
+    category: Network Access
+  pattern-either:
+  - pattern: http.Client.Do(...)
+  - pattern: $VAR = http.Client.Do
+  - pattern: Client.Do(...)
+  - pattern: $VAR = Client.Do
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http.DefaultClient.Do
+  languages:
+  - go
+  message: Avoid using http.DefaultClient.Do(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.DefaultClient.Do()
+    category: Network Access
+  pattern-either:
+  - pattern: http.DefaultClient.Do(...)
+  - pattern: $VAR = http.DefaultClient.Do
+  - pattern: DefaultClient.Do(...)
+  - pattern: $VAR = DefaultClient.Do
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http.Get
+  languages:
+  - go
+  message: Avoid using http.Get(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.Get()
+    category: Network Access
+  pattern-either:
+  - pattern: http.Get(...)
+  - pattern: $VAR = http.Get
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http.Handle
+  languages:
+  - go
+  message: Avoid using http.Handle(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.Handle()
+    category: Network Access
+  pattern-either:
+  - pattern: http.Handle(...)
+  - pattern: $VAR = http.Handle
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http.HandleFunc
+  languages:
+  - go
+  message: Avoid using http.HandleFunc(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.HandleFunc()
+    category: Network Access
+  pattern-either:
+  - pattern: http.HandleFunc(...)
+  - pattern: $VAR = http.HandleFunc
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http.ListenAndServe
+  languages:
+  - go
+  message: Avoid using http.ListenAndServe(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.ListenAndServe()
+    category: Network Access
+  pattern-either:
+  - pattern: http.ListenAndServe(...)
+  - pattern: $VAR = http.ListenAndServe
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http.ListenAndServeTLS
+  languages:
+  - go
+  message: Avoid using http.ListenAndServeTLS(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.ListenAndServeTLS()
+    category: Network Access
+  pattern-either:
+  - pattern: http.ListenAndServeTLS(...)
+  - pattern: $VAR = http.ListenAndServeTLS
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http.NewRequest
+  languages:
+  - go
+  message: Avoid using http.NewRequest(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.NewRequest()
+    category: Network Access
+  pattern-either:
+  - pattern: http.NewRequest(...)
+  - pattern: $VAR = http.NewRequest
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http.NewRequestWithContext
+  languages:
+  - go
+  message: Avoid using http.NewRequestWithContext(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.NewRequestWithContext()
+    category: Network Access
+  pattern-either:
+  - pattern: http.NewRequestWithContext(...)
+  - pattern: $VAR = http.NewRequestWithContext
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http.Post
+  languages:
+  - go
+  message: Avoid using http.Post(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.Post()
+    category: Network Access
+  pattern-either:
+  - pattern: http.Post(...)
+  - pattern: $VAR = http.Post
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http.PostForm
+  languages:
+  - go
+  message: Avoid using http.PostForm(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.PostForm()
+    category: Network Access
+  pattern-either:
+  - pattern: http.PostForm(...)
+  - pattern: $VAR = http.PostForm
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http.Serve
+  languages:
+  - go
+  message: Avoid using http.Serve(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.Serve()
+    category: Network Access
+  pattern-either:
+  - pattern: http.Serve(...)
+  - pattern: $VAR = http.Serve
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http.ServeTLS
+  languages:
+  - go
+  message: Avoid using http.ServeTLS(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.ServeTLS()
+    category: Network Access
+  pattern-either:
+  - pattern: http.ServeTLS(...)
+  - pattern: $VAR = http.ServeTLS
+  severity: WARNING
+  tags:
+  - Network Access

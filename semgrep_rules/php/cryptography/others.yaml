@@ -1,0 +1,481 @@
+rules:
+- id: no-crypt
+  languages:
+  - php
+  message: Avoid using crypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypt()
+    category: Cryptography
+  pattern-either:
+  - pattern: crypt(...)
+  - pattern: $VAR = crypt(...)
+  - pattern: $VAR = "crypt"
+  - pattern: $VAR = 'crypt'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-hash_pbkdf2
+  languages:
+  - php
+  message: Avoid using hash_pbkdf2(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: hash_pbkdf2()
+    category: Cryptography
+  pattern-either:
+  - pattern: hash_pbkdf2(...)
+  - pattern: $VAR = hash_pbkdf2(...)
+  - pattern: $VAR = "hash_pbkdf2"
+  - pattern: $VAR = 'hash_pbkdf2'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-mcrypt_decrypt
+  languages:
+  - php
+  message: Avoid using mcrypt_decrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: mcrypt_decrypt()
+    category: Cryptography
+  pattern-either:
+  - pattern: mcrypt_decrypt(...)
+  - pattern: $VAR = mcrypt_decrypt(...)
+  - pattern: $VAR = "mcrypt_decrypt"
+  - pattern: $VAR = 'mcrypt_decrypt'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-mcrypt_encrypt
+  languages:
+  - php
+  message: Avoid using mcrypt_encrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: mcrypt_encrypt()
+    category: Cryptography
+  pattern-either:
+  - pattern: mcrypt_encrypt(...)
+  - pattern: $VAR = mcrypt_encrypt(...)
+  - pattern: $VAR = "mcrypt_encrypt"
+  - pattern: $VAR = 'mcrypt_encrypt'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-md5
+  languages:
+  - php
+  message: Avoid using md5(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: md5()
+    category: Cryptography
+  pattern-either:
+  - pattern: md5(...)
+  - pattern: $VAR = md5(...)
+  - pattern: $VAR = "md5"
+  - pattern: $VAR = 'md5'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-openssl_csr_new
+  languages:
+  - php
+  message: Avoid using openssl_csr_new(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: openssl_csr_new()
+    category: Cryptography
+  pattern-either:
+  - pattern: openssl_csr_new(...)
+  - pattern: $VAR = openssl_csr_new(...)
+  - pattern: $VAR = "openssl_csr_new"
+  - pattern: $VAR = 'openssl_csr_new'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-openssl_csr_sign
+  languages:
+  - php
+  message: Avoid using openssl_csr_sign(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: openssl_csr_sign()
+    category: Cryptography
+  pattern-either:
+  - pattern: openssl_csr_sign(...)
+  - pattern: $VAR = openssl_csr_sign(...)
+  - pattern: $VAR = "openssl_csr_sign"
+  - pattern: $VAR = 'openssl_csr_sign'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-openssl_decrypt
+  languages:
+  - php
+  message: Avoid using openssl_decrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: openssl_decrypt()
+    category: Cryptography
+  pattern-either:
+  - pattern: openssl_decrypt(...)
+  - pattern: $VAR = openssl_decrypt(...)
+  - pattern: $VAR = "openssl_decrypt"
+  - pattern: $VAR = 'openssl_decrypt'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-openssl_encrypt
+  languages:
+  - php
+  message: Avoid using openssl_encrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: openssl_encrypt()
+    category: Cryptography
+  pattern-either:
+  - pattern: openssl_encrypt(...)
+  - pattern: $VAR = openssl_encrypt(...)
+  - pattern: $VAR = "openssl_encrypt"
+  - pattern: $VAR = 'openssl_encrypt'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-openssl_pkey_export
+  languages:
+  - php
+  message: Avoid using openssl_pkey_export(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: openssl_pkey_export()
+    category: Cryptography
+  pattern-either:
+  - pattern: openssl_pkey_export(...)
+  - pattern: $VAR = openssl_pkey_export(...)
+  - pattern: $VAR = "openssl_pkey_export"
+  - pattern: $VAR = 'openssl_pkey_export'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-openssl_pkey_export_to_file
+  languages:
+  - php
+  message: Avoid using openssl_pkey_export_to_file(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: openssl_pkey_export_to_file()
+    category: Cryptography
+  pattern-either:
+  - pattern: openssl_pkey_export_to_file(...)
+  - pattern: $VAR = openssl_pkey_export_to_file(...)
+  - pattern: $VAR = "openssl_pkey_export_to_file"
+  - pattern: $VAR = 'openssl_pkey_export_to_file'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-openssl_pkey_free
+  languages:
+  - php
+  message: Avoid using openssl_pkey_free(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: openssl_pkey_free()
+    category: Cryptography
+  pattern-either:
+  - pattern: openssl_pkey_free(...)
+  - pattern: $VAR = openssl_pkey_free(...)
+  - pattern: $VAR = "openssl_pkey_free"
+  - pattern: $VAR = 'openssl_pkey_free'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-openssl_pkey_get_private
+  languages:
+  - php
+  message: Avoid using openssl_pkey_get_private(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: openssl_pkey_get_private()
+    category: Cryptography
+  pattern-either:
+  - pattern: openssl_pkey_get_private(...)
+  - pattern: $VAR = openssl_pkey_get_private(...)
+  - pattern: $VAR = "openssl_pkey_get_private"
+  - pattern: $VAR = 'openssl_pkey_get_private'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-openssl_pkey_get_public
+  languages:
+  - php
+  message: Avoid using openssl_pkey_get_public(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: openssl_pkey_get_public()
+    category: Cryptography
+  pattern-either:
+  - pattern: openssl_pkey_get_public(...)
+  - pattern: $VAR = openssl_pkey_get_public(...)
+  - pattern: $VAR = "openssl_pkey_get_public"
+  - pattern: $VAR = 'openssl_pkey_get_public'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-openssl_pkey_new
+  languages:
+  - php
+  message: Avoid using openssl_pkey_new(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: openssl_pkey_new()
+    category: Cryptography
+  pattern-either:
+  - pattern: openssl_pkey_new(...)
+  - pattern: $VAR = openssl_pkey_new(...)
+  - pattern: $VAR = "openssl_pkey_new"
+  - pattern: $VAR = 'openssl_pkey_new'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-openssl_private_decrypt
+  languages:
+  - php
+  message: Avoid using openssl_private_decrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: openssl_private_decrypt()
+    category: Cryptography
+  pattern-either:
+  - pattern: openssl_private_decrypt(...)
+  - pattern: $VAR = openssl_private_decrypt(...)
+  - pattern: $VAR = "openssl_private_decrypt"
+  - pattern: $VAR = 'openssl_private_decrypt'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-openssl_private_encrypt
+  languages:
+  - php
+  message: Avoid using openssl_private_encrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: openssl_private_encrypt()
+    category: Cryptography
+  pattern-either:
+  - pattern: openssl_private_encrypt(...)
+  - pattern: $VAR = openssl_private_encrypt(...)
+  - pattern: $VAR = "openssl_private_encrypt"
+  - pattern: $VAR = 'openssl_private_encrypt'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-openssl_public_decrypt
+  languages:
+  - php
+  message: Avoid using openssl_public_decrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: openssl_public_decrypt()
+    category: Cryptography
+  pattern-either:
+  - pattern: openssl_public_decrypt(...)
+  - pattern: $VAR = openssl_public_decrypt(...)
+  - pattern: $VAR = "openssl_public_decrypt"
+  - pattern: $VAR = 'openssl_public_decrypt'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-openssl_public_encrypt
+  languages:
+  - php
+  message: Avoid using openssl_public_encrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: openssl_public_encrypt()
+    category: Cryptography
+  pattern-either:
+  - pattern: openssl_public_encrypt(...)
+  - pattern: $VAR = openssl_public_encrypt(...)
+  - pattern: $VAR = "openssl_public_encrypt"
+  - pattern: $VAR = 'openssl_public_encrypt'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-openssl_sign
+  languages:
+  - php
+  message: Avoid using openssl_sign(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: openssl_sign()
+    category: Cryptography
+  pattern-either:
+  - pattern: openssl_sign(...)
+  - pattern: $VAR = openssl_sign(...)
+  - pattern: $VAR = "openssl_sign"
+  - pattern: $VAR = 'openssl_sign'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-openssl_verify
+  languages:
+  - php
+  message: Avoid using openssl_verify(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: openssl_verify()
+    category: Cryptography
+  pattern-either:
+  - pattern: openssl_verify(...)
+  - pattern: $VAR = openssl_verify(...)
+  - pattern: $VAR = "openssl_verify"
+  - pattern: $VAR = 'openssl_verify'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-openssl_x509_export
+  languages:
+  - php
+  message: Avoid using openssl_x509_export(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: openssl_x509_export()
+    category: Cryptography
+  pattern-either:
+  - pattern: openssl_x509_export(...)
+  - pattern: $VAR = openssl_x509_export(...)
+  - pattern: $VAR = "openssl_x509_export"
+  - pattern: $VAR = 'openssl_x509_export'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-openssl_x509_export_to_file
+  languages:
+  - php
+  message: Avoid using openssl_x509_export_to_file(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: openssl_x509_export_to_file()
+    category: Cryptography
+  pattern-either:
+  - pattern: openssl_x509_export_to_file(...)
+  - pattern: $VAR = openssl_x509_export_to_file(...)
+  - pattern: $VAR = "openssl_x509_export_to_file"
+  - pattern: $VAR = 'openssl_x509_export_to_file'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-openssl_x509_new
+  languages:
+  - php
+  message: Avoid using openssl_x509_new(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: openssl_x509_new()
+    category: Cryptography
+  pattern-either:
+  - pattern: openssl_x509_new(...)
+  - pattern: $VAR = openssl_x509_new(...)
+  - pattern: $VAR = "openssl_x509_new"
+  - pattern: $VAR = 'openssl_x509_new'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-password_hash
+  languages:
+  - php
+  message: Avoid using password_hash(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: password_hash()
+    category: Cryptography
+  pattern-either:
+  - pattern: password_hash(...)
+  - pattern: $VAR = password_hash(...)
+  - pattern: $VAR = "password_hash"
+  - pattern: $VAR = 'password_hash'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-password_verify
+  languages:
+  - php
+  message: Avoid using password_verify(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: password_verify()
+    category: Cryptography
+  pattern-either:
+  - pattern: password_verify(...)
+  - pattern: $VAR = password_verify(...)
+  - pattern: $VAR = "password_verify"
+  - pattern: $VAR = 'password_verify'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-sha1
+  languages:
+  - php
+  message: Avoid using sha1(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: sha1()
+    category: Cryptography
+  pattern-either:
+  - pattern: sha1(...)
+  - pattern: $VAR = sha1(...)
+  - pattern: $VAR = "sha1"
+  - pattern: $VAR = 'sha1'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-sodium_crypto_pwhash
+  languages:
+  - php
+  message: Avoid using sodium_crypto_pwhash(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: sodium_crypto_pwhash()
+    category: Cryptography
+  pattern-either:
+  - pattern: sodium_crypto_pwhash(...)
+  - pattern: $VAR = sodium_crypto_pwhash(...)
+  - pattern: $VAR = "sodium_crypto_pwhash"
+  - pattern: $VAR = 'sodium_crypto_pwhash'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-sodium_crypto_pwhash_str
+  languages:
+  - php
+  message: Avoid using sodium_crypto_pwhash_str(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: sodium_crypto_pwhash_str()
+    category: Cryptography
+  pattern-either:
+  - pattern: sodium_crypto_pwhash_str(...)
+  - pattern: $VAR = sodium_crypto_pwhash_str(...)
+  - pattern: $VAR = "sodium_crypto_pwhash_str"
+  - pattern: $VAR = 'sodium_crypto_pwhash_str'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-sodium_crypto_pwhash_str_verify
+  languages:
+  - php
+  message: Avoid using sodium_crypto_pwhash_str_verify(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: sodium_crypto_pwhash_str_verify()
+    category: Cryptography
+  pattern-either:
+  - pattern: sodium_crypto_pwhash_str_verify(...)
+  - pattern: $VAR = sodium_crypto_pwhash_str_verify(...)
+  - pattern: $VAR = "sodium_crypto_pwhash_str_verify"
+  - pattern: $VAR = 'sodium_crypto_pwhash_str_verify'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-sodium_crypto_secretbox
+  languages:
+  - php
+  message: Avoid using sodium_crypto_secretbox(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: sodium_crypto_secretbox()
+    category: Cryptography
+  pattern-either:
+  - pattern: sodium_crypto_secretbox(...)
+  - pattern: $VAR = sodium_crypto_secretbox(...)
+  - pattern: $VAR = "sodium_crypto_secretbox"
+  - pattern: $VAR = 'sodium_crypto_secretbox'
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-sodium_crypto_secretbox_open
+  languages:
+  - php
+  message: Avoid using sodium_crypto_secretbox_open(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: sodium_crypto_secretbox_open()
+    category: Cryptography
+  pattern-either:
+  - pattern: sodium_crypto_secretbox_open(...)
+  - pattern: $VAR = sodium_crypto_secretbox_open(...)
+  - pattern: $VAR = "sodium_crypto_secretbox_open"
+  - pattern: $VAR = 'sodium_crypto_secretbox_open'
+  severity: WARNING
+  tags:
+  - Cryptography

@@ -1,0 +1,71 @@
+\section{Background}
+\subsection{Skills in the Agentic Supply Chain}
+As LLM-based agents become increasingly complex, their architectures are also becoming more modular. As shown in ~\autoref{fig:skill-architecture}, a typical agent runtime comprises the LLM provider, an agent framework that manages execution, and orchestration logic, such as multi-agent workflows. Within this runtime, agent capabilities are not implemented solely by the core framework. Instead, they are often extended through external components, such as tool calling via Model Context Protocol~(MCP)~\cite{mcp-intro} or agent collaboration via Agent2Agent~(A2A) protocol~\cite{a2a-protocol}.
+
+Recently, Anthropic introduced a more lightweight and flexible mechanism, called Agent Skills~\cite{agentskills-overview}, to extend LLM agents with reusable capabilities. The skill mechanism allows developers to extend an agent with task-specific functionality without modifying the agent core. Since then, this paradigm has been adopted by a growing number of agent frameworks and platforms, including OpenAI~\cite{openai-codex-skills}, LangChain~\cite{langchain-deepagents-skills}, and OpenClaw~\cite{openclaw-skills-docs}. 
+In practice, a skill is typically packaged as a collection of heterogeneous artifacts, including prompt files such as \texttt{SKILL.md}, executable code scripts such as \texttt{.py} or \texttt{.js}, and configuration or manifest files such as \texttt{.json} and \texttt{.yaml}. As illustrated in \autoref{fig:skill-architecture}, these artifacts jointly define the skill's functionality, usage conditions, and runtime behavior. Once installed into an agent framework, the skill does not execute as an isolated program; instead, it interacts with the hosting agent runtime, which interprets the skill metadata, invokes its code or prompts when appropriate, and mediates access to the underlying tool layer. Through this interaction, a skill may influence agent decisions, call tools such as filesystem access, shell execution, process spawning, or network requests, and communicate with external resources or services. 
+
+As the skill ecosystem has evolved, public registries and marketplaces have also emerged. Similar to how MCP servers are published through MCP registries~\cite{hou2026mcp,mcp-so,mcpmarket} and interoperable agents are discovered by agent registries~\cite{lobehub-agent-market,agency-agents-marketplace}, skills are increasingly distributed through dedicated public registries, including ClawHub~\cite{clawhub}, \texttt{skills.sh}~\cite{skills.sh}, and \texttt{SkillsMP}~\cite{skillsmp}. These registries support skill publication, discovery, installation, and reuse, allowing developers or end users to browse third-party capabilities and integrate them into agent runtimes.
+As a result, skills are rapidly becoming a fundamental unit of capability distribution in modern agentic supply chain~\cite{hu2025llmsc,wang2025llmsc,huang2025llmsc}.
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=0.99\linewidth]{Figures/architecture.pdf}
+    \caption{Skills in the Agentic Supply Chain Ecosystem}
+    \label{fig:skill-architecture}
+\end{figure}
+
+\subsection{Malicious Skills and Mitigations}
+
+\begin{table*}[t]
+\centering
+\caption{Comparison of Existing Skill Security Scan Tools.}
+\begin{threeparttable}
+\begin{tabular}{llccccc}
+\toprule
+\textbf{Tool} & \textbf{Source \& Stars} & \textbf{Artifact Cov.} & \textbf{Static} & \textbf{LLM} & \textbf{Dynamic} & \textbf{Cross-artifact} \\
+\midrule
+\textsc{AI-Infra-Guard~\cite{tencent2026aiinfraguard}}           
+    & Tencent, 3.3K Stars & \CIRCLE & \CIRCLE    & \CIRCLE    & \Circle    & \LEFTcircle \\
+
+\textsc{AgentScan~\cite{snyk-agent-scan}}  
+    & Snyk, 2K Stars & \LEFTcircle & \LEFTcircle& \LEFTcircle& \Circle    & \LEFTcircle \\
+
+\textsc{Skill Scanner~\cite{cisco-skill-scanner}}           
+    & Cisco, 1.5K Stars & \CIRCLE & \CIRCLE    & \CIRCLE    & \Circle    & \LEFTcircle \\
+
+\textsc{Nova-Proximity~\cite{roccia2026novaproximity}}           
+    & NovaHunting, 286 Stars & \LEFTcircle & \CIRCLE    & \CIRCLE    & \Circle    & \Circle \\
+
+\textsc{Skill-Sec-Scan~\cite{huifer-skill-security-scan}} 
+    & SourceHot, 106 Stars & \LEFTcircle & \CIRCLE    & \Circle    & \Circle    & \Circle \\
+
+\textsc{Caterpillar~\cite{alice2026caterpillar}} 
+    & Alice, 41 Stars & \CIRCLE & \CIRCLE    & \CIRCLE    & \Circle    & \LEFTcircle \\
+
+\textsc{MASB\footnote{MASB is short for MaliciousAgentSkillsBenchmark.}~\cite{liu2026maliciousagentskillswild}}                    
+    & Quantstamp, 29 Stars & \LEFTcircle & \CIRCLE    & \CIRCLE    & \CIRCLE    & \LEFTcircle \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[flushleft]
+\footnotesize
+\item[a] \textbf{Artifact Cov.} denotes the supported skill-related artifacts or file types.
+\item[b] \CIRCLE\ indicates broad/full support, \LEFTcircle\ indicates moderate/partial support, and \Circle\ indicates limited or no support.
+\item[c] \textbf{Cross-artifact} refers to explicit reasoning over relations among multiple artifacts, rather than simple recursive scanning.
+\end{tablenotes}
+\end{threeparttable}
+\label{tab:baseline-tool-comparison}
+\end{table*}
+
+\begin{figure*}
+    \centering
+    \includegraphics[width=0.95\linewidth]{Figures/motivation.pdf}
+    \caption{A Motivating Example}
+    \label{fig:motivation}
+\end{figure*}
+
+Unfortunately, like other open registries such as NPM~\cite{wang2025malpacdetector,cheng2024donapi,zahan2025socketai}, PyPI~\cite{sun2024em4py,gao2024malguard}, and VSCode extension marketplace~\cite{malvscode,vscodesecret}, skill registries introduce a new attack surface into the agentic supply chain~\cite{liu2026maliciousagentskillswild,koi2026clawhavoc,snyk2026skills}. Once third-party skills can be publicly published, discovered, installed, and reused across agent runtimes, they become a new supply-chain artifact through which adversaries may distribute malicious functionality.
+Because skills can influence agent behavior and interact with tool calling, a malicious skill may abuse these capabilities to perform harmful actions such as data exfiltration, unauthorized command execution, and agent hijacking. 
+However, unlike traditional malware, the malicious logic of a skill is often not concentrated in a single executable code scripts. Instead, it may be distributed across prompts, scripts, manifests, configuration files, and setup logic~\cite{snyk2026skills,liu2026maliciousagentskillswild}. For example, a prompt may instruct the agent to collect sensitive information, a script may access local files or environment variables, and a configuration file may specify an attacker-controlled endpoint for exfiltration. As a result, the security risk of a skill often emerges only when multiple artifacts and their interactions are considered together.
+
+To mitigate these threats, both industries and researchers have begun developing preliminary detection mechanisms for malicious skills. As shown in \autoref{tab:baseline-tool-comparison}, existing mitigations mainly fall into three categories. The first is \emph{static detection}, which scans skill artifacts using predefined rules~\cite{huifer-skill-security-scan,goplus-agentguard,roccia2026novaproximity,cisco-skill-scanner}, signatures~\cite{clawscan,smartchainark2026skillsecurityaudit}, or pattern matching~\cite{liu2026maliciousagentskillswild,cisco-skill-scanner,alice2026caterpillar} to identify suspicious code, prompts, dependencies, or metadata. Static methods are efficient and scalable, but they can be evaded when malicious behaviors are expressed through rewritten logic~\cite{certik-skill-scanning-boundary}, benign-looking third-party APIs~\cite{huang2024spiderscan}, or cross-artifact compositions. The second category is \emph{LLM-based semantic analysis}, which uses language models to interpret prompts, scripts, and documentation in order to detect suspicious intent or hidden malicious behaviors~\cite{liu2026maliciousagentskillswild,cisco-skill-scanner,alice2026caterpillar,roccia2026novaproximity}. These methods can generalize beyond handcrafted rules, but they may also be misled by prompt injection~\cite{checkpoint2025aievasion,melo2025aimalwarepromptinjection}, obfuscated descriptions~\cite{snyk-skill-scanner-false-security}, or adversarially crafted contexts~\cite{certik-skill-scanning-boundary,rao2026acoda}. The third category is \emph{dynamic analysis and sandbox monitoring}, which executes skills in controlled environments and detects maliciousness through observed runtime behavior~\cite{liu2026maliciousagentskillswild}. While dynamic approaches can reveal concrete attack actions, their effectiveness depends on execution coverage and may be limited by environment-sensitive or sandbox-aware samples~\cite{cyfirma-malware-evasion,lefaou2024antivirusedr}. Overall, these preliminary mitigations provide useful protection, but they still leave important challenges in accurately detecting malicious skills in real-world ecosystems.

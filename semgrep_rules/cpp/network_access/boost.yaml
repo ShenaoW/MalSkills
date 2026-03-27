@@ -1,0 +1,94 @@
+rules:
+- id: no-boost-asio-ip-tcp-acceptor-accept
+  languages:
+  - cpp
+  message: Avoid using boost::asio::ip::tcp::acceptor::accept(), as it can lead to potential issues with network access.
+  metadata:
+    api: boost::asio::ip::tcp::acceptor::accept()
+    category: Network Access
+  pattern-either:
+  - pattern: boost::asio::ip::tcp::acceptor::accept(...)
+  - pattern: $VAR = boost::asio::ip::tcp::acceptor::accept
+  - pattern: asio::ip::tcp::acceptor::accept(...)
+  - pattern: $VAR = asio::ip::tcp::acceptor::accept
+  - pattern: ip::tcp::acceptor::accept(...)
+  - pattern: $VAR = ip::tcp::acceptor::accept
+  - pattern: tcp::acceptor::accept(...)
+  - pattern: $VAR = tcp::acceptor::accept
+  - pattern: acceptor::accept(...)
+  - pattern: $VAR = acceptor::accept
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-boost-asio-ip-tcp-resolver-resolve
+  languages:
+  - cpp
+  message: Avoid using boost::asio::ip::tcp::resolver::resolve(), as it can lead to potential issues with network access.
+  metadata:
+    api: boost::asio::ip::tcp::resolver::resolve()
+    category: Network Access
+  pattern-either:
+  - pattern: boost::asio::ip::tcp::resolver::resolve(...)
+  - pattern: $VAR = boost::asio::ip::tcp::resolver::resolve
+  - pattern: asio::ip::tcp::resolver::resolve(...)
+  - pattern: $VAR = asio::ip::tcp::resolver::resolve
+  - pattern: ip::tcp::resolver::resolve(...)
+  - pattern: $VAR = ip::tcp::resolver::resolve
+  - pattern: tcp::resolver::resolve(...)
+  - pattern: $VAR = tcp::resolver::resolve
+  - pattern: resolver::resolve(...)
+  - pattern: $VAR = resolver::resolve
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-boost-asio-ip-tcp-socket-connect
+  languages:
+  - cpp
+  message: Avoid using boost::asio::ip::tcp::socket::connect(), as it can lead to potential issues with network access.
+  metadata:
+    api: boost::asio::ip::tcp::socket::connect()
+    category: Network Access
+  pattern-either:
+  - pattern: boost::asio::ip::tcp::socket::connect(...)
+  - pattern: $VAR = boost::asio::ip::tcp::socket::connect
+  - pattern: asio::ip::tcp::socket::connect(...)
+  - pattern: $VAR = asio::ip::tcp::socket::connect
+  - pattern: ip::tcp::socket::connect(...)
+  - pattern: $VAR = ip::tcp::socket::connect
+  - pattern: tcp::socket::connect(...)
+  - pattern: $VAR = tcp::socket::connect
+  - pattern: socket::connect(...)
+  - pattern: $VAR = socket::connect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-boost-asio-read
+  languages:
+  - cpp
+  message: Avoid using boost::asio::read(), as it can lead to potential issues with network access.
+  metadata:
+    api: boost::asio::read()
+    category: Network Access
+  pattern-either:
+  - pattern: boost::asio::read(...)
+  - pattern: $VAR = boost::asio::read
+  - pattern: asio::read(...)
+  - pattern: $VAR = asio::read
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-boost-asio-write
+  languages:
+  - cpp
+  message: Avoid using boost::asio::write(), as it can lead to potential issues with network access.
+  metadata:
+    api: boost::asio::write()
+    category: Network Access
+  pattern-either:
+  - pattern: boost::asio::write(...)
+  - pattern: $VAR = boost::asio::write
+  - pattern: asio::write(...)
+  - pattern: $VAR = asio::write
+  severity: WARNING
+  tags:
+  - Network Access

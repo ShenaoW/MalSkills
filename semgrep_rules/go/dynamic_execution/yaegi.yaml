@@ -1,0 +1,27 @@
+rules:
+- id: no-yaegi.Eval
+  languages:
+  - go
+  message: Avoid using yaegi.Eval(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: yaegi.Eval()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: yaegi.Eval(...)
+  - pattern: $VAR = yaegi.Eval
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: no-yaegi.Interpret
+  languages:
+  - go
+  message: Avoid using yaegi.Interpret(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: yaegi.Interpret()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: yaegi.Interpret(...)
+  - pattern: $VAR = yaegi.Interpret
+  severity: WARNING
+  tags:
+  - Dynamic Execution

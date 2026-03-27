@@ -1,0 +1,92 @@
+rules:
+- id: no-FileUtils.chmod
+  languages:
+  - ruby
+  message: Avoid using FileUtils.chmod(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: FileUtils.chmod()
+    category: File or System Operation
+  pattern-either:
+  - pattern: FileUtils.chmod(...)
+  - pattern: $VAR = FileUtils.chmod
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-FileUtils.cp
+  languages:
+  - ruby
+  message: Avoid using FileUtils.cp(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: FileUtils.cp()
+    category: File or System Operation
+  pattern-either:
+  - pattern: FileUtils.cp(...)
+  - pattern: $VAR = FileUtils.cp
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-FileUtils.mkdir_p
+  languages:
+  - ruby
+  message: Avoid using FileUtils.mkdir_p(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: FileUtils.mkdir_p()
+    category: File or System Operation
+  pattern-either:
+  - pattern: FileUtils.mkdir_p(...)
+  - pattern: $VAR = FileUtils.mkdir_p
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-FileUtils.mv
+  languages:
+  - ruby
+  message: Avoid using FileUtils.mv(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: FileUtils.mv()
+    category: File or System Operation
+  pattern-either:
+  - pattern: FileUtils.mv(...)
+  - pattern: $VAR = FileUtils.mv
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-FileUtils.rm
+  languages:
+  - ruby
+  message: Avoid using FileUtils.rm(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: FileUtils.rm()
+    category: File or System Operation
+  pattern-either:
+  - pattern: FileUtils.rm(...)
+  - pattern: $VAR = FileUtils.rm
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-FileUtils.rm_rf
+  languages:
+  - ruby
+  message: Avoid using FileUtils.rm_rf(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: FileUtils.rm_rf()
+    category: File or System Operation
+  pattern-either:
+  - pattern: FileUtils.rm_rf(...)
+  - pattern: $VAR = FileUtils.rm_rf
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-FileUtils.touch
+  languages:
+  - ruby
+  message: Avoid using FileUtils.touch(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: FileUtils.touch()
+    category: File or System Operation
+  pattern-either:
+  - pattern: FileUtils.touch(...)
+  - pattern: $VAR = FileUtils.touch
+  severity: WARNING
+  tags:
+  - File or System Operation

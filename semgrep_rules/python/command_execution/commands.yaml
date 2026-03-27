@@ -1,0 +1,27 @@
+rules:
+- id: no-commands-getoutput
+  languages:
+  - python
+  message: Avoid using commands.getoutput(), as it can lead to potential issues with command execution.
+  metadata:
+    api: commands.getoutput()
+    category: Command Execution
+  pattern-either:
+  - pattern: commands.getoutput(...)
+  - pattern: $VAR = commands.getoutput
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-commands-getstatusoutput
+  languages:
+  - python
+  message: Avoid using commands.getstatusoutput(), as it can lead to potential issues with command execution.
+  metadata:
+    api: commands.getstatusoutput()
+    category: Command Execution
+  pattern-either:
+  - pattern: commands.getstatusoutput(...)
+  - pattern: $VAR = commands.getstatusoutput
+  severity: WARNING
+  tags:
+  - Command Execution

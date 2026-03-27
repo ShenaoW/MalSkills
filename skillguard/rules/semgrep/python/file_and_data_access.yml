@@ -1,0 +1,74 @@
+rules:
+  - id: python.file_and_data_access.file_enumeration
+    languages: [python]
+    message: Python file or directory enumeration
+    severity: WARNING
+    metadata:
+      skillguard_subtype: file_enumeration_and_location
+      skillguard_evidence_type: file_and_data_access
+      skillguard_value_metavar: $PATH
+    pattern-either:
+      - pattern: os.listdir($PATH)
+      - pattern: os.walk($PATH)
+      - pattern: glob.glob($PATH)
+      - pattern: pathlib.Path($PATH).glob(...)
+      - pattern: pathlib.Path($PATH).rglob(...)
+
+  - id: python.file_and_data_access.content_read
+    languages: [python]
+    message: Python content read and parse from local files
+    severity: WARNING
+    metadata:
+      skillguard_subtype: content_read_and_parse
+      skillguard_evidence_type: file_and_data_access
+      skillguard_value_metavar: $PATH
+    pattern-either:
+      - pattern: open($PATH, ...)
+      - pattern: pathlib.Path($PATH).read_text(...)
+      - pattern: pathlib.Path($PATH).read_bytes(...)
+      - pattern: json.load(open($PATH, ...))
+      - pattern: yaml.safe_load(open($PATH, ...))
+
+  - id: python.file_and_data_access.bulk_copy_archive
+    languages: [python]
+    message: Python bulk copy or archival staging
+    severity: WARNING
+    metadata:
+      skillguard_subtype: bulk_copy_and_archive
+      skillguard_evidence_type: file_and_data_access
+      skillguard_value_metavar: $PATH
+    pattern-either:
+      - pattern: shutil.copytree($SRC, $PATH, ...)
+      - pattern: shutil.make_archive($PATH, ...)
+      - pattern: tarfile.open($PATH, ...)
+      - pattern: zipfile.ZipFile($PATH, ...)
+
+  - id: python.file_and_data_access.config_modification
+    languages: [python]
+    message: Python config or metadata modification
+    severity: WARNING
+    metadata:
+      skillguard_subtype: config_or_metadata_modification
+      skillguard_evidence_type: file_and_data_access
+      skillguard_value_metavar: $PATH
+    pattern-either:
+      - pattern: pathlib.Path($PATH).write_text(...)
+      - pattern: pathlib.Path($PATH).write_bytes(...)
+      - pattern: os.chmod($PATH, ...)
+      - pattern: os.chown($PATH, ...)
+      - pattern: os.utime($PATH, ...)
+
+  - id: python.file_and_data_access.deletion
+    languages: [python]
+    message: Python deletion or overwrite of files
+    severity: WARNING
+    metadata:
+      skillguard_subtype: deletion_or_overwrite
+      skillguard_evidence_type: file_and_data_access
+      skillguard_value_metavar: $PATH
+    pattern-either:
+      - pattern: os.remove($PATH)
+      - pattern: os.unlink($PATH)
+      - pattern: shutil.rmtree($PATH)
+      - pattern: pathlib.Path($PATH).unlink(...)
+      - pattern: os.truncate($PATH, ...)

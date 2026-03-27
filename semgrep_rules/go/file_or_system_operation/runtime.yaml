@@ -1,0 +1,53 @@
+rules:
+- id: no-runtime.GOARCH
+  languages:
+  - go
+  message: Avoid using runtime.GOARCH(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: runtime.GOARCH()
+    category: File or System Operation
+  pattern-either:
+  - pattern: runtime.GOARCH(...)
+  - pattern: $VAR = runtime.GOARCH
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-runtime.GOMAXPROCS
+  languages:
+  - go
+  message: Avoid using runtime.GOMAXPROCS(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: runtime.GOMAXPROCS()
+    category: File or System Operation
+  pattern-either:
+  - pattern: runtime.GOMAXPROCS(...)
+  - pattern: $VAR = runtime.GOMAXPROCS
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-runtime.GOOS
+  languages:
+  - go
+  message: Avoid using runtime.GOOS(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: runtime.GOOS()
+    category: File or System Operation
+  pattern-either:
+  - pattern: runtime.GOOS(...)
+  - pattern: $VAR = runtime.GOOS
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-runtime.NumCPU
+  languages:
+  - go
+  message: Avoid using runtime.NumCPU(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: runtime.NumCPU()
+    category: File or System Operation
+  pattern-either:
+  - pattern: runtime.NumCPU(...)
+  - pattern: $VAR = runtime.NumCPU
+  severity: WARNING
+  tags:
+  - File or System Operation

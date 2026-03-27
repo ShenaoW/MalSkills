@@ -1,0 +1,47 @@
+rules:
+- id: no-org-objectweb-asm-ClassReader-accept
+  languages:
+  - java
+  message: Avoid using org.objectweb.asm.ClassReader.accept(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: org.objectweb.asm.ClassReader.accept()
+    category: Obfuscation
+  pattern-either:
+  - pattern: new org.objectweb.asm.ClassReader.accept(...)
+  - pattern: org.objectweb.asm.ClassReader.accept(...)
+  - pattern: $VAR = org.objectweb.asm.ClassReader.accept
+  - pattern: new objectweb.asm.ClassReader.accept(...)
+  - pattern: objectweb.asm.ClassReader.accept(...)
+  - pattern: $VAR = objectweb.asm.ClassReader.accept
+  - pattern: new asm.ClassReader.accept(...)
+  - pattern: asm.ClassReader.accept(...)
+  - pattern: $VAR = asm.ClassReader.accept
+  - pattern: new ClassReader.accept(...)
+  - pattern: ClassReader.accept(...)
+  - pattern: $VAR = ClassReader.accept
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-org-objectweb-asm-ClassWriter-toByteArray
+  languages:
+  - java
+  message: Avoid using org.objectweb.asm.ClassWriter.toByteArray(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: org.objectweb.asm.ClassWriter.toByteArray()
+    category: Obfuscation
+  pattern-either:
+  - pattern: new org.objectweb.asm.ClassWriter.toByteArray(...)
+  - pattern: org.objectweb.asm.ClassWriter.toByteArray(...)
+  - pattern: $VAR = org.objectweb.asm.ClassWriter.toByteArray
+  - pattern: new objectweb.asm.ClassWriter.toByteArray(...)
+  - pattern: objectweb.asm.ClassWriter.toByteArray(...)
+  - pattern: $VAR = objectweb.asm.ClassWriter.toByteArray
+  - pattern: new asm.ClassWriter.toByteArray(...)
+  - pattern: asm.ClassWriter.toByteArray(...)
+  - pattern: $VAR = asm.ClassWriter.toByteArray
+  - pattern: new ClassWriter.toByteArray(...)
+  - pattern: ClassWriter.toByteArray(...)
+  - pattern: $VAR = ClassWriter.toByteArray
+  severity: WARNING
+  tags:
+  - Obfuscation

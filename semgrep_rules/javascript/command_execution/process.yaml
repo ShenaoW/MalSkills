@@ -1,0 +1,597 @@
+rules:
+- id: no-process-_debugEnd
+  languages:
+  - javascript
+  message: Avoid using process._debugEnd(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process._debugEnd()
+    category: Command Execution
+  pattern-either:
+  - pattern: process._debugEnd(...)
+  - pattern: $VAR = process._debugEnd
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-_debugProcess
+  languages:
+  - javascript
+  message: Avoid using process._debugProcess(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process._debugProcess()
+    category: Command Execution
+  pattern-either:
+  - pattern: process._debugProcess(...)
+  - pattern: $VAR = process._debugProcess
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-_fatalException
+  languages:
+  - javascript
+  message: Avoid using process._fatalException(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process._fatalException()
+    category: Command Execution
+  pattern-either:
+  - pattern: process._fatalException(...)
+  - pattern: $VAR = process._fatalException
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-_getActiveHandles
+  languages:
+  - javascript
+  message: Avoid using process._getActiveHandles(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process._getActiveHandles()
+    category: Command Execution
+  pattern-either:
+  - pattern: process._getActiveHandles(...)
+  - pattern: $VAR = process._getActiveHandles
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-_getActiveRequests
+  languages:
+  - javascript
+  message: Avoid using process._getActiveRequests(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process._getActiveRequests()
+    category: Command Execution
+  pattern-either:
+  - pattern: process._getActiveRequests(...)
+  - pattern: $VAR = process._getActiveRequests
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-_kill
+  languages:
+  - javascript
+  message: Avoid using process._kill(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process._kill()
+    category: Command Execution
+  pattern-either:
+  - pattern: process._kill(...)
+  - pattern: $VAR = process._kill
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-_linkedBinding
+  languages:
+  - javascript
+  message: Avoid using process._linkedBinding(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process._linkedBinding()
+    category: Command Execution
+  pattern-either:
+  - pattern: process._linkedBinding(...)
+  - pattern: $VAR = process._linkedBinding
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-_rawDebug
+  languages:
+  - javascript
+  message: Avoid using process._rawDebug(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process._rawDebug()
+    category: Command Execution
+  pattern-either:
+  - pattern: process._rawDebug(...)
+  - pattern: $VAR = process._rawDebug
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-_startProfilerIdleNotifier
+  languages:
+  - javascript
+  message: Avoid using process._startProfilerIdleNotifier(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process._startProfilerIdleNotifier()
+    category: Command Execution
+  pattern-either:
+  - pattern: process._startProfilerIdleNotifier(...)
+  - pattern: $VAR = process._startProfilerIdleNotifier
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-_stopProfilerIdleNotifier
+  languages:
+  - javascript
+  message: Avoid using process._stopProfilerIdleNotifier(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process._stopProfilerIdleNotifier()
+    category: Command Execution
+  pattern-either:
+  - pattern: process._stopProfilerIdleNotifier(...)
+  - pattern: $VAR = process._stopProfilerIdleNotifier
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-_tickCallback
+  languages:
+  - javascript
+  message: Avoid using process._tickCallback(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process._tickCallback()
+    category: Command Execution
+  pattern-either:
+  - pattern: process._tickCallback(...)
+  - pattern: $VAR = process._tickCallback
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-abort
+  languages:
+  - javascript
+  message: Avoid using process.abort(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.abort()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.abort(...)
+  - pattern: $VAR = process.abort
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-assert
+  languages:
+  - javascript
+  message: Avoid using process.assert(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.assert()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.assert(...)
+  - pattern: $VAR = process.assert
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-binding
+  languages:
+  - javascript
+  message: Avoid using process.binding(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.binding()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.binding(...)
+  - pattern: $VAR = process.binding
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-chdir
+  languages:
+  - javascript
+  message: Avoid using process.chdir(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.chdir()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.chdir(...)
+  - pattern: $VAR = process.chdir
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-constrainedMemory
+  languages:
+  - javascript
+  message: Avoid using process.constrainedMemory(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.constrainedMemory()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.constrainedMemory(...)
+  - pattern: $VAR = process.constrainedMemory
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-cpuUsage
+  languages:
+  - javascript
+  message: Avoid using process.cpuUsage(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.cpuUsage()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.cpuUsage(...)
+  - pattern: $VAR = process.cpuUsage
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-cwd
+  languages:
+  - javascript
+  message: Avoid using process.cwd(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.cwd()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.cwd(...)
+  - pattern: $VAR = process.cwd
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-dlopen
+  languages:
+  - javascript
+  message: Avoid using process.dlopen(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.dlopen()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.dlopen(...)
+  - pattern: $VAR = process.dlopen
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-emitWarning
+  languages:
+  - javascript
+  message: Avoid using process.emitWarning(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.emitWarning()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.emitWarning(...)
+  - pattern: $VAR = process.emitWarning
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-exit
+  languages:
+  - javascript
+  message: Avoid using process.exit(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.exit()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.exit(...)
+  - pattern: $VAR = process.exit
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-getActiveResourcesInfo
+  languages:
+  - javascript
+  message: Avoid using process.getActiveResourcesInfo(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.getActiveResourcesInfo()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.getActiveResourcesInfo(...)
+  - pattern: $VAR = process.getActiveResourcesInfo
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-getegid
+  languages:
+  - javascript
+  message: Avoid using process.getegid(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.getegid()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.getegid(...)
+  - pattern: $VAR = process.getegid
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-geteuid
+  languages:
+  - javascript
+  message: Avoid using process.geteuid(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.geteuid()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.geteuid(...)
+  - pattern: $VAR = process.geteuid
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-getgid
+  languages:
+  - javascript
+  message: Avoid using process.getgid(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.getgid()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.getgid(...)
+  - pattern: $VAR = process.getgid
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-getgroups
+  languages:
+  - javascript
+  message: Avoid using process.getgroups(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.getgroups()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.getgroups(...)
+  - pattern: $VAR = process.getgroups
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-getuid
+  languages:
+  - javascript
+  message: Avoid using process.getuid(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.getuid()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.getuid(...)
+  - pattern: $VAR = process.getuid
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-hasUncaughtExceptionCaptureCallback
+  languages:
+  - javascript
+  message: Avoid using process.hasUncaughtExceptionCaptureCallback(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.hasUncaughtExceptionCaptureCallback()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.hasUncaughtExceptionCaptureCallback(...)
+  - pattern: $VAR = process.hasUncaughtExceptionCaptureCallback
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-hrtime
+  languages:
+  - javascript
+  message: Avoid using process.hrtime(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.hrtime()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.hrtime(...)
+  - pattern: $VAR = process.hrtime
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-initgroups
+  languages:
+  - javascript
+  message: Avoid using process.initgroups(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.initgroups()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.initgroups(...)
+  - pattern: $VAR = process.initgroups
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-kill
+  languages:
+  - javascript
+  message: Avoid using process.kill(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.kill()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.kill(...)
+  - pattern: $VAR = process.kill
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-memoryUsage
+  languages:
+  - javascript
+  message: Avoid using process.memoryUsage(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.memoryUsage()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.memoryUsage(...)
+  - pattern: $VAR = process.memoryUsage
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-nextTick
+  languages:
+  - javascript
+  message: Avoid using process.nextTick(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.nextTick()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.nextTick(...)
+  - pattern: $VAR = process.nextTick
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-openStdin
+  languages:
+  - javascript
+  message: Avoid using process.openStdin(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.openStdin()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.openStdin(...)
+  - pattern: $VAR = process.openStdin
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-reallyExit
+  languages:
+  - javascript
+  message: Avoid using process.reallyExit(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.reallyExit()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.reallyExit(...)
+  - pattern: $VAR = process.reallyExit
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-resourceUsage
+  languages:
+  - javascript
+  message: Avoid using process.resourceUsage(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.resourceUsage()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.resourceUsage(...)
+  - pattern: $VAR = process.resourceUsage
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-setSourceMapsEnabled
+  languages:
+  - javascript
+  message: Avoid using process.setSourceMapsEnabled(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.setSourceMapsEnabled()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.setSourceMapsEnabled(...)
+  - pattern: $VAR = process.setSourceMapsEnabled
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-setUncaughtExceptionCaptureCallback
+  languages:
+  - javascript
+  message: Avoid using process.setUncaughtExceptionCaptureCallback(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.setUncaughtExceptionCaptureCallback()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.setUncaughtExceptionCaptureCallback(...)
+  - pattern: $VAR = process.setUncaughtExceptionCaptureCallback
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-setegid
+  languages:
+  - javascript
+  message: Avoid using process.setegid(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.setegid()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.setegid(...)
+  - pattern: $VAR = process.setegid
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-seteuid
+  languages:
+  - javascript
+  message: Avoid using process.seteuid(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.seteuid()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.seteuid(...)
+  - pattern: $VAR = process.seteuid
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-setgid
+  languages:
+  - javascript
+  message: Avoid using process.setgid(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.setgid()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.setgid(...)
+  - pattern: $VAR = process.setgid
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-setgroups
+  languages:
+  - javascript
+  message: Avoid using process.setgroups(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.setgroups()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.setgroups(...)
+  - pattern: $VAR = process.setgroups
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-setuid
+  languages:
+  - javascript
+  message: Avoid using process.setuid(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.setuid()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.setuid(...)
+  - pattern: $VAR = process.setuid
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-umask
+  languages:
+  - javascript
+  message: Avoid using process.umask(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.umask()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.umask(...)
+  - pattern: $VAR = process.umask
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-process-uptime
+  languages:
+  - javascript
+  message: Avoid using process.uptime(), as it can lead to potential issues with command execution.
+  metadata:
+    api: process.uptime()
+    category: Command Execution
+  pattern-either:
+  - pattern: process.uptime(...)
+  - pattern: $VAR = process.uptime
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-require-process
+  languages:
+  - javascript
+  message: Avoid using require('process'), as it can lead to potential issues with command execution.
+  metadata:
+    api: require('process')
+    category: Command Execution
+  pattern: require('process')
+  severity: WARNING
+  tags:
+  - Command Execution

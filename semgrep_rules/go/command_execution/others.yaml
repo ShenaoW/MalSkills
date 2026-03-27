@@ -1,0 +1,14 @@
+rules:
+- id: no-os.StartProcess
+  languages:
+  - go
+  message: Avoid using os.StartProcess(), as it can lead to potential issues with command execution.
+  metadata:
+    api: os.StartProcess()
+    category: Command Execution
+  pattern-either:
+  - pattern: os.StartProcess(...)
+  - pattern: $VAR = os.StartProcess
+  severity: WARNING
+  tags:
+  - Command Execution

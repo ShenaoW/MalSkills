@@ -1,0 +1,16 @@
+rules:
+  - id: const-require-obfuscated
+    patterns:
+      - pattern: require($X)
+      - pattern-not: require("$_")
+      - pattern-not: require('$_')
+    message: "Suspicious require call with non-literal argument"
+    severity: WARNING
+    metadata:
+      api: require("Obfuscation")
+      category: Obfuscation
+    languages:
+      - javascript
+      - typescript
+    tags:
+      - Obfuscation

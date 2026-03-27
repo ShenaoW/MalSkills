@@ -30,3 +30,15 @@ Each analyzed skill emits:
 - The reasoning engine exports Souffle-compatible facts and rules, and also
   includes a Python executor so the pipeline works even when `souffle` is not
   installed.
+
+
+## Baselines
+
+- `python3 -m skillguard.cli run-eval --benchmark experiments/benchmark_study/benchmark_recall.json --output output/codex_agent_baseline --variant benchmark_codex_agent_baseline`
+- `python3 -m skillguard.cli run-eval --benchmark experiments/benchmark_study/benchmark_recall.json --output output/skill_security_audit_baseline --variant benchmark_skill_security_audit_baseline`
+- `python3 -m skillguard.cli run-eval --benchmark experiments/benchmark_study/benchmark_recall.json --output output/skill_security_scan_baseline --variant benchmark_skill_security_scan_baseline`
+- `python3 -m skillguard.cli run-eval --benchmark experiments/benchmark_study/benchmark_recall.json --output output/skills_security_audit_baseline --variant benchmark_skills_security_audit_baseline`
+- `python3 -m skillguard.cli run-eval --benchmark experiments/benchmark_study/benchmark_recall.json --output output/caterpillar_baseline --variant benchmark_caterpillar_baseline`
+- `python3 -m skillguard.cli run-eval --benchmark experiments/benchmark_study/benchmark_recall.json --output output/clawscan_baseline --variant benchmark_clawscan_baseline`
+- `python3 -m skillguard.cli run-eval --benchmark experiments/benchmark_study/benchmark_recall.json --output output/skill_scanner_baseline --variant benchmark_skill_scanner_baseline`
+- `python3 -m skillguard.cli run-eval --benchmark experiments/benchmark_study/benchmark_recall.json --output output/nova_proximity_baseline --variant benchmark_nova_proximity_baseline`

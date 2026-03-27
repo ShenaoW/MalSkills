@@ -1,0 +1,475 @@
+rules:
+- id: no-os.Chdir
+  languages:
+  - go
+  message: Avoid using os.Chdir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Chdir()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Chdir(...)
+  - pattern: $VAR = os.Chdir
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Chmod
+  languages:
+  - go
+  message: Avoid using os.Chmod(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Chmod()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Chmod(...)
+  - pattern: $VAR = os.Chmod
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Chown
+  languages:
+  - go
+  message: Avoid using os.Chown(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Chown()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Chown(...)
+  - pattern: $VAR = os.Chown
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Create
+  languages:
+  - go
+  message: Avoid using os.Create(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Create()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Create(...)
+  - pattern: $VAR = os.Create
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.CreateTemp
+  languages:
+  - go
+  message: Avoid using os.CreateTemp(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.CreateTemp()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.CreateTemp(...)
+  - pattern: $VAR = os.CreateTemp
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Environ
+  languages:
+  - go
+  message: Avoid using os.Environ(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Environ()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Environ(...)
+  - pattern: $VAR = os.Environ
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Exit
+  languages:
+  - go
+  message: Avoid using os.Exit(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Exit()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Exit(...)
+  - pattern: $VAR = os.Exit
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.FindProcess
+  languages:
+  - go
+  message: Avoid using os.FindProcess(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.FindProcess()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.FindProcess(...)
+  - pattern: $VAR = os.FindProcess
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Getegid
+  languages:
+  - go
+  message: Avoid using os.Getegid(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Getegid()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Getegid(...)
+  - pattern: $VAR = os.Getegid
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Getenv
+  languages:
+  - go
+  message: Avoid using os.Getenv(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Getenv()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Getenv(...)
+  - pattern: $VAR = os.Getenv
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Geteuid
+  languages:
+  - go
+  message: Avoid using os.Geteuid(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Geteuid()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Geteuid(...)
+  - pattern: $VAR = os.Geteuid
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Getgid
+  languages:
+  - go
+  message: Avoid using os.Getgid(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Getgid()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Getgid(...)
+  - pattern: $VAR = os.Getgid
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Getpid
+  languages:
+  - go
+  message: Avoid using os.Getpid(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Getpid()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Getpid(...)
+  - pattern: $VAR = os.Getpid
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Getppid
+  languages:
+  - go
+  message: Avoid using os.Getppid(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Getppid()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Getppid(...)
+  - pattern: $VAR = os.Getppid
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Getuid
+  languages:
+  - go
+  message: Avoid using os.Getuid(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Getuid()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Getuid(...)
+  - pattern: $VAR = os.Getuid
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Getwd
+  languages:
+  - go
+  message: Avoid using os.Getwd(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Getwd()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Getwd(...)
+  - pattern: $VAR = os.Getwd
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Hostname
+  languages:
+  - go
+  message: Avoid using os.Hostname(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Hostname()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Hostname(...)
+  - pattern: $VAR = os.Hostname
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Link
+  languages:
+  - go
+  message: Avoid using os.Link(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Link()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Link(...)
+  - pattern: $VAR = os.Link
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Lstat
+  languages:
+  - go
+  message: Avoid using os.Lstat(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Lstat()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Lstat(...)
+  - pattern: $VAR = os.Lstat
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Mkdir
+  languages:
+  - go
+  message: Avoid using os.Mkdir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Mkdir()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Mkdir(...)
+  - pattern: $VAR = os.Mkdir
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.MkdirAll
+  languages:
+  - go
+  message: Avoid using os.MkdirAll(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.MkdirAll()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.MkdirAll(...)
+  - pattern: $VAR = os.MkdirAll
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.MkdirTemp
+  languages:
+  - go
+  message: Avoid using os.MkdirTemp(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.MkdirTemp()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.MkdirTemp(...)
+  - pattern: $VAR = os.MkdirTemp
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.OpenFile
+  languages:
+  - go
+  message: Avoid using os.OpenFile(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.OpenFile()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.OpenFile(...)
+  - pattern: $VAR = os.OpenFile
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.ReadDir
+  languages:
+  - go
+  message: Avoid using os.ReadDir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.ReadDir()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.ReadDir(...)
+  - pattern: $VAR = os.ReadDir
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Readlink
+  languages:
+  - go
+  message: Avoid using os.Readlink(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Readlink()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Readlink(...)
+  - pattern: $VAR = os.Readlink
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Remove
+  languages:
+  - go
+  message: Avoid using os.Remove(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Remove()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Remove(...)
+  - pattern: $VAR = os.Remove
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.RemoveAll
+  languages:
+  - go
+  message: Avoid using os.RemoveAll(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.RemoveAll()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.RemoveAll(...)
+  - pattern: $VAR = os.RemoveAll
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Rename
+  languages:
+  - go
+  message: Avoid using os.Rename(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Rename()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Rename(...)
+  - pattern: $VAR = os.Rename
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Setenv
+  languages:
+  - go
+  message: Avoid using os.Setenv(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Setenv()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Setenv(...)
+  - pattern: $VAR = os.Setenv
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Stat
+  languages:
+  - go
+  message: Avoid using os.Stat(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Stat()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Stat(...)
+  - pattern: $VAR = os.Stat
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Stderr.Write
+  languages:
+  - go
+  message: Avoid using os.Stderr.Write(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Stderr.Write()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Stderr.Write(...)
+  - pattern: $VAR = os.Stderr.Write
+  - pattern: Stderr.Write(...)
+  - pattern: $VAR = Stderr.Write
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Stdin.Read
+  languages:
+  - go
+  message: Avoid using os.Stdin.Read(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Stdin.Read()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Stdin.Read(...)
+  - pattern: $VAR = os.Stdin.Read
+  - pattern: Stdin.Read(...)
+  - pattern: $VAR = Stdin.Read
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Stdout.Write
+  languages:
+  - go
+  message: Avoid using os.Stdout.Write(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Stdout.Write()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Stdout.Write(...)
+  - pattern: $VAR = os.Stdout.Write
+  - pattern: Stdout.Write(...)
+  - pattern: $VAR = Stdout.Write
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Symlink
+  languages:
+  - go
+  message: Avoid using os.Symlink(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Symlink()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Symlink(...)
+  - pattern: $VAR = os.Symlink
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.Unsetenv
+  languages:
+  - go
+  message: Avoid using os.Unsetenv(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.Unsetenv()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.Unsetenv(...)
+  - pattern: $VAR = os.Unsetenv
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-os.WriteFile
+  languages:
+  - go
+  message: Avoid using os.WriteFile(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.WriteFile()
+    category: File or System Operation
+  pattern-either:
+  - pattern: os.WriteFile(...)
+  - pattern: $VAR = os.WriteFile
+  severity: WARNING
+  tags:
+  - File or System Operation

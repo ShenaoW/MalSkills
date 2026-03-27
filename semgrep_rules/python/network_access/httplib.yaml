@@ -1,0 +1,27 @@
+rules:
+- id: no-httplib-HTTPConnection
+  languages:
+  - python
+  message: Avoid using httplib.HTTPConnection(), as it can lead to potential issues with network access.
+  metadata:
+    api: httplib.HTTPConnection()
+    category: Network Access
+  pattern-either:
+  - pattern: httplib.HTTPConnection(...)
+  - pattern: $VAR = httplib.HTTPConnection
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-httplib-HTTPSConnection
+  languages:
+  - python
+  message: Avoid using httplib.HTTPSConnection(), as it can lead to potential issues with network access.
+  metadata:
+    api: httplib.HTTPSConnection()
+    category: Network Access
+  pattern-either:
+  - pattern: httplib.HTTPSConnection(...)
+  - pattern: $VAR = httplib.HTTPSConnection
+  severity: WARNING
+  tags:
+  - Network Access

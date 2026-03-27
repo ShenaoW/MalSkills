@@ -13,20 +13,35 @@ REPO_ID="${4:-unknown}"
 RISK_LEVEL="${5:-unknown}"
 IN_PLACE_LOG="${6:-false}"
 
-# Configuration
 USE_NOVA="${USE_NOVA:-true}"
 NOVA_BLOCK="${NOVA_BLOCK:-false}"
 TIMEOUT="${EXEC_TIMEOUT:-900}"
+PROJECT_ROOT="${PROJECT_ROOT:-$(cd "$(dirname "$0")/.." && pwd)}"
+SEARCH_DIR="$PROJECT_ROOT"
+while [ "$SEARCH_DIR" != "/" ]; do
+    ENV_FILE="$SEARCH_DIR/.env"
+    if [ -f "$ENV_FILE" ]; then
+        set -a
+        source "$ENV_FILE"
+        set +a
+        break
+    fi
+    SEARCH_DIR="$(dirname "$SEARCH_DIR")"
+done
 
-# Get API key
-if [ -n "$ANTHROPIC_API_KEY" ]; then
-    API_KEY="$ANTHROPIC_API_KEY"
+if [ -n "${OPENAI_API_KEY:-}" ]; then
+    API_KEY="$OPENAI_API_KEY"
+elif [ -n "${PACKY_API_KEY:-}" ]; then
+    API_KEY="$PACKY_API_KEY"
 else
-    echo "Error: ANTHROPIC_API_KEY not set"
+    echo "Error: OPENAI_API_KEY or PACKY_API_KEY not set"
     exit 1
 fi
 
-# Determine log directory
+API_BASE_URL="${OPENAI_BASE_URL:-${PACKY_API_URL:-https://www.packyapi.com/v1}}"
+API_MODEL="${OPENAI_MODEL:-${LLM_MODEL:-gpt-5.3-codex-medium}}"
+DOCKER_IMAGE="${DOCKER_IMAGE:-codex-skill-sandbox}"
+
 if [ "$IN_PLACE_LOG" = "true" ]; then
     TEST_DIR="${SKILL_PATH}/execution_records"
 else
@@ -41,14 +56,11 @@ echo "Repo: $REPO_ID"
 echo "Risk: $RISK_LEVEL"
 echo "Log Dir: $TEST_DIR"
 
-# Get UID/GID for proper file permissions
 HOST_UID=$(id -u)
 HOST_GID=$(id -g)
-
-# Generate unique container name
 CONTAINER_NAME="skill-exec-${SKILL_NAME}-${REPO_ID}-$$"
+HOST_CODEX_DIR="${HOME:-$(getent passwd "$(id -u)" | cut -d: -f6)}/.codex"
 
-# Set mount arguments based on log mode
 if [ "$IN_PLACE_LOG" = "true" ]; then
     SKILL_PARENT_DIR="$(dirname "$SKILL_PATH")"
     SKILL_BASENAME="$(basename "$SKILL_PATH")"
@@ -56,113 +68,161 @@ if [ "$IN_PLACE_LOG" = "true" ]; then
     LOG_MOUNT_ARG=(-v "$SKILL_PARENT_DIR:/app/skill_parent")
 else
     LOG_MOUNT_ARG=(-v "${EXECUTION_LOGS_DIR}:/app/logs")
-    TEST_DIR_MOUNT="/app/$TEST_DIR"
+    TEST_DIR_MOUNT="/app/logs/${RISK_LEVEL}/${REPO_ID}/${SKILL_NAME}"
 fi
 
-# Run Docker container
-docker run --rm -it \
+CODEX_MOUNT_ARGS=()
+if [ -d "$HOST_CODEX_DIR" ]; then
+    CODEX_MOUNT_ARGS=(-v "${HOST_CODEX_DIR}:/host_codex:ro")
+fi
+
+docker run --rm \
     --name "$CONTAINER_NAME" \
+    --user root \
     --cap-add=SYS_ADMIN \
     --cap-add=NET_ADMIN \
     --security-opt seccomp=unconfined \
     "${LOG_MOUNT_ARG[@]}" \
+    "${CODEX_MOUNT_ARGS[@]}" \
     -v "${PROJECT_ROOT}/executor/nova_setup.sh:/nova_setup.sh:ro" \
     -v "${PROJECT_ROOT}/executor/smart_monitor.py:/smart_monitor.py:ro" \
     -v "$SKILL_PATH:/skill_source:ro" \
     -w /tmp \
     -e HOST_UID="$HOST_UID" \
     -e HOST_GID="$HOST_GID" \
-    -e ANTHROPIC_AUTH_TOKEN="$API_KEY" \
-    -e ANTHROPIC_BASE_URL="${ANTHROPIC_BASE_URL:-https://api.anthropic.com}" \
+    -e OPENAI_API_KEY="$API_KEY" \
+    -e PACKY_API_KEY="$API_KEY" \
+    -e PACKY_API_URL="$API_BASE_URL" \
+    -e LLM_MODEL="$API_MODEL" \
     -e SKILL_NAME="$SKILL_NAME" \
     -e USER_PROMPT="$USER_PROMPT" \
+    -e EXECUTION_REQUEST="Read the current skill directory and execute it according to this user request: $USER_PROMPT" \
     -e TEST_DIR="$TEST_DIR_MOUNT" \
+    -e TIMEOUT="$TIMEOUT" \
     -e USE_NOVA="$USE_NOVA" \
     -e NOVA_BLOCK="$NOVA_BLOCK" \
-    claude-skill-sandbox bash -c '
-
-    # Setup user
-    useradd -m -u "$HOST_UID" appuser 2>/dev/null
-    groupmod -g "$HOST_GID" appuser 2>/dev/null
+    "$DOCKER_IMAGE" bash -lc '
+    groupmod -o -g "$HOST_GID" appuser 2>/dev/null || true
+    usermod -o -u "$HOST_UID" -g "$HOST_GID" appuser 2>/dev/null || true
     mkdir -p "$TEST_DIR"
-    chown appuser:appuser "$TEST_DIR"
+    chown appuser:appuser "$TEST_DIR" 2>/dev/null || true
 
     export HOME="/home/appuser"
     export APPUSER_HOME="/home/appuser"
+    export WORK_DIR="$APPUSER_HOME/workspace"
+    export OPENAI_API_KEY="${OPENAI_API_KEY}"
+    mkdir -p "$APPUSER_HOME/.codex"
+    if [ -f /host_codex/config.toml ]; then
+        cp /host_codex/config.toml "$APPUSER_HOME/.codex/config.host.toml" 2>/dev/null || true
+    fi
+    if [ -f /host_codex/auth.json ]; then
+        cp /host_codex/auth.json "$APPUSER_HOME/.codex/auth.host.json" 2>/dev/null || true
+    fi
+    cat > "$APPUSER_HOME/.codex/config.toml" <<EOF
+model_provider = "packycode"
+model = "${LLM_MODEL}"
+model_reasoning_effort = "medium"
+disable_response_storage = true
+approvals_reviewer = "user"
 
-    # Initialize NOVA
+[model_providers.packycode]
+name = "packycode"
+base_url = "${PACKY_API_URL}"
+wire_api = "responses"
+requires_openai_auth = true
+
+[projects."$WORK_DIR/skill"]
+trust_level = "trusted"
+EOF
+    cat > "$APPUSER_HOME/.codex/auth.json" <<EOF
+{"OPENAI_API_KEY":"${OPENAI_API_KEY}"}
+EOF
+    mkdir -p "$WORK_DIR/skill"
+    cp -r /skill_source/. "$WORK_DIR/skill/"
+    chown -R appuser:appuser "$WORK_DIR" "$APPUSER_HOME/.codex"
+
     if [ "$USE_NOVA" = "true" ]; then
-        /nova_setup.sh "$APPUSER_HOME" "$([ "$NOVA_BLOCK" = "true" ] && echo "block" || echo "monitor")"
+        bash /nova_setup.sh "$APPUSER_HOME" "$([ "$NOVA_BLOCK" = "true" ] && echo block || echo monitor)"
         export NOVA_REPORT_DIR="$TEST_DIR/nova"
         mkdir -p "$NOVA_REPORT_DIR"
-        chown appuser:appuser "$NOVA_REPORT_DIR"
-        echo "[NOVA] Initialized"
+        chown appuser:appuser "$NOVA_REPORT_DIR" 2>/dev/null || true
     fi
 
-    # Copy skill
-    mkdir -p "$APPUSER_HOME/.claude/"{skills,todos,cache,debug}
-    echo "{\"hasCompletedOnboarding\": true}" > "$APPUSER_HOME/.claude.json"
-    cp -r /skill_source "$APPUSER_HOME/.claude/skills/'"$SKILL_NAME"'"
-    chown -R appuser:appuser "$APPUSER_HOME/.claude" "$APPUSER_HOME/.claude.json"
+    PROMPT_FILE="/tmp/execution_prompt.txt"
+    python3 - <<PY
+from pathlib import Path
 
-    cd "$APPUSER_HOME"
+root = Path("$WORK_DIR/skill")
+prompt_path = Path("$PROMPT_FILE")
+max_files = 20
+max_bytes = 65536
+allowed_exts = {
+    ".md", ".txt", ".sh", ".bash", ".zsh", ".py", ".js", ".ts",
+    ".json", ".yaml", ".yml", ".toml", ".ini", ".cfg", ".conf"
+}
 
-    # Start tcpdump
-    echo "[Monitor] Starting tcpdump..."
+files = []
+for path in sorted(root.rglob("*")):
+    if not path.is_file():
+        continue
+    rel = path.relative_to(root)
+    if path.suffix.lower() in allowed_exts or path.name in {"SKILL.md", "README.md"}:
+        files.append(path)
+    if len(files) >= max_files:
+        break
+
+with prompt_path.open("w", encoding="utf-8") as out:
+    out.write("You are given a skill directory for dynamic execution. ")
+    out.write("Use the provided file contents as primary context and avoid additional filesystem exploration unless strictly required.\\n")
+    out.write(f"User request: $EXECUTION_REQUEST\\n\\n")
+    out.write("Included files:\\n")
+    for path in files:
+        out.write(f"- {path.relative_to(root)}\\n")
+    out.write("\\n")
+    for path in files:
+        rel = path.relative_to(root)
+        try:
+            data = path.read_text(encoding="utf-8")
+        except UnicodeDecodeError:
+            data = path.read_text(encoding="utf-8", errors="replace")
+        if len(data.encode("utf-8")) > max_bytes:
+            data = data[:max_bytes]
+            data += "\\n\\n[TRUNCATED]\\n"
+        out.write(f"FILE: {rel}\\n")
+        out.write(data)
+        if not data.endswith("\\n"):
+            out.write("\\n")
+        out.write("\\n")
+PY
+
     tcpdump -i any -w "$TEST_DIR/network.pcap" -s 0 2>/dev/null &
     TCPDUMP_PID=$!
-
-    # File system snapshot
-    echo "[Monitor] Creating baseline snapshot..."
     python3 /smart_monitor.py snapshot /tmp/fs_state.json "$APPUSER_HOME"
-
-    # Execute skill
-    echo ""
-    echo "=========================================="
-    echo "Executing Skill (timeout: '${TIMEOUT}s')"
-    echo "=========================================="
 
     STRACE_LOG="$TEST_DIR/strace.log"
     STRACE_OPTS="-f -s 2000 -e trace=open,openat,creat,write,unlink,rename,mkdir,rmdir,execve,connect,accept,sendto,recvfrom"
 
     strace $STRACE_OPTS -o "$STRACE_LOG" \
-    su appuser -c "cd $APPUSER_HOME && echo \"${USER_PROMPT}\" | stdbuf -oL timeout ${TIMEOUT}s claude --dangerously-skip-permissions" 2>&1 | tee -a "$TEST_DIR/claude_output.txt"
+      su appuser -c "cd \"$WORK_DIR/skill\" && timeout ${TIMEOUT}s codex exec --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox --model \"$LLM_MODEL\" -C \"$WORK_DIR/skill\" --output-last-message \"$TEST_DIR/final_message.txt\" - < \"$PROMPT_FILE\"" 2>&1 | tee -a "$TEST_DIR/codex_output.txt"
 
     EXIT_CODE=${PIPESTATUS[0]}
-
-    echo ""
-    if [ $EXIT_CODE -eq 124 ]; then
-        echo "Warning: Execution timeout (${TIMEOUT}s)"
-    else
-        echo "Execution complete (exit code: $EXIT_CODE)"
-    fi
-
     kill $TCPDUMP_PID 2>/dev/null
     wait $TCPDUMP_PID 2>/dev/null
 
-    # Collect NOVA reports
     if [ "$USE_NOVA" = "true" ]; then
-        echo "[NOVA] Collecting reports..."
         NOVA_SRC="/home/appuser/.nova-protector/reports"
         NOVA_DEST="$TEST_DIR/nova"
-
         for i in {1..15}; do
             if [ -d "$NOVA_SRC" ] && [ "$(ls -A $NOVA_SRC 2>/dev/null)" ]; then
                 cp -r "$NOVA_SRC"/. "$NOVA_DEST/" 2>/dev/null
-                echo "[NOVA] Reports collected"
                 break
             fi
             sleep 2
         done
     fi
 
-    # File system diff
-    echo "[Monitor] Analyzing file changes..."
     python3 /smart_monitor.py diff /tmp/fs_state.json "$APPUSER_HOME" "$TEST_DIR"
-
-    echo "=========================================="
-    echo "Execution Complete"
-    echo "=========================================="
+    exit $EXIT_CODE
 '
 
 echo ""

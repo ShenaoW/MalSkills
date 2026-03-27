@@ -1,0 +1,27 @@
+rules:
+- id: no-exec.Command
+  languages:
+  - go
+  message: Avoid using exec.Command(), as it can lead to potential issues with command execution.
+  metadata:
+    api: exec.Command()
+    category: Command Execution
+  pattern-either:
+  - pattern: exec.Command(...)
+  - pattern: $VAR = exec.Command
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-exec.CommandContext
+  languages:
+  - go
+  message: Avoid using exec.CommandContext(), as it can lead to potential issues with command execution.
+  metadata:
+    api: exec.CommandContext()
+    category: Command Execution
+  pattern-either:
+  - pattern: exec.CommandContext(...)
+  - pattern: $VAR = exec.CommandContext
+  severity: WARNING
+  tags:
+  - Command Execution

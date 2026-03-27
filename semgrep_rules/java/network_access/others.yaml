@@ -1,0 +1,57 @@
+rules:
+- id: no-HttpClient
+  languages:
+  - java
+  message: Avoid using HttpClient(), as it can lead to potential issues with network access.
+  metadata:
+    api: HttpClient()
+    category: Network Access
+  pattern-either:
+  - pattern: new HttpClient(...)
+  - pattern: HttpClient(...)
+  - pattern: $VAR = HttpClient
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-HttpURLConnection
+  languages:
+  - java
+  message: Avoid using HttpURLConnection(), as it can lead to potential issues with network access.
+  metadata:
+    api: HttpURLConnection()
+    category: Network Access
+  pattern-either:
+  - pattern: new HttpURLConnection(...)
+  - pattern: HttpURLConnection(...)
+  - pattern: $VAR = HttpURLConnection
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-Socket
+  languages:
+  - java
+  message: Avoid using Socket(), as it can lead to potential issues with network access.
+  metadata:
+    api: Socket()
+    category: Network Access
+  pattern-either:
+  - pattern: new Socket(...)
+  - pattern: Socket(...)
+  - pattern: $VAR = Socket
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-URL
+  languages:
+  - java
+  message: Avoid using URL(), as it can lead to potential issues with network access.
+  metadata:
+    api: URL()
+    category: Network Access
+  pattern-either:
+  - pattern: new URL(...)
+  - pattern: URL(...)
+  - pattern: $VAR = URL
+  severity: WARNING
+  tags:
+  - Network Access

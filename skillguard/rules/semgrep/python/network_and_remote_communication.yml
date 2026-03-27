@@ -1,0 +1,77 @@
+rules:
+  - id: python.network_and_remote_communication.outbound_http
+    languages: [python]
+    message: Python outbound network connection
+    severity: WARNING
+    metadata:
+      skillguard_subtype: outbound_connection
+      skillguard_evidence_type: network_and_remote_communication
+      skillguard_value_metavar: $URL
+    pattern-either:
+      - pattern: requests.get($URL, ...)
+      - pattern: requests.post($URL, ...)
+      - pattern: requests.put($URL, ...)
+      - pattern: requests.delete($URL, ...)
+      - pattern: httpx.get($URL, ...)
+      - pattern: httpx.post($URL, ...)
+      - pattern: urllib.request.urlopen($URL, ...)
+      - pattern: aiohttp.ClientSession().get($URL, ...)
+      - pattern: aiohttp.ClientSession().post($URL, ...)
+
+  - id: python.network_and_remote_communication.socket_connect
+    languages: [python]
+    message: Python outbound socket connection
+    severity: WARNING
+    metadata:
+      skillguard_subtype: outbound_connection
+      skillguard_evidence_type: network_and_remote_communication
+    pattern-either:
+      - pattern: socket.socket(...).connect(...)
+      - pattern: socket.create_connection(...)
+
+  - id: python.network_and_remote_communication.listener
+    languages: [python]
+    message: Python listener or inbound socket receive
+    severity: WARNING
+    metadata:
+      skillguard_subtype: listener_and_receive
+      skillguard_evidence_type: network_and_remote_communication
+    pattern-either:
+      - pattern: socket.socket(...).bind(...)
+      - pattern: socket.socket(...).listen(...)
+      - pattern: socketserver.TCPServer(...)
+
+  - id: python.network_and_remote_communication.tunnel
+    languages: [python]
+    message: Python tunneling or SSH forwarding
+    severity: WARNING
+    metadata:
+      skillguard_subtype: tunneling_and_forwarding
+      skillguard_evidence_type: network_and_remote_communication
+    pattern-either:
+      - pattern: paramiko.SSHClient().connect(...)
+      - pattern: sshtunnel.SSHTunnelForwarder(...)
+
+  - id: python.network_and_remote_communication.encrypted_comm
+    languages: [python]
+    message: Python TLS or protocol encapsulation communication
+    severity: WARNING
+    metadata:
+      skillguard_subtype: protocol_encapsulation_or_encrypted_comm
+      skillguard_evidence_type: network_and_remote_communication
+    pattern-either:
+      - pattern: ssl.wrap_socket(...)
+      - pattern: ssl.SSLContext(...).wrap_socket(...)
+      - pattern: websocket.create_connection(...)
+
+  - id: python.network_and_remote_communication.traffic_capture
+    languages: [python]
+    message: Python traffic capture or sniffing
+    severity: WARNING
+    metadata:
+      skillguard_subtype: traffic_capture_and_observation
+      skillguard_evidence_type: network_and_remote_communication
+    pattern-either:
+      - pattern: scapy.all.sniff(...)
+      - pattern: pyshark.LiveCapture(...)
+      - pattern: pcapy.open_live(...)

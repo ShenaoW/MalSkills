@@ -1,0 +1,81 @@
+rules:
+- id: no-java-lang-Class-newInstance
+  languages:
+  - java
+  message: Avoid using java.lang.Class.newInstance(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: java.lang.Class.newInstance()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: new java.lang.Class.newInstance(...)
+  - pattern: java.lang.Class.newInstance(...)
+  - pattern: $VAR = java.lang.Class.newInstance
+  - pattern: new lang.Class.newInstance(...)
+  - pattern: lang.Class.newInstance(...)
+  - pattern: $VAR = lang.Class.newInstance
+  - pattern: new Class.newInstance(...)
+  - pattern: Class.newInstance(...)
+  - pattern: $VAR = Class.newInstance
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: no-java-lang-ClassLoader-loadClass
+  languages:
+  - java
+  message: Avoid using java.lang.ClassLoader.loadClass(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: java.lang.ClassLoader.loadClass()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: new java.lang.ClassLoader.loadClass(...)
+  - pattern: java.lang.ClassLoader.loadClass(...)
+  - pattern: $VAR = java.lang.ClassLoader.loadClass
+  - pattern: new lang.ClassLoader.loadClass(...)
+  - pattern: lang.ClassLoader.loadClass(...)
+  - pattern: $VAR = lang.ClassLoader.loadClass
+  - pattern: new ClassLoader.loadClass(...)
+  - pattern: ClassLoader.loadClass(...)
+  - pattern: $VAR = ClassLoader.loadClass
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: no-java-net-URLClassLoader-getResourceAsStream
+  languages:
+  - java
+  message: Avoid using java.net.URLClassLoader.getResourceAsStream(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: java.net.URLClassLoader.getResourceAsStream()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: new java.net.URLClassLoader.getResourceAsStream(...)
+  - pattern: java.net.URLClassLoader.getResourceAsStream(...)
+  - pattern: $VAR = java.net.URLClassLoader.getResourceAsStream
+  - pattern: new net.URLClassLoader.getResourceAsStream(...)
+  - pattern: net.URLClassLoader.getResourceAsStream(...)
+  - pattern: $VAR = net.URLClassLoader.getResourceAsStream
+  - pattern: new URLClassLoader.getResourceAsStream(...)
+  - pattern: URLClassLoader.getResourceAsStream(...)
+  - pattern: $VAR = URLClassLoader.getResourceAsStream
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: no-java-net-URLClassLoader-loadClass
+  languages:
+  - java
+  message: Avoid using java.net.URLClassLoader.loadClass(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: java.net.URLClassLoader.loadClass()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: new java.net.URLClassLoader.loadClass(...)
+  - pattern: java.net.URLClassLoader.loadClass(...)
+  - pattern: $VAR = java.net.URLClassLoader.loadClass
+  - pattern: new net.URLClassLoader.loadClass(...)
+  - pattern: net.URLClassLoader.loadClass(...)
+  - pattern: $VAR = net.URLClassLoader.loadClass
+  - pattern: new URLClassLoader.loadClass(...)
+  - pattern: URLClassLoader.loadClass(...)
+  - pattern: $VAR = URLClassLoader.loadClass
+  severity: WARNING
+  tags:
+  - Dynamic Execution

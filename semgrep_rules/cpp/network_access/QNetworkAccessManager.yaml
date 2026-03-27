@@ -1,0 +1,27 @@
+rules:
+- id: no-QNetworkAccessManager-get
+  languages:
+  - cpp
+  message: Avoid using QNetworkAccessManager::get(), as it can lead to potential issues with network access.
+  metadata:
+    api: QNetworkAccessManager::get()
+    category: Network Access
+  pattern-either:
+  - pattern: QNetworkAccessManager::get(...)
+  - pattern: $VAR = QNetworkAccessManager::get
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-QNetworkAccessManager-post
+  languages:
+  - cpp
+  message: Avoid using QNetworkAccessManager::post(), as it can lead to potential issues with network access.
+  metadata:
+    api: QNetworkAccessManager::post()
+    category: Network Access
+  pattern-either:
+  - pattern: QNetworkAccessManager::post(...)
+  - pattern: $VAR = QNetworkAccessManager::post
+  severity: WARNING
+  tags:
+  - Network Access

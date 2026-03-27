@@ -1,0 +1,286 @@
+rules:
+- id: no-pathlib-Path-__new__
+  languages:
+  - python
+  message: Avoid using pathlib.Path.__new__(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: pathlib.Path.__new__()
+    category: File or System Operation
+  pattern-either:
+  - pattern: pathlib.Path.__new__(...)
+  - pattern: $VAR = pathlib.Path.__new__
+  - pattern: Path.__new__(...)
+  - pattern: $VAR = Path.__new__
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-pathlib-Path-chmod
+  languages:
+  - python
+  message: Avoid using pathlib.Path.chmod(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: pathlib.Path.chmod()
+    category: File or System Operation
+  pattern-either:
+  - pattern: pathlib.Path.chmod(...)
+  - pattern: $VAR = pathlib.Path.chmod
+  - pattern: Path.chmod(...)
+  - pattern: $VAR = Path.chmod
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-pathlib-Path-lchmod
+  languages:
+  - python
+  message: Avoid using pathlib.Path.lchmod(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: pathlib.Path.lchmod()
+    category: File or System Operation
+  pattern-either:
+  - pattern: pathlib.Path.lchmod(...)
+  - pattern: $VAR = pathlib.Path.lchmod
+  - pattern: Path.lchmod(...)
+  - pattern: $VAR = Path.lchmod
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-pathlib-Path-mkdir
+  languages:
+  - python
+  message: Avoid using pathlib.Path.mkdir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: pathlib.Path.mkdir()
+    category: File or System Operation
+  pattern-either:
+  - pattern: pathlib.Path.mkdir(...)
+  - pattern: $VAR = pathlib.Path.mkdir
+  - pattern: Path.mkdir(...)
+  - pattern: $VAR = Path.mkdir
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-pathlib-Path-open
+  languages:
+  - python
+  message: Avoid using pathlib.Path.open(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: pathlib.Path.open()
+    category: File or System Operation
+  pattern-either:
+  - pattern: pathlib.Path.open(...)
+  - pattern: $VAR = pathlib.Path.open
+  - pattern: Path.open(...)
+  - pattern: $VAR = Path.open
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-pathlib-Path-read_bytes
+  languages:
+  - python
+  message: Avoid using pathlib.Path.read_bytes(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: pathlib.Path.read_bytes()
+    category: File or System Operation
+  pattern-either:
+  - pattern: pathlib.Path.read_bytes(...)
+  - pattern: $VAR = pathlib.Path.read_bytes
+  - pattern: Path.read_bytes(...)
+  - pattern: $VAR = Path.read_bytes
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-pathlib-Path-read_text
+  languages:
+  - python
+  message: Avoid using pathlib.Path.read_text(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: pathlib.Path.read_text()
+    category: File or System Operation
+  pattern-either:
+  - pattern: pathlib.Path.read_text(...)
+  - pattern: $VAR = pathlib.Path.read_text
+  - pattern: Path.read_text(...)
+  - pattern: $VAR = Path.read_text
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-pathlib-Path-rename
+  languages:
+  - python
+  message: Avoid using pathlib.Path.rename(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: pathlib.Path.rename()
+    category: File or System Operation
+  pattern-either:
+  - pattern: pathlib.Path.rename(...)
+  - pattern: $VAR = pathlib.Path.rename
+  - pattern: Path.rename(...)
+  - pattern: $VAR = Path.rename
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-pathlib-Path-replace
+  languages:
+  - python
+  message: Avoid using pathlib.Path.replace(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: pathlib.Path.replace()
+    category: File or System Operation
+  pattern-either:
+  - pattern: pathlib.Path.replace(...)
+  - pattern: $VAR = pathlib.Path.replace
+  - pattern: Path.replace(...)
+  - pattern: $VAR = Path.replace
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-pathlib-Path-rglob
+  languages:
+  - python
+  message: Avoid using pathlib.Path.rglob(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: pathlib.Path.rglob()
+    category: File or System Operation
+  pattern-either:
+  - pattern: pathlib.Path.rglob(...)
+  - pattern: $VAR = pathlib.Path.rglob
+  - pattern: Path.rglob(...)
+  - pattern: $VAR = Path.rglob
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-pathlib-Path-rmdir
+  languages:
+  - python
+  message: Avoid using pathlib.Path.rmdir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: pathlib.Path.rmdir()
+    category: File or System Operation
+  pattern-either:
+  - pattern: pathlib.Path.rmdir(...)
+  - pattern: $VAR = pathlib.Path.rmdir
+  - pattern: Path.rmdir(...)
+  - pattern: $VAR = Path.rmdir
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-pathlib-Path-symlink_to
+  languages:
+  - python
+  message: Avoid using pathlib.Path.symlink_to(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: pathlib.Path.symlink_to()
+    category: File or System Operation
+  pattern-either:
+  - pattern: pathlib.Path.symlink_to(...)
+  - pattern: $VAR = pathlib.Path.symlink_to
+  - pattern: Path.symlink_to(...)
+  - pattern: $VAR = Path.symlink_to
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-pathlib-Path-touch
+  languages:
+  - python
+  message: Avoid using pathlib.Path.touch(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: pathlib.Path.touch()
+    category: File or System Operation
+  pattern-either:
+  - pattern: pathlib.Path.touch(...)
+  - pattern: $VAR = pathlib.Path.touch
+  - pattern: Path.touch(...)
+  - pattern: $VAR = Path.touch
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-pathlib-Path-unlink
+  languages:
+  - python
+  message: Avoid using pathlib.Path.unlink(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: pathlib.Path.unlink()
+    category: File or System Operation
+  pattern-either:
+  - pattern: pathlib.Path.unlink(...)
+  - pattern: $VAR = pathlib.Path.unlink
+  - pattern: Path.unlink(...)
+  - pattern: $VAR = Path.unlink
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-pathlib-Path-write_bytes
+  languages:
+  - python
+  message: Avoid using pathlib.Path.write_bytes(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: pathlib.Path.write_bytes()
+    category: File or System Operation
+  pattern-either:
+  - pattern: pathlib.Path.write_bytes(...)
+  - pattern: $VAR = pathlib.Path.write_bytes
+  - pattern: Path.write_bytes(...)
+  - pattern: $VAR = Path.write_bytes
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-pathlib-Path-write_text
+  languages:
+  - python
+  message: Avoid using pathlib.Path.write_text(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: pathlib.Path.write_text()
+    category: File or System Operation
+  pattern-either:
+  - pattern: pathlib.Path.write_text(...)
+  - pattern: $VAR = pathlib.Path.write_text
+  - pattern: Path.write_text(...)
+  - pattern: $VAR = Path.write_text
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-pathlib-PurePath-__new__
+  languages:
+  - python
+  message: Avoid using pathlib.PurePath.__new__(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: pathlib.PurePath.__new__()
+    category: File or System Operation
+  pattern-either:
+  - pattern: pathlib.PurePath.__new__(...)
+  - pattern: $VAR = pathlib.PurePath.__new__
+  - pattern: PurePath.__new__(...)
+  - pattern: $VAR = PurePath.__new__
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-pathlib-PurePath-__rtruediv__
+  languages:
+  - python
+  message: Avoid using pathlib.PurePath.__rtruediv__(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: pathlib.PurePath.__rtruediv__()
+    category: File or System Operation
+  pattern-either:
+  - pattern: pathlib.PurePath.__rtruediv__(...)
+  - pattern: $VAR = pathlib.PurePath.__rtruediv__
+  - pattern: PurePath.__rtruediv__(...)
+  - pattern: $VAR = PurePath.__rtruediv__
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-pathlib-PurePath-__truediv__
+  languages:
+  - python
+  message: Avoid using pathlib.PurePath.__truediv__(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: pathlib.PurePath.__truediv__()
+    category: File or System Operation
+  pattern-either:
+  - pattern: pathlib.PurePath.__truediv__(...)
+  - pattern: $VAR = pathlib.PurePath.__truediv__
+  - pattern: PurePath.__truediv__(...)
+  - pattern: $VAR = PurePath.__truediv__
+  severity: WARNING
+  tags:
+  - File or System Operation

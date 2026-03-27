@@ -1,0 +1,261 @@
+rules:
+- id: no-os-execl
+  languages:
+  - python
+  message: Avoid using os.execl(), as it can lead to potential issues with command execution.
+  metadata:
+    api: os.execl()
+    category: Command Execution
+  pattern-either:
+  - pattern: os.execl(...)
+  - pattern: $VAR = os.execl
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-os-execle
+  languages:
+  - python
+  message: Avoid using os.execle(), as it can lead to potential issues with command execution.
+  metadata:
+    api: os.execle()
+    category: Command Execution
+  pattern-either:
+  - pattern: os.execle(...)
+  - pattern: $VAR = os.execle
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-os-execlp
+  languages:
+  - python
+  message: Avoid using os.execlp(), as it can lead to potential issues with command execution.
+  metadata:
+    api: os.execlp()
+    category: Command Execution
+  pattern-either:
+  - pattern: os.execlp(...)
+  - pattern: $VAR = os.execlp
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-os-execlpe
+  languages:
+  - python
+  message: Avoid using os.execlpe(), as it can lead to potential issues with command execution.
+  metadata:
+    api: os.execlpe()
+    category: Command Execution
+  pattern-either:
+  - pattern: os.execlpe(...)
+  - pattern: $VAR = os.execlpe
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-os-execv
+  languages:
+  - python
+  message: Avoid using os.execv(), as it can lead to potential issues with command execution.
+  metadata:
+    api: os.execv()
+    category: Command Execution
+  pattern-either:
+  - pattern: os.execv(...)
+  - pattern: $VAR = os.execv
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-os-execve
+  languages:
+  - python
+  message: Avoid using os.execve(), as it can lead to potential issues with command execution.
+  metadata:
+    api: os.execve()
+    category: Command Execution
+  pattern-either:
+  - pattern: os.execve(...)
+  - pattern: $VAR = os.execve
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-os-execvp
+  languages:
+  - python
+  message: Avoid using os.execvp(), as it can lead to potential issues with command execution.
+  metadata:
+    api: os.execvp()
+    category: Command Execution
+  pattern-either:
+  - pattern: os.execvp(...)
+  - pattern: $VAR = os.execvp
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-os-execvpe
+  languages:
+  - python
+  message: Avoid using os.execvpe(), as it can lead to potential issues with command execution.
+  metadata:
+    api: os.execvpe()
+    category: Command Execution
+  pattern-either:
+  - pattern: os.execvpe(...)
+  - pattern: $VAR = os.execvpe
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-os-posix_spawn
+  languages:
+  - python
+  message: Avoid using os.posix_spawn(), as it can lead to potential issues with command execution.
+  metadata:
+    api: os.posix_spawn()
+    category: Command Execution
+  pattern-either:
+  - pattern: os.posix_spawn(...)
+  - pattern: $VAR = os.posix_spawn
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-os-posix_spawnp
+  languages:
+  - python
+  message: Avoid using os.posix_spawnp(), as it can lead to potential issues with command execution.
+  metadata:
+    api: os.posix_spawnp()
+    category: Command Execution
+  pattern-either:
+  - pattern: os.posix_spawnp(...)
+  - pattern: $VAR = os.posix_spawnp
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-os-spawnl
+  languages:
+  - python
+  message: Avoid using os.spawnl(), as it can lead to potential issues with command execution.
+  metadata:
+    api: os.spawnl()
+    category: Command Execution
+  pattern-either:
+  - pattern: os.spawnl(...)
+  - pattern: $VAR = os.spawnl
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-os-spawnle
+  languages:
+  - python
+  message: Avoid using os.spawnle(), as it can lead to potential issues with command execution.
+  metadata:
+    api: os.spawnle()
+    category: Command Execution
+  pattern-either:
+  - pattern: os.spawnle(...)
+  - pattern: $VAR = os.spawnle
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-os-spawnlp
+  languages:
+  - python
+  message: Avoid using os.spawnlp(), as it can lead to potential issues with command execution.
+  metadata:
+    api: os.spawnlp()
+    category: Command Execution
+  pattern-either:
+  - pattern: os.spawnlp(...)
+  - pattern: $VAR = os.spawnlp
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-os-spawnlpe
+  languages:
+  - python
+  message: Avoid using os.spawnlpe(), as it can lead to potential issues with command execution.
+  metadata:
+    api: os.spawnlpe()
+    category: Command Execution
+  pattern-either:
+  - pattern: os.spawnlpe(...)
+  - pattern: $VAR = os.spawnlpe
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-os-spawnv
+  languages:
+  - python
+  message: Avoid using os.spawnv(), as it can lead to potential issues with command execution.
+  metadata:
+    api: os.spawnv()
+    category: Command Execution
+  pattern-either:
+  - pattern: os.spawnv(...)
+  - pattern: $VAR = os.spawnv
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-os-spawnve
+  languages:
+  - python
+  message: Avoid using os.spawnve(), as it can lead to potential issues with command execution.
+  metadata:
+    api: os.spawnve()
+    category: Command Execution
+  pattern-either:
+  - pattern: os.spawnve(...)
+  - pattern: $VAR = os.spawnve
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-os-spawnvp
+  languages:
+  - python
+  message: Avoid using os.spawnvp(), as it can lead to potential issues with command execution.
+  metadata:
+    api: os.spawnvp()
+    category: Command Execution
+  pattern-either:
+  - pattern: os.spawnvp(...)
+  - pattern: $VAR = os.spawnvp
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-os-spawnvpe
+  languages:
+  - python
+  message: Avoid using os.spawnvpe(), as it can lead to potential issues with command execution.
+  metadata:
+    api: os.spawnvpe()
+    category: Command Execution
+  pattern-either:
+  - pattern: os.spawnvpe(...)
+  - pattern: $VAR = os.spawnvpe
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-os-startfile
+  languages:
+  - python
+  message: Avoid using os.startfile(), as it can lead to potential issues with command execution.
+  metadata:
+    api: os.startfile()
+    category: Command Execution
+  pattern-either:
+  - pattern: os.startfile(...)
+  - pattern: $VAR = os.startfile
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-os-system
+  languages:
+  - python
+  message: Avoid using os.system(), as it can lead to potential issues with command execution.
+  metadata:
+    api: os.system()
+    category: Command Execution
+  pattern-either:
+  - pattern: os.system(...)
+  - pattern: $VAR = os.system
+  severity: WARNING
+  tags:
+  - Command Execution

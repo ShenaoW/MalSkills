@@ -1,0 +1,31 @@
+rules:
+- id: no-exec.Command_x__x_.Output
+  languages:
+  - go
+  message: Avoid using exec.Command().Output(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: exec.Command().Output()
+    category: Obfuscation
+  pattern-either:
+  - pattern: exec.Command().Output(...)
+  - pattern: $VAR = exec.Command().Output
+  - pattern: Command().Output(...)
+  - pattern: $VAR = Command().Output
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-exec.Command_x__x_.Run
+  languages:
+  - go
+  message: Avoid using exec.Command().Run(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: exec.Command().Run()
+    category: Obfuscation
+  pattern-either:
+  - pattern: exec.Command().Run(...)
+  - pattern: $VAR = exec.Command().Run
+  - pattern: Command().Run(...)
+  - pattern: $VAR = Command().Run
+  severity: WARNING
+  tags:
+  - Obfuscation

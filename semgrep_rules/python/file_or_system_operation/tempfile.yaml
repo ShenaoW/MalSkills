@@ -1,0 +1,83 @@
+rules:
+- id: no-tempfile-NamedTemporaryFile
+  languages:
+  - python
+  message: Avoid using tempfile.NamedTemporaryFile(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: tempfile.NamedTemporaryFile()
+    category: File or System Operation
+  pattern-either:
+  - pattern: tempfile.NamedTemporaryFile(...)
+  - pattern: $VAR = tempfile.NamedTemporaryFile
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-tempfile-SpooledTemporaryFile-__init__
+  languages:
+  - python
+  message: Avoid using tempfile.SpooledTemporaryFile.__init__(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: tempfile.SpooledTemporaryFile.__init__()
+    category: File or System Operation
+  pattern-either:
+  - pattern: tempfile.SpooledTemporaryFile.__init__(...)
+  - pattern: $VAR = tempfile.SpooledTemporaryFile.__init__
+  - pattern: SpooledTemporaryFile.__init__(...)
+  - pattern: $VAR = SpooledTemporaryFile.__init__
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-tempfile-TemporaryDirectory-__init__
+  languages:
+  - python
+  message: Avoid using tempfile.TemporaryDirectory.__init__(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: tempfile.TemporaryDirectory.__init__()
+    category: File or System Operation
+  pattern-either:
+  - pattern: tempfile.TemporaryDirectory.__init__(...)
+  - pattern: $VAR = tempfile.TemporaryDirectory.__init__
+  - pattern: TemporaryDirectory.__init__(...)
+  - pattern: $VAR = TemporaryDirectory.__init__
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-tempfile-TemporaryFile
+  languages:
+  - python
+  message: Avoid using tempfile.TemporaryFile(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: tempfile.TemporaryFile()
+    category: File or System Operation
+  pattern-either:
+  - pattern: tempfile.TemporaryFile(...)
+  - pattern: $VAR = tempfile.TemporaryFile
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-tempfile-mkdtemp
+  languages:
+  - python
+  message: Avoid using tempfile.mkdtemp(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: tempfile.mkdtemp()
+    category: File or System Operation
+  pattern-either:
+  - pattern: tempfile.mkdtemp(...)
+  - pattern: $VAR = tempfile.mkdtemp
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-tempfile-mkstemp
+  languages:
+  - python
+  message: Avoid using tempfile.mkstemp(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: tempfile.mkstemp()
+    category: File or System Operation
+  pattern-either:
+  - pattern: tempfile.mkstemp(...)
+  - pattern: $VAR = tempfile.mkstemp
+  severity: WARNING
+  tags:
+  - File or System Operation

@@ -1,0 +1,61 @@
+rules:
+- id: no-Botan-AES_128-decrypt
+  languages:
+  - cpp
+  message: Avoid using Botan::AES_128::decrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: Botan::AES_128::decrypt()
+    category: Cryptography
+  pattern-either:
+  - pattern: Botan::AES_128::decrypt(...)
+  - pattern: $VAR = Botan::AES_128::decrypt
+  - pattern: AES_128::decrypt(...)
+  - pattern: $VAR = AES_128::decrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-Botan-AES_128-encrypt
+  languages:
+  - cpp
+  message: Avoid using Botan::AES_128::encrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: Botan::AES_128::encrypt()
+    category: Cryptography
+  pattern-either:
+  - pattern: Botan::AES_128::encrypt(...)
+  - pattern: $VAR = Botan::AES_128::encrypt
+  - pattern: AES_128::encrypt(...)
+  - pattern: $VAR = AES_128::encrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-Botan-Cipher_Mode-finish
+  languages:
+  - cpp
+  message: Avoid using Botan::Cipher_Mode::finish(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: Botan::Cipher_Mode::finish()
+    category: Cryptography
+  pattern-either:
+  - pattern: Botan::Cipher_Mode::finish(...)
+  - pattern: $VAR = Botan::Cipher_Mode::finish
+  - pattern: Cipher_Mode::finish(...)
+  - pattern: $VAR = Cipher_Mode::finish
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-Botan-Cipher_Mode-start
+  languages:
+  - cpp
+  message: Avoid using Botan::Cipher_Mode::start(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: Botan::Cipher_Mode::start()
+    category: Cryptography
+  pattern-either:
+  - pattern: Botan::Cipher_Mode::start(...)
+  - pattern: $VAR = Botan::Cipher_Mode::start
+  - pattern: Cipher_Mode::start(...)
+  - pattern: $VAR = Cipher_Mode::start
+  severity: WARNING
+  tags:
+  - Cryptography

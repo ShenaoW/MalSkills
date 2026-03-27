@@ -1,0 +1,281 @@
+rules:
+- id: no-System-AppDomain-CurrentDomain-AssemblyResolve
+  languages:
+  - csharp
+  message: Avoid using System.AppDomain.CurrentDomain.AssemblyResolve(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: System.AppDomain.CurrentDomain.AssemblyResolve()
+    category: Obfuscation
+  pattern-either:
+  - pattern: System.AppDomain.CurrentDomain.AssemblyResolve(...)
+  - pattern: $VAR = System.AppDomain.CurrentDomain.AssemblyResolve
+  - pattern: AppDomain.CurrentDomain.AssemblyResolve(...)
+  - pattern: $VAR = AppDomain.CurrentDomain.AssemblyResolve
+  - pattern: CurrentDomain.AssemblyResolve(...)
+  - pattern: $VAR = CurrentDomain.AssemblyResolve
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-System-AppDomain-DefineDynamicAssembly
+  languages:
+  - csharp
+  message: Avoid using System.AppDomain.DefineDynamicAssembly(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: System.AppDomain.DefineDynamicAssembly()
+    category: Obfuscation
+  pattern-either:
+  - pattern: System.AppDomain.DefineDynamicAssembly(...)
+  - pattern: $VAR = System.AppDomain.DefineDynamicAssembly
+  - pattern: AppDomain.DefineDynamicAssembly(...)
+  - pattern: $VAR = AppDomain.DefineDynamicAssembly
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-System-Convert-FromBase64String
+  languages:
+  - csharp
+  message: Avoid using System.Convert.FromBase64String(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: System.Convert.FromBase64String()
+    category: Obfuscation
+  pattern-either:
+  - pattern: System.Convert.FromBase64String(...)
+  - pattern: $VAR = System.Convert.FromBase64String
+  - pattern: Convert.FromBase64String(...)
+  - pattern: $VAR = Convert.FromBase64String
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-System-Convert-ToBase64String
+  languages:
+  - csharp
+  message: Avoid using System.Convert.ToBase64String(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: System.Convert.ToBase64String()
+    category: Obfuscation
+  pattern-either:
+  - pattern: System.Convert.ToBase64String(...)
+  - pattern: $VAR = System.Convert.ToBase64String
+  - pattern: Convert.ToBase64String(...)
+  - pattern: $VAR = Convert.ToBase64String
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-System-Delegate-CreateDelegate
+  languages:
+  - csharp
+  message: Avoid using System.Delegate.CreateDelegate(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: System.Delegate.CreateDelegate()
+    category: Obfuscation
+  pattern-either:
+  - pattern: System.Delegate.CreateDelegate(...)
+  - pattern: $VAR = System.Delegate.CreateDelegate
+  - pattern: Delegate.CreateDelegate(...)
+  - pattern: $VAR = Delegate.CreateDelegate
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-System-Reflection-Assembly-GetType
+  languages:
+  - csharp
+  message: Avoid using System.Reflection.Assembly.GetType(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: System.Reflection.Assembly.GetType()
+    category: Obfuscation
+  pattern-either:
+  - pattern: System.Reflection.Assembly.GetType(...)
+  - pattern: $VAR = System.Reflection.Assembly.GetType
+  - pattern: Reflection.Assembly.GetType(...)
+  - pattern: $VAR = Reflection.Assembly.GetType
+  - pattern: Assembly.GetType(...)
+  - pattern: $VAR = Assembly.GetType
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-System-Reflection-Emit-AssemblyBuilder-DefineDynamicAssembly
+  languages:
+  - csharp
+  message: Avoid using System.Reflection.Emit.AssemblyBuilder.DefineDynamicAssembly(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: System.Reflection.Emit.AssemblyBuilder.DefineDynamicAssembly()
+    category: Obfuscation
+  pattern-either:
+  - pattern: System.Reflection.Emit.AssemblyBuilder.DefineDynamicAssembly(...)
+  - pattern: $VAR = System.Reflection.Emit.AssemblyBuilder.DefineDynamicAssembly
+  - pattern: Reflection.Emit.AssemblyBuilder.DefineDynamicAssembly(...)
+  - pattern: $VAR = Reflection.Emit.AssemblyBuilder.DefineDynamicAssembly
+  - pattern: Emit.AssemblyBuilder.DefineDynamicAssembly(...)
+  - pattern: $VAR = Emit.AssemblyBuilder.DefineDynamicAssembly
+  - pattern: AssemblyBuilder.DefineDynamicAssembly(...)
+  - pattern: $VAR = AssemblyBuilder.DefineDynamicAssembly
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-System-Reflection-Emit-ILGenerator-Emit
+  languages:
+  - csharp
+  message: Avoid using System.Reflection.Emit.ILGenerator.Emit(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: System.Reflection.Emit.ILGenerator.Emit()
+    category: Obfuscation
+  pattern-either:
+  - pattern: System.Reflection.Emit.ILGenerator.Emit(...)
+  - pattern: $VAR = System.Reflection.Emit.ILGenerator.Emit
+  - pattern: Reflection.Emit.ILGenerator.Emit(...)
+  - pattern: $VAR = Reflection.Emit.ILGenerator.Emit
+  - pattern: Emit.ILGenerator.Emit(...)
+  - pattern: $VAR = Emit.ILGenerator.Emit
+  - pattern: ILGenerator.Emit(...)
+  - pattern: $VAR = ILGenerator.Emit
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-System-Reflection-Emit-ModuleBuilder-DefineDynamicModule
+  languages:
+  - csharp
+  message: Avoid using System.Reflection.Emit.ModuleBuilder.DefineDynamicModule(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: System.Reflection.Emit.ModuleBuilder.DefineDynamicModule()
+    category: Obfuscation
+  pattern-either:
+  - pattern: System.Reflection.Emit.ModuleBuilder.DefineDynamicModule(...)
+  - pattern: $VAR = System.Reflection.Emit.ModuleBuilder.DefineDynamicModule
+  - pattern: Reflection.Emit.ModuleBuilder.DefineDynamicModule(...)
+  - pattern: $VAR = Reflection.Emit.ModuleBuilder.DefineDynamicModule
+  - pattern: Emit.ModuleBuilder.DefineDynamicModule(...)
+  - pattern: $VAR = Emit.ModuleBuilder.DefineDynamicModule
+  - pattern: ModuleBuilder.DefineDynamicModule(...)
+  - pattern: $VAR = ModuleBuilder.DefineDynamicModule
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-System-Reflection-Emit-TypeBuilder-CreateType
+  languages:
+  - csharp
+  message: Avoid using System.Reflection.Emit.TypeBuilder.CreateType(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: System.Reflection.Emit.TypeBuilder.CreateType()
+    category: Obfuscation
+  pattern-either:
+  - pattern: System.Reflection.Emit.TypeBuilder.CreateType(...)
+  - pattern: $VAR = System.Reflection.Emit.TypeBuilder.CreateType
+  - pattern: Reflection.Emit.TypeBuilder.CreateType(...)
+  - pattern: $VAR = Reflection.Emit.TypeBuilder.CreateType
+  - pattern: Emit.TypeBuilder.CreateType(...)
+  - pattern: $VAR = Emit.TypeBuilder.CreateType
+  - pattern: TypeBuilder.CreateType(...)
+  - pattern: $VAR = TypeBuilder.CreateType
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-System-Reflection-Emit-TypeBuilder-DefineMethod
+  languages:
+  - csharp
+  message: Avoid using System.Reflection.Emit.TypeBuilder.DefineMethod(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: System.Reflection.Emit.TypeBuilder.DefineMethod()
+    category: Obfuscation
+  pattern-either:
+  - pattern: System.Reflection.Emit.TypeBuilder.DefineMethod(...)
+  - pattern: $VAR = System.Reflection.Emit.TypeBuilder.DefineMethod
+  - pattern: Reflection.Emit.TypeBuilder.DefineMethod(...)
+  - pattern: $VAR = Reflection.Emit.TypeBuilder.DefineMethod
+  - pattern: Emit.TypeBuilder.DefineMethod(...)
+  - pattern: $VAR = Emit.TypeBuilder.DefineMethod
+  - pattern: TypeBuilder.DefineMethod(...)
+  - pattern: $VAR = TypeBuilder.DefineMethod
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-System-Text-Encoding-UTF8-GetBytes
+  languages:
+  - csharp
+  message: Avoid using System.Text.Encoding.UTF8.GetBytes(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: System.Text.Encoding.UTF8.GetBytes()
+    category: Obfuscation
+  pattern-either:
+  - pattern: System.Text.Encoding.UTF8.GetBytes(...)
+  - pattern: $VAR = System.Text.Encoding.UTF8.GetBytes
+  - pattern: Text.Encoding.UTF8.GetBytes(...)
+  - pattern: $VAR = Text.Encoding.UTF8.GetBytes
+  - pattern: Encoding.UTF8.GetBytes(...)
+  - pattern: $VAR = Encoding.UTF8.GetBytes
+  - pattern: UTF8.GetBytes(...)
+  - pattern: $VAR = UTF8.GetBytes
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-System-Text-Encoding-UTF8-GetString
+  languages:
+  - csharp
+  message: Avoid using System.Text.Encoding.UTF8.GetString(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: System.Text.Encoding.UTF8.GetString()
+    category: Obfuscation
+  pattern-either:
+  - pattern: System.Text.Encoding.UTF8.GetString(...)
+  - pattern: $VAR = System.Text.Encoding.UTF8.GetString
+  - pattern: Text.Encoding.UTF8.GetString(...)
+  - pattern: $VAR = Text.Encoding.UTF8.GetString
+  - pattern: Encoding.UTF8.GetString(...)
+  - pattern: $VAR = Encoding.UTF8.GetString
+  - pattern: UTF8.GetString(...)
+  - pattern: $VAR = UTF8.GetString
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-System-Text-Encoding-Unicode-GetBytes
+  languages:
+  - csharp
+  message: Avoid using System.Text.Encoding.Unicode.GetBytes(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: System.Text.Encoding.Unicode.GetBytes()
+    category: Obfuscation
+  pattern-either:
+  - pattern: System.Text.Encoding.Unicode.GetBytes(...)
+  - pattern: $VAR = System.Text.Encoding.Unicode.GetBytes
+  - pattern: Text.Encoding.Unicode.GetBytes(...)
+  - pattern: $VAR = Text.Encoding.Unicode.GetBytes
+  - pattern: Encoding.Unicode.GetBytes(...)
+  - pattern: $VAR = Encoding.Unicode.GetBytes
+  - pattern: Unicode.GetBytes(...)
+  - pattern: $VAR = Unicode.GetBytes
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-System-Text-Encoding-Unicode-GetString
+  languages:
+  - csharp
+  message: Avoid using System.Text.Encoding.Unicode.GetString(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: System.Text.Encoding.Unicode.GetString()
+    category: Obfuscation
+  pattern-either:
+  - pattern: System.Text.Encoding.Unicode.GetString(...)
+  - pattern: $VAR = System.Text.Encoding.Unicode.GetString
+  - pattern: Text.Encoding.Unicode.GetString(...)
+  - pattern: $VAR = Text.Encoding.Unicode.GetString
+  - pattern: Encoding.Unicode.GetString(...)
+  - pattern: $VAR = Encoding.Unicode.GetString
+  - pattern: Unicode.GetString(...)
+  - pattern: $VAR = Unicode.GetString
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-System-Type-GetField
+  languages:
+  - csharp
+  message: Avoid using System.Type.GetField(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: System.Type.GetField()
+    category: Obfuscation
+  pattern-either:
+  - pattern: System.Type.GetField(...)
+  - pattern: $VAR = System.Type.GetField
+  - pattern: Type.GetField(...)
+  - pattern: $VAR = Type.GetField
+  severity: WARNING
+  tags:
+  - Obfuscation

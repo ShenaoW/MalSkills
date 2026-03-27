@@ -1,0 +1,27 @@
+rules:
+- id: no-tls.Dial
+  languages:
+  - go
+  message: Avoid using tls.Dial(), as it can lead to potential issues with network access.
+  metadata:
+    api: tls.Dial()
+    category: Network Access
+  pattern-either:
+  - pattern: tls.Dial(...)
+  - pattern: $VAR = tls.Dial
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-tls.Listen
+  languages:
+  - go
+  message: Avoid using tls.Listen(), as it can lead to potential issues with network access.
+  metadata:
+    api: tls.Listen()
+    category: Network Access
+  pattern-either:
+  - pattern: tls.Listen(...)
+  - pattern: $VAR = tls.Listen
+  severity: WARNING
+  tags:
+  - Network Access

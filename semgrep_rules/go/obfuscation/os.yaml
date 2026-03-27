@@ -1,0 +1,27 @@
+rules:
+- id: no-os.Open
+  languages:
+  - go
+  message: Avoid using os.Open(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: os.Open()
+    category: Obfuscation
+  pattern-either:
+  - pattern: os.Open(...)
+  - pattern: $VAR = os.Open
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-os.ReadFile
+  languages:
+  - go
+  message: Avoid using os.ReadFile(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: os.ReadFile()
+    category: Obfuscation
+  pattern-either:
+  - pattern: os.ReadFile(...)
+  - pattern: $VAR = os.ReadFile
+  severity: WARNING
+  tags:
+  - Obfuscation

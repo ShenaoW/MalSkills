@@ -1,0 +1,66 @@
+rules:
+- id: no-UDPSocket.bind
+  languages:
+  - ruby
+  message: Avoid using UDPSocket.bind(), as it can lead to potential issues with network access.
+  metadata:
+    api: UDPSocket.bind()
+    category: Network Access
+  pattern-either:
+  - pattern: UDPSocket.bind(...)
+  - pattern: $VAR = UDPSocket.bind
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-UDPSocket.new
+  languages:
+  - ruby
+  message: Avoid using UDPSocket.new(), as it can lead to potential issues with network access.
+  metadata:
+    api: UDPSocket.new()
+    category: Network Access
+  pattern-either:
+  - pattern: UDPSocket.new(...)
+  - pattern: $VAR = UDPSocket.new
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-UDPSocket.open
+  languages:
+  - ruby
+  message: Avoid using UDPSocket.open(), as it can lead to potential issues with network access.
+  metadata:
+    api: UDPSocket.open()
+    category: Network Access
+  pattern-either:
+  - pattern: UDPSocket.open(...)
+  - pattern: $VAR = UDPSocket.open
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-UDPSocket.recvfrom
+  languages:
+  - ruby
+  message: Avoid using UDPSocket.recvfrom(), as it can lead to potential issues with network access.
+  metadata:
+    api: UDPSocket.recvfrom()
+    category: Network Access
+  pattern-either:
+  - pattern: UDPSocket.recvfrom(...)
+  - pattern: $VAR = UDPSocket.recvfrom
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-UDPSocket.send
+  languages:
+  - ruby
+  message: Avoid using UDPSocket.send(), as it can lead to potential issues with network access.
+  metadata:
+    api: UDPSocket.send()
+    category: Network Access
+  pattern-either:
+  - pattern: UDPSocket.send(...)
+  - pattern: $VAR = UDPSocket.send
+  severity: WARNING
+  tags:
+  - Network Access

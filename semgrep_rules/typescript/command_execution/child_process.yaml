@@ -1,0 +1,111 @@
+rules:
+- id: no-child_process-exec
+  languages:
+  - typescript
+  message: Avoid using child_process.exec(), as it can lead to potential issues with command execution.
+  metadata:
+    api: child_process.exec()
+    category: Command Execution
+  pattern-either:
+  - pattern: child_process.exec(...)
+  - pattern: $VAR = child_process.exec
+  - pattern: exec(...)
+  - pattern: $VAR = exec
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-child_process-execFile
+  languages:
+  - typescript
+  message: Avoid using child_process.execFile(), as it can lead to potential issues with command execution.
+  metadata:
+    api: child_process.execFile()
+    category: Command Execution
+  pattern-either:
+  - pattern: child_process.execFile(...)
+  - pattern: $VAR = child_process.execFile
+  - pattern: execFile(...)
+  - pattern: $VAR = execFile
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-child_process-execFileSync
+  languages:
+  - typescript
+  message: Avoid using child_process.execFileSync(), as it can lead to potential issues with command execution.
+  metadata:
+    api: child_process.execFileSync()
+    category: Command Execution
+  pattern-either:
+  - pattern: child_process.execFileSync(...)
+  - pattern: $VAR = child_process.execFileSync
+  - pattern: execFileSync(...)
+  - pattern: $VAR = execFileSync
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-child_process-execSync
+  languages:
+  - typescript
+  message: Avoid using child_process.execSync(), as it can lead to potential issues with command execution.
+  metadata:
+    api: child_process.execSync()
+    category: Command Execution
+  pattern-either:
+  - pattern: child_process.execSync(...)
+  - pattern: $VAR = child_process.execSync
+  - pattern: execSync(...)
+  - pattern: $VAR = execSync
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-child_process-fork
+  languages:
+  - typescript
+  message: Avoid using child_process.fork(), as it can lead to potential issues with command execution.
+  metadata:
+    api: child_process.fork()
+    category: Command Execution
+  pattern-either:
+  - pattern: child_process.fork(...)
+  - pattern: $VAR = child_process.fork
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-child_process-spawn
+  languages:
+  - typescript
+  message: Avoid using child_process.spawn(), as it can lead to potential issues with command execution.
+  metadata:
+    api: child_process.spawn()
+    category: Command Execution
+  pattern-either:
+  - pattern: child_process.spawn(...)
+  - pattern: $VAR = child_process.spawn
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-child_process-spawnSync
+  languages:
+  - typescript
+  message: Avoid using child_process.spawnSync(), as it can lead to potential issues with command execution.
+  metadata:
+    api: child_process.spawnSync()
+    category: Command Execution
+  pattern-either:
+  - pattern: child_process.spawnSync(...)
+  - pattern: $VAR = child_process.spawnSync
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-require-child_process
+  languages:
+  - typescript
+  message: Avoid using require('child_process'), as it can lead to potential issues with command execution.
+  metadata:
+    api: require('child_process')
+    category: Command Execution
+  pattern: require('child_process')
+  severity: WARNING
+  tags:
+  - Command Execution

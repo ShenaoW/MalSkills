@@ -1,0 +1,38 @@
+rules:
+- id: no-tmp-dirSync
+  languages:
+  - javascript
+  message: Avoid using tmp.dirSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: tmp.dirSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: tmp.dirSync(...)
+  - pattern: $VAR = tmp.dirSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-tmp-fileSync
+  languages:
+  - javascript
+  message: Avoid using tmp.fileSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: tmp.fileSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: tmp.fileSync(...)
+  - pattern: $VAR = tmp.fileSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-require-tmp
+  languages:
+  - javascript
+  message: Avoid using require('tmp'), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: require('tmp')
+    category: File or System Operation
+  pattern: require('tmp')
+  severity: WARNING
+  tags:
+  - File or System Operation

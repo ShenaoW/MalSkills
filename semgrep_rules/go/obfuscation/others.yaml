@@ -1,0 +1,40 @@
+rules:
+- id: no-aes.NewCipher
+  languages:
+  - go
+  message: Avoid using aes.NewCipher(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: aes.NewCipher()
+    category: Obfuscation
+  pattern-either:
+  - pattern: aes.NewCipher(...)
+  - pattern: $VAR = aes.NewCipher
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-ioutil.ReadFile
+  languages:
+  - go
+  message: Avoid using ioutil.ReadFile(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: ioutil.ReadFile()
+    category: Obfuscation
+  pattern-either:
+  - pattern: ioutil.ReadFile(...)
+  - pattern: $VAR = ioutil.ReadFile
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-unsafe.Pointer
+  languages:
+  - go
+  message: Avoid using unsafe.Pointer(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: unsafe.Pointer()
+    category: Obfuscation
+  pattern-either:
+  - pattern: unsafe.Pointer(...)
+  - pattern: $VAR = unsafe.Pointer
+  severity: WARNING
+  tags:
+  - Obfuscation

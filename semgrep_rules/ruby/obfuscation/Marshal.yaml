@@ -1,0 +1,27 @@
+rules:
+- id: no-Marshal.dump
+  languages:
+  - ruby
+  message: Avoid using Marshal.dump(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: Marshal.dump()
+    category: Obfuscation
+  pattern-either:
+  - pattern: Marshal.dump(...)
+  - pattern: $VAR = Marshal.dump
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-Marshal.load
+  languages:
+  - ruby
+  message: Avoid using Marshal.load(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: Marshal.load()
+    category: Obfuscation
+  pattern-either:
+  - pattern: Marshal.load(...)
+  - pattern: $VAR = Marshal.load
+  severity: WARNING
+  tags:
+  - Obfuscation

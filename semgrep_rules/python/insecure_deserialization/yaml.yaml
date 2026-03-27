@@ -1,0 +1,27 @@
+rules:
+- id: no-yaml-load
+  languages:
+  - python
+  message: Avoid using yaml.load(), as it can lead to potential issues with insecure deserialization.
+  metadata:
+    api: yaml.load()
+    category: Insecure Deserialization
+  pattern-either:
+  - pattern: yaml.load(...)
+  - pattern: $VAR = yaml.load
+  severity: WARNING
+  tags:
+  - Insecure Deserialization
+- id: no-yaml-load_all
+  languages:
+  - python
+  message: Avoid using yaml.load_all(), as it can lead to potential issues with insecure deserialization.
+  metadata:
+    api: yaml.load_all()
+    category: Insecure Deserialization
+  pattern-either:
+  - pattern: yaml.load_all(...)
+  - pattern: $VAR = yaml.load_all
+  severity: WARNING
+  tags:
+  - Insecure Deserialization

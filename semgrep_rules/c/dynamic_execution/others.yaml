@@ -1,0 +1,66 @@
+rules:
+- id: no-dlclose
+  languages:
+  - c
+  message: Avoid using dlclose(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: dlclose()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: dlclose(...)
+  - pattern: $VAR = dlclose
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: no-dlerror
+  languages:
+  - c
+  message: Avoid using dlerror(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: dlerror()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: dlerror(...)
+  - pattern: $VAR = dlerror
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: no-dlopen
+  languages:
+  - c
+  message: Avoid using dlopen(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: dlopen()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: dlopen(...)
+  - pattern: $VAR = dlopen
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: no-dlsym
+  languages:
+  - c
+  message: Avoid using dlsym(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: dlsym()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: dlsym(...)
+  - pattern: $VAR = dlsym
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: no-mmap
+  languages:
+  - c
+  message: Avoid using mmap(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: mmap()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: mmap(...)
+  - pattern: $VAR = mmap
+  severity: WARNING
+  tags:
+  - Dynamic Execution

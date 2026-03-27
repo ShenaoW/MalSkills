@@ -1,0 +1,89 @@
+rules:
+- id: no-ftplib-FTP
+  languages:
+  - python
+  message: Avoid using ftplib.FTP(), as it can lead to potential issues with network access.
+  metadata:
+    api: ftplib.FTP()
+    category: Network Access
+  pattern-either:
+  - pattern: ftplib.FTP(...)
+  - pattern: $VAR = ftplib.FTP
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-ftplib-FTP-connect
+  languages:
+  - python
+  message: Avoid using ftplib.FTP.connect(), as it can lead to potential issues with network access.
+  metadata:
+    api: ftplib.FTP.connect()
+    category: Network Access
+  pattern-either:
+  - pattern: ftplib.FTP.connect(...)
+  - pattern: $VAR = ftplib.FTP.connect
+  - pattern: FTP.connect(...)
+  - pattern: $VAR = FTP.connect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-ftplib-FTP-cwd
+  languages:
+  - python
+  message: Avoid using ftplib.FTP.cwd(), as it can lead to potential issues with network access.
+  metadata:
+    api: ftplib.FTP.cwd()
+    category: Network Access
+  pattern-either:
+  - pattern: ftplib.FTP.cwd(...)
+  - pattern: $VAR = ftplib.FTP.cwd
+  - pattern: FTP.cwd(...)
+  - pattern: $VAR = FTP.cwd
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-ftplib-FTP-login
+  languages:
+  - python
+  message: Avoid using ftplib.FTP.login(), as it can lead to potential issues with network access.
+  metadata:
+    api: ftplib.FTP.login()
+    category: Network Access
+  pattern-either:
+  - pattern: ftplib.FTP.login(...)
+  - pattern: $VAR = ftplib.FTP.login
+  - pattern: FTP.login(...)
+  - pattern: $VAR = FTP.login
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-ftplib-FTP-retrbinary
+  languages:
+  - python
+  message: Avoid using ftplib.FTP.retrbinary(), as it can lead to potential issues with network access.
+  metadata:
+    api: ftplib.FTP.retrbinary()
+    category: Network Access
+  pattern-either:
+  - pattern: ftplib.FTP.retrbinary(...)
+  - pattern: $VAR = ftplib.FTP.retrbinary
+  - pattern: FTP.retrbinary(...)
+  - pattern: $VAR = FTP.retrbinary
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-ftplib-FTP-storbinary
+  languages:
+  - python
+  message: Avoid using ftplib.FTP.storbinary(), as it can lead to potential issues with network access.
+  metadata:
+    api: ftplib.FTP.storbinary()
+    category: Network Access
+  pattern-either:
+  - pattern: ftplib.FTP.storbinary(...)
+  - pattern: $VAR = ftplib.FTP.storbinary
+  - pattern: FTP.storbinary(...)
+  - pattern: $VAR = FTP.storbinary
+  severity: WARNING
+  tags:
+  - Network Access

@@ -1,0 +1,66 @@
+rules:
+- id: no-Cmd.CombinedOutput
+  languages:
+  - go
+  message: Avoid using Cmd.CombinedOutput(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Cmd.CombinedOutput()
+    category: Command Execution
+  pattern-either:
+  - pattern: Cmd.CombinedOutput(...)
+  - pattern: $VAR = Cmd.CombinedOutput
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-Cmd.Output
+  languages:
+  - go
+  message: Avoid using Cmd.Output(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Cmd.Output()
+    category: Command Execution
+  pattern-either:
+  - pattern: Cmd.Output(...)
+  - pattern: $VAR = Cmd.Output
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-Cmd.Run
+  languages:
+  - go
+  message: Avoid using Cmd.Run(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Cmd.Run()
+    category: Command Execution
+  pattern-either:
+  - pattern: Cmd.Run(...)
+  - pattern: $VAR = Cmd.Run
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-Cmd.Start
+  languages:
+  - go
+  message: Avoid using Cmd.Start(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Cmd.Start()
+    category: Command Execution
+  pattern-either:
+  - pattern: Cmd.Start(...)
+  - pattern: $VAR = Cmd.Start
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-Cmd.Wait
+  languages:
+  - go
+  message: Avoid using Cmd.Wait(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Cmd.Wait()
+    category: Command Execution
+  pattern-either:
+  - pattern: Cmd.Wait(...)
+  - pattern: $VAR = Cmd.Wait
+  severity: WARNING
+  tags:
+  - Command Execution

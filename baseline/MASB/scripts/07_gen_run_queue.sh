@@ -48,8 +48,10 @@ for audit_file in malicious_dir.glob('*_audit.json'):
         with open(audit_file, 'r') as f:
             audit = json.load(f)
 
-        # Parse filename: rest_1_skillname_audit.json
-        filename = audit_file.stem  # remove _audit.json
+        # Parse filename: repoid_skillname_audit.json
+        filename = audit_file.stem
+        if filename.endswith('_audit'):
+            filename = filename[:-6]
         parts = filename.split('_')
 
         if len(parts) >= 3:

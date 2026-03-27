@@ -1,0 +1,168 @@
+rules:
+- id: no-systeminformation-bios
+  languages:
+  - javascript
+  message: Avoid using systeminformation.bios(), as it can lead to potential issues with command execution.
+  metadata:
+    api: systeminformation.bios()
+    category: Command Execution
+  pattern-either:
+  - pattern: systeminformation.bios(...)
+  - pattern: $VAR = systeminformation.bios
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-systeminformation-cpuTemperature
+  languages:
+  - javascript
+  message: Avoid using systeminformation.cpuTemperature(), as it can lead to potential issues with command execution.
+  metadata:
+    api: systeminformation.cpuTemperature()
+    category: Command Execution
+  pattern-either:
+  - pattern: systeminformation.cpuTemperature(...)
+  - pattern: $VAR = systeminformation.cpuTemperature
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-systeminformation-diskLayout
+  languages:
+  - javascript
+  message: Avoid using systeminformation.diskLayout(), as it can lead to potential issues with command execution.
+  metadata:
+    api: systeminformation.diskLayout()
+    category: Command Execution
+  pattern-either:
+  - pattern: systeminformation.diskLayout(...)
+  - pattern: $VAR = systeminformation.diskLayout
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-systeminformation-dockerContainerStats
+  languages:
+  - javascript
+  message: Avoid using systeminformation.dockerContainerStats(), as it can lead to potential issues with command execution.
+  metadata:
+    api: systeminformation.dockerContainerStats()
+    category: Command Execution
+  pattern-either:
+  - pattern: systeminformation.dockerContainerStats(...)
+  - pattern: $VAR = systeminformation.dockerContainerStats
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-systeminformation-fsSize
+  languages:
+  - javascript
+  message: Avoid using systeminformation.fsSize(), as it can lead to potential issues with command execution.
+  metadata:
+    api: systeminformation.fsSize()
+    category: Command Execution
+  pattern-either:
+  - pattern: systeminformation.fsSize(...)
+  - pattern: $VAR = systeminformation.fsSize
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-systeminformation-fsStats
+  languages:
+  - javascript
+  message: Avoid using systeminformation.fsStats(), as it can lead to potential issues with command execution.
+  metadata:
+    api: systeminformation.fsStats()
+    category: Command Execution
+  pattern-either:
+  - pattern: systeminformation.fsStats(...)
+  - pattern: $VAR = systeminformation.fsStats
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-systeminformation-mem
+  languages:
+  - javascript
+  message: Avoid using systeminformation.mem(), as it can lead to potential issues with command execution.
+  metadata:
+    api: systeminformation.mem()
+    category: Command Execution
+  pattern-either:
+  - pattern: systeminformation.mem(...)
+  - pattern: $VAR = systeminformation.mem
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-systeminformation-networkConnections
+  languages:
+  - javascript
+  message: Avoid using systeminformation.networkConnections(), as it can lead to potential issues with command execution.
+  metadata:
+    api: systeminformation.networkConnections()
+    category: Command Execution
+  pattern-either:
+  - pattern: systeminformation.networkConnections(...)
+  - pattern: $VAR = systeminformation.networkConnections
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-systeminformation-osInfo
+  languages:
+  - javascript
+  message: Avoid using systeminformation.osInfo(), as it can lead to potential issues with command execution.
+  metadata:
+    api: systeminformation.osInfo()
+    category: Command Execution
+  pattern-either:
+  - pattern: systeminformation.osInfo(...)
+  - pattern: $VAR = systeminformation.osInfo
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-systeminformation-services
+  languages:
+  - javascript
+  message: Avoid using systeminformation.services(), as it can lead to potential issues with command execution.
+  metadata:
+    api: systeminformation.services()
+    category: Command Execution
+  pattern-either:
+  - pattern: systeminformation.services(...)
+  - pattern: $VAR = systeminformation.services
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-systeminformation-system
+  languages:
+  - javascript
+  message: Avoid using systeminformation.system(), as it can lead to potential issues with command execution.
+  metadata:
+    api: systeminformation.system()
+    category: Command Execution
+  pattern-either:
+  - pattern: systeminformation.system(...)
+  - pattern: $VAR = systeminformation.system
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-systeminformation-versions
+  languages:
+  - javascript
+  message: Avoid using systeminformation.versions(), as it can lead to potential issues with command execution.
+  metadata:
+    api: systeminformation.versions()
+    category: Command Execution
+  pattern-either:
+  - pattern: systeminformation.versions(...)
+  - pattern: $VAR = systeminformation.versions
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-require-systeminformation
+  languages:
+  - javascript
+  message: Avoid using require('systeminformation'), as it can lead to potential issues with command execution.
+  metadata:
+    api: require('systeminformation')
+    category: Command Execution
+  pattern: require('systeminformation')
+  severity: WARNING
+  tags:
+  - Command Execution

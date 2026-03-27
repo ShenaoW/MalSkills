@@ -1,0 +1,924 @@
+rules:
+- id: no-HttpOpenRequest
+  languages:
+  - cpp
+  message: Avoid using HttpOpenRequest(), as it can lead to potential issues with network access.
+  metadata:
+    api: HttpOpenRequest()
+    category: Network Access
+  pattern-either:
+  - pattern: HttpOpenRequest(...)
+  - pattern: $VAR = HttpOpenRequest
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-HttpSendRequest
+  languages:
+  - cpp
+  message: Avoid using HttpSendRequest(), as it can lead to potential issues with network access.
+  metadata:
+    api: HttpSendRequest()
+    category: Network Access
+  pattern-either:
+  - pattern: HttpSendRequest(...)
+  - pattern: $VAR = HttpSendRequest
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-InternetCloseHandle
+  languages:
+  - cpp
+  message: Avoid using InternetCloseHandle(), as it can lead to potential issues with network access.
+  metadata:
+    api: InternetCloseHandle()
+    category: Network Access
+  pattern-either:
+  - pattern: InternetCloseHandle(...)
+  - pattern: $VAR = InternetCloseHandle
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-InternetConnect
+  languages:
+  - cpp
+  message: Avoid using InternetConnect(), as it can lead to potential issues with network access.
+  metadata:
+    api: InternetConnect()
+    category: Network Access
+  pattern-either:
+  - pattern: InternetConnect(...)
+  - pattern: $VAR = InternetConnect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-InternetOpen
+  languages:
+  - cpp
+  message: Avoid using InternetOpen(), as it can lead to potential issues with network access.
+  metadata:
+    api: InternetOpen()
+    category: Network Access
+  pattern-either:
+  - pattern: InternetOpen(...)
+  - pattern: $VAR = InternetOpen
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-InternetOpenUrl
+  languages:
+  - cpp
+  message: Avoid using InternetOpenUrl(), as it can lead to potential issues with network access.
+  metadata:
+    api: InternetOpenUrl()
+    category: Network Access
+  pattern-either:
+  - pattern: InternetOpenUrl(...)
+  - pattern: $VAR = InternetOpenUrl
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-InternetReadFile
+  languages:
+  - cpp
+  message: Avoid using InternetReadFile(), as it can lead to potential issues with network access.
+  metadata:
+    api: InternetReadFile()
+    category: Network Access
+  pattern-either:
+  - pattern: InternetReadFile(...)
+  - pattern: $VAR = InternetReadFile
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-SSL_CTX_free
+  languages:
+  - cpp
+  message: Avoid using SSL_CTX_free(), as it can lead to potential issues with network access.
+  metadata:
+    api: SSL_CTX_free()
+    category: Network Access
+  pattern-either:
+  - pattern: SSL_CTX_free(...)
+  - pattern: $VAR = SSL_CTX_free
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-SSL_CTX_new
+  languages:
+  - cpp
+  message: Avoid using SSL_CTX_new(), as it can lead to potential issues with network access.
+  metadata:
+    api: SSL_CTX_new()
+    category: Network Access
+  pattern-either:
+  - pattern: SSL_CTX_new(...)
+  - pattern: $VAR = SSL_CTX_new
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-SSL_connect
+  languages:
+  - cpp
+  message: Avoid using SSL_connect(), as it can lead to potential issues with network access.
+  metadata:
+    api: SSL_connect()
+    category: Network Access
+  pattern-either:
+  - pattern: SSL_connect(...)
+  - pattern: $VAR = SSL_connect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-SSL_free
+  languages:
+  - cpp
+  message: Avoid using SSL_free(), as it can lead to potential issues with network access.
+  metadata:
+    api: SSL_free()
+    category: Network Access
+  pattern-either:
+  - pattern: SSL_free(...)
+  - pattern: $VAR = SSL_free
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-SSL_library_init
+  languages:
+  - cpp
+  message: Avoid using SSL_library_init(), as it can lead to potential issues with network access.
+  metadata:
+    api: SSL_library_init()
+    category: Network Access
+  pattern-either:
+  - pattern: SSL_library_init(...)
+  - pattern: $VAR = SSL_library_init
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-SSL_new
+  languages:
+  - cpp
+  message: Avoid using SSL_new(), as it can lead to potential issues with network access.
+  metadata:
+    api: SSL_new()
+    category: Network Access
+  pattern-either:
+  - pattern: SSL_new(...)
+  - pattern: $VAR = SSL_new
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-SSL_read
+  languages:
+  - cpp
+  message: Avoid using SSL_read(), as it can lead to potential issues with network access.
+  metadata:
+    api: SSL_read()
+    category: Network Access
+  pattern-either:
+  - pattern: SSL_read(...)
+  - pattern: $VAR = SSL_read
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-SSL_set_fd
+  languages:
+  - cpp
+  message: Avoid using SSL_set_fd(), as it can lead to potential issues with network access.
+  metadata:
+    api: SSL_set_fd()
+    category: Network Access
+  pattern-either:
+  - pattern: SSL_set_fd(...)
+  - pattern: $VAR = SSL_set_fd
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-SSL_shutdown
+  languages:
+  - cpp
+  message: Avoid using SSL_shutdown(), as it can lead to potential issues with network access.
+  metadata:
+    api: SSL_shutdown()
+    category: Network Access
+  pattern-either:
+  - pattern: SSL_shutdown(...)
+  - pattern: $VAR = SSL_shutdown
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-SSL_write
+  languages:
+  - cpp
+  message: Avoid using SSL_write(), as it can lead to potential issues with network access.
+  metadata:
+    api: SSL_write()
+    category: Network Access
+  pattern-either:
+  - pattern: SSL_write(...)
+  - pattern: $VAR = SSL_write
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-WSACleanup
+  languages:
+  - cpp
+  message: Avoid using WSACleanup(), as it can lead to potential issues with network access.
+  metadata:
+    api: WSACleanup()
+    category: Network Access
+  pattern-either:
+  - pattern: WSACleanup(...)
+  - pattern: $VAR = WSACleanup
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-WSAConnect
+  languages:
+  - cpp
+  message: Avoid using WSAConnect(), as it can lead to potential issues with network access.
+  metadata:
+    api: WSAConnect()
+    category: Network Access
+  pattern-either:
+  - pattern: WSAConnect(...)
+  - pattern: $VAR = WSAConnect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-WSAGetLastError
+  languages:
+  - cpp
+  message: Avoid using WSAGetLastError(), as it can lead to potential issues with network access.
+  metadata:
+    api: WSAGetLastError()
+    category: Network Access
+  pattern-either:
+  - pattern: WSAGetLastError(...)
+  - pattern: $VAR = WSAGetLastError
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-WSARecv
+  languages:
+  - cpp
+  message: Avoid using WSARecv(), as it can lead to potential issues with network access.
+  metadata:
+    api: WSARecv()
+    category: Network Access
+  pattern-either:
+  - pattern: WSARecv(...)
+  - pattern: $VAR = WSARecv
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-WSARecvFrom
+  languages:
+  - cpp
+  message: Avoid using WSARecvFrom(), as it can lead to potential issues with network access.
+  metadata:
+    api: WSARecvFrom()
+    category: Network Access
+  pattern-either:
+  - pattern: WSARecvFrom(...)
+  - pattern: $VAR = WSARecvFrom
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-WSASend
+  languages:
+  - cpp
+  message: Avoid using WSASend(), as it can lead to potential issues with network access.
+  metadata:
+    api: WSASend()
+    category: Network Access
+  pattern-either:
+  - pattern: WSASend(...)
+  - pattern: $VAR = WSASend
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-WSASendTo
+  languages:
+  - cpp
+  message: Avoid using WSASendTo(), as it can lead to potential issues with network access.
+  metadata:
+    api: WSASendTo()
+    category: Network Access
+  pattern-either:
+  - pattern: WSASendTo(...)
+  - pattern: $VAR = WSASendTo
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-WSASocket
+  languages:
+  - cpp
+  message: Avoid using WSASocket(), as it can lead to potential issues with network access.
+  metadata:
+    api: WSASocket()
+    category: Network Access
+  pattern-either:
+  - pattern: WSASocket(...)
+  - pattern: $VAR = WSASocket
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-WSAStartup
+  languages:
+  - cpp
+  message: Avoid using WSAStartup(), as it can lead to potential issues with network access.
+  metadata:
+    api: WSAStartup()
+    category: Network Access
+  pattern-either:
+  - pattern: WSAStartup(...)
+  - pattern: $VAR = WSAStartup
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-WinHttpCloseHandle
+  languages:
+  - cpp
+  message: Avoid using WinHttpCloseHandle(), as it can lead to potential issues with network access.
+  metadata:
+    api: WinHttpCloseHandle()
+    category: Network Access
+  pattern-either:
+  - pattern: WinHttpCloseHandle(...)
+  - pattern: $VAR = WinHttpCloseHandle
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-WinHttpConnect
+  languages:
+  - cpp
+  message: Avoid using WinHttpConnect(), as it can lead to potential issues with network access.
+  metadata:
+    api: WinHttpConnect()
+    category: Network Access
+  pattern-either:
+  - pattern: WinHttpConnect(...)
+  - pattern: $VAR = WinHttpConnect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-WinHttpOpen
+  languages:
+  - cpp
+  message: Avoid using WinHttpOpen(), as it can lead to potential issues with network access.
+  metadata:
+    api: WinHttpOpen()
+    category: Network Access
+  pattern-either:
+  - pattern: WinHttpOpen(...)
+  - pattern: $VAR = WinHttpOpen
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-WinHttpOpenRequest
+  languages:
+  - cpp
+  message: Avoid using WinHttpOpenRequest(), as it can lead to potential issues with network access.
+  metadata:
+    api: WinHttpOpenRequest()
+    category: Network Access
+  pattern-either:
+  - pattern: WinHttpOpenRequest(...)
+  - pattern: $VAR = WinHttpOpenRequest
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-WinHttpReadData
+  languages:
+  - cpp
+  message: Avoid using WinHttpReadData(), as it can lead to potential issues with network access.
+  metadata:
+    api: WinHttpReadData()
+    category: Network Access
+  pattern-either:
+  - pattern: WinHttpReadData(...)
+  - pattern: $VAR = WinHttpReadData
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-WinHttpReceiveResponse
+  languages:
+  - cpp
+  message: Avoid using WinHttpReceiveResponse(), as it can lead to potential issues with network access.
+  metadata:
+    api: WinHttpReceiveResponse()
+    category: Network Access
+  pattern-either:
+  - pattern: WinHttpReceiveResponse(...)
+  - pattern: $VAR = WinHttpReceiveResponse
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-WinHttpSendRequest
+  languages:
+  - cpp
+  message: Avoid using WinHttpSendRequest(), as it can lead to potential issues with network access.
+  metadata:
+    api: WinHttpSendRequest()
+    category: Network Access
+  pattern-either:
+  - pattern: WinHttpSendRequest(...)
+  - pattern: $VAR = WinHttpSendRequest
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-accept
+  languages:
+  - cpp
+  message: Avoid using accept(), as it can lead to potential issues with network access.
+  metadata:
+    api: accept()
+    category: Network Access
+  pattern-either:
+  - pattern: accept(...)
+  - pattern: $VAR = accept
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-bind
+  languages:
+  - cpp
+  message: Avoid using bind(), as it can lead to potential issues with network access.
+  metadata:
+    api: bind()
+    category: Network Access
+  pattern-either:
+  - pattern: bind(...)
+  - pattern: $VAR = bind
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-close
+  languages:
+  - cpp
+  message: Avoid using close(), as it can lead to potential issues with network access.
+  metadata:
+    api: close()
+    category: Network Access
+  pattern-either:
+  - pattern: close(...)
+  - pattern: $VAR = close
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-closesocket
+  languages:
+  - cpp
+  message: Avoid using closesocket(), as it can lead to potential issues with network access.
+  metadata:
+    api: closesocket()
+    category: Network Access
+  pattern-either:
+  - pattern: closesocket(...)
+  - pattern: $VAR = closesocket
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-connect
+  languages:
+  - cpp
+  message: Avoid using connect(), as it can lead to potential issues with network access.
+  metadata:
+    api: connect()
+    category: Network Access
+  pattern-either:
+  - pattern: connect(...)
+  - pattern: $VAR = connect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-curl_easy_cleanup
+  languages:
+  - cpp
+  message: Avoid using curl_easy_cleanup(), as it can lead to potential issues with network access.
+  metadata:
+    api: curl_easy_cleanup()
+    category: Network Access
+  pattern-either:
+  - pattern: curl_easy_cleanup(...)
+  - pattern: $VAR = curl_easy_cleanup
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-curl_easy_init
+  languages:
+  - cpp
+  message: Avoid using curl_easy_init(), as it can lead to potential issues with network access.
+  metadata:
+    api: curl_easy_init()
+    category: Network Access
+  pattern-either:
+  - pattern: curl_easy_init(...)
+  - pattern: $VAR = curl_easy_init
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-curl_easy_perform
+  languages:
+  - cpp
+  message: Avoid using curl_easy_perform(), as it can lead to potential issues with network access.
+  metadata:
+    api: curl_easy_perform()
+    category: Network Access
+  pattern-either:
+  - pattern: curl_easy_perform(...)
+  - pattern: $VAR = curl_easy_perform
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-curl_easy_setopt
+  languages:
+  - cpp
+  message: Avoid using curl_easy_setopt(), as it can lead to potential issues with network access.
+  metadata:
+    api: curl_easy_setopt()
+    category: Network Access
+  pattern-either:
+  - pattern: curl_easy_setopt(...)
+  - pattern: $VAR = curl_easy_setopt
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-curl_global_cleanup
+  languages:
+  - cpp
+  message: Avoid using curl_global_cleanup(), as it can lead to potential issues with network access.
+  metadata:
+    api: curl_global_cleanup()
+    category: Network Access
+  pattern-either:
+  - pattern: curl_global_cleanup(...)
+  - pattern: $VAR = curl_global_cleanup
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-curl_global_init
+  languages:
+  - cpp
+  message: Avoid using curl_global_init(), as it can lead to potential issues with network access.
+  metadata:
+    api: curl_global_init()
+    category: Network Access
+  pattern-either:
+  - pattern: curl_global_init(...)
+  - pattern: $VAR = curl_global_init
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-dns_lookup
+  languages:
+  - cpp
+  message: Avoid using dns_lookup(), as it can lead to potential issues with network access.
+  metadata:
+    api: dns_lookup()
+    category: Network Access
+  pattern-either:
+  - pattern: dns_lookup(...)
+  - pattern: $VAR = dns_lookup
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-download_file
+  languages:
+  - cpp
+  message: Avoid using download_file(), as it can lead to potential issues with network access.
+  metadata:
+    api: download_file()
+    category: Network Access
+  pattern-either:
+  - pattern: download_file(...)
+  - pattern: $VAR = download_file
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-fetch_url
+  languages:
+  - cpp
+  message: Avoid using fetch_url(), as it can lead to potential issues with network access.
+  metadata:
+    api: fetch_url()
+    category: Network Access
+  pattern-either:
+  - pattern: fetch_url(...)
+  - pattern: $VAR = fetch_url
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-freeaddrinfo
+  languages:
+  - cpp
+  message: Avoid using freeaddrinfo(), as it can lead to potential issues with network access.
+  metadata:
+    api: freeaddrinfo()
+    category: Network Access
+  pattern-either:
+  - pattern: freeaddrinfo(...)
+  - pattern: $VAR = freeaddrinfo
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-getaddrinfo
+  languages:
+  - cpp
+  message: Avoid using getaddrinfo(), as it can lead to potential issues with network access.
+  metadata:
+    api: getaddrinfo()
+    category: Network Access
+  pattern-either:
+  - pattern: getaddrinfo(...)
+  - pattern: $VAR = getaddrinfo
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-gethostbyaddr
+  languages:
+  - cpp
+  message: Avoid using gethostbyaddr(), as it can lead to potential issues with network access.
+  metadata:
+    api: gethostbyaddr()
+    category: Network Access
+  pattern-either:
+  - pattern: gethostbyaddr(...)
+  - pattern: $VAR = gethostbyaddr
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-gethostbyname
+  languages:
+  - cpp
+  message: Avoid using gethostbyname(), as it can lead to potential issues with network access.
+  metadata:
+    api: gethostbyname()
+    category: Network Access
+  pattern-either:
+  - pattern: gethostbyname(...)
+  - pattern: $VAR = gethostbyname
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http_get
+  languages:
+  - cpp
+  message: Avoid using http_get(), as it can lead to potential issues with network access.
+  metadata:
+    api: http_get()
+    category: Network Access
+  pattern-either:
+  - pattern: http_get(...)
+  - pattern: $VAR = http_get
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-http_post
+  languages:
+  - cpp
+  message: Avoid using http_post(), as it can lead to potential issues with network access.
+  metadata:
+    api: http_post()
+    category: Network Access
+  pattern-either:
+  - pattern: http_post(...)
+  - pattern: $VAR = http_post
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-inet_addr
+  languages:
+  - cpp
+  message: Avoid using inet_addr(), as it can lead to potential issues with network access.
+  metadata:
+    api: inet_addr()
+    category: Network Access
+  pattern-either:
+  - pattern: inet_addr(...)
+  - pattern: $VAR = inet_addr
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-inet_ntoa
+  languages:
+  - cpp
+  message: Avoid using inet_ntoa(), as it can lead to potential issues with network access.
+  metadata:
+    api: inet_ntoa()
+    category: Network Access
+  pattern-either:
+  - pattern: inet_ntoa(...)
+  - pattern: $VAR = inet_ntoa
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-inet_ntop
+  languages:
+  - cpp
+  message: Avoid using inet_ntop(), as it can lead to potential issues with network access.
+  metadata:
+    api: inet_ntop()
+    category: Network Access
+  pattern-either:
+  - pattern: inet_ntop(...)
+  - pattern: $VAR = inet_ntop
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-inet_pton
+  languages:
+  - cpp
+  message: Avoid using inet_pton(), as it can lead to potential issues with network access.
+  metadata:
+    api: inet_pton()
+    category: Network Access
+  pattern-either:
+  - pattern: inet_pton(...)
+  - pattern: $VAR = inet_pton
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-listen
+  languages:
+  - cpp
+  message: Avoid using listen(), as it can lead to potential issues with network access.
+  metadata:
+    api: listen()
+    category: Network Access
+  pattern-either:
+  - pattern: listen(...)
+  - pattern: $VAR = listen
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-recv
+  languages:
+  - cpp
+  message: Avoid using recv(), as it can lead to potential issues with network access.
+  metadata:
+    api: recv()
+    category: Network Access
+  pattern-either:
+  - pattern: recv(...)
+  - pattern: $VAR = recv
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-recvfrom
+  languages:
+  - cpp
+  message: Avoid using recvfrom(), as it can lead to potential issues with network access.
+  metadata:
+    api: recvfrom()
+    category: Network Access
+  pattern-either:
+  - pattern: recvfrom(...)
+  - pattern: $VAR = recvfrom
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-res_query
+  languages:
+  - cpp
+  message: Avoid using res_query(), as it can lead to potential issues with network access.
+  metadata:
+    api: res_query()
+    category: Network Access
+  pattern-either:
+  - pattern: res_query(...)
+  - pattern: $VAR = res_query
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-res_search
+  languages:
+  - cpp
+  message: Avoid using res_search(), as it can lead to potential issues with network access.
+  metadata:
+    api: res_search()
+    category: Network Access
+  pattern-either:
+  - pattern: res_search(...)
+  - pattern: $VAR = res_search
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-send
+  languages:
+  - cpp
+  message: Avoid using send(), as it can lead to potential issues with network access.
+  metadata:
+    api: send()
+    category: Network Access
+  pattern-either:
+  - pattern: send(...)
+  - pattern: $VAR = send
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-sendto
+  languages:
+  - cpp
+  message: Avoid using sendto(), as it can lead to potential issues with network access.
+  metadata:
+    api: sendto()
+    category: Network Access
+  pattern-either:
+  - pattern: sendto(...)
+  - pattern: $VAR = sendto
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-shutdown
+  languages:
+  - cpp
+  message: Avoid using shutdown(), as it can lead to potential issues with network access.
+  metadata:
+    api: shutdown()
+    category: Network Access
+  pattern-either:
+  - pattern: shutdown(...)
+  - pattern: $VAR = shutdown
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-socket
+  languages:
+  - cpp
+  message: Avoid using socket(), as it can lead to potential issues with network access.
+  metadata:
+    api: socket()
+    category: Network Access
+  pattern-either:
+  - pattern: socket(...)
+  - pattern: $VAR = socket
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-socket_connect
+  languages:
+  - cpp
+  message: Avoid using socket_connect(), as it can lead to potential issues with network access.
+  metadata:
+    api: socket_connect()
+    category: Network Access
+  pattern-either:
+  - pattern: socket_connect(...)
+  - pattern: $VAR = socket_connect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-tcp_connect
+  languages:
+  - cpp
+  message: Avoid using tcp_connect(), as it can lead to potential issues with network access.
+  metadata:
+    api: tcp_connect()
+    category: Network Access
+  pattern-either:
+  - pattern: tcp_connect(...)
+  - pattern: $VAR = tcp_connect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-upload_data
+  languages:
+  - cpp
+  message: Avoid using upload_data(), as it can lead to potential issues with network access.
+  metadata:
+    api: upload_data()
+    category: Network Access
+  pattern-either:
+  - pattern: upload_data(...)
+  - pattern: $VAR = upload_data
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-QNetworkReply-readAll
+  languages:
+  - cpp
+  message: Avoid using QNetworkReply::readAll(), as it can lead to potential issues with network access.
+  metadata:
+    api: QNetworkReply::readAll()
+    category: Network Access
+  pattern-either:
+  - pattern: QNetworkReply::readAll(...)
+  - pattern: $VAR = QNetworkReply::readAll
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-QNetworkRequest-setUrl
+  languages:
+  - cpp
+  message: Avoid using QNetworkRequest::setUrl(), as it can lead to potential issues with network access.
+  metadata:
+    api: QNetworkRequest::setUrl()
+    category: Network Access
+  pattern-either:
+  - pattern: QNetworkRequest::setUrl(...)
+  - pattern: $VAR = QNetworkRequest::setUrl
+  severity: WARNING
+  tags:
+  - Network Access

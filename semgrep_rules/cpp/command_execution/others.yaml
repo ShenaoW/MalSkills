@@ -1,0 +1,456 @@
+rules:
+- id: no-CreateProcess
+  languages:
+  - cpp
+  message: Avoid using CreateProcess(), as it can lead to potential issues with command execution.
+  metadata:
+    api: CreateProcess()
+    category: Command Execution
+  pattern-either:
+  - pattern: CreateProcess(...)
+  - pattern: $VAR = CreateProcess
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-CreateProcessA
+  languages:
+  - cpp
+  message: Avoid using CreateProcessA(), as it can lead to potential issues with command execution.
+  metadata:
+    api: CreateProcessA()
+    category: Command Execution
+  pattern-either:
+  - pattern: CreateProcessA(...)
+  - pattern: $VAR = CreateProcessA
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-CreateProcessW
+  languages:
+  - cpp
+  message: Avoid using CreateProcessW(), as it can lead to potential issues with command execution.
+  metadata:
+    api: CreateProcessW()
+    category: Command Execution
+  pattern-either:
+  - pattern: CreateProcessW(...)
+  - pattern: $VAR = CreateProcessW
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-LoadLibrary
+  languages:
+  - cpp
+  message: Avoid using LoadLibrary(), as it can lead to potential issues with command execution.
+  metadata:
+    api: LoadLibrary()
+    category: Command Execution
+  pattern-either:
+  - pattern: LoadLibrary(...)
+  - pattern: $VAR = LoadLibrary
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-LoadLibraryA
+  languages:
+  - cpp
+  message: Avoid using LoadLibraryA(), as it can lead to potential issues with command execution.
+  metadata:
+    api: LoadLibraryA()
+    category: Command Execution
+  pattern-either:
+  - pattern: LoadLibraryA(...)
+  - pattern: $VAR = LoadLibraryA
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-LoadLibraryW
+  languages:
+  - cpp
+  message: Avoid using LoadLibraryW(), as it can lead to potential issues with command execution.
+  metadata:
+    api: LoadLibraryW()
+    category: Command Execution
+  pattern-either:
+  - pattern: LoadLibraryW(...)
+  - pattern: $VAR = LoadLibraryW
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-ShellExecute
+  languages:
+  - cpp
+  message: Avoid using ShellExecute(), as it can lead to potential issues with command execution.
+  metadata:
+    api: ShellExecute()
+    category: Command Execution
+  pattern-either:
+  - pattern: ShellExecute(...)
+  - pattern: $VAR = ShellExecute
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-ShellExecuteEx
+  languages:
+  - cpp
+  message: Avoid using ShellExecuteEx(), as it can lead to potential issues with command execution.
+  metadata:
+    api: ShellExecuteEx()
+    category: Command Execution
+  pattern-either:
+  - pattern: ShellExecuteEx(...)
+  - pattern: $VAR = ShellExecuteEx
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-SystemParametersInfo
+  languages:
+  - cpp
+  message: Avoid using SystemParametersInfo(), as it can lead to potential issues with command execution.
+  metadata:
+    api: SystemParametersInfo()
+    category: Command Execution
+  pattern-either:
+  - pattern: SystemParametersInfo(...)
+  - pattern: $VAR = SystemParametersInfo
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-WinExec
+  languages:
+  - cpp
+  message: Avoid using WinExec(), as it can lead to potential issues with command execution.
+  metadata:
+    api: WinExec()
+    category: Command Execution
+  pattern-either:
+  - pattern: WinExec(...)
+  - pattern: $VAR = WinExec
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-clone
+  languages:
+  - cpp
+  message: Avoid using clone(), as it can lead to potential issues with command execution.
+  metadata:
+    api: clone()
+    category: Command Execution
+  pattern-either:
+  - pattern: clone(...)
+  - pattern: $VAR = clone
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-execl
+  languages:
+  - cpp
+  message: Avoid using execl(), as it can lead to potential issues with command execution.
+  metadata:
+    api: execl()
+    category: Command Execution
+  pattern-either:
+  - pattern: execl(...)
+  - pattern: $VAR = execl
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-execle
+  languages:
+  - cpp
+  message: Avoid using execle(), as it can lead to potential issues with command execution.
+  metadata:
+    api: execle()
+    category: Command Execution
+  pattern-either:
+  - pattern: execle(...)
+  - pattern: $VAR = execle
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-execlp
+  languages:
+  - cpp
+  message: Avoid using execlp(), as it can lead to potential issues with command execution.
+  metadata:
+    api: execlp()
+    category: Command Execution
+  pattern-either:
+  - pattern: execlp(...)
+  - pattern: $VAR = execlp
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-execute
+  languages:
+  - cpp
+  message: Avoid using execute(), as it can lead to potential issues with command execution.
+  metadata:
+    api: execute()
+    category: Command Execution
+  pattern-either:
+  - pattern: execute(...)
+  - pattern: $VAR = execute
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-execv
+  languages:
+  - cpp
+  message: Avoid using execv(), as it can lead to potential issues with command execution.
+  metadata:
+    api: execv()
+    category: Command Execution
+  pattern-either:
+  - pattern: execv(...)
+  - pattern: $VAR = execv
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-execve
+  languages:
+  - cpp
+  message: Avoid using execve(), as it can lead to potential issues with command execution.
+  metadata:
+    api: execve()
+    category: Command Execution
+  pattern-either:
+  - pattern: execve(...)
+  - pattern: $VAR = execve
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-execvp
+  languages:
+  - cpp
+  message: Avoid using execvp(), as it can lead to potential issues with command execution.
+  metadata:
+    api: execvp()
+    category: Command Execution
+  pattern-either:
+  - pattern: execvp(...)
+  - pattern: $VAR = execvp
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-execvpe
+  languages:
+  - cpp
+  message: Avoid using execvpe(), as it can lead to potential issues with command execution.
+  metadata:
+    api: execvpe()
+    category: Command Execution
+  pattern-either:
+  - pattern: execvpe(...)
+  - pattern: $VAR = execvpe
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-fork
+  languages:
+  - cpp
+  message: Avoid using fork(), as it can lead to potential issues with command execution.
+  metadata:
+    api: fork()
+    category: Command Execution
+  pattern-either:
+  - pattern: fork(...)
+  - pattern: $VAR = fork
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-nsystem
+  languages:
+  - cpp
+  message: Avoid using nsystem(), as it can lead to potential issues with command execution.
+  metadata:
+    api: nsystem()
+    category: Command Execution
+  pattern-either:
+  - pattern: nsystem(...)
+  - pattern: $VAR = nsystem
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-popen
+  languages:
+  - cpp
+  message: Avoid using popen(), as it can lead to potential issues with command execution.
+  metadata:
+    api: popen()
+    category: Command Execution
+  pattern-either:
+  - pattern: popen(...)
+  - pattern: $VAR = popen
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-run_command
+  languages:
+  - cpp
+  message: Avoid using run_command(), as it can lead to potential issues with command execution.
+  metadata:
+    api: run_command()
+    category: Command Execution
+  pattern-either:
+  - pattern: run_command(...)
+  - pattern: $VAR = run_command
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-run_shell
+  languages:
+  - cpp
+  message: Avoid using run_shell(), as it can lead to potential issues with command execution.
+  metadata:
+    api: run_shell()
+    category: Command Execution
+  pattern-either:
+  - pattern: run_shell(...)
+  - pattern: $VAR = run_shell
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-spawnl
+  languages:
+  - cpp
+  message: Avoid using spawnl(), as it can lead to potential issues with command execution.
+  metadata:
+    api: spawnl()
+    category: Command Execution
+  pattern-either:
+  - pattern: spawnl(...)
+  - pattern: $VAR = spawnl
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-spawnle
+  languages:
+  - cpp
+  message: Avoid using spawnle(), as it can lead to potential issues with command execution.
+  metadata:
+    api: spawnle()
+    category: Command Execution
+  pattern-either:
+  - pattern: spawnle(...)
+  - pattern: $VAR = spawnle
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-spawnlp
+  languages:
+  - cpp
+  message: Avoid using spawnlp(), as it can lead to potential issues with command execution.
+  metadata:
+    api: spawnlp()
+    category: Command Execution
+  pattern-either:
+  - pattern: spawnlp(...)
+  - pattern: $VAR = spawnlp
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-spawnlpe
+  languages:
+  - cpp
+  message: Avoid using spawnlpe(), as it can lead to potential issues with command execution.
+  metadata:
+    api: spawnlpe()
+    category: Command Execution
+  pattern-either:
+  - pattern: spawnlpe(...)
+  - pattern: $VAR = spawnlpe
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-spawnv
+  languages:
+  - cpp
+  message: Avoid using spawnv(), as it can lead to potential issues with command execution.
+  metadata:
+    api: spawnv()
+    category: Command Execution
+  pattern-either:
+  - pattern: spawnv(...)
+  - pattern: $VAR = spawnv
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-spawnve
+  languages:
+  - cpp
+  message: Avoid using spawnve(), as it can lead to potential issues with command execution.
+  metadata:
+    api: spawnve()
+    category: Command Execution
+  pattern-either:
+  - pattern: spawnve(...)
+  - pattern: $VAR = spawnve
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-spawnvp
+  languages:
+  - cpp
+  message: Avoid using spawnvp(), as it can lead to potential issues with command execution.
+  metadata:
+    api: spawnvp()
+    category: Command Execution
+  pattern-either:
+  - pattern: spawnvp(...)
+  - pattern: $VAR = spawnvp
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-spawnvpe
+  languages:
+  - cpp
+  message: Avoid using spawnvpe(), as it can lead to potential issues with command execution.
+  metadata:
+    api: spawnvpe()
+    category: Command Execution
+  pattern-either:
+  - pattern: spawnvpe(...)
+  - pattern: $VAR = spawnvpe
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-system
+  languages:
+  - cpp
+  message: Avoid using system(), as it can lead to potential issues with command execution.
+  metadata:
+    api: system()
+    category: Command Execution
+  pattern-either:
+  - pattern: system(...)
+  - pattern: $VAR = system
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-systemf
+  languages:
+  - cpp
+  message: Avoid using systemf(), as it can lead to potential issues with command execution.
+  metadata:
+    api: systemf()
+    category: Command Execution
+  pattern-either:
+  - pattern: systemf(...)
+  - pattern: $VAR = systemf
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-vfork
+  languages:
+  - cpp
+  message: Avoid using vfork(), as it can lead to potential issues with command execution.
+  metadata:
+    api: vfork()
+    category: Command Execution
+  pattern-either:
+  - pattern: vfork(...)
+  - pattern: $VAR = vfork
+  severity: WARNING
+  tags:
+  - Command Execution

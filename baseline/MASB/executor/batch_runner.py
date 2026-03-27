@@ -42,7 +42,7 @@ def run_task(line: str, config: Config, api_pool: APIKeyPool, ex_mode: bool = Fa
         skill_path = parts[1]
         prompt = parts[2]
 
-        if ex_mode and len(parts) >= 6:
+        if len(parts) >= 6:
             repo_id = parts[3]
             risk_level = parts[4]
             top_level = parts[5]
@@ -75,14 +75,15 @@ def run_task(line: str, config: Config, api_pool: APIKeyPool, ex_mode: bool = Fa
         # Set environment
         env = os.environ.copy()
         if api_key:
-            env["ANTHROPIC_API_KEY"] = api_key
+            env["OPENAI_API_KEY"] = api_key
 
         base_url = config.get_with_env_fallback(
             'analyzer.api.base_url_env',
-            'ANTHROPIC_BASE_URL',
-            'https://api.anthropic.com'
+            'PACKY_API_URL',
+            'https://www.packyapi.com/v1'
         )
-        env["ANTHROPIC_BASE_URL"] = base_url
+        env["OPENAI_BASE_URL"] = base_url
+        env["OPENAI_MODEL"] = os.environ.get('OPENAI_MODEL') or os.environ.get('LLM_MODEL', 'gpt-5.3-codex-medium')
 
         env["PROJECT_ROOT"] = str(config.root_dir)
         env["EXECUTION_LOGS_DIR"] = str(config.paths.execution_logs_dir)

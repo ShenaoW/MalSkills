@@ -1,0 +1,40 @@
+rules:
+- id: no-ifstream-close
+  languages:
+  - cpp
+  message: Avoid using ifstream::close(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: ifstream::close()
+    category: File or System Operation
+  pattern-either:
+  - pattern: ifstream::close(...)
+  - pattern: $VAR = ifstream::close
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-ifstream-open
+  languages:
+  - cpp
+  message: Avoid using ifstream::open(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: ifstream::open()
+    category: File or System Operation
+  pattern-either:
+  - pattern: ifstream::open(...)
+  - pattern: $VAR = ifstream::open
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-ifstream-read
+  languages:
+  - cpp
+  message: Avoid using ifstream::read(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: ifstream::read()
+    category: File or System Operation
+  pattern-either:
+  - pattern: ifstream::read(...)
+  - pattern: $VAR = ifstream::read
+  severity: WARNING
+  tags:
+  - File or System Operation

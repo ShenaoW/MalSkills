@@ -1,0 +1,47 @@
+rules:
+- id: no-com-sun-jna-Native-load
+  languages:
+  - java
+  message: Avoid using com.sun.jna.Native.load(), as it can lead to potential issues with command execution.
+  metadata:
+    api: com.sun.jna.Native.load()
+    category: Command Execution
+  pattern-either:
+  - pattern: new com.sun.jna.Native.load(...)
+  - pattern: com.sun.jna.Native.load(...)
+  - pattern: $VAR = com.sun.jna.Native.load
+  - pattern: new sun.jna.Native.load(...)
+  - pattern: sun.jna.Native.load(...)
+  - pattern: $VAR = sun.jna.Native.load
+  - pattern: new jna.Native.load(...)
+  - pattern: jna.Native.load(...)
+  - pattern: $VAR = jna.Native.load
+  - pattern: new Native.load(...)
+  - pattern: Native.load(...)
+  - pattern: $VAR = Native.load
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-com-sun-jna-NativeLibrary-getInstance
+  languages:
+  - java
+  message: Avoid using com.sun.jna.NativeLibrary.getInstance(), as it can lead to potential issues with command execution.
+  metadata:
+    api: com.sun.jna.NativeLibrary.getInstance()
+    category: Command Execution
+  pattern-either:
+  - pattern: new com.sun.jna.NativeLibrary.getInstance(...)
+  - pattern: com.sun.jna.NativeLibrary.getInstance(...)
+  - pattern: $VAR = com.sun.jna.NativeLibrary.getInstance
+  - pattern: new sun.jna.NativeLibrary.getInstance(...)
+  - pattern: sun.jna.NativeLibrary.getInstance(...)
+  - pattern: $VAR = sun.jna.NativeLibrary.getInstance
+  - pattern: new jna.NativeLibrary.getInstance(...)
+  - pattern: jna.NativeLibrary.getInstance(...)
+  - pattern: $VAR = jna.NativeLibrary.getInstance
+  - pattern: new NativeLibrary.getInstance(...)
+  - pattern: NativeLibrary.getInstance(...)
+  - pattern: $VAR = NativeLibrary.getInstance
+  severity: WARNING
+  tags:
+  - Command Execution

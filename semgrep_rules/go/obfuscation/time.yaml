@@ -1,0 +1,40 @@
+rules:
+- id: no-time.AfterFunc
+  languages:
+  - go
+  message: Avoid using time.AfterFunc(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: time.AfterFunc()
+    category: Obfuscation
+  pattern-either:
+  - pattern: time.AfterFunc(...)
+  - pattern: $VAR = time.AfterFunc
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-time.NewTimer
+  languages:
+  - go
+  message: Avoid using time.NewTimer(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: time.NewTimer()
+    category: Obfuscation
+  pattern-either:
+  - pattern: time.NewTimer(...)
+  - pattern: $VAR = time.NewTimer
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-time.Sleep
+  languages:
+  - go
+  message: Avoid using time.Sleep(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: time.Sleep()
+    category: Obfuscation
+  pattern-either:
+  - pattern: time.Sleep(...)
+  - pattern: $VAR = time.Sleep
+  severity: WARNING
+  tags:
+  - Obfuscation

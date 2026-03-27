@@ -1,4 +1,4 @@
-# Claude Skill Sandbox Docker Image
+# Codex Skill Sandbox Docker Image
 # Used for dynamic execution of skills in isolated environment
 #
 # BUILD OPTIONS:
@@ -7,24 +7,24 @@
 #   NOVA_MODE=none  - Don't install NOVA (default)
 #
 # Usage:
-#   docker build --build-arg NOVA_MODE=full -t claude-skill-sandbox .
-#   docker build --build-arg NOVA_MODE=lite -t claude-skill-sandbox .
-#   docker build -t claude-skill-sandbox .
+#   docker build --build-arg NOVA_MODE=full -t codex-skill-sandbox .
+#   docker build --build-arg NOVA_MODE=lite -t codex-skill-sandbox .
+#   docker build -t codex-skill-sandbox .
 
 FROM python:3.10-slim
 
 # Build arguments for NOVA installation
 ARG NOVA_MODE=none
 
-# Configure Chinese mirror sources (fix network issues in China)
+# Configure Debian sources
 RUN rm -f /etc/apt/sources.list.d/debian.sources && \
     echo "Types: deb" > /etc/apt/sources.list.d/debian.sources && \
-    echo "URIs: https://mirrors.ustc.edu.cn/debian https://repo.huaweicloud.com/debian" >> /etc/apt/sources.list.d/debian.sources && \
+    echo "URIs: http://deb.debian.org/debian" >> /etc/apt/sources.list.d/debian.sources && \
     echo "Suites: bookworm bookworm-updates" >> /etc/apt/sources.list.d/debian.sources && \
     echo "Components: main contrib non-free non-free-firmware" >> /etc/apt/sources.list.d/debian.sources && \
     echo "" >> /etc/apt/sources.list.d/debian.sources && \
     echo "Types: deb" >> /etc/apt/sources.list.d/debian.sources && \
-    echo "URIs: https://mirrors.ustc.edu.cn/debian-security https://repo.huaweicloud.com/debian-security" >> /etc/apt/sources.list.d/debian.sources && \
+    echo "URIs: http://deb.debian.org/debian-security" >> /etc/apt/sources.list.d/debian.sources && \
     echo "Suites: bookworm-security" >> /etc/apt/sources.list.d/debian.sources && \
     echo "Components: main contrib non-free non-free-firmware" >> /etc/apt/sources.list.d/debian.sources
 
@@ -35,7 +35,6 @@ RUN apt-get update && \
         tcpdump \
         curl \
         wget \
-        git \
         sudo \
         file \
         procps \
@@ -45,13 +44,13 @@ RUN apt-get update && \
         ca-certificates \
     && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
 
-# Install Node.js 18.x (required by Claude Code CLI)
+# Install Node.js 18.x (required by Codex CLI)
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Claude Code CLI via npm (not pip)
-RUN npm install -g @anthropic-ai/claude-code
+RUN npm install -g @openai/codex
 
 # Set up working directory
 WORKDIR /app

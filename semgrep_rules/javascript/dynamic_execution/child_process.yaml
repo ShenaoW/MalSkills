@@ -1,0 +1,27 @@
+rules:
+- id: no-child_process-ChildProcess
+  languages:
+  - javascript
+  message: Avoid using child_process.ChildProcess(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: child_process.ChildProcess()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: child_process.ChildProcess(...)
+  - pattern: $VAR = child_process.ChildProcess
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: no-child_process-_forkChild
+  languages:
+  - javascript
+  message: Avoid using child_process._forkChild(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: child_process._forkChild()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: child_process._forkChild(...)
+  - pattern: $VAR = child_process._forkChild
+  severity: WARNING
+  tags:
+  - Dynamic Execution

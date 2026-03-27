@@ -1,0 +1,53 @@
+rules:
+- id: no-shelljs-exec
+  languages:
+  - javascript
+  message: Avoid using shelljs.exec(), as it can lead to potential issues with command execution.
+  metadata:
+    api: shelljs.exec()
+    category: Command Execution
+  pattern-either:
+  - pattern: shelljs.exec(...)
+  - pattern: $VAR = shelljs.exec
+  - pattern: exec(...)
+  - pattern: $VAR = exec
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-shelljs-sed
+  languages:
+  - javascript
+  message: Avoid using shelljs.sed(), as it can lead to potential issues with command execution.
+  metadata:
+    api: shelljs.sed()
+    category: Command Execution
+  pattern-either:
+  - pattern: shelljs.sed(...)
+  - pattern: $VAR = shelljs.sed
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-shelljs-test
+  languages:
+  - javascript
+  message: Avoid using shelljs.test(), as it can lead to potential issues with command execution.
+  metadata:
+    api: shelljs.test()
+    category: Command Execution
+  pattern-either:
+  - pattern: shelljs.test(...)
+  - pattern: $VAR = shelljs.test
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-require-shelljs
+  languages:
+  - javascript
+  message: Avoid using require('shelljs'), as it can lead to potential issues with command execution.
+  metadata:
+    api: require('shelljs')
+    category: Command Execution
+  pattern: require('shelljs')
+  severity: WARNING
+  tags:
+  - Command Execution

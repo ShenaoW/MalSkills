@@ -1,8 +1,8 @@
-# Claude Skill Security Scanner Configuration
+# Codex Skill Security Scanner Configuration
 # All paths are relative to project root
 
 project:
-  name: "claude-skill-security"
+  name: "codex-skill-security"
   version: "1.0.0"
 
 # Directory paths (relative to project root)
@@ -58,13 +58,13 @@ analyzer:
 
   # API configuration
   api:
-    key_env: "ANTHROPIC_API_KEY"
-    base_url_env: "ANTHROPIC_BASE_URL"
-    default_base_url: "https://api.anthropic.com"
+    key_env: "PACKY_API_KEY"
+    base_url_env: "PACKY_API_URL"
+    default_base_url: "https://www.packyapi.com/v1"
 
 # Executor configuration
 executor:
-  docker_image: "claude-skill-sandbox"
+  docker_image: "codex-skill-sandbox"
   max_workers: 3
   timeout: 900
   use_nova: true

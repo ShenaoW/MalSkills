@@ -1,0 +1,799 @@
+rules:
+- id: no-System-Security-Cryptography-Aes-Create
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.Aes.Create(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.Aes.Create()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.Aes.Create(...)
+  - pattern: $VAR = System.Security.Cryptography.Aes.Create
+  - pattern: Security.Cryptography.Aes.Create(...)
+  - pattern: $VAR = Security.Cryptography.Aes.Create
+  - pattern: Cryptography.Aes.Create(...)
+  - pattern: $VAR = Cryptography.Aes.Create
+  - pattern: Aes.Create(...)
+  - pattern: $VAR = Aes.Create
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-AesManaged-CreateDecryptor
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.AesManaged.CreateDecryptor(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.AesManaged.CreateDecryptor()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.AesManaged.CreateDecryptor(...)
+  - pattern: $VAR = System.Security.Cryptography.AesManaged.CreateDecryptor
+  - pattern: Security.Cryptography.AesManaged.CreateDecryptor(...)
+  - pattern: $VAR = Security.Cryptography.AesManaged.CreateDecryptor
+  - pattern: Cryptography.AesManaged.CreateDecryptor(...)
+  - pattern: $VAR = Cryptography.AesManaged.CreateDecryptor
+  - pattern: AesManaged.CreateDecryptor(...)
+  - pattern: $VAR = AesManaged.CreateDecryptor
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-AesManaged-CreateEncryptor
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.AesManaged.CreateEncryptor(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.AesManaged.CreateEncryptor()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.AesManaged.CreateEncryptor(...)
+  - pattern: $VAR = System.Security.Cryptography.AesManaged.CreateEncryptor
+  - pattern: Security.Cryptography.AesManaged.CreateEncryptor(...)
+  - pattern: $VAR = Security.Cryptography.AesManaged.CreateEncryptor
+  - pattern: Cryptography.AesManaged.CreateEncryptor(...)
+  - pattern: $VAR = Cryptography.AesManaged.CreateEncryptor
+  - pattern: AesManaged.CreateEncryptor(...)
+  - pattern: $VAR = AesManaged.CreateEncryptor
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-DES-Create
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.DES.Create(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.DES.Create()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.DES.Create(...)
+  - pattern: $VAR = System.Security.Cryptography.DES.Create
+  - pattern: Security.Cryptography.DES.Create(...)
+  - pattern: $VAR = Security.Cryptography.DES.Create
+  - pattern: Cryptography.DES.Create(...)
+  - pattern: $VAR = Cryptography.DES.Create
+  - pattern: DES.Create(...)
+  - pattern: $VAR = DES.Create
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-DESCryptoServiceProvider-CreateDecryptor
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.DESCryptoServiceProvider.CreateDecryptor(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.DESCryptoServiceProvider.CreateDecryptor()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.DESCryptoServiceProvider.CreateDecryptor(...)
+  - pattern: $VAR = System.Security.Cryptography.DESCryptoServiceProvider.CreateDecryptor
+  - pattern: Security.Cryptography.DESCryptoServiceProvider.CreateDecryptor(...)
+  - pattern: $VAR = Security.Cryptography.DESCryptoServiceProvider.CreateDecryptor
+  - pattern: Cryptography.DESCryptoServiceProvider.CreateDecryptor(...)
+  - pattern: $VAR = Cryptography.DESCryptoServiceProvider.CreateDecryptor
+  - pattern: DESCryptoServiceProvider.CreateDecryptor(...)
+  - pattern: $VAR = DESCryptoServiceProvider.CreateDecryptor
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-DESCryptoServiceProvider-CreateEncryptor
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.DESCryptoServiceProvider.CreateEncryptor(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.DESCryptoServiceProvider.CreateEncryptor()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.DESCryptoServiceProvider.CreateEncryptor(...)
+  - pattern: $VAR = System.Security.Cryptography.DESCryptoServiceProvider.CreateEncryptor
+  - pattern: Security.Cryptography.DESCryptoServiceProvider.CreateEncryptor(...)
+  - pattern: $VAR = Security.Cryptography.DESCryptoServiceProvider.CreateEncryptor
+  - pattern: Cryptography.DESCryptoServiceProvider.CreateEncryptor(...)
+  - pattern: $VAR = Cryptography.DESCryptoServiceProvider.CreateEncryptor
+  - pattern: DESCryptoServiceProvider.CreateEncryptor(...)
+  - pattern: $VAR = DESCryptoServiceProvider.CreateEncryptor
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-ECDsa-Create
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.ECDsa.Create(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.ECDsa.Create()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.ECDsa.Create(...)
+  - pattern: $VAR = System.Security.Cryptography.ECDsa.Create
+  - pattern: Security.Cryptography.ECDsa.Create(...)
+  - pattern: $VAR = Security.Cryptography.ECDsa.Create
+  - pattern: Cryptography.ECDsa.Create(...)
+  - pattern: $VAR = Cryptography.ECDsa.Create
+  - pattern: ECDsa.Create(...)
+  - pattern: $VAR = ECDsa.Create
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-ECDsa-SignData
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.ECDsa.SignData(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.ECDsa.SignData()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.ECDsa.SignData(...)
+  - pattern: $VAR = System.Security.Cryptography.ECDsa.SignData
+  - pattern: Security.Cryptography.ECDsa.SignData(...)
+  - pattern: $VAR = Security.Cryptography.ECDsa.SignData
+  - pattern: Cryptography.ECDsa.SignData(...)
+  - pattern: $VAR = Cryptography.ECDsa.SignData
+  - pattern: ECDsa.SignData(...)
+  - pattern: $VAR = ECDsa.SignData
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-ECDsa-VerifyData
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.ECDsa.VerifyData(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.ECDsa.VerifyData()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.ECDsa.VerifyData(...)
+  - pattern: $VAR = System.Security.Cryptography.ECDsa.VerifyData
+  - pattern: Security.Cryptography.ECDsa.VerifyData(...)
+  - pattern: $VAR = Security.Cryptography.ECDsa.VerifyData
+  - pattern: Cryptography.ECDsa.VerifyData(...)
+  - pattern: $VAR = Cryptography.ECDsa.VerifyData
+  - pattern: ECDsa.VerifyData(...)
+  - pattern: $VAR = ECDsa.VerifyData
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-HMACMD5-ComputeHash
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.HMACMD5.ComputeHash(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.HMACMD5.ComputeHash()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.HMACMD5.ComputeHash(...)
+  - pattern: $VAR = System.Security.Cryptography.HMACMD5.ComputeHash
+  - pattern: Security.Cryptography.HMACMD5.ComputeHash(...)
+  - pattern: $VAR = Security.Cryptography.HMACMD5.ComputeHash
+  - pattern: Cryptography.HMACMD5.ComputeHash(...)
+  - pattern: $VAR = Cryptography.HMACMD5.ComputeHash
+  - pattern: HMACMD5.ComputeHash(...)
+  - pattern: $VAR = HMACMD5.ComputeHash
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-HMACSHA1-ComputeHash
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.HMACSHA1.ComputeHash(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.HMACSHA1.ComputeHash()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.HMACSHA1.ComputeHash(...)
+  - pattern: $VAR = System.Security.Cryptography.HMACSHA1.ComputeHash
+  - pattern: Security.Cryptography.HMACSHA1.ComputeHash(...)
+  - pattern: $VAR = Security.Cryptography.HMACSHA1.ComputeHash
+  - pattern: Cryptography.HMACSHA1.ComputeHash(...)
+  - pattern: $VAR = Cryptography.HMACSHA1.ComputeHash
+  - pattern: HMACSHA1.ComputeHash(...)
+  - pattern: $VAR = HMACSHA1.ComputeHash
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-HMACSHA256-ComputeHash
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.HMACSHA256.ComputeHash(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.HMACSHA256.ComputeHash()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.HMACSHA256.ComputeHash(...)
+  - pattern: $VAR = System.Security.Cryptography.HMACSHA256.ComputeHash
+  - pattern: Security.Cryptography.HMACSHA256.ComputeHash(...)
+  - pattern: $VAR = Security.Cryptography.HMACSHA256.ComputeHash
+  - pattern: Cryptography.HMACSHA256.ComputeHash(...)
+  - pattern: $VAR = Cryptography.HMACSHA256.ComputeHash
+  - pattern: HMACSHA256.ComputeHash(...)
+  - pattern: $VAR = HMACSHA256.ComputeHash
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-HashAlgorithm-Create
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.HashAlgorithm.Create(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.HashAlgorithm.Create()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.HashAlgorithm.Create(...)
+  - pattern: $VAR = System.Security.Cryptography.HashAlgorithm.Create
+  - pattern: Security.Cryptography.HashAlgorithm.Create(...)
+  - pattern: $VAR = Security.Cryptography.HashAlgorithm.Create
+  - pattern: Cryptography.HashAlgorithm.Create(...)
+  - pattern: $VAR = Cryptography.HashAlgorithm.Create
+  - pattern: HashAlgorithm.Create(...)
+  - pattern: $VAR = HashAlgorithm.Create
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-KeyedHashAlgorithm-Create
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.KeyedHashAlgorithm.Create(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.KeyedHashAlgorithm.Create()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.KeyedHashAlgorithm.Create(...)
+  - pattern: $VAR = System.Security.Cryptography.KeyedHashAlgorithm.Create
+  - pattern: Security.Cryptography.KeyedHashAlgorithm.Create(...)
+  - pattern: $VAR = Security.Cryptography.KeyedHashAlgorithm.Create
+  - pattern: Cryptography.KeyedHashAlgorithm.Create(...)
+  - pattern: $VAR = Cryptography.KeyedHashAlgorithm.Create
+  - pattern: KeyedHashAlgorithm.Create(...)
+  - pattern: $VAR = KeyedHashAlgorithm.Create
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-MD5-ComputeHash
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.MD5.ComputeHash(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.MD5.ComputeHash()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.MD5.ComputeHash(...)
+  - pattern: $VAR = System.Security.Cryptography.MD5.ComputeHash
+  - pattern: Security.Cryptography.MD5.ComputeHash(...)
+  - pattern: $VAR = Security.Cryptography.MD5.ComputeHash
+  - pattern: Cryptography.MD5.ComputeHash(...)
+  - pattern: $VAR = Cryptography.MD5.ComputeHash
+  - pattern: MD5.ComputeHash(...)
+  - pattern: $VAR = MD5.ComputeHash
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-MD5-Create
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.MD5.Create(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.MD5.Create()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.MD5.Create(...)
+  - pattern: $VAR = System.Security.Cryptography.MD5.Create
+  - pattern: Security.Cryptography.MD5.Create(...)
+  - pattern: $VAR = Security.Cryptography.MD5.Create
+  - pattern: Cryptography.MD5.Create(...)
+  - pattern: $VAR = Cryptography.MD5.Create
+  - pattern: MD5.Create(...)
+  - pattern: $VAR = MD5.Create
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-PasswordDeriveBytes-GetBytes
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.PasswordDeriveBytes.GetBytes(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.PasswordDeriveBytes.GetBytes()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.PasswordDeriveBytes.GetBytes(...)
+  - pattern: $VAR = System.Security.Cryptography.PasswordDeriveBytes.GetBytes
+  - pattern: Security.Cryptography.PasswordDeriveBytes.GetBytes(...)
+  - pattern: $VAR = Security.Cryptography.PasswordDeriveBytes.GetBytes
+  - pattern: Cryptography.PasswordDeriveBytes.GetBytes(...)
+  - pattern: $VAR = Cryptography.PasswordDeriveBytes.GetBytes
+  - pattern: PasswordDeriveBytes.GetBytes(...)
+  - pattern: $VAR = PasswordDeriveBytes.GetBytes
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-RSA-Create
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.RSA.Create(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.RSA.Create()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.RSA.Create(...)
+  - pattern: $VAR = System.Security.Cryptography.RSA.Create
+  - pattern: Security.Cryptography.RSA.Create(...)
+  - pattern: $VAR = Security.Cryptography.RSA.Create
+  - pattern: Cryptography.RSA.Create(...)
+  - pattern: $VAR = Cryptography.RSA.Create
+  - pattern: RSA.Create(...)
+  - pattern: $VAR = RSA.Create
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-RSA-Decrypt
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.RSA.Decrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.RSA.Decrypt()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.RSA.Decrypt(...)
+  - pattern: $VAR = System.Security.Cryptography.RSA.Decrypt
+  - pattern: Security.Cryptography.RSA.Decrypt(...)
+  - pattern: $VAR = Security.Cryptography.RSA.Decrypt
+  - pattern: Cryptography.RSA.Decrypt(...)
+  - pattern: $VAR = Cryptography.RSA.Decrypt
+  - pattern: RSA.Decrypt(...)
+  - pattern: $VAR = RSA.Decrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-RSA-Encrypt
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.RSA.Encrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.RSA.Encrypt()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.RSA.Encrypt(...)
+  - pattern: $VAR = System.Security.Cryptography.RSA.Encrypt
+  - pattern: Security.Cryptography.RSA.Encrypt(...)
+  - pattern: $VAR = Security.Cryptography.RSA.Encrypt
+  - pattern: Cryptography.RSA.Encrypt(...)
+  - pattern: $VAR = Cryptography.RSA.Encrypt
+  - pattern: RSA.Encrypt(...)
+  - pattern: $VAR = RSA.Encrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-RSACryptoServiceProvider-Decrypt
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.RSACryptoServiceProvider.Decrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.RSACryptoServiceProvider.Decrypt()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.RSACryptoServiceProvider.Decrypt(...)
+  - pattern: $VAR = System.Security.Cryptography.RSACryptoServiceProvider.Decrypt
+  - pattern: Security.Cryptography.RSACryptoServiceProvider.Decrypt(...)
+  - pattern: $VAR = Security.Cryptography.RSACryptoServiceProvider.Decrypt
+  - pattern: Cryptography.RSACryptoServiceProvider.Decrypt(...)
+  - pattern: $VAR = Cryptography.RSACryptoServiceProvider.Decrypt
+  - pattern: RSACryptoServiceProvider.Decrypt(...)
+  - pattern: $VAR = RSACryptoServiceProvider.Decrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-RSACryptoServiceProvider-Encrypt
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.RSACryptoServiceProvider.Encrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.RSACryptoServiceProvider.Encrypt()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.RSACryptoServiceProvider.Encrypt(...)
+  - pattern: $VAR = System.Security.Cryptography.RSACryptoServiceProvider.Encrypt
+  - pattern: Security.Cryptography.RSACryptoServiceProvider.Encrypt(...)
+  - pattern: $VAR = Security.Cryptography.RSACryptoServiceProvider.Encrypt
+  - pattern: Cryptography.RSACryptoServiceProvider.Encrypt(...)
+  - pattern: $VAR = Cryptography.RSACryptoServiceProvider.Encrypt
+  - pattern: RSACryptoServiceProvider.Encrypt(...)
+  - pattern: $VAR = RSACryptoServiceProvider.Encrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-RandomNumberGenerator-Create
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.RandomNumberGenerator.Create(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.RandomNumberGenerator.Create()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.RandomNumberGenerator.Create(...)
+  - pattern: $VAR = System.Security.Cryptography.RandomNumberGenerator.Create
+  - pattern: Security.Cryptography.RandomNumberGenerator.Create(...)
+  - pattern: $VAR = Security.Cryptography.RandomNumberGenerator.Create
+  - pattern: Cryptography.RandomNumberGenerator.Create(...)
+  - pattern: $VAR = Cryptography.RandomNumberGenerator.Create
+  - pattern: RandomNumberGenerator.Create(...)
+  - pattern: $VAR = RandomNumberGenerator.Create
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-RandomNumberGenerator-GetBytes
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.RandomNumberGenerator.GetBytes(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.RandomNumberGenerator.GetBytes()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.RandomNumberGenerator.GetBytes(...)
+  - pattern: $VAR = System.Security.Cryptography.RandomNumberGenerator.GetBytes
+  - pattern: Security.Cryptography.RandomNumberGenerator.GetBytes(...)
+  - pattern: $VAR = Security.Cryptography.RandomNumberGenerator.GetBytes
+  - pattern: Cryptography.RandomNumberGenerator.GetBytes(...)
+  - pattern: $VAR = Cryptography.RandomNumberGenerator.GetBytes
+  - pattern: RandomNumberGenerator.GetBytes(...)
+  - pattern: $VAR = RandomNumberGenerator.GetBytes
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-Rfc2898DeriveBytes-GetBytes
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.Rfc2898DeriveBytes.GetBytes(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.Rfc2898DeriveBytes.GetBytes()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.Rfc2898DeriveBytes.GetBytes(...)
+  - pattern: $VAR = System.Security.Cryptography.Rfc2898DeriveBytes.GetBytes
+  - pattern: Security.Cryptography.Rfc2898DeriveBytes.GetBytes(...)
+  - pattern: $VAR = Security.Cryptography.Rfc2898DeriveBytes.GetBytes
+  - pattern: Cryptography.Rfc2898DeriveBytes.GetBytes(...)
+  - pattern: $VAR = Cryptography.Rfc2898DeriveBytes.GetBytes
+  - pattern: Rfc2898DeriveBytes.GetBytes(...)
+  - pattern: $VAR = Rfc2898DeriveBytes.GetBytes
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-Rfc2898DeriveBytes-Reset
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.Rfc2898DeriveBytes.Reset(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.Rfc2898DeriveBytes.Reset()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.Rfc2898DeriveBytes.Reset(...)
+  - pattern: $VAR = System.Security.Cryptography.Rfc2898DeriveBytes.Reset
+  - pattern: Security.Cryptography.Rfc2898DeriveBytes.Reset(...)
+  - pattern: $VAR = Security.Cryptography.Rfc2898DeriveBytes.Reset
+  - pattern: Cryptography.Rfc2898DeriveBytes.Reset(...)
+  - pattern: $VAR = Cryptography.Rfc2898DeriveBytes.Reset
+  - pattern: Rfc2898DeriveBytes.Reset(...)
+  - pattern: $VAR = Rfc2898DeriveBytes.Reset
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-Rijndael-Create
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.Rijndael.Create(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.Rijndael.Create()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.Rijndael.Create(...)
+  - pattern: $VAR = System.Security.Cryptography.Rijndael.Create
+  - pattern: Security.Cryptography.Rijndael.Create(...)
+  - pattern: $VAR = Security.Cryptography.Rijndael.Create
+  - pattern: Cryptography.Rijndael.Create(...)
+  - pattern: $VAR = Cryptography.Rijndael.Create
+  - pattern: Rijndael.Create(...)
+  - pattern: $VAR = Rijndael.Create
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-RijndaelManaged-CreateDecryptor
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.RijndaelManaged.CreateDecryptor(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.RijndaelManaged.CreateDecryptor()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.RijndaelManaged.CreateDecryptor(...)
+  - pattern: $VAR = System.Security.Cryptography.RijndaelManaged.CreateDecryptor
+  - pattern: Security.Cryptography.RijndaelManaged.CreateDecryptor(...)
+  - pattern: $VAR = Security.Cryptography.RijndaelManaged.CreateDecryptor
+  - pattern: Cryptography.RijndaelManaged.CreateDecryptor(...)
+  - pattern: $VAR = Cryptography.RijndaelManaged.CreateDecryptor
+  - pattern: RijndaelManaged.CreateDecryptor(...)
+  - pattern: $VAR = RijndaelManaged.CreateDecryptor
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-RijndaelManaged-CreateEncryptor
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.RijndaelManaged.CreateEncryptor(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.RijndaelManaged.CreateEncryptor()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.RijndaelManaged.CreateEncryptor(...)
+  - pattern: $VAR = System.Security.Cryptography.RijndaelManaged.CreateEncryptor
+  - pattern: Security.Cryptography.RijndaelManaged.CreateEncryptor(...)
+  - pattern: $VAR = Security.Cryptography.RijndaelManaged.CreateEncryptor
+  - pattern: Cryptography.RijndaelManaged.CreateEncryptor(...)
+  - pattern: $VAR = Cryptography.RijndaelManaged.CreateEncryptor
+  - pattern: RijndaelManaged.CreateEncryptor(...)
+  - pattern: $VAR = RijndaelManaged.CreateEncryptor
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-SHA1-ComputeHash
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.SHA1.ComputeHash(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.SHA1.ComputeHash()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.SHA1.ComputeHash(...)
+  - pattern: $VAR = System.Security.Cryptography.SHA1.ComputeHash
+  - pattern: Security.Cryptography.SHA1.ComputeHash(...)
+  - pattern: $VAR = Security.Cryptography.SHA1.ComputeHash
+  - pattern: Cryptography.SHA1.ComputeHash(...)
+  - pattern: $VAR = Cryptography.SHA1.ComputeHash
+  - pattern: SHA1.ComputeHash(...)
+  - pattern: $VAR = SHA1.ComputeHash
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-SHA1-Create
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.SHA1.Create(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.SHA1.Create()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.SHA1.Create(...)
+  - pattern: $VAR = System.Security.Cryptography.SHA1.Create
+  - pattern: Security.Cryptography.SHA1.Create(...)
+  - pattern: $VAR = Security.Cryptography.SHA1.Create
+  - pattern: Cryptography.SHA1.Create(...)
+  - pattern: $VAR = Cryptography.SHA1.Create
+  - pattern: SHA1.Create(...)
+  - pattern: $VAR = SHA1.Create
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-SHA256-ComputeHash
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.SHA256.ComputeHash(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.SHA256.ComputeHash()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.SHA256.ComputeHash(...)
+  - pattern: $VAR = System.Security.Cryptography.SHA256.ComputeHash
+  - pattern: Security.Cryptography.SHA256.ComputeHash(...)
+  - pattern: $VAR = Security.Cryptography.SHA256.ComputeHash
+  - pattern: Cryptography.SHA256.ComputeHash(...)
+  - pattern: $VAR = Cryptography.SHA256.ComputeHash
+  - pattern: SHA256.ComputeHash(...)
+  - pattern: $VAR = SHA256.ComputeHash
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-SHA256-Create
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.SHA256.Create(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.SHA256.Create()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.SHA256.Create(...)
+  - pattern: $VAR = System.Security.Cryptography.SHA256.Create
+  - pattern: Security.Cryptography.SHA256.Create(...)
+  - pattern: $VAR = Security.Cryptography.SHA256.Create
+  - pattern: Cryptography.SHA256.Create(...)
+  - pattern: $VAR = Cryptography.SHA256.Create
+  - pattern: SHA256.Create(...)
+  - pattern: $VAR = SHA256.Create
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-SHA384-ComputeHash
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.SHA384.ComputeHash(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.SHA384.ComputeHash()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.SHA384.ComputeHash(...)
+  - pattern: $VAR = System.Security.Cryptography.SHA384.ComputeHash
+  - pattern: Security.Cryptography.SHA384.ComputeHash(...)
+  - pattern: $VAR = Security.Cryptography.SHA384.ComputeHash
+  - pattern: Cryptography.SHA384.ComputeHash(...)
+  - pattern: $VAR = Cryptography.SHA384.ComputeHash
+  - pattern: SHA384.ComputeHash(...)
+  - pattern: $VAR = SHA384.ComputeHash
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-SHA384-Create
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.SHA384.Create(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.SHA384.Create()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.SHA384.Create(...)
+  - pattern: $VAR = System.Security.Cryptography.SHA384.Create
+  - pattern: Security.Cryptography.SHA384.Create(...)
+  - pattern: $VAR = Security.Cryptography.SHA384.Create
+  - pattern: Cryptography.SHA384.Create(...)
+  - pattern: $VAR = Cryptography.SHA384.Create
+  - pattern: SHA384.Create(...)
+  - pattern: $VAR = SHA384.Create
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-SHA512-ComputeHash
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.SHA512.ComputeHash(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.SHA512.ComputeHash()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.SHA512.ComputeHash(...)
+  - pattern: $VAR = System.Security.Cryptography.SHA512.ComputeHash
+  - pattern: Security.Cryptography.SHA512.ComputeHash(...)
+  - pattern: $VAR = Security.Cryptography.SHA512.ComputeHash
+  - pattern: Cryptography.SHA512.ComputeHash(...)
+  - pattern: $VAR = Cryptography.SHA512.ComputeHash
+  - pattern: SHA512.ComputeHash(...)
+  - pattern: $VAR = SHA512.ComputeHash
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-SHA512-Create
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.SHA512.Create(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.SHA512.Create()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.SHA512.Create(...)
+  - pattern: $VAR = System.Security.Cryptography.SHA512.Create
+  - pattern: Security.Cryptography.SHA512.Create(...)
+  - pattern: $VAR = Security.Cryptography.SHA512.Create
+  - pattern: Cryptography.SHA512.Create(...)
+  - pattern: $VAR = Cryptography.SHA512.Create
+  - pattern: SHA512.Create(...)
+  - pattern: $VAR = SHA512.Create
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-SymmetricAlgorithm-CreateDecryptor
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.SymmetricAlgorithm.CreateDecryptor(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.SymmetricAlgorithm.CreateDecryptor()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.SymmetricAlgorithm.CreateDecryptor(...)
+  - pattern: $VAR = System.Security.Cryptography.SymmetricAlgorithm.CreateDecryptor
+  - pattern: Security.Cryptography.SymmetricAlgorithm.CreateDecryptor(...)
+  - pattern: $VAR = Security.Cryptography.SymmetricAlgorithm.CreateDecryptor
+  - pattern: Cryptography.SymmetricAlgorithm.CreateDecryptor(...)
+  - pattern: $VAR = Cryptography.SymmetricAlgorithm.CreateDecryptor
+  - pattern: SymmetricAlgorithm.CreateDecryptor(...)
+  - pattern: $VAR = SymmetricAlgorithm.CreateDecryptor
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-SymmetricAlgorithm-CreateEncryptor
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.SymmetricAlgorithm.CreateEncryptor(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.SymmetricAlgorithm.CreateEncryptor()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.SymmetricAlgorithm.CreateEncryptor(...)
+  - pattern: $VAR = System.Security.Cryptography.SymmetricAlgorithm.CreateEncryptor
+  - pattern: Security.Cryptography.SymmetricAlgorithm.CreateEncryptor(...)
+  - pattern: $VAR = Security.Cryptography.SymmetricAlgorithm.CreateEncryptor
+  - pattern: Cryptography.SymmetricAlgorithm.CreateEncryptor(...)
+  - pattern: $VAR = Cryptography.SymmetricAlgorithm.CreateEncryptor
+  - pattern: SymmetricAlgorithm.CreateEncryptor(...)
+  - pattern: $VAR = SymmetricAlgorithm.CreateEncryptor
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-TripleDES-Create
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.TripleDES.Create(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.TripleDES.Create()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.TripleDES.Create(...)
+  - pattern: $VAR = System.Security.Cryptography.TripleDES.Create
+  - pattern: Security.Cryptography.TripleDES.Create(...)
+  - pattern: $VAR = Security.Cryptography.TripleDES.Create
+  - pattern: Cryptography.TripleDES.Create(...)
+  - pattern: $VAR = Cryptography.TripleDES.Create
+  - pattern: TripleDES.Create(...)
+  - pattern: $VAR = TripleDES.Create
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-TripleDESCryptoServiceProvider-CreateDecryptor
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.TripleDESCryptoServiceProvider.CreateDecryptor(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.TripleDESCryptoServiceProvider.CreateDecryptor()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.TripleDESCryptoServiceProvider.CreateDecryptor(...)
+  - pattern: $VAR = System.Security.Cryptography.TripleDESCryptoServiceProvider.CreateDecryptor
+  - pattern: Security.Cryptography.TripleDESCryptoServiceProvider.CreateDecryptor(...)
+  - pattern: $VAR = Security.Cryptography.TripleDESCryptoServiceProvider.CreateDecryptor
+  - pattern: Cryptography.TripleDESCryptoServiceProvider.CreateDecryptor(...)
+  - pattern: $VAR = Cryptography.TripleDESCryptoServiceProvider.CreateDecryptor
+  - pattern: TripleDESCryptoServiceProvider.CreateDecryptor(...)
+  - pattern: $VAR = TripleDESCryptoServiceProvider.CreateDecryptor
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-System-Security-Cryptography-TripleDESCryptoServiceProvider-CreateEncryptor
+  languages:
+  - csharp
+  message: Avoid using System.Security.Cryptography.TripleDESCryptoServiceProvider.CreateEncryptor(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: System.Security.Cryptography.TripleDESCryptoServiceProvider.CreateEncryptor()
+    category: Cryptography
+  pattern-either:
+  - pattern: System.Security.Cryptography.TripleDESCryptoServiceProvider.CreateEncryptor(...)
+  - pattern: $VAR = System.Security.Cryptography.TripleDESCryptoServiceProvider.CreateEncryptor
+  - pattern: Security.Cryptography.TripleDESCryptoServiceProvider.CreateEncryptor(...)
+  - pattern: $VAR = Security.Cryptography.TripleDESCryptoServiceProvider.CreateEncryptor
+  - pattern: Cryptography.TripleDESCryptoServiceProvider.CreateEncryptor(...)
+  - pattern: $VAR = Cryptography.TripleDESCryptoServiceProvider.CreateEncryptor
+  - pattern: TripleDESCryptoServiceProvider.CreateEncryptor(...)
+  - pattern: $VAR = TripleDESCryptoServiceProvider.CreateEncryptor
+  severity: WARNING
+  tags:
+  - Cryptography

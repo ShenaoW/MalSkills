@@ -1,9 +1,24 @@
 from __future__ import annotations
 
+import hashlib
 import json
+import multiprocessing
+import re
 import time
 from pathlib import Path
 
+from .baselines import (
+    run_masb_baseline,
+    run_caterpillar_baseline,
+    run_clawscan_baseline,
+    run_codex_agent_baseline,
+    run_nova_proximity_baseline,
+    run_skill_scanner_baseline,
+    run_skill_security_audit_baseline,
+    run_skill_security_scan_baseline,
+    run_skills_security_audit_baseline,
+)
+from .baselines.external_tools import DEFAULT_TIMEOUT_SEC, SKILL_SCANNER_TIMEOUT_SEC
 from .benchmark import load_benchmark_entries
 from .models import BenchmarkEntry, to_jsonable
 from .pipeline import AnalyzerConfig, SkillAnalyzer
@@ -11,23 +26,166 @@ from .utils import ensure_dir
 
 
 VARIANTS = {
-    "full": AnalyzerConfig(enable_intent=True),
-    "static_only": AnalyzerConfig(enable_intent=False),
-    "intent_only": AnalyzerConfig(enable_static=False, enable_intent=True),
-    "no_formal_reasoning": AnalyzerConfig(enable_intent=True, reasoning_mode="heuristic"),
-    "no_cross_artifact_resolution": AnalyzerConfig(enable_intent=True, enable_cross_artifact_resolution=False),
-    "no_capability_mismatch": AnalyzerConfig(enable_intent=True, enable_capability_mismatch=False),
-    "benchmark_full": AnalyzerConfig(enable_intent=True, enable_yasa=False),
-    "benchmark_static_only": AnalyzerConfig(enable_intent=False, enable_yasa=False),
-    "benchmark_no_formal_reasoning": AnalyzerConfig(enable_intent=True, enable_yasa=False, reasoning_mode="heuristic"),
-    "benchmark_no_cross_artifact_resolution": AnalyzerConfig(enable_intent=True, enable_yasa=False, enable_cross_artifact_resolution=False),
-    "benchmark_no_capability_mismatch": AnalyzerConfig(enable_intent=True, enable_yasa=False, enable_capability_mismatch=False),
+    "full": AnalyzerConfig(enable_llm_evidence=True),
+    "semgrep_evidence_only": AnalyzerConfig(enable_llm_evidence=False),
+    "llm_evidence_only": AnalyzerConfig(enable_semgrep=False, enable_llm_evidence=True),
+    "formal_reasoning_only": AnalyzerConfig(enable_llm_evidence=True, reasoning_mode="formal"),
+    "llm_reasoning_only": AnalyzerConfig(enable_llm_evidence=True, reasoning_mode="llm"),
+    "no_yasa": AnalyzerConfig(enable_llm_evidence=True, enable_yasa=False),
+    "no_cross_artifact_resolution": AnalyzerConfig(enable_llm_evidence=True, enable_cross_artifact_resolution=False),
+    "static_only": AnalyzerConfig(
+        enable_llm_evidence=False,
+        enable_yasa=False,
+        enable_cross_artifact_resolution=False,
+        reasoning_mode="formal",
+    ),
+    "benchmark_full": AnalyzerConfig(enable_llm_evidence=True, max_artifacts=600, max_total_text_bytes=2_000_000),
+    "benchmark_semgrep_evidence_only": AnalyzerConfig(enable_llm_evidence=False, max_artifacts=600, max_total_text_bytes=2_000_000),
+    "benchmark_llm_evidence_only": AnalyzerConfig(
+        enable_semgrep=False,
+        enable_llm_evidence=True,
+        max_artifacts=600,
+        max_total_text_bytes=2_000_000,
+    ),
+    "benchmark_formal_reasoning_only": AnalyzerConfig(
+        enable_llm_evidence=True,
+        reasoning_mode="formal",
+        max_artifacts=600,
+        max_total_text_bytes=2_000_000,
+    ),
+    "benchmark_llm_reasoning_only": AnalyzerConfig(enable_llm_evidence=True, reasoning_mode="llm", max_artifacts=600, max_total_text_bytes=2_000_000),
+    "benchmark_no_yasa": AnalyzerConfig(
+        enable_llm_evidence=True,
+        enable_yasa=False,
+        max_artifacts=600,
+        max_total_text_bytes=2_000_000,
+    ),
+    "benchmark_no_cross_artifact_resolution": AnalyzerConfig(enable_llm_evidence=True, enable_cross_artifact_resolution=False, max_artifacts=600, max_total_text_bytes=2_000_000),
+    "benchmark_static_only": AnalyzerConfig(
+        enable_llm_evidence=False,
+        enable_yasa=False,
+        enable_cross_artifact_resolution=False,
+        reasoning_mode="formal",
+        max_artifacts=600,
+        max_total_text_bytes=2_000_000,
+    ),
+    "masb_baseline": "masb_baseline",
+    "benchmark_masb_baseline": "masb_baseline",
+    "codex_agent_baseline": "codex_agent_baseline",
+    "benchmark_codex_agent_baseline": "codex_agent_baseline",
+    "skill_security_audit_baseline": "skill_security_audit_baseline",
+    "benchmark_skill_security_audit_baseline": "skill_security_audit_baseline",
+    "skill_security_scan_baseline": "skill_security_scan_baseline",
+    "benchmark_skill_security_scan_baseline": "skill_security_scan_baseline",
+    "skills_security_audit_baseline": "skills_security_audit_baseline",
+    "benchmark_skills_security_audit_baseline": "skills_security_audit_baseline",
+    "caterpillar_baseline": "caterpillar_baseline",
+    "benchmark_caterpillar_baseline": "caterpillar_baseline",
+    "clawscan_baseline": "clawscan_baseline",
+    "benchmark_clawscan_baseline": "clawscan_baseline",
+    "skill_scanner_baseline": "skill_scanner_baseline",
+    "benchmark_skill_scanner_baseline": "skill_scanner_baseline",
+    "nova_proximity_baseline": "nova_proximity_baseline",
+    "benchmark_nova_proximity_baseline": "nova_proximity_baseline",
 }
+
+# The outer benchmark case timeout must exceed any baseline subprocess timeout.
+# Otherwise the evaluator can kill only the worker process while a detached
+# baseline subprocess (started in its own session) keeps running as an orphan.
+BENCHMARK_CASE_TIMEOUT_BUFFER_SEC = 30
+BENCHMARK_CASE_TIMEOUT_SEC = (
+    max(
+        DEFAULT_TIMEOUT_SEC,
+        SKILL_SCANNER_TIMEOUT_SEC,
+    )
+    + BENCHMARK_CASE_TIMEOUT_BUFFER_SEC
+)
+
+
+def _analyze_case_worker(skill_path: str, case_output_dir: str, config: AnalyzerConfig | str, queue: multiprocessing.Queue) -> None:
+    try:
+        if config == "masb_baseline":
+            queue.put(run_masb_baseline(skill_path, case_output_dir))
+            return
+        if config == "codex_agent_baseline":
+            queue.put(run_codex_agent_baseline(skill_path, case_output_dir))
+            return
+        if config == "skill_security_audit_baseline":
+            queue.put(run_skill_security_audit_baseline(skill_path, case_output_dir))
+            return
+        if config == "skill_security_scan_baseline":
+            queue.put(run_skill_security_scan_baseline(skill_path, case_output_dir))
+            return
+        if config == "skills_security_audit_baseline":
+            queue.put(run_skills_security_audit_baseline(skill_path, case_output_dir))
+            return
+        if config == "caterpillar_baseline":
+            queue.put(run_caterpillar_baseline(skill_path, case_output_dir))
+            return
+        if config == "clawscan_baseline":
+            queue.put(run_clawscan_baseline(skill_path, case_output_dir))
+            return
+        if config == "skill_scanner_baseline":
+            queue.put(run_skill_scanner_baseline(skill_path, case_output_dir))
+            return
+        if config == "nova_proximity_baseline":
+            queue.put(run_nova_proximity_baseline(skill_path, case_output_dir))
+            return
+        analyzer = SkillAnalyzer()
+        result = analyzer.analyze(skill_path, output_dir=case_output_dir, config=config)
+        queue.put(
+            {
+                "status": "ok",
+                "predicted": result.verdict.label,
+                "score": result.verdict.score,
+                "patterns": result.verdict.malicious_patterns + result.verdict.suspicious_patterns,
+                "evidence_count": len(result.evidence),
+                "derived_evidence_count": len(result.derived_evidence),
+                "combined_evidence_count": len(result.combined_evidence),
+                "primitive_count": len(result.primitives),
+            }
+        )
+    except Exception as exc:
+        queue.put(
+            {
+                "status": "error",
+                "error": f"{type(exc).__name__}: {exc}",
+                "predicted": "error",
+                "score": 0.0,
+                "patterns": [],
+                "evidence_count": 0,
+                "derived_evidence_count": 0,
+                "combined_evidence_count": 0,
+                "primitive_count": 0,
+            }
+        )
+
+
+def _run_case_direct(skill_path: str, case_output_dir: Path, config: str) -> dict[str, object]:
+    if config == "masb_baseline":
+        return run_masb_baseline(skill_path, case_output_dir)
+    if config == "codex_agent_baseline":
+        return run_codex_agent_baseline(skill_path, case_output_dir)
+    if config == "skill_security_audit_baseline":
+        return run_skill_security_audit_baseline(skill_path, case_output_dir)
+    if config == "skill_security_scan_baseline":
+        return run_skill_security_scan_baseline(skill_path, case_output_dir)
+    if config == "skills_security_audit_baseline":
+        return run_skills_security_audit_baseline(skill_path, case_output_dir)
+    if config == "caterpillar_baseline":
+        return run_caterpillar_baseline(skill_path, case_output_dir)
+    if config == "clawscan_baseline":
+        return run_clawscan_baseline(skill_path, case_output_dir)
+    if config == "skill_scanner_baseline":
+        return run_skill_scanner_baseline(skill_path, case_output_dir)
+    if config == "nova_proximity_baseline":
+        return run_nova_proximity_baseline(skill_path, case_output_dir)
+    raise ValueError(f"unknown baseline config: {config}")
 
 
 class Evaluator:
     def __init__(self) -> None:
-        self.analyzer = SkillAnalyzer()
+        pass
 
     def run(
         self,
@@ -106,28 +264,39 @@ class Evaluator:
         entries: list[BenchmarkEntry],
         output_dir: str | Path,
         variant: str,
-        config: AnalyzerConfig,
+        config: AnalyzerConfig | str,
         *,
         datasets: list[str] | None,
         splits: list[str] | None,
         labels: list[str] | None,
     ) -> dict[str, object]:
+        destination = Path(output_dir)
+        ensure_dir(destination)
         results = []
         for entry in entries:
             started_at = time.perf_counter()
-            result = self.analyzer.analyze(entry.local_path, config=config)
+            case_output_dir = destination / "cases" / variant / self._stable_case_directory_name(entry.entry_id)
+            runtime_sec = time.perf_counter() - started_at
+            manifest_path = case_output_dir / "output_manifest.json"
+            case_result = self._run_case(entry.local_path, case_output_dir, config)
             runtime_sec = time.perf_counter() - started_at
             results.append({
                 "entry_id": entry.entry_id,
                 "dataset": entry.dataset,
                 "split": entry.split,
                 "label": entry.label,
-                "predicted": result.verdict.label,
-                "score": result.verdict.score,
-                "patterns": result.verdict.malicious_patterns + result.verdict.suspicious_patterns,
+                "status": case_result["status"],
+                "predicted": case_result["predicted"],
+                "score": case_result["score"],
+                "patterns": case_result["patterns"],
                 "runtime_sec": round(runtime_sec, 4),
-                "evidence_count": len(result.evidence),
-                "primitive_count": len(result.primitives),
+                "evidence_count": case_result["evidence_count"],
+                "derived_evidence_count": case_result["derived_evidence_count"],
+                "combined_evidence_count": case_result["combined_evidence_count"],
+                "primitive_count": case_result["primitive_count"],
+                "analysis_output_dir": str(case_output_dir.relative_to(destination)),
+                "analysis_manifest_path": str(manifest_path.relative_to(destination)),
+                "error": case_result.get("error", ""),
             })
         metrics = self._compute_metrics(entries, results)
         payload = {
@@ -141,15 +310,96 @@ class Evaluator:
                 "by_label": self._compute_breakdown(entries, results, key="label"),
             },
         }
-        destination = Path(output_dir)
-        ensure_dir(destination)
+        case_outputs = {
+            row["entry_id"]: {
+                "analysis_output_dir": row["analysis_output_dir"],
+                "analysis_manifest_path": row["analysis_manifest_path"],
+            }
+            for row in results
+        }
+        payload["case_outputs"] = case_outputs
         (destination / f"eval_{variant}.json").write_text(json.dumps(to_jsonable(payload), indent=2, sort_keys=True), encoding="utf-8")
+        (destination / f"case_outputs_{variant}.json").write_text(json.dumps(to_jsonable(case_outputs), indent=2, sort_keys=True), encoding="utf-8")
+        return payload
+
+    def _stable_case_directory_name(self, entry_id: str) -> str:
+        slug = re.sub(r"[^A-Za-z0-9]+", "_", entry_id).strip("_").lower()
+        if not slug:
+            slug = "case"
+        digest = hashlib.sha1(entry_id.encode("utf-8")).hexdigest()[:10]
+        return f"{slug}__{digest}"
+
+    def _run_case(self, skill_path: str, case_output_dir: Path, config: AnalyzerConfig | str) -> dict[str, object]:
+        ensure_dir(case_output_dir)
+        if isinstance(config, str):
+            try:
+                payload = dict(_run_case_direct(skill_path, case_output_dir, config))
+            except Exception as exc:
+                payload = {
+                    "status": "error",
+                    "predicted": "error",
+                    "score": 0.0,
+                    "patterns": [],
+                    "evidence_count": 0,
+                    "derived_evidence_count": 0,
+                    "combined_evidence_count": 0,
+                    "primitive_count": 0,
+                    "error": f"{type(exc).__name__}: {exc}",
+                }
+            (case_output_dir / "benchmark_case_status.json").write_text(
+                json.dumps(payload, indent=2, sort_keys=True),
+                encoding="utf-8",
+            )
+            return payload
+
+        queue: multiprocessing.Queue = multiprocessing.Queue()
+        process = multiprocessing.Process(
+            target=_analyze_case_worker,
+            args=(skill_path, str(case_output_dir), config, queue),
+            daemon=True,
+        )
+        process.start()
+        process.join(BENCHMARK_CASE_TIMEOUT_SEC)
+        if process.is_alive():
+            process.terminate()
+            process.join(5)
+            if process.is_alive():
+                process.kill()
+                process.join(5)
+            payload = {
+                "status": "timeout",
+                "predicted": "timeout",
+                "score": 0.0,
+                "patterns": [],
+                "evidence_count": 0,
+                "derived_evidence_count": 0,
+                "combined_evidence_count": 0,
+                "primitive_count": 0,
+                "error": f"case timed out after {BENCHMARK_CASE_TIMEOUT_SEC}s",
+            }
+            (case_output_dir / "benchmark_case_status.json").write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+            return payload
+        if not queue.empty():
+            payload = dict(queue.get())
+        else:
+            payload = {
+                "status": "error",
+                "predicted": "error",
+                "score": 0.0,
+                "patterns": [],
+                "evidence_count": 0,
+                "derived_evidence_count": 0,
+                "combined_evidence_count": 0,
+                "primitive_count": 0,
+                "error": "worker exited without result payload",
+            }
+        (case_output_dir / "benchmark_case_status.json").write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
         return payload
 
     def _compute_metrics(self, entries: list[BenchmarkEntry], results: list[dict[str, object]]) -> dict[str, float]:
         gold_positive = {entry.entry_id for entry in entries if entry.label == "malicious"}
         gold_negative = {entry.entry_id for entry in entries if entry.label != "malicious"}
-        pred_positive = {row["entry_id"] for row in results if row["predicted"] in {"malicious", "suspicious"}}
+        pred_positive = {row["entry_id"] for row in results if row["predicted"] == "malicious"}
         pred_strict_positive = {row["entry_id"] for row in results if row["predicted"] == "malicious"}
         tp = len(gold_positive & pred_positive)
         fp = len(gold_negative & pred_positive)
@@ -170,7 +420,11 @@ class Evaluator:
         avg_runtime = total_runtime / len(results) if results else 0.0
         throughput = len(results) / (total_runtime / 60.0) if total_runtime else 0.0
         avg_evidence = sum(float(row.get("evidence_count", 0.0)) for row in results) / len(results) if results else 0.0
+        avg_derived_evidence = sum(float(row.get("derived_evidence_count", 0.0)) for row in results) / len(results) if results else 0.0
+        avg_combined_evidence = sum(float(row.get("combined_evidence_count", 0.0)) for row in results) / len(results) if results else 0.0
         avg_primitives = sum(float(row.get("primitive_count", 0.0)) for row in results) / len(results) if results else 0.0
+        timeout_count = sum(1 for row in results if row.get("status") == "timeout")
+        error_count = sum(1 for row in results if row.get("status") == "error")
         return {
             "precision": round(precision, 4),
             "recall": round(recall, 4),
@@ -187,7 +441,11 @@ class Evaluator:
             "avg_runtime_sec": round(avg_runtime, 4),
             "throughput_skills_per_min": round(throughput, 4),
             "avg_evidence_count": round(avg_evidence, 4),
+            "avg_derived_evidence_count": round(avg_derived_evidence, 4),
+            "avg_combined_evidence_count": round(avg_combined_evidence, 4),
             "avg_primitive_count": round(avg_primitives, 4),
+            "timeout_count": float(timeout_count),
+            "error_count": float(error_count),
         }
 
     def _compute_breakdown(self, entries: list[BenchmarkEntry], results: list[dict[str, object]], *, key: str) -> dict[str, dict[str, float]]:
@@ -226,6 +484,8 @@ def render_results(results_dir: str | Path) -> Path:
         lines.append(f"- Avg runtime (s): {metrics.get('avg_runtime_sec', 0.0)}")
         lines.append(f"- Throughput (skills/min): {metrics.get('throughput_skills_per_min', 0.0)}")
         lines.append(f"- Avg evidence count: {metrics.get('avg_evidence_count', 0.0)}")
+        lines.append(f"- Avg primitive-support evidence count: {metrics.get('avg_derived_evidence_count', 0.0)}")
+        lines.append(f"- Avg combined evidence count: {metrics.get('avg_combined_evidence_count', 0.0)}")
         lines.append(f"- Avg primitive count: {metrics.get('avg_primitive_count', 0.0)}")
         if all(key in metrics for key in ("tp", "fp", "fn", "tn")):
             lines.append(f"- Confusion: TP={int(metrics['tp'])}, FP={int(metrics['fp'])}, FN={int(metrics['fn'])}, TN={int(metrics['tn'])}")

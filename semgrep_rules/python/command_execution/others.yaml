@@ -1,0 +1,40 @@
+rules:
+- id: no-nt-system
+  languages:
+  - python
+  message: Avoid using nt.system(), as it can lead to potential issues with command execution.
+  metadata:
+    api: nt.system()
+    category: Command Execution
+  pattern-either:
+  - pattern: nt.system(...)
+  - pattern: $VAR = nt.system
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-posix-system
+  languages:
+  - python
+  message: Avoid using posix.system(), as it can lead to potential issues with command execution.
+  metadata:
+    api: posix.system()
+    category: Command Execution
+  pattern-either:
+  - pattern: posix.system(...)
+  - pattern: $VAR = posix.system
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-pty-spawn
+  languages:
+  - python
+  message: Avoid using pty.spawn(), as it can lead to potential issues with command execution.
+  metadata:
+    api: pty.spawn()
+    category: Command Execution
+  pattern-either:
+  - pattern: pty.spawn(...)
+  - pattern: $VAR = pty.spawn
+  severity: WARNING
+  tags:
+  - Command Execution

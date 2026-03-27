@@ -1,0 +1,41 @@
+rules:
+- id: no-javax-script-ScriptEngine-eval
+  languages:
+  - java
+  message: Avoid using javax.script.ScriptEngine.eval(), as it can lead to potential issues with command execution.
+  metadata:
+    api: javax.script.ScriptEngine.eval()
+    category: Command Execution
+  pattern-either:
+  - pattern: new javax.script.ScriptEngine.eval(...)
+  - pattern: javax.script.ScriptEngine.eval(...)
+  - pattern: $VAR = javax.script.ScriptEngine.eval
+  - pattern: new script.ScriptEngine.eval(...)
+  - pattern: script.ScriptEngine.eval(...)
+  - pattern: $VAR = script.ScriptEngine.eval
+  - pattern: new ScriptEngine.eval(...)
+  - pattern: ScriptEngine.eval(...)
+  - pattern: $VAR = ScriptEngine.eval
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-javax-script-ScriptEngineManager-getEngineByName
+  languages:
+  - java
+  message: Avoid using javax.script.ScriptEngineManager.getEngineByName(), as it can lead to potential issues with command execution.
+  metadata:
+    api: javax.script.ScriptEngineManager.getEngineByName()
+    category: Command Execution
+  pattern-either:
+  - pattern: new javax.script.ScriptEngineManager.getEngineByName(...)
+  - pattern: javax.script.ScriptEngineManager.getEngineByName(...)
+  - pattern: $VAR = javax.script.ScriptEngineManager.getEngineByName
+  - pattern: new script.ScriptEngineManager.getEngineByName(...)
+  - pattern: script.ScriptEngineManager.getEngineByName(...)
+  - pattern: $VAR = script.ScriptEngineManager.getEngineByName
+  - pattern: new ScriptEngineManager.getEngineByName(...)
+  - pattern: ScriptEngineManager.getEngineByName(...)
+  - pattern: $VAR = ScriptEngineManager.getEngineByName
+  severity: WARNING
+  tags:
+  - Command Execution

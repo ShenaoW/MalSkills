@@ -1,0 +1,38 @@
+rules:
+- id: no-unirest-get
+  languages:
+  - javascript
+  message: Avoid using unirest.get(), as it can lead to potential issues with network access.
+  metadata:
+    api: unirest.get()
+    category: Network Access
+  pattern-either:
+  - pattern: unirest.get(...)
+  - pattern: $VAR = unirest.get
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-unirest-post
+  languages:
+  - javascript
+  message: Avoid using unirest.post(), as it can lead to potential issues with network access.
+  metadata:
+    api: unirest.post()
+    category: Network Access
+  pattern-either:
+  - pattern: unirest.post(...)
+  - pattern: $VAR = unirest.post
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-require-unirest
+  languages:
+  - javascript
+  message: Avoid using require('unirest'), as it can lead to potential issues with network access.
+  metadata:
+    api: require('unirest')
+    category: Network Access
+  pattern: require('unirest')
+  severity: WARNING
+  tags:
+  - Network Access

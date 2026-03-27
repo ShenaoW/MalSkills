@@ -1,0 +1,42 @@
+rules:
+- id: no-QProcess-execute
+  languages:
+  - cpp
+  message: Avoid using QProcess::execute(), as it can lead to potential issues with command execution.
+  metadata:
+    api: QProcess::execute()
+    category: Command Execution
+  pattern-either:
+  - pattern: QProcess::execute(...)
+  - pattern: $VAR = QProcess::execute
+  - pattern: execute(...)
+  - pattern: $VAR = execute
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-QProcess-start
+  languages:
+  - cpp
+  message: Avoid using QProcess::start(), as it can lead to potential issues with command execution.
+  metadata:
+    api: QProcess::start()
+    category: Command Execution
+  pattern-either:
+  - pattern: QProcess::start(...)
+  - pattern: $VAR = QProcess::start
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-QProcess-startDetached
+  languages:
+  - cpp
+  message: Avoid using QProcess::startDetached(), as it can lead to potential issues with command execution.
+  metadata:
+    api: QProcess::startDetached()
+    category: Command Execution
+  pattern-either:
+  - pattern: QProcess::startDetached(...)
+  - pattern: $VAR = QProcess::startDetached
+  severity: WARNING
+  tags:
+  - Command Execution

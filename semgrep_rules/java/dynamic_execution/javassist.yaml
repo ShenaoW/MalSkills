@@ -1,0 +1,52 @@
+rules:
+- id: no-javassist-ClassPool-get
+  languages:
+  - java
+  message: Avoid using javassist.ClassPool.get(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: javassist.ClassPool.get()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: new javassist.ClassPool.get(...)
+  - pattern: javassist.ClassPool.get(...)
+  - pattern: $VAR = javassist.ClassPool.get
+  - pattern: new ClassPool.get(...)
+  - pattern: ClassPool.get(...)
+  - pattern: $VAR = ClassPool.get
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: no-javassist-CtClass-toClass
+  languages:
+  - java
+  message: Avoid using javassist.CtClass.toClass(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: javassist.CtClass.toClass()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: new javassist.CtClass.toClass(...)
+  - pattern: javassist.CtClass.toClass(...)
+  - pattern: $VAR = javassist.CtClass.toClass
+  - pattern: new CtClass.toClass(...)
+  - pattern: CtClass.toClass(...)
+  - pattern: $VAR = CtClass.toClass
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: no-javassist-CtMethod-insertBefore
+  languages:
+  - java
+  message: Avoid using javassist.CtMethod.insertBefore(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: javassist.CtMethod.insertBefore()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: new javassist.CtMethod.insertBefore(...)
+  - pattern: javassist.CtMethod.insertBefore(...)
+  - pattern: $VAR = javassist.CtMethod.insertBefore
+  - pattern: new CtMethod.insertBefore(...)
+  - pattern: CtMethod.insertBefore(...)
+  - pattern: $VAR = CtMethod.insertBefore
+  severity: WARNING
+  tags:
+  - Dynamic Execution

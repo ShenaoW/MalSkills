@@ -1,0 +1,79 @@
+rules:
+- id: no-__import__
+  languages:
+  - python
+  message: Avoid using __import__(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: __import__()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: __import__(...)
+  - pattern: $VAR = __import__
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: no-compile
+  languages:
+  - python
+  message: Avoid using compile(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: compile()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: compile(...)
+  - pattern: $VAR = compile
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: no-eval
+  languages:
+  - python
+  message: Avoid using eval(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: eval()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: eval(...)
+  - pattern: $VAR = eval
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: no-exec
+  languages:
+  - python
+  message: Avoid using exec(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: exec()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: exec(...)
+  - pattern: $VAR = exec
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: no-execfile
+  languages:
+  - python
+  message: Avoid using execfile(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: execfile()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: execfile(...)
+  - pattern: $VAR = execfile
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: no-getattr
+  languages:
+  - python
+  message: Avoid using getattr(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: getattr()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: getattr(...)
+  - pattern: $VAR = getattr
+  severity: WARNING
+  tags:
+  - Dynamic Execution

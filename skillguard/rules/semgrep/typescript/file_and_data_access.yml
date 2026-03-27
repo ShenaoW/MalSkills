@@ -1,0 +1,54 @@
+rules:
+  - id: typescript.file_and_data_access.file_enumeration_and_location
+    languages: [typescript]
+    message: TypeScript enumerates files or directories
+    severity: WARNING
+    metadata:
+      skillguard_subtype: file_enumeration_and_location
+      skillguard_evidence_type: file_and_data_access
+      skillguard_value_metavar: $PATH
+    pattern-either:
+      - pattern: fs.readdirSync($PATH, ...)
+      - pattern: fs.readdir($PATH, ...)
+      - pattern: fs.promises.readdir($PATH, ...)
+
+  - id: typescript.file_and_data_access.content_read_and_parse
+    languages: [typescript]
+    message: TypeScript reads local file contents
+    severity: WARNING
+    metadata:
+      skillguard_subtype: content_read_and_parse
+      skillguard_evidence_type: file_and_data_access
+      skillguard_value_metavar: $PATH
+    pattern-either:
+      - pattern: fs.readFileSync($PATH, ...)
+      - pattern: fs.readFile($PATH, ...)
+      - pattern: fs.promises.readFile($PATH, ...)
+
+  - id: typescript.file_and_data_access.config_or_metadata_modification
+    languages: [typescript]
+    message: TypeScript modifies config files or metadata
+    severity: WARNING
+    metadata:
+      skillguard_subtype: config_or_metadata_modification
+      skillguard_evidence_type: file_and_data_access
+      skillguard_value_metavar: $PATH
+    pattern-either:
+      - pattern: fs.writeFileSync($PATH, ...)
+      - pattern: fs.writeFile($PATH, ...)
+      - pattern: fs.appendFileSync($PATH, ...)
+      - pattern: fs.chmodSync($PATH, ...)
+
+  - id: typescript.file_and_data_access.deletion_or_overwrite
+    languages: [typescript]
+    message: TypeScript deletes or overwrites files
+    severity: WARNING
+    metadata:
+      skillguard_subtype: deletion_or_overwrite
+      skillguard_evidence_type: file_and_data_access
+      skillguard_value_metavar: $PATH
+    pattern-either:
+      - pattern: fs.unlinkSync($PATH)
+      - pattern: fs.rmSync($PATH, ...)
+      - pattern: fs.truncateSync($PATH, ...)
+

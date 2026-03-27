@@ -1,0 +1,66 @@
+rules:
+- id: no-IO.foreach
+  languages:
+  - ruby
+  message: Avoid using IO.foreach(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: IO.foreach()
+    category: File or System Operation
+  pattern-either:
+  - pattern: IO.foreach(...)
+  - pattern: $VAR = IO.foreach
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-IO.open
+  languages:
+  - ruby
+  message: Avoid using IO.open(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: IO.open()
+    category: File or System Operation
+  pattern-either:
+  - pattern: IO.open(...)
+  - pattern: $VAR = IO.open
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-IO.read
+  languages:
+  - ruby
+  message: Avoid using IO.read(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: IO.read()
+    category: File or System Operation
+  pattern-either:
+  - pattern: IO.read(...)
+  - pattern: $VAR = IO.read
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-IO.readlines
+  languages:
+  - ruby
+  message: Avoid using IO.readlines(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: IO.readlines()
+    category: File or System Operation
+  pattern-either:
+  - pattern: IO.readlines(...)
+  - pattern: $VAR = IO.readlines
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-IO.write
+  languages:
+  - ruby
+  message: Avoid using IO.write(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: IO.write()
+    category: File or System Operation
+  pattern-either:
+  - pattern: IO.write(...)
+  - pattern: $VAR = IO.write
+  severity: WARNING
+  tags:
+  - File or System Operation

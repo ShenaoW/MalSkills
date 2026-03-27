@@ -1,0 +1,38 @@
+rules:
+- id: no-needle-get
+  languages:
+  - javascript
+  message: Avoid using needle.get(), as it can lead to potential issues with network access.
+  metadata:
+    api: needle.get()
+    category: Network Access
+  pattern-either:
+  - pattern: needle.get(...)
+  - pattern: $VAR = needle.get
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-needle-post
+  languages:
+  - javascript
+  message: Avoid using needle.post(), as it can lead to potential issues with network access.
+  metadata:
+    api: needle.post()
+    category: Network Access
+  pattern-either:
+  - pattern: needle.post(...)
+  - pattern: $VAR = needle.post
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-require-needle
+  languages:
+  - javascript
+  message: Avoid using require('needle'), as it can lead to potential issues with network access.
+  metadata:
+    api: require('needle')
+    category: Network Access
+  pattern: require('needle')
+  severity: WARNING
+  tags:
+  - Network Access

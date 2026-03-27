@@ -1,0 +1,29 @@
+rules:
+- id: no-govaluate.EvaluableExpression.Evaluate
+  languages:
+  - go
+  message: Avoid using govaluate.EvaluableExpression.Evaluate(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: govaluate.EvaluableExpression.Evaluate()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: govaluate.EvaluableExpression.Evaluate(...)
+  - pattern: $VAR = govaluate.EvaluableExpression.Evaluate
+  - pattern: EvaluableExpression.Evaluate(...)
+  - pattern: $VAR = EvaluableExpression.Evaluate
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: no-govaluate.NewEvaluableExpression
+  languages:
+  - go
+  message: Avoid using govaluate.NewEvaluableExpression(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: govaluate.NewEvaluableExpression()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: govaluate.NewEvaluableExpression(...)
+  - pattern: $VAR = govaluate.NewEvaluableExpression
+  severity: WARNING
+  tags:
+  - Dynamic Execution

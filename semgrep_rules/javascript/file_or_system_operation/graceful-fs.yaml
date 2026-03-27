@@ -1,0 +1,170 @@
+rules:
+- id: no-graceful-fs-chmod
+  languages:
+  - javascript
+  message: Avoid using graceful-fs.chmod(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: graceful-fs.chmod()
+    category: File or System Operation
+  pattern-either:
+  - pattern: graceful-fs.chmod(...)
+  - pattern: $VAR = graceful-fs.chmod
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-graceful-fs-copyFileSync
+  languages:
+  - javascript
+  message: Avoid using graceful-fs.copyFileSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: graceful-fs.copyFileSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: graceful-fs.copyFileSync(...)
+  - pattern: $VAR = graceful-fs.copyFileSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-graceful-fs-mkdir
+  languages:
+  - javascript
+  message: Avoid using graceful-fs.mkdir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: graceful-fs.mkdir()
+    category: File or System Operation
+  pattern-either:
+  - pattern: graceful-fs.mkdir(...)
+  - pattern: $VAR = graceful-fs.mkdir
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-graceful-fs-promises-writeFile
+  languages:
+  - javascript
+  message: Avoid using graceful-fs.promises.writeFile(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: graceful-fs.promises.writeFile()
+    category: File or System Operation
+  pattern-either:
+  - pattern: graceful-fs.promises.writeFile(...)
+  - pattern: $VAR = graceful-fs.promises.writeFile
+  - pattern: promises.writeFile(...)
+  - pattern: $VAR = promises.writeFile
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-graceful-fs-readFileSync
+  languages:
+  - javascript
+  message: Avoid using graceful-fs.readFileSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: graceful-fs.readFileSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: graceful-fs.readFileSync(...)
+  - pattern: $VAR = graceful-fs.readFileSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-graceful-fs-rename
+  languages:
+  - javascript
+  message: Avoid using graceful-fs.rename(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: graceful-fs.rename()
+    category: File or System Operation
+  pattern-either:
+  - pattern: graceful-fs.rename(...)
+  - pattern: $VAR = graceful-fs.rename
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-graceful-fs-rmdirSync
+  languages:
+  - javascript
+  message: Avoid using graceful-fs.rmdirSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: graceful-fs.rmdirSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: graceful-fs.rmdirSync(...)
+  - pattern: $VAR = graceful-fs.rmdirSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-graceful-fs-symlink
+  languages:
+  - javascript
+  message: Avoid using graceful-fs.symlink(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: graceful-fs.symlink()
+    category: File or System Operation
+  pattern-either:
+  - pattern: graceful-fs.symlink(...)
+  - pattern: $VAR = graceful-fs.symlink
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-graceful-fs-symlinkSync
+  languages:
+  - javascript
+  message: Avoid using graceful-fs.symlinkSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: graceful-fs.symlinkSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: graceful-fs.symlinkSync(...)
+  - pattern: $VAR = graceful-fs.symlinkSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-graceful-fs-unlink
+  languages:
+  - javascript
+  message: Avoid using graceful-fs.unlink(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: graceful-fs.unlink()
+    category: File or System Operation
+  pattern-either:
+  - pattern: graceful-fs.unlink(...)
+  - pattern: $VAR = graceful-fs.unlink
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-graceful-fs-unlinkSync
+  languages:
+  - javascript
+  message: Avoid using graceful-fs.unlinkSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: graceful-fs.unlinkSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: graceful-fs.unlinkSync(...)
+  - pattern: $VAR = graceful-fs.unlinkSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-graceful-fs-writeFileSync
+  languages:
+  - javascript
+  message: Avoid using graceful-fs.writeFileSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: graceful-fs.writeFileSync()
+    category: File or System Operation
+  pattern-either:
+  - pattern: graceful-fs.writeFileSync(...)
+  - pattern: $VAR = graceful-fs.writeFileSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: no-require-graceful-fs
+  languages:
+  - javascript
+  message: Avoid using require('graceful-fs'), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: require('graceful-fs')
+    category: File or System Operation
+  pattern: require('graceful-fs')
+  severity: WARNING
+  tags:
+  - File or System Operation

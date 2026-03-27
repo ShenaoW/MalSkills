@@ -1,0 +1,31 @@
+rules:
+- id: no-base64.StdEncoding.DecodeString
+  languages:
+  - go
+  message: Avoid using base64.StdEncoding.DecodeString(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: base64.StdEncoding.DecodeString()
+    category: Obfuscation
+  pattern-either:
+  - pattern: base64.StdEncoding.DecodeString(...)
+  - pattern: $VAR = base64.StdEncoding.DecodeString
+  - pattern: StdEncoding.DecodeString(...)
+  - pattern: $VAR = StdEncoding.DecodeString
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-base64.StdEncoding.EncodeToString
+  languages:
+  - go
+  message: Avoid using base64.StdEncoding.EncodeToString(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: base64.StdEncoding.EncodeToString()
+    category: Obfuscation
+  pattern-either:
+  - pattern: base64.StdEncoding.EncodeToString(...)
+  - pattern: $VAR = base64.StdEncoding.EncodeToString
+  - pattern: StdEncoding.EncodeToString(...)
+  - pattern: $VAR = StdEncoding.EncodeToString
+  severity: WARNING
+  tags:
+  - Obfuscation

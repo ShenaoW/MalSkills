@@ -1,0 +1,92 @@
+rules:
+- id: no-rsa.decrypt
+  languages:
+  - ruby
+  message: Avoid using rsa.decrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: rsa.decrypt()
+    category: Cryptography
+  pattern-either:
+  - pattern: rsa.decrypt(...)
+  - pattern: $VAR = rsa.decrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-rsa.encrypt
+  languages:
+  - ruby
+  message: Avoid using rsa.encrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: rsa.encrypt()
+    category: Cryptography
+  pattern-either:
+  - pattern: rsa.encrypt(...)
+  - pattern: $VAR = rsa.encrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-rsa.private_encrypt
+  languages:
+  - ruby
+  message: Avoid using rsa.private_encrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: rsa.private_encrypt()
+    category: Cryptography
+  pattern-either:
+  - pattern: rsa.private_encrypt(...)
+  - pattern: $VAR = rsa.private_encrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-rsa.public_decrypt
+  languages:
+  - ruby
+  message: Avoid using rsa.public_decrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: rsa.public_decrypt()
+    category: Cryptography
+  pattern-either:
+  - pattern: rsa.public_decrypt(...)
+  - pattern: $VAR = rsa.public_decrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-rsa.public_encrypt
+  languages:
+  - ruby
+  message: Avoid using rsa.public_encrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: rsa.public_encrypt()
+    category: Cryptography
+  pattern-either:
+  - pattern: rsa.public_encrypt(...)
+  - pattern: $VAR = rsa.public_encrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-rsa.sign
+  languages:
+  - ruby
+  message: Avoid using rsa.sign(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: rsa.sign()
+    category: Cryptography
+  pattern-either:
+  - pattern: rsa.sign(...)
+  - pattern: $VAR = rsa.sign
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-rsa.verify
+  languages:
+  - ruby
+  message: Avoid using rsa.verify(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: rsa.verify()
+    category: Cryptography
+  pattern-either:
+  - pattern: rsa.verify(...)
+  - pattern: $VAR = rsa.verify
+  severity: WARNING
+  tags:
+  - Cryptography

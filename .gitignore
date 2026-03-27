@@ -138,3 +138,6 @@ __pycache__/
 
 /data/
 .skillguard_cache/
+/output/
+baseline/MASB/scan_results/
+baseline/MASB/workspace/

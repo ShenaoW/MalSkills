@@ -1,0 +1,131 @@
+rules:
+- id: no-socket-accept
+  languages:
+  - python
+  message: Avoid using socket.accept(), as it can lead to potential issues with network access.
+  metadata:
+    api: socket.accept()
+    category: Network Access
+  pattern-either:
+  - pattern: socket.accept(...)
+  - pattern: $VAR = socket.accept
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-socket-bind
+  languages:
+  - python
+  message: Avoid using socket.bind(), as it can lead to potential issues with network access.
+  metadata:
+    api: socket.bind()
+    category: Network Access
+  pattern-either:
+  - pattern: socket.bind(...)
+  - pattern: $VAR = socket.bind
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-socket-connect
+  languages:
+  - python
+  message: Avoid using socket.connect(), as it can lead to potential issues with network access.
+  metadata:
+    api: socket.connect()
+    category: Network Access
+  pattern-either:
+  - pattern: socket.connect(...)
+  - pattern: $VAR = socket.connect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-socket-gethostbyname
+  languages:
+  - python
+  message: Avoid using socket.gethostbyname(), as it can lead to potential issues with network access.
+  metadata:
+    api: socket.gethostbyname()
+    category: Network Access
+  pattern-either:
+  - pattern: socket.gethostbyname(...)
+  - pattern: $VAR = socket.gethostbyname
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-socket-gethostbyname_ex
+  languages:
+  - python
+  message: Avoid using socket.gethostbyname_ex(), as it can lead to potential issues with network access.
+  metadata:
+    api: socket.gethostbyname_ex()
+    category: Network Access
+  pattern-either:
+  - pattern: socket.gethostbyname_ex(...)
+  - pattern: $VAR = socket.gethostbyname_ex
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-socket-gethostname
+  languages:
+  - python
+  message: Avoid using socket.gethostname(), as it can lead to potential issues with network access.
+  metadata:
+    api: socket.gethostname()
+    category: Network Access
+  pattern-either:
+  - pattern: socket.gethostname(...)
+  - pattern: $VAR = socket.gethostname
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-socket-listen
+  languages:
+  - python
+  message: Avoid using socket.listen(), as it can lead to potential issues with network access.
+  metadata:
+    api: socket.listen()
+    category: Network Access
+  pattern-either:
+  - pattern: socket.listen(...)
+  - pattern: $VAR = socket.listen
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-socket-recv
+  languages:
+  - python
+  message: Avoid using socket.recv(), as it can lead to potential issues with network access.
+  metadata:
+    api: socket.recv()
+    category: Network Access
+  pattern-either:
+  - pattern: socket.recv(...)
+  - pattern: $VAR = socket.recv
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-socket-send
+  languages:
+  - python
+  message: Avoid using socket.send(), as it can lead to potential issues with network access.
+  metadata:
+    api: socket.send()
+    category: Network Access
+  pattern-either:
+  - pattern: socket.send(...)
+  - pattern: $VAR = socket.send
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-socket-socket
+  languages:
+  - python
+  message: Avoid using socket.socket(), as it can lead to potential issues with network access.
+  metadata:
+    api: socket.socket()
+    category: Network Access
+  pattern-either:
+  - pattern: socket.socket(...)
+  - pattern: $VAR = socket.socket
+  severity: WARNING
+  tags:
+  - Network Access

@@ -1,0 +1,40 @@
+rules:
+- id: no-elliptic.P256
+  languages:
+  - go
+  message: Avoid using elliptic.P256(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: elliptic.P256()
+    category: Cryptography
+  pattern-either:
+  - pattern: elliptic.P256(...)
+  - pattern: $VAR = elliptic.P256
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-elliptic.P384
+  languages:
+  - go
+  message: Avoid using elliptic.P384(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: elliptic.P384()
+    category: Cryptography
+  pattern-either:
+  - pattern: elliptic.P384(...)
+  - pattern: $VAR = elliptic.P384
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-elliptic.P521
+  languages:
+  - go
+  message: Avoid using elliptic.P521(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: elliptic.P521()
+    category: Cryptography
+  pattern-either:
+  - pattern: elliptic.P521(...)
+  - pattern: $VAR = elliptic.P521
+  severity: WARNING
+  tags:
+  - Cryptography

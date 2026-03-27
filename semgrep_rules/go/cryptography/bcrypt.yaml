@@ -1,0 +1,27 @@
+rules:
+- id: no-bcrypt.CompareHashAndPassword
+  languages:
+  - go
+  message: Avoid using bcrypt.CompareHashAndPassword(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: bcrypt.CompareHashAndPassword()
+    category: Cryptography
+  pattern-either:
+  - pattern: bcrypt.CompareHashAndPassword(...)
+  - pattern: $VAR = bcrypt.CompareHashAndPassword
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-bcrypt.GenerateFromPassword
+  languages:
+  - go
+  message: Avoid using bcrypt.GenerateFromPassword(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: bcrypt.GenerateFromPassword()
+    category: Cryptography
+  pattern-either:
+  - pattern: bcrypt.GenerateFromPassword(...)
+  - pattern: $VAR = bcrypt.GenerateFromPassword
+  severity: WARNING
+  tags:
+  - Cryptography

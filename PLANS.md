@@ -14,8 +14,8 @@
 
 ## 系统契约
 - **输入**：单个 skill 目录或 benchmark 条目
-- **Evidence Facts 层**：Semgrep 与大模型并行产生的统一 schema 事实
-- **Primitive Facts 层**：带对象绑定关系、参数化和 provenance 的 primitive facts
+- **Evidence Facts 层**：Semgrep 与大模型并行产生的统一 schema 事实，只记录原始敏感操作命中
+- **Primitive Facts 层**：带对象绑定关系、参数化和 provenance 的 primitive facts，以及 primitive compilation 阶段产生的辅助 evidence
 - **输出层**：二元风险标签、多标签恶意模式、触发规则、证明链、评测指标
 
 ## 当前硬目标
@@ -27,8 +27,9 @@
 
 ### 最新检查点
 - `experiments/benchmark_study/malicious_200_seed1337.json`：当前固定种子恶意子集
-- `experiments/benchmark_study/malicious_200_heuristic_eval.json`：当前恶意召回率门槛结果，`n=200` 时达到 `97.5%`
-- 当前剩余问题主要集中在未覆盖恶意模式与超大仓库带来的超时成本，而不是 recall gate 失败
+- 当前 benchmark 主变体为 `benchmark_full`，配置等价于 `evidence(semgrep+llm) -> primitive(llm+yasa) -> reasoning(hybrid)`
+- `YASA` 当前在 primitive 阶段输出 `object_binding / parameter_binding`，不再作为旧 `taint_flow` producer 参与主链路
+- 当前剩余问题主要集中在规则覆盖率、LLM 输出收敛性、历史残留模块清理与全量 benchmark 的稳定性
 
 ---
 
@@ -169,13 +170,12 @@ Skill 安全分析的起点不应该是“它是否恶意”，而应该是“�
 - 后续可解析为 sink 的 endpoint key/value
 
 ### 3.4 evidence fact schema 要求
-分析器直接输出的是 `evidence facts`，而不是最终 primitive。每条事实至少需要：
+分析器直接输出的是 `evidence facts`，而不是最终 primitive。evidence 阶段不做派生属性推导；每条事实至少需要：
 
-- producer（semgrep / yasa / llm）
+- producer（semgrep / llm）
 - artifact id / path
 - span
 - fact type
-- object 或 parameter binding
 - attributes
 - confidence
 - provenance
@@ -189,10 +189,27 @@ Skill 安全分析的起点不应该是“它是否恶意”，而应该是“�
 - 必须通过 `rules/yasa/` 中的项目本地规则配置驱动
 - 仅适用于 `Python / JavaScript / Go / Java`
 - 用于当某个敏感 API / sink 需要详细分析参数对象指向时补充深度事实
+- 当前应通过自定义 checker 直接输出 `parameter_binding`，而不是把旧 taint finding 原样传入主链路
 - 重点覆盖的 flow family：
-  - `env/file/config -> network`
-  - `env/user input -> exec`
-  - `dynamic parameter -> sensitive sink`
+  - `config/env/argv -> outbound_connection(endpoint/payload)`
+  - `config/env/user_input -> execution(command/module/path)`
+  - `symbolic reference -> sensitive sink parameter`
+
+## 8. 距离完整 benchmark 的剩余工作
+
+### P0
+- 清理 `skillguard/static/` 中仍保留旧 `taint_flow` 语义的历史实现，避免被误接入
+- 为 YASA object-binding 与 benchmark variant 增加最小回归测试
+- 更新所有文档与实验入口，确保不再出现 `heuristic`、`capability_mismatch`、旧 benchmark 名称
+
+### P1
+- 扩展 `rules/yasa/` 中针对网络、执行、文件访问 sink 的参数角色建模
+- 收紧 LLM object-analysis prompt，降低过宽 symbolic binding
+- 运行 20~50 个恶意样本抽样 benchmark，定位 timeout / 漏检 / 误报来源
+
+### P2
+- 按 reasoning taxonomy 补强 formal 规则对漏检 pattern 的覆盖
+- 继续完善 LLM -> Semgrep / YASA feedback loop 的规则固化质量
 
 ### 4.2 模型提取约束
 模型不能直接输出最终安全结论，只能输出结构化事实。
@@ -211,22 +228,26 @@ Skill 安全分析的起点不应该是“它是否恶意”，而应该是“�
 - provenance evidence IDs
 - artifact paths
 
-### 4.4 当前核心 primitive fact 家族
-- `READ_FILE(path_class, sensitivity_class, source)`
-- `LIST_DIR(path_class, source)`
-- `READ_ENV(key_class, sensitivity_class, source)`
-- `READ_CONFIG(key, value_class, source)`
-- `NETWORK_SEND(dst_class, protocol, source)`
-- `NETWORK_FETCH(dst_class, protocol, source)`
-- `SHELL_EXEC(command_class, source)`
-- `DYNAMIC_LOAD(module_source, source)`
-- `REQUEST_SECRET(secret_class, source)`
-- `SETUP_INSTRUCTION(intent_class, source)`
-- `EMBED_HIDDEN_INSTRUCTION(intent_class, source)`
-- `DECLARED_CAPABILITY(scope, implied_capabilities, source)`
-- `TAINT_FLOW(flow_kind, sink_rule, source)`
-- `TOOL_SURFACE_EXPOSURE(tool_class, destination_class, source)`
-- `CONFIG_ENDPOINT(endpoint_class, source)`
+### 4.4 当前核心 primitive 组织方式
+- primitive 的主类型直接使用 evidence taxonomy subtype，例如：
+  - `direct_process_execution`
+  - `shell_interpreter_execution`
+  - `dynamic_module_load`
+  - `private_key_or_api_key_access`
+  - `content_read_and_parse`
+  - `outbound_connection`
+  - `scheduled_persistence`
+- primitive compilation 阶段允许额外产生少量辅助事实，用于对象绑定与推理支撑：
+  - `parameter_binding`
+  - `config_ref`
+  - `config_value`
+  - `taint_flow`
+  - `hidden_instruction`
+  - `setup_instruction`
+  - `secret_request`
+  - `declared_capability`
+  - `obfuscated_exec`
+- reasoning 的输入不再依赖旧的 uppercase primitive family，而是依赖 subtype + object identity + graph relation
 
 ### 4.5 恶意模式 taxonomy
 - `Sensitive_Exfiltration`

@@ -1,0 +1,52 @@
+rules:
+  - id: typescript.execution_control.child_process_shell
+    languages: [typescript]
+    message: TypeScript shell-backed command execution
+    severity: WARNING
+    metadata:
+      skillguard_subtype: shell_interpreter_execution
+      skillguard_evidence_type: execution_control
+      skillguard_value_metavar: $CMD
+    pattern-either:
+      - pattern: exec($CMD, ...)
+      - pattern: child_process.exec($CMD, ...)
+      - pattern: execSync($CMD, ...)
+      - pattern: child_process.execSync($CMD, ...)
+
+  - id: typescript.execution_control.child_process_direct
+    languages: [typescript]
+    message: TypeScript direct process execution
+    severity: WARNING
+    metadata:
+      skillguard_subtype: direct_process_execution
+      skillguard_evidence_type: execution_control
+      skillguard_value_metavar: $CMD
+    pattern-either:
+      - pattern: spawn($CMD, ...)
+      - pattern: child_process.spawn($CMD, ...)
+      - pattern: execFile($CMD, ...)
+      - pattern: child_process.execFile($CMD, ...)
+
+  - id: typescript.execution_control.script_host_execution
+    languages: [typescript]
+    message: TypeScript runtime code evaluation
+    severity: WARNING
+    metadata:
+      skillguard_subtype: script_host_execution
+      skillguard_evidence_type: execution_control
+      skillguard_value_metavar: $CODE
+    pattern-either:
+      - pattern: eval($CODE)
+      - pattern: new Function($CODE)
+
+  - id: typescript.execution_control.dynamic_module_load
+    languages: [typescript]
+    message: TypeScript dynamic module loading
+    severity: WARNING
+    metadata:
+      skillguard_subtype: dynamic_module_load
+      skillguard_evidence_type: execution_control
+      skillguard_value_metavar: $MODULE
+    pattern-either:
+      - pattern: require($MODULE)
+      - pattern: import($MODULE)

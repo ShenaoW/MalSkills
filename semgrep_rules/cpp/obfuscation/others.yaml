@@ -1,0 +1,118 @@
+rules:
+- id: no-CheckRemoteDebuggerPresent
+  languages:
+  - cpp
+  message: Avoid using CheckRemoteDebuggerPresent(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: CheckRemoteDebuggerPresent()
+    category: Obfuscation
+  pattern-either:
+  - pattern: CheckRemoteDebuggerPresent(...)
+  - pattern: $VAR = CheckRemoteDebuggerPresent
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-IsDebuggerPresent
+  languages:
+  - cpp
+  message: Avoid using IsDebuggerPresent(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: IsDebuggerPresent()
+    category: Obfuscation
+  pattern-either:
+  - pattern: IsDebuggerPresent(...)
+  - pattern: $VAR = IsDebuggerPresent
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-OutputDebugStringA
+  languages:
+  - cpp
+  message: Avoid using OutputDebugStringA(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: OutputDebugStringA()
+    category: Obfuscation
+  pattern-either:
+  - pattern: OutputDebugStringA(...)
+  - pattern: $VAR = OutputDebugStringA
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-OutputDebugStringW
+  languages:
+  - cpp
+  message: Avoid using OutputDebugStringW(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: OutputDebugStringW()
+    category: Obfuscation
+  pattern-either:
+  - pattern: OutputDebugStringW(...)
+  - pattern: $VAR = OutputDebugStringW
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-__asm
+  languages:
+  - cpp
+  message: Avoid using __asm(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: __asm()
+    category: Obfuscation
+  pattern-either:
+  - pattern: __asm(...)
+  - pattern: $VAR = __asm
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-__asm__
+  languages:
+  - cpp
+  message: Avoid using __asm__(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: __asm__()
+    category: Obfuscation
+  pattern-either:
+  - pattern: __asm__(...)
+  - pattern: $VAR = __asm__
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-_asm
+  languages:
+  - cpp
+  message: Avoid using _asm(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: _asm()
+    category: Obfuscation
+  pattern-either:
+  - pattern: _asm(...)
+  - pattern: $VAR = _asm
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-macro
+  languages:
+  - cpp
+  message: Avoid using macro(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: macro()
+    category: Obfuscation
+  pattern-either:
+  - pattern: macro(...)
+  - pattern: $VAR = macro
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-pclose
+  languages:
+  - cpp
+  message: Avoid using pclose(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: pclose()
+    category: Obfuscation
+  pattern-either:
+  - pattern: pclose(...)
+  - pattern: $VAR = pclose
+  severity: WARNING
+  tags:
+  - Obfuscation

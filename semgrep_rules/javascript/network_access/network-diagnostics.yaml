@@ -1,0 +1,64 @@
+rules:
+- id: no-network-diagnostics-haveDNS
+  languages:
+  - javascript
+  message: Avoid using network-diagnostics.haveDNS(), as it can lead to potential issues with network access.
+  metadata:
+    api: network-diagnostics.haveDNS()
+    category: Network Access
+  pattern-either:
+  - pattern: network-diagnostics.haveDNS(...)
+  - pattern: $VAR = network-diagnostics.haveDNS
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-network-diagnostics-haveHTTP
+  languages:
+  - javascript
+  message: Avoid using network-diagnostics.haveHTTP(), as it can lead to potential issues with network access.
+  metadata:
+    api: network-diagnostics.haveHTTP()
+    category: Network Access
+  pattern-either:
+  - pattern: network-diagnostics.haveHTTP(...)
+  - pattern: $VAR = network-diagnostics.haveHTTP
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-network-diagnostics-haveHTTPS
+  languages:
+  - javascript
+  message: Avoid using network-diagnostics.haveHTTPS(), as it can lead to potential issues with network access.
+  metadata:
+    api: network-diagnostics.haveHTTPS()
+    category: Network Access
+  pattern-either:
+  - pattern: network-diagnostics.haveHTTPS(...)
+  - pattern: $VAR = network-diagnostics.haveHTTPS
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-network-diagnostics-havePing
+  languages:
+  - javascript
+  message: Avoid using network-diagnostics.havePing(), as it can lead to potential issues with network access.
+  metadata:
+    api: network-diagnostics.havePing()
+    category: Network Access
+  pattern-either:
+  - pattern: network-diagnostics.havePing(...)
+  - pattern: $VAR = network-diagnostics.havePing
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-require-network-diagnostics
+  languages:
+  - javascript
+  message: Avoid using require('network-diagnostics'), as it can lead to potential issues with network access.
+  metadata:
+    api: require('network-diagnostics')
+    category: Network Access
+  pattern: require('network-diagnostics')
+  severity: WARNING
+  tags:
+  - Network Access

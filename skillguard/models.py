@@ -21,6 +21,11 @@ class ArtifactRecord:
     line_count: int
     is_text: bool
     content: str | None = None
+    generated: bool = False
+    source_artifact_id: str | None = None
+    source_artifact_path: str | None = None
+    source_start_line: int | None = None
+    source_end_line: int | None = None
 
 
 @dataclass
@@ -32,8 +37,11 @@ class EvidenceRecord:
     subtype: str
     value: str
     confidence: float
+    producer: str = ""
     span: Span | None = None
+    binding: dict[str, Any] = field(default_factory=dict)
     attributes: dict[str, Any] = field(default_factory=dict)
+    provenance: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
@@ -44,6 +52,7 @@ class PrimitiveRecord:
     confidence: float
     evidence_ids: list[str]
     artifact_paths: list[str]
+    primitive_category: str = ""
 
 
 @dataclass
@@ -55,6 +64,7 @@ class PatternMatch:
     primitive_ids: list[str]
     evidence_ids: list[str]
     explanation: str
+    source: str = "formal"
 
 
 @dataclass
@@ -72,6 +82,8 @@ class AnalysisResult:
     skill_path: str
     artifacts: list[ArtifactRecord]
     evidence: list[EvidenceRecord]
+    derived_evidence: list[EvidenceRecord]
+    combined_evidence: list[EvidenceRecord]
     primitives: list[PrimitiveRecord]
     patterns: list[PatternMatch]
     verdict: SkillVerdict

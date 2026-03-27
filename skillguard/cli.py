@@ -7,7 +7,7 @@ import json
 
 from .benchmark import BenchmarkBuilder
 from .evaluation import VARIANTS, Evaluator, render_results
-from .mutate import MutationGenerator
+from .llm_runtime import describe_llm_runtime
 from .pipeline import AnalyzerConfig, SkillAnalyzer
 
 
@@ -18,14 +18,12 @@ def build_parser() -> argparse.ArgumentParser:
     analyze = subparsers.add_parser("analyze-skill")
     analyze.add_argument("path")
     analyze.add_argument("--output", required=True)
-    analyze.add_argument("--disable-intent", action="store_true")
-    analyze.add_argument("--disable-static", action="store_true")
     analyze.add_argument("--no-souffle-export", action="store_true")
+    analyze.add_argument("--disable-llm-evidence", action="store_true")
     analyze.add_argument("--disable-semgrep", action="store_true")
     analyze.add_argument("--disable-yasa", action="store_true")
     analyze.add_argument("--disable-cross-artifact-resolution", action="store_true")
-    analyze.add_argument("--disable-capability-mismatch", action="store_true")
-    analyze.add_argument("--reasoning-mode", choices=["formal", "heuristic"], default="formal")
+    analyze.add_argument("--reasoning-mode", choices=["hybrid", "formal", "llm"], default="hybrid")
 
     benchmark = subparsers.add_parser("build-benchmark-index")
     benchmark.add_argument("--output", required=True)
@@ -40,12 +38,10 @@ def build_parser() -> argparse.ArgumentParser:
     evaluate.add_argument("--split", action="append", dest="splits")
     evaluate.add_argument("--label", action="append", dest="labels")
 
-    mutate = subparsers.add_parser("gen-mutations")
-    mutate.add_argument("--input-skill", required=True)
-    mutate.add_argument("--output", required=True)
-
     render = subparsers.add_parser("render-report")
     render.add_argument("--results", required=True)
+
+    subparsers.add_parser("show-llm-config")
     return parser
 
 
@@ -58,13 +54,11 @@ def main(argv: list[str] | None = None) -> int:
             args.path,
             output_dir=args.output,
             config=AnalyzerConfig(
-                enable_static=not args.disable_static,
-                enable_intent=not args.disable_intent,
                 export_souffle=not args.no_souffle_export,
                 enable_semgrep=not args.disable_semgrep,
+                enable_llm_evidence=not args.disable_llm_evidence,
                 enable_yasa=not args.disable_yasa,
                 enable_cross_artifact_resolution=not args.disable_cross_artifact_resolution,
-                enable_capability_mismatch=not args.disable_capability_mismatch,
                 reasoning_mode=args.reasoning_mode,
             ),
         )
@@ -102,16 +96,12 @@ def main(argv: list[str] | None = None) -> int:
             )
             print(f"variant={payload['variant']} recall={payload['metrics']['recall']} precision={payload['metrics']['precision']}")
         return 0
-    if args.command == "gen-mutations":
-        generator = MutationGenerator()
-        outputs = generator.generate(args.input_skill, args.output)
-        print("generated mutations:")
-        for path in outputs:
-            print(path)
-        return 0
     if args.command == "render-report":
         output = render_results(args.results)
         print(output)
+        return 0
+    if args.command == "show-llm-config":
+        print(json.dumps(describe_llm_runtime(), indent=2, sort_keys=True))
         return 0
     parser.error(f"unknown command: {args.command}")
     return 2

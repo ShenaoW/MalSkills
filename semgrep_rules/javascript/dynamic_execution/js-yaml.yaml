@@ -1,0 +1,38 @@
+rules:
+- id: no-js-yaml-load
+  languages:
+  - javascript
+  message: Avoid using js-yaml.load(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: js-yaml.load()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: js-yaml.load(...)
+  - pattern: $VAR = js-yaml.load
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: no-js-yaml-loadAll
+  languages:
+  - javascript
+  message: Avoid using js-yaml.loadAll(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: js-yaml.loadAll()
+    category: Dynamic Execution
+  pattern-either:
+  - pattern: js-yaml.loadAll(...)
+  - pattern: $VAR = js-yaml.loadAll
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: no-require-js-yaml
+  languages:
+  - javascript
+  message: Avoid using require('js-yaml'), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: require('js-yaml')
+    category: Dynamic Execution
+  pattern: require('js-yaml')
+  severity: WARNING
+  tags:
+  - Dynamic Execution

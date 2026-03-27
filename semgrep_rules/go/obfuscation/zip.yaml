@@ -1,0 +1,27 @@
+rules:
+- id: no-zip.NewReader
+  languages:
+  - go
+  message: Avoid using zip.NewReader(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: zip.NewReader()
+    category: Obfuscation
+  pattern-either:
+  - pattern: zip.NewReader(...)
+  - pattern: $VAR = zip.NewReader
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: no-zip.NewWriter
+  languages:
+  - go
+  message: Avoid using zip.NewWriter(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: zip.NewWriter()
+    category: Obfuscation
+  pattern-either:
+  - pattern: zip.NewWriter(...)
+  - pattern: $VAR = zip.NewWriter
+  severity: WARNING
+  tags:
+  - Obfuscation

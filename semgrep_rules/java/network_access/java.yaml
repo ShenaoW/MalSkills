@@ -1,0 +1,608 @@
+rules:
+- id: no-java-io-BufferedReader-readLine
+  languages:
+  - java
+  message: Avoid using java.io.BufferedReader.readLine(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.io.BufferedReader.readLine()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.io.BufferedReader.readLine(...)
+  - pattern: java.io.BufferedReader.readLine(...)
+  - pattern: $VAR = java.io.BufferedReader.readLine
+  - pattern: new io.BufferedReader.readLine(...)
+  - pattern: io.BufferedReader.readLine(...)
+  - pattern: $VAR = io.BufferedReader.readLine
+  - pattern: new BufferedReader.readLine(...)
+  - pattern: BufferedReader.readLine(...)
+  - pattern: $VAR = BufferedReader.readLine
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-io-InputStream-read
+  languages:
+  - java
+  message: Avoid using java.io.InputStream.read(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.io.InputStream.read()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.io.InputStream.read(...)
+  - pattern: java.io.InputStream.read(...)
+  - pattern: $VAR = java.io.InputStream.read
+  - pattern: new io.InputStream.read(...)
+  - pattern: io.InputStream.read(...)
+  - pattern: $VAR = io.InputStream.read
+  - pattern: new InputStream.read(...)
+  - pattern: InputStream.read(...)
+  - pattern: $VAR = InputStream.read
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-io-OutputStream-write
+  languages:
+  - java
+  message: Avoid using java.io.OutputStream.write(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.io.OutputStream.write()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.io.OutputStream.write(...)
+  - pattern: java.io.OutputStream.write(...)
+  - pattern: $VAR = java.io.OutputStream.write
+  - pattern: new io.OutputStream.write(...)
+  - pattern: io.OutputStream.write(...)
+  - pattern: $VAR = io.OutputStream.write
+  - pattern: new OutputStream.write(...)
+  - pattern: OutputStream.write(...)
+  - pattern: $VAR = OutputStream.write
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-io-PrintWriter-println
+  languages:
+  - java
+  message: Avoid using java.io.PrintWriter.println(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.io.PrintWriter.println()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.io.PrintWriter.println(...)
+  - pattern: java.io.PrintWriter.println(...)
+  - pattern: $VAR = java.io.PrintWriter.println
+  - pattern: new io.PrintWriter.println(...)
+  - pattern: io.PrintWriter.println(...)
+  - pattern: $VAR = io.PrintWriter.println
+  - pattern: new PrintWriter.println(...)
+  - pattern: PrintWriter.println(...)
+  - pattern: $VAR = PrintWriter.println
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-net-DatagramSocket-receive
+  languages:
+  - java
+  message: Avoid using java.net.DatagramSocket.receive(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.net.DatagramSocket.receive()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.net.DatagramSocket.receive(...)
+  - pattern: java.net.DatagramSocket.receive(...)
+  - pattern: $VAR = java.net.DatagramSocket.receive
+  - pattern: new net.DatagramSocket.receive(...)
+  - pattern: net.DatagramSocket.receive(...)
+  - pattern: $VAR = net.DatagramSocket.receive
+  - pattern: new DatagramSocket.receive(...)
+  - pattern: DatagramSocket.receive(...)
+  - pattern: $VAR = DatagramSocket.receive
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-net-DatagramSocket-send
+  languages:
+  - java
+  message: Avoid using java.net.DatagramSocket.send(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.net.DatagramSocket.send()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.net.DatagramSocket.send(...)
+  - pattern: java.net.DatagramSocket.send(...)
+  - pattern: $VAR = java.net.DatagramSocket.send
+  - pattern: new net.DatagramSocket.send(...)
+  - pattern: net.DatagramSocket.send(...)
+  - pattern: $VAR = net.DatagramSocket.send
+  - pattern: new DatagramSocket.send(...)
+  - pattern: DatagramSocket.send(...)
+  - pattern: $VAR = DatagramSocket.send
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-net-HttpURLConnection-connect
+  languages:
+  - java
+  message: Avoid using java.net.HttpURLConnection.connect(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.net.HttpURLConnection.connect()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.net.HttpURLConnection.connect(...)
+  - pattern: java.net.HttpURLConnection.connect(...)
+  - pattern: $VAR = java.net.HttpURLConnection.connect
+  - pattern: new net.HttpURLConnection.connect(...)
+  - pattern: net.HttpURLConnection.connect(...)
+  - pattern: $VAR = net.HttpURLConnection.connect
+  - pattern: new HttpURLConnection.connect(...)
+  - pattern: HttpURLConnection.connect(...)
+  - pattern: $VAR = HttpURLConnection.connect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-net-HttpURLConnection-getInputStream
+  languages:
+  - java
+  message: Avoid using java.net.HttpURLConnection.getInputStream(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.net.HttpURLConnection.getInputStream()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.net.HttpURLConnection.getInputStream(...)
+  - pattern: java.net.HttpURLConnection.getInputStream(...)
+  - pattern: $VAR = java.net.HttpURLConnection.getInputStream
+  - pattern: new net.HttpURLConnection.getInputStream(...)
+  - pattern: net.HttpURLConnection.getInputStream(...)
+  - pattern: $VAR = net.HttpURLConnection.getInputStream
+  - pattern: new HttpURLConnection.getInputStream(...)
+  - pattern: HttpURLConnection.getInputStream(...)
+  - pattern: $VAR = HttpURLConnection.getInputStream
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-net-HttpURLConnection-getOutputStream
+  languages:
+  - java
+  message: Avoid using java.net.HttpURLConnection.getOutputStream(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.net.HttpURLConnection.getOutputStream()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.net.HttpURLConnection.getOutputStream(...)
+  - pattern: java.net.HttpURLConnection.getOutputStream(...)
+  - pattern: $VAR = java.net.HttpURLConnection.getOutputStream
+  - pattern: new net.HttpURLConnection.getOutputStream(...)
+  - pattern: net.HttpURLConnection.getOutputStream(...)
+  - pattern: $VAR = net.HttpURLConnection.getOutputStream
+  - pattern: new HttpURLConnection.getOutputStream(...)
+  - pattern: HttpURLConnection.getOutputStream(...)
+  - pattern: $VAR = HttpURLConnection.getOutputStream
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-net-HttpURLConnection-getResponseCode
+  languages:
+  - java
+  message: Avoid using java.net.HttpURLConnection.getResponseCode(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.net.HttpURLConnection.getResponseCode()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.net.HttpURLConnection.getResponseCode(...)
+  - pattern: java.net.HttpURLConnection.getResponseCode(...)
+  - pattern: $VAR = java.net.HttpURLConnection.getResponseCode
+  - pattern: new net.HttpURLConnection.getResponseCode(...)
+  - pattern: net.HttpURLConnection.getResponseCode(...)
+  - pattern: $VAR = net.HttpURLConnection.getResponseCode
+  - pattern: new HttpURLConnection.getResponseCode(...)
+  - pattern: HttpURLConnection.getResponseCode(...)
+  - pattern: $VAR = HttpURLConnection.getResponseCode
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-net-HttpURLConnection-setRequestMethod
+  languages:
+  - java
+  message: Avoid using java.net.HttpURLConnection.setRequestMethod(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.net.HttpURLConnection.setRequestMethod()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.net.HttpURLConnection.setRequestMethod(...)
+  - pattern: java.net.HttpURLConnection.setRequestMethod(...)
+  - pattern: $VAR = java.net.HttpURLConnection.setRequestMethod
+  - pattern: new net.HttpURLConnection.setRequestMethod(...)
+  - pattern: net.HttpURLConnection.setRequestMethod(...)
+  - pattern: $VAR = net.HttpURLConnection.setRequestMethod
+  - pattern: new HttpURLConnection.setRequestMethod(...)
+  - pattern: HttpURLConnection.setRequestMethod(...)
+  - pattern: $VAR = HttpURLConnection.setRequestMethod
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-net-ServerSocket-accept
+  languages:
+  - java
+  message: Avoid using java.net.ServerSocket.accept(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.net.ServerSocket.accept()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.net.ServerSocket.accept(...)
+  - pattern: java.net.ServerSocket.accept(...)
+  - pattern: $VAR = java.net.ServerSocket.accept
+  - pattern: new net.ServerSocket.accept(...)
+  - pattern: net.ServerSocket.accept(...)
+  - pattern: $VAR = net.ServerSocket.accept
+  - pattern: new ServerSocket.accept(...)
+  - pattern: ServerSocket.accept(...)
+  - pattern: $VAR = ServerSocket.accept
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-net-Socket-connect
+  languages:
+  - java
+  message: Avoid using java.net.Socket.connect(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.net.Socket.connect()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.net.Socket.connect(...)
+  - pattern: java.net.Socket.connect(...)
+  - pattern: $VAR = java.net.Socket.connect
+  - pattern: new net.Socket.connect(...)
+  - pattern: net.Socket.connect(...)
+  - pattern: $VAR = net.Socket.connect
+  - pattern: new Socket.connect(...)
+  - pattern: Socket.connect(...)
+  - pattern: $VAR = Socket.connect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-net-Socket-getInputStream
+  languages:
+  - java
+  message: Avoid using java.net.Socket.getInputStream(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.net.Socket.getInputStream()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.net.Socket.getInputStream(...)
+  - pattern: java.net.Socket.getInputStream(...)
+  - pattern: $VAR = java.net.Socket.getInputStream
+  - pattern: new net.Socket.getInputStream(...)
+  - pattern: net.Socket.getInputStream(...)
+  - pattern: $VAR = net.Socket.getInputStream
+  - pattern: new Socket.getInputStream(...)
+  - pattern: Socket.getInputStream(...)
+  - pattern: $VAR = Socket.getInputStream
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-net-Socket-getOutputStream
+  languages:
+  - java
+  message: Avoid using java.net.Socket.getOutputStream(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.net.Socket.getOutputStream()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.net.Socket.getOutputStream(...)
+  - pattern: java.net.Socket.getOutputStream(...)
+  - pattern: $VAR = java.net.Socket.getOutputStream
+  - pattern: new net.Socket.getOutputStream(...)
+  - pattern: net.Socket.getOutputStream(...)
+  - pattern: $VAR = net.Socket.getOutputStream
+  - pattern: new Socket.getOutputStream(...)
+  - pattern: Socket.getOutputStream(...)
+  - pattern: $VAR = Socket.getOutputStream
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-net-URI-create
+  languages:
+  - java
+  message: Avoid using java.net.URI.create(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.net.URI.create()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.net.URI.create(...)
+  - pattern: java.net.URI.create(...)
+  - pattern: $VAR = java.net.URI.create
+  - pattern: new net.URI.create(...)
+  - pattern: net.URI.create(...)
+  - pattern: $VAR = net.URI.create
+  - pattern: new URI.create(...)
+  - pattern: URI.create(...)
+  - pattern: $VAR = URI.create
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-net-URI-toURL
+  languages:
+  - java
+  message: Avoid using java.net.URI.toURL(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.net.URI.toURL()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.net.URI.toURL(...)
+  - pattern: java.net.URI.toURL(...)
+  - pattern: $VAR = java.net.URI.toURL
+  - pattern: new net.URI.toURL(...)
+  - pattern: net.URI.toURL(...)
+  - pattern: $VAR = net.URI.toURL
+  - pattern: new URI.toURL(...)
+  - pattern: URI.toURL(...)
+  - pattern: $VAR = URI.toURL
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-net-URL-openConnection
+  languages:
+  - java
+  message: Avoid using java.net.URL.openConnection(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.net.URL.openConnection()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.net.URL.openConnection(...)
+  - pattern: java.net.URL.openConnection(...)
+  - pattern: $VAR = java.net.URL.openConnection
+  - pattern: new net.URL.openConnection(...)
+  - pattern: net.URL.openConnection(...)
+  - pattern: $VAR = net.URL.openConnection
+  - pattern: new URL.openConnection(...)
+  - pattern: URL.openConnection(...)
+  - pattern: $VAR = URL.openConnection
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-net-URL-openStream
+  languages:
+  - java
+  message: Avoid using java.net.URL.openStream(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.net.URL.openStream()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.net.URL.openStream(...)
+  - pattern: java.net.URL.openStream(...)
+  - pattern: $VAR = java.net.URL.openStream
+  - pattern: new net.URL.openStream(...)
+  - pattern: net.URL.openStream(...)
+  - pattern: $VAR = net.URL.openStream
+  - pattern: new URL.openStream(...)
+  - pattern: URL.openStream(...)
+  - pattern: $VAR = URL.openStream
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-net-URL-toURI
+  languages:
+  - java
+  message: Avoid using java.net.URL.toURI(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.net.URL.toURI()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.net.URL.toURI(...)
+  - pattern: java.net.URL.toURI(...)
+  - pattern: $VAR = java.net.URL.toURI
+  - pattern: new net.URL.toURI(...)
+  - pattern: net.URL.toURI(...)
+  - pattern: $VAR = net.URL.toURI
+  - pattern: new URL.toURI(...)
+  - pattern: URL.toURI(...)
+  - pattern: $VAR = URL.toURI
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-net-http-HttpClient-newHttpClient
+  languages:
+  - java
+  message: Avoid using java.net.http.HttpClient.newHttpClient(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.net.http.HttpClient.newHttpClient()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.net.http.HttpClient.newHttpClient(...)
+  - pattern: java.net.http.HttpClient.newHttpClient(...)
+  - pattern: $VAR = java.net.http.HttpClient.newHttpClient
+  - pattern: new net.http.HttpClient.newHttpClient(...)
+  - pattern: net.http.HttpClient.newHttpClient(...)
+  - pattern: $VAR = net.http.HttpClient.newHttpClient
+  - pattern: new http.HttpClient.newHttpClient(...)
+  - pattern: http.HttpClient.newHttpClient(...)
+  - pattern: $VAR = http.HttpClient.newHttpClient
+  - pattern: new HttpClient.newHttpClient(...)
+  - pattern: HttpClient.newHttpClient(...)
+  - pattern: $VAR = HttpClient.newHttpClient
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-net-http-HttpClient-send
+  languages:
+  - java
+  message: Avoid using java.net.http.HttpClient.send(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.net.http.HttpClient.send()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.net.http.HttpClient.send(...)
+  - pattern: java.net.http.HttpClient.send(...)
+  - pattern: $VAR = java.net.http.HttpClient.send
+  - pattern: new net.http.HttpClient.send(...)
+  - pattern: net.http.HttpClient.send(...)
+  - pattern: $VAR = net.http.HttpClient.send
+  - pattern: new http.HttpClient.send(...)
+  - pattern: http.HttpClient.send(...)
+  - pattern: $VAR = http.HttpClient.send
+  - pattern: new HttpClient.send(...)
+  - pattern: HttpClient.send(...)
+  - pattern: $VAR = HttpClient.send
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-net-http-HttpClient-sendAsync
+  languages:
+  - java
+  message: Avoid using java.net.http.HttpClient.sendAsync(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.net.http.HttpClient.sendAsync()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.net.http.HttpClient.sendAsync(...)
+  - pattern: java.net.http.HttpClient.sendAsync(...)
+  - pattern: $VAR = java.net.http.HttpClient.sendAsync
+  - pattern: new net.http.HttpClient.sendAsync(...)
+  - pattern: net.http.HttpClient.sendAsync(...)
+  - pattern: $VAR = net.http.HttpClient.sendAsync
+  - pattern: new http.HttpClient.sendAsync(...)
+  - pattern: http.HttpClient.sendAsync(...)
+  - pattern: $VAR = http.HttpClient.sendAsync
+  - pattern: new HttpClient.sendAsync(...)
+  - pattern: HttpClient.sendAsync(...)
+  - pattern: $VAR = HttpClient.sendAsync
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-net-http-HttpRequest-build
+  languages:
+  - java
+  message: Avoid using java.net.http.HttpRequest.build(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.net.http.HttpRequest.build()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.net.http.HttpRequest.build(...)
+  - pattern: java.net.http.HttpRequest.build(...)
+  - pattern: $VAR = java.net.http.HttpRequest.build
+  - pattern: new net.http.HttpRequest.build(...)
+  - pattern: net.http.HttpRequest.build(...)
+  - pattern: $VAR = net.http.HttpRequest.build
+  - pattern: new http.HttpRequest.build(...)
+  - pattern: http.HttpRequest.build(...)
+  - pattern: $VAR = http.HttpRequest.build
+  - pattern: new HttpRequest.build(...)
+  - pattern: HttpRequest.build(...)
+  - pattern: $VAR = HttpRequest.build
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-net-http-HttpRequest-newBuilder
+  languages:
+  - java
+  message: Avoid using java.net.http.HttpRequest.newBuilder(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.net.http.HttpRequest.newBuilder()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.net.http.HttpRequest.newBuilder(...)
+  - pattern: java.net.http.HttpRequest.newBuilder(...)
+  - pattern: $VAR = java.net.http.HttpRequest.newBuilder
+  - pattern: new net.http.HttpRequest.newBuilder(...)
+  - pattern: net.http.HttpRequest.newBuilder(...)
+  - pattern: $VAR = net.http.HttpRequest.newBuilder
+  - pattern: new http.HttpRequest.newBuilder(...)
+  - pattern: http.HttpRequest.newBuilder(...)
+  - pattern: $VAR = http.HttpRequest.newBuilder
+  - pattern: new HttpRequest.newBuilder(...)
+  - pattern: HttpRequest.newBuilder(...)
+  - pattern: $VAR = HttpRequest.newBuilder
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-nio-channels-ServerSocketChannel-accept
+  languages:
+  - java
+  message: Avoid using java.nio.channels.ServerSocketChannel.accept(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.nio.channels.ServerSocketChannel.accept()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.nio.channels.ServerSocketChannel.accept(...)
+  - pattern: java.nio.channels.ServerSocketChannel.accept(...)
+  - pattern: $VAR = java.nio.channels.ServerSocketChannel.accept
+  - pattern: new nio.channels.ServerSocketChannel.accept(...)
+  - pattern: nio.channels.ServerSocketChannel.accept(...)
+  - pattern: $VAR = nio.channels.ServerSocketChannel.accept
+  - pattern: new channels.ServerSocketChannel.accept(...)
+  - pattern: channels.ServerSocketChannel.accept(...)
+  - pattern: $VAR = channels.ServerSocketChannel.accept
+  - pattern: new ServerSocketChannel.accept(...)
+  - pattern: ServerSocketChannel.accept(...)
+  - pattern: $VAR = ServerSocketChannel.accept
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-nio-channels-ServerSocketChannel-open
+  languages:
+  - java
+  message: Avoid using java.nio.channels.ServerSocketChannel.open(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.nio.channels.ServerSocketChannel.open()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.nio.channels.ServerSocketChannel.open(...)
+  - pattern: java.nio.channels.ServerSocketChannel.open(...)
+  - pattern: $VAR = java.nio.channels.ServerSocketChannel.open
+  - pattern: new nio.channels.ServerSocketChannel.open(...)
+  - pattern: nio.channels.ServerSocketChannel.open(...)
+  - pattern: $VAR = nio.channels.ServerSocketChannel.open
+  - pattern: new channels.ServerSocketChannel.open(...)
+  - pattern: channels.ServerSocketChannel.open(...)
+  - pattern: $VAR = channels.ServerSocketChannel.open
+  - pattern: new ServerSocketChannel.open(...)
+  - pattern: ServerSocketChannel.open(...)
+  - pattern: $VAR = ServerSocketChannel.open
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-nio-channels-SocketChannel-connect
+  languages:
+  - java
+  message: Avoid using java.nio.channels.SocketChannel.connect(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.nio.channels.SocketChannel.connect()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.nio.channels.SocketChannel.connect(...)
+  - pattern: java.nio.channels.SocketChannel.connect(...)
+  - pattern: $VAR = java.nio.channels.SocketChannel.connect
+  - pattern: new nio.channels.SocketChannel.connect(...)
+  - pattern: nio.channels.SocketChannel.connect(...)
+  - pattern: $VAR = nio.channels.SocketChannel.connect
+  - pattern: new channels.SocketChannel.connect(...)
+  - pattern: channels.SocketChannel.connect(...)
+  - pattern: $VAR = channels.SocketChannel.connect
+  - pattern: new SocketChannel.connect(...)
+  - pattern: SocketChannel.connect(...)
+  - pattern: $VAR = SocketChannel.connect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-java-nio-channels-SocketChannel-open
+  languages:
+  - java
+  message: Avoid using java.nio.channels.SocketChannel.open(), as it can lead to potential issues with network access.
+  metadata:
+    api: java.nio.channels.SocketChannel.open()
+    category: Network Access
+  pattern-either:
+  - pattern: new java.nio.channels.SocketChannel.open(...)
+  - pattern: java.nio.channels.SocketChannel.open(...)
+  - pattern: $VAR = java.nio.channels.SocketChannel.open
+  - pattern: new nio.channels.SocketChannel.open(...)
+  - pattern: nio.channels.SocketChannel.open(...)
+  - pattern: $VAR = nio.channels.SocketChannel.open
+  - pattern: new channels.SocketChannel.open(...)
+  - pattern: channels.SocketChannel.open(...)
+  - pattern: $VAR = channels.SocketChannel.open
+  - pattern: new SocketChannel.open(...)
+  - pattern: SocketChannel.open(...)
+  - pattern: $VAR = SocketChannel.open
+  severity: WARNING
+  tags:
+  - Network Access

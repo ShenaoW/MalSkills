@@ -1,0 +1,27 @@
+rules:
+- id: no-dsa.syssign
+  languages:
+  - ruby
+  message: Avoid using dsa.syssign(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: dsa.syssign()
+    category: Cryptography
+  pattern-either:
+  - pattern: dsa.syssign(...)
+  - pattern: $VAR = dsa.syssign
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-dsa.sysverify
+  languages:
+  - ruby
+  message: Avoid using dsa.sysverify(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: dsa.sysverify()
+    category: Cryptography
+  pattern-either:
+  - pattern: dsa.sysverify(...)
+  - pattern: $VAR = dsa.sysverify
+  severity: WARNING
+  tags:
+  - Cryptography

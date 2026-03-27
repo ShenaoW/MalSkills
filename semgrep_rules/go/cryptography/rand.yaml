@@ -1,0 +1,40 @@
+rules:
+- id: no-rand.Int
+  languages:
+  - go
+  message: Avoid using rand.Int(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: rand.Int()
+    category: Cryptography
+  pattern-either:
+  - pattern: rand.Int(...)
+  - pattern: $VAR = rand.Int
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-rand.Intn
+  languages:
+  - go
+  message: Avoid using rand.Intn(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: rand.Intn()
+    category: Cryptography
+  pattern-either:
+  - pattern: rand.Intn(...)
+  - pattern: $VAR = rand.Intn
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: no-rand.Read
+  languages:
+  - go
+  message: Avoid using rand.Read(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: rand.Read()
+    category: Cryptography
+  pattern-either:
+  - pattern: rand.Read(...)
+  - pattern: $VAR = rand.Read
+  severity: WARNING
+  tags:
+  - Cryptography

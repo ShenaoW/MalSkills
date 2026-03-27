@@ -1,0 +1,27 @@
+rules:
+- id: no-URI.open
+  languages:
+  - ruby
+  message: Avoid using URI.open(), as it can lead to potential issues with network access.
+  metadata:
+    api: URI.open()
+    category: Network Access
+  pattern-either:
+  - pattern: URI.open(...)
+  - pattern: $VAR = URI.open
+  severity: WARNING
+  tags:
+  - Network Access
+- id: no-URI.parse
+  languages:
+  - ruby
+  message: Avoid using URI.parse(), as it can lead to potential issues with network access.
+  metadata:
+    api: URI.parse()
+    category: Network Access
+  pattern-either:
+  - pattern: URI.parse(...)
+  - pattern: $VAR = URI.parse
+  severity: WARNING
+  tags:
+  - Network Access

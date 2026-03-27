@@ -1,0 +1,27 @@
+rules:
+- id: no-shlex-quote
+  languages:
+  - python
+  message: Avoid using shlex.quote(), as it can lead to potential issues with command execution.
+  metadata:
+    api: shlex.quote()
+    category: Command Execution
+  pattern-either:
+  - pattern: shlex.quote(...)
+  - pattern: $VAR = shlex.quote
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: no-shlex-split
+  languages:
+  - python
+  message: Avoid using shlex.split(), as it can lead to potential issues with command execution.
+  metadata:
+    api: shlex.split()
+    category: Command Execution
+  pattern-either:
+  - pattern: shlex.split(...)
+  - pattern: $VAR = shlex.split
+  severity: WARNING
+  tags:
+  - Command Execution
