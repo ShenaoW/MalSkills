@@ -141,3 +141,5 @@ __pycache__/
 /output/
 baseline/MASB/scan_results/
 baseline/MASB/workspace/
+
+/paper/
