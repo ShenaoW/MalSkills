@@ -8,8 +8,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from skillguard.evidence.llm import LlmEvidenceExtractor
-from skillguard.models import ArtifactRecord
+from malskills.evidence.llm import LlmEvidenceExtractor
+from malskills.models import ArtifactRecord
 
 
 def _artifact(relative_path: str, content: str = "line1\nline2\n") -> ArtifactRecord:
@@ -44,7 +44,7 @@ def test_llm_evidence_uses_single_artifact_requests_at_or_below_threshold(monkey
             ]
         }
 
-    monkeypatch.setattr("skillguard.evidence.llm.invoke_structured_json", fake_invoke_structured_json)
+    monkeypatch.setattr("malskills.evidence.llm.invoke_structured_json", fake_invoke_structured_json)
     artifacts = [_artifact(f"file_{index}.md") for index in range(3)]
     result = extractor.extract(artifacts)
 
@@ -82,7 +82,7 @@ def test_llm_evidence_uses_batched_request_above_threshold_and_maps_artifact_pat
             ]
         }
 
-    monkeypatch.setattr("skillguard.evidence.llm.invoke_structured_json", fake_invoke_structured_json)
+    monkeypatch.setattr("malskills.evidence.llm.invoke_structured_json", fake_invoke_structured_json)
     artifacts = [_artifact(f"file_{index}.md") for index in range(10)] + [_artifact("dir/file_10.js", "a\nb\n")]
     result = extractor.extract(artifacts)
 

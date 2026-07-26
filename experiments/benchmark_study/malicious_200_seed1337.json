@@ -5,7 +5,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__auto-updater-43c6i__latest_d02be48481de",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__auto-updater-43c6i__latest_d02be48481de",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__auto-updater-43c6i__latest_d02be48481de",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -21,7 +21,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__auto-updater-eclpb__latest_3bd2b8499187",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__auto-updater-eclpb__latest_3bd2b8499187",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__auto-updater-eclpb__latest_3bd2b8499187",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -37,7 +37,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__auto-updater-mkukz__latest_05f4c51ae2e4",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__auto-updater-mkukz__latest_05f4c51ae2e4",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__auto-updater-mkukz__latest_05f4c51ae2e4",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -53,7 +53,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__auto-updater-se38e__latest_7e3ce451bff8",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__auto-updater-se38e__latest_7e3ce451bff8",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__auto-updater-se38e__latest_7e3ce451bff8",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -69,7 +69,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__auto-updater-sxdg2__latest_f2ca5bfa11f1",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__auto-updater-sxdg2__latest_f2ca5bfa11f1",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__auto-updater-sxdg2__latest_f2ca5bfa11f1",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -85,7 +85,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__clawhub-gstca__latest_4d1a132178b0",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__clawhub-gstca__latest_4d1a132178b0",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__clawhub-gstca__latest_4d1a132178b0",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -101,7 +101,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__clawhub-krmvq__latest_f8e2572fc0bd",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__clawhub-krmvq__latest_f8e2572fc0bd",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__clawhub-krmvq__latest_f8e2572fc0bd",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -117,7 +117,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__clawhub-tlxx5__latest_42b879a04631",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__clawhub-tlxx5__latest_42b879a04631",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__clawhub-tlxx5__latest_42b879a04631",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -133,7 +133,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__ethereum-gas-tracker-leifg__latest_5b8c4aff14ba",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__ethereum-gas-tracker-leifg__latest_5b8c4aff14ba",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__ethereum-gas-tracker-leifg__latest_5b8c4aff14ba",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -149,7 +149,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__ethereum-gas-tracker-osr2u__latest_18085575bb19",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__ethereum-gas-tracker-osr2u__latest_18085575bb19",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__ethereum-gas-tracker-osr2u__latest_18085575bb19",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -165,7 +165,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__ethereum-gas-tracker-qxorv__latest_b67cfb0d0900",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__ethereum-gas-tracker-qxorv__latest_b67cfb0d0900",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__ethereum-gas-tracker-qxorv__latest_b67cfb0d0900",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -181,7 +181,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__google-workspace-devfw__latest_5e15d4e92cc0",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__google-workspace-devfw__latest_5e15d4e92cc0",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__google-workspace-devfw__latest_5e15d4e92cc0",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -197,7 +197,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__google-workspace-izypr__latest_d399a4bfcb6b",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__google-workspace-izypr__latest_d399a4bfcb6b",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__google-workspace-izypr__latest_d399a4bfcb6b",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -213,7 +213,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__google-workspace-ndlt1__latest_c658812fb5bb",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__google-workspace-ndlt1__latest_c658812fb5bb",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__google-workspace-ndlt1__latest_c658812fb5bb",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -229,7 +229,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__insider-wallets-finder-9dlka__latest_8841e84709a0",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__insider-wallets-finder-9dlka__latest_8841e84709a0",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__insider-wallets-finder-9dlka__latest_8841e84709a0",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -245,7 +245,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__insider-wallets-finder-btj6c__latest_504f0ebb36ce",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__insider-wallets-finder-btj6c__latest_504f0ebb36ce",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__insider-wallets-finder-btj6c__latest_504f0ebb36ce",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -261,7 +261,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__insider-wallets-finder-mk3w3__latest_1353177534e1",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__insider-wallets-finder-mk3w3__latest_1353177534e1",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__insider-wallets-finder-mk3w3__latest_1353177534e1",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -277,7 +277,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__insider-wallets-finder-qjkug__latest_b5de089640cc",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__insider-wallets-finder-qjkug__latest_b5de089640cc",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__insider-wallets-finder-qjkug__latest_b5de089640cc",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -293,7 +293,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__phantom-0jcvy__latest_1022020c4e40",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__phantom-0jcvy__latest_1022020c4e40",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__phantom-0jcvy__latest_1022020c4e40",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -309,7 +309,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__phantom-0snsv__latest_ac7ecd10965e",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__phantom-0snsv__latest_ac7ecd10965e",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__phantom-0snsv__latest_ac7ecd10965e",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -325,7 +325,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__phantom-lxnyf__latest_38d2038d78d1",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__phantom-lxnyf__latest_38d2038d78d1",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__phantom-lxnyf__latest_38d2038d78d1",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -341,7 +341,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__phantom-qs450__latest_b52152cadb85",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__phantom-qs450__latest_b52152cadb85",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__phantom-qs450__latest_b52152cadb85",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -357,7 +357,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__polym__latest_d7d2cf39420a",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__polym__latest_d7d2cf39420a",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__polym__latest_d7d2cf39420a",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -373,7 +373,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__polymarket-esfbk__latest_697e2e4f1cc8",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__polymarket-esfbk__latest_697e2e4f1cc8",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__polymarket-esfbk__latest_697e2e4f1cc8",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -389,7 +389,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__polymarket-fpwui__latest_5a43b7055f77",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__polymarket-fpwui__latest_5a43b7055f77",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__polymarket-fpwui__latest_5a43b7055f77",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -405,7 +405,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__polymarket-gxyrz__latest_4d5778972148",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__polymarket-gxyrz__latest_4d5778972148",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__polymarket-gxyrz__latest_4d5778972148",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -421,7 +421,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__polymarket-ik168__latest_e515bcda7be6",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__polymarket-ik168__latest_e515bcda7be6",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__polymarket-ik168__latest_e515bcda7be6",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -437,7 +437,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__polymarket-juui0__latest_b822744e7eab",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__polymarket-juui0__latest_b822744e7eab",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__polymarket-juui0__latest_b822744e7eab",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -453,7 +453,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__polymarket-vj5zb__latest_b419ef308f3f",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__polymarket-vj5zb__latest_b419ef308f3f",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__polymarket-vj5zb__latest_b419ef308f3f",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -469,7 +469,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__polymarket-vx875__latest_116d93ba767a",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__polymarket-vx875__latest_116d93ba767a",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__polymarket-vx875__latest_116d93ba767a",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -485,7 +485,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__solana-1fuhx__latest_12dea24fa883",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__solana-1fuhx__latest_12dea24fa883",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__solana-1fuhx__latest_12dea24fa883",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -501,7 +501,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__solana-9ahmt__latest_c40f8af8e401",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__solana-9ahmt__latest_c40f8af8e401",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__solana-9ahmt__latest_c40f8af8e401",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -517,7 +517,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__solana-d95dl__latest_2114064da707",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__solana-d95dl__latest_2114064da707",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__solana-d95dl__latest_2114064da707",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -533,7 +533,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__solana-dgipr__latest_5aa324a6dccf",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__solana-dgipr__latest_5aa324a6dccf",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__solana-dgipr__latest_5aa324a6dccf",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -549,7 +549,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__solana-fckyq__latest_f99ff8647540",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__solana-fckyq__latest_f99ff8647540",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__solana-fckyq__latest_f99ff8647540",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -565,7 +565,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__solana-goq2i__latest_70153be7a2e2",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__solana-goq2i__latest_70153be7a2e2",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__solana-goq2i__latest_70153be7a2e2",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -581,7 +581,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__solana-kief4__latest_23279b646bcb",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__solana-kief4__latest_23279b646bcb",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__solana-kief4__latest_23279b646bcb",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -597,7 +597,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__solana-t1nyq__latest_428bd5cf489f",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__solana-t1nyq__latest_428bd5cf489f",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__solana-t1nyq__latest_428bd5cf489f",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -613,7 +613,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__solana-tbcxe__latest_102f463e4a02",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__solana-tbcxe__latest_102f463e4a02",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__solana-tbcxe__latest_102f463e4a02",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -629,7 +629,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__update__latest_f9a6a23864dc",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__update__latest_f9a6a23864dc",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__update__latest_f9a6a23864dc",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -645,7 +645,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__updater__latest_50096952983d",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__updater__latest_50096952983d",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__updater__latest_50096952983d",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -661,7 +661,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__wallet-tracker-bxb0a__latest_e1e920342be9",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__wallet-tracker-bxb0a__latest_e1e920342be9",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__wallet-tracker-bxb0a__latest_e1e920342be9",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -677,7 +677,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__wallet-tracker-gel8n__latest_edcb1b8bf299",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__wallet-tracker-gel8n__latest_edcb1b8bf299",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__wallet-tracker-gel8n__latest_edcb1b8bf299",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -693,7 +693,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__wallet-tracker-l7dst__latest_438041e54d4c",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__wallet-tracker-l7dst__latest_438041e54d4c",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__wallet-tracker-l7dst__latest_438041e54d4c",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -709,7 +709,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__wallet-tracker-pbckx__latest_c2e175e08fa0",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__wallet-tracker-pbckx__latest_c2e175e08fa0",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__wallet-tracker-pbckx__latest_c2e175e08fa0",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -725,7 +725,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__wallet-tracker-x76ik__latest_1d87771b365e",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__wallet-tracker-x76ik__latest_1d87771b365e",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__wallet-tracker-x76ik__latest_1d87771b365e",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -741,7 +741,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__x-trends-0heof__latest_0d6dc7bc125d",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__x-trends-0heof__latest_0d6dc7bc125d",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__x-trends-0heof__latest_0d6dc7bc125d",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -757,7 +757,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__x-trends-hloqe__latest_303a18f22f77",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__x-trends-hloqe__latest_303a18f22f77",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__x-trends-hloqe__latest_303a18f22f77",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -773,7 +773,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__x-trends-orwhp__latest_d775ac9b56b0",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__x-trends-orwhp__latest_d775ac9b56b0",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__x-trends-orwhp__latest_d775ac9b56b0",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -789,7 +789,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__yahoo-finance-m16op__latest_0dffd8cfa202",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__yahoo-finance-m16op__latest_0dffd8cfa202",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__yahoo-finance-m16op__latest_0dffd8cfa202",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -805,7 +805,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__yahoo-finance-mb9wu__latest_ae99e9dd94b4",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__yahoo-finance-mb9wu__latest_ae99e9dd94b4",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__yahoo-finance-mb9wu__latest_ae99e9dd94b4",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -821,7 +821,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__yahoo-finance-wcr6j__latest_33375d75e278",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__yahoo-finance-wcr6j__latest_33375d75e278",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__yahoo-finance-wcr6j__latest_33375d75e278",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -837,7 +837,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__yahoo-finance-y7mbx__latest_f549fdf16c64",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__yahoo-finance-y7mbx__latest_f549fdf16c64",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__yahoo-finance-y7mbx__latest_f549fdf16c64",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -853,7 +853,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__yahoo-finance-ztbyq__latest_01590921f69d",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__yahoo-finance-ztbyq__latest_01590921f69d",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__yahoo-finance-ztbyq__latest_01590921f69d",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -869,7 +869,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__youtube-summarize-5oixh__latest_a0ec46e00749",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__youtube-summarize-5oixh__latest_a0ec46e00749",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__youtube-summarize-5oixh__latest_a0ec46e00749",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -885,7 +885,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__youtube-summarize-beqh9__latest_80bdb46e8621",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__youtube-summarize-beqh9__latest_80bdb46e8621",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__youtube-summarize-beqh9__latest_80bdb46e8621",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -901,7 +901,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__youtube-summarize-hr5oh__latest_583ffded7683",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__youtube-summarize-hr5oh__latest_583ffded7683",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__youtube-summarize-hr5oh__latest_583ffded7683",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -917,7 +917,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__youtube-thumbnail-grabber-rzncj__latest_32625e3b9ee2",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__youtube-thumbnail-grabber-rzncj__latest_32625e3b9ee2",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__youtube-thumbnail-grabber-rzncj__latest_32625e3b9ee2",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -933,7 +933,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__youtube-thumbnail-grabber-sq374__latest_8ea10e752750",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__youtube-thumbnail-grabber-sq374__latest_8ea10e752750",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__youtube-thumbnail-grabber-sq374__latest_8ea10e752750",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -949,7 +949,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__youtube-thumbnail-grabber-tzilx__latest_bd4ddd3d068d",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__youtube-thumbnail-grabber-tzilx__latest_bd4ddd3d068d",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__youtube-thumbnail-grabber-tzilx__latest_bd4ddd3d068d",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -965,7 +965,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__youtube-video-downloader-cjmxp__latest_91a1750fe37c",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__youtube-video-downloader-cjmxp__latest_91a1750fe37c",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__youtube-video-downloader-cjmxp__latest_91a1750fe37c",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -981,7 +981,7 @@
     "entry_id": "clawsec::extracted__hightower6eu__youtube-video-downloader-pydzq__latest_5fe122a9f933",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__hightower6eu__youtube-video-downloader-pydzq__latest_5fe122a9f933",
+    "local_path": "data/clawsec_malskills/extracted__hightower6eu__youtube-video-downloader-pydzq__latest_5fe122a9f933",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -997,7 +997,7 @@
     "entry_id": "clawsec::extracted__moonshine-100rze__excel-1kl__latest_fbcd1f6fe08d",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__moonshine-100rze__excel-1kl__latest_fbcd1f6fe08d",
+    "local_path": "data/clawsec_malskills/extracted__moonshine-100rze__excel-1kl__latest_fbcd1f6fe08d",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1013,7 +1013,7 @@
     "entry_id": "clawsec::extracted__mosonchan2023__polymarket-market-maker__latest_13001d78e104",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__mosonchan2023__polymarket-market-maker__latest_13001d78e104",
+    "local_path": "data/clawsec_malskills/extracted__mosonchan2023__polymarket-market-maker__latest_13001d78e104",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1029,7 +1029,7 @@
     "entry_id": "clawsec::extracted__pepe276__publish-dist__latest_ac7a2e2ed59c",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__pepe276__publish-dist__latest_ac7a2e2ed59c",
+    "local_path": "data/clawsec_malskills/extracted__pepe276__publish-dist__latest_ac7a2e2ed59c",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1045,7 +1045,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__agent-browser-plyd56pz7air__latest_063657ff6c85",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__agent-browser-plyd56pz7air__latest_063657ff6c85",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__agent-browser-plyd56pz7air__latest_063657ff6c85",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1061,7 +1061,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__agent-browser-zd1dook9mtfz__latest_e01cac73f28f",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__agent-browser-zd1dook9mtfz__latest_e01cac73f28f",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__agent-browser-zd1dook9mtfz__latest_e01cac73f28f",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1077,7 +1077,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__auto-updater-eu0vxzedkgb__latest_0726bfe5ff5b",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__auto-updater-eu0vxzedkgb__latest_0726bfe5ff5b",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__auto-updater-eu0vxzedkgb__latest_0726bfe5ff5b",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1093,7 +1093,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__auto-updater-lrssiatzxpx__latest_f2f93706143f",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__auto-updater-lrssiatzxpx__latest_f2f93706143f",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__auto-updater-lrssiatzxpx__latest_f2f93706143f",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1109,7 +1109,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__auto-updater-pb70kpsnfof__latest_ce8aeb621c2a",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__auto-updater-pb70kpsnfof__latest_ce8aeb621c2a",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__auto-updater-pb70kpsnfof__latest_ce8aeb621c2a",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1125,7 +1125,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__bird-ar__latest_9ed1ab6b690e",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__bird-ar__latest_9ed1ab6b690e",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__bird-ar__latest_9ed1ab6b690e",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1141,7 +1141,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__bird-rl__latest_314b786825b2",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__bird-rl__latest_314b786825b2",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__bird-rl__latest_314b786825b2",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1157,7 +1157,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__bird-yt__latest_34756c74ab30",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__bird-yt__latest_34756c74ab30",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__bird-yt__latest_34756c74ab30",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1173,7 +1173,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__clawdhub-aecm6lh6uo__latest_8e2de61a0779",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__clawdhub-aecm6lh6uo__latest_8e2de61a0779",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__clawdhub-aecm6lh6uo__latest_8e2de61a0779",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1189,7 +1189,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__clawdhub-l91mzsalr7__latest_665cbccf4c38",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__clawdhub-l91mzsalr7__latest_665cbccf4c38",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__clawdhub-l91mzsalr7__latest_665cbccf4c38",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1205,7 +1205,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__clawdhub-za29sitx9w__latest_2308f58c542b",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__clawdhub-za29sitx9w__latest_2308f58c542b",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__clawdhub-za29sitx9w__latest_2308f58c542b",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1221,7 +1221,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__clawdhub-zh7v47hpwk__latest_fd716de669a4",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__clawdhub-zh7v47hpwk__latest_fd716de669a4",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__clawdhub-zh7v47hpwk__latest_fd716de669a4",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1237,7 +1237,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__coding-agent-by6ghzyes__latest_ce2e0c94aeb9",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__coding-agent-by6ghzyes__latest_ce2e0c94aeb9",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__coding-agent-by6ghzyes__latest_ce2e0c94aeb9",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1253,7 +1253,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__coding-agent-pekjzav3x__latest_c47487aa036a",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__coding-agent-pekjzav3x__latest_c47487aa036a",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__coding-agent-pekjzav3x__latest_c47487aa036a",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1269,7 +1269,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__coding-agent-tvmz0qsg1__latest_3a2354c922d2",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__coding-agent-tvmz0qsg1__latest_3a2354c922d2",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__coding-agent-tvmz0qsg1__latest_3a2354c922d2",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1285,7 +1285,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__deep-research-pjazdzyd__latest_0567a71e6984",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__deep-research-pjazdzyd__latest_0567a71e6984",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__deep-research-pjazdzyd__latest_0567a71e6984",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1301,7 +1301,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__gog-g7ksras__latest_81066233b373",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__gog-g7ksras__latest_81066233b373",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__gog-g7ksras__latest_81066233b373",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1317,7 +1317,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__leo-wallet__latest_46b3194c485a",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__leo-wallet__latest_46b3194c485a",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__leo-wallet__latest_46b3194c485a",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1333,7 +1333,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__nano-banana-pro-mauf71__latest_03443fbd90cc",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__nano-banana-pro-mauf71__latest_03443fbd90cc",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__nano-banana-pro-mauf71__latest_03443fbd90cc",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1349,7 +1349,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__nano-banana-pro-mzvmth__latest_f3330f5edfd5",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__nano-banana-pro-mzvmth__latest_f3330f5edfd5",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__nano-banana-pro-mzvmth__latest_f3330f5edfd5",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1365,7 +1365,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__nano-pdf-cr79t__latest_d43f3b9967bf",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__nano-pdf-cr79t__latest_d43f3b9967bf",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__nano-pdf-cr79t__latest_d43f3b9967bf",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1381,7 +1381,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__nano-pdf-kxufw__latest_358457a9070d",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__nano-pdf-kxufw__latest_358457a9070d",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__nano-pdf-kxufw__latest_358457a9070d",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1397,7 +1397,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__nano-pdf-quqdg__latest_7d615e510b5d",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__nano-pdf-quqdg__latest_7d615e510b5d",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__nano-pdf-quqdg__latest_7d615e510b5d",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1413,7 +1413,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__nano-pdf-xyixq__latest_966304ba605a",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__nano-pdf-xyixq__latest_966304ba605a",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__nano-pdf-xyixq__latest_966304ba605a",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1429,7 +1429,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__nano-pdf-yqsfx__latest_fbc56b823b39",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__nano-pdf-yqsfx__latest_fbc56b823b39",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__nano-pdf-yqsfx__latest_fbc56b823b39",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1445,7 +1445,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__nano-pdf-zpgdu__latest_28975ec1691e",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__nano-pdf-zpgdu__latest_28975ec1691e",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__nano-pdf-zpgdu__latest_28975ec1691e",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1461,7 +1461,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__summarize-177r__latest_4007dfbf4ee1",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__summarize-177r__latest_4007dfbf4ee1",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__summarize-177r__latest_4007dfbf4ee1",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1477,7 +1477,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__summarize-nrqj__latest_824060dd8a27",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__summarize-nrqj__latest_824060dd8a27",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__summarize-nrqj__latest_824060dd8a27",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1493,7 +1493,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__summarize-rjig__latest_892746536f3c",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__summarize-rjig__latest_892746536f3c",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__summarize-rjig__latest_892746536f3c",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1509,7 +1509,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__wacli-hdg__latest_9db7704dfac1",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__wacli-hdg__latest_9db7704dfac1",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__wacli-hdg__latest_9db7704dfac1",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1525,7 +1525,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__wacli-muk__latest_19fa2c0a298d",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__wacli-muk__latest_19fa2c0a298d",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__wacli-muk__latest_19fa2c0a298d",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1541,7 +1541,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__wacli-w3y__latest_e84c52c551a4",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__wacli-w3y__latest_e84c52c551a4",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__wacli-w3y__latest_e84c52c551a4",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1557,7 +1557,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__youtube-watcher-7__latest_430e8871e6e3",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__youtube-watcher-7__latest_430e8871e6e3",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__youtube-watcher-7__latest_430e8871e6e3",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1573,7 +1573,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__youtube-watcher-a__latest_022a5b7f4a76",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__youtube-watcher-a__latest_022a5b7f4a76",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__youtube-watcher-a__latest_022a5b7f4a76",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1589,7 +1589,7 @@
     "entry_id": "clawsec::extracted__sakaen736jih__youtube-watcher-g__latest_9ed1d4060ab7",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__sakaen736jih__youtube-watcher-g__latest_9ed1d4060ab7",
+    "local_path": "data/clawsec_malskills/extracted__sakaen736jih__youtube-watcher-g__latest_9ed1d4060ab7",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1605,7 +1605,7 @@
     "entry_id": "clawsec::extracted__seedamir__amir__latest_a367336f7dcf",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__seedamir__amir__latest_a367336f7dcf",
+    "local_path": "data/clawsec_malskills/extracted__seedamir__amir__latest_a367336f7dcf",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1621,7 +1621,7 @@
     "entry_id": "clawsec::extracted__timclawbot__update__latest_4fd022de701c",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__timclawbot__update__latest_4fd022de701c",
+    "local_path": "data/clawsec_malskills/extracted__timclawbot__update__latest_4fd022de701c",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1637,7 +1637,7 @@
     "entry_id": "clawsec::extracted__zaycv__polymarket-trading__latest_d2517346a53b",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/extracted__zaycv__polymarket-trading__latest_d2517346a53b",
+    "local_path": "data/clawsec_malskills/extracted__zaycv__polymarket-trading__latest_d2517346a53b",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1653,7 +1653,7 @@
     "entry_id": "clawsec::flagged__adaptationio-gemini-auth",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/flagged__adaptationio-gemini-auth",
+    "local_path": "data/clawsec_malskills/flagged__adaptationio-gemini-auth",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1669,7 +1669,7 @@
     "entry_id": "clawsec::flagged__majiayu000-codex-auth",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/flagged__majiayu000-codex-auth",
+    "local_path": "data/clawsec_malskills/flagged__majiayu000-codex-auth",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1685,7 +1685,7 @@
     "entry_id": "clawsec::flagged__ryo-ebata-data-exfil",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/clawsec_malskills/flagged__ryo-ebata-data-exfil",
+    "local_path": "data/clawsec_malskills/flagged__ryo-ebata-data-exfil",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1701,7 +1701,7 @@
     "entry_id": "confirmed::hightower6eu/auto-updater-3rk1s",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/auto-updater-3rk1s",
+    "local_path": "data/malicious_confirmed/hightower6eu/auto-updater-3rk1s",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1717,7 +1717,7 @@
     "entry_id": "confirmed::hightower6eu/auto-updater-5fhqm",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/auto-updater-5fhqm",
+    "local_path": "data/malicious_confirmed/hightower6eu/auto-updater-5fhqm",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1733,7 +1733,7 @@
     "entry_id": "confirmed::hightower6eu/auto-updater-m0fsa",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/auto-updater-m0fsa",
+    "local_path": "data/malicious_confirmed/hightower6eu/auto-updater-m0fsa",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1749,7 +1749,7 @@
     "entry_id": "confirmed::hightower6eu/clawhub-d4kxr",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/clawhub-d4kxr",
+    "local_path": "data/malicious_confirmed/hightower6eu/clawhub-d4kxr",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1765,7 +1765,7 @@
     "entry_id": "confirmed::hightower6eu/clawhub-f3qcn",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/clawhub-f3qcn",
+    "local_path": "data/malicious_confirmed/hightower6eu/clawhub-f3qcn",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1781,7 +1781,7 @@
     "entry_id": "confirmed::hightower6eu/clawhub-gpcrq",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/clawhub-gpcrq",
+    "local_path": "data/malicious_confirmed/hightower6eu/clawhub-gpcrq",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1797,7 +1797,7 @@
     "entry_id": "confirmed::hightower6eu/clawhub-oihpl",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/clawhub-oihpl",
+    "local_path": "data/malicious_confirmed/hightower6eu/clawhub-oihpl",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1813,7 +1813,7 @@
     "entry_id": "confirmed::hightower6eu/clawhub-olgys",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/clawhub-olgys",
+    "local_path": "data/malicious_confirmed/hightower6eu/clawhub-olgys",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1829,7 +1829,7 @@
     "entry_id": "confirmed::hightower6eu/clawhubcli",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/clawhubcli",
+    "local_path": "data/malicious_confirmed/hightower6eu/clawhubcli",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1845,7 +1845,7 @@
     "entry_id": "confirmed::hightower6eu/ethereum-gas-tracker-esupl",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/ethereum-gas-tracker-esupl",
+    "local_path": "data/malicious_confirmed/hightower6eu/ethereum-gas-tracker-esupl",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1861,7 +1861,7 @@
     "entry_id": "confirmed::hightower6eu/google-workspace-ndlt1",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/google-workspace-ndlt1",
+    "local_path": "data/malicious_confirmed/hightower6eu/google-workspace-ndlt1",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1877,7 +1877,7 @@
     "entry_id": "confirmed::hightower6eu/google-workspace-womvg",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/google-workspace-womvg",
+    "local_path": "data/malicious_confirmed/hightower6eu/google-workspace-womvg",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1893,7 +1893,7 @@
     "entry_id": "confirmed::hightower6eu/google-workspace-ytrqj",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/google-workspace-ytrqj",
+    "local_path": "data/malicious_confirmed/hightower6eu/google-workspace-ytrqj",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1909,7 +1909,7 @@
     "entry_id": "confirmed::hightower6eu/insider-wallets-finder-cv1d9",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/insider-wallets-finder-cv1d9",
+    "local_path": "data/malicious_confirmed/hightower6eu/insider-wallets-finder-cv1d9",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1925,7 +1925,7 @@
     "entry_id": "confirmed::hightower6eu/insider-wallets-finder-h5syo",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/insider-wallets-finder-h5syo",
+    "local_path": "data/malicious_confirmed/hightower6eu/insider-wallets-finder-h5syo",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1941,7 +1941,7 @@
     "entry_id": "confirmed::hightower6eu/phantom-ahdwb",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/phantom-ahdwb",
+    "local_path": "data/malicious_confirmed/hightower6eu/phantom-ahdwb",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1957,7 +1957,7 @@
     "entry_id": "confirmed::hightower6eu/phantom-mdr3q",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/phantom-mdr3q",
+    "local_path": "data/malicious_confirmed/hightower6eu/phantom-mdr3q",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1973,7 +1973,7 @@
     "entry_id": "confirmed::hightower6eu/phantom-syjqj",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/phantom-syjqj",
+    "local_path": "data/malicious_confirmed/hightower6eu/phantom-syjqj",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -1989,7 +1989,7 @@
     "entry_id": "confirmed::hightower6eu/polymarket-33efn",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/polymarket-33efn",
+    "local_path": "data/malicious_confirmed/hightower6eu/polymarket-33efn",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2005,7 +2005,7 @@
     "entry_id": "confirmed::hightower6eu/polymarket-dfknh",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/polymarket-dfknh",
+    "local_path": "data/malicious_confirmed/hightower6eu/polymarket-dfknh",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2021,7 +2021,7 @@
     "entry_id": "confirmed::hightower6eu/polymarket-y0c8k",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/polymarket-y0c8k",
+    "local_path": "data/malicious_confirmed/hightower6eu/polymarket-y0c8k",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2037,7 +2037,7 @@
     "entry_id": "confirmed::hightower6eu/solana-1fuhx",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/solana-1fuhx",
+    "local_path": "data/malicious_confirmed/hightower6eu/solana-1fuhx",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2053,7 +2053,7 @@
     "entry_id": "confirmed::hightower6eu/solana-9ahmt",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/solana-9ahmt",
+    "local_path": "data/malicious_confirmed/hightower6eu/solana-9ahmt",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2069,7 +2069,7 @@
     "entry_id": "confirmed::hightower6eu/solana-wi1cy",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/solana-wi1cy",
+    "local_path": "data/malicious_confirmed/hightower6eu/solana-wi1cy",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2085,7 +2085,7 @@
     "entry_id": "confirmed::hightower6eu/solana-ytzgw",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/solana-ytzgw",
+    "local_path": "data/malicious_confirmed/hightower6eu/solana-ytzgw",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2101,7 +2101,7 @@
     "entry_id": "confirmed::hightower6eu/updater",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/updater",
+    "local_path": "data/malicious_confirmed/hightower6eu/updater",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2117,7 +2117,7 @@
     "entry_id": "confirmed::hightower6eu/wallet-tracker-bxb0a",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/wallet-tracker-bxb0a",
+    "local_path": "data/malicious_confirmed/hightower6eu/wallet-tracker-bxb0a",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2133,7 +2133,7 @@
     "entry_id": "confirmed::hightower6eu/wallet-tracker-hhjpv",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/wallet-tracker-hhjpv",
+    "local_path": "data/malicious_confirmed/hightower6eu/wallet-tracker-hhjpv",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2149,7 +2149,7 @@
     "entry_id": "confirmed::hightower6eu/wallet-tracker-rcoux",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/wallet-tracker-rcoux",
+    "local_path": "data/malicious_confirmed/hightower6eu/wallet-tracker-rcoux",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2165,7 +2165,7 @@
     "entry_id": "confirmed::hightower6eu/x-trends-axy84",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/x-trends-axy84",
+    "local_path": "data/malicious_confirmed/hightower6eu/x-trends-axy84",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2181,7 +2181,7 @@
     "entry_id": "confirmed::hightower6eu/x-trends-hloqe",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/x-trends-hloqe",
+    "local_path": "data/malicious_confirmed/hightower6eu/x-trends-hloqe",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2197,7 +2197,7 @@
     "entry_id": "confirmed::hightower6eu/x-trends-rwskq",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/x-trends-rwskq",
+    "local_path": "data/malicious_confirmed/hightower6eu/x-trends-rwskq",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2213,7 +2213,7 @@
     "entry_id": "confirmed::hightower6eu/yahoo-finance-ijybk",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/yahoo-finance-ijybk",
+    "local_path": "data/malicious_confirmed/hightower6eu/yahoo-finance-ijybk",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2229,7 +2229,7 @@
     "entry_id": "confirmed::hightower6eu/yahoo-finance-m16op",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/yahoo-finance-m16op",
+    "local_path": "data/malicious_confirmed/hightower6eu/yahoo-finance-m16op",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2245,7 +2245,7 @@
     "entry_id": "confirmed::hightower6eu/yahoo-finance-saosh",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/yahoo-finance-saosh",
+    "local_path": "data/malicious_confirmed/hightower6eu/yahoo-finance-saosh",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2261,7 +2261,7 @@
     "entry_id": "confirmed::hightower6eu/yahoo-finance-tqxkb",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/yahoo-finance-tqxkb",
+    "local_path": "data/malicious_confirmed/hightower6eu/yahoo-finance-tqxkb",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2277,7 +2277,7 @@
     "entry_id": "confirmed::hightower6eu/yahoo-finance-wcr6j",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/yahoo-finance-wcr6j",
+    "local_path": "data/malicious_confirmed/hightower6eu/yahoo-finance-wcr6j",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2293,7 +2293,7 @@
     "entry_id": "confirmed::hightower6eu/youtube-summarize-11y0i",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/youtube-summarize-11y0i",
+    "local_path": "data/malicious_confirmed/hightower6eu/youtube-summarize-11y0i",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2309,7 +2309,7 @@
     "entry_id": "confirmed::hightower6eu/youtube-summarize-k67rk",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/youtube-summarize-k67rk",
+    "local_path": "data/malicious_confirmed/hightower6eu/youtube-summarize-k67rk",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2325,7 +2325,7 @@
     "entry_id": "confirmed::hightower6eu/youtube-summarize-lh9rq",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/youtube-summarize-lh9rq",
+    "local_path": "data/malicious_confirmed/hightower6eu/youtube-summarize-lh9rq",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2341,7 +2341,7 @@
     "entry_id": "confirmed::hightower6eu/youtube-summarize-umait",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/youtube-summarize-umait",
+    "local_path": "data/malicious_confirmed/hightower6eu/youtube-summarize-umait",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2357,7 +2357,7 @@
     "entry_id": "confirmed::hightower6eu/youtube-thumbnail-grabber-2vx4b",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/youtube-thumbnail-grabber-2vx4b",
+    "local_path": "data/malicious_confirmed/hightower6eu/youtube-thumbnail-grabber-2vx4b",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2373,7 +2373,7 @@
     "entry_id": "confirmed::hightower6eu/youtube-thumbnail-grabber-jes1t",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/youtube-thumbnail-grabber-jes1t",
+    "local_path": "data/malicious_confirmed/hightower6eu/youtube-thumbnail-grabber-jes1t",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2389,7 +2389,7 @@
     "entry_id": "confirmed::hightower6eu/youtube-thumbnail-grabber-sq374",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/youtube-thumbnail-grabber-sq374",
+    "local_path": "data/malicious_confirmed/hightower6eu/youtube-thumbnail-grabber-sq374",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2405,7 +2405,7 @@
     "entry_id": "confirmed::hightower6eu/youtube-video-downloader-9kscv",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/youtube-video-downloader-9kscv",
+    "local_path": "data/malicious_confirmed/hightower6eu/youtube-video-downloader-9kscv",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2421,7 +2421,7 @@
     "entry_id": "confirmed::hightower6eu/youtube-video-downloader-hvzyq",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/youtube-video-downloader-hvzyq",
+    "local_path": "data/malicious_confirmed/hightower6eu/youtube-video-downloader-hvzyq",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2437,7 +2437,7 @@
     "entry_id": "confirmed::hightower6eu/youtube-video-downloader-pydzq",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/hightower6eu/youtube-video-downloader-pydzq",
+    "local_path": "data/malicious_confirmed/hightower6eu/youtube-video-downloader-pydzq",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2453,7 +2453,7 @@
     "entry_id": "confirmed::noreplyboter/better-polymarket",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/noreplyboter/better-polymarket",
+    "local_path": "data/malicious_confirmed/noreplyboter/better-polymarket",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2469,7 +2469,7 @@
     "entry_id": "confirmed::pepe276/publish-dist",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/pepe276/publish-dist",
+    "local_path": "data/malicious_confirmed/pepe276/publish-dist",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2485,7 +2485,7 @@
     "entry_id": "confirmed::sakaen736jih/agent-browser-6aigix9qi2tu",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/agent-browser-6aigix9qi2tu",
+    "local_path": "data/malicious_confirmed/sakaen736jih/agent-browser-6aigix9qi2tu",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2501,7 +2501,7 @@
     "entry_id": "confirmed::sakaen736jih/agent-browser-fopzsipap75u",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/agent-browser-fopzsipap75u",
+    "local_path": "data/malicious_confirmed/sakaen736jih/agent-browser-fopzsipap75u",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2517,7 +2517,7 @@
     "entry_id": "confirmed::sakaen736jih/agent-browser-jrdv4mcscrb2",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/agent-browser-jrdv4mcscrb2",
+    "local_path": "data/malicious_confirmed/sakaen736jih/agent-browser-jrdv4mcscrb2",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2533,7 +2533,7 @@
     "entry_id": "confirmed::sakaen736jih/agent-browser-npzrafdduyrm",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/agent-browser-npzrafdduyrm",
+    "local_path": "data/malicious_confirmed/sakaen736jih/agent-browser-npzrafdduyrm",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2549,7 +2549,7 @@
     "entry_id": "confirmed::sakaen736jih/agent-browser-zd1dook9mtfz",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/agent-browser-zd1dook9mtfz",
+    "local_path": "data/malicious_confirmed/sakaen736jih/agent-browser-zd1dook9mtfz",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2565,7 +2565,7 @@
     "entry_id": "confirmed::sakaen736jih/auto-updater-dyismmj5csx",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/auto-updater-dyismmj5csx",
+    "local_path": "data/malicious_confirmed/sakaen736jih/auto-updater-dyismmj5csx",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2581,7 +2581,7 @@
     "entry_id": "confirmed::sakaen736jih/auto-updater-jhsfi4ehp1b",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/auto-updater-jhsfi4ehp1b",
+    "local_path": "data/malicious_confirmed/sakaen736jih/auto-updater-jhsfi4ehp1b",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2597,7 +2597,7 @@
     "entry_id": "confirmed::sakaen736jih/bird-ch",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/bird-ch",
+    "local_path": "data/malicious_confirmed/sakaen736jih/bird-ch",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2613,7 +2613,7 @@
     "entry_id": "confirmed::sakaen736jih/bird-h4",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/bird-h4",
+    "local_path": "data/malicious_confirmed/sakaen736jih/bird-h4",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2629,7 +2629,7 @@
     "entry_id": "confirmed::sakaen736jih/bird-hg",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/bird-hg",
+    "local_path": "data/malicious_confirmed/sakaen736jih/bird-hg",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2645,7 +2645,7 @@
     "entry_id": "confirmed::sakaen736jih/clawdhub-0ds2em57jf",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/clawdhub-0ds2em57jf",
+    "local_path": "data/malicious_confirmed/sakaen736jih/clawdhub-0ds2em57jf",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2661,7 +2661,7 @@
     "entry_id": "confirmed::sakaen736jih/clawdhub-3ffldvumfb",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/clawdhub-3ffldvumfb",
+    "local_path": "data/malicious_confirmed/sakaen736jih/clawdhub-3ffldvumfb",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2677,7 +2677,7 @@
     "entry_id": "confirmed::sakaen736jih/clawdhub-lyass2awyp",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/clawdhub-lyass2awyp",
+    "local_path": "data/malicious_confirmed/sakaen736jih/clawdhub-lyass2awyp",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2693,7 +2693,7 @@
     "entry_id": "confirmed::sakaen736jih/coding-agent-8wyxxelkv",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/coding-agent-8wyxxelkv",
+    "local_path": "data/malicious_confirmed/sakaen736jih/coding-agent-8wyxxelkv",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2709,7 +2709,7 @@
     "entry_id": "confirmed::sakaen736jih/coding-agent-boz67cmsl",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/coding-agent-boz67cmsl",
+    "local_path": "data/malicious_confirmed/sakaen736jih/coding-agent-boz67cmsl",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2725,7 +2725,7 @@
     "entry_id": "confirmed::sakaen736jih/coding-agent-ggeu0hlk4",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/coding-agent-ggeu0hlk4",
+    "local_path": "data/malicious_confirmed/sakaen736jih/coding-agent-ggeu0hlk4",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2741,7 +2741,7 @@
     "entry_id": "confirmed::sakaen736jih/coding-agent-o10sk4yyb",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/coding-agent-o10sk4yyb",
+    "local_path": "data/malicious_confirmed/sakaen736jih/coding-agent-o10sk4yyb",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2757,7 +2757,7 @@
     "entry_id": "confirmed::sakaen736jih/coding-agent-p2kq1f9ou",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/coding-agent-p2kq1f9ou",
+    "local_path": "data/malicious_confirmed/sakaen736jih/coding-agent-p2kq1f9ou",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2773,7 +2773,7 @@
     "entry_id": "confirmed::sakaen736jih/gog-kfnluze",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/gog-kfnluze",
+    "local_path": "data/malicious_confirmed/sakaen736jih/gog-kfnluze",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2789,7 +2789,7 @@
     "entry_id": "confirmed::sakaen736jih/gog-sywovxv",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/gog-sywovxv",
+    "local_path": "data/malicious_confirmed/sakaen736jih/gog-sywovxv",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2805,7 +2805,7 @@
     "entry_id": "confirmed::sakaen736jih/nano-banana-pro-c16jff",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/nano-banana-pro-c16jff",
+    "local_path": "data/malicious_confirmed/sakaen736jih/nano-banana-pro-c16jff",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2821,7 +2821,7 @@
     "entry_id": "confirmed::sakaen736jih/nano-banana-pro-oinrw3",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/nano-banana-pro-oinrw3",
+    "local_path": "data/malicious_confirmed/sakaen736jih/nano-banana-pro-oinrw3",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2837,7 +2837,7 @@
     "entry_id": "confirmed::sakaen736jih/nano-pdf-kxufw",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/nano-pdf-kxufw",
+    "local_path": "data/malicious_confirmed/sakaen736jih/nano-pdf-kxufw",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2853,7 +2853,7 @@
     "entry_id": "confirmed::sakaen736jih/nano-pdf-rt9y1",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/nano-pdf-rt9y1",
+    "local_path": "data/malicious_confirmed/sakaen736jih/nano-pdf-rt9y1",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2869,7 +2869,7 @@
     "entry_id": "confirmed::sakaen736jih/solana",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/solana",
+    "local_path": "data/malicious_confirmed/sakaen736jih/solana",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2885,7 +2885,7 @@
     "entry_id": "confirmed::sakaen736jih/wacli-hdg",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/wacli-hdg",
+    "local_path": "data/malicious_confirmed/sakaen736jih/wacli-hdg",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2901,7 +2901,7 @@
     "entry_id": "confirmed::sakaen736jih/wacli-klt",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/sakaen736jih/wacli-klt",
+    "local_path": "data/malicious_confirmed/sakaen736jih/wacli-klt",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2917,7 +2917,7 @@
     "entry_id": "confirmed::zaycv/blrd",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/zaycv/blrd",
+    "local_path": "data/malicious_confirmed/zaycv/blrd",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2933,7 +2933,7 @@
     "entry_id": "confirmed::zaycv/clawbhub",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/zaycv/clawbhub",
+    "local_path": "data/malicious_confirmed/zaycv/clawbhub",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2949,7 +2949,7 @@
     "entry_id": "confirmed::zaycv/clawdhab",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/zaycv/clawdhab",
+    "local_path": "data/malicious_confirmed/zaycv/clawdhab",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2965,7 +2965,7 @@
     "entry_id": "confirmed::zaycv/clawhub1",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/zaycv/clawhub1",
+    "local_path": "data/malicious_confirmed/zaycv/clawhub1",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2981,7 +2981,7 @@
     "entry_id": "confirmed::zaycv/polymarket-hyperliquid-trading",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/zaycv/polymarket-hyperliquid-trading",
+    "local_path": "data/malicious_confirmed/zaycv/polymarket-hyperliquid-trading",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -2997,7 +2997,7 @@
     "entry_id": "confirmed::zaycv/shield",
     "label": "malicious",
     "label_source": "curated_dataset",
-    "local_path": "/home/shenaow/AgentSkill/data/malicious_confirmed/zaycv/shield",
+    "local_path": "data/malicious_confirmed/zaycv/shield",
     "metadata": {
       "kind": "confirmed_malicious"
     },
@@ -3013,7 +3013,7 @@
     "entry_id": "masb::skills.rest::rest_1659::math-calculator",
     "label": "malicious",
     "label_source": "malicious_skills.csv",
-    "local_path": "/home/shenaow/AgentSkill/data/MaliciousAgentSkillsBench/skills.rest/rest_1659/math-calculator",
+    "local_path": "data/MaliciousAgentSkillsBench/skills.rest/rest_1659/math-calculator",
     "metadata": {
       "download_status": "downloaded",
       "url": "https://github.com/hushuguo/malicious-mathHelper/archive/main.zip"
@@ -3034,7 +3034,7 @@
     "entry_id": "masb::skillsmp.com::smp_2343::gemini-image",
     "label": "malicious",
     "label_source": "malicious_skills.csv",
-    "local_path": "/home/shenaow/AgentSkill/data/MaliciousAgentSkillsBench/skillsmp.com/smp_2343/gemini-image",
+    "local_path": "data/MaliciousAgentSkillsBench/skillsmp.com/smp_2343/gemini-image",
     "metadata": {
       "download_status": "downloaded",
       "url": "https://github.com/acking-you/myclaude-skills/archive/main.zip"
@@ -3056,7 +3056,7 @@
     "entry_id": "masb::skillsmp.com::smp_2663::ai-truthfulness-enforcer",
     "label": "malicious",
     "label_source": "malicious_skills.csv",
-    "local_path": "/home/shenaow/AgentSkill/data/MaliciousAgentSkillsBench/skillsmp.com/smp_2663/ai-truthfulness-enforcer",
+    "local_path": "data/MaliciousAgentSkillsBench/skillsmp.com/smp_2663/ai-truthfulness-enforcer",
     "metadata": {
       "download_status": "downloaded",
       "url": "https://github.com/ananddtyagi/cc-marketplace/archive/main.zip"
@@ -3076,7 +3076,7 @@
     "entry_id": "masb::skillsmp.com::smp_2795::email",
     "label": "malicious",
     "label_source": "malicious_skills.csv",
-    "local_path": "/home/shenaow/AgentSkill/data/MaliciousAgentSkillsBench/skillsmp.com/smp_2795/email",
+    "local_path": "data/MaliciousAgentSkillsBench/skillsmp.com/smp_2795/email",
     "metadata": {
       "download_status": "downloaded",
       "url": "https://github.com/arlenagreer/claude_configuration_docs/archive/main.zip"
@@ -3097,7 +3097,7 @@
     "entry_id": "masb::skillsmp.com::smp_3101::setup-claude-skills-for-web",
     "label": "malicious",
     "label_source": "malicious_skills.csv",
-    "local_path": "/home/shenaow/AgentSkill/data/MaliciousAgentSkillsBench/skillsmp.com/smp_3101/setup-claude-skills-for-web",
+    "local_path": "data/MaliciousAgentSkillsBench/skillsmp.com/smp_3101/setup-claude-skills-for-web",
     "metadata": {
       "download_status": "downloaded",
       "url": "https://github.com/berlysia/dotfiles/archive/master.zip"
@@ -3117,7 +3117,7 @@
     "entry_id": "masb::skillsmp.com::smp_4914::graphics-api",
     "label": "malicious",
     "label_source": "malicious_skills.csv",
-    "local_path": "/home/shenaow/AgentSkill/data/MaliciousAgentSkillsBench/skillsmp.com/smp_4914/graphics-api",
+    "local_path": "data/MaliciousAgentSkillsBench/skillsmp.com/smp_4914/graphics-api",
     "metadata": {
       "download_status": "downloaded",
       "url": "https://github.com/gmh5225/awesome-game-security/archive/main.zip"
@@ -3136,7 +3136,7 @@
     "entry_id": "masb::skillsmp.com::smp_7251::flow-nexus-neural",
     "label": "malicious",
     "label_source": "malicious_skills.csv",
-    "local_path": "/home/shenaow/AgentSkill/data/MaliciousAgentSkillsBench/skillsmp.com/smp_7251/flow-nexus-neural",
+    "local_path": "data/MaliciousAgentSkillsBench/skillsmp.com/smp_7251/flow-nexus-neural",
     "metadata": {
       "download_status": "downloaded",
       "url": "https://github.com/myysophia/cli-agent/archive/main.zip"
@@ -3159,7 +3159,7 @@
     "entry_id": "masb::skillsmp.com::smp_7332::idea-skill",
     "label": "malicious",
     "label_source": "malicious_skills.csv",
-    "local_path": "/home/shenaow/AgentSkill/data/MaliciousAgentSkillsBench/skillsmp.com/smp_7332/idea-skill",
+    "local_path": "data/MaliciousAgentSkillsBench/skillsmp.com/smp_7332/idea-skill",
     "metadata": {
       "download_status": "downloaded",
       "url": "https://github.com/nbbaier/idea-explorer/archive/main.zip"
@@ -3179,7 +3179,7 @@
     "entry_id": "masb::skillsmp.com::smp_7974::load-skills",
     "label": "malicious",
     "label_source": "malicious_skills.csv",
-    "local_path": "/home/shenaow/AgentSkill/data/MaliciousAgentSkillsBench/skillsmp.com/smp_7974/load-skills",
+    "local_path": "data/MaliciousAgentSkillsBench/skillsmp.com/smp_7974/load-skills",
     "metadata": {
       "download_status": "downloaded",
       "url": "https://github.com/plurigrid/asi/archive/main.zip"
@@ -3201,7 +3201,7 @@
     "entry_id": "masb::skillsmp.com::smp_8380::cc10x-router",
     "label": "malicious",
     "label_source": "malicious_skills.csv",
-    "local_path": "/home/shenaow/AgentSkill/data/MaliciousAgentSkillsBench/skillsmp.com/smp_8380/cc10x-router",
+    "local_path": "data/MaliciousAgentSkillsBench/skillsmp.com/smp_8380/cc10x-router",
     "metadata": {
       "download_status": "downloaded",
       "url": "https://github.com/romiluz13/cc10x/archive/main.zip"
@@ -3221,7 +3221,7 @@
     "entry_id": "masb::skillsmp.com::smp_8452::flow-nexus-platform",
     "label": "malicious",
     "label_source": "malicious_skills.csv",
-    "local_path": "/home/shenaow/AgentSkill/data/MaliciousAgentSkillsBench/skillsmp.com/smp_8452/flow-nexus-platform",
+    "local_path": "data/MaliciousAgentSkillsBench/skillsmp.com/smp_8452/flow-nexus-platform",
     "metadata": {
       "download_status": "downloaded",
       "url": "https://github.com/ruvnet/ruvector/archive/main.zip"
@@ -3244,7 +3244,7 @@
     "entry_id": "masb::skillsmp.com::smp_9021::find-incomplete-series",
     "label": "malicious",
     "label_source": "malicious_skills.csv",
-    "local_path": "/home/shenaow/AgentSkill/data/MaliciousAgentSkillsBench/skillsmp.com/smp_9021/find-incomplete-series",
+    "local_path": "data/MaliciousAgentSkillsBench/skillsmp.com/smp_9021/find-incomplete-series",
     "metadata": {
       "download_status": "downloaded",
       "url": "https://github.com/stbenjam/claude-nine/archive/main.zip"

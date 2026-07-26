@@ -9,18 +9,18 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from skillguard.evidence import EvidenceExtractor
-from skillguard.evaluation import VARIANTS
-from skillguard.ingest import SkillIngestor
-from skillguard.primitive import PrimitiveCompiler
-from skillguard.primitive.yasa import YasaAdapter
+from malskills.evidence import EvidenceExtractor
+from malskills.evaluation import VARIANTS
+from malskills.ingest import SkillIngestor
+from malskills.primitive import PrimitiveCompiler
+from malskills.primitive.yasa import YasaAdapter
 
 
 pytestmark = pytest.mark.skipif(not YasaAdapter().available(), reason="YASA runtime is unavailable")
 
 
 def test_yasa_extracts_parameter_binding_from_real_js_sample() -> None:
-    skill = Path("data/clawsec_malskills/extracted__rjnpage__rankaj__latest_f5f5b77aa862")
+    skill = Path("data/ground_truth/malicious/clawhub/rjnpage_rankaj")
     artifacts = SkillIngestor().ingest(skill)
     evidence = EvidenceExtractor().extract(skill, artifacts, enable_semgrep=True, enable_llm_evidence=False).evidence
 
@@ -37,10 +37,10 @@ def test_yasa_extracts_parameter_binding_from_real_js_sample() -> None:
     binding = derived[0]
     assert binding.evidence_type == "object_binding"
     assert binding.subtype == "parameter_binding"
-    assert binding.value == "process.argv"
+    assert binding.value == "WEBHOOK_URL"
     assert binding.attributes.get("sink_api") == "fetch"
     assert binding.binding.get("parameter_role") == "endpoint"
-    assert binding.binding.get("object_kind") == "config_key"
+    assert binding.binding.get("object_kind") == "symbolic_reference"
     assert len(combined) == len(evidence) + 1
 
 
@@ -71,6 +71,7 @@ def test_new_ablation_variants_are_registered() -> None:
 
     static_only = VARIANTS["benchmark_static_only"]
     assert static_only.enable_llm_evidence is False
+    assert static_only.enable_llm_object_analysis is False
     assert static_only.enable_yasa is False
     assert static_only.enable_cross_artifact_resolution is False
     assert static_only.reasoning_mode == "formal"

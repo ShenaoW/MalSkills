@@ -1,0 +1,59 @@
+rules:
+  - id: python.privilege_and_identity_manipulation.identity_switch
+    languages: [python]
+    message: Python switches execution identity
+    severity: WARNING
+    metadata:
+      malskills_subtype: identity_switch
+      malskills_evidence_type: privilege_and_identity_manipulation
+    pattern-either:
+      - pattern: os.setuid(...)
+      - pattern: os.seteuid(...)
+      - pattern: os.setgid(...)
+      - pattern: os.setegid(...)
+
+  - id: python.privilege_and_identity_manipulation.privilege_adjustment
+    languages: [python]
+    message: Python adjusts privileges or capabilities
+    severity: WARNING
+    metadata:
+      malskills_subtype: privilege_adjustment
+      malskills_evidence_type: privilege_and_identity_manipulation
+    pattern-either:
+      - pattern: capng.capng_update(...)
+      - pattern: prctl.cap_effective.limit(...)
+
+  - id: python.privilege_and_identity_manipulation.group_or_acl_modification
+    languages: [python]
+    message: Python modifies group membership, ACLs, or file capabilities
+    severity: WARNING
+    metadata:
+      malskills_subtype: group_or_acl_modification
+      malskills_evidence_type: privilege_and_identity_manipulation
+      malskills_value_metavar: $CMD
+    patterns:
+      - pattern-either:
+          - pattern: subprocess.run($CMD, ...)
+          - pattern: subprocess.Popen($CMD, ...)
+          - pattern: os.system($CMD)
+      - metavariable-regex:
+          metavariable: $CMD
+          regex: (?i).*(usermod\s+-aG|net\s+localgroup|setfacl|setcap|icacls).*
+
+  - id: python.privilege_and_identity_manipulation.boundary_bypass
+    languages: [python]
+    message: Python invokes policy or container boundary bypass tools
+    severity: WARNING
+    metadata:
+      malskills_subtype: boundary_bypass
+      malskills_evidence_type: privilege_and_identity_manipulation
+      malskills_value_metavar: $CMD
+    patterns:
+      - pattern-either:
+          - pattern: subprocess.run($CMD, ...)
+          - pattern: subprocess.Popen($CMD, ...)
+          - pattern: os.system($CMD)
+      - metavariable-regex:
+          metavariable: $CMD
+          regex: (?i).*(pkexec|sudo\b|nsenter|unshare|docker\s+run\s+--privileged).*
+

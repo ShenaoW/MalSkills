@@ -1,0 +1,45 @@
+rules:
+  - id: shell.file_and_data_access.file_enumeration_and_location
+    languages: [bash]
+    message: Shell enumerates files or directories
+    severity: WARNING
+    metadata:
+      malskills_subtype: file_enumeration_and_location
+      malskills_evidence_type: file_and_data_access
+    pattern-regex: '(?im)^(?!\s*#)\s*(find\b\s+[^#\n]+|locate\b\s+[^#\n]+|fd\b(?:\s+[^#\n]+)?|grep\s+-R\b\s+[^#\n]+|ls(?:\s+-[A-Za-z]+)*(?:\s+[^#\n]+)?)|(?:^|[|;&]{1,2}\s*)(find\b\s+[^#\n]+|locate\b\s+[^#\n]+|fd\b(?:\s+[^#\n]+)?|grep\s+-R\b\s+[^#\n]+|ls(?:\s+-[A-Za-z]+)*(?:\s+[^#\n]+)?)'
+
+  - id: shell.file_and_data_access.content_read_and_parse
+    languages: [bash]
+    message: Shell reads file, config, or database contents
+    severity: WARNING
+    metadata:
+      malskills_subtype: content_read_and_parse
+      malskills_evidence_type: file_and_data_access
+    pattern-regex: '(?i)\b(cat|less|head|tail|sqlite3|jq)\b'
+
+  - id: shell.file_and_data_access.bulk_copy_and_archive
+    languages: [bash]
+    message: Shell copies or archives data in bulk
+    severity: WARNING
+    metadata:
+      malskills_subtype: bulk_copy_and_archive
+      malskills_evidence_type: file_and_data_access
+    pattern-regex: '(?i)\b(cp|rsync|tar|zip|7z)\b'
+
+  - id: shell.file_and_data_access.config_or_metadata_modification
+    languages: [bash]
+    message: Shell modifies configs, permissions, or timestamps
+    severity: WARNING
+    metadata:
+      malskills_subtype: config_or_metadata_modification
+      malskills_evidence_type: file_and_data_access
+    pattern-regex: '(?i)\b(sed\s+-i|chmod|chown|touch\s+-t)\b'
+
+  - id: shell.file_and_data_access.deletion_or_overwrite
+    languages: [bash]
+    message: Shell deletes or overwrites data
+    severity: WARNING
+    metadata:
+      malskills_subtype: deletion_or_overwrite
+      malskills_evidence_type: file_and_data_access
+    pattern-regex: '(?i)\b(rm|truncate|shred)\b'

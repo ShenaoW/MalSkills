@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from skillguard.ingest import SkillIngestor
+from malskills.ingest import SkillIngestor
 
 
 def test_large_repo_keeps_fulltext_for_priority_markdown_and_only_fences_for_ordinary_markdown(tmp_path: Path) -> None:
@@ -35,5 +35,5 @@ def test_large_repo_keeps_fulltext_for_priority_markdown_and_only_fences_for_ord
     assert "notes.md" not in by_path
 
     derived_paths = {artifact.relative_path for artifact in artifacts if artifact.generated}
-    assert ".skillguard_fences/README__fence_0.sh" in derived_paths
-    assert ".skillguard_fences/notes__fence_0.py" in derived_paths
+    assert ".malskills_fences/README__fence_0.sh" in derived_paths
+    assert ".malskills_fences/notes__fence_0.py" in derived_paths

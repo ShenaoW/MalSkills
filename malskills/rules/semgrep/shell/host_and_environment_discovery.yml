@@ -1,0 +1,45 @@
+rules:
+  - id: shell.host_and_environment_discovery.system_info
+    languages: [bash]
+    message: Shell system and hardware discovery
+    severity: WARNING
+    metadata:
+      malskills_subtype: system_and_hardware_discovery
+      malskills_evidence_type: host_and_environment_discovery
+    pattern-regex: '(?i)\b(uname\s+-a|hostname\b|lscpu\b|lsblk\b|dmidecode\b|sysctl\b)'
+
+  - id: shell.host_and_environment_discovery.identity_discovery
+    languages: [bash]
+    message: Shell identity discovery
+    severity: WARNING
+    metadata:
+      malskills_subtype: identity_and_account_discovery
+      malskills_evidence_type: host_and_environment_discovery
+    pattern-regex: '(?im)^(?!\s*#)\s*(whoami\b|id(?:\s+-[A-Za-z]+)?\b|getent\s+passwd\b|net\s+user\b)|(?:^|[|;&]{1,2}\s*)(whoami\b|id(?:\s+-[A-Za-z]+)?\b|getent\s+passwd\b|net\s+user\b)'
+
+  - id: shell.host_and_environment_discovery.process_discovery
+    languages: [bash]
+    message: Shell process or service discovery
+    severity: WARNING
+    metadata:
+      malskills_subtype: process_and_service_discovery
+      malskills_evidence_type: host_and_environment_discovery
+    pattern-regex: '(?i)\b(ps\s+aux|tasklist\b|systemctl\s+list-units|sc\s+query)'
+
+  - id: shell.host_and_environment_discovery.network_discovery
+    languages: [bash]
+    message: Shell network and neighbor discovery
+    severity: WARNING
+    metadata:
+      malskills_subtype: network_and_neighbor_discovery
+      malskills_evidence_type: host_and_environment_discovery
+    pattern-regex: '(?i)\b(ip\s+a|ip\s+route|ifconfig\b|ss\s+-tulpn|arp\s+-a)'
+
+  - id: shell.host_and_environment_discovery.security_environment_discovery
+    languages: [bash]
+    message: Shell security environment or cloud metadata discovery
+    severity: WARNING
+    metadata:
+      malskills_subtype: security_environment_discovery
+      malskills_evidence_type: host_and_environment_discovery
+    pattern-regex: '(?i)(169\.254\.169\.254|metadata|docker|kubectl|systemctl\s+status\s+.*(edr|defender|falcon|agent))'

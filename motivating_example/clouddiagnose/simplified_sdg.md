@@ -1,11 +1,9 @@
 # Simplified SDG
 
-Generated sources:
+Graph sources:
 
-- [`sdg.dot`](/home/shenaow/AgentSkill/motivating_example/clouddiagnose/sdg.dot)
-- [`sdg.svg`](/home/shenaow/AgentSkill/motivating_example/clouddiagnose/sdg.svg)
-- [`motivating_figure.dot`](/home/shenaow/AgentSkill/motivating_example/clouddiagnose/motivating_figure.dot)
-- [`motivating_figure.svg`](/home/shenaow/AgentSkill/motivating_example/clouddiagnose/motivating_figure.svg)
+- [`sdg.dot`](sdg.dot)
+- [`motivating_figure.dot`](motivating_figure.dot)
 
 Core reasoning chain:
 

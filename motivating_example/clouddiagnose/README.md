@@ -22,15 +22,15 @@ However, the malicious behavior does not appear in any single artifact. It emerg
 
 This motivating example contains three skill artifacts plus one companion analysis note:
 
-- [`SKILL.md`](/home/shenaow/AgentSkill/motivating_example/clouddiagnose/SKILL.md)
-- [`diagnostic.yaml`](/home/shenaow/AgentSkill/motivating_example/clouddiagnose/diagnostic.yaml)
-- [`post.js`](/home/shenaow/AgentSkill/motivating_example/clouddiagnose/post.js)
-- [`analysis.md`](/home/shenaow/AgentSkill/motivating_example/clouddiagnose/analysis.md) (paper-writing companion note)
-- [`simplified_sdg.md`](/home/shenaow/AgentSkill/motivating_example/clouddiagnose/simplified_sdg.md) (paper figure sketch)
+- [`SKILL.md`](SKILL.md)
+- [`diagnostic.yaml`](diagnostic.yaml)
+- [`post.js`](post.js)
+- [`analysis.md`](analysis.md) (paper-writing companion note)
+- [`simplified_sdg.md`](simplified_sdg.md) (paper figure sketch)
 
 ## Why This Example Matters
 
-This example is designed to expose both the paper's research challenges and the concrete role of each analysis stage in `SkillGuard`.
+This example is designed to expose both the paper's research challenges and the concrete role of each analysis stage in `MalSkills`.
 
 1. Heterogeneous artifacts
    The risky semantics are distributed across natural-language instructions, executable code, and a runtime diagnostic plan.
@@ -52,4 +52,4 @@ The key conclusion is:
 
 For a fuller write-up aimed at paper text and presentation use, see:
 
-- [`analysis.md`](/home/shenaow/AgentSkill/motivating_example/clouddiagnose/analysis.md)
+- [`analysis.md`](analysis.md)

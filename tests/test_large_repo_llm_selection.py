@@ -8,8 +8,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from skillguard.evidence.extractor import EvidenceExtractor
-from skillguard.models import ArtifactRecord, EvidenceRecord
+from malskills.evidence.extractor import EvidenceExtractor
+from malskills.models import ArtifactRecord, EvidenceRecord
 
 
 def _artifact(relative_path: str, content: str = "content\n") -> ArtifactRecord:

@@ -1,0 +1,67 @@
+rules:
+  - id: python.host_and_environment_discovery.system_info
+    languages: [python]
+    message: Python system and hardware discovery
+    severity: WARNING
+    metadata:
+      malskills_subtype: system_and_hardware_discovery
+      malskills_evidence_type: host_and_environment_discovery
+    pattern-either:
+      - pattern: os.uname()
+      - pattern: platform.uname()
+      - pattern: platform.platform()
+      - pattern: platform.machine()
+      - pattern: socket.gethostname()
+
+  - id: python.host_and_environment_discovery.identity_discovery
+    languages: [python]
+    message: Python identity and account discovery
+    severity: WARNING
+    metadata:
+      malskills_subtype: identity_and_account_discovery
+      malskills_evidence_type: host_and_environment_discovery
+    pattern-either:
+      - pattern: os.getlogin()
+      - pattern: getpass.getuser()
+      - pattern: pwd.getpwuid(...)
+      - pattern: grp.getgrgid(...)
+
+  - id: python.host_and_environment_discovery.process_service_discovery
+    languages: [python]
+    message: Python process or service discovery
+    severity: WARNING
+    metadata:
+      malskills_subtype: process_and_service_discovery
+      malskills_evidence_type: host_and_environment_discovery
+    pattern-either:
+      - pattern: psutil.process_iter(...)
+      - pattern: psutil.pids()
+      - pattern: psutil.process_iter()
+
+  - id: python.host_and_environment_discovery.network_discovery
+    languages: [python]
+    message: Python network interface or route discovery
+    severity: WARNING
+    metadata:
+      malskills_subtype: network_and_neighbor_discovery
+      malskills_evidence_type: host_and_environment_discovery
+    pattern-either:
+      - pattern: psutil.net_if_addrs()
+      - pattern: psutil.net_connections(...)
+      - pattern: socket.gethostbyname_ex(...)
+
+  - id: python.host_and_environment_discovery.security_environment_discovery
+    languages: [python]
+    message: Python cloud/container/security environment probing
+    severity: WARNING
+    metadata:
+      malskills_subtype: security_environment_discovery
+      malskills_evidence_type: host_and_environment_discovery
+      malskills_value_metavar: $URL
+    patterns:
+      - pattern-either:
+          - pattern: requests.get($URL, ...)
+          - pattern: urllib.request.urlopen($URL, ...)
+      - metavariable-regex:
+          metavariable: $URL
+          regex: (?i).*(169\.254\.169\.254|metadata|computeMetadata|instance-identity).*

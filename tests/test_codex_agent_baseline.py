@@ -8,8 +8,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from skillguard.baselines.codex_agent import run_codex_agent_baseline
-from skillguard.llm_runtime import LlmRuntimeConfig
+from malskills.baselines.codex_agent import run_codex_agent_baseline
+from malskills.llm_runtime import LlmRuntimeConfig
 
 
 def test_codex_agent_baseline_maps_malicious_audit(monkeypatch, tmp_path: Path) -> None:
@@ -54,8 +54,8 @@ def test_codex_agent_baseline_maps_malicious_audit(monkeypatch, tmp_path: Path) 
             ],
         }
 
-    monkeypatch.setattr("skillguard.baselines.codex_agent.build_llm_runtime_config", lambda: runtime)
-    monkeypatch.setattr("skillguard.baselines.codex_agent.invoke_structured_json", fake_invoke_structured_json)
+    monkeypatch.setattr("malskills.baselines.codex_agent.build_llm_runtime_config", lambda: runtime)
+    monkeypatch.setattr("malskills.baselines.codex_agent.invoke_structured_json", fake_invoke_structured_json)
 
     result = run_codex_agent_baseline(skill_dir, tmp_path / "out")
 

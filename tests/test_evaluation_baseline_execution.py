@@ -7,11 +7,11 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from skillguard.evaluation import Evaluator
+from malskills.evaluation import Evaluator
 
 
 def test_baseline_run_case_executes_directly_without_outer_worker(monkeypatch, tmp_path: Path) -> None:
-    import skillguard.evaluation as evaluation
+    import malskills.evaluation as evaluation
 
     called: dict[str, object] = {}
 

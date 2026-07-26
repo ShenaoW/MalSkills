@@ -11,10 +11,10 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from skillguard.evaluation import Evaluator, render_results
-from skillguard.models import BenchmarkEntry, to_jsonable
-from skillguard.benchmark import load_benchmark_entries
-from skillguard.utils import ensure_dir
+from malskills.evaluation import Evaluator, render_results
+from malskills.models import BenchmarkEntry, to_jsonable
+from malskills.benchmark import load_benchmark_entries
+from malskills.utils import ensure_dir
 
 
 DEFAULT_ABLATIONS = [
@@ -57,7 +57,7 @@ def write_subset(path: Path, entries: list[BenchmarkEntry]) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--benchmark", default="/tmp/skillguard_bench.json")
+    parser.add_argument("--benchmark", default="/tmp/malskills_bench.json")
     parser.add_argument("--output", required=True)
     parser.add_argument("--ecosystem-sample", type=int, default=1000)
     parser.add_argument("--seed", type=int, default=1337)

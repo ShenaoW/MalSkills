@@ -1,0 +1,30 @@
+rules:
+  - id: typescript.persistence_and_startup_control.scheduled_persistence
+    languages: [typescript]
+    message: TypeScript creates scheduled persistence
+    severity: WARNING
+    metadata:
+      malskills_subtype: scheduled_persistence
+      malskills_evidence_type: persistence_and_startup_control
+      malskills_value_metavar: $SPEC
+    pattern-either:
+      - pattern: cron.schedule($SPEC, ...)
+      - pattern: nodeCron.schedule($SPEC, ...)
+      - pattern: schedule.scheduleJob($SPEC, ...)
+
+  - id: typescript.persistence_and_startup_control.service_or_daemon_persistence
+    languages: [typescript]
+    message: TypeScript establishes service persistence via CLI
+    severity: WARNING
+    metadata:
+      malskills_subtype: service_or_daemon_persistence
+      malskills_evidence_type: persistence_and_startup_control
+      malskills_value_metavar: $CMD
+    patterns:
+      - pattern-either:
+          - pattern: exec($CMD, ...)
+          - pattern: child_process.exec($CMD, ...)
+      - metavariable-regex:
+          metavariable: $CMD
+          regex: (?i).*(systemctl\s+enable|sc\s+create|launchctl\s+load|schtasks|crontab).*
+

@@ -8,8 +8,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from skillguard.evidence.semgrep import SemgrepEvidenceExtractor
-from skillguard.ingest import SkillIngestor
+from malskills.evidence.semgrep import SemgrepEvidenceExtractor
+from malskills.ingest import SkillIngestor
 
 
 def _extract_semgrep_subtypes(skill: Path) -> list[tuple[str, str, str]]:
@@ -26,7 +26,7 @@ def _extract_semgrep_subtypes(skill: Path) -> list[tuple[str, str, str]]:
 
 
 def test_markdown_persistence_rule_no_longer_matches_natural_language_or_examples() -> None:
-    skill = Path("data/malicious_confirmed/zaycv/linkedin-job-application")
+    skill = Path("data/ground_truth/malicious/clawhub/zaycv_linkedin-job-application")
     matches = _extract_semgrep_subtypes(skill)
 
     assert matches
@@ -39,7 +39,7 @@ def test_markdown_persistence_rule_no_longer_matches_natural_language_or_example
 
 
 def test_markdown_base64_to_bash_chain_is_detected_in_real_malicious_skill() -> None:
-    skill = Path("data/clawsec_malskills/extracted__sakaen736jih__nano-banana-pro-oinrw3__latest_124fb20ce8a9")
+    skill = Path("data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-oinrw3")
     matches = _extract_semgrep_subtypes(skill)
 
     assert any(

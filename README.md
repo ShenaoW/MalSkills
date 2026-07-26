@@ -12,7 +12,7 @@ It works in three stages:
 
 ## What the repository contains
 
-- `skillguard/`: main implementation
+- `malskills/`: main implementation
 - `experiments/`: experiment drivers
 - `data/`: benchmark and analysis inputs
 - `output/`: generated results
@@ -28,18 +28,36 @@ It works in three stages:
 
 The project metadata is in `pyproject.toml`.
 
+## Installation
+
+```bash
+git clone https://github.com/ShenaoW/MalSkills.git
+cd MalSkills
+python3 -m pip install -e .
+```
+
 ## How to run MalSkills
 
 Analyze a single skill:
 
 ```bash
-python3 -m skillguard.cli analyze-skill <skill-dir> --output <output-dir>
+malskills analyze-skill <skill-dir> --output <output-dir>
+```
+
+Run a single-skill static smoke test without LLM calls:
+
+```bash
+malskills analyze-skill <skill-dir> --output <output-dir> \
+  --disable-llm-evidence \
+  --disable-llm-object-analysis \
+  --disable-yasa \
+  --reasoning-mode formal
 ```
 
 Run the full benchmark pipeline:
 
 ```bash
-python3 -m skillguard.cli run-eval \
+malskills run-eval \
   --benchmark output/ground_truth_final_benchmark.json \
   --output output/ground_truth_eval \
   --variant benchmark_full
@@ -48,13 +66,13 @@ python3 -m skillguard.cli run-eval \
 Render a readable report:
 
 ```bash
-python3 -m skillguard.cli render-report --results output/ground_truth_eval
+malskills render-report --results output/ground_truth_eval
 ```
 
 Inspect the resolved LLM runtime:
 
 ```bash
-python3 -m skillguard.cli show-llm-config
+malskills show-llm-config
 ```
 
 ## Main outputs
@@ -76,10 +94,18 @@ The main labeled benchmark is:
 
 - `output/ground_truth_final_benchmark.json`
 
+Generate it from the checked-in ground-truth CSV if it is not present:
+
+```bash
+malskills build-benchmark-index \
+  --root . \
+  --output output/ground_truth_final_benchmark.json
+```
+
 Run the full system:
 
 ```bash
-python3 -m skillguard.cli run-eval \
+malskills run-eval \
   --benchmark output/ground_truth_final_benchmark.json \
   --output output/rq1_malskills \
   --variant benchmark_full
@@ -87,26 +113,26 @@ python3 -m skillguard.cli run-eval \
 
 ### Ablation variants
 
-The evaluation variants are defined in `skillguard/evaluation.py`.
+The evaluation variants are defined in `malskills/evaluation.py`.
 
 Examples:
 
 ```bash
-python3 -m skillguard.cli run-eval \
+malskills run-eval \
   --benchmark output/ground_truth_final_benchmark.json \
   --output output/rq2_no_neuro_reasoning \
   --variant benchmark_formal_reasoning_only
 ```
 
 ```bash
-python3 -m skillguard.cli run-eval \
+malskills run-eval \
   --benchmark output/ground_truth_final_benchmark.json \
   --output output/rq2_no_symbolic_extractor \
   --variant benchmark_llm_evidence_only
 ```
 
 ```bash
-python3 -m skillguard.cli run-eval \
+malskills run-eval \
   --benchmark output/ground_truth_final_benchmark.json \
   --output output/rq2_no_neuro_extractor \
   --variant benchmark_semgrep_evidence_only
@@ -133,11 +159,11 @@ The script reads model-specific settings from `.env`, runs each model separately
 
 General runtime variables:
 
-- `SKILLGUARD_LLM_MODE`
-- `SKILLGUARD_LLM_MODEL`
-- `SKILLGUARD_LLM_API_KEY`
-- `SKILLGUARD_LLM_BASE_URL`
-- `SKILLGUARD_LLM_TIMEOUT_SEC`
+- `MALSKILLS_LLM_MODE`
+- `MALSKILLS_LLM_MODEL`
+- `MALSKILLS_LLM_API_KEY`
+- `MALSKILLS_LLM_BASE_URL`
+- `MALSKILLS_LLM_TIMEOUT_SEC`
 
 RQ3 model-specific variables:
 
@@ -151,21 +177,21 @@ RQ3 model-specific variables:
 Example baseline commands:
 
 ```bash
-python3 -m skillguard.cli run-eval \
+malskills run-eval \
   --benchmark output/ground_truth_final_benchmark.json \
   --output output/codex_agent_baseline \
   --variant benchmark_codex_agent_baseline
 ```
 
 ```bash
-python3 -m skillguard.cli run-eval \
+malskills run-eval \
   --benchmark output/ground_truth_final_benchmark.json \
   --output output/caterpillar_baseline \
   --variant benchmark_caterpillar_baseline
 ```
 
 ```bash
-python3 -m skillguard.cli run-eval \
+malskills run-eval \
   --benchmark output/ground_truth_final_benchmark.json \
   --output output/skill_scanner_baseline \
   --variant benchmark_skill_scanner_baseline

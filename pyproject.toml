@@ -1,17 +1,26 @@
 [project]
-name = "skillguard"
+name = "malskills"
 version = "0.1.0"
-description = "Neuro-symbolic static analyzer for malicious agent skills"
+description = "MalSkills: a neuro-symbolic static analyzer for malicious agent skills"
 requires-python = ">=3.9"
 authors = [{ name = "OpenCode" }]
 readme = "README.md"
 
+[project.urls]
+Homepage = "https://github.com/ShenaoW/MalSkills"
+Repository = "https://github.com/ShenaoW/MalSkills.git"
+Issues = "https://github.com/ShenaoW/MalSkills/issues"
+
 [project.scripts]
-analyze-skill = "skillguard.cli:main"
-build-benchmark-index = "skillguard.cli:main"
-run-eval = "skillguard.cli:main"
-gen-mutations = "skillguard.cli:main"
-render-report = "skillguard.cli:main"
+malskills = "malskills.cli:main"
+analyze-skill = "malskills.cli:main"
+build-benchmark-index = "malskills.cli:main"
+run-eval = "malskills.cli:main"
+gen-mutations = "malskills.cli:main"
+render-report = "malskills.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["malskills*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -1,0 +1,46 @@
+rules:
+  - id: shell.lateral_movement_and_remote_execution.remote_login
+    languages: [bash]
+    message: Shell authenticates to a remote host
+    severity: WARNING
+    metadata:
+      malskills_subtype: remote_login
+      malskills_evidence_type: lateral_movement_and_remote_execution
+    pattern-regex: '(?i)\b(ssh|smbclient|winrs|mstsc)\b'
+
+  - id: shell.lateral_movement_and_remote_execution.remote_command_execution
+    languages: [bash]
+    message: Shell executes commands on a remote host
+    severity: WARNING
+    metadata:
+      malskills_subtype: remote_command_execution
+      malskills_evidence_type: lateral_movement_and_remote_execution
+    pattern-regex: '(?i)\b(ssh\s+\S+\s+.+|wmic\s+\/node|psexec|Invoke-Command)\b'
+
+  - id: shell.lateral_movement_and_remote_execution.remote_file_transfer
+    languages: [bash]
+    message: Shell transfers files between hosts
+    severity: WARNING
+    metadata:
+      malskills_subtype: remote_file_transfer
+      malskills_evidence_type: lateral_movement_and_remote_execution
+    pattern-regex: '(?i)\b(scp|sftp|rsync|copy\s+\\\\\\\\)\b'
+
+  - id: shell.lateral_movement_and_remote_execution.remote_management_abuse
+    languages: [bash]
+    message: Shell abuses orchestration or remote management channels
+    severity: WARNING
+    metadata:
+      malskills_subtype: remote_management_abuse
+      malskills_evidence_type: lateral_movement_and_remote_execution
+    pattern-regex: '(?i)\b(ansible|salt|pdsh|wmic|sc\s+\\\\\\\\)\b'
+
+  - id: shell.lateral_movement_and_remote_execution.cluster_or_cloud_node_control
+    languages: [bash]
+    message: Shell controls cluster or cloud nodes
+    severity: WARNING
+    metadata:
+      malskills_subtype: cluster_or_cloud_node_control
+      malskills_evidence_type: lateral_movement_and_remote_execution
+    pattern-regex: '(?i)\b(kubectl\s+exec|kubectl\s+cp|docker\s+exec|aws\s+ssm\s+send-command)\b'
+

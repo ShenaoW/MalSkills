@@ -1,0 +1,32 @@
+[
+  {
+    "checkerIds": ["taint_flow_js_input"],
+    "sources": {
+      "TaintSource": [
+        {"path": "process.env", "scopeFile": "all", "scopeFunc": "all"},
+        {"path": "process.argv", "scopeFile": "all", "scopeFunc": "all"},
+        {"path": "req.body", "scopeFile": "all", "scopeFunc": "all"},
+        {"path": "req.query", "scopeFile": "all", "scopeFunc": "all"}
+      ],
+      "FuncCallReturnValueTaintSource": [
+        {"fsig": "fs.readFileSync", "values": ["0"], "scopeFile": "all", "scopeFunc": "all"},
+        {"fsig": "fs.readFile", "values": ["0"], "scopeFile": "all", "scopeFunc": "all"},
+        {"fsig": "dotenv.config", "values": ["0"], "scopeFile": "all", "scopeFunc": "all"}
+      ]
+    },
+    "sinks": {
+      "FuncCallTaintSink": [
+        {"fsig": "fetch", "args": ["0"], "attribute": "NodejsSSRF"},
+        {"fsig": "axios.post", "args": ["0"], "attribute": "NodejsSSRF"},
+        {"fsig": "axios.put", "args": ["0"], "attribute": "NodejsSSRF"},
+        {"fsig": "axios.patch", "args": ["0"], "attribute": "NodejsSSRF"},
+        {"fsig": "http.request", "args": ["0"], "attribute": "NodejsSSRF"},
+        {"fsig": "https.request", "args": ["0"], "attribute": "NodejsSSRF"},
+        {"fsig": "child_process.exec", "args": ["0"], "attribute": "NodejsExec"},
+        {"fsig": "child_process.execSync", "args": ["0"], "attribute": "NodejsExec"},
+        {"fsig": "child_process.spawn", "args": ["0"], "attribute": "NodejsExec"},
+        {"fsig": "child_process.spawnSync", "args": ["0"], "attribute": "NodejsExec"}
+      ]
+    }
+  }
+]

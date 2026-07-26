@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from skillguard.utils import ensure_dir, load_env_file
+from malskills.utils import ensure_dir, load_env_file
 
 
 @dataclass(frozen=True)
@@ -77,13 +77,13 @@ def _build_env(profile: RuntimeProfile, timeout_sec: int) -> dict[str, str]:
     env = os.environ.copy()
     env.update(
         {
-            "SKILLGUARD_LLM_MODE": "openai_api",
-            "SKILLGUARD_LLM_MODEL": model,
-            "SKILLGUARD_LLM_API_KEY": api_key,
-            "SKILLGUARD_LLM_BASE_URL": base_url,
-            "SKILLGUARD_LLM_TIMEOUT_SEC": str(timeout_sec),
-            "SKILLGUARD_LLM_CACHE": str((ROOT / ".cache" / "rq3" / profile.name / "evidence").resolve()),
-            "SKILLGUARD_LLM_REASONING_CACHE": str((ROOT / ".cache" / "rq3" / profile.name / "reasoning").resolve()),
+            "MALSKILLS_LLM_MODE": "openai_api",
+            "MALSKILLS_LLM_MODEL": model,
+            "MALSKILLS_LLM_API_KEY": api_key,
+            "MALSKILLS_LLM_BASE_URL": base_url,
+            "MALSKILLS_LLM_TIMEOUT_SEC": str(timeout_sec),
+            "MALSKILLS_LLM_CACHE": str((ROOT / ".cache" / "rq3" / profile.name / "evidence").resolve()),
+            "MALSKILLS_LLM_REASONING_CACHE": str((ROOT / ".cache" / "rq3" / profile.name / "reasoning").resolve()),
         }
     )
     env["RQ3_ACTIVE_BASE_URL_ENV"] = base_url_name or ""
@@ -117,7 +117,7 @@ def main() -> int:
         ensure_dir(profile_dir)
 
         config_result = _run(
-            [sys.executable, "-m", "skillguard.cli", "show-llm-config"],
+            [sys.executable, "-m", "malskills.cli", "show-llm-config"],
             env=env,
             cwd=ROOT,
         )
@@ -131,7 +131,7 @@ def main() -> int:
             [
                 sys.executable,
                 "-m",
-                "skillguard.cli",
+                "malskills.cli",
                 "run-eval",
                 "--benchmark",
                 str((ROOT / args.benchmark).resolve()),
@@ -149,7 +149,7 @@ def main() -> int:
 
         if not args.skip_render:
             render_result = _run(
-                [sys.executable, "-m", "skillguard.cli", "render-report", "--results", str(profile_dir)],
+                [sys.executable, "-m", "malskills.cli", "render-report", "--results", str(profile_dir)],
                 env=env,
                 cwd=ROOT,
             )

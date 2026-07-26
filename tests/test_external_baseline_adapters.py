@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from skillguard.baselines.external_tools import (
+from malskills.baselines.external_tools import (
     run_masb_baseline,
     run_caterpillar_baseline,
     run_nova_proximity_baseline,
@@ -76,7 +76,7 @@ def test_masb_baseline_maps_thresholded_risk_score(monkeypatch, tmp_path: Path) 
     skill_dir = tmp_path / 'skill'
     skill_dir.mkdir()
     output_dir = tmp_path / 'out'
-    from skillguard.baselines import external_tools
+    from malskills.baselines import external_tools
 
     runtime_root = output_dir / "masb_runtime"
 
@@ -203,6 +203,8 @@ def test_skill_scanner_baseline_maps_high_severity(monkeypatch, tmp_path: Path) 
 
 
 def test_nova_proximity_baseline_maps_high_severity(monkeypatch, tmp_path: Path) -> None:
+    from malskills.baselines import external_tools
+
     skill_dir = tmp_path / 'skill'
     skill_dir.mkdir()
     output_dir = tmp_path / 'out'
@@ -229,6 +231,7 @@ def test_nova_proximity_baseline_maps_high_severity(monkeypatch, tmp_path: Path)
         report_path.write_text(__import__("json").dumps(payload), encoding="utf-8")
         return _FakeProcess("")
 
+    monkeypatch.setattr(external_tools, '_resolve_python_bin', lambda: sys.executable)
     monkeypatch.setattr(subprocess, 'Popen', fake_popen)
     result = run_nova_proximity_baseline(skill_dir, output_dir)
 
@@ -238,7 +241,7 @@ def test_nova_proximity_baseline_maps_high_severity(monkeypatch, tmp_path: Path)
     assert (output_dir / 'nova_proximity_report.json').exists()
 
 def test_external_baseline_timeout_kills_process_group(monkeypatch, tmp_path: Path) -> None:
-    from skillguard.baselines import external_tools
+    from malskills.baselines import external_tools
 
     skill_dir = tmp_path / 'skill'
     skill_dir.mkdir()

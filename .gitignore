@@ -1,5 +1,6 @@
 # Dependencies
 node_modules/
+.venv/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -139,11 +140,13 @@ config/local.json
 # pychache
 __pycache__/
 *.pyc
+*.egg-info/
 
-.skillguard_cache/
+.malskills_cache/
 /output/
 baseline/MASB/scan_results/
 baseline/MASB/workspace/
+baseline/MASB/tasks/
 
 /paper/
 
@@ -158,5 +161,3 @@ baseline/MASB/workspace/
 /AGENTS.md
 
 /ralphy/
-
-/docs/
