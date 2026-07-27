@@ -25,9 +25,6 @@
 [submodule "baseline/skills_security_audit"]
 	path = baseline/skills_security_audit
 	url = https://github.com/DaverLabs/skills_security_audit.git
-[submodule "baseline/slowmist-agent-security"]
-	path = baseline/slowmist-agent-security
-	url = https://github.com/slowmist/slowmist-agent-security.git
 [submodule "baseline/skillspector"]
 	path = baseline/skillspector
 	url = https://github.com/NVIDIA/SkillSpector.git
@@ -64,3 +61,6 @@
 [submodule "baseline/agent-scan"]
 	path = baseline/agent-scan
 	url = https://github.com/snyk/agent-scan.git
+[submodule "vendor/yasa"]
+	path = vendor/yasa
+	url = https://github.com/antgroup/YASA-Engine.git

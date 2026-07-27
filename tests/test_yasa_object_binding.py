@@ -77,11 +77,6 @@ def test_new_ablation_variants_are_registered() -> None:
     assert static_only.reasoning_mode == "formal"
 
 
-def test_codex_agent_baseline_variant_is_registered() -> None:
-    assert VARIANTS["codex_agent_baseline"] == "codex_agent_baseline"
-    assert VARIANTS["benchmark_codex_agent_baseline"] == "codex_agent_baseline"
-
-
 def test_external_baseline_variants_are_registered() -> None:
     assert VARIANTS["skill_security_audit_baseline"] == "skill_security_audit_baseline"
     assert VARIANTS["benchmark_skill_security_audit_baseline"] == "skill_security_audit_baseline"

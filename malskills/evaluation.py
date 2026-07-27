@@ -8,24 +8,40 @@ import time
 from pathlib import Path
 
 from .baselines import (
-    run_masb_baseline,
+    run_agentguard_baseline,
+    run_agentverus_baseline,
+    run_ai_infra_guard_baseline,
     run_caterpillar_baseline,
+    run_clawvet_baseline,
     run_clawscan_baseline,
-    run_codex_agent_baseline,
+    run_masb_baseline,
     run_nova_proximity_baseline,
+    run_openclaw_clawscan_baseline,
+    run_razin_baseline,
+    run_runtime_skill_audit_baseline,
+    run_skill_sentinel_baseline,
     run_skill_scanner_baseline,
     run_skill_security_audit_baseline,
     run_skill_security_scan_baseline,
+    run_skillfortify_baseline,
+    run_skillsieve_baseline,
+    run_skillspector_baseline,
     run_skills_security_audit_baseline,
+    run_skilltotal_baseline,
+    run_skillward_baseline,
+    run_snyk_agent_scan_baseline,
 )
 from .baselines.external_tools import DEFAULT_TIMEOUT_SEC, SKILL_SCANNER_TIMEOUT_SEC
+from .baselines.legacy_tools import LLM_BASELINE_TIMEOUT_SEC
+from .baselines.modern_tools import MODERN_TOOLS_TIMEOUT_SEC
+from .baselines.research_tools import RESEARCH_BASELINE_TIMEOUT_SEC
 from .benchmark import load_benchmark_entries
 from .models import BenchmarkEntry, to_jsonable
 from .pipeline import AnalyzerConfig, SkillAnalyzer
 from .utils import ensure_dir
 
 
-VARIANTS = {
+VARIANTS: dict[str, AnalyzerConfig | str] = {
     "full": AnalyzerConfig(enable_llm_evidence=True),
     "semgrep_evidence_only": AnalyzerConfig(enable_llm_evidence=False),
     "llm_evidence_only": AnalyzerConfig(enable_semgrep=False, enable_llm_evidence=True),
@@ -71,25 +87,41 @@ VARIANTS = {
         max_artifacts=600,
         max_total_text_bytes=2_000_000,
     ),
-    "masb_baseline": "masb_baseline",
-    "benchmark_masb_baseline": "masb_baseline",
-    "codex_agent_baseline": "codex_agent_baseline",
-    "benchmark_codex_agent_baseline": "codex_agent_baseline",
-    "skill_security_audit_baseline": "skill_security_audit_baseline",
-    "benchmark_skill_security_audit_baseline": "skill_security_audit_baseline",
-    "skill_security_scan_baseline": "skill_security_scan_baseline",
-    "benchmark_skill_security_scan_baseline": "skill_security_scan_baseline",
-    "skills_security_audit_baseline": "skills_security_audit_baseline",
-    "benchmark_skills_security_audit_baseline": "skills_security_audit_baseline",
-    "caterpillar_baseline": "caterpillar_baseline",
-    "benchmark_caterpillar_baseline": "caterpillar_baseline",
-    "clawscan_baseline": "clawscan_baseline",
-    "benchmark_clawscan_baseline": "clawscan_baseline",
-    "skill_scanner_baseline": "skill_scanner_baseline",
-    "benchmark_skill_scanner_baseline": "skill_scanner_baseline",
-    "nova_proximity_baseline": "nova_proximity_baseline",
-    "benchmark_nova_proximity_baseline": "nova_proximity_baseline",
 }
+
+
+def _baseline_runners():
+    return {
+        "masb_baseline": run_masb_baseline,
+        "skill_security_audit_baseline": run_skill_security_audit_baseline,
+        "skill_security_scan_baseline": run_skill_security_scan_baseline,
+        "skills_security_audit_baseline": run_skills_security_audit_baseline,
+        "caterpillar_baseline": run_caterpillar_baseline,
+        "clawscan_baseline": run_clawscan_baseline,
+        "skill_scanner_baseline": run_skill_scanner_baseline,
+        "nova_proximity_baseline": run_nova_proximity_baseline,
+        "snyk_agent_scan_baseline": run_snyk_agent_scan_baseline,
+        "ai_infra_guard_baseline": run_ai_infra_guard_baseline,
+        "agentguard_baseline": run_agentguard_baseline,
+        "skillspector_baseline": run_skillspector_baseline,
+        "agentverus_baseline": run_agentverus_baseline,
+        "skilltotal_baseline": run_skilltotal_baseline,
+        "clawvet_baseline": run_clawvet_baseline,
+        "razin_baseline": run_razin_baseline,
+        "openclaw_clawscan_baseline": run_openclaw_clawscan_baseline,
+        "skillsieve_baseline": run_skillsieve_baseline,
+        "skillward_baseline": run_skillward_baseline,
+        "runtime_skill_audit_baseline": run_runtime_skill_audit_baseline,
+        "skillfortify_baseline": run_skillfortify_baseline,
+        "skill_sentinel_baseline": run_skill_sentinel_baseline,
+    }
+
+
+BASELINE_CONFIGS = tuple(_baseline_runners())
+
+for baseline_config in BASELINE_CONFIGS:
+    VARIANTS[baseline_config] = baseline_config
+    VARIANTS[f"benchmark_{baseline_config}"] = baseline_config
 
 # The outer benchmark case timeout must exceed any baseline subprocess timeout.
 # Otherwise the evaluator can kill only the worker process while a detached
@@ -99,6 +131,9 @@ BENCHMARK_CASE_TIMEOUT_SEC = (
     max(
         DEFAULT_TIMEOUT_SEC,
         SKILL_SCANNER_TIMEOUT_SEC,
+        LLM_BASELINE_TIMEOUT_SEC,
+        MODERN_TOOLS_TIMEOUT_SEC,
+        RESEARCH_BASELINE_TIMEOUT_SEC,
     )
     + BENCHMARK_CASE_TIMEOUT_BUFFER_SEC
 )
@@ -106,32 +141,11 @@ BENCHMARK_CASE_TIMEOUT_SEC = (
 
 def _analyze_case_worker(skill_path: str, case_output_dir: str, config: AnalyzerConfig | str, queue: multiprocessing.Queue) -> None:
     try:
-        if config == "masb_baseline":
-            queue.put(run_masb_baseline(skill_path, case_output_dir))
-            return
-        if config == "codex_agent_baseline":
-            queue.put(run_codex_agent_baseline(skill_path, case_output_dir))
-            return
-        if config == "skill_security_audit_baseline":
-            queue.put(run_skill_security_audit_baseline(skill_path, case_output_dir))
-            return
-        if config == "skill_security_scan_baseline":
-            queue.put(run_skill_security_scan_baseline(skill_path, case_output_dir))
-            return
-        if config == "skills_security_audit_baseline":
-            queue.put(run_skills_security_audit_baseline(skill_path, case_output_dir))
-            return
-        if config == "caterpillar_baseline":
-            queue.put(run_caterpillar_baseline(skill_path, case_output_dir))
-            return
-        if config == "clawscan_baseline":
-            queue.put(run_clawscan_baseline(skill_path, case_output_dir))
-            return
-        if config == "skill_scanner_baseline":
-            queue.put(run_skill_scanner_baseline(skill_path, case_output_dir))
-            return
-        if config == "nova_proximity_baseline":
-            queue.put(run_nova_proximity_baseline(skill_path, case_output_dir))
+        if isinstance(config, str):
+            runner = _baseline_runners().get(config)
+            if runner is None:
+                raise ValueError(f"unknown baseline config: {config}")
+            queue.put(runner(skill_path, case_output_dir))
             return
         analyzer = SkillAnalyzer()
         result = analyzer.analyze(skill_path, output_dir=case_output_dir, config=config)
@@ -164,25 +178,10 @@ def _analyze_case_worker(skill_path: str, case_output_dir: str, config: Analyzer
 
 
 def _run_case_direct(skill_path: str, case_output_dir: Path, config: str) -> dict[str, object]:
-    if config == "masb_baseline":
-        return run_masb_baseline(skill_path, case_output_dir)
-    if config == "codex_agent_baseline":
-        return run_codex_agent_baseline(skill_path, case_output_dir)
-    if config == "skill_security_audit_baseline":
-        return run_skill_security_audit_baseline(skill_path, case_output_dir)
-    if config == "skill_security_scan_baseline":
-        return run_skill_security_scan_baseline(skill_path, case_output_dir)
-    if config == "skills_security_audit_baseline":
-        return run_skills_security_audit_baseline(skill_path, case_output_dir)
-    if config == "caterpillar_baseline":
-        return run_caterpillar_baseline(skill_path, case_output_dir)
-    if config == "clawscan_baseline":
-        return run_clawscan_baseline(skill_path, case_output_dir)
-    if config == "skill_scanner_baseline":
-        return run_skill_scanner_baseline(skill_path, case_output_dir)
-    if config == "nova_proximity_baseline":
-        return run_nova_proximity_baseline(skill_path, case_output_dir)
-    raise ValueError(f"unknown baseline config: {config}")
+    runner = _baseline_runners().get(config)
+    if runner is None:
+        raise ValueError(f"unknown baseline config: {config}")
+    return runner(skill_path, case_output_dir)
 
 
 class Evaluator:

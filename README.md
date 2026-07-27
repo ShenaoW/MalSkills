@@ -25,15 +25,25 @@ It works in three stages:
 - Python `>= 3.9`
 - optional `semgrep` for parsing-based extraction
 - optional LLM API credentials in `.env` for full runs
+- baseline-specific Python, Node.js, Go, Docker, and API dependencies as listed below
 
 The project metadata is in `pyproject.toml`.
 
 ## Installation
 
 ```bash
-git clone https://github.com/ShenaoW/MalSkills.git
+git clone --recurse-submodules https://github.com/ShenaoW/MalSkills.git
 cd MalSkills
 python3 -m pip install -e .
+```
+
+For an existing checkout, synchronize and initialize every pinned baseline and
+the YASA engine:
+
+```bash
+git submodule sync --recursive
+git submodule update --init --recursive
+git submodule status --recursive
 ```
 
 ## How to run MalSkills
@@ -174,25 +184,77 @@ RQ3 model-specific variables:
 
 ## Baselines
 
-Example baseline commands:
+Every adapter writes the upstream report, a normalized `output_manifest.json`,
+and the common benchmark fields (`predicted`, `score`, and `patterns`). The
+`benchmark_` prefix selects the same adapter while preserving the naming used
+by benchmark experiments.
+
+The default benchmark study includes the following deterministic static
+baselines:
+
+| Variant suffix | Tool | Runtime |
+|---|---|---|
+| `skill_security_audit_baseline` | skill-security-audit | Python |
+| `skill_security_scan_baseline` | skill-security-scan | Python |
+| `skills_security_audit_baseline` | skills_security_audit | Python |
+| `caterpillar_baseline` | Caterpillar offline scanner | Node.js |
+| `clawscan_baseline` | ClawScan by ClawGuard | Node.js |
+| `skill_scanner_baseline` | Cisco AI Defense skill-scanner | Python |
+| `nova_proximity_baseline` | Nova Proximity | Python |
+| `agentguard_baseline` | GoPlus AgentGuard | Node.js |
+| `skillspector_baseline` | NVIDIA SkillSpector (`--no-llm`) | Python |
+| `agentverus_baseline` | AgentVerus Scanner | Node.js 22+ |
+| `skilltotal_baseline` | SkillTotal | Python 3.10+ |
+| `clawvet_baseline` | ClawVet offline scanner | Node.js 22+ |
+| `razin_baseline` | Razin | Python 3.12+ |
+| `openclaw_clawscan_baseline` | OpenClaw ClawScan static scanner | Go |
+| `skillfortify_baseline` | SkillFortify | Python 3.11+ |
+
+These integrations are available but remain opt-in because they require an
+external service, an LLM, or sandboxed execution:
+
+| Variant suffix | Tool | Additional requirement |
+|---|---|---|
+| `masb_baseline` | MaliciousAgentSkillsBench | Codex/OpenAI-compatible credentials for high-risk samples; `codex-skill-sandbox` for dynamic execution |
+| `snyk_agent_scan_baseline` | Snyk Agent Scan | `SNYK_TOKEN` |
+| `ai_infra_guard_baseline` | Tencent AI-Infra-Guard | `LLM_API_KEY` or `OPENAI_API_KEY` |
+| `skillsieve_baseline` | SkillSieve | LiteLLM provider credentials |
+| `skillward_baseline` | SkillWard | provider credentials, Docker, and its sandbox image |
+| `runtime_skill_audit_baseline` | Runtime Skill Audit | LLM endpoint, OpenClaw, Docker, and `rsa_sandbox` |
+| `skill_sentinel_baseline` | Enkrypt AI Skill Sentinel | `OPENAI_API_KEY`; `VIRUSTOTAL_API_KEY` is optional |
+
+Submodules pin source revisions but do not install upstream dependencies. Use
+an isolated environment for each Python tool and follow the corresponding
+`baseline/<tool>/README*`; build Node.js tools in their own submodule. This
+avoids dependency conflicts between research prototypes.
+
+Run one baseline directly:
 
 ```bash
 malskills run-eval \
   --benchmark output/ground_truth_final_benchmark.json \
-  --output output/codex_agent_baseline \
-  --variant benchmark_codex_agent_baseline
+  --output output/skillspector_baseline \
+  --variant benchmark_skillspector_baseline
 ```
 
-```bash
-malskills run-eval \
-  --benchmark output/ground_truth_final_benchmark.json \
-  --output output/caterpillar_baseline \
-  --variant benchmark_caterpillar_baseline
-```
+Run the study with MalSkills ablations and all offline static baselines:
 
 ```bash
-malskills run-eval \
+python3 experiments/run_benchmark_study.py \
   --benchmark output/ground_truth_final_benchmark.json \
-  --output output/skill_scanner_baseline \
-  --variant benchmark_skill_scanner_baseline
+  --output output/benchmark_study
 ```
+
+Include every optional baseline only after its external requirements are ready:
+
+```bash
+python3 experiments/run_benchmark_study.py \
+  --benchmark output/ground_truth_final_benchmark.json \
+  --output output/benchmark_study_all \
+  --include-optional-baselines
+```
+
+Third-party code remains under each upstream project's license. In particular,
+review the current AgentVerus licensing terms and SkillFortify's Elastic License
+2.0 before redistribution or commercial use; a git submodule does not relicense
+its contents under MalSkills.

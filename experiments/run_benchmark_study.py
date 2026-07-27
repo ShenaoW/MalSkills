@@ -17,7 +17,7 @@ from malskills.benchmark import load_benchmark_entries
 from malskills.utils import ensure_dir
 
 
-DEFAULT_ABLATIONS = [
+CORE_ABLATIONS = [
     "benchmark_full",
     "benchmark_semgrep_evidence_only",
     "benchmark_llm_evidence_only",
@@ -26,14 +26,40 @@ DEFAULT_ABLATIONS = [
     "benchmark_no_yasa",
     "benchmark_no_cross_artifact_resolution",
     "benchmark_static_only",
-    "benchmark_codex_agent_baseline",
+]
+
+
+DEFAULT_STATIC_BASELINES = [
     "benchmark_skill_security_audit_baseline",
     "benchmark_skill_security_scan_baseline",
     "benchmark_skills_security_audit_baseline",
     "benchmark_caterpillar_baseline",
     "benchmark_clawscan_baseline",
     "benchmark_skill_scanner_baseline",
+    "benchmark_nova_proximity_baseline",
+    "benchmark_agentguard_baseline",
+    "benchmark_skillspector_baseline",
+    "benchmark_agentverus_baseline",
+    "benchmark_skilltotal_baseline",
+    "benchmark_clawvet_baseline",
+    "benchmark_razin_baseline",
+    "benchmark_openclaw_clawscan_baseline",
+    "benchmark_skillfortify_baseline",
 ]
+
+
+OPTIONAL_BASELINES = [
+    "benchmark_masb_baseline",
+    "benchmark_snyk_agent_scan_baseline",
+    "benchmark_ai_infra_guard_baseline",
+    "benchmark_skillsieve_baseline",
+    "benchmark_skillward_baseline",
+    "benchmark_runtime_skill_audit_baseline",
+    "benchmark_skill_sentinel_baseline",
+]
+
+
+DEFAULT_ABLATIONS = [*CORE_ABLATIONS, *DEFAULT_STATIC_BASELINES]
 
 
 def select_entries(
@@ -61,8 +87,22 @@ def main() -> int:
     parser.add_argument("--output", required=True)
     parser.add_argument("--ecosystem-sample", type=int, default=1000)
     parser.add_argument("--seed", type=int, default=1337)
-    parser.add_argument("--ablations", nargs="*", default=DEFAULT_ABLATIONS)
+    parser.add_argument(
+        "--ablations",
+        nargs="+",
+        default=None,
+        help="variants to run; defaults to MalSkills ablations plus offline static baselines",
+    )
+    parser.add_argument(
+        "--include-optional-baselines",
+        action="store_true",
+        help="also run API-, LLM-, or sandbox-backed baselines",
+    )
     args = parser.parse_args()
+
+    ablations = list(args.ablations) if args.ablations is not None else list(DEFAULT_ABLATIONS)
+    if args.include_optional_baselines:
+        ablations.extend(variant for variant in OPTIONAL_BASELINES if variant not in ablations)
 
     entries = load_benchmark_entries(args.benchmark)
     output_dir = Path(args.output).resolve()
@@ -82,7 +122,7 @@ def main() -> int:
     evaluator = Evaluator()
     recall_report = evaluator.run(recall_path, output_dir / "recall_eval", variant="benchmark_full")
     ecosystem_report = evaluator.run(ecosystem_path, output_dir / "ecosystem_eval", variant="benchmark_full")
-    ablation_report = evaluator.run_suite(ablation_path, output_dir / "ablation_eval", variants=args.ablations)
+    ablation_report = evaluator.run_suite(ablation_path, output_dir / "ablation_eval", variants=ablations)
     recall_summary = render_results(output_dir / "recall_eval")
     ecosystem_summary = render_results(output_dir / "ecosystem_eval")
     ablation_summary = render_results(output_dir / "ablation_eval")

@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+import json
 import subprocess
 from pathlib import Path
 import sys
 from typing import Any
+
+import pytest
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -13,6 +16,7 @@ if str(ROOT) not in sys.path:
 from malskills.baselines.external_tools import (
     run_masb_baseline,
     run_caterpillar_baseline,
+    run_clawscan_baseline,
     run_nova_proximity_baseline,
     run_skill_scanner_baseline,
     run_skill_security_audit_baseline,
@@ -72,6 +76,27 @@ def test_skill_security_scan_baseline_parses_prefixed_json(monkeypatch, tmp_path
     assert (output_dir / 'output_manifest.json').exists()
 
 
+def test_skill_security_scan_uses_finding_severity_when_aggregate_level_is_wrong(
+    monkeypatch, tmp_path: Path
+) -> None:
+    skill_dir = tmp_path / 'skill'
+    skill_dir.mkdir()
+    payload = json.dumps(
+        {
+            'risk_level': 'SAFE',
+            'risk_score': 1.05,
+            'issues': [{'rule_id': 'NET001', 'severity': 'CRITICAL'}],
+            'summary': {'CRITICAL': 1},
+        }
+    )
+    monkeypatch.setattr(subprocess, 'Popen', lambda *args, **kwargs: _FakeProcess(payload))
+
+    result = run_skill_security_scan_baseline(skill_dir, tmp_path / 'out')
+
+    assert result['predicted'] == 'malicious'
+    assert result['score'] == 0.95
+
+
 def test_masb_baseline_maps_thresholded_risk_score(monkeypatch, tmp_path: Path) -> None:
     skill_dir = tmp_path / 'skill'
     skill_dir.mkdir()
@@ -121,6 +146,89 @@ def test_masb_baseline_maps_thresholded_risk_score(monkeypatch, tmp_path: Path) 
     assert (output_dir / 'output_manifest.json').exists()
 
 
+def test_masb_baseline_preserves_static_medium_as_suspicious(monkeypatch, tmp_path: Path) -> None:
+    from malskills.baselines import external_tools
+
+    skill_dir = tmp_path / 'skill'
+    skill_dir.mkdir()
+    output_dir = tmp_path / 'out'
+    runtime_root = output_dir / 'masb_runtime'
+    commands_seen: list[list[str]] = []
+
+    def fake_prepare(skill_path: Path, destination: Path) -> Path:
+        runtime_root.mkdir(parents=True, exist_ok=True)
+        return runtime_root
+
+    def fake_run(runtime: Path, commands: list[list[str]]) -> list[dict[str, Any]]:
+        commands_seen.extend(commands)
+        return [{"command": command, "returncode": 0, "stdout": "", "stderr": ""} for command in commands]
+
+    def fake_collect_static(runtime: Path, skill_path: Path) -> dict[str, Any]:
+        return {
+            "risk_level": "MEDIUM",
+            "skills_reports": [
+                {
+                    "skill_name": skill_path.name,
+                    "risk_level": "MEDIUM",
+                    "issues": [{"rule_id": "NET001"}],
+                }
+            ],
+        }
+
+    monkeypatch.setattr(external_tools, "_prepare_masb_runtime", fake_prepare)
+    monkeypatch.setattr(external_tools, "_run_masb_native_pipeline", fake_run)
+    monkeypatch.setattr(external_tools, "_collect_masb_static_payload", fake_collect_static)
+
+    result = run_masb_baseline(skill_dir, output_dir)
+
+    assert result['predicted'] == 'suspicious'
+    assert result['patterns'] == ['NET001']
+    assert commands_seen == [["bash", "scripts/04_scan.sh"]]
+
+
+def test_masb_baseline_rejects_unknown_static_result(monkeypatch, tmp_path: Path) -> None:
+    from malskills.baselines import external_tools
+
+    skill_dir = tmp_path / 'skill'
+    skill_dir.mkdir()
+    output_dir = tmp_path / 'out'
+
+    monkeypatch.setattr(external_tools, "_prepare_masb_runtime", lambda *_: output_dir / "masb_runtime")
+    monkeypatch.setattr(
+        external_tools,
+        "_run_masb_native_pipeline",
+        lambda runtime, commands: [{"command": commands[0], "returncode": 0, "stdout": "", "stderr": ""}],
+    )
+    monkeypatch.setattr(external_tools, "_collect_masb_static_payload", lambda *_: {"risk_level": "UNKNOWN"})
+
+    with pytest.raises(RuntimeError, match="usable risk level"):
+        run_masb_baseline(skill_dir, output_dir)
+
+
+def test_masb_baseline_rejects_runtime_error_verdict(monkeypatch, tmp_path: Path) -> None:
+    from malskills.baselines import external_tools
+
+    skill_dir = tmp_path / 'skill'
+    skill_dir.mkdir()
+    output_dir = tmp_path / 'out'
+
+    monkeypatch.setattr(external_tools, '_prepare_masb_runtime', lambda *_: output_dir / 'masb_runtime')
+    monkeypatch.setattr(
+        external_tools,
+        '_run_masb_native_pipeline',
+        lambda _runtime, commands: [{'command': command, 'returncode': 0} for command in commands],
+    )
+    monkeypatch.setattr(external_tools, '_collect_masb_static_payload', lambda *_: {'risk_level': 'HIGH'})
+    monkeypatch.setattr(
+        external_tools,
+        '_collect_masb_runtime_payload_from_static',
+        lambda *_: {'risk_level': 'ERROR', 'vulnerabilities': []},
+    )
+
+    with pytest.raises(RuntimeError, match='usable verdict'):
+        run_masb_baseline(skill_dir, output_dir)
+
+
 def test_skills_security_audit_baseline_maps_review_to_suspicious(monkeypatch, tmp_path: Path) -> None:
     skill_dir = tmp_path / 'skill'
     skill_dir.mkdir()
@@ -158,6 +266,8 @@ def test_skill_security_audit_baseline_tolerates_nonzero_exit_with_json(monkeypa
 
 
 def test_caterpillar_baseline_tolerates_nonzero_exit_with_json(monkeypatch, tmp_path: Path) -> None:
+    from malskills.baselines import external_tools
+
     skill_dir = tmp_path / 'skill'
     skill_dir.mkdir()
     output_dir = tmp_path / 'out'
@@ -170,6 +280,11 @@ def test_caterpillar_baseline_tolerates_nonzero_exit_with_json(monkeypatch, tmp_
     def fake_popen(*args: object, **kwargs: object) -> _FakeProcess:
         return _FakeProcess(payload, returncode=1)
 
+    monkeypatch.setattr(
+        external_tools,
+        '_resolve_caterpillar_command',
+        lambda root: ['caterpillar', 'ask', str(root), '--json', '--mode', 'offline'],
+    )
     monkeypatch.setattr(subprocess, 'Popen', fake_popen)
     result = run_caterpillar_baseline(skill_dir, output_dir)
 
@@ -177,6 +292,67 @@ def test_caterpillar_baseline_tolerates_nonzero_exit_with_json(monkeypatch, tmp_
     assert result['predicted'] == 'malicious'
     assert result['patterns'] == ['Credential Theft']
     assert (output_dir / 'caterpillar_report.json').exists()
+
+
+def test_caterpillar_failure_payload_is_not_benign(monkeypatch, tmp_path: Path) -> None:
+    from malskills.baselines import external_tools
+
+    skill_dir = tmp_path / 'skill'
+    skill_dir.mkdir()
+    output_dir = tmp_path / 'out'
+    payload = '{"success": false, "error": {"code": "scan_failed", "message": "backend unavailable"}}'
+
+    monkeypatch.setattr(
+        external_tools,
+        '_resolve_caterpillar_command',
+        lambda root: ['caterpillar', 'ask', str(root), '--json', '--mode', 'offline'],
+    )
+    monkeypatch.setattr(subprocess, 'Popen', lambda *args, **kwargs: _FakeProcess(payload, returncode=1))
+
+    with pytest.raises(RuntimeError, match='backend unavailable'):
+        run_caterpillar_baseline(skill_dir, output_dir)
+
+
+def test_clawscan_baseline_accepts_warning_exit_code(monkeypatch, tmp_path: Path) -> None:
+    skill_dir = tmp_path / 'skill'
+    skill_dir.mkdir()
+    output_dir = tmp_path / 'out'
+    payload = json.dumps(
+        {
+            "target": str(skill_dir),
+            "path": str(skill_dir),
+            "timestamp": "2026-07-27T00:00:00Z",
+            "findings": [{"ruleId": "promptInjection", "severity": "warning"}],
+            "analyzers": [{"name": "Prompt Injection", "findings": 1, "status": "ok"}],
+            "summary": {"total": 1, "critical": 0, "warning": 1, "info": 0},
+            "risk": {"score": 20, "level": "warning"},
+        }
+    )
+    monkeypatch.setattr(subprocess, 'Popen', lambda *args, **kwargs: _FakeProcess(payload, returncode=1))
+
+    result = run_clawscan_baseline(skill_dir, output_dir)
+
+    assert result['predicted'] == 'suspicious'
+    assert result['patterns'] == ['promptInjection']
+
+
+def test_clawscan_analyzer_failure_is_not_benign(monkeypatch, tmp_path: Path) -> None:
+    skill_dir = tmp_path / 'skill'
+    skill_dir.mkdir()
+    output_dir = tmp_path / 'out'
+    payload = json.dumps(
+        {
+            "target": str(skill_dir),
+            "findings": [],
+            "analyzers": [{"name": "Scripts", "findings": 0, "status": "error", "error": "boom"}],
+            "summary": {"total": 0},
+            "risk": {"score": 0, "level": "safe"},
+        }
+    )
+    monkeypatch.setattr(subprocess, 'Popen', lambda *args, **kwargs: _FakeProcess(payload))
+
+    with pytest.raises(RuntimeError, match='Scripts'):
+        run_clawscan_baseline(skill_dir, output_dir)
 
 
 def test_skill_scanner_baseline_maps_high_severity(monkeypatch, tmp_path: Path) -> None:
@@ -191,7 +367,7 @@ def test_skill_scanner_baseline_maps_high_severity(monkeypatch, tmp_path: Path) 
     )
 
     def fake_popen(*args: object, **kwargs: object) -> _FakeProcess:
-        return _FakeProcess(payload, returncode=1)
+        return _FakeProcess(payload, returncode=0)
 
     monkeypatch.setattr(subprocess, 'Popen', fake_popen)
     result = run_skill_scanner_baseline(skill_dir, output_dir)
@@ -202,6 +378,20 @@ def test_skill_scanner_baseline_maps_high_severity(monkeypatch, tmp_path: Path) 
     assert (output_dir / 'skill_scanner_report.json').exists()
 
 
+def test_skill_scanner_rejects_nonzero_exit_even_with_json(monkeypatch, tmp_path: Path) -> None:
+    skill_dir = tmp_path / 'skill'
+    skill_dir.mkdir()
+    output_dir = tmp_path / 'out'
+    payload = (
+        '{"skill_name": "demo", "skill_path": "/tmp/demo", "is_safe": false, '
+        '"max_severity": "HIGH", "findings_count": 1, "findings": [{"rule_id": "RULE"}]}'
+    )
+    monkeypatch.setattr(subprocess, 'Popen', lambda *args, **kwargs: _FakeProcess(payload, returncode=1))
+
+    with pytest.raises(subprocess.CalledProcessError):
+        run_skill_scanner_baseline(skill_dir, output_dir)
+
+
 def test_nova_proximity_baseline_maps_high_severity(monkeypatch, tmp_path: Path) -> None:
     from malskills.baselines import external_tools
 
@@ -210,28 +400,36 @@ def test_nova_proximity_baseline_maps_high_severity(monkeypatch, tmp_path: Path)
     output_dir = tmp_path / 'out'
 
     payload = {
+        "scan_type": "skill",
         "scan_results": {
             "total_skills": 1,
+            "security_sections": {
+                "total_flags": 1,
+                "counts_by_severity": {"critical": 0, "high": 1, "medium": 0, "low": 0},
+            },
             "skills": [
                 {
                     "name": "demo",
-                    "security_flags": [
-                        {"type": "undeclared_tool", "severity": "high"},
-                    ],
+                    "security_sections": {
+                        "total_flags": 1,
+                        "counts_by_severity": {"critical": 0, "high": 1, "medium": 0, "low": 0},
+                        "security_findings": [{"type": "undeclared_tool", "severity": "high"}],
+                        "hook_config_logic_findings": [],
+                    },
                 }
             ],
         },
-        "nova_analysis": {"flagged_count": 0},
+        "nova_analysis": None,
     }
 
     def fake_popen(*args: object, **kwargs: object) -> _FakeProcess:
         prefix = Path(str(args[0][-1]))
         report_path = prefix.parent / f"{prefix.name}_20260326_120000.json"
         report_path.parent.mkdir(parents=True, exist_ok=True)
-        report_path.write_text(__import__("json").dumps(payload), encoding="utf-8")
+        report_path.write_text(json.dumps(payload), encoding="utf-8")
         return _FakeProcess("")
 
-    monkeypatch.setattr(external_tools, '_resolve_python_bin', lambda: sys.executable)
+    monkeypatch.setattr(external_tools, '_resolve_tool_python', lambda _root: sys.executable)
     monkeypatch.setattr(subprocess, 'Popen', fake_popen)
     result = run_nova_proximity_baseline(skill_dir, output_dir)
 
@@ -239,6 +437,57 @@ def test_nova_proximity_baseline_maps_high_severity(monkeypatch, tmp_path: Path)
     assert result['predicted'] == 'malicious'
     assert result['patterns'] == ['undeclared_tool']
     assert (output_dir / 'nova_proximity_report.json').exists()
+
+
+def test_nova_proximity_rejects_failed_run_before_reusing_report(monkeypatch, tmp_path: Path) -> None:
+    from malskills.baselines import external_tools
+
+    skill_dir = tmp_path / 'skill'
+    skill_dir.mkdir()
+    output_dir = tmp_path / 'out'
+    native_output = output_dir / 'nova_proximity_native'
+    native_output.mkdir(parents=True)
+    stale_report = native_output / 'nova_proximity_20260726_120000.json'
+    stale_report.write_text('{"scan_results": {"total_skills": 1, "skills": [{}]}}', encoding='utf-8')
+
+    monkeypatch.setattr(external_tools, '_resolve_tool_python', lambda _root: sys.executable)
+    monkeypatch.setattr(subprocess, 'Popen', lambda *args, **kwargs: _FakeProcess('', returncode=1, stderr='failed'))
+
+    with pytest.raises(subprocess.CalledProcessError):
+        run_nova_proximity_baseline(skill_dir, output_dir)
+    assert not stale_report.exists()
+
+
+def test_empty_json_report_is_not_treated_as_benign(monkeypatch, tmp_path: Path) -> None:
+    skill_dir = tmp_path / 'skill'
+    skill_dir.mkdir()
+    output_dir = tmp_path / 'out'
+    monkeypatch.setattr(subprocess, 'Popen', lambda *args, **kwargs: _FakeProcess('{}'))
+
+    with pytest.raises(ValueError, match='did not emit a JSON object'):
+        run_skill_security_scan_baseline(skill_dir, output_dir)
+
+
+def test_tool_python_prefers_dot_venv_then_venv(monkeypatch, tmp_path: Path) -> None:
+    from malskills.baselines import external_tools
+
+    tool_root = tmp_path / 'tool'
+    dot_venv_python = tool_root / '.venv' / 'bin' / 'python'
+    venv_python = tool_root / 'venv' / 'bin' / 'python'
+    dot_venv_python.parent.mkdir(parents=True)
+    venv_python.parent.mkdir(parents=True)
+    system_python = tmp_path / 'system-python'
+    system_python.touch()
+    dot_venv_python.symlink_to(system_python)
+    venv_python.touch()
+    monkeypatch.setattr(external_tools, '_resolve_python_bin', lambda: '/fallback/python')
+
+    assert external_tools._resolve_tool_python(tool_root) == str(dot_venv_python)
+    dot_venv_python.unlink()
+    assert external_tools._resolve_tool_python(tool_root) == str(venv_python)
+    venv_python.unlink()
+    assert external_tools._resolve_tool_python(tool_root) == '/fallback/python'
+
 
 def test_external_baseline_timeout_kills_process_group(monkeypatch, tmp_path: Path) -> None:
     from malskills.baselines import external_tools

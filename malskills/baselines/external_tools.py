@@ -14,6 +14,7 @@ from ..utils import ensure_dir
 
 DEFAULT_TIMEOUT_SEC = 120
 SKILL_SCANNER_TIMEOUT_SEC = 300
+_PROJECT_ROOT = Path(__file__).resolve().parents[2]
 MASB_DEFAULT_THRESHOLDS = {
     "critical": 8.0,
     "high": 6.0,
@@ -27,18 +28,22 @@ def run_skill_security_scan_baseline(skill_path: str | Path, output_dir: str | P
     destination = Path(output_dir)
     ensure_dir(destination)
 
-    payload = _run_json_baseline_command(
-        [
-            "python3",
-            "-m",
-            "src.cli",
-            "scan",
-            str(skill_root),
-            "--format",
-            "json",
-        ],
-        env_overrides={"PYTHONPATH": str((Path(__file__).resolve().parents[2] / "baseline" / "skill-security-scan").resolve())},
+    tool_root = _PROJECT_ROOT / "baseline" / "skill-security-scan"
+    command = [
+        "python3",
+        "-m",
+        "src.cli",
+        "scan",
+        str(skill_root),
+        "--format",
+        "json",
+    ]
+    payload = _run_checked_json_baseline_command(
+        command,
+        accepted_returncodes={0},
+        env_overrides={"PYTHONPATH": str(tool_root.resolve())},
     )
+    _validate_skill_security_scan_payload(payload)
     normalized = _normalize_skill_security_scan_payload(payload)
     return _finalize_baseline_result(
         destination=destination,
@@ -47,15 +52,7 @@ def run_skill_security_scan_baseline(skill_path: str | Path, output_dir: str | P
         payload=normalized,
         runtime={
             "tool": "skill-security-scan",
-            "command": [
-                "python3",
-                "-m",
-                "src.cli",
-                "scan",
-                str(skill_root),
-                "--format",
-                "json",
-            ],
+            "command": command,
         },
         predicted=_map_skill_security_scan_prediction(normalized),
         score=_map_skill_security_scan_score(normalized),
@@ -78,7 +75,9 @@ def run_masb_baseline(skill_path: str | Path, output_dir: str | Path) -> dict[st
     step4_command = ["bash", "scripts/04_scan.sh"]
     command_results = _run_masb_native_pipeline(runtime_root, [step4_command])
     static_payload = _collect_masb_static_payload(runtime_root, skill_root)
-    static_level = str(static_payload.get("risk_level", "SAFE")).upper()
+    static_level = str(static_payload.get("risk_level", "UNKNOWN")).upper()
+    if static_level not in {"CRITICAL", "HIGH", "MEDIUM", "LOW", "SAFE"}:
+        raise RuntimeError(f"MASB static scan did not produce a usable risk level: {static_level}")
     normalized: dict[str, Any]
     if static_level in {"CRITICAL", "HIGH"}:
         follow_up_commands = [
@@ -91,6 +90,8 @@ def run_masb_baseline(skill_path: str | Path, output_dir: str | Path) -> dict[st
         normalized = _collect_masb_runtime_payload_from_static(runtime_root, skill_root, static_payload)
     else:
         normalized = _normalize_masb_static_payload(static_payload, skill_root)
+    if str(normalized.get("risk_level", "ERROR")).upper() == "ERROR":
+        raise RuntimeError("MASB runtime analysis did not produce a usable verdict")
     return _finalize_baseline_result(
         destination=destination,
         artifact_name="masb_report.json",
@@ -119,15 +120,18 @@ def run_skill_security_audit_baseline(skill_path: str | Path, output_dir: str | 
     destination = Path(output_dir)
     ensure_dir(destination)
 
-    payload = _run_json_baseline_command(
-        [
-            "python3",
-            "baseline/skill-security-audit/scripts/skill_audit.py",
-            "--path",
-            str(skill_root),
-            "--json",
-        ],
+    command = [
+        "python3",
+        str((_PROJECT_ROOT / "baseline" / "skill-security-audit" / "scripts" / "skill_audit.py").resolve()),
+        "--path",
+        str(skill_root),
+        "--json",
+    ]
+    payload = _run_checked_json_baseline_command(
+        command,
+        accepted_returncodes={0, 1, 2, 3},
     )
+    _validate_skill_security_audit_payload(payload)
     normalized = _normalize_skill_security_audit_payload(payload)
     return _finalize_baseline_result(
         destination=destination,
@@ -136,13 +140,7 @@ def run_skill_security_audit_baseline(skill_path: str | Path, output_dir: str | 
         payload=normalized,
         runtime={
             "tool": "skill-security-audit",
-            "command": [
-                "python3",
-                "baseline/skill-security-audit/scripts/skill_audit.py",
-                "--path",
-                str(skill_root),
-                "--json",
-            ],
+            "command": command,
         },
         predicted=_map_skill_security_audit_prediction(normalized),
         score=_map_skill_security_audit_score(normalized),
@@ -163,17 +161,20 @@ def run_skills_security_audit_baseline(skill_path: str | Path, output_dir: str |
     destination = Path(output_dir)
     ensure_dir(destination)
 
-    payload = _run_json_baseline_command(
-        [
-            "python3",
-            "-m",
-            "skills_security_audit",
-            str(skill_root),
-            "--mode",
-            "static",
-        ],
-        env_overrides={"PYTHONPATH": str((Path(__file__).resolve().parents[2] / "baseline").resolve())},
+    command = [
+        "python3",
+        "-m",
+        "skills_security_audit",
+        str(skill_root),
+        "--mode",
+        "static",
+    ]
+    payload = _run_checked_json_baseline_command(
+        command,
+        accepted_returncodes={0},
+        env_overrides={"PYTHONPATH": str((_PROJECT_ROOT / "baseline").resolve())},
     )
+    _validate_skills_security_audit_payload(payload)
     normalized = _normalize_skills_security_audit_payload(payload)
     return _finalize_baseline_result(
         destination=destination,
@@ -182,14 +183,7 @@ def run_skills_security_audit_baseline(skill_path: str | Path, output_dir: str |
         payload=normalized,
         runtime={
             "tool": "skills_security_audit",
-            "command": [
-                "python3",
-                "-m",
-                "skills_security_audit",
-                str(skill_root),
-                "--mode",
-                "static",
-            ],
+            "command": command,
         },
         predicted=_map_skills_security_audit_prediction(normalized),
         score=_map_skills_security_audit_score(normalized),
@@ -209,17 +203,12 @@ def run_caterpillar_baseline(skill_path: str | Path, output_dir: str | Path) -> 
     destination = Path(output_dir)
     ensure_dir(destination)
 
-    payload = _run_json_baseline_command(
-        [
-            "node",
-            "baseline/caterpillar/dist/cli.js",
-            "ask",
-            str(skill_root),
-            "--json",
-            "--mode",
-            "offline",
-        ],
+    command = _resolve_caterpillar_command(skill_root)
+    payload = _run_checked_json_baseline_command(
+        command,
+        accepted_returncodes={0, 1},
     )
+    _validate_caterpillar_payload(payload)
     normalized = _normalize_caterpillar_payload(payload)
     return _finalize_baseline_result(
         destination=destination,
@@ -228,15 +217,7 @@ def run_caterpillar_baseline(skill_path: str | Path, output_dir: str | Path) -> 
         payload=normalized,
         runtime={
             "tool": "caterpillar",
-            "command": [
-                "node",
-                "baseline/caterpillar/dist/cli.js",
-                "ask",
-                str(skill_root),
-                "--json",
-                "--mode",
-                "offline",
-            ],
+            "command": command,
         },
         predicted=_map_caterpillar_prediction(normalized),
         score=_map_caterpillar_score(normalized),
@@ -255,15 +236,18 @@ def run_clawscan_baseline(skill_path: str | Path, output_dir: str | Path) -> dic
     destination = Path(output_dir)
     ensure_dir(destination)
 
-    payload = _run_json_baseline_command(
-        [
-            "node",
-            "baseline/clawscan/src/cli.js",
-            "scan",
-            str(skill_root),
-            "--json",
-        ],
+    command = [
+        "node",
+        str((_PROJECT_ROOT / "baseline" / "clawscan" / "src" / "cli.js").resolve()),
+        "scan",
+        str(skill_root),
+        "--json",
+    ]
+    payload = _run_checked_json_baseline_command(
+        command,
+        accepted_returncodes={0, 1, 2},
     )
+    _validate_clawscan_payload(payload)
     normalized = _normalize_clawscan_payload(payload)
     return _finalize_baseline_result(
         destination=destination,
@@ -272,13 +256,7 @@ def run_clawscan_baseline(skill_path: str | Path, output_dir: str | Path) -> dic
         payload=normalized,
         runtime={
             "tool": "clawscan",
-            "command": [
-                "node",
-                "baseline/clawscan/src/cli.js",
-                "scan",
-                str(skill_root),
-                "--json",
-            ],
+            "command": command,
         },
         predicted=_map_clawscan_prediction(normalized),
         score=float(normalized.get("risk", {}).get("score", 0.0) or 0.0) / 100.0,
@@ -298,19 +276,22 @@ def run_skill_scanner_baseline(skill_path: str | Path, output_dir: str | Path) -
     ensure_dir(destination)
 
     python_bin = _resolve_skill_scanner_python()
-    payload = _run_json_baseline_command(
-        [
-            str(python_bin),
-            "-m",
-            "skill_scanner.cli.cli",
-            "scan",
-            str(skill_root),
-            "--format",
-            "json",
-        ],
-        env_overrides={"PYTHONPATH": str((Path(__file__).resolve().parents[2] / "baseline" / "skill-scanner").resolve())},
+    command = [
+        str(python_bin),
+        "-m",
+        "skill_scanner.cli.cli",
+        "scan",
+        str(skill_root),
+        "--format",
+        "json",
+    ]
+    payload = _run_checked_json_baseline_command(
+        command,
+        accepted_returncodes={0},
+        env_overrides={"PYTHONPATH": str((_PROJECT_ROOT / "baseline" / "skill-scanner").resolve())},
         timeout_sec=SKILL_SCANNER_TIMEOUT_SEC,
     )
+    _validate_skill_scanner_payload(payload)
     normalized = _normalize_skill_scanner_payload(payload)
     return _finalize_baseline_result(
         destination=destination,
@@ -319,15 +300,7 @@ def run_skill_scanner_baseline(skill_path: str | Path, output_dir: str | Path) -
         payload=normalized,
         runtime={
             "tool": "skill-scanner",
-            "command": [
-                str(python_bin),
-                "-m",
-                "skill_scanner.cli.cli",
-                "scan",
-                str(skill_root),
-                "--format",
-                "json",
-            ],
+            "command": command,
         },
         predicted=_map_skill_scanner_prediction(normalized),
         score=_map_skill_scanner_score(normalized),
@@ -346,10 +319,15 @@ def run_nova_proximity_baseline(skill_path: str | Path, output_dir: str | Path) 
     destination = Path(output_dir)
     ensure_dir(destination)
 
-    output_prefix = destination / "nova_proximity"
+    native_output = destination / "nova_proximity_native"
+    ensure_dir(native_output)
+    output_prefix = native_output / "nova_proximity"
+    for stale_report in native_output.glob("nova_proximity_*.json"):
+        stale_report.unlink()
+    tool_root = _PROJECT_ROOT / "baseline" / "nova-proximity"
     command = [
-        _resolve_python_bin(),
-        "baseline/nova-proximity/novaprox.py",
+        _resolve_tool_python(tool_root),
+        str((tool_root / "novaprox.py").resolve()),
         "--skill",
         str(skill_root),
         "--skill-recursive",
@@ -357,11 +335,19 @@ def run_nova_proximity_baseline(skill_path: str | Path, output_dir: str | Path) 
         "--output-prefix",
         str(output_prefix),
     ]
-    _run_baseline_command(command)
-    report_paths = sorted(destination.glob("nova_proximity_*.json"))
+    completed = _run_baseline_command(command)
+    if completed.returncode != 0:
+        raise subprocess.CalledProcessError(
+            completed.returncode,
+            command,
+            output=completed.stdout,
+            stderr=completed.stderr,
+        )
+    report_paths = sorted(native_output.glob("nova_proximity_*.json"))
     if not report_paths:
-        raise FileNotFoundError(f"nova-proximity report not found under {destination}")
+        raise FileNotFoundError(f"nova-proximity report not found under {native_output}")
     payload = _load_json_file(report_paths[-1])
+    _validate_nova_proximity_payload(payload)
     normalized = _normalize_nova_proximity_payload(payload)
     return _finalize_baseline_result(
         destination=destination,
@@ -371,6 +357,7 @@ def run_nova_proximity_baseline(skill_path: str | Path, output_dir: str | Path) 
         runtime={
             "tool": "nova-proximity",
             "command": command,
+            "native_report": str(report_paths[-1]),
         },
         predicted=_map_nova_proximity_prediction(normalized),
         score=_map_nova_proximity_score(normalized),
@@ -400,6 +387,107 @@ def _run_json_baseline_command(
             stderr=completed.stderr,
         )
     return payload
+
+
+def _run_checked_json_baseline_command(
+    command: list[str],
+    *,
+    accepted_returncodes: set[int],
+    env_overrides: dict[str, str] | None = None,
+    timeout_sec: int = DEFAULT_TIMEOUT_SEC,
+) -> dict[str, Any]:
+    completed = _run_baseline_command(command, env_overrides=env_overrides, timeout_sec=timeout_sec)
+    payload = _extract_json_object(completed.stdout)
+    if completed.returncode not in accepted_returncodes or (completed.returncode != 0 and not payload):
+        raise subprocess.CalledProcessError(
+            completed.returncode,
+            command,
+            output=completed.stdout,
+            stderr=completed.stderr,
+        )
+    if not payload:
+        raise ValueError(f"{command[0]} did not emit a JSON object")
+    return payload
+
+
+def _validate_skill_security_scan_payload(payload: dict[str, Any]) -> None:
+    level = str(payload.get("risk_level", "")).upper()
+    if level not in {"CRITICAL", "HIGH", "MEDIUM", "LOW", "SAFE"}:
+        raise ValueError("skill-security-scan returned no usable risk level")
+    if not isinstance(payload.get("issues"), list) or not isinstance(payload.get("summary"), dict):
+        raise ValueError("skill-security-scan returned an invalid JSON report")
+
+
+def _validate_skill_security_audit_payload(payload: dict[str, Any]) -> None:
+    skills = payload.get("skills")
+    if not isinstance(skills, dict) or not skills or not isinstance(payload.get("summary"), dict):
+        raise ValueError("skill-security-audit did not return a completed skill scan")
+
+
+def _validate_skills_security_audit_payload(payload: dict[str, Any]) -> None:
+    if not isinstance(payload.get("files"), list) or not isinstance(payload.get("summary"), dict):
+        raise ValueError("skills_security_audit returned an invalid JSON report")
+
+
+def _validate_caterpillar_payload(payload: dict[str, Any]) -> None:
+    if payload.get("success") is not True:
+        error = payload.get("error")
+        message = error.get("message") if isinstance(error, dict) else "scan unsuccessful"
+        raise RuntimeError(f"Caterpillar scan failed: {message}")
+    data = payload.get("data")
+    if not isinstance(data, dict):
+        raise ValueError("Caterpillar returned no scan data")
+    if str(data.get("grade", "")).upper() not in {"A", "B", "C", "D", "F"}:
+        raise ValueError("Caterpillar returned no usable grade")
+    if not isinstance(data.get("findings"), list):
+        raise ValueError("Caterpillar returned an invalid findings list")
+
+
+def _validate_clawscan_payload(payload: dict[str, Any]) -> None:
+    if payload.get("error"):
+        raise RuntimeError(f"ClawScan scan failed: {payload['error']}")
+    findings = payload.get("findings")
+    analyzers = payload.get("analyzers")
+    risk = payload.get("risk")
+    if not isinstance(findings, list) or not isinstance(analyzers, list) or not isinstance(risk, dict):
+        raise ValueError("ClawScan returned an invalid JSON report")
+    if not analyzers:
+        raise ValueError("ClawScan did not run any analyzers")
+    failed = [
+        str(item.get("name", "unknown"))
+        for item in analyzers
+        if isinstance(item, dict) and str(item.get("status", "")).lower() != "ok"
+    ]
+    if failed:
+        raise RuntimeError(f"ClawScan analyzer failure: {', '.join(failed)}")
+    if str(risk.get("level", "")).lower() not in {"safe", "warning", "dangerous"}:
+        raise ValueError("ClawScan returned no usable risk level")
+
+
+def _validate_skill_scanner_payload(payload: dict[str, Any]) -> None:
+    if not str(payload.get("skill_name", "")).strip():
+        raise ValueError("Cisco Skill Scanner returned no skill result")
+    if not isinstance(payload.get("findings"), list):
+        raise ValueError("Cisco Skill Scanner returned an invalid findings list")
+    if str(payload.get("max_severity", "")).upper() not in {"CRITICAL", "HIGH", "MEDIUM", "LOW", "INFO", "SAFE"}:
+        raise ValueError("Cisco Skill Scanner returned no usable severity")
+    failed = payload.get("analyzers_failed")
+    if isinstance(failed, list) and failed:
+        raise RuntimeError(f"Cisco Skill Scanner reported {len(failed)} failed analyzer(s)")
+
+
+def _validate_nova_proximity_payload(payload: dict[str, Any]) -> None:
+    scan_results = payload.get("scan_results")
+    if not isinstance(scan_results, dict):
+        raise ValueError("nova-proximity returned no scan results")
+    skills = scan_results.get("skills")
+    if not isinstance(skills, list):
+        raise ValueError("nova-proximity returned an invalid skills list")
+    total_skills = int(scan_results.get("total_skills", len(skills)) or 0)
+    if total_skills <= 0 or not skills:
+        errors = scan_results.get("errors")
+        detail = errors[0] if isinstance(errors, list) and errors else "no skills were analyzed"
+        raise RuntimeError(f"nova-proximity scan failed: {detail}")
 
 
 def _run_baseline_command(
@@ -590,9 +678,15 @@ def _normalize_nova_proximity_payload(payload: dict[str, Any]) -> dict[str, Any]
     for skill in skills:
         if not isinstance(skill, dict):
             continue
-        for flag in skill.get("security_flags", []):
-            if isinstance(flag, dict):
-                security_flags.append(flag)
+        security_flags.extend(_nova_security_flags(skill))
+    if not security_flags:
+        security_flags.extend(_nova_security_flags(scan_results))
+
+    security_sections = scan_results.get("security_sections")
+    if isinstance(security_sections, dict):
+        declared_total = int(security_sections.get("total_flags", 0) or 0)
+        if declared_total > 0 and not security_flags:
+            raise ValueError("nova-proximity reported security flags without exporting their details")
     return {
         "scan_results": scan_results,
         "nova_analysis": nova_analysis,
@@ -602,9 +696,27 @@ def _normalize_nova_proximity_payload(payload: dict[str, Any]) -> dict[str, Any]
     }
 
 
+def _nova_security_flags(container: dict[str, Any]) -> list[dict[str, Any]]:
+    flags = container.get("security_flags")
+    if isinstance(flags, list):
+        return [item for item in flags if isinstance(item, dict)]
+
+    sections = container.get("security_sections")
+    if not isinstance(sections, dict):
+        return []
+    grouped_flags: list[dict[str, Any]] = []
+    for key in ("security_findings", "hook_config_logic_findings"):
+        items = sections.get(key)
+        if isinstance(items, list):
+            grouped_flags.extend(item for item in items if isinstance(item, dict))
+    return grouped_flags
+
+
 def _prepare_masb_runtime(skill_root: Path, destination: Path) -> Path:
     source_root = Path(__file__).resolve().parents[2] / "baseline" / "MASB"
     runtime_root = destination / "masb_runtime"
+    if runtime_root.exists():
+        shutil.rmtree(runtime_root)
     runtime_root.mkdir(parents=True, exist_ok=True)
 
     for name in ("analyzer", "executor", "scanner", "scripts", "utils"):
@@ -774,7 +886,6 @@ def _collect_masb_static_payload(runtime_root: Path, skill_root: Path) -> dict[s
     if not report_paths:
         raise FileNotFoundError(f"MASB static report not found under {workspace_root}")
 
-    target_report: dict[str, Any] | None = None
     target_skill_name = skill_root.name
     for report_path in report_paths:
         payload = _load_json_file(report_path)
@@ -782,14 +893,9 @@ def _collect_masb_static_payload(runtime_root: Path, skill_root: Path) -> dict[s
             if not isinstance(skill_report, dict):
                 continue
             if str(skill_report.get("skill_name", "")).strip() == target_skill_name:
-                target_report = payload
-                break
-        if target_report is not None:
-            break
+                return payload
 
-    if target_report is None:
-        target_report = _load_json_file(report_paths[0])
-    return target_report
+    raise FileNotFoundError(f"MASB static report for {target_skill_name} not found under {workspace_root}")
 
 
 def _normalize_masb_static_payload(payload: dict[str, Any], skill_root: Path) -> dict[str, Any]:
@@ -828,6 +934,15 @@ def _normalize_masb_static_payload(payload: dict[str, Any], skill_root: Path) ->
 
 
 def _map_skill_security_scan_prediction(payload: dict[str, Any]) -> str:
+    severities = {
+        str(item.get("severity", "")).upper()
+        for item in payload.get("issues", [])
+        if isinstance(item, dict)
+    }
+    if severities & {"CRITICAL", "HIGH"}:
+        return "malicious"
+    if severities & {"MEDIUM", "WARNING", "LOW"}:
+        return "suspicious"
     level = str(payload.get("risk_level", "UNKNOWN")).upper()
     if level in {"CRITICAL", "HIGH"}:
         return "malicious"
@@ -837,10 +952,10 @@ def _map_skill_security_scan_prediction(payload: dict[str, Any]) -> str:
 
 
 def _map_skill_security_scan_score(payload: dict[str, Any]) -> float:
-    level = str(payload.get("risk_level", "UNKNOWN")).upper()
-    if level in {"CRITICAL", "HIGH"}:
+    predicted = _map_skill_security_scan_prediction(payload)
+    if predicted == "malicious":
         return 0.95
-    if level in {"MEDIUM", "WARNING", "LOW"}:
+    if predicted == "suspicious":
         return 0.6
     return 0.1
 
@@ -976,7 +1091,7 @@ def _map_masb_prediction(payload: dict[str, Any]) -> str:
     level = str(payload.get("risk_level", "ERROR")).upper()
     if level == "MALICIOUS":
         return "malicious"
-    if level == "SUSPICIOUS":
+    if level in {"SUSPICIOUS", "CRITICAL", "HIGH", "MEDIUM", "LOW"}:
         return "suspicious"
     return "benign"
 
@@ -990,12 +1105,39 @@ def _map_masb_score(payload: dict[str, Any]) -> float:
     return 0.1
 
 
+def _resolve_caterpillar_command(skill_root: Path) -> list[str]:
+    tool_root = _PROJECT_ROOT / "baseline" / "caterpillar"
+    args = ["ask", str(skill_root), "--json", "--mode", "offline"]
+    dist_entry = tool_root / "dist" / "cli.js"
+    if dist_entry.is_file():
+        return ["node", str(dist_entry.resolve()), *args]
+
+    tsx = tool_root / "node_modules" / ".bin" / "tsx"
+    source_entry = tool_root / "core" / "src" / "index.ts"
+    if tsx.is_file() and source_entry.is_file():
+        return [str(tsx.resolve()), str(source_entry.resolve()), *args]
+
+    installed = shutil.which("caterpillar")
+    if installed:
+        return [installed, *args]
+    raise FileNotFoundError(
+        "Caterpillar CLI is not built; run `npm ci && npm run build` in baseline/caterpillar"
+    )
+
+
 def _resolve_skill_scanner_python() -> Path:
-    root = Path(__file__).resolve().parents[2]
-    candidate = root / "baseline" / "skill-scanner" / ".venv" / "bin" / "python"
+    candidate = _PROJECT_ROOT / "baseline" / "skill-scanner" / ".venv" / "bin" / "python"
     if candidate.exists():
         return candidate
-    return Path("python3.10")
+    return Path(sys.executable or shutil.which("python3") or "python3")
+
+
+def _resolve_tool_python(tool_root: Path) -> str:
+    for environment_name in (".venv", "venv"):
+        candidate = tool_root / environment_name / "bin" / "python"
+        if candidate.is_file():
+            return str(candidate)
+    return _resolve_python_bin()
 
 
 def _resolve_python_bin() -> str:
