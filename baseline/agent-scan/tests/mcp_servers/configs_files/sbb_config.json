@@ -1,8 +1,0 @@
-{
-    "mcpServers": {
-        "SBB": {
-            "command": "uv run python",
-            "args": ["tests/mcp_servers/full_feature_server.py"]
-        }
-    }
-}
