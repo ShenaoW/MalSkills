@@ -11,7 +11,7 @@ from .. import llm_runtime
 from ..llm_runtime import build_llm_runtime_config, invoke_structured_json
 from ..models import ArtifactRecord, SSOFinding, PatternMatch, SSORecord, WorkflowDiscovery
 
-REASONING_PROMPT_VERSION = "2026-08-03-v5"
+REASONING_PROMPT_VERSION = "2026-08-04-v9"
 
 PATTERN_TAXONOMY: dict[str, dict[str, str]] = {
     "Execution_and_Delivery": {
@@ -103,6 +103,14 @@ Counterexamples:
 - A standalone outbound_connection to a benign-looking endpoint is not automatically a malicious pattern.
 - A standalone content_read_and_parse on an ordinary file is not enough for Information_Theft.
 - A credential used only in an Authorization or authentication header to access its intended service is not Information_Theft; require findings that sensitive data flows into an unauthorized payload, staging, or exfiltration sink.
+- HTTPS by itself is transport security, not Command_and_Control.
+- Running curl or wget only to query a documented API is network access, not Execution_and_Delivery; require a fetched executable, script, module, or payload that is subsequently launched or loaded.
+- A scheduled backup, documented service restart, process-manager cron restart, or ordinary recurring job is not malicious Persistence without an unauthorized or covert execution chain.
+- Deleting a calendar event or performing a documented backup restore/rollback is not Destruction_and_Ransomware.
+- Removing a stale application cache or local index is not Defense_Evasion_and_Anti_Forensics.
+- A local security audit, inventory, status, or diagnostic command is not Lateral_Movement or remote management abuse.
+- git reset, git clean, and ordinary source repository rollback are not recovery impairment or Destruction_and_Ransomware.
+- chmod +x on an application executable is not Privilege_Escalation_and_Identity_Abuse.
 - Generic capability summaries are not patterns.
 - Use only the official reasoning taxonomy above; do not resurrect legacy pattern names.
 
@@ -218,8 +226,14 @@ class LlmPatternReasoner:
         symbolic_patterns: list[PatternMatch] | None = None,
     ) -> tuple[list[PatternMatch], list[WorkflowDiscovery]]:
         symbolic_patterns = symbolic_patterns or []
+        artifacts, findings, ssos, graph = self._focus_reasoning_context(
+            artifacts,
+            findings,
+            ssos,
+            graph or {},
+        )
         cache_path = self._cache_path_for(
-            skill_path, artifacts, findings, ssos, graph or {}, symbolic_patterns
+            skill_path, artifacts, findings, ssos, graph, symbolic_patterns
         )
         if cache_path.exists():
             try:
@@ -236,7 +250,7 @@ class LlmPatternReasoner:
                 pass
         payload = invoke_structured_json(
             prompt=self._build_prompt(
-                skill_path, artifacts, findings, ssos, graph or {}, symbolic_patterns
+                skill_path, artifacts, findings, ssos, graph, symbolic_patterns
             ),
             schema=reasoning_schema(),
             system_prompt=LLM_REASONING_SYSTEM_PROMPT,
@@ -254,6 +268,88 @@ class LlmPatternReasoner:
             symbolic_patterns,
         )
         return patterns, discoveries or self._fallback_discoveries(patterns, symbolic_patterns)
+
+    def _focus_reasoning_context(
+        self,
+        artifacts: list[ArtifactRecord],
+        findings: list[SSOFinding],
+        ssos: list[SSORecord],
+        graph: dict[str, Any],
+    ) -> tuple[
+        list[ArtifactRecord],
+        list[SSOFinding],
+        list[SSORecord],
+        dict[str, Any],
+    ]:
+        allowed_edges = {
+            "has_operand",
+            "value_flow",
+            "same_object",
+        }
+        adjacency: dict[str, set[str]] = {}
+        eligible_edges: list[dict[str, Any]] = []
+        for edge in graph.get("edges", []):
+            if str(edge.get("type", "")) not in allowed_edges:
+                continue
+            source = str(edge.get("source", ""))
+            target = str(edge.get("target", ""))
+            if not source or not target:
+                continue
+            adjacency.setdefault(source, set()).add(target)
+            adjacency.setdefault(target, set()).add(source)
+            eligible_edges.append(edge)
+
+        sso_ids = {item.sso_id for item in ssos}
+        focused_nodes: set[str] = set()
+        focused_sso_ids: set[str] = set()
+        visited: set[str] = set()
+        for sso_id in sorted(sso_ids):
+            if sso_id in visited:
+                continue
+            stack = [sso_id]
+            component: set[str] = set()
+            while stack:
+                current = stack.pop()
+                if current in component:
+                    continue
+                component.add(current)
+                stack.extend(adjacency.get(current, ()))
+            visited.update(component)
+            component_ssos = component & sso_ids
+            if len(component_ssos) >= 2:
+                focused_nodes.update(component)
+                focused_sso_ids.update(component_ssos)
+
+        if not focused_sso_ids:
+            return artifacts, findings, ssos, graph
+        focused_ssos = [item for item in ssos if item.sso_id in focused_sso_ids]
+        finding_ids = {
+            finding_id
+            for item in focused_ssos
+            for finding_id in item.finding_ids
+        }
+        focused_findings = [item for item in findings if item.finding_id in finding_ids]
+        artifact_paths = {
+            path
+            for item in focused_ssos
+            for path in item.artifact_paths
+        }
+        focused_artifacts = [item for item in artifacts if item.relative_path in artifact_paths]
+        focused_graph = {
+            "nodes": [
+                node
+                for node in graph.get("nodes", [])
+                if str(node.get("id", "")) in focused_nodes
+            ],
+            "edges": [
+                edge
+                for edge in eligible_edges
+                if str(edge.get("source", "")) in focused_nodes
+                and str(edge.get("target", "")) in focused_nodes
+            ],
+            "artifacts": list(graph.get("artifacts", [])),
+        }
+        return focused_artifacts, focused_findings, focused_ssos, focused_graph
 
     def _build_prompt(
         self,

@@ -154,7 +154,7 @@ def _analyze_case_worker(skill_path: str, case_output_dir: str, config: Analyzer
                 "status": "ok",
                 "predicted": result.verdict.label,
                 "score": result.verdict.score,
-                "patterns": result.verdict.malicious_patterns + result.verdict.suspicious_patterns,
+                "patterns": result.verdict.malicious_patterns,
                 "finding_count": len(result.findings),
                 "operand_resolution_count": len(result.operand_resolutions),
                 "sso_count": len(result.ssos),

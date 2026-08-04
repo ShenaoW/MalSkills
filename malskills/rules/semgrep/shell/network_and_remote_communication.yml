@@ -34,7 +34,7 @@ rules:
       malskills_subtype: protocol_encapsulation_or_encrypted_comm
       malskills_sso_category: network_and_remote_communication
     pattern-regex: >-
-      (?im)^(?!\s*#)\s*((curl|wget)\b[^\n#]*https://[^\s"'`]+|\bdig\b[^\n#]*|\bopenssl\s+s_client\b[^\n#]*)|(?:^|[|;&]{1,2}\s*)((curl|wget)\b[^\n#]*https://[^\s"'`]+|\bdig\b[^\n#]*|\bopenssl\s+s_client\b[^\n#]*)
+      (?im)^(?!\s*#)\s*openssl\s+s_client\b[^\n#]*|(?:^|[|;&]{1,2}\s*)openssl\s+s_client\b[^\n#]*
 
   - id: shell.network_and_remote_communication.traffic_capture
     languages: [bash]

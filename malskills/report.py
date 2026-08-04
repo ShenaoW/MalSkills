@@ -272,7 +272,6 @@ class ResultWriter:
             f"- Verdict: `{result.verdict.label}`",
             f"- Score: `{result.verdict.score:.2f}`",
             f"- Malicious patterns: {', '.join(result.verdict.malicious_patterns) or 'none'}",
-            f"- Suspicious patterns: {', '.join(result.verdict.suspicious_patterns) or 'none'}",
             "",
             "## Artifact Inventory",
             "",

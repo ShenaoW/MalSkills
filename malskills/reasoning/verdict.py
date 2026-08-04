@@ -45,18 +45,10 @@ class PatternVerdictBuilder:
 
         all_high_patterns = sorted({name for names in high_patterns_by_source.values() for name in names})
         all_medium_patterns = sorted({name for names in medium_patterns_by_source.values() for name in names})
-        llm_high_patterns = sorted(high_patterns_by_source.get("llm", set()))
-
-        malicious_patterns: list[str] = []
-        suspicious_patterns: list[str] = []
-        if llm_high_patterns:
+        malicious_patterns = all_high_patterns or all_medium_patterns
+        if malicious_patterns:
             label = "malicious"
-            malicious_patterns = all_high_patterns or llm_high_patterns
-            score = min(0.99, 0.7 + 0.08 * len(malicious_patterns))
-        elif all_high_patterns or all_medium_patterns:
-            label = "suspicious"
-            suspicious_patterns = all_high_patterns or all_medium_patterns
-            score = min(0.89, 0.5 + 0.06 * len(suspicious_patterns))
+            score = round(min(0.99, 0.7 + 0.08 * len(malicious_patterns)), 2)
         else:
             label = "benign"
             score = 0.1
@@ -73,7 +65,6 @@ class PatternVerdictBuilder:
                 "stage": "pattern",
                 "pattern_names": [pattern.name for pattern in patterns],
                 "malicious_patterns": malicious_patterns,
-                "suspicious_patterns": suspicious_patterns,
             },
             {
                 "stage": "verdict",
@@ -86,8 +77,7 @@ class PatternVerdictBuilder:
             label=label,
             score=score,
             malicious_patterns=malicious_patterns,
-            suspicious_patterns=suspicious_patterns,
-            summary=self.summarize(label, malicious_patterns, suspicious_patterns),
+            summary=self.summarize(label, malicious_patterns),
         )
         setattr(verdict, "decision_chain", decision_chain)
         for pattern in patterns:
@@ -122,10 +112,7 @@ class PatternVerdictBuilder:
         self,
         label: str,
         malicious_patterns: list[str],
-        suspicious_patterns: list[str],
     ) -> str:
         if label == "malicious":
             return f"Detected malicious behavior patterns: {', '.join(malicious_patterns)}."
-        if label == "suspicious":
-            return f"Detected suspicious behavior patterns: {', '.join(suspicious_patterns)}."
         return "No malicious capability composition was inferred from the current SSO set."

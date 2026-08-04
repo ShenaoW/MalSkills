@@ -105,6 +105,7 @@ class LlmObjectAnalyzer:
         cache_dir: str | Path | None = None,
         max_workers: int = 2,
         max_prompt_bytes: int = 80_000,
+        context_lines: int = 40,
     ) -> None:
         self.runtime = build_llm_runtime_config("object_analysis")
         default_cache = Path(".cache") / "malskills_llm_object"
@@ -114,6 +115,7 @@ class LlmObjectAnalyzer:
         self.max_workers = max(1, int(os.environ.get("MALSKILLS_LLM_OBJECT_MAX_WORKERS", max_workers)))
         configured_limit = int(os.environ.get("MALSKILLS_LLM_OBJECT_MAX_PROMPT_BYTES", max_prompt_bytes))
         self.max_prompt_bytes = max(10_000, configured_limit)
+        self.context_lines = max(5, context_lines)
 
     def extract(
         self,
@@ -137,14 +139,18 @@ class LlmObjectAnalyzer:
             }
             and artifact.content
         ]
+        focused = self._focus_artifacts(eligible, findings)
         artifact_views = [
             view
-            for artifact in eligible
+            for artifact in focused
             for view in self._split_artifact_view(
                 replace(
                     artifact,
-                    source_start_line=1,
-                    source_end_line=max(1, len((artifact.content or "").splitlines())),
+                    source_start_line=artifact.source_start_line or 1,
+                    source_end_line=(
+                        artifact.source_end_line
+                        or max(1, len((artifact.content or "").splitlines()))
+                    ),
                 ),
                 findings,
             )
@@ -166,10 +172,47 @@ class LlmObjectAnalyzer:
             key=lambda item: (
                 item.artifact_path,
                 item.span.start_line if item.span else 0,
-                item.finding_id,
+                item.binding_id,
             )
         )
         return records
+
+    def _focus_artifacts(
+        self,
+        artifacts: list[ArtifactRecord],
+        findings: list[SSOFinding],
+    ) -> list[ArtifactRecord]:
+        findings_by_path: dict[str, list[SSOFinding]] = {}
+        for finding in findings:
+            findings_by_path.setdefault(finding.artifact_path, []).append(finding)
+        focused: list[ArtifactRecord] = []
+        for artifact in artifacts:
+            relevant = [item for item in findings_by_path.get(artifact.relative_path, []) if item.span]
+            content = artifact.content or ""
+            lines = content.splitlines()
+            if not relevant or not lines:
+                continue
+            start = max(1, min(item.span.start_line for item in relevant if item.span) - self.context_lines)
+            end = min(
+                len(lines),
+                max(item.span.end_line for item in relevant if item.span) + self.context_lines,
+            )
+            if start == 1 and end == len(lines):
+                focused.append(artifact)
+                continue
+            snippet = "\n".join(lines[start - 1 : end])
+            focused.append(
+                replace(
+                    artifact,
+                    content=snippet,
+                    content_hash=hashlib.sha256(snippet.encode("utf-8")).hexdigest(),
+                    size_bytes=len(snippet.encode("utf-8")),
+                    line_count=max(1, end - start + 1),
+                    source_start_line=start,
+                    source_end_line=end,
+                )
+            )
+        return focused
 
     def _extract_via_model(
         self,

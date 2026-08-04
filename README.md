@@ -6,7 +6,7 @@ It works in three stages:
 
 1. **Security-Sensitive Operation extraction**: identify security-relevant operations from code, prompts, manifests, configuration files, and setup instructions.
 2. **Skill Dependency Graph generation**: recover the operands of those operations and connect them through object identity and value-flow relations.
-3. **Neuro-symbolic reasoning**: detect malicious behavior patterns or suspicious workflows from the graph.
+3. **Neuro-symbolic reasoning**: detect malicious behavior patterns from the graph and produce a binary `malicious` or `benign` verdict.
 
 ![MalSkills pipeline](assets/malskills.png)
 
@@ -134,7 +134,7 @@ Each analyzed skill produces:
 - `operands.json`: role-bearing objects used by SSOs, such as endpoint, command, payload, and path operands
 - `values.json`: literal, symbolic, and program values bound to or propagated into Operands
 - `operand_resolutions.json`: binding provenance and analyzer-proven value-flow steps
-- `pattern_summary.json`: matched malicious or suspicious patterns
+- `pattern_summary.json`: matched malicious patterns
 - `sdg.json`: the Artifact/SSO/Operand/Value dependency graph
 - `sdg.dot`: Graphviz rendering of the same dependency graph
 - `proofs.json`: reasoning traces
@@ -268,6 +268,27 @@ Each stage also supports `MODE`, `MODEL`, `TIMEOUT_SEC`, and
 
 The precedence is stage environment variable, global environment variable,
 stage TOML setting, global TOML setting, then the built-in default.
+
+## LLM execution strategy
+
+The default pipeline minimizes repeated model context:
+
+1. Semgrep extracts static SSO findings first.
+2. One batched semantic pass supplements SSO findings and resolves operands in
+   the same response.
+3. YASA results take precedence over LLM operand bindings.
+4. The standalone object model is only a fallback for sinks not covered by
+   YASA when the combined semantic pass did not run.
+5. Hybrid pattern reasoning invokes the LLM only when formal reasoning found
+   no pattern and the SDG still contains an uncovered connected multi-SSO
+   workflow.
+
+Code-oriented fallback prompts use a bounded source window around findings;
+Markdown and prompt artifacts retain their full text because operation meaning
+often depends on surrounding instructions. Semantic call counts and result
+counts are recorded under `analysis_metadata.json.llm_semantic`.
+The combined pass uses the `sso_extraction` model setting; `object_analysis`
+configures only the standalone fallback.
 
 RQ3 model-specific variables:
 

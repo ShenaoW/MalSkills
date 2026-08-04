@@ -6,7 +6,7 @@ rules:
     metadata:
       malskills_subtype: shell_interpreter_execution
       malskills_sso_category: execution_control
-    pattern-regex: '(?i)\b(bash|sh|zsh)\s+-c\b|\beval\b|\bsource\b|^\s*\.\s+'
+    pattern-regex: '(?im)\b(bash|sh|zsh)\s+-c\b|\beval\b|(?:^|[|;&]{1,2}\s*)source\s+|^\s*\.\s+'
 
   - id: shell.execution_control.script_host_execution
     languages: [bash]

@@ -49,14 +49,40 @@ class SDGCompiler:
         enable_llm_object_analysis: bool = True,
         enable_yasa: bool = True,
         enable_cross_artifact_resolution: bool = True,
+        precomputed_llm_bindings: list[OperandBinding] | None = None,
     ) -> SDGCompilation:
         self._counter = 0
         binding_facts: list[OperandBinding] = []
-        if enable_llm_object_analysis:
-            binding_facts.extend(self.llm_analyzer.extract(artifacts, findings))
         if enable_yasa and skill_root is not None and self._should_run_yasa(artifacts):
             yasa_bindings = self.yasa_adapter.extract(skill_root, artifacts)
             binding_facts.extend(self._attach_supporting_findings(yasa_bindings, findings))
+        if enable_llm_object_analysis:
+            if precomputed_llm_bindings is not None:
+                binding_facts.extend(
+                    self._attach_supporting_findings(
+                        precomputed_llm_bindings,
+                        findings,
+                    )
+                )
+            else:
+                unresolved = self._findings_without_bindings(findings, binding_facts)
+                if unresolved:
+                    unresolved_paths = {item.artifact_path for item in unresolved}
+                    focused_artifacts = [
+                        artifact
+                        for artifact in artifacts
+                        if artifact.relative_path in unresolved_paths
+                    ]
+                    fallback_bindings = self.llm_analyzer.extract(
+                        focused_artifacts,
+                        unresolved,
+                    )
+                    binding_facts.extend(
+                        self._attach_supporting_findings(
+                            fallback_bindings,
+                            findings,
+                        )
+                    )
 
         parameter_bindings = self._parameter_bindings_index(binding_facts)
 
@@ -101,6 +127,31 @@ class SDGCompiler:
             graph=graph,
             findings=list(findings),
         )
+
+    def _findings_without_bindings(
+        self,
+        findings: list[SSOFinding],
+        bindings: list[OperandBinding],
+    ) -> list[SSOFinding]:
+        by_sink = {
+            (item.artifact_path, item.sink_api)
+            for item in bindings
+            if item.sink_api
+        }
+        by_subtype = {
+            (item.artifact_path, item.sink_subtype)
+            for item in bindings
+            if item.sink_subtype
+        }
+        unresolved: list[SSOFinding] = []
+        for finding in findings:
+            sink_api = str(finding.attributes.get("sink_api", "")).strip()
+            if sink_api and (finding.artifact_path, sink_api) in by_sink:
+                continue
+            if (finding.artifact_path, finding.subtype) in by_subtype:
+                continue
+            unresolved.append(finding)
+        return unresolved
 
     def _compile_finding(
         self,
@@ -287,6 +338,8 @@ class SDGCompiler:
             **params,
             "operation_object": operation_object,
             "object_identity_kind": self._object_kind_from_id(operation_object),
+            "source_start_line": item.span.start_line if item.span else 0,
+            "source_end_line": item.span.end_line if item.span else 0,
         }
         if related_object_values:
             sso_attributes["related_objects"] = self._stable(related_object_values)

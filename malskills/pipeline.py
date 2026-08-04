@@ -72,6 +72,7 @@ class SkillAnalyzer:
             artifacts,
             enable_semgrep=cfg.enable_semgrep,
             enable_llm_sso_extraction=cfg.enable_llm_sso_extraction,
+            enable_llm_object_analysis=cfg.enable_llm_object_analysis,
             additional_semgrep_rules_dirs=(
                 [rule_snapshot.semgrep_dir] if rule_snapshot.semgrep_dir is not None else []
             ),
@@ -85,6 +86,11 @@ class SkillAnalyzer:
             enable_llm_object_analysis=cfg.enable_llm_object_analysis,
             enable_yasa=cfg.enable_yasa,
             enable_cross_artifact_resolution=cfg.enable_cross_artifact_resolution,
+            precomputed_llm_bindings=(
+                extraction.llm_operand_bindings
+                if extraction.semantic_analysis_performed
+                else None
+            ),
         )
         runtime_sec = time.perf_counter() - started_at
         patterns, verdict, facts, workflow_discoveries = self.reasoner.reason(

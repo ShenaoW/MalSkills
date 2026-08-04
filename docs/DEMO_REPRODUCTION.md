@@ -128,16 +128,7 @@ output/demo_reproduction/<timestamp>/core_detection_report.md
 data/ground_truth/malicious/clawhub/pepe276_publish-dist
 ```
 
-已验证的典型输出：
-
-- Verdict：`suspicious`
-- Score：`0.62`
-- Suspicious patterns：`Execution_and_Delivery`，`Information_Theft`
-- LLM backend：`codex_cli`
-- LLM model：`gpt-5.3-codex-medium`
-- YASA operand resolutions：`3`
-
-展示口径：这是一个已标注的恶意样本，系统给出的是风险告警 `suspicious`，表示需要进入人工复核；不要把它口头说成系统最终判定 `malicious`。
+当前工具只输出 `malicious` 和 `benign`。演示前应使用当前配置重跑样本，展示 `verdict.json` 中的二分类结果、命中 Pattern 和分析后端，不要复用旧三分类结果。
 
 mini benchmark 使用 2 个样本：
 
@@ -150,10 +141,8 @@ mini benchmark 使用 2 个样本：
 - Status：`ok=2`
 - LLM cases：`2/2`
 - YASA hit cases：`1`
-- Risk precision：`1.0`
-- Risk recall：`1.0`
-- Prediction counts：`benign=1`，`suspicious=1`
-- Label to prediction：`benign -> benign=1`，`malicious -> suspicious=1`
+- Prediction counts 只应包含 `benign` 和 `malicious`
+- Precision、recall 和 F1 直接按 `malicious` 正类计算
 
 全量 200 样本结果已经跑过，目录：
 
@@ -161,17 +150,7 @@ mini benchmark 使用 2 个样本：
 output/rq1_malskills/
 ```
 
-已验证的全量输出：
-
-- Entries：`200`
-- Error/timeout：`0`
-- LLM cases：`200/200`
-- YASA hit cases：`5`
-- Prediction counts：`suspicious=120`，`benign=80`
-- 真实恶意样本：`71` 个判为 `suspicious`，`29` 个判为 `benign`
-- 真实良性样本：`49` 个判为 `suspicious`，`51` 个判为 `benign`
-
-注意：当前严格评估口径只把 `malicious` 算作正类，`suspicious` 不算正类，因此全量 `summary.md` 中 precision/recall 可能显示为 `0.0`。脚本生成的 `core_detection_report.md` 会额外展示风险检出口径：把 `suspicious` 和 `malicious` 都视为需要人工复核的风险告警。答辩展示建议优先使用风险检出指标，同时保留严格指标作为补充说明。
+该目录中的历史结果来自旧三分类逻辑，不能代表当前二分类规则。正式报告前需要重新运行 200 样本评估；当前 precision、recall、F1 和 false-positive rate 都直接以 `malicious` 为正类计算。
 
 ## 5. 全量实验复现
 

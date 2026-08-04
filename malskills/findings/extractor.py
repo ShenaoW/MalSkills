@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
+import hashlib
 from pathlib import Path
 
 from ..ingest import LARGE_REPO_ARTIFACT_THRESHOLD
-from ..models import ArtifactRecord, SSOFinding
+from ..models import ArtifactRecord, OperandBinding, SSOFinding
 from .llm import LlmSSOFindingExtractor
 from .semgrep import SemgrepSSOFindingExtractor
 
@@ -14,6 +15,8 @@ class SSOFindingExtractionResult:
     findings: list[SSOFinding]
     semgrep_findings: list[SSOFinding]
     llm_findings: list[SSOFinding]
+    llm_operand_bindings: list[OperandBinding]
+    semantic_analysis_performed: bool
     metadata: dict[str, object]
 
 
@@ -29,6 +32,7 @@ class SSOFindingExtractor:
         *,
         enable_semgrep: bool = True,
         enable_llm_sso_extraction: bool = True,
+        enable_llm_object_analysis: bool = True,
         additional_semgrep_rules_dirs: list[str | Path] | None = None,
         ruleset_digest: str = "none",
     ) -> SSOFindingExtractionResult:
@@ -56,9 +60,20 @@ class SSOFindingExtractor:
                 "ruleset_digest": ruleset_digest,
             }
         llm_findings: list[SSOFinding] = []
+        llm_operand_bindings: list[OperandBinding] = []
+        semantic_analysis_performed = False
+        llm_artifact_count = 0
         if enable_llm_sso_extraction:
-            llm_artifacts = self._select_llm_artifacts(artifacts, semgrep_findings) if large_repo else artifacts
-            llm_findings = self.llm.extract(llm_artifacts).findings
+            llm_artifacts = self._select_llm_artifacts(artifacts, semgrep_findings)
+            llm_artifact_count = len(llm_artifacts)
+            semantic = self.llm.extract(
+                llm_artifacts,
+                existing_findings=semgrep_findings,
+                include_operand_bindings=enable_llm_object_analysis,
+            )
+            semantic_analysis_performed = bool(llm_artifacts)
+            llm_findings = semantic.findings
+            llm_operand_bindings = semantic.operand_bindings
             findings.extend(llm_findings)
         findings = self._dedupe_findings(findings)
         findings.sort(key=lambda item: (item.artifact_path, item.span.start_line if item.span else 0, item.finding_id))
@@ -66,8 +81,18 @@ class SSOFindingExtractor:
             findings=findings,
             semgrep_findings=semgrep_findings,
             llm_findings=llm_findings,
+            llm_operand_bindings=llm_operand_bindings,
+            semantic_analysis_performed=semantic_analysis_performed,
             metadata={
                 "semgrep": dict(self.semgrep.last_run),
+                "llm_semantic": {
+                    "performed": semantic_analysis_performed,
+                    "artifact_count": llm_artifact_count,
+                    "finding_count": len(llm_findings),
+                    "operand_binding_count": len(llm_operand_bindings),
+                    "backend": self.llm.runtime.backend,
+                    "model": self.llm.runtime.model,
+                },
                 "ruleset_digest": ruleset_digest,
             },
         )
@@ -141,7 +166,49 @@ class SSOFindingExtractor:
             )
             selected_paths.update(artifact.relative_path for artifact in exploratory[:12])
 
-        return [artifact_by_path[path] for path in sorted(selected_paths)]
+        selected = [artifact_by_path[path] for path in sorted(selected_paths)]
+        return self._focus_llm_artifacts(selected, semgrep_findings)
+
+    def _focus_llm_artifacts(
+        self,
+        artifacts: list[ArtifactRecord],
+        findings: list[SSOFinding],
+        *,
+        context_lines: int = 40,
+    ) -> list[ArtifactRecord]:
+        findings_by_path: dict[str, list[SSOFinding]] = {}
+        for finding in findings:
+            findings_by_path.setdefault(finding.artifact_path, []).append(finding)
+        focused: list[ArtifactRecord] = []
+        for artifact in artifacts:
+            relevant = [item for item in findings_by_path.get(artifact.relative_path, []) if item.span]
+            if not relevant or artifact.artifact_type in {"markdown", "prompt"}:
+                focused.append(artifact)
+                continue
+            lines = (artifact.content or "").splitlines()
+            if not lines:
+                continue
+            start = max(1, min(item.span.start_line for item in relevant if item.span) - context_lines)
+            end = min(
+                len(lines),
+                max(item.span.end_line for item in relevant if item.span) + context_lines,
+            )
+            if start == 1 and end == len(lines):
+                focused.append(artifact)
+                continue
+            snippet = "\n".join(lines[start - 1 : end])
+            focused.append(
+                replace(
+                    artifact,
+                    content=snippet,
+                    content_hash=hashlib.sha256(snippet.encode("utf-8")).hexdigest(),
+                    size_bytes=len(snippet.encode("utf-8")),
+                    line_count=max(1, end - start + 1),
+                    source_start_line=start,
+                    source_end_line=end,
+                )
+            )
+        return focused
 
     def _dedupe_findings(self, findings: list[SSOFinding]) -> list[SSOFinding]:
         grouped: dict[tuple[object, ...], list[SSOFinding]] = {}

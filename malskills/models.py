@@ -140,7 +140,6 @@ class SkillVerdict:
     label: str
     score: float
     malicious_patterns: list[str]
-    suspicious_patterns: list[str]
     summary: str
 
 

@@ -9,7 +9,7 @@ from pathlib import Path
 
 from .. import llm_runtime
 from ..llm_runtime import build_llm_runtime_config, invoke_structured_json
-from ..models import ArtifactRecord, SSOFinding, Span
+from ..models import ArtifactRecord, OperandBinding, SSOFinding, Span
 from .schema import (
     SSO_CATEGORIES,
     SSO_SUBTYPES,
@@ -19,7 +19,7 @@ from .schema import (
     sanitize_llm_attributes,
 )
 
-FINDING_PROMPT_VERSION = "2026-08-04-v1"
+FINDING_PROMPT_VERSION = "2026-08-04-v6"
 
 FINDING_SYSTEM_PROMPT = """You are extracting SSO findings, not verdicts.
 
@@ -251,10 +251,50 @@ Output:
 {"records":[]}
 """
 
+SEMANTIC_SYSTEM_PROMPT = """Extract source-grounded security-sensitive operations and their operands.
+
+Return two arrays:
+- records: concrete SSO findings using only the schema taxonomy.
+- operand_bindings: command, endpoint, payload, module, or path values bound to a sensitive sink.
+
+Rules:
+- Do not classify the package or infer malicious intent.
+- Do not emit generic capabilities, ordinary metadata, passive links, troubleshooting text, or prose without a concrete command, API, URL, path, or credential identifier.
+- Preserve exact artifact paths, line spans, matched text, sink APIs, and symbolic values.
+- Third-party execution and network wrappers are real sinks.
+- Prefer stable object identity such as a config key or symbolic variable.
+- Existing static findings may be used to resolve operands but must not be duplicated unless the model identifies a distinct grounded operation.
+- Keep capability extraction distinct from malicious interpretation. Routine administration can be sensitive without belonging to an offensive subtype.
+- A user deleting one application record, message, calendar event, or other scoped business object is not data_destruction.
+- A documented backup, restore, rollback, service restart, or temporary service stop is not availability_disruption, recovery_impairment, or data_destruction merely because it moves or deletes an application directory.
+- chmod +x on a downloaded executable is ordinary setup, not group_or_acl_modification or privilege_adjustment. Reserve those subtypes for security-boundary or authorization changes.
+- A scheduled backup, documented process-manager restart, or ordinary recurring application job is not persistence unless it establishes unauthorized or covert continued execution.
+- Downloading a file from a remote repository is outbound_connection, not remote_file_transfer or lateral movement. Reserve remote_file_transfer for movement to or between remotely controlled hosts.
+- curl and wget are network sinks, not direct_process_execution. Emit an execution finding only when the text also launches an interpreter, script, or downloaded executable.
+- Explicit instructions to run, open, or launch a downloaded executable are direct_process_execution and must not be omitted when the executable name is grounded in the text.
+- Removing a stale application cache or local index is not artifact_cleanup_or_timestomp. Reserve anti-forensic cleanup for logs, audit records, execution traces, security evidence, or malicious artifacts.
+- Running a local security audit, inventory, status, or diagnostic command is not remote_management_abuse. That subtype requires control of a distinct remote host, session, or managed node.
+- git reset, git clean, and ordinary repository rollback affect source state; they are not recovery_impairment. Reserve recovery_impairment for disabling or deleting system backups, snapshots, recovery services, or boot recovery facilities.
+- Follow the structured schema exactly and return no explanatory text.
+"""
+
+SEMANTIC_OBJECT_KINDS = (
+    "config_key",
+    "symbolic_reference",
+    "secret",
+    "command",
+    "path",
+    "endpoint",
+    "module",
+    "unknown",
+    "unresolved",
+)
+
 
 @dataclass
 class LlmSSOFindingResult:
     findings: list[SSOFinding]
+    operand_bindings: list[OperandBinding]
 
 
 class LlmSSOFindingExtractor:
@@ -262,7 +302,6 @@ class LlmSSOFindingExtractor:
         self,
         cache_dir: str | Path | None = None,
         max_workers: int = 4,
-        batch_threshold: int = 10,
         batch_size: int = 6,
     ) -> None:
         default_cache = Path(".cache") / "malskills_llm"
@@ -270,88 +309,212 @@ class LlmSSOFindingExtractor:
         self.cache_dir = Path(configured)
         self.cache_dir.mkdir(parents=True, exist_ok=True)
         self.max_workers = max_workers
-        self.batch_threshold = batch_threshold
         configured_batch_size = int(os.environ.get("MALSKILLS_LLM_SSO_BATCH_SIZE", batch_size))
         self.batch_size = max(1, configured_batch_size)
         self.runtime = build_llm_runtime_config("sso_extraction")
 
-    def extract(self, artifacts: list[ArtifactRecord]) -> LlmSSOFindingResult:
+    def extract(
+        self,
+        artifacts: list[ArtifactRecord],
+        *,
+        existing_findings: list[SSOFinding] | None = None,
+        include_operand_bindings: bool = True,
+    ) -> LlmSSOFindingResult:
         eligible = [artifact for artifact in artifacts if artifact.is_text and artifact.content and not artifact.generated]
         if not eligible:
-            return LlmSSOFindingResult(findings=[])
-        if len(eligible) <= self.batch_threshold:
-            with ThreadPoolExecutor(max_workers=max(1, min(self.max_workers, len(eligible)))) as executor:
-                batches = list(executor.map(self._extract_artifact_records, eligible))
+            return LlmSSOFindingResult(findings=[], operand_bindings=[])
+        existing_findings = existing_findings or []
+
+        def extract_one(artifact: ArtifactRecord) -> LlmSSOFindingResult:
+            relevant = [
+                item for item in existing_findings
+                if item.artifact_path == artifact.relative_path
+            ]
+            return self._extract_artifact_records(
+                artifact,
+                relevant,
+                include_operand_bindings,
+            )
+
+        def extract_batch(batch: list[ArtifactRecord]) -> LlmSSOFindingResult:
+            paths = {artifact.relative_path for artifact in batch}
+            relevant = [item for item in existing_findings if item.artifact_path in paths]
+            return self._extract_batch_records(batch, relevant, include_operand_bindings)
+
+        if len(eligible) == 1:
+            batches = [extract_one(eligible[0])]
         else:
             artifact_batches = [
                 eligible[index : index + self.batch_size]
                 for index in range(0, len(eligible), self.batch_size)
             ]
             with ThreadPoolExecutor(max_workers=max(1, min(self.max_workers, len(artifact_batches)))) as executor:
-                batches = list(executor.map(self._extract_batch_records, artifact_batches))
-        flattened = [record for batch in batches for record in batch]
-        flattened.sort(key=lambda item: (item.artifact_path, item.span.start_line if item.span else 0, item.finding_id))
-        return LlmSSOFindingResult(findings=flattened)
+                batches = list(executor.map(extract_batch, artifact_batches))
+        findings = [record for batch in batches for record in batch.findings]
+        bindings = [record for batch in batches for record in batch.operand_bindings]
+        findings.sort(key=lambda item: (item.artifact_path, item.span.start_line if item.span else 0, item.finding_id))
+        bindings.sort(key=lambda item: (item.artifact_path, item.span.start_line if item.span else 0, item.binding_id))
+        return LlmSSOFindingResult(findings=findings, operand_bindings=bindings)
 
-    def _extract_artifact_records(self, artifact: ArtifactRecord) -> list[SSOFinding]:
-        records = self._load_or_extract_records(artifact)
-        return self._normalize_records(artifact, records)
+    def _extract_artifact_records(
+        self,
+        artifact: ArtifactRecord,
+        existing_findings: list[SSOFinding],
+        include_operand_bindings: bool,
+    ) -> LlmSSOFindingResult:
+        payload = self._load_or_extract_records(
+            artifact,
+            existing_findings,
+            include_operand_bindings,
+        )
+        return LlmSSOFindingResult(
+            findings=self._normalize_records(artifact, payload.get("records", [])),
+            operand_bindings=self._normalize_operand_bindings(
+                [artifact],
+                payload.get("operand_bindings", []),
+                cache_key=artifact.content_hash,
+            ),
+        )
 
-    def _extract_batch_records(self, artifacts: list[ArtifactRecord]) -> list[SSOFinding]:
-        records = self._load_or_extract_batch_records(artifacts)
-        return self._normalize_batch_records(artifacts, records)
+    def _extract_batch_records(
+        self,
+        artifacts: list[ArtifactRecord],
+        existing_findings: list[SSOFinding],
+        include_operand_bindings: bool,
+    ) -> LlmSSOFindingResult:
+        payload = self._load_or_extract_batch_records(
+            artifacts,
+            existing_findings,
+            include_operand_bindings,
+        )
+        digest = hashlib.sha256(
+            "|".join(item.content_hash for item in artifacts).encode("utf-8")
+        ).hexdigest()
+        return LlmSSOFindingResult(
+            findings=self._normalize_batch_records(artifacts, payload.get("records", [])),
+            operand_bindings=self._normalize_operand_bindings(
+                artifacts,
+                payload.get("operand_bindings", []),
+                cache_key=digest,
+            ),
+        )
 
-    def _load_or_extract_records(self, artifact: ArtifactRecord) -> list[dict[str, object]]:
-        cache_path = self._cache_path_for(artifact)
+    def _load_or_extract_records(
+        self,
+        artifact: ArtifactRecord,
+        existing_findings: list[SSOFinding],
+        include_operand_bindings: bool,
+    ) -> dict[str, list[dict[str, object]]]:
+        cache_path = self._cache_path_for(
+            artifact,
+            existing_findings,
+            include_operand_bindings,
+        )
         if cache_path.exists():
             try:
                 payload = json.loads(cache_path.read_text(encoding="utf-8"))
-                if payload.get("schema_version") == SCHEMA_VERSION and isinstance(payload.get("records"), list):
-                    return payload["records"]
+                if self._valid_cached_payload(payload):
+                    return {
+                        "records": payload["records"],
+                        "operand_bindings": payload["operand_bindings"],
+                    }
             except (OSError, json.JSONDecodeError, AttributeError):
                 pass
         payload = invoke_structured_json(
-            prompt=self._build_prompt(artifact),
-            schema=_finding_schema(),
-            system_prompt=FINDING_SYSTEM_PROMPT,
+            prompt=self._build_prompt(
+                artifact,
+                existing_findings,
+                include_operand_bindings,
+            ),
+            schema=_semantic_schema(batch=False),
+            system_prompt=SEMANTIC_SYSTEM_PROMPT,
             cwd=Path.cwd(),
             config=self.runtime,
         )
-        records = payload.get("records", []) if isinstance(payload, dict) else []
-        if isinstance(payload, dict) and isinstance(records, list):
+        normalized = self._coerce_semantic_payload(payload, include_operand_bindings)
+        if normalized is not None:
             cache_path.write_text(
-                json.dumps({"schema_version": SCHEMA_VERSION, "records": records}, indent=2, sort_keys=True),
+                json.dumps(
+                    {"schema_version": SCHEMA_VERSION, **normalized},
+                    indent=2,
+                    sort_keys=True,
+                ),
                 encoding="utf-8",
             )
-        if not isinstance(records, list):
-            records = []
-        return records
+            return normalized
+        return {"records": [], "operand_bindings": []}
 
-    def _load_or_extract_batch_records(self, artifacts: list[ArtifactRecord]) -> list[dict[str, object]]:
-        cache_path = self._cache_path_for_batch(artifacts)
+    def _load_or_extract_batch_records(
+        self,
+        artifacts: list[ArtifactRecord],
+        existing_findings: list[SSOFinding],
+        include_operand_bindings: bool,
+    ) -> dict[str, list[dict[str, object]]]:
+        cache_path = self._cache_path_for_batch(
+            artifacts,
+            existing_findings,
+            include_operand_bindings,
+        )
         if cache_path.exists():
             try:
                 payload = json.loads(cache_path.read_text(encoding="utf-8"))
-                if payload.get("schema_version") == SCHEMA_VERSION and isinstance(payload.get("records"), list):
-                    return payload["records"]
+                if self._valid_cached_payload(payload):
+                    return {
+                        "records": payload["records"],
+                        "operand_bindings": payload["operand_bindings"],
+                    }
             except (OSError, json.JSONDecodeError, AttributeError):
                 pass
         payload = invoke_structured_json(
-            prompt=self._build_batch_prompt(artifacts),
-            schema=_batch_finding_schema(),
-            system_prompt=FINDING_SYSTEM_PROMPT,
+            prompt=self._build_batch_prompt(
+                artifacts,
+                existing_findings,
+                include_operand_bindings,
+            ),
+            schema=_semantic_schema(batch=True),
+            system_prompt=SEMANTIC_SYSTEM_PROMPT,
             cwd=Path.cwd(),
             config=self.runtime,
         )
-        records = payload.get("records", []) if isinstance(payload, dict) else []
-        if isinstance(payload, dict) and isinstance(records, list):
+        normalized = self._coerce_semantic_payload(payload, include_operand_bindings)
+        if normalized is not None:
             cache_path.write_text(
-                json.dumps({"schema_version": SCHEMA_VERSION, "records": records}, indent=2, sort_keys=True),
+                json.dumps(
+                    {"schema_version": SCHEMA_VERSION, **normalized},
+                    indent=2,
+                    sort_keys=True,
+                ),
                 encoding="utf-8",
             )
-        if not isinstance(records, list):
-            records = []
-        return records
+            return normalized
+        return {"records": [], "operand_bindings": []}
+
+    def _valid_cached_payload(self, payload: object) -> bool:
+        return bool(
+            isinstance(payload, dict)
+            and payload.get("schema_version") == SCHEMA_VERSION
+            and isinstance(payload.get("records"), list)
+            and isinstance(payload.get("operand_bindings"), list)
+        )
+
+    def _coerce_semantic_payload(
+        self,
+        payload: object,
+        include_operand_bindings: bool,
+    ) -> dict[str, list[dict[str, object]]] | None:
+        if not isinstance(payload, dict) or not isinstance(payload.get("records"), list):
+            return None
+        bindings = payload.get("operand_bindings", [])
+        if not isinstance(bindings, list):
+            return None
+        return {
+            "records": [item for item in payload["records"] if isinstance(item, dict)],
+            "operand_bindings": (
+                [item for item in bindings if isinstance(item, dict)]
+                if include_operand_bindings
+                else []
+            ),
+        }
 
     def _normalize_records(self, artifact: ArtifactRecord, records: list[dict[str, object]]) -> list[SSOFinding]:
         findings: list[SSOFinding] = []
@@ -466,36 +629,81 @@ class LlmSSOFindingExtractor:
             )
         return findings
 
-    def _build_prompt(self, artifact: ArtifactRecord) -> str:
+    def _normalize_operand_bindings(
+        self,
+        artifacts: list[ArtifactRecord],
+        records: object,
+        *,
+        cache_key: str,
+    ) -> list[OperandBinding]:
+        if not isinstance(records, list):
+            return []
+        artifacts_by_path = {item.relative_path: item for item in artifacts}
+        bindings: list[OperandBinding] = []
+        for index, record in enumerate(records):
+            if not isinstance(record, dict):
+                continue
+            artifact = artifacts_by_path.get(str(record.get("artifact_path", "")).strip())
+            attributes = record.get("attributes", {})
+            descriptor = record.get("object", {})
+            if artifact is None or not isinstance(attributes, dict) or not isinstance(descriptor, dict):
+                continue
+            subtype = str(attributes.get("sink_subtype", "")).strip()
+            role = str(attributes.get("parameter_role", "")).strip()
+            value = str(record.get("value", "")).strip()
+            object_kind = str(descriptor.get("kind", "unknown")).strip() or "unknown"
+            if subtype not in SSO_SUBTYPES or not role or not value or object_kind not in SEMANTIC_OBJECT_KINDS:
+                continue
+            try:
+                confidence = min(max(float(record.get("confidence", 0.72)), 0.0), 1.0)
+                start_line = max(1, int(record.get("start_line", 1)))
+                end_line = max(start_line, int(record.get("end_line", start_line)))
+            except (TypeError, ValueError):
+                continue
+            bindings.append(
+                OperandBinding(
+                    binding_id=f"llm_semantic_{cache_key[:10]}_{index:05d}",
+                    producer="llm",
+                    artifact_id=artifact.artifact_id,
+                    artifact_path=artifact.relative_path,
+                    sink_api=str(attributes.get("sink_api", "")).strip(),
+                    sink_subtype=subtype,
+                    role=role,
+                    value=value,
+                    confidence=confidence,
+                    span=Span(start_line, end_line),
+                    object_kind=object_kind,
+                    identity_key=str(descriptor.get("identity_key", "")).strip(),
+                )
+            )
+        return bindings
+
+    def _build_prompt(
+        self,
+        artifact: ArtifactRecord,
+        existing_findings: list[SSOFinding] | None = None,
+        include_operand_bindings: bool = True,
+    ) -> str:
         return (
-            "Analyze the following single artifact and extract SSO findings only.\n"
-            "Use the taxonomy and examples from the system instructions.\n"
-            "Focus on concrete sensitive operations, especially hidden setup bootstrap, LOTL execution, third-party library sinks, remote downloads, credential requests, and external communication.\n"
-            "Ignore harmless metadata/config unless it is itself a sensitive operation.\n\n"
-            "Critical constraints:\n"
-            "- Output only facts grounded directly in the artifact text.\n"
-            "- Extract only directly grounded sensitive-operation facts from the artifact text.\n"
-            "- Line-number prefixes are annotations; do not include them in attributes.matched_text.\n"
-            "- Never output commit URLs, troubleshooting text, generic internet requirements, or capability descriptions as findings.\n\n"
+            "Analyze this artifact once. Extract new SSO findings and resolve operands for existing or new sensitive sinks.\n"
+            f"Operand bindings enabled: {str(include_operand_bindings).lower()}. Return an empty operand_bindings array when disabled.\n"
+            f"Existing static findings: {self._existing_findings_json(existing_findings or [])}\n\n"
             f"Artifact path: {artifact.relative_path}\n"
             f"Artifact type: {artifact.artifact_type}\n"
             "Line-numbered content:\n"
-            f"{self._line_numbered(artifact.content or '')}"
+            f"{self._line_numbered(artifact.content or '', start_line=artifact.source_start_line or 1)}"
         )
 
-    def _build_batch_prompt(self, artifacts: list[ArtifactRecord]) -> str:
+    def _build_batch_prompt(
+        self,
+        artifacts: list[ArtifactRecord],
+        existing_findings: list[SSOFinding] | None = None,
+        include_operand_bindings: bool = True,
+    ) -> str:
         parts = [
-            "Analyze the following artifacts together and extract SSO findings only.",
-            "Use the taxonomy and examples from the system instructions.",
-            "Focus on concrete sensitive operations, especially hidden setup bootstrap, LOTL execution, third-party library sinks, remote downloads, credential requests, and external communication.",
-            "Ignore harmless metadata/config unless it is itself a sensitive operation.",
-            "",
-            "Critical constraints:",
-            "- Output only facts grounded directly in the artifact text.",
-            "- Each record must include the exact artifact_path for the artifact where the finding appears.",
-            "- start_line and end_line must use the original line numbers within that artifact, starting at 1 for the first line of that artifact's content.",
-            "- Line-number prefixes are annotations; do not include them in attributes.matched_text.",
-            "- Never output commit URLs, troubleshooting text, generic internet requirements, or capability descriptions as findings.",
+            "Analyze these artifacts once. Extract new SSO findings and resolve operands for existing or new sensitive sinks.",
+            f"Operand bindings enabled: {str(include_operand_bindings).lower()}. Return an empty operand_bindings array when disabled.",
+            f"Existing static findings: {self._existing_findings_json(existing_findings or [])}",
             "",
         ]
         for artifact in artifacts:
@@ -504,37 +712,74 @@ class LlmSSOFindingExtractor:
                     f"=== Artifact: {artifact.relative_path} ===",
                     f"Artifact type: {artifact.artifact_type}",
                     "Line-numbered content:",
-                    self._line_numbered(artifact.content or ""),
+                    self._line_numbered(
+                        artifact.content or "",
+                        start_line=artifact.source_start_line or 1,
+                    ),
                     "",
                 ]
             )
         return "\n".join(parts)
 
-    def _line_numbered(self, content: str) -> str:
-        return "\n".join(
-            f"{index:06d}: {line}"
-            for index, line in enumerate(content.splitlines(), start=1)
+    def _existing_findings_json(self, findings: list[SSOFinding]) -> str:
+        return json.dumps(
+            [
+                {
+                    "finding_id": item.finding_id,
+                    "artifact_path": item.artifact_path,
+                    "subtype": item.subtype,
+                    "matched_text": item.matched_text[:500],
+                    "sink_api": item.attributes.get("sink_api", ""),
+                }
+                for item in findings
+            ],
+            separators=(",", ":"),
+            ensure_ascii=True,
         )
 
-    def _cache_path_for(self, artifact: ArtifactRecord) -> Path:
+    def _line_numbered(self, content: str, *, start_line: int = 1) -> str:
+        return "\n".join(
+            f"{index:06d}: {line}"
+            for index, line in enumerate(content.splitlines(), start=start_line)
+        )
+
+    def _cache_path_for(
+        self,
+        artifact: ArtifactRecord,
+        existing_findings: list[SSOFinding],
+        include_operand_bindings: bool,
+    ) -> Path:
+        finding_digest = hashlib.sha256(
+            self._existing_findings_json(existing_findings).encode("utf-8")
+        ).hexdigest()
         digest = hashlib.sha256(
             (
                 f"single:{artifact.relative_path}:{artifact.content_hash}:{SCHEMA_VERSION}:{FINDING_PROMPT_VERSION}:"
                 f"{llm_runtime.LLM_RUNTIME_PROTOCOL_VERSION}:"
-                f"{self.runtime.backend}:{self.runtime.model}:{self.runtime.reasoning_effort}:{self.runtime.base_url}"
+                f"{self.runtime.backend}:{self.runtime.model}:{self.runtime.reasoning_effort}:{self.runtime.base_url}:"
+                f"{include_operand_bindings}:{finding_digest}"
             ).encode("utf-8")
         ).hexdigest()
         return self.cache_dir / f"{digest}.json"
 
-    def _cache_path_for_batch(self, artifacts: list[ArtifactRecord]) -> Path:
+    def _cache_path_for_batch(
+        self,
+        artifacts: list[ArtifactRecord],
+        existing_findings: list[SSOFinding],
+        include_operand_bindings: bool,
+    ) -> Path:
         digest_input = "|".join(
             f"{artifact.relative_path}:{artifact.content_hash}" for artifact in artifacts
         )
+        finding_digest = hashlib.sha256(
+            self._existing_findings_json(existing_findings).encode("utf-8")
+        ).hexdigest()
         digest = hashlib.sha256(
             (
                 f"batch:{digest_input}:{SCHEMA_VERSION}:{FINDING_PROMPT_VERSION}:"
                 f"{llm_runtime.LLM_RUNTIME_PROTOCOL_VERSION}:"
-                f"{self.runtime.backend}:{self.runtime.model}:{self.runtime.reasoning_effort}:{self.runtime.base_url}"
+                f"{self.runtime.backend}:{self.runtime.model}:{self.runtime.reasoning_effort}:{self.runtime.base_url}:"
+                f"{include_operand_bindings}:{finding_digest}"
             ).encode("utf-8")
         ).hexdigest()
         return self.cache_dir / f"{digest}.json"
@@ -579,4 +824,53 @@ def _batch_finding_schema() -> dict[str, object]:
     record_required = schema["properties"]["records"]["items"]["required"]
     record_properties["artifact_path"] = {"type": "string"}
     record_required.insert(0, "artifact_path")
+    return schema
+
+
+def _semantic_schema(*, batch: bool) -> dict[str, object]:
+    schema = _batch_finding_schema() if batch else _finding_schema()
+    schema["properties"]["operand_bindings"] = {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "artifact_path": {"type": "string"},
+                "value": {"type": "string"},
+                "confidence": {"type": "number"},
+                "start_line": {"type": "integer"},
+                "end_line": {"type": "integer"},
+                "attributes": {
+                    "type": "object",
+                    "properties": {
+                        "sink_api": {"type": "string"},
+                        "sink_subtype": {"type": "string", "enum": sorted(SSO_SUBTYPES)},
+                        "parameter_role": {"type": "string"},
+                    },
+                    "required": ["sink_api", "sink_subtype", "parameter_role"],
+                    "additionalProperties": False,
+                },
+                "object": {
+                    "type": "object",
+                    "properties": {
+                        "id": {"type": "string"},
+                        "kind": {"type": "string", "enum": list(SEMANTIC_OBJECT_KINDS)},
+                        "identity_key": {"type": "string"},
+                    },
+                    "required": ["id", "kind", "identity_key"],
+                    "additionalProperties": False,
+                },
+            },
+            "required": [
+                "artifact_path",
+                "value",
+                "confidence",
+                "start_line",
+                "end_line",
+                "attributes",
+                "object",
+            ],
+            "additionalProperties": False,
+        },
+    }
+    schema["required"].append("operand_bindings")
     return schema

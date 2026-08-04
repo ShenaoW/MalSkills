@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 from pathlib import Path
+import re
 from typing import Any
 
 from ..models import (
@@ -107,12 +108,14 @@ class PatternReasoner:
         graph: dict[str, Any],
         learned_workflow_rules_dir: str | Path | None,
     ) -> tuple[list[PatternMatch], SkillVerdict, list[WorkflowDiscovery]]:
-        formal_patterns, _ = self._formal_reason(
+        formal_patterns, formal_verdict = self._formal_reason(
             skill_path,
             ssos,
             graph=graph,
             learned_workflow_rules_dir=learned_workflow_rules_dir,
         )
+        if not self._should_run_llm_reasoning(ssos, graph, formal_patterns):
+            return formal_patterns, formal_verdict, []
         llm_patterns, discoveries = self._llm_reasoner.reason(
             skill_path=skill_path,
             artifacts=artifacts,
@@ -129,6 +132,20 @@ class PatternReasoner:
         merged = self._finalize_patterns([*formal_patterns, *llm_patterns])
         verdict = self._verdicts.patterns_to_verdict(skill_path, merged)
         return merged, verdict, discoveries
+
+    def _should_run_llm_reasoning(
+        self,
+        ssos: list[SSORecord],
+        graph: dict[str, Any],
+        formal_patterns: list[PatternMatch],
+    ) -> bool:
+        if formal_patterns or len(ssos) < 2:
+            return False
+        for index, left in enumerate(ssos):
+            for right in ssos[index + 1 :]:
+                if left.subtype != right.subtype and self._workflow_rules.connected(left, right, graph):
+                    return True
+        return False
 
     def _workflow_discovery_covered(
         self,
@@ -202,6 +219,22 @@ class PatternReasoner:
         for sso in execs:
             linked_fetches = self._linked_candidates(sso, fetches)
             if not linked_fetches:
+                linked_fetches = [
+                    candidate
+                    for candidate in fetches
+                    if self._same_delivery_object(sso, candidate)
+                ]
+            if not linked_fetches:
+                if self._is_embedded_delivery_execution(sso):
+                    patterns.append(
+                        self._pattern(
+                            "Execution_and_Delivery",
+                            "high",
+                            ["R_EMBEDDED_DELIVERY_EXECUTION"],
+                            [sso],
+                            "One grounded command combines encoded or remote payload delivery with shell execution.",
+                        )
+                    )
                 continue
             support = [sso, linked_fetches[0]]
             patterns.append(
@@ -217,28 +250,47 @@ class PatternReasoner:
 
     def _rule_persistence(self, by_type: dict[str, list[SSORecord]]) -> list[PatternMatch]:
         patterns: list[PatternMatch] = []
+        execution = [
+            item
+            for item in self._execution_ssos(by_type)
+            if self._is_embedded_delivery_execution(item)
+        ]
         for sso in self._persistence_ssos(by_type):
+            linked_execution = self._linked_candidates(sso, execution)
+            if not linked_execution:
+                continue
             patterns.append(
                 self._pattern(
                     "Persistence",
                     "high",
-                    ["R_PERSISTENCE"],
-                    [sso],
-                    "The skill establishes persistence through startup, service, scheduled, event, or boot-chain control.",
+                    ["R_PERSISTENCE_EXECUTION_CHAIN"],
+                    [sso, linked_execution[0]],
+                    "A persistence mechanism is connected to a high-risk delivery or execution chain.",
                 )
             )
         return patterns
 
     def _rule_privilege_and_identity_abuse(self, by_type: dict[str, list[SSORecord]]) -> list[PatternMatch]:
         patterns: list[PatternMatch] = []
+        execution = [
+            item
+            for item in self._execution_ssos(by_type)
+            if self._is_embedded_delivery_execution(item)
+        ]
         for sso in self._privilege_ssos(by_type):
+            linked_execution = self._linked_candidates(sso, execution)
+            support = [sso]
+            if linked_execution:
+                support.append(linked_execution[0])
+            elif not self._is_embedded_delivery_execution(sso):
+                continue
             patterns.append(
                 self._pattern(
                     "Privilege_Escalation_and_Identity_Abuse",
                     "high",
-                    ["R_PRIVILEGE_IDENTITY"],
-                    [sso],
-                    "The skill manipulates identities, privileges, tokens, groups, or trust boundaries.",
+                    ["R_PRIVILEGE_IDENTITY_EXECUTION_CHAIN"],
+                    support,
+                    "A privilege or identity operation is part of a high-risk delivery or execution chain.",
                 )
             )
         return patterns
@@ -315,6 +367,8 @@ class PatternReasoner:
     def _rule_lateral_movement(self, by_type: dict[str, list[SSORecord]]) -> list[PatternMatch]:
         patterns: list[PatternMatch] = []
         for sso in self._lateral_movement_ssos(by_type):
+            if sso.subtype in {"remote_file_transfer", "remote_management_abuse"} and not self._is_explicit_remote_control(sso):
+                continue
             patterns.append(
                 self._pattern(
                     "Lateral_Movement",
@@ -329,6 +383,8 @@ class PatternReasoner:
     def _rule_defense_evasion(self, by_type: dict[str, list[SSORecord]]) -> list[PatternMatch]:
         patterns: list[PatternMatch] = []
         for sso in self._defense_evasion_ssos(by_type):
+            if sso.subtype == "artifact_cleanup_or_timestomp" and not self._targets_security_evidence(sso):
+                continue
             patterns.append(
                 self._pattern(
                     "Defense_Evasion_and_Anti_Forensics",
@@ -343,6 +399,10 @@ class PatternReasoner:
     def _rule_destruction_and_ransomware(self, by_type: dict[str, list[SSORecord]]) -> list[PatternMatch]:
         patterns: list[PatternMatch] = []
         for sso in self._impact_ssos(by_type):
+            if sso.subtype in {"data_destruction", "availability_disruption"} and not self._is_system_wide_impact(sso):
+                continue
+            if sso.subtype == "recovery_impairment" and not self._targets_system_recovery(sso):
+                continue
             patterns.append(
                 self._pattern(
                     "Destruction_and_Ransomware",
@@ -453,10 +513,139 @@ class PatternReasoner:
             "listener_and_receive",
             "tunneling_and_forwarding",
             "proxy_or_route_manipulation",
-            "protocol_encapsulation_or_encrypted_comm",
         ]:
             values.extend(by_type.get(key, []))
+        execution = [
+            item
+            for item in self._execution_ssos(by_type)
+            if self._is_embedded_delivery_execution(item)
+        ]
+        for sso in by_type.get("protocol_encapsulation_or_encrypted_comm", []):
+            if self._linked_candidates(sso, execution):
+                values.append(sso)
         return values
+
+    def _is_embedded_delivery_execution(self, sso: SSORecord) -> bool:
+        text = self._sso_text(sso).lower()
+        has_shell = any(token in text for token in ("| bash", "| sh", "bash -c", "sh -c"))
+        encoded = "base64" in text or "powershell -enc" in text or "powershell -encodedcommand" in text
+        downloader = "curl " in text or "wget " in text
+        return (encoded and has_shell) or (downloader and has_shell)
+
+    def _same_delivery_object(self, execution: SSORecord, fetch: SSORecord) -> bool:
+        if not self._nearby_source_span(execution, fetch, max_lines=20):
+            return False
+        return bool(
+            self._delivery_identity_tokens(execution)
+            & self._delivery_identity_tokens(fetch)
+        )
+
+    def _nearby_source_span(
+        self,
+        left: SSORecord,
+        right: SSORecord,
+        *,
+        max_lines: int,
+    ) -> bool:
+        if not set(left.artifact_paths) & set(right.artifact_paths):
+            return False
+        left_line = int(left.attributes.get("source_start_line", 0) or 0)
+        right_line = int(right.attributes.get("source_start_line", 0) or 0)
+        return bool(left_line and right_line and abs(left_line - right_line) <= max_lines)
+
+    def _delivery_identity_tokens(self, sso: SSORecord) -> set[str]:
+        tokens: set[str] = set()
+        for value in re.findall(
+            r"[A-Za-z0-9_-]+\.(?:zip|tar|tgz|gz|exe|msi|pkg|dmg|sh|ps1)",
+            self._sso_text(sso),
+            flags=re.IGNORECASE,
+        ):
+            normalized = re.sub(r"\.(?:zip|tar|tgz|gz|exe|msi|pkg|dmg|sh|ps1)$", "", value.lower())
+            if len(normalized) >= 5:
+                tokens.add(normalized)
+        return tokens
+
+    def _is_system_wide_impact(self, sso: SSORecord) -> bool:
+        text = self._sso_text(sso).lower()
+        destructive_tokens = (
+            "rm -rf /",
+            "rm -fr /",
+            "mkfs",
+            "diskpart clean",
+            "format c:",
+            "dd if=/dev/zero",
+            "shred ",
+            "cipher /w",
+            "vssadmin delete shadows",
+            "wbadmin delete catalog",
+            "bcdedit ",
+        )
+        return any(token in text for token in destructive_tokens)
+
+    def _targets_security_evidence(self, sso: SSORecord) -> bool:
+        text = self._sso_text(sso).lower()
+        return any(
+            token in text
+            for token in (
+                " log",
+                "/log",
+                "audit",
+                "history",
+                "eventlog",
+                "event log",
+                "prefetch",
+                "forensic",
+                "evidence",
+                "defender",
+                "security tool",
+            )
+        )
+
+    def _targets_system_recovery(self, sso: SSORecord) -> bool:
+        text = self._sso_text(sso).lower()
+        return any(
+            token in text
+            for token in (
+                "vssadmin",
+                "wbadmin",
+                "shadow copy",
+                "recovery partition",
+                "recovery environment",
+                "system restore",
+                "backup catalog",
+                "bcdedit",
+                "timeshift",
+                "time machine backup",
+            )
+        )
+
+    def _is_explicit_remote_control(self, sso: SSORecord) -> bool:
+        text = self._sso_text(sso).lower()
+        return any(
+            token in text
+            for token in (
+                "ssh ",
+                "scp ",
+                "sftp ",
+                "rsync ",
+                "winrm",
+                "psexec",
+                "remote host",
+                "remote node",
+                "remote session",
+                "kubectl exec",
+                "ansible ",
+            )
+        )
+
+    def _sso_text(self, sso: SSORecord) -> str:
+        values = [
+            sso.attributes.get("matched_text", ""),
+            sso.attributes.get("text", ""),
+            sso.attributes.get("command", ""),
+            sso.attributes.get("endpoint", ""),
+        ]
+        return " ".join(str(value) for value in values if value)
 
     def _lateral_movement_ssos(self, by_type: dict[str, list[SSORecord]]) -> list[SSORecord]:
         values: list[SSORecord] = []

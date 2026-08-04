@@ -510,7 +510,6 @@ print("Single-skill verdict")
 print(f"- label: {verdict.get('label')}")
 print(f"- score: {verdict.get('score')}")
 print(f"- malicious_patterns: {verdict.get('malicious_patterns', [])}")
-print(f"- suspicious_patterns: {verdict.get('suspicious_patterns', [])}")
 print("Engine participation")
 print(f"- llm_backend: {llm_backend}")
 print(f"- llm_model: {llm_model}")
@@ -546,7 +545,7 @@ metrics = payload["metrics"]
 status_counts = Counter(row["status"] for row in payload["results"])
 pred_counts = Counter(row["predicted"] for row in payload["results"])
 label_pred = Counter((row["label"], row["predicted"]) for row in payload["results"])
-risk_positive = {"suspicious", "malicious"}
+risk_positive = {"malicious"}
 risk_tp = sum(1 for row in payload["results"] if row["label"] == "malicious" and row["predicted"] in risk_positive)
 risk_fp = sum(1 for row in payload["results"] if row["label"] != "malicious" and row["predicted"] in risk_positive)
 risk_fn = sum(1 for row in payload["results"] if row["label"] == "malicious" and row["predicted"] not in risk_positive)
@@ -574,9 +573,9 @@ print("Mini benchmark summary")
 print(f"- entries: {int(metrics['num_entries'])}")
 print(f"- strict_precision_malicious_only: {metrics['precision']}")
 print(f"- strict_recall_malicious_only: {metrics['recall']}")
-print(f"- risk_precision_suspicious_or_malicious: {risk_precision:.4f}")
-print(f"- risk_recall_suspicious_or_malicious: {risk_recall:.4f}")
-print(f"- risk_f1_suspicious_or_malicious: {risk_f1:.4f}")
+print(f"- malicious_precision: {risk_precision:.4f}")
+print(f"- malicious_recall: {risk_recall:.4f}")
+print(f"- malicious_f1: {risk_f1:.4f}")
 print(f"- risk_confusion: TP={risk_tp}, FP={risk_fp}, FN={risk_fn}, TN={risk_tn}")
 print(f"- status_counts: {dict(status_counts)}")
 print(f"- prediction_counts: {dict(pred_counts)}")
@@ -683,14 +682,6 @@ def benchmark_summary(root: Path):
     status_counts = Counter(row["status"] for row in payload["results"])
     pred_counts = Counter(row["predicted"] for row in payload["results"])
     label_pred = Counter(f"{row['label']} -> {row['predicted']}" for row in payload["results"])
-    risk_positive = {"suspicious", "malicious"}
-    risk_tp = sum(1 for row in payload["results"] if row["label"] == "malicious" and row["predicted"] in risk_positive)
-    risk_fp = sum(1 for row in payload["results"] if row["label"] != "malicious" and row["predicted"] in risk_positive)
-    risk_fn = sum(1 for row in payload["results"] if row["label"] == "malicious" and row["predicted"] not in risk_positive)
-    risk_tn = sum(1 for row in payload["results"] if row["label"] != "malicious" and row["predicted"] not in risk_positive)
-    risk_precision = risk_tp / (risk_tp + risk_fp) if risk_tp + risk_fp else 0.0
-    risk_recall = risk_tp / (risk_tp + risk_fn) if risk_tp + risk_fn else 0.0
-    risk_f1 = 2 * risk_precision * risk_recall / (risk_precision + risk_recall) if risk_precision + risk_recall else 0.0
     case_root = root / "cases" / variant
     llm_cases = 0
     yasa_cases = 0
@@ -708,10 +699,6 @@ def benchmark_summary(root: Path):
         "recall": metrics["recall"],
         "f1": metrics["f1"],
         "confusion": f"TP={int(metrics['tp'])}, FP={int(metrics['fp'])}, FN={int(metrics['fn'])}, TN={int(metrics['tn'])}",
-        "risk_precision": round(risk_precision, 4),
-        "risk_recall": round(risk_recall, 4),
-        "risk_f1": round(risk_f1, 4),
-        "risk_confusion": f"TP={risk_tp}, FP={risk_fp}, FN={risk_fn}, TN={risk_tn}",
         "status_counts": dict(status_counts),
         "prediction_counts": dict(pred_counts),
         "label_prediction_counts": dict(label_pred),
@@ -728,7 +715,7 @@ single_resolution_methods = resolution_methods(single_root / "operand_resolution
 mini = benchmark_summary(output_dir / "eval_mini")
 full = benchmark_summary(output_dir / "eval_full")
 single_label = single_verdict.get("label") if single_verdict else None
-single_risk_alert = single_label in {"suspicious", "malicious"}
+single_risk_alert = single_label == "malicious"
 
 lines = [
     "# MalSkills Core Detection Report",
@@ -759,11 +746,10 @@ if single_verdict:
         f"- Verdict label: `{single_verdict.get('label')}`",
         f"- Score: `{single_verdict.get('score')}`",
         f"- Malicious patterns: `{single_verdict.get('malicious_patterns', [])}`",
-        f"- Suspicious patterns: `{single_verdict.get('suspicious_patterns', [])}`",
         f"- LLM backend: `{single_runtime.get('backend')}`",
         f"- LLM model: `{single_runtime.get('model')}`",
         f"- Operand resolution methods: `{single_resolution_methods}`",
-        "- Interpretation: `suspicious` means the sample triggered a risk alert and should enter manual review.",
+        "- Interpretation: `malicious` is the only positive verdict; `benign` is the negative verdict.",
     ])
 else:
     lines.append("- Skipped or not generated.")
@@ -789,10 +775,6 @@ else:
     if mini:
         lines.extend([
             f"- Entries: `{mini['entries']}`",
-            f"- Risk precision (suspicious or malicious): `{mini['risk_precision']}`",
-            f"- Risk recall (suspicious or malicious): `{mini['risk_recall']}`",
-            f"- Risk F1 (suspicious or malicious): `{mini['risk_f1']}`",
-            f"- Risk confusion: `{mini['risk_confusion']}`",
             f"- Strict malicious precision: `{mini['precision']}`",
             f"- Strict malicious recall: `{mini['recall']}`",
             f"- Strict malicious confusion: `{mini['confusion']}`",
@@ -809,10 +791,6 @@ else:
     if full:
         lines.extend([
             f"- Entries: `{full['entries']}`",
-            f"- Risk precision (suspicious or malicious): `{full['risk_precision']}`",
-            f"- Risk recall (suspicious or malicious): `{full['risk_recall']}`",
-            f"- Risk F1 (suspicious or malicious): `{full['risk_f1']}`",
-            f"- Risk confusion: `{full['risk_confusion']}`",
             f"- Strict malicious precision: `{full['precision']}`",
             f"- Strict malicious recall: `{full['recall']}`",
             f"- Strict malicious confusion: `{full['confusion']}`",
