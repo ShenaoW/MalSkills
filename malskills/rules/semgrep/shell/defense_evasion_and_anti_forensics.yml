@@ -5,7 +5,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: security_tool_impairment
-      malskills_evidence_type: defense_evasion_and_anti_forensics
+      malskills_sso_category: defense_evasion_and_anti_forensics
     pattern-regex: '(?i)(systemctl\s+stop|sc\s+stop|taskkill|killall).*(defender|falcon|crowdstrike|sentinel|edr|agent|audit)'
 
   - id: shell.defense_evasion_and_anti_forensics.logging_suppression
@@ -14,7 +14,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: logging_or_audit_suppression
-      malskills_evidence_type: defense_evasion_and_anti_forensics
+      malskills_sso_category: defense_evasion_and_anti_forensics
     pattern-regex: '(?i)(wevtutil\s+cl|journalctl\s+--vacuum|auditctl\s+-e\s+0|history\s+-c|unset\s+HISTFILE|rm\s+.*bash_history)'
 
   - id: shell.defense_evasion_and_anti_forensics.policy_weakening
@@ -23,7 +23,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: policy_or_access_control_weakening
-      malskills_evidence_type: defense_evasion_and_anti_forensics
+      malskills_sso_category: defense_evasion_and_anti_forensics
     pattern-regex: '(?i)(ufw\s+disable|iptables\s+-F|nft\s+flush|setenforce\s+0)'
 
   - id: shell.defense_evasion_and_anti_forensics.cleanup_or_timestomp
@@ -32,5 +32,5 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: artifact_cleanup_or_timestomp
-      malskills_evidence_type: defense_evasion_and_anti_forensics
+      malskills_sso_category: defense_evasion_and_anti_forensics
     pattern-regex: '(?i)(touch\s+-t|rm\s+-f\s+.*history|truncate\s+-s\s+0)'

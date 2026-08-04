@@ -5,7 +5,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: remote_login
-      malskills_evidence_type: lateral_movement_and_remote_execution
+      malskills_sso_category: lateral_movement_and_remote_execution
     pattern-either:
       - pattern: paramiko.SSHClient().connect(...)
       - pattern: winrm.Session(...)
@@ -16,7 +16,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: remote_command_execution
-      malskills_evidence_type: lateral_movement_and_remote_execution
+      malskills_sso_category: lateral_movement_and_remote_execution
     pattern-either:
       - pattern: paramiko.SSHClient().exec_command(...)
       - pattern: winrm.Session(...).run_cmd(...)
@@ -28,7 +28,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: remote_file_transfer
-      malskills_evidence_type: lateral_movement_and_remote_execution
+      malskills_sso_category: lateral_movement_and_remote_execution
     pattern-either:
       - pattern: paramiko.SFTPClient.from_transport(...).put(...)
       - pattern: paramiko.SFTPClient.from_transport(...).get(...)
@@ -41,7 +41,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: cluster_or_cloud_node_control
-      malskills_evidence_type: lateral_movement_and_remote_execution
+      malskills_sso_category: lateral_movement_and_remote_execution
     pattern-either:
       - pattern: kubernetes.stream.stream(...)
       - pattern: boto3.client("ssm").send_command(...)

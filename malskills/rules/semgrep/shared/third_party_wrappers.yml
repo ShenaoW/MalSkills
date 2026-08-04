@@ -5,7 +5,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: shell_interpreter_execution
-      malskills_evidence_type: execution_control
+      malskills_sso_category: execution_control
       malskills_value_metavar: $CMD
     pattern-either:
       - pattern: fabric.Connection(...).run($CMD, ...)
@@ -18,7 +18,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: shell_interpreter_execution
-      malskills_evidence_type: execution_control
+      malskills_sso_category: execution_control
       malskills_value_metavar: $CMD
     pattern-either:
       - pattern: execa($CMD, ...)
@@ -31,7 +31,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: outbound_connection
-      malskills_evidence_type: network_and_remote_communication
+      malskills_sso_category: network_and_remote_communication
       malskills_value_metavar: $URL
     pattern-either:
       - pattern: superagent.get($URL, ...)

@@ -24,6 +24,15 @@ TEXT_SUFFIXES = {
     ".sh",
     ".bash",
     ".zsh",
+    ".c",
+    ".cc",
+    ".cpp",
+    ".cxx",
+    ".cs",
+    ".go",
+    ".java",
+    ".php",
+    ".rb",
 }
 
 MARKDOWN_NAMES = {"skill.md", "claude.md", "agents.md", "readme.md", "handoff.md"}
@@ -159,7 +168,7 @@ NOISY_SUBTREES = {
     (".cursor", "prompts"),
 }
 PRIORITY_ROOT_DIRS = {"prompts", "prompt", "skills", "skill", "scripts", ".claude", ".cursor", ".mcp"}
-EVIDENCE_TEXT_ARTIFACT_TYPES = {"markdown", "prompt", "manifest", "config", "installer"}
+ANALYZABLE_TEXT_ARTIFACT_TYPES = {"markdown", "prompt", "manifest", "config", "installer"}
 
 
 def classify_artifact(path: Path) -> str:
@@ -181,6 +190,20 @@ def classify_artifact(path: Path) -> str:
         return "javascript"
     if suffix in {".sh", ".bash", ".zsh"}:
         return "shell"
+    if suffix == ".java":
+        return "java"
+    if suffix == ".go":
+        return "go"
+    if suffix == ".c":
+        return "c"
+    if suffix in {".cc", ".cpp", ".cxx"}:
+        return "cpp"
+    if suffix == ".cs":
+        return "csharp"
+    if suffix == ".php":
+        return "php"
+    if suffix == ".rb":
+        return "ruby"
     if suffix in TEXT_SUFFIXES:
         return "text"
     return "binary"

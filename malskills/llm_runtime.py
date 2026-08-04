@@ -33,11 +33,14 @@ class LlmRuntimeConfig:
     api_key: str
     api_provider: str
     resolved_env: dict[str, str | None]
+    reasoning_effort: str = ""
 
 
-DEFAULT_OPENAI_MODEL = "gpt-5.3-codex-medium"
+DEFAULT_OPENAI_MODEL = "gpt-5.6-sol"
 DEFAULT_ANTHROPIC_MODEL = "claude-sonnet-4-5"
-DEFAULT_TIMEOUT_SEC = 45
+DEFAULT_CODEX_REASONING_EFFORT = "low"
+DEFAULT_TIMEOUT_SEC = 300
+LLM_RUNTIME_PROTOCOL_VERSION = "2026-07-28-v1"
 
 
 def build_llm_runtime_config() -> LlmRuntimeConfig:
@@ -56,6 +59,7 @@ def build_llm_runtime_config() -> LlmRuntimeConfig:
     codex_cli_env = _first_env("MALSKILLS_CODEX_CLI")
     claude_cli_env = _first_env("MALSKILLS_CLAUDE_CLI")
     timeout_env = _first_env("MALSKILLS_LLM_TIMEOUT_SEC")
+    reasoning_effort_env = _first_env("MALSKILLS_LLM_REASONING_EFFORT")
 
     codex_cli = codex_cli_env.value or "codex"
     claude_cli = claude_cli_env.value or "claude"
@@ -66,15 +70,20 @@ def build_llm_runtime_config() -> LlmRuntimeConfig:
     default_model = DEFAULT_ANTHROPIC_MODEL if api_provider == "anthropic" else DEFAULT_OPENAI_MODEL
     model = model_env.value or default_model
 
+    backend = _resolve_backend(
+        requested_mode=requested_mode,
+        codex_available=bool(codex_cli_path),
+        claude_available=bool(claude_cli_path),
+        api_available=bool(api_key_env.value),
+        api_provider=api_provider,
+    )
+    reasoning_effort = _parse_reasoning_effort(reasoning_effort_env.value)
+    if backend == "codex_cli" and not reasoning_effort:
+        reasoning_effort = DEFAULT_CODEX_REASONING_EFFORT
+
     return LlmRuntimeConfig(
         requested_mode=requested_mode,
-        backend=_resolve_backend(
-            requested_mode=requested_mode,
-            codex_available=bool(codex_cli_path),
-            claude_available=bool(claude_cli_path),
-            api_available=bool(api_key_env.value),
-            api_provider=api_provider,
-        ),
+        backend=backend,
         model=model,
         timeout_sec=_parse_timeout(timeout_env.value),
         codex_cli=codex_cli,
@@ -92,7 +101,9 @@ def build_llm_runtime_config() -> LlmRuntimeConfig:
             "codex_cli": codex_cli_env.name,
             "claude_cli": claude_cli_env.name,
             "timeout_sec": timeout_env.name,
+            "reasoning_effort": reasoning_effort_env.name,
         },
+        reasoning_effort=reasoning_effort,
     )
 
 
@@ -103,6 +114,7 @@ def describe_llm_runtime(config: LlmRuntimeConfig | None = None) -> dict[str, An
         "resolved_backend": runtime.backend,
         "model": runtime.model,
         "timeout_sec": runtime.timeout_sec,
+        "reasoning_effort": runtime.reasoning_effort or None,
         "local_cli": {
             "codex_cli": runtime.codex_cli,
             "codex_cli_path": runtime.codex_cli_path or None,
@@ -116,7 +128,12 @@ def describe_llm_runtime(config: LlmRuntimeConfig | None = None) -> dict[str, An
         },
         "resolved_env": runtime.resolved_env,
         "environment_variables": {
-            "selection": ["MALSKILLS_LLM_MODE", "MALSKILLS_LLM_MODEL", "MALSKILLS_LLM_TIMEOUT_SEC"],
+            "selection": [
+                "MALSKILLS_LLM_MODE",
+                "MALSKILLS_LLM_MODEL",
+                "MALSKILLS_LLM_TIMEOUT_SEC",
+                "MALSKILLS_LLM_REASONING_EFFORT",
+            ],
             "local_cli": ["MALSKILLS_CODEX_CLI", "MALSKILLS_CLAUDE_CLI"],
             "online_api": [
                 "MALSKILLS_LLM_BASE_URL",
@@ -131,7 +148,12 @@ def describe_llm_runtime(config: LlmRuntimeConfig | None = None) -> dict[str, An
                 "ANTHROPIC_AUTH_TOKEN",
                 "ANTHROPIC_MODEL",
             ],
-            "cache": ["MALSKILLS_LLM_CACHE"],
+            "cache": [
+                "MALSKILLS_LLM_CACHE",
+                "MALSKILLS_LLM_OBJECT_CACHE",
+                "MALSKILLS_LLM_REASONING_CACHE",
+                "MALSKILLS_LLM_FEEDBACK_CACHE",
+            ],
         },
     }
 
@@ -146,7 +168,13 @@ def invoke_structured_json(
 ) -> dict[str, Any] | None:
     runtime = config or build_llm_runtime_config()
     if runtime.backend == "codex_cli":
-        return _invoke_codex_cli(runtime, prompt=prompt, schema=schema, cwd=cwd)
+        return _invoke_codex_cli(
+            runtime,
+            prompt=prompt,
+            schema=schema,
+            system_prompt=system_prompt,
+            cwd=cwd,
+        )
     if runtime.backend == "claude_cli":
         return _invoke_claude_cli(runtime, prompt=prompt, schema=schema, system_prompt=system_prompt, cwd=cwd)
     if runtime.backend == "anthropic_api":
@@ -161,14 +189,24 @@ def _invoke_codex_cli(
     *,
     prompt: str,
     schema: dict[str, Any],
+    system_prompt: str,
     cwd: str | Path | None,
 ) -> dict[str, Any] | None:
     with tempfile.TemporaryDirectory(prefix="malskills-codex-") as tmp_dir:
         schema_path = Path(tmp_dir) / "schema.json"
         output_path = Path(tmp_dir) / "result.json"
         schema_path.write_text(json.dumps(schema, indent=2, sort_keys=True), encoding="utf-8")
-        command = [
-            runtime.codex_cli_path,
+        command = [runtime.codex_cli_path]
+        trusted_instructions = system_prompt.strip()
+        if trusted_instructions:
+            command.extend(
+                ["--config", f"developer_instructions={json.dumps(trusted_instructions)}"]
+            )
+        if runtime.reasoning_effort:
+            command.extend(
+                ["--config", f"model_reasoning_effort={json.dumps(runtime.reasoning_effort)}"]
+            )
+        command.extend([
             "exec",
             "--skip-git-repo-check",
             "--sandbox",
@@ -181,8 +219,8 @@ def _invoke_codex_cli(
             str(schema_path),
             "--output-last-message",
             str(output_path),
-            prompt,
-        ]
+            "-",
+        ])
         try:
             subprocess.run(
                 command,
@@ -190,6 +228,7 @@ def _invoke_codex_cli(
                 check=True,
                 capture_output=True,
                 text=True,
+                input=prompt,
                 timeout=runtime.timeout_sec,
             )
         except (OSError, subprocess.SubprocessError):
@@ -412,3 +451,10 @@ def _parse_timeout(value: str) -> int:
     except (TypeError, ValueError):
         return DEFAULT_TIMEOUT_SEC
     return max(1, parsed)
+
+
+def _parse_reasoning_effort(value: str) -> str:
+    normalized = value.strip().lower()
+    if normalized in {"minimal", "low", "medium", "high", "xhigh", "max", "ultra"}:
+        return normalized
+    return ""

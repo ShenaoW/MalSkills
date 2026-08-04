@@ -5,7 +5,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: shell_interpreter_execution
-      malskills_evidence_type: execution_control
+      malskills_sso_category: execution_control
       malskills_value_metavar: $CMD
     pattern-either:
       - pattern: exec($CMD, ...)
@@ -19,7 +19,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: direct_process_execution
-      malskills_evidence_type: execution_control
+      malskills_sso_category: execution_control
       malskills_value_metavar: $CMD
     pattern-either:
       - pattern: spawn($CMD, ...)
@@ -37,7 +37,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: script_host_execution
-      malskills_evidence_type: execution_control
+      malskills_sso_category: execution_control
       malskills_value_metavar: $CODE
     pattern-either:
       - pattern: eval($CODE)
@@ -49,7 +49,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: dynamic_module_load
-      malskills_evidence_type: execution_control
+      malskills_sso_category: execution_control
       malskills_value_metavar: $MODULE
     pattern-either:
       - pattern: require($MODULE)
@@ -62,7 +62,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: proxy_execution_or_lolbin_abuse
-      malskills_evidence_type: execution_control
+      malskills_sso_category: execution_control
       malskills_value_metavar: $CMD
     patterns:
       - pattern-either:

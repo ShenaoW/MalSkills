@@ -11,7 +11,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: scheduled_persistence
-      malskills_evidence_type: persistence_and_startup_control
+      malskills_sso_category: persistence_and_startup_control
     pattern-regex: '(?im)^\s*(?:[-*]\s+|`+)?(?:sudo\s+)?(?:crontab\b|schtasks\b|systemd-run\b|launchctl\s+load\b|at\s+(?:now|\d{1,2}:\d{2}|\d{1,2}(?:am|pm)|[A-Za-z]{3}\s+\d{1,2}:\d{2}))\b'
 
   - id: markdown.persistence_and_startup_control.cron_expression
@@ -26,7 +26,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: scheduled_persistence
-      malskills_evidence_type: persistence_and_startup_control
+      malskills_sso_category: persistence_and_startup_control
     patterns:
       - pattern-regex: '(?im)^\s*(?:[-*]\s+|`+)?(?:sudo\s+)?(?:crontab\b|schtasks\b|systemd-run\b|launchctl\s+load\b)[^\n]*$'
       - pattern-regex: '(?im)^\s*(?:[-*]\s+|`+)?(?:(?:\*|[0-5]?\d)\s+(?:\*|[01]?\d|2[0-3])\s+(?:\*|[1-9]|[12]\d|3[01])\s+(?:\*|[1-9]|1[0-2])\s+(?:\*|[0-6])\s+\S.*)$'

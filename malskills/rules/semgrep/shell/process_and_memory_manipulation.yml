@@ -5,7 +5,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: process_attach
-      malskills_evidence_type: process_and_memory_manipulation
+      malskills_sso_category: process_and_memory_manipulation
     pattern-regex: '(?i)\b(gdb\s+-p|lldb\s+-p|strace\s+-p|ptrace)\b'
 
   - id: shell.process_and_memory_manipulation.cross_process_memory_read
@@ -14,7 +14,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: cross_process_memory_read
-      malskills_evidence_type: process_and_memory_manipulation
+      malskills_sso_category: process_and_memory_manipulation
     pattern-regex: '(?i)/proc/[0-9]+/mem|gcore\b'
 
   - id: shell.process_and_memory_manipulation.cross_process_memory_write
@@ -23,6 +23,6 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: cross_process_memory_write
-      malskills_evidence_type: process_and_memory_manipulation
+      malskills_sso_category: process_and_memory_manipulation
     pattern-regex: '(?i)(gdb\b.*set\s+\{|\bdd\b.*\/proc\/[0-9]+\/mem)'
 

@@ -5,7 +5,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: data_destruction
-      malskills_evidence_type: impact_and_destruction
+      malskills_sso_category: impact_and_destruction
       malskills_value_metavar: $CMD
     patterns:
       - pattern-either:
@@ -23,7 +23,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: data_encryption_or_locking
-      malskills_evidence_type: impact_and_destruction
+      malskills_sso_category: impact_and_destruction
     pattern-either:
       - pattern: Fernet(...).encrypt(...)
       - pattern: AES.new(...).encrypt(...)
@@ -35,7 +35,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: recovery_impairment
-      malskills_evidence_type: impact_and_destruction
+      malskills_sso_category: impact_and_destruction
       malskills_value_metavar: $CMD
     patterns:
       - pattern-either:
@@ -51,7 +51,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: availability_disruption
-      malskills_evidence_type: impact_and_destruction
+      malskills_sso_category: impact_and_destruction
       malskills_value_metavar: $CMD
     patterns:
       - pattern-either:

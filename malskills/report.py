@@ -3,27 +3,44 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from .evidence.feedback import EvidenceFeedbackAnalyzer
+from .findings.feedback import SSOFindingFeedbackAnalyzer
 from .models import AnalysisResult, to_jsonable
 from .utils import ensure_dir
 
 
 class ResultWriter:
-    def write(self, result: AnalysisResult, output_dir: str | Path) -> None:
+    def write(
+        self,
+        result: AnalysisResult,
+        output_dir: str | Path,
+        *,
+        feedback_payload: dict[str, object] | None = None,
+    ) -> None:
         destination = Path(output_dir)
         ensure_dir(destination)
         graph_payload = self._build_graph_payload(result)
-        feedback_payload = self._build_feedback_payload(result)
+        feedback_payload = feedback_payload or self.disabled_feedback_payload()
         self._write_json(destination / "verdict.json", self._build_verdict_payload(result))
         self._write_json(destination / "artifacts.json", result.artifacts)
-        self._write_json(destination / "evidence.json", result.evidence)
-        self._write_json(destination / "primitive_support_evidence.json", result.derived_evidence)
-        self._write_json(destination / "all_evidence.json", result.combined_evidence)
+        self._write_json(
+            destination / "sso_findings.json",
+            [self._finding_payload(item) for item in result.findings],
+        )
+        self._write_json(
+            destination / "ssos.json",
+            [self._sso_payload(item) for item in result.ssos],
+        )
+        self._write_json(destination / "operands.json", result.operands)
+        self._write_json(destination / "values.json", result.values)
+        self._write_json(
+            destination / "operand_resolutions.json", result.operand_resolutions
+        )
         self._write_json(destination / "feedback_loop.json", feedback_payload)
+        self._write_json(destination / "workflow_discoveries.json", result.workflow_discoveries)
+        self._write_json(destination / "analysis_metadata.json", result.analysis_metadata)
         self._write_json(destination / "facts.json", self._build_facts_payload(result))
-        self._write_json(destination / "evidence_graph.json", graph_payload)
-        self._write_text(destination / "evidence_graph.dot", self._render_graph_dot(graph_payload))
-        self._write_json(destination / "primitives.json", result.primitives)
+        self._write_json(destination / "sdg.json", graph_payload)
+        self._write_text(destination / "sdg.dot", self._render_graph_dot(graph_payload))
         self._write_json(destination / "proofs.json", self._build_pattern_proofs(result))
         self._write_json(destination / "pattern_summary.json", self._summarize_patterns(result))
         self._write_markdown(destination / "human_report.md", result)
@@ -38,14 +55,17 @@ class ResultWriter:
         path_map = {
             "verdict": "verdict.json",
             "artifacts": "artifacts.json",
-            "evidence": "evidence.json",
-            "primitive_support_evidence": "primitive_support_evidence.json",
-            "all_evidence": "all_evidence.json",
+            "sso_findings": "sso_findings.json",
+            "ssos": "ssos.json",
+            "operands": "operands.json",
+            "values": "values.json",
+            "operand_resolutions": "operand_resolutions.json",
             "feedback_loop": "feedback_loop.json",
+            "workflow_discoveries": "workflow_discoveries.json",
+            "analysis_metadata": "analysis_metadata.json",
             "facts": "facts.json",
-            "graph_json": "evidence_graph.json",
-            "graph_dot": "evidence_graph.dot",
-            "primitives": "primitives.json",
+            "sdg_json": "sdg.json",
+            "sdg_dot": "sdg.dot",
             "proofs": "proofs.json",
             "pattern_summary": "pattern_summary.json",
             "human_report": "human_report.md",
@@ -53,7 +73,7 @@ class ResultWriter:
         if include_souffle is None:
             include_souffle = (destination / "souffle").exists()
         return {
-            "schema_version": 1,
+            "schema_version": 4,
             "root": ".",
             "files": path_map,
             "directories": {
@@ -70,8 +90,40 @@ class ResultWriter:
     def _write_text(self, path: Path, content: str) -> None:
         path.write_text(content, encoding="utf-8")
 
-    def _build_feedback_payload(self, result: AnalysisResult) -> dict[str, object]:
-        return EvidenceFeedbackAnalyzer().analyze(result.artifacts, result.evidence)
+    def _finding_payload(self, finding: object) -> dict[str, object]:
+        payload = to_jsonable(finding)
+        if payload.get("confidence") is None:
+            payload.pop("confidence", None)
+        return payload
+
+    def _sso_payload(self, sso: object) -> dict[str, object]:
+        payload = to_jsonable(sso)
+        if payload.get("confidence") is None:
+            payload.pop("confidence", None)
+        return payload
+
+    def build_feedback_payload(self, result: AnalysisResult) -> dict[str, object]:
+        return SSOFindingFeedbackAnalyzer().analyze(
+            result.artifacts,
+            result.findings,
+            semgrep_findings=result.findings_by_producer.get("semgrep"),
+            llm_findings=result.findings_by_producer.get("llm"),
+        )
+
+    def disabled_feedback_payload(self) -> dict[str, object]:
+        return {
+            "status": "disabled",
+            "llm_only_hits": [],
+            "llm_rule_feedback": [],
+            "semgrep_rule_candidates": [],
+            "summary": {
+                "llm_only_hit_count": 0,
+                "reviewed_hit_count": 0,
+                "semgrep_candidate_count": 0,
+                "proposed_rule_count": 0,
+                "rejected_rule_count": 0,
+            },
+        }
 
     def _summarize_patterns(self, result: AnalysisResult) -> list[dict[str, object]]:
         grouped: dict[str, list[object]] = {}
@@ -80,8 +132,8 @@ class ResultWriter:
         summaries: list[dict[str, object]] = []
         for _, matches in sorted(grouped.items()):
             first = matches[0]
-            primitive_ids = sorted({primitive_id for match in matches for primitive_id in match.primitive_ids})
-            evidence_ids = sorted({evidence_id for match in matches for evidence_id in match.evidence_ids})
+            sso_ids = sorted({sso_id for match in matches for sso_id in match.sso_ids})
+            finding_ids = sorted({finding_id for match in matches for finding_id in match.finding_ids})
             summaries.append(
                 {
                     "name": first.name,
@@ -89,8 +141,8 @@ class ResultWriter:
                     "severity": first.severity,
                     "match_count": len(matches),
                     "rule_ids": first.rule_ids,
-                    "primitive_ids": primitive_ids,
-                    "evidence_ids": evidence_ids,
+                    "sso_ids": sso_ids,
+                    "finding_ids": finding_ids,
                     "explanation": first.explanation,
                     "explanation_chain": getattr(first, "explanation_chain", []),
                 }
@@ -106,8 +158,8 @@ class ResultWriter:
                     "name": pattern.name,
                     "severity": pattern.severity,
                     "rule_ids": pattern.rule_ids,
-                    "primitive_ids": pattern.primitive_ids,
-                    "evidence_ids": pattern.evidence_ids,
+                    "sso_ids": pattern.sso_ids,
+                    "finding_ids": pattern.finding_ids,
                     "explanation": pattern.explanation,
                     "source": pattern.source,
                     "explanation_chain": getattr(pattern, "explanation_chain", []),
@@ -143,14 +195,14 @@ class ResultWriter:
             for edge in edges
         }
         focus_artifact_ids: set[str] = set()
-        focus_evidence_ids: set[str] = set()
-        focus_primitive_ids: set[str] = set()
+        focus_finding_ids: set[str] = set()
+        focus_sso_ids: set[str] = set()
         focus_pattern_ids: list[str] = []
 
         for pattern in result.patterns:
             focus_pattern_ids.append(pattern.pattern_id)
-            focus_evidence_ids.update(pattern.evidence_ids)
-            focus_primitive_ids.update(pattern.primitive_ids)
+            focus_finding_ids.update(pattern.finding_ids)
+            focus_sso_ids.update(pattern.sso_ids)
             if pattern.pattern_id not in existing_node_ids:
                 nodes.append(
                     {
@@ -162,17 +214,11 @@ class ResultWriter:
                     }
                 )
                 existing_node_ids.add(pattern.pattern_id)
-            for primitive_id in pattern.primitive_ids:
-                edge_key = (primitive_id, pattern.pattern_id, "triggers")
+            for sso_id in pattern.sso_ids:
+                edge_key = (sso_id, pattern.pattern_id, "triggers")
                 if edge_key not in existing_edge_keys:
-                    edges.append({"source": primitive_id, "target": pattern.pattern_id, "type": "triggers"})
+                    edges.append({"source": sso_id, "target": pattern.pattern_id, "type": "triggers"})
                     existing_edge_keys.add(edge_key)
-            for evidence_id in pattern.evidence_ids:
-                edge_key = (evidence_id, pattern.pattern_id, "explains")
-                if edge_key not in existing_edge_keys:
-                    edges.append({"source": evidence_id, "target": pattern.pattern_id, "type": "explains"})
-                    existing_edge_keys.add(edge_key)
-
         verdict_node_id = "verdict"
         if verdict_node_id not in existing_node_ids:
             nodes.append(
@@ -189,17 +235,19 @@ class ResultWriter:
                 edges.append({"source": pattern.pattern_id, "target": verdict_node_id, "type": "decides"})
                 existing_edge_keys.add(edge_key)
 
-        artifact_ids_by_evidence = {item.evidence_id: item.artifact_id for item in result.combined_evidence}
+        artifact_ids_by_finding = {
+            item.finding_id: item.artifact_id for item in result.findings
+        }
         focus_artifact_ids.update(
             artifact_id
-            for evidence_id, artifact_id in artifact_ids_by_evidence.items()
-            if evidence_id in focus_evidence_ids
+            for finding_id, artifact_id in artifact_ids_by_finding.items()
+            if finding_id in focus_finding_ids
         )
         focus_logical_object_ids = {
             str(edge.get("target", ""))
             for edge in edges
-            if str(edge.get("source", "")) in focus_evidence_ids | focus_primitive_ids
-            and str(edge.get("type", "")) in {"acts_on", "associated_with"}
+            if str(edge.get("source", "")) in focus_sso_ids
+            and str(edge.get("type", "")) == "has_operand"
         }
         payload = {
             "nodes": nodes,
@@ -207,8 +255,8 @@ class ResultWriter:
             "artifacts": list(result.graph.get("artifacts", [])),
             "focus": {
                 "artifact_ids": sorted(focus_artifact_ids),
-                "evidence_ids": sorted(focus_evidence_ids),
-                "primitive_ids": sorted(focus_primitive_ids),
+                "finding_ids": sorted(focus_finding_ids),
+                "sso_ids": sorted(focus_sso_ids),
                 "logical_object_ids": sorted(focus_logical_object_ids),
                 "pattern_ids": sorted(focus_pattern_ids),
                 "verdict_node_id": verdict_node_id,
@@ -229,10 +277,11 @@ class ResultWriter:
             "## Artifact Inventory",
             "",
             f"- Artifacts: {len(result.artifacts)}",
-            f"- Evidence facts: {len(result.evidence)}",
-            f"- Primitive-support evidence facts: {len(result.derived_evidence)}",
-            f"- Combined evidence facts: {len(result.combined_evidence)}",
-            f"- Primitive facts: {len(result.primitives)}",
+            f"- SSO findings: {len(result.findings)}",
+            f"- Operand resolutions: {len(result.operand_resolutions)}",
+            f"- SSO facts: {len(result.ssos)}",
+            f"- Operand facts: {len(result.operands)}",
+            f"- Value facts: {len(result.values)}",
             "",
             "## Triggered Patterns",
         ]
@@ -241,11 +290,11 @@ class ResultWriter:
         for summary in pattern_summaries:
             lines.append(f"- `{summary['name']}` [{summary['source']}] ({summary['severity']}, matches={summary['match_count']}): {summary['explanation']}")
             lines.append(f"  - Rules: {', '.join(summary['rule_ids'])}")
-            lines.append(f"  - Primitive IDs: {', '.join(summary['primitive_ids'][:5])}")
-        lines.extend(["", "## Primitive Counts", ""])
+            lines.append(f"  - SSO IDs: {', '.join(summary['sso_ids'][:5])}")
+        lines.extend(["", "## SSO Counts", ""])
         counts: dict[str, int] = {}
-        for primitive in result.primitives:
-            counts[primitive.primitive_type] = counts.get(primitive.primitive_type, 0) + 1
+        for sso in result.ssos:
+            counts[sso.subtype] = counts.get(sso.subtype, 0) + 1
         if not counts:
             lines.append("- None")
         else:
@@ -255,9 +304,9 @@ class ResultWriter:
 
     def _render_graph_dot(self, graph: dict[str, object]) -> str:
         lines = [
-            "digraph evidence_graph {",
+            "digraph sdg {",
             "  rankdir=LR;",
-            '  graph [label="MalSkills Evidence Graph", labelloc=t];',
+            '  graph [label="MalSkills Skill Dependency Graph", labelloc=t];',
             '  node [shape=box, style="rounded"];',
         ]
         for node in sorted(graph.get("nodes", []), key=lambda item: str(item.get("id", ""))):
@@ -302,18 +351,23 @@ class ResultWriter:
             "analysis_meta": ["key", "value"],
             "artifact": ["artifact_id", "artifact_type", "artifact_path"],
             "artifact_meta": ["artifact_id", "key", "value"],
-            "evidence": ["evidence_id", "artifact_id", "evidence_type", "subtype", "value"],
-            "evidence_attr": ["evidence_id", "key", "value"],
-            "evidence_confidence": ["evidence_id", "confidence"],
-            "evidence_span": ["evidence_id", "start_line", "end_line"],
+            "finding": ["finding_id", "artifact_id", "category", "subtype", "matched_text"],
+            "finding_attr": ["finding_id", "key", "value"],
+            "finding_confidence": ["finding_id", "confidence"],
+            "finding_span": ["finding_id", "start_line", "end_line"],
             "graph_edge": ["source", "target", "type"],
+            "sso": ["sso_id", "category", "subtype"],
+            "sso_finding": ["sso_id", "finding_id"],
+            "sso_confidence": ["sso_id", "confidence"],
+            "sso_object": ["sso_id", "object_id", "object_identity_kind"],
+            "sso_attr": ["sso_id", "key", "value"],
+            "sso_operand": ["sso_id", "operand_id", "role"],
+            "operand": ["operand_id", "role", "object_kind", "identity_key"],
+            "value": ["value_id", "value_kind", "display_value"],
+            "value_flow": ["source", "target", "flow_kind"],
             "pattern_match": ["pattern_id", "pattern_name", "severity"],
-            "pattern_support": ["pattern_id", "primitive_id"],
-            "primitive": ["primitive_id", "primitive_type"],
-            "primitive_confidence": ["primitive_id", "confidence"],
-            "primitive_evidence": ["primitive_id", "evidence_id"],
-            "primitive_object": ["primitive_id", "object_id", "object_identity_kind"],
-            "primitive_param": ["primitive_id", "key", "value"],
+            "pattern_support": ["pattern_id", "sso_id"],
+            "pattern_attr": ["pattern_id", "key", "value"],
             "verdict": ["label", "score"],
         }
         if relation_name in schema:

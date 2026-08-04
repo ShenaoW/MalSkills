@@ -29,30 +29,83 @@ class ArtifactRecord:
 
 
 @dataclass
-class EvidenceRecord:
-    evidence_id: str
+class SSOFinding:
+    finding_id: str
     artifact_id: str
     artifact_path: str
-    evidence_type: str
+    category: str
     subtype: str
-    value: str
-    confidence: float
+    matched_text: str
+    confidence: float | None
     producer: str = ""
     span: Span | None = None
-    binding: dict[str, Any] = field(default_factory=dict)
     attributes: dict[str, Any] = field(default_factory=dict)
     provenance: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
-class PrimitiveRecord:
-    primitive_id: str
-    primitive_type: str
-    params: dict[str, Any]
-    confidence: float
-    evidence_ids: list[str]
+class SSORecord:
+    sso_id: str
+    category: str
+    subtype: str
+    confidence: float | None
+    finding_ids: list[str]
+    artifact_ids: list[str]
     artifact_paths: list[str]
-    primitive_category: str = ""
+    operand_ids: list[str] = field(default_factory=list)
+    attributes: dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass
+class OperandRecord:
+    operand_id: str
+    role: str
+    object_kind: str
+    identity_key: str
+    display_value: str
+    resolution_methods: list[str] = field(default_factory=list)
+
+
+@dataclass
+class ValueRecord:
+    value_id: str
+    value_kind: str
+    display_value: str
+    artifact_path: str = ""
+    span: Span | None = None
+
+
+@dataclass
+class OperandResolution:
+    resolution_id: str
+    sso_id: str
+    role: str
+    operand_id: str
+    value_id: str
+    method: str
+    confidence: float
+    artifact_path: str
+    span: Span | None = None
+    flow_steps: list[dict[str, Any]] = field(default_factory=list)
+    source_finding_ids: list[str] = field(default_factory=list)
+
+
+@dataclass
+class OperandBinding:
+    binding_id: str
+    producer: str
+    artifact_id: str
+    artifact_path: str
+    sink_api: str
+    sink_subtype: str
+    role: str
+    value: str
+    confidence: float
+    span: Span | None = None
+    object_kind: str = "unknown"
+    identity_key: str = ""
+    flow_steps: list[dict[str, Any]] = field(default_factory=list)
+    source_finding_ids: list[str] = field(default_factory=list)
 
 
 @dataclass
@@ -61,10 +114,24 @@ class PatternMatch:
     name: str
     severity: str
     rule_ids: list[str]
-    primitive_ids: list[str]
-    evidence_ids: list[str]
+    sso_ids: list[str]
+    finding_ids: list[str]
     explanation: str
     source: str = "formal"
+    generator: dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass
+class WorkflowDiscovery:
+    discovery_id: str
+    workflow_name: str
+    pattern_name: str
+    confidence: float
+    sso_ids: list[str]
+    finding_ids: list[str]
+    explanation: str
+    source: str = "llm"
+    generator: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass
@@ -81,14 +148,18 @@ class SkillVerdict:
 class AnalysisResult:
     skill_path: str
     artifacts: list[ArtifactRecord]
-    evidence: list[EvidenceRecord]
-    derived_evidence: list[EvidenceRecord]
-    combined_evidence: list[EvidenceRecord]
-    primitives: list[PrimitiveRecord]
+    findings: list[SSOFinding]
+    ssos: list[SSORecord]
+    operands: list[OperandRecord]
+    values: list[ValueRecord]
+    operand_resolutions: list[OperandResolution]
     patterns: list[PatternMatch]
     verdict: SkillVerdict
     graph: dict[str, Any]
     facts: dict[str, list[tuple[Any, ...]]]
+    workflow_discoveries: list[WorkflowDiscovery] = field(default_factory=list)
+    findings_by_producer: dict[str, list[SSOFinding]] = field(default_factory=dict)
+    analysis_metadata: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass

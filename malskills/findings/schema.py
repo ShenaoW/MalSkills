@@ -2,21 +2,21 @@ from __future__ import annotations
 
 from typing import Any
 
-from ..models import EvidenceRecord
+from ..models import SSOFinding
 
-SCHEMA_VERSION = "evidence-v4"
-REQUIRED_EVIDENCE_FIELDS = (
+SCHEMA_VERSION = "sso-finding-v2"
+REQUIRED_FINDING_FIELDS = (
     "producer",
     "artifact",
     "span",
-    "fact_type",
-    "binding",
+    "category",
+    "subtype",
+    "matched_text",
     "attributes",
-    "confidence",
     "provenance",
 )
 
-EVIDENCE_TYPE_BY_SUBTYPE = {
+SSO_CATEGORY_BY_SUBTYPE = {
     "direct_process_execution": "payload_execution",
     "shell_interpreter_execution": "payload_execution",
     "script_host_execution": "payload_execution",
@@ -75,11 +75,10 @@ EVIDENCE_TYPE_BY_SUBTYPE = {
     "recovery_impairment": "impact_and_destruction",
     "availability_disruption": "impact_and_destruction",
     "boot_or_low_level_destruction": "impact_and_destruction",
-    "parameter_binding": "object_binding",
 }
 
-EVIDENCE_CATEGORIES = tuple(dict.fromkeys(EVIDENCE_TYPE_BY_SUBTYPE.values()))
-EVIDENCE_SUBTYPES = tuple(EVIDENCE_TYPE_BY_SUBTYPE.keys())
+SSO_CATEGORIES = tuple(dict.fromkeys(SSO_CATEGORY_BY_SUBTYPE.values()))
+SSO_SUBTYPES = tuple(SSO_CATEGORY_BY_SUBTYPE.keys())
 
 DISALLOWED_LLM_ATTRIBUTE_KEYS = {
     "classification",
@@ -97,21 +96,12 @@ DISALLOWED_LLM_ATTRIBUTE_KEYS = {
     "suspicious_patterns",
     "verdict",
 }
-def canonical_evidence_type(subtype: str, fallback: str) -> str:
-    return EVIDENCE_TYPE_BY_SUBTYPE.get(subtype, fallback)
+def canonical_sso_category(subtype: str, fallback: str) -> str:
+    return SSO_CATEGORY_BY_SUBTYPE.get(subtype, fallback)
 
 
-def infer_evidence_category(subtype: str) -> str:
-    return EVIDENCE_TYPE_BY_SUBTYPE.get(subtype, "unknown")
-
-
-def merge_binding_attributes(binding: dict[str, object], attributes: dict[str, Any]) -> dict[str, object]:
-    merged = dict(binding)
-    for key in ("implied_capabilities", "secret_class", "consistency_target"):
-        value = attributes.get(key)
-        if value not in (None, "", [], {}):
-            merged[key] = value
-    return merged
+def infer_sso_category(subtype: str) -> str:
+    return SSO_CATEGORY_BY_SUBTYPE.get(subtype, "unknown")
 
 
 def sanitize_llm_attributes(attributes: dict[str, Any]) -> dict[str, Any]:
@@ -124,30 +114,28 @@ def sanitize_llm_attributes(attributes: dict[str, Any]) -> dict[str, Any]:
     return sanitized
 
 
-def normalize_evidence_record(record: EvidenceRecord) -> EvidenceRecord:
+def normalize_sso_finding(record: SSOFinding) -> SSOFinding:
     if not record.producer:
-        raise ValueError("evidence fact is missing required field: producer")
+        raise ValueError("SSO finding is missing required field: producer")
     if not record.artifact_id or not record.artifact_path:
-        raise ValueError("evidence fact is missing required field: artifact")
-    if not record.evidence_type:
-        raise ValueError("evidence fact is missing required field: fact_type")
+        raise ValueError("SSO finding is missing required field: artifact")
+    if not record.category:
+        raise ValueError("SSO finding is missing required field: category")
     if record.span is None:
-        raise ValueError("evidence fact is missing required field: span")
-    if not isinstance(record.binding, dict):
-        raise ValueError("evidence fact has invalid field: binding")
+        raise ValueError("SSO finding is missing required field: span")
     if not isinstance(record.attributes, dict):
-        raise ValueError("evidence fact has invalid field: attributes")
+        raise ValueError("SSO finding has invalid field: attributes")
     if not isinstance(record.provenance, dict):
-        raise ValueError("evidence fact has invalid field: provenance")
+        raise ValueError("SSO finding has invalid field: provenance")
 
     attributes = dict(record.attributes)
-    if record.subtype not in EVIDENCE_TYPE_BY_SUBTYPE:
-        raise ValueError(f"unknown evidence subtype: {record.subtype}")
+    if record.subtype not in SSO_CATEGORY_BY_SUBTYPE:
+        raise ValueError(f"unknown SSO finding subtype: {record.subtype}")
 
     attributes["schema_version"] = SCHEMA_VERSION
     attributes["producer"] = record.producer
     attributes.setdefault("engine", record.producer)
-    attributes.setdefault("evidence_category", infer_evidence_category(record.subtype))
+    attributes.setdefault("sso_category", infer_sso_category(record.subtype))
 
     artifact = record.provenance.get("artifact", {})
     if not isinstance(artifact, dict):
@@ -170,17 +158,20 @@ def normalize_evidence_record(record: EvidenceRecord) -> EvidenceRecord:
         },
     }
 
-    return EvidenceRecord(
-        evidence_id=record.evidence_id,
+    return SSOFinding(
+        finding_id=record.finding_id,
         producer=record.producer,
         artifact_id=record.artifact_id,
         artifact_path=record.artifact_path,
-        evidence_type=canonical_evidence_type(record.subtype, record.evidence_type),
+        category=canonical_sso_category(record.subtype, record.category),
         subtype=record.subtype,
-        value=record.value,
-        confidence=min(max(float(record.confidence), 0.0), 1.0),
+        matched_text=record.matched_text.strip(),
+        confidence=(
+            min(max(float(record.confidence), 0.0), 1.0)
+            if record.confidence is not None
+            else None
+        ),
         span=record.span,
-        binding=dict(record.binding),
         attributes=attributes,
         provenance=provenance,
     )

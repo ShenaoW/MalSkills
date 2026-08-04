@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-"""YASA adapter for primitive facts compilation."""
+"""YASA adapter for SDG operand resolution."""
 
 import json
 import os
@@ -11,8 +11,7 @@ import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 
-from ..models import ArtifactRecord, EvidenceRecord, Span
-from ..evidence.schema import normalize_evidence_record
+from ..models import ArtifactRecord, SSOFinding, OperandBinding, Span
 from ..utils import iter_code_fences
 
 
@@ -65,15 +64,15 @@ class YasaAdapter:
     def available(self) -> bool:
         return shutil.which("node") is not None and self.yasa_root.exists() and (self.yasa_root / "dist" / "main.js").exists()
 
-    def extract(self, skill_root: str | Path, artifacts: list[ArtifactRecord]) -> list[EvidenceRecord]:
+    def extract(self, skill_root: str | Path, artifacts: list[ArtifactRecord]) -> list[OperandBinding]:
         if not self.available():
             return []
         root = Path(skill_root).resolve()
         targets = self._build_targets(artifacts)
-        evidence: list[EvidenceRecord] = []
+        bindings: list[OperandBinding] = []
         for language in self._planned_languages(targets):
             checker_id, sdk_env = self.CHECKER_CONFIG[language]
-            evidence.extend(
+            bindings.extend(
                 self._run_yasa(
                     root,
                     [target for target in targets if target.language == language],
@@ -83,7 +82,7 @@ class YasaAdapter:
                     uast_sdk=os.environ.get(sdk_env) if sdk_env else None,
                 )
             )
-        return self._dedupe_findings(evidence)
+        return self._dedupe_findings(bindings)
 
     def _planned_languages(self, targets: list[AnalysisTarget]) -> list[str]:
         artifact_types = {target.language for target in targets}
@@ -104,18 +103,18 @@ class YasaAdapter:
                 return language
         return None
 
-    def language_for_evidence(self, artifact: ArtifactRecord, evidence: EvidenceRecord) -> str | None:
+    def language_for_finding(self, artifact: ArtifactRecord, findings: SSOFinding) -> str | None:
         language = self.language_for_artifact(artifact)
         if language:
             return language
         if artifact.artifact_type not in {"markdown", "prompt"}:
             return None
-        if evidence.span is None or not artifact.content:
+        if findings.span is None or not artifact.content:
             return None
         for target in self._fenced_code_targets(artifact):
             start_line = target.line_offset + 1
             end_line = target.line_offset + target.content.count("\n") + 1
-            if start_line <= evidence.span.start_line <= end_line:
+            if start_line <= findings.span.start_line <= end_line:
                 return target.language
         return None
 
@@ -169,7 +168,7 @@ class YasaAdapter:
         checker_id: str,
         rule_config: str,
         uast_sdk: str | None = None,
-    ) -> list[EvidenceRecord]:
+    ) -> list[OperandBinding]:
         with tempfile.TemporaryDirectory(prefix="malskills-yasa-") as tmpdir:
             source_root = Path(tmpdir) / "source"
             report_dir = Path(tmpdir) / "report"
@@ -203,7 +202,7 @@ class YasaAdapter:
                 return []
 
         target_map = {target.source_path: target for target in targets}
-        evidence: list[EvidenceRecord] = []
+        bindings: list[OperandBinding] = []
         for run in payload.get("runs", []):
             for result in run.get("results", []):
                 target, start_line, end_line = self._extract_location(result, source_root, target_map)
@@ -212,28 +211,28 @@ class YasaAdapter:
                 flow_steps = self._extract_flow_steps(result, source_root, target_map)
                 finding = self._extract_yasa_finding(result, target, start_line, end_line, language, checker_id, flow_steps)
                 if finding is not None:
-                    evidence.append(finding)
+                    bindings.append(finding)
                 self._counter += 1
-        return evidence
+        return bindings
 
-    def _dedupe_findings(self, evidence: list[EvidenceRecord]) -> list[EvidenceRecord]:
-        deduped: list[EvidenceRecord] = []
+    def _dedupe_findings(self, bindings: list[OperandBinding]) -> list[OperandBinding]:
+        deduped: list[OperandBinding] = []
         seen: set[str] = set()
-        for item in evidence:
+        for item in bindings:
             key = json.dumps(
                 {
                     "artifact_id": item.artifact_id,
                     "artifact_path": item.artifact_path,
-                    "evidence_type": item.evidence_type,
-                    "subtype": item.subtype,
+                    "sink_api": item.sink_api,
+                    "sink_subtype": item.sink_subtype,
+                    "role": item.role,
                     "value": item.value,
                     "span": {
                         "start_line": item.span.start_line if item.span else None,
                         "end_line": item.span.end_line if item.span else None,
                     },
-                    "binding": item.binding,
-                    "sink_api": item.attributes.get("sink_api", ""),
-                    "parameter_role": item.binding.get("parameter_role", ""),
+                    "object_kind": item.object_kind,
+                    "identity_key": item.identity_key,
                 },
                 sort_keys=True,
                 ensure_ascii=True,
@@ -253,7 +252,7 @@ class YasaAdapter:
         language: str,
         checker_id: str,
         flow_steps: list[dict[str, object]] | None = None,
-    ) -> EvidenceRecord | None:
+    ) -> OperandBinding | None:
         sink_info = result.get("sinkInfo", {}) if isinstance(result.get("sinkInfo", {}), dict) else {}
         resolved_flow_steps = list(flow_steps or [])
         sink_api = str(sink_info.get("sinkRule", "")).strip()
@@ -264,46 +263,20 @@ class YasaAdapter:
         value, binding = self._binding_from_flow(target, resolved_flow_steps, parameter_role)
         if not value:
             return None
-        return normalize_evidence_record(
-            EvidenceRecord(
-                evidence_id=f"yasa_{self._counter:05d}",
-                producer="yasa",
-                artifact_id=target.artifact_id,
-                artifact_path=target.artifact_path,
-                evidence_type="object_binding",
-                subtype="parameter_binding",
-                value=value,
-                confidence=0.94,
-                span=Span(start_line, end_line),
-                binding={
-                    **binding,
-                    "parameter_role": parameter_role,
-                },
-                attributes={
-                    "engine": "yasa",
-                    "analysis_stage": "primitive_compilation",
-                    "analysis_component": "yasa_object_analysis",
-                    "rule_id": checker_id,
-                    "language": language,
-                    "sink_attribute": sink_info.get("sinkAttribute", ""),
-                    "sink_api": sink_api,
-                    "sink_subtype": sink_subtype,
-                    "parameter_role": parameter_role,
-                    "entrypoint_type": (result.get("entrypoint") or {}).get("type", ""),
-                    "message": (result.get("message") or {}).get("text", ""),
-                    "flow_steps": resolved_flow_steps,
-                    "matched_text": self._matched_text_for_flow(value, resolved_flow_steps),
-                },
-                provenance={
-                    "artifact": {"id": target.artifact_id, "path": target.artifact_path},
-                    "span": {"start_line": start_line, "end_line": end_line},
-                    "producer": "yasa",
-                    "analysis_stage": "primitive_compilation",
-                    "analysis_component": "yasa_object_analysis",
-                    "rule_id": checker_id,
-                    "language": language,
-                },
-            )
+        return OperandBinding(
+            binding_id=f"yasa_{self._counter:05d}",
+            producer="yasa",
+            artifact_id=target.artifact_id,
+            artifact_path=target.artifact_path,
+            sink_api=sink_api,
+            sink_subtype=sink_subtype,
+            role=parameter_role,
+            value=value,
+            confidence=0.94,
+            span=Span(start_line, end_line),
+            object_kind=str(binding.get("object_kind", "unknown")),
+            identity_key=str(binding.get("identity_key", "")),
+            flow_steps=resolved_flow_steps,
         )
 
     def _materialize_targets(self, source_root: Path, targets: list[AnalysisTarget]) -> None:

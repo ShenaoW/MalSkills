@@ -5,7 +5,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: data_destruction
-      malskills_evidence_type: impact_and_destruction
+      malskills_sso_category: impact_and_destruction
     pattern-regex: '(?i)\b(rm\s+-rf|shred|dd\s+if=\/dev\/zero)\b'
 
   - id: shell.impact_and_destruction.data_encryption_or_locking
@@ -14,7 +14,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: data_encryption_or_locking
-      malskills_evidence_type: impact_and_destruction
+      malskills_sso_category: impact_and_destruction
     pattern-regex: '(?i)\b(openssl\s+enc|gpg\s+-c|gpg\s+--symmetric)\b'
 
   - id: shell.impact_and_destruction.recovery_impairment
@@ -23,7 +23,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: recovery_impairment
-      malskills_evidence_type: impact_and_destruction
+      malskills_sso_category: impact_and_destruction
     pattern-regex: '(?i)\b(vssadmin\s+delete\s+shadows|wbadmin\s+delete|rm\s+-rf\s+.*backup)\b'
 
   - id: shell.impact_and_destruction.availability_disruption
@@ -32,6 +32,6 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: availability_disruption
-      malskills_evidence_type: impact_and_destruction
+      malskills_sso_category: impact_and_destruction
     pattern-regex: '(?i)\b(shutdown|reboot|halt|poweroff|kill\s+-9)\b'
 

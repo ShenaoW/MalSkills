@@ -5,7 +5,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: file_enumeration_and_location
-      malskills_evidence_type: file_and_data_access
+      malskills_sso_category: file_and_data_access
       malskills_value_metavar: $PATH
     pattern-either:
       - pattern: fs.readdirSync($PATH, ...)
@@ -19,7 +19,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: content_read_and_parse
-      malskills_evidence_type: file_and_data_access
+      malskills_sso_category: file_and_data_access
       malskills_value_metavar: $PATH
     pattern-either:
       - pattern: fs.readFileSync($PATH, ...)
@@ -32,7 +32,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: bulk_copy_and_archive
-      malskills_evidence_type: file_and_data_access
+      malskills_sso_category: file_and_data_access
     pattern-either:
       - pattern: fs.cpSync(...)
       - pattern: fs.copyFileSync(...)
@@ -44,7 +44,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: config_or_metadata_modification
-      malskills_evidence_type: file_and_data_access
+      malskills_sso_category: file_and_data_access
       malskills_value_metavar: $PATH
     pattern-either:
       - pattern: fs.writeFileSync($PATH, ...)
@@ -59,7 +59,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: deletion_or_overwrite
-      malskills_evidence_type: file_and_data_access
+      malskills_sso_category: file_and_data_access
       malskills_value_metavar: $PATH
     pattern-either:
       - pattern: fs.unlinkSync($PATH)

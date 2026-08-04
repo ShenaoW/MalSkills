@@ -25,8 +25,8 @@ class PatternVerdictBuilder:
             key = (
                 pattern.name,
                 pattern.source,
-                tuple(sorted(pattern.primitive_ids)),
-                tuple(sorted(pattern.evidence_ids)),
+                tuple(sorted(pattern.sso_ids)),
+                tuple(sorted(pattern.finding_ids)),
             )
             if key in seen_names:
                 continue
@@ -96,8 +96,8 @@ class PatternVerdictBuilder:
                 [step for step in explanation_chain if step.get("stage") != "verdict"]
                 if explanation_chain
                 else [
-                {"stage": "evidence_fact", "evidence_ids": pattern.evidence_ids},
-                {"stage": "primitive_fact", "primitive_ids": pattern.primitive_ids},
+                {"stage": "sso_finding", "finding_ids": pattern.finding_ids},
+                {"stage": "sso", "sso_ids": pattern.sso_ids},
                 {"stage": "rule", "rule_ids": pattern.rule_ids},
                 {"stage": "reasoning_source", "source": pattern.source},
                 {
@@ -128,4 +128,4 @@ class PatternVerdictBuilder:
             return f"Detected malicious behavior patterns: {', '.join(malicious_patterns)}."
         if label == "suspicious":
             return f"Detected suspicious behavior patterns: {', '.join(suspicious_patterns)}."
-        return "No malicious capability composition was inferred from the current primitive set."
+        return "No malicious capability composition was inferred from the current SSO set."

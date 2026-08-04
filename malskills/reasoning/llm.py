@@ -3,13 +3,15 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 from typing import Any
 
+from .. import llm_runtime
 from ..llm_runtime import build_llm_runtime_config, invoke_structured_json
-from ..models import ArtifactRecord, EvidenceRecord, PatternMatch, PrimitiveRecord
+from ..models import ArtifactRecord, SSOFinding, PatternMatch, SSORecord, WorkflowDiscovery
 
-REASONING_PROMPT_VERSION = "2026-03-22-v2"
+REASONING_PROMPT_VERSION = "2026-08-03-v5"
 
 PATTERN_TAXONOMY: dict[str, dict[str, str]] = {
     "Execution_and_Delivery": {
@@ -53,12 +55,20 @@ PATTERN_TAXONOMY: dict[str, dict[str, str]] = {
 LLM_REASONING_SYSTEM_PROMPT = """You are a reasoning engine for malicious-pattern classification.
 
 Task:
-- Consume structured evidence facts, primitive facts, and an object/dependency graph.
+- Consume structured SSOFinding records, normalized SSO facts, and an object/dependency graph.
 - Output only reasoning taxonomy pattern matches.
 - Do not invent new pattern names.
-- Do not output raw evidence facts, extracted operands, or primitive facts as patterns.
+- Do not output raw SSOFinding records, extracted operands, or SSO facts as patterns.
 - Use object identity, binding, and cross-artifact links when deciding whether multiple operations belong to the same chain.
 - Follow the structured schema exactly.
+
+Reusable workflow discovery:
+- You also receive symbolic pattern matches that the static rule base already found.
+- If a grounded, connected workflow is not covered by those symbolic matches, you may nominate it under `candidate_workflows`.
+- A candidate is not a verdict and does not affect the current classification.
+- Candidate workflows must use at least two provided SSO ids connected by shared operands or value flow.
+- Use a stable snake_case workflow_name that describes the operation sequence, not package-specific names.
+- Map the workflow to one existing pattern_name; do not invent a new verdict taxonomy.
 
 Allowed pattern taxonomy:
 - Execution_and_Delivery: execution-capable behavior is present, optionally linked to remote delivery or payload staging.
@@ -73,7 +83,7 @@ Allowed pattern taxonomy:
 
 Reasoning discipline:
 - Base your answer on the provided structured facts, not on free-form speculation.
-- Prefer patterns supported by linked objects or explicit evidence/primitive chains.
+- Prefer patterns supported by linked objects or explicit findings/SSO chains.
 - Only emit a pattern if the supporting facts materially satisfy the taxonomy definition.
 - If a behavior is only a single sensitive operation without a higher-level malicious pattern, emit no pattern.
 - If no taxonomy pattern applies, return an empty list.
@@ -83,7 +93,7 @@ Examples:
 2. cron/systemd/RunKey/service registration => Persistence.
 3. setuid/sudo/UAC bypass/token impersonation => Privilege_Escalation_and_Identity_Abuse.
 4. ptrace/ReadProcessMemory/CreateRemoteThread/mprotect RWX => Injection_and_Covert_Residency.
-5. API key access, session token access, SSH key access, or sensitive file read paired with external transfer => Information_Theft.
+5. API key access, session token access, SSH key access, or sensitive file read flowing into an unauthorized outbound payload or staging operation => Information_Theft.
 6. listener/tunnel/proxy/protocol encapsulation or explicit external send channel => Command_and_Control.
 7. ssh/WinRM/remote exec/cluster node control => Lateral_Movement.
 8. stop EDR / clear logs / disable firewall / hide artifacts => Defense_Evasion_and_Anti_Forensics.
@@ -92,23 +102,32 @@ Examples:
 Counterexamples:
 - A standalone outbound_connection to a benign-looking endpoint is not automatically a malicious pattern.
 - A standalone content_read_and_parse on an ordinary file is not enough for Information_Theft.
+- A credential used only in an Authorization or authentication header to access its intended service is not Information_Theft; require findings that sensitive data flows into an unauthorized payload, staging, or exfiltration sink.
 - Generic capability summaries are not patterns.
 - Use only the official reasoning taxonomy above; do not resurrect legacy pattern names.
 
-Output JSON only with key "patterns".
+Output JSON only with keys "patterns" and "candidate_workflows".
 Each pattern item must contain exactly:
 - pattern_name
 - severity
 - confidence
-- supporting_evidence_ids
-- supporting_primitive_ids
+- supporting_finding_ids
+- supporting_sso_ids
 - explanation
 
 Constraints:
 - pattern_name must be one of the allowed taxonomy names above.
 - severity must equal the official taxonomy severity for that pattern.
-- supporting_evidence_ids and supporting_primitive_ids must reference provided ids only.
+- supporting_finding_ids and supporting_sso_ids must reference provided ids only.
 - explanation must be brief and pattern-specific, not a generic risk summary.
+
+Each candidate_workflows item must contain exactly:
+- workflow_name
+- pattern_name
+- confidence
+- supporting_finding_ids
+- supporting_sso_ids
+- explanation
 """
 
 
@@ -116,7 +135,7 @@ def reasoning_schema() -> dict[str, Any]:
     return {
         "type": "object",
         "additionalProperties": False,
-        "required": ["patterns"],
+        "required": ["patterns", "candidate_workflows"],
         "properties": {
             "patterns": {
                 "type": "array",
@@ -127,26 +146,55 @@ def reasoning_schema() -> dict[str, Any]:
                         "pattern_name",
                         "severity",
                         "confidence",
-                        "supporting_evidence_ids",
-                        "supporting_primitive_ids",
+                        "supporting_finding_ids",
+                        "supporting_sso_ids",
                         "explanation",
                     ],
                     "properties": {
                         "pattern_name": {"type": "string", "enum": sorted(PATTERN_TAXONOMY)},
                         "severity": {"type": "string", "enum": ["high"]},
                         "confidence": {"type": "number"},
-                        "supporting_evidence_ids": {
+                        "supporting_finding_ids": {
                             "type": "array",
                             "items": {"type": "string"},
                         },
-                        "supporting_primitive_ids": {
+                        "supporting_sso_ids": {
                             "type": "array",
                             "items": {"type": "string"},
                         },
                         "explanation": {"type": "string"},
                     },
                 },
-            }
+            },
+            "candidate_workflows": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "additionalProperties": False,
+                    "required": [
+                        "workflow_name",
+                        "pattern_name",
+                        "confidence",
+                        "supporting_finding_ids",
+                        "supporting_sso_ids",
+                        "explanation",
+                    ],
+                    "properties": {
+                        "workflow_name": {"type": "string"},
+                        "pattern_name": {"type": "string", "enum": sorted(PATTERN_TAXONOMY)},
+                        "confidence": {"type": "number"},
+                        "supporting_finding_ids": {
+                            "type": "array",
+                            "items": {"type": "string"},
+                        },
+                        "supporting_sso_ids": {
+                            "type": "array",
+                            "items": {"type": "string"},
+                        },
+                        "explanation": {"type": "string"},
+                    },
+                },
+            },
         },
     }
 
@@ -164,19 +212,32 @@ class LlmPatternReasoner:
         *,
         skill_path: str,
         artifacts: list[ArtifactRecord],
-        evidence: list[EvidenceRecord],
-        primitives: list[PrimitiveRecord],
+        findings: list[SSOFinding],
+        ssos: list[SSORecord],
         graph: dict[str, Any] | None = None,
-    ) -> list[PatternMatch]:
-        cache_path = self._cache_path_for(skill_path, artifacts, evidence, primitives, graph or {})
+        symbolic_patterns: list[PatternMatch] | None = None,
+    ) -> tuple[list[PatternMatch], list[WorkflowDiscovery]]:
+        symbolic_patterns = symbolic_patterns or []
+        cache_path = self._cache_path_for(
+            skill_path, artifacts, findings, ssos, graph or {}, symbolic_patterns
+        )
         if cache_path.exists():
             try:
                 cached = json.loads(cache_path.read_text(encoding="utf-8"))
-                return self._parse_patterns(cached, evidence, primitives)
+                patterns = self._parse_patterns(cached, findings, ssos)
+                discoveries = self._parse_discoveries(
+                    cached,
+                    findings,
+                    ssos,
+                    symbolic_patterns,
+                )
+                return patterns, discoveries or self._fallback_discoveries(patterns, symbolic_patterns)
             except (OSError, json.JSONDecodeError):
                 pass
         payload = invoke_structured_json(
-            prompt=self._build_prompt(skill_path, artifacts, evidence, primitives, graph or {}),
+            prompt=self._build_prompt(
+                skill_path, artifacts, findings, ssos, graph or {}, symbolic_patterns
+            ),
             schema=reasoning_schema(),
             system_prompt=LLM_REASONING_SYSTEM_PROMPT,
             cwd=Path(skill_path),
@@ -184,18 +245,27 @@ class LlmPatternReasoner:
         )
         if isinstance(payload, dict):
             cache_path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
-        return self._parse_patterns(payload or {}, evidence, primitives)
+        parsed_payload = payload or {}
+        patterns = self._parse_patterns(parsed_payload, findings, ssos)
+        discoveries = self._parse_discoveries(
+            parsed_payload,
+            findings,
+            ssos,
+            symbolic_patterns,
+        )
+        return patterns, discoveries or self._fallback_discoveries(patterns, symbolic_patterns)
 
     def _build_prompt(
         self,
         skill_path: str,
         artifacts: list[ArtifactRecord],
-        evidence: list[EvidenceRecord],
-        primitives: list[PrimitiveRecord],
+        findings: list[SSOFinding],
+        ssos: list[SSORecord],
         graph: dict[str, Any],
+        symbolic_patterns: list[PatternMatch],
     ) -> str:
-        evidence_by_id = {item.evidence_id: item for item in evidence}
-        primitive_by_id = {item.primitive_id: item for item in primitives}
+        finding_by_id = {item.finding_id: item for item in findings}
+        sso_by_id = {item.sso_id: item for item in ssos}
         artifact_summary = [
             {
                 "artifact_id": artifact.artifact_id,
@@ -206,28 +276,31 @@ class LlmPatternReasoner:
             }
             for artifact in artifacts
         ]
-        evidence_summary = [
-            {
-                "evidence_id": item.evidence_id,
+        finding_summary = []
+        for item in findings:
+            finding_payload = {
+                "finding_id": item.finding_id,
                 "artifact_path": item.artifact_path,
-                "type": item.evidence_type,
+                "type": item.category,
                 "subtype": item.subtype,
-                "confidence": item.confidence,
+                "matched_text": item.matched_text,
                 "attributes": self._trim_mapping(
                     item.attributes,
-                    keys=["engine", "matched_text", "sink_api", "config_kind", "endpoint_class", "dst_class", "command_class", "path_class", "resolved_from", "flow_kind"],
+                    keys=["engine", "sink_api", "config_kind", "endpoint_class", "dst_class", "command_class", "path_class", "resolved_from", "flow_kind"],
                 ),
             }
-            for item in evidence
-        ]
-        primitive_summary = [
-            {
-                "primitive_id": item.primitive_id,
-                "primitive_type": item.primitive_type,
-                "confidence": item.confidence,
-                "evidence_ids": item.evidence_ids,
-                "params": self._trim_mapping(
-                    item.params,
+            if item.confidence is not None:
+                finding_payload["confidence"] = item.confidence
+            finding_summary.append(finding_payload)
+        sso_summary = []
+        for item in ssos:
+            sso_payload = {
+                "sso_id": item.sso_id,
+                "category": item.category,
+                "subtype": item.subtype,
+                "finding_ids": item.finding_ids,
+                "attributes": self._trim_mapping(
+                    item.attributes,
                     keys=[
                         "operation_object",
                         "object_identity_kind",
@@ -250,8 +323,9 @@ class LlmPatternReasoner:
                     ],
                 ),
             }
-            for item in primitives
-        ]
+            if item.confidence is not None:
+                sso_payload["confidence"] = item.confidence
+            sso_summary.append(sso_payload)
         graph_summary = {
             "nodes": [
                 {
@@ -261,50 +335,69 @@ class LlmPatternReasoner:
                     "name": str(node.get("name", "")),
                 }
                 for node in graph.get("nodes", [])
-                if str(node.get("kind", "")) in {"logical_object", "primitive", "evidence"}
+                if str(node.get("kind", "")) in {"operand", "value", "sso"}
             ],
             "edges": [
                 {
                     "source": str(edge.get("source", "")),
                     "target": str(edge.get("target", "")),
                     "type": str(edge.get("type", "")),
+                    "role": str(edge.get("role", "")),
+                    "flow_kind": str(edge.get("flow_kind", "")),
                 }
                 for edge in graph.get("edges", [])
-                if str(edge.get("type", "")) in {"supports", "acts_on", "associated_with", "resolved_via", "resolved_from", "same_object"}
+                if str(edge.get("type", ""))
+                in {
+                    "has_operand",
+                    "value_flow",
+                    "same_object",
+                }
             ],
         }
+        symbolic_summary = [
+            {
+                "pattern_name": item.name,
+                "rule_ids": item.rule_ids,
+                "sso_ids": item.sso_ids,
+                "finding_ids": item.finding_ids,
+            }
+            for item in symbolic_patterns
+        ]
         return (
             "Reasoning task: classify malicious patterns from structured facts only.\n"
             f"Skill path: {skill_path}\n"
             f"Allowed patterns: {json.dumps(sorted(PATTERN_TAXONOMY), ensure_ascii=True)}\n"
             "Use the official taxonomy definitions from the system prompt.\n"
-            "Prefer chains supported by shared objects, resolved config links, or explicit evidence/primitive references.\n"
-            "Return JSON only.\n\n"
+            "Prefer chains supported by shared objects, resolved config links, or explicit findings/SSO references.\n"
+            "Nominate reusable workflow candidates only when the connected workflow is not covered by symbolic matches.\n"
+            "Return JSON only with patterns and candidate_workflows.\n\n"
+            "Existing symbolic matches:\n"
+            f"{json.dumps(symbolic_summary, indent=2, sort_keys=True, ensure_ascii=True)}\n\n"
             "Artifacts:\n"
             f"{json.dumps(artifact_summary, indent=2, sort_keys=True, ensure_ascii=True)}\n\n"
-            "Evidence facts:\n"
-            f"{json.dumps(evidence_summary, indent=2, sort_keys=True, ensure_ascii=True)}\n\n"
-            "Primitive facts:\n"
-            f"{json.dumps(primitive_summary, indent=2, sort_keys=True, ensure_ascii=True)}\n\n"
+            "Finding facts:\n"
+            f"{json.dumps(finding_summary, indent=2, sort_keys=True, ensure_ascii=True)}\n\n"
+            "SSO facts:\n"
+            f"{json.dumps(sso_summary, indent=2, sort_keys=True, ensure_ascii=True)}\n\n"
             "Object graph:\n"
             f"{json.dumps(graph_summary, indent=2, sort_keys=True, ensure_ascii=True)}\n\n"
             "Reference sets:\n"
-            f"{json.dumps({'evidence_ids': sorted(evidence_by_id), 'primitive_ids': sorted(primitive_by_id)}, indent=2, sort_keys=True, ensure_ascii=True)}"
+            f"{json.dumps({'finding_ids': sorted(finding_by_id), 'sso_ids': sorted(sso_by_id)}, indent=2, sort_keys=True, ensure_ascii=True)}"
         )
 
     def _parse_patterns(
         self,
         payload: dict[str, Any],
-        evidence: list[EvidenceRecord],
-        primitives: list[PrimitiveRecord],
+        findings: list[SSOFinding],
+        ssos: list[SSORecord],
     ) -> list[PatternMatch]:
         if not isinstance(payload, dict):
             return []
         raw_patterns = payload.get("patterns", [])
         if not isinstance(raw_patterns, list):
             return []
-        valid_evidence_ids = {item.evidence_id for item in evidence}
-        valid_primitive_ids = {item.primitive_id for item in primitives}
+        valid_finding_ids = {item.finding_id for item in findings}
+        valid_sso_ids = {item.sso_id for item in ssos}
         parsed: list[PatternMatch] = []
         for index, raw in enumerate(raw_patterns):
             if not isinstance(raw, dict):
@@ -322,21 +415,21 @@ class LlmPatternReasoner:
                 confidence = 0.0
             if confidence <= 0:
                 continue
-            evidence_ids = self._stable_unique(
+            finding_ids = self._stable_unique(
                 [
                     str(item).strip()
-                    for item in raw.get("supporting_evidence_ids", [])
-                    if str(item).strip() in valid_evidence_ids
+                    for item in raw.get("supporting_finding_ids", [])
+                    if str(item).strip() in valid_finding_ids
                 ]
             )
-            primitive_ids = self._stable_unique(
+            sso_ids = self._stable_unique(
                 [
                     str(item).strip()
-                    for item in raw.get("supporting_primitive_ids", [])
-                    if str(item).strip() in valid_primitive_ids
+                    for item in raw.get("supporting_sso_ids", [])
+                    if str(item).strip() in valid_sso_ids
                 ]
             )
-            if not evidence_ids and not primitive_ids:
+            if not finding_ids and not sso_ids:
                 continue
             explanation = str(raw.get("explanation", "")).strip()
             if not explanation:
@@ -347,32 +440,157 @@ class LlmPatternReasoner:
                     name=name,
                     severity=severity,
                     rule_ids=[f"LLM_REASONING::{name}"],
-                    primitive_ids=primitive_ids,
-                    evidence_ids=evidence_ids,
+                    sso_ids=sso_ids,
+                    finding_ids=finding_ids,
                     explanation=explanation,
                     source="llm",
+                    generator={
+                        "backend": self.runtime.backend,
+                        "model": self.runtime.model,
+                        "prompt_version": REASONING_PROMPT_VERSION,
+                    },
                 )
             )
         return parsed
+
+    def _parse_discoveries(
+        self,
+        payload: dict[str, Any],
+        findings: list[SSOFinding],
+        ssos: list[SSORecord],
+        symbolic_patterns: list[PatternMatch] | None = None,
+    ) -> list[WorkflowDiscovery]:
+        raw_discoveries = payload.get("candidate_workflows", []) if isinstance(payload, dict) else []
+        if not isinstance(raw_discoveries, list):
+            return []
+        valid_finding_ids = {item.finding_id for item in findings}
+        valid_sso_ids = {item.sso_id for item in ssos}
+        discoveries: list[WorkflowDiscovery] = []
+        for index, raw in enumerate(raw_discoveries):
+            if not isinstance(raw, dict):
+                continue
+            pattern_name = str(raw.get("pattern_name", "")).strip()
+            workflow_name = self._workflow_slug(str(raw.get("workflow_name", "")))
+            if pattern_name not in PATTERN_TAXONOMY or not workflow_name:
+                continue
+            try:
+                confidence = float(raw.get("confidence", 0.0))
+            except (TypeError, ValueError):
+                continue
+            sso_ids = self._stable_unique(
+                [
+                    str(item).strip()
+                    for item in raw.get("supporting_sso_ids", [])
+                    if str(item).strip() in valid_sso_ids
+                ]
+            )
+            finding_ids = self._stable_unique(
+                [
+                    str(item).strip()
+                    for item in raw.get("supporting_finding_ids", [])
+                    if str(item).strip() in valid_finding_ids
+                ]
+            )
+            explanation = str(raw.get("explanation", "")).strip()
+            if confidence <= 0 or len(sso_ids) < 2 or not explanation:
+                continue
+            if self._covered_by_symbolic(
+                pattern_name,
+                sso_ids,
+                symbolic_patterns or [],
+            ):
+                continue
+            discoveries.append(
+                WorkflowDiscovery(
+                    discovery_id=f"llm_workflow_{index:05d}",
+                    workflow_name=workflow_name,
+                    pattern_name=pattern_name,
+                    confidence=min(confidence, 1.0),
+                    sso_ids=sso_ids,
+                    finding_ids=finding_ids,
+                    explanation=explanation,
+                    generator={
+                        "backend": self.runtime.backend,
+                        "model": self.runtime.model,
+                        "prompt_version": REASONING_PROMPT_VERSION,
+                    },
+                )
+            )
+        return discoveries
+
+    def _fallback_discoveries(
+        self,
+        patterns: list[PatternMatch],
+        symbolic_patterns: list[PatternMatch],
+    ) -> list[WorkflowDiscovery]:
+        discoveries: list[WorkflowDiscovery] = []
+        for index, pattern in enumerate(patterns):
+            if len(pattern.sso_ids) < 2 or self._covered_by_symbolic(
+                pattern.name,
+                pattern.sso_ids,
+                symbolic_patterns,
+            ):
+                continue
+            discoveries.append(
+                WorkflowDiscovery(
+                    discovery_id=f"llm_workflow_fallback_{index:05d}",
+                    workflow_name=self._workflow_slug(f"uncovered_{pattern.name}"),
+                    pattern_name=pattern.name,
+                    confidence=0.7,
+                    sso_ids=list(pattern.sso_ids),
+                    finding_ids=list(pattern.finding_ids),
+                    explanation=pattern.explanation,
+                    generator={
+                        "backend": self.runtime.backend,
+                        "model": self.runtime.model,
+                        "prompt_version": REASONING_PROMPT_VERSION,
+                    },
+                )
+            )
+        return discoveries
+
+    def _covered_by_symbolic(
+        self,
+        pattern_name: str,
+        sso_ids: list[str],
+        symbolic_patterns: list[PatternMatch],
+    ) -> bool:
+        candidate_ssos = set(sso_ids)
+        return any(
+            symbolic.name == pattern_name
+            and candidate_ssos
+            and candidate_ssos <= set(symbolic.sso_ids)
+            for symbolic in symbolic_patterns
+        )
 
     def _cache_path_for(
         self,
         skill_path: str,
         artifacts: list[ArtifactRecord],
-        evidence: list[EvidenceRecord],
-        primitives: list[PrimitiveRecord],
+        findings: list[SSOFinding],
+        ssos: list[SSORecord],
         graph: dict[str, Any],
+        symbolic_patterns: list[PatternMatch],
     ) -> Path:
         payload = {
             "skill_path": str(Path(skill_path).resolve()),
             "artifacts": [(item.artifact_id, item.relative_path, item.content_hash) for item in artifacts],
-            "evidence": [(item.evidence_id, item.subtype, item.attributes.get("matched_text", ""), item.confidence) for item in evidence],
-            "primitives": [(item.primitive_id, item.primitive_type, item.params, item.evidence_ids) for item in primitives],
+            "findings": [
+                (item.finding_id, item.subtype, item.matched_text, item.confidence)
+                for item in findings
+            ],
+            "ssos": [(item.sso_id, item.subtype, item.attributes, item.finding_ids) for item in ssos],
             "graph_edges": graph.get("edges", []),
+            "symbolic_patterns": [
+                (item.name, item.rule_ids, item.sso_ids, item.finding_ids)
+                for item in symbolic_patterns
+            ],
             "schema": sorted(PATTERN_TAXONOMY),
             "version": REASONING_PROMPT_VERSION,
+            "runtime_protocol_version": llm_runtime.LLM_RUNTIME_PROTOCOL_VERSION,
             "runtime_backend": self.runtime.backend,
             "runtime_model": self.runtime.model,
+            "runtime_reasoning_effort": self.runtime.reasoning_effort,
             "runtime_base_url": self.runtime.base_url,
         }
         digest = hashlib.sha256(json.dumps(payload, sort_keys=True, ensure_ascii=True).encode("utf-8")).hexdigest()
@@ -395,3 +613,6 @@ class LlmPatternReasoner:
             seen.add(value)
             ordered.append(value)
         return ordered
+
+    def _workflow_slug(self, value: str) -> str:
+        return re.sub(r"[^a-z0-9]+", "_", value.lower()).strip("_")[:80]

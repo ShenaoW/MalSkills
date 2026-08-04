@@ -17,7 +17,6 @@ It works in three stages:
 - `data/`: benchmark and analysis inputs
 - `output/`: generated results
 - `baseline/`: baseline integrations
-- `tests/`: regression tests
 - `assets/`: figures used in this artifact
 
 ## Requirements
@@ -58,7 +57,7 @@ Run a single-skill static smoke test without LLM calls:
 
 ```bash
 malskills analyze-skill <skill-dir> --output <output-dir> \
-  --disable-llm-evidence \
+  --disable-llm-sso-extraction \
   --disable-llm-object-analysis \
   --disable-yasa \
   --reasoning-mode formal
@@ -90,11 +89,51 @@ malskills show-llm-config
 Each analyzed skill produces:
 
 - `verdict.json`: final label and score
-- `all_evidence.json`: extracted security-sensitive operations
+- `sso_findings.json`: source-grounded extractor findings used to form security-sensitive operations
+- `ssos.json`: normalized security-sensitive operations, with supporting Finding IDs and Operand IDs
+- `operands.json`: role-bearing objects used by SSOs, such as endpoint, command, payload, and path operands
+- `values.json`: literal, symbolic, and program values bound to or propagated into Operands
+- `operand_resolutions.json`: binding provenance and analyzer-proven value-flow steps
 - `pattern_summary.json`: matched malicious or suspicious patterns
-- `evidence_graph.json`: graph representation of recovered dependencies
+- `sdg.json`: the Artifact/SSO/Operand/Value dependency graph
+- `sdg.dot`: Graphviz rendering of the same dependency graph
 - `proofs.json`: reasoning traces
 - `human_report.md`: readable explanation
+- `workflow_discoveries.json`: LLM-nominated reusable workflow candidates
+- `analysis_metadata.json`: extractor status and the content-addressed ruleset digest
+
+The canonical analysis path is `SSOFinding -> SSO -> Operand -> Value -> Pattern -> Verdict`.
+`SSOFinding` records are source-grounded extractor outputs and are not SDG nodes.
+The canonical SDG path is `Artifact -> SSO -> Operand -> Value`; proven assignment
+or call propagation is represented by directional `Value -> Value` edges.
+
+## Guarded rule learning
+
+LLM-only SSO discoveries and uncovered connected workflows can be accumulated in a persistent rule store. Collection is opt-in and never changes the active rules during the scan that produced a candidate:
+
+```bash
+malskills analyze-skill <skill-dir> \
+  --output <output-dir> \
+  --rule-store output/learned-rules \
+  --collect-rule-candidates \
+  --rule-group-id <dedupe-or-campaign-id>
+```
+
+Inspect, validate, and explicitly promote a candidate:
+
+```bash
+malskills rules list --store output/learned-rules
+malskills rules validate <candidate-id> \
+  --store output/learned-rules \
+  --manifest held-out.json
+malskills rules promote <candidate-id> \
+  --store output/learned-rules \
+  --approved-by <reviewer>
+```
+
+Future scans reuse the promoted Semgrep and graph rules by passing the same `--rule-store`, including when LLM analysis is disabled. See [the rule-learning guide](docs/RULE_LEARNING.md) for validation manifests, default gates, rollback, and poisoning controls. The detailed [paper alignment audit](docs/PAPER_ALIGNMENT.md) records what is aligned and what remains incomplete.
+
+Use `malskills rules deactivate <candidate-id> --store <store> --approved-by <reviewer>` to withdraw one active rule while retaining unrelated active rules.
 
 ## Reproducing the benchmark experiments
 
@@ -138,14 +177,14 @@ malskills run-eval \
 malskills run-eval \
   --benchmark output/ground_truth_final_benchmark.json \
   --output output/rq2_no_symbolic_extractor \
-  --variant benchmark_llm_evidence_only
+  --variant benchmark_llm_findings_only
 ```
 
 ```bash
 malskills run-eval \
   --benchmark output/ground_truth_final_benchmark.json \
   --output output/rq2_no_neuro_extractor \
-  --variant benchmark_semgrep_evidence_only
+  --variant benchmark_semgrep_findings_only
 ```
 
 ### LLM comparison

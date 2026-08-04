@@ -5,7 +5,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: outbound_connection
-      malskills_evidence_type: network_and_remote_communication
+      malskills_sso_category: network_and_remote_communication
       malskills_value_metavar: $URL
     pattern-either:
       - pattern: fetch($URL, ...)
@@ -21,7 +21,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: listener_and_receive
-      malskills_evidence_type: network_and_remote_communication
+      malskills_sso_category: network_and_remote_communication
     pattern-either:
       - pattern: net.createServer(...)
       - pattern: http.createServer(...)

@@ -5,7 +5,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: system_and_hardware_discovery
-      malskills_evidence_type: host_and_environment_discovery
+      malskills_sso_category: host_and_environment_discovery
     pattern-either:
       - pattern: os.uname()
       - pattern: platform.uname()
@@ -19,7 +19,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: identity_and_account_discovery
-      malskills_evidence_type: host_and_environment_discovery
+      malskills_sso_category: host_and_environment_discovery
     pattern-either:
       - pattern: os.getlogin()
       - pattern: getpass.getuser()
@@ -32,7 +32,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: process_and_service_discovery
-      malskills_evidence_type: host_and_environment_discovery
+      malskills_sso_category: host_and_environment_discovery
     pattern-either:
       - pattern: psutil.process_iter(...)
       - pattern: psutil.pids()
@@ -44,7 +44,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: network_and_neighbor_discovery
-      malskills_evidence_type: host_and_environment_discovery
+      malskills_sso_category: host_and_environment_discovery
     pattern-either:
       - pattern: psutil.net_if_addrs()
       - pattern: psutil.net_connections(...)
@@ -56,7 +56,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: security_environment_discovery
-      malskills_evidence_type: host_and_environment_discovery
+      malskills_sso_category: host_and_environment_discovery
       malskills_value_metavar: $URL
     patterns:
       - pattern-either:

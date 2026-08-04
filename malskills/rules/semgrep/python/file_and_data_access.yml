@@ -5,7 +5,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: file_enumeration_and_location
-      malskills_evidence_type: file_and_data_access
+      malskills_sso_category: file_and_data_access
       malskills_value_metavar: $PATH
     pattern-either:
       - pattern: os.listdir($PATH)
@@ -20,7 +20,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: content_read_and_parse
-      malskills_evidence_type: file_and_data_access
+      malskills_sso_category: file_and_data_access
       malskills_value_metavar: $PATH
     pattern-either:
       - pattern: open($PATH, ...)
@@ -35,7 +35,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: bulk_copy_and_archive
-      malskills_evidence_type: file_and_data_access
+      malskills_sso_category: file_and_data_access
       malskills_value_metavar: $PATH
     pattern-either:
       - pattern: shutil.copytree($SRC, $PATH, ...)
@@ -49,7 +49,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: config_or_metadata_modification
-      malskills_evidence_type: file_and_data_access
+      malskills_sso_category: file_and_data_access
       malskills_value_metavar: $PATH
     pattern-either:
       - pattern: pathlib.Path($PATH).write_text(...)
@@ -64,7 +64,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: deletion_or_overwrite
-      malskills_evidence_type: file_and_data_access
+      malskills_sso_category: file_and_data_access
       malskills_value_metavar: $PATH
     pattern-either:
       - pattern: os.remove($PATH)

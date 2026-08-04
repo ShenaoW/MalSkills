@@ -5,7 +5,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: outbound_connection
-      malskills_evidence_type: network_and_remote_communication
+      malskills_sso_category: network_and_remote_communication
       malskills_value_metavar: $URL
     pattern-either:
       - pattern: fetch($URL, ...)
@@ -24,7 +24,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: outbound_connection
-      malskills_evidence_type: network_and_remote_communication
+      malskills_sso_category: network_and_remote_communication
     pattern-either:
       - pattern: net.connect(...)
       - pattern: tls.connect(...)
@@ -37,7 +37,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: listener_and_receive
-      malskills_evidence_type: network_and_remote_communication
+      malskills_sso_category: network_and_remote_communication
     pattern-either:
       - pattern: net.createServer(...)
       - pattern: http.createServer(...)
@@ -49,7 +49,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: tunneling_and_forwarding
-      malskills_evidence_type: network_and_remote_communication
+      malskills_sso_category: network_and_remote_communication
     pattern-either:
       - pattern: ssh2.Client(...)
       - pattern: new SocksProxyAgent(...)
@@ -60,7 +60,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: protocol_encapsulation_or_encrypted_comm
-      malskills_evidence_type: network_and_remote_communication
+      malskills_sso_category: network_and_remote_communication
     pattern-either:
       - pattern: tls.connect(...)
       - pattern: https.request(...)

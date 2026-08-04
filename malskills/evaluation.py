@@ -42,44 +42,44 @@ from .utils import ensure_dir
 
 
 VARIANTS: dict[str, AnalyzerConfig | str] = {
-    "full": AnalyzerConfig(enable_llm_evidence=True),
-    "semgrep_evidence_only": AnalyzerConfig(enable_llm_evidence=False),
-    "llm_evidence_only": AnalyzerConfig(enable_semgrep=False, enable_llm_evidence=True),
-    "formal_reasoning_only": AnalyzerConfig(enable_llm_evidence=True, reasoning_mode="formal"),
-    "llm_reasoning_only": AnalyzerConfig(enable_llm_evidence=True, reasoning_mode="llm"),
-    "no_yasa": AnalyzerConfig(enable_llm_evidence=True, enable_yasa=False),
-    "no_cross_artifact_resolution": AnalyzerConfig(enable_llm_evidence=True, enable_cross_artifact_resolution=False),
+    "full": AnalyzerConfig(enable_llm_sso_extraction=True),
+    "semgrep_findings_only": AnalyzerConfig(enable_llm_sso_extraction=False),
+    "llm_findings_only": AnalyzerConfig(enable_semgrep=False, enable_llm_sso_extraction=True),
+    "formal_reasoning_only": AnalyzerConfig(enable_llm_sso_extraction=True, reasoning_mode="formal"),
+    "llm_reasoning_only": AnalyzerConfig(enable_llm_sso_extraction=True, reasoning_mode="llm"),
+    "no_yasa": AnalyzerConfig(enable_llm_sso_extraction=True, enable_yasa=False),
+    "no_cross_artifact_resolution": AnalyzerConfig(enable_llm_sso_extraction=True, enable_cross_artifact_resolution=False),
     "static_only": AnalyzerConfig(
-        enable_llm_evidence=False,
+        enable_llm_sso_extraction=False,
         enable_llm_object_analysis=False,
         enable_yasa=False,
         enable_cross_artifact_resolution=False,
         reasoning_mode="formal",
     ),
-    "benchmark_full": AnalyzerConfig(enable_llm_evidence=True, max_artifacts=600, max_total_text_bytes=2_000_000),
-    "benchmark_semgrep_evidence_only": AnalyzerConfig(enable_llm_evidence=False, max_artifacts=600, max_total_text_bytes=2_000_000),
-    "benchmark_llm_evidence_only": AnalyzerConfig(
+    "benchmark_full": AnalyzerConfig(enable_llm_sso_extraction=True, max_artifacts=600, max_total_text_bytes=2_000_000),
+    "benchmark_semgrep_findings_only": AnalyzerConfig(enable_llm_sso_extraction=False, max_artifacts=600, max_total_text_bytes=2_000_000),
+    "benchmark_llm_findings_only": AnalyzerConfig(
         enable_semgrep=False,
-        enable_llm_evidence=True,
+        enable_llm_sso_extraction=True,
         max_artifacts=600,
         max_total_text_bytes=2_000_000,
     ),
     "benchmark_formal_reasoning_only": AnalyzerConfig(
-        enable_llm_evidence=True,
+        enable_llm_sso_extraction=True,
         reasoning_mode="formal",
         max_artifacts=600,
         max_total_text_bytes=2_000_000,
     ),
-    "benchmark_llm_reasoning_only": AnalyzerConfig(enable_llm_evidence=True, reasoning_mode="llm", max_artifacts=600, max_total_text_bytes=2_000_000),
+    "benchmark_llm_reasoning_only": AnalyzerConfig(enable_llm_sso_extraction=True, reasoning_mode="llm", max_artifacts=600, max_total_text_bytes=2_000_000),
     "benchmark_no_yasa": AnalyzerConfig(
-        enable_llm_evidence=True,
+        enable_llm_sso_extraction=True,
         enable_yasa=False,
         max_artifacts=600,
         max_total_text_bytes=2_000_000,
     ),
-    "benchmark_no_cross_artifact_resolution": AnalyzerConfig(enable_llm_evidence=True, enable_cross_artifact_resolution=False, max_artifacts=600, max_total_text_bytes=2_000_000),
+    "benchmark_no_cross_artifact_resolution": AnalyzerConfig(enable_llm_sso_extraction=True, enable_cross_artifact_resolution=False, max_artifacts=600, max_total_text_bytes=2_000_000),
     "benchmark_static_only": AnalyzerConfig(
-        enable_llm_evidence=False,
+        enable_llm_sso_extraction=False,
         enable_llm_object_analysis=False,
         enable_yasa=False,
         enable_cross_artifact_resolution=False,
@@ -155,10 +155,9 @@ def _analyze_case_worker(skill_path: str, case_output_dir: str, config: Analyzer
                 "predicted": result.verdict.label,
                 "score": result.verdict.score,
                 "patterns": result.verdict.malicious_patterns + result.verdict.suspicious_patterns,
-                "evidence_count": len(result.evidence),
-                "derived_evidence_count": len(result.derived_evidence),
-                "combined_evidence_count": len(result.combined_evidence),
-                "primitive_count": len(result.primitives),
+                "finding_count": len(result.findings),
+                "operand_resolution_count": len(result.operand_resolutions),
+                "sso_count": len(result.ssos),
             }
         )
     except Exception as exc:
@@ -169,10 +168,9 @@ def _analyze_case_worker(skill_path: str, case_output_dir: str, config: Analyzer
                 "predicted": "error",
                 "score": 0.0,
                 "patterns": [],
-                "evidence_count": 0,
-                "derived_evidence_count": 0,
-                "combined_evidence_count": 0,
-                "primitive_count": 0,
+                "finding_count": 0,
+                "operand_resolution_count": 0,
+                "sso_count": 0,
             }
         )
 
@@ -291,10 +289,9 @@ class Evaluator:
                 "score": case_result["score"],
                 "patterns": case_result["patterns"],
                 "runtime_sec": round(runtime_sec, 4),
-                "evidence_count": case_result["evidence_count"],
-                "derived_evidence_count": case_result["derived_evidence_count"],
-                "combined_evidence_count": case_result["combined_evidence_count"],
-                "primitive_count": case_result["primitive_count"],
+                "finding_count": case_result["finding_count"],
+                "operand_resolution_count": case_result["operand_resolution_count"],
+                "sso_count": case_result["sso_count"],
                 "analysis_output_dir": str(case_output_dir.relative_to(destination)),
                 "analysis_manifest_path": str(manifest_path.relative_to(destination)),
                 "error": case_result.get("error", ""),
@@ -341,10 +338,9 @@ class Evaluator:
                     "predicted": "error",
                     "score": 0.0,
                     "patterns": [],
-                    "evidence_count": 0,
-                    "derived_evidence_count": 0,
-                    "combined_evidence_count": 0,
-                    "primitive_count": 0,
+                    "finding_count": 0,
+                    "operand_resolution_count": 0,
+                    "sso_count": 0,
                     "error": f"{type(exc).__name__}: {exc}",
                 }
             (case_output_dir / "benchmark_case_status.json").write_text(
@@ -372,10 +368,9 @@ class Evaluator:
                 "predicted": "timeout",
                 "score": 0.0,
                 "patterns": [],
-                "evidence_count": 0,
-                "derived_evidence_count": 0,
-                "combined_evidence_count": 0,
-                "primitive_count": 0,
+                "finding_count": 0,
+                "operand_resolution_count": 0,
+                "sso_count": 0,
                 "error": f"case timed out after {BENCHMARK_CASE_TIMEOUT_SEC}s",
             }
             (case_output_dir / "benchmark_case_status.json").write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
@@ -388,10 +383,9 @@ class Evaluator:
                 "predicted": "error",
                 "score": 0.0,
                 "patterns": [],
-                "evidence_count": 0,
-                "derived_evidence_count": 0,
-                "combined_evidence_count": 0,
-                "primitive_count": 0,
+                "finding_count": 0,
+                "operand_resolution_count": 0,
+                "sso_count": 0,
                 "error": "worker exited without result payload",
             }
         (case_output_dir / "benchmark_case_status.json").write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
@@ -420,10 +414,9 @@ class Evaluator:
         total_runtime = sum(float(row.get("runtime_sec", 0.0)) for row in results)
         avg_runtime = total_runtime / len(results) if results else 0.0
         throughput = len(results) / (total_runtime / 60.0) if total_runtime else 0.0
-        avg_evidence = sum(float(row.get("evidence_count", 0.0)) for row in results) / len(results) if results else 0.0
-        avg_derived_evidence = sum(float(row.get("derived_evidence_count", 0.0)) for row in results) / len(results) if results else 0.0
-        avg_combined_evidence = sum(float(row.get("combined_evidence_count", 0.0)) for row in results) / len(results) if results else 0.0
-        avg_primitives = sum(float(row.get("primitive_count", 0.0)) for row in results) / len(results) if results else 0.0
+        avg_findings = sum(float(row.get("finding_count", 0.0)) for row in results) / len(results) if results else 0.0
+        avg_operand_resolutions = sum(float(row.get("operand_resolution_count", 0.0)) for row in results) / len(results) if results else 0.0
+        avg_ssos = sum(float(row.get("sso_count", 0.0)) for row in results) / len(results) if results else 0.0
         timeout_count = sum(1 for row in results if row.get("status") == "timeout")
         error_count = sum(1 for row in results if row.get("status") == "error")
         return {
@@ -441,10 +434,9 @@ class Evaluator:
             "num_entries": float(len(entries)),
             "avg_runtime_sec": round(avg_runtime, 4),
             "throughput_skills_per_min": round(throughput, 4),
-            "avg_evidence_count": round(avg_evidence, 4),
-            "avg_derived_evidence_count": round(avg_derived_evidence, 4),
-            "avg_combined_evidence_count": round(avg_combined_evidence, 4),
-            "avg_primitive_count": round(avg_primitives, 4),
+            "avg_finding_count": round(avg_findings, 4),
+            "avg_operand_resolution_count": round(avg_operand_resolutions, 4),
+            "avg_sso_count": round(avg_ssos, 4),
             "timeout_count": float(timeout_count),
             "error_count": float(error_count),
         }
@@ -484,10 +476,9 @@ def render_results(results_dir: str | Path) -> Path:
         lines.append(f"- Strict malicious false positive rate: {metrics.get('strict_malicious_false_positive_rate', 0.0)}")
         lines.append(f"- Avg runtime (s): {metrics.get('avg_runtime_sec', 0.0)}")
         lines.append(f"- Throughput (skills/min): {metrics.get('throughput_skills_per_min', 0.0)}")
-        lines.append(f"- Avg evidence count: {metrics.get('avg_evidence_count', 0.0)}")
-        lines.append(f"- Avg primitive-support evidence count: {metrics.get('avg_derived_evidence_count', 0.0)}")
-        lines.append(f"- Avg combined evidence count: {metrics.get('avg_combined_evidence_count', 0.0)}")
-        lines.append(f"- Avg primitive count: {metrics.get('avg_primitive_count', 0.0)}")
+        lines.append(f"- Avg findings count: {metrics.get('avg_finding_count', 0.0)}")
+        lines.append(f"- Avg operand resolution count: {metrics.get('avg_operand_resolution_count', 0.0)}")
+        lines.append(f"- Avg SSO count: {metrics.get('avg_sso_count', 0.0)}")
         if all(key in metrics for key in ("tp", "fp", "fn", "tn")):
             lines.append(f"- Confusion: TP={int(metrics['tp'])}, FP={int(metrics['fp'])}, FN={int(metrics['fn'])}, TN={int(metrics['tn'])}")
         lines.append(f"- Entries: {int(metrics['num_entries'])}")

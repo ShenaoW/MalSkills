@@ -1188,8 +1188,7 @@ def _finalize_baseline_result(
         "predicted": predicted,
         "score": score,
         "patterns": patterns,
-        "evidence_count": 0,
-        "derived_evidence_count": 0,
-        "combined_evidence_count": 0,
-        "primitive_count": 0,
+        "finding_count": 0,
+        "operand_resolution_count": 0,
+        "sso_count": 0,
     }

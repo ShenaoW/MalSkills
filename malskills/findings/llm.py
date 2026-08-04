@@ -7,36 +7,37 @@ from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from pathlib import Path
 
+from .. import llm_runtime
 from ..llm_runtime import build_llm_runtime_config, invoke_structured_json
-from ..models import ArtifactRecord, EvidenceRecord, Span
+from ..models import ArtifactRecord, SSOFinding, Span
 from .schema import (
-    EVIDENCE_CATEGORIES,
-    EVIDENCE_SUBTYPES,
+    SSO_CATEGORIES,
+    SSO_SUBTYPES,
     SCHEMA_VERSION,
-    canonical_evidence_type,
-    normalize_evidence_record,
+    canonical_sso_category,
+    normalize_sso_finding,
     sanitize_llm_attributes,
 )
 
-EVIDENCE_PROMPT_VERSION = "2026-03-23-v3"
+FINDING_PROMPT_VERSION = "2026-08-04-v1"
 
-EVIDENCE_SYSTEM_PROMPT = """You are extracting evidence facts, not verdicts.
+FINDING_SYSTEM_PROMPT = """You are extracting SSO findings, not verdicts.
 
 Task:
 - Read one artifact.
-- Output only sensitive-operation evidence facts.
+- Output only sensitive-operation SSO findings.
 - Do not output benign metadata, ordinary ownership fields, version fields, timestamps, or harmless descriptive prose.
 - Do not infer final maliciousness.
 - Only extract concrete sensitive operations that are explicitly grounded in the artifact text.
-- Never output analyst summaries, inferred intent summaries, capability summaries, or explanatory paraphrases as evidence facts.
-- Use only the official evidence taxonomy subtypes from docs/taxonomy.md.
+- Never output analyst summaries, inferred intent summaries, capability summaries, or explanatory paraphrases as SSO findings.
+- Use only the official SSO taxonomy subtypes from docs/taxonomy.md.
 - The output must satisfy the structured schema exactly.
 - Every record must contain both `type` and `subtype`.
-- `type` must be one of the official evidence categories.
-- `subtype` must be one of the official evidence subtypes.
+- `type` must be one of the official SSO categories.
+- `subtype` must be one of the official SSO subtypes.
 - `type` and `subtype` must be consistent: `type` must be the parent category of `subtype`.
 
-Evidence taxonomy:
+Finding taxonomy:
 1. payload_execution
 Subtypes:
 - direct_process_execution
@@ -156,7 +157,7 @@ Official category -> subtype mapping:
 Important detection guidance:
 - Treat LOTL and trusted-tool abuse as sensitive operations. Examples: curl, wget, powershell, bash, sh, mshta, rundll32, regsvr32, osascript, cron bootstrap commands.
 - Treat third-party library wrappers as equivalent to native sinks. Examples: fabric.run, invoke.run, execa/execaCommand, got.post, superagent.post, aiohttp.request, urllib3.request, node-pty, pexpect.
-- In markdown or README-style artifacts, imperative setup text can still be sensitive evidence when it tells the operator to download, visit, copy, paste, run, install, or enable an external component.
+- In markdown or README-style artifacts, imperative setup text can still be sensitive findings when it tells the operator to download, visit, copy, paste, run, install, or enable an external component.
 - Treat markdown frontmatter, YAML metadata, and inline JSON metadata as first-class artifact text. If frontmatter contains install records, shell commands, package installers, download URLs, or bootstrap steps, extract them exactly like ordinary code or prose.
 - If an artifact says a component "must be installed", "must be running", "before proceeding", or "required to function", and the same artifact provides a concrete download URL, shell command, executable archive, or terminal paste step, extract the concrete sensitive operations rather than ignoring them as setup prose.
 - For install metadata or setup prose, emit one record per concrete operation. Example: a shell command that uses curl inside sh -c yields both outbound_connection and shell_interpreter_execution.
@@ -170,7 +171,7 @@ Important detection guidance:
 
 Output rules:
 - Return JSON only with key "records".
-- Each record must be one concrete evidence fact.
+- Each record must be one concrete SSO finding.
 - Do not invent fields outside the schema.
 - Do not invent new category names or subtype names.
 - If no valid taxonomy subtype applies, emit no record instead of using an approximate label.
@@ -252,40 +253,51 @@ Output:
 
 
 @dataclass
-class LlmEvidenceResult:
-    evidence: list[EvidenceRecord]
+class LlmSSOFindingResult:
+    findings: list[SSOFinding]
 
 
-class LlmEvidenceExtractor:
-    def __init__(self, cache_dir: str | Path | None = None, max_workers: int = 4, batch_threshold: int = 10) -> None:
+class LlmSSOFindingExtractor:
+    def __init__(
+        self,
+        cache_dir: str | Path | None = None,
+        max_workers: int = 4,
+        batch_threshold: int = 10,
+        batch_size: int = 6,
+    ) -> None:
         default_cache = Path(".cache") / "malskills_llm"
         configured = cache_dir or os.environ.get("MALSKILLS_LLM_CACHE") or default_cache
         self.cache_dir = Path(configured)
         self.cache_dir.mkdir(parents=True, exist_ok=True)
         self.max_workers = max_workers
         self.batch_threshold = batch_threshold
+        configured_batch_size = int(os.environ.get("MALSKILLS_LLM_SSO_BATCH_SIZE", batch_size))
+        self.batch_size = max(1, configured_batch_size)
         self.runtime = build_llm_runtime_config()
 
-    def extract(self, artifacts: list[ArtifactRecord]) -> LlmEvidenceResult:
+    def extract(self, artifacts: list[ArtifactRecord]) -> LlmSSOFindingResult:
         eligible = [artifact for artifact in artifacts if artifact.is_text and artifact.content and not artifact.generated]
         if not eligible:
-            return LlmEvidenceResult(evidence=[])
+            return LlmSSOFindingResult(findings=[])
         if len(eligible) <= self.batch_threshold:
             with ThreadPoolExecutor(max_workers=max(1, min(self.max_workers, len(eligible)))) as executor:
                 batches = list(executor.map(self._extract_artifact_records, eligible))
-            flattened: list[EvidenceRecord] = []
-            for batch in batches:
-                flattened.extend(batch)
         else:
-            flattened = self._extract_batch_records(eligible)
-        flattened.sort(key=lambda item: (item.artifact_path, item.span.start_line if item.span else 0, item.evidence_id))
-        return LlmEvidenceResult(evidence=flattened)
+            artifact_batches = [
+                eligible[index : index + self.batch_size]
+                for index in range(0, len(eligible), self.batch_size)
+            ]
+            with ThreadPoolExecutor(max_workers=max(1, min(self.max_workers, len(artifact_batches)))) as executor:
+                batches = list(executor.map(self._extract_batch_records, artifact_batches))
+        flattened = [record for batch in batches for record in batch]
+        flattened.sort(key=lambda item: (item.artifact_path, item.span.start_line if item.span else 0, item.finding_id))
+        return LlmSSOFindingResult(findings=flattened)
 
-    def _extract_artifact_records(self, artifact: ArtifactRecord) -> list[EvidenceRecord]:
+    def _extract_artifact_records(self, artifact: ArtifactRecord) -> list[SSOFinding]:
         records = self._load_or_extract_records(artifact)
         return self._normalize_records(artifact, records)
 
-    def _extract_batch_records(self, artifacts: list[ArtifactRecord]) -> list[EvidenceRecord]:
+    def _extract_batch_records(self, artifacts: list[ArtifactRecord]) -> list[SSOFinding]:
         records = self._load_or_extract_batch_records(artifacts)
         return self._normalize_batch_records(artifacts, records)
 
@@ -300,8 +312,8 @@ class LlmEvidenceExtractor:
                 pass
         payload = invoke_structured_json(
             prompt=self._build_prompt(artifact),
-            schema=_evidence_schema(),
-            system_prompt=EVIDENCE_SYSTEM_PROMPT,
+            schema=_finding_schema(),
+            system_prompt=FINDING_SYSTEM_PROMPT,
             cwd=Path.cwd(),
             config=self.runtime,
         )
@@ -326,8 +338,8 @@ class LlmEvidenceExtractor:
                 pass
         payload = invoke_structured_json(
             prompt=self._build_batch_prompt(artifacts),
-            schema=_batch_evidence_schema(),
-            system_prompt=EVIDENCE_SYSTEM_PROMPT,
+            schema=_batch_finding_schema(),
+            system_prompt=FINDING_SYSTEM_PROMPT,
             cwd=Path.cwd(),
             config=self.runtime,
         )
@@ -341,8 +353,8 @@ class LlmEvidenceExtractor:
             records = []
         return records
 
-    def _normalize_records(self, artifact: ArtifactRecord, records: list[dict[str, object]]) -> list[EvidenceRecord]:
-        evidence_facts: list[EvidenceRecord] = []
+    def _normalize_records(self, artifact: ArtifactRecord, records: list[dict[str, object]]) -> list[SSOFinding]:
+        findings: list[SSOFinding] = []
         for index, record in enumerate(records):
             if not isinstance(record, dict):
                 continue
@@ -350,9 +362,9 @@ class LlmEvidenceExtractor:
             subtype = str(record.get("subtype", "")).strip()
             attributes = record.get("attributes", {})
             if (
-                record_type not in EVIDENCE_CATEGORIES
-                or subtype not in EVIDENCE_SUBTYPES
-                or canonical_evidence_type(subtype, "unknown") != record_type
+                record_type not in SSO_CATEGORIES
+                or subtype not in SSO_SUBTYPES
+                or canonical_sso_category(subtype, "unknown") != record_type
                 or not isinstance(attributes, dict)
             ):
                 continue
@@ -363,43 +375,41 @@ class LlmEvidenceExtractor:
                 confidence = float(record.get("confidence", 0.75))
             except (TypeError, ValueError):
                 continue
-            evidence_facts.append(
-                normalize_evidence_record(
-                    EvidenceRecord(
-                        evidence_id=f"llm_{artifact.artifact_id}_{index:05d}",
+            findings.append(
+                normalize_sso_finding(
+                    SSOFinding(
+                        finding_id=f"llm_{artifact.artifact_id}_{index:05d}",
                         producer="llm",
                         artifact_id=artifact.artifact_id,
                         artifact_path=artifact.relative_path,
-                        evidence_type=canonical_evidence_type(subtype, "unknown"),
+                        category=canonical_sso_category(subtype, "unknown"),
                         subtype=subtype,
-                        value="",
+                        matched_text=str(attrs.get("matched_text") or ""),
                         confidence=confidence,
                         span=Span(start_line, end_line),
-                        binding={},
                         attributes={
                             "engine": "llm",
                             "backend": self.runtime.backend,
                             "model": self.runtime.model,
-                            "analysis_stage": "evidence_extraction",
-                            "analysis_component": "llm_evidence",
-                            "matched_text": str(attrs.get("matched_text") or ""),
+                            "analysis_stage": "sso_extraction",
+                            "analysis_component": "llm_finding",
                         },
                         provenance={
                             "artifact": {"id": artifact.artifact_id, "path": artifact.relative_path},
                             "span": {"start_line": start_line, "end_line": end_line},
                             "producer": "llm",
                             "backend": self.runtime.backend,
-                            "analysis_stage": "evidence_extraction",
-                            "analysis_component": "llm_evidence",
+                            "analysis_stage": "sso_extraction",
+                            "analysis_component": "llm_finding",
                         },
                     )
                 )
             )
-        return evidence_facts
+        return findings
 
-    def _normalize_batch_records(self, artifacts: list[ArtifactRecord], records: list[dict[str, object]]) -> list[EvidenceRecord]:
+    def _normalize_batch_records(self, artifacts: list[ArtifactRecord], records: list[dict[str, object]]) -> list[SSOFinding]:
         artifact_by_path = {artifact.relative_path: artifact for artifact in artifacts}
-        evidence_facts: list[EvidenceRecord] = []
+        findings: list[SSOFinding] = []
         for index, record in enumerate(records):
             if not isinstance(record, dict):
                 continue
@@ -411,9 +421,9 @@ class LlmEvidenceExtractor:
             subtype = str(record.get("subtype", "")).strip()
             attributes = record.get("attributes", {})
             if (
-                record_type not in EVIDENCE_CATEGORIES
-                or subtype not in EVIDENCE_SUBTYPES
-                or canonical_evidence_type(subtype, "unknown") != record_type
+                record_type not in SSO_CATEGORIES
+                or subtype not in SSO_SUBTYPES
+                or canonical_sso_category(subtype, "unknown") != record_type
                 or not isinstance(attributes, dict)
             ):
                 continue
@@ -424,68 +434,68 @@ class LlmEvidenceExtractor:
                 confidence = float(record.get("confidence", 0.75))
             except (TypeError, ValueError):
                 continue
-            evidence_facts.append(
-                normalize_evidence_record(
-                    EvidenceRecord(
-                        evidence_id=f"llm_batch_{artifact.artifact_id}_{index:05d}",
+            findings.append(
+                normalize_sso_finding(
+                    SSOFinding(
+                        finding_id=f"llm_batch_{artifact.artifact_id}_{index:05d}",
                         producer="llm",
                         artifact_id=artifact.artifact_id,
                         artifact_path=artifact.relative_path,
-                        evidence_type=canonical_evidence_type(subtype, "unknown"),
+                        category=canonical_sso_category(subtype, "unknown"),
                         subtype=subtype,
-                        value="",
+                        matched_text=str(attrs.get("matched_text") or ""),
                         confidence=confidence,
                         span=Span(start_line, end_line),
-                        binding={},
                         attributes={
                             "engine": "llm",
                             "backend": self.runtime.backend,
                             "model": self.runtime.model,
-                            "analysis_stage": "evidence_extraction",
-                            "analysis_component": "llm_evidence_batch",
-                            "matched_text": str(attrs.get("matched_text") or ""),
+                            "analysis_stage": "sso_extraction",
+                            "analysis_component": "llm_finding_batch",
                         },
                         provenance={
                             "artifact": {"id": artifact.artifact_id, "path": artifact.relative_path},
                             "span": {"start_line": start_line, "end_line": end_line},
                             "producer": "llm",
                             "backend": self.runtime.backend,
-                            "analysis_stage": "evidence_extraction",
-                            "analysis_component": "llm_evidence_batch",
+                            "analysis_stage": "sso_extraction",
+                            "analysis_component": "llm_finding_batch",
                         },
                     )
                 )
             )
-        return evidence_facts
+        return findings
 
     def _build_prompt(self, artifact: ArtifactRecord) -> str:
         return (
-            "Analyze the following single artifact and extract evidence facts only.\n"
+            "Analyze the following single artifact and extract SSO findings only.\n"
             "Use the taxonomy and examples from the system instructions.\n"
             "Focus on concrete sensitive operations, especially hidden setup bootstrap, LOTL execution, third-party library sinks, remote downloads, credential requests, and external communication.\n"
             "Ignore harmless metadata/config unless it is itself a sensitive operation.\n\n"
             "Critical constraints:\n"
             "- Output only facts grounded directly in the artifact text.\n"
             "- Extract only directly grounded sensitive-operation facts from the artifact text.\n"
-            "- Never output commit URLs, troubleshooting text, generic internet requirements, or capability descriptions as evidence.\n\n"
+            "- Line-number prefixes are annotations; do not include them in attributes.matched_text.\n"
+            "- Never output commit URLs, troubleshooting text, generic internet requirements, or capability descriptions as findings.\n\n"
             f"Artifact path: {artifact.relative_path}\n"
             f"Artifact type: {artifact.artifact_type}\n"
-            "Content:\n"
-            f"{artifact.content or ''}"
+            "Line-numbered content:\n"
+            f"{self._line_numbered(artifact.content or '')}"
         )
 
     def _build_batch_prompt(self, artifacts: list[ArtifactRecord]) -> str:
         parts = [
-            "Analyze the following artifacts together and extract evidence facts only.",
+            "Analyze the following artifacts together and extract SSO findings only.",
             "Use the taxonomy and examples from the system instructions.",
             "Focus on concrete sensitive operations, especially hidden setup bootstrap, LOTL execution, third-party library sinks, remote downloads, credential requests, and external communication.",
             "Ignore harmless metadata/config unless it is itself a sensitive operation.",
             "",
             "Critical constraints:",
             "- Output only facts grounded directly in the artifact text.",
-            "- Each record must include the exact artifact_path for the artifact where the evidence appears.",
+            "- Each record must include the exact artifact_path for the artifact where the finding appears.",
             "- start_line and end_line must use the original line numbers within that artifact, starting at 1 for the first line of that artifact's content.",
-            "- Never output commit URLs, troubleshooting text, generic internet requirements, or capability descriptions as evidence.",
+            "- Line-number prefixes are annotations; do not include them in attributes.matched_text.",
+            "- Never output commit URLs, troubleshooting text, generic internet requirements, or capability descriptions as findings.",
             "",
         ]
         for artifact in artifacts:
@@ -493,18 +503,25 @@ class LlmEvidenceExtractor:
                 [
                     f"=== Artifact: {artifact.relative_path} ===",
                     f"Artifact type: {artifact.artifact_type}",
-                    "Content:",
-                    artifact.content or "",
+                    "Line-numbered content:",
+                    self._line_numbered(artifact.content or ""),
                     "",
                 ]
             )
         return "\n".join(parts)
 
+    def _line_numbered(self, content: str) -> str:
+        return "\n".join(
+            f"{index:06d}: {line}"
+            for index, line in enumerate(content.splitlines(), start=1)
+        )
+
     def _cache_path_for(self, artifact: ArtifactRecord) -> Path:
         digest = hashlib.sha256(
             (
-                f"single:{artifact.relative_path}:{artifact.content_hash}:{SCHEMA_VERSION}:{EVIDENCE_PROMPT_VERSION}:"
-                f"{self.runtime.backend}:{self.runtime.model}:{self.runtime.base_url}"
+                f"single:{artifact.relative_path}:{artifact.content_hash}:{SCHEMA_VERSION}:{FINDING_PROMPT_VERSION}:"
+                f"{llm_runtime.LLM_RUNTIME_PROTOCOL_VERSION}:"
+                f"{self.runtime.backend}:{self.runtime.model}:{self.runtime.reasoning_effort}:{self.runtime.base_url}"
             ).encode("utf-8")
         ).hexdigest()
         return self.cache_dir / f"{digest}.json"
@@ -515,14 +532,15 @@ class LlmEvidenceExtractor:
         )
         digest = hashlib.sha256(
             (
-                f"batch:{digest_input}:{SCHEMA_VERSION}:{EVIDENCE_PROMPT_VERSION}:"
-                f"{self.runtime.backend}:{self.runtime.model}:{self.runtime.base_url}"
+                f"batch:{digest_input}:{SCHEMA_VERSION}:{FINDING_PROMPT_VERSION}:"
+                f"{llm_runtime.LLM_RUNTIME_PROTOCOL_VERSION}:"
+                f"{self.runtime.backend}:{self.runtime.model}:{self.runtime.reasoning_effort}:{self.runtime.base_url}"
             ).encode("utf-8")
         ).hexdigest()
         return self.cache_dir / f"{digest}.json"
 
 
-def _evidence_schema() -> dict[str, object]:
+def _finding_schema() -> dict[str, object]:
     return {
         "type": "object",
         "properties": {
@@ -531,8 +549,8 @@ def _evidence_schema() -> dict[str, object]:
                 "items": {
                     "type": "object",
                     "properties": {
-                        "type": {"type": "string", "enum": sorted(EVIDENCE_CATEGORIES)},
-                        "subtype": {"type": "string", "enum": sorted(EVIDENCE_SUBTYPES)},
+                        "type": {"type": "string", "enum": sorted(SSO_CATEGORIES)},
+                        "subtype": {"type": "string", "enum": sorted(SSO_SUBTYPES)},
                         "confidence": {"type": "number"},
                         "start_line": {"type": "integer"},
                         "end_line": {"type": "integer"},
@@ -555,8 +573,8 @@ def _evidence_schema() -> dict[str, object]:
     }
 
 
-def _batch_evidence_schema() -> dict[str, object]:
-    schema = _evidence_schema()
+def _batch_finding_schema() -> dict[str, object]:
+    schema = _finding_schema()
     record_properties = schema["properties"]["records"]["items"]["properties"]
     record_required = schema["properties"]["records"]["items"]["required"]
     record_properties["artifact_path"] = {"type": "string"}

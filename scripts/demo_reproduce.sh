@@ -12,14 +12,12 @@ RUN_DOCKER_SMOKE=0
 QUIET_BUILD=1
 CONCISE=0
 SINGLE_DEMO=0
-SKIP_TESTS=0
 SKIP_SINGLE=0
 SKIP_MINI_BENCHMARK=0
 SAMPLE_PATH="data/ground_truth/malicious/clawhub/pepe276_publish-dist"
 SINGLE_OUTPUT_NAME="single_sample_full"
 DEMO_VARIANT="benchmark_full"
 DOCKER_IMAGE="malskills-demo:latest"
-PYTEST_RESULT="skipped"
 DOCKER_RESULT="not_requested"
 
 usage() {
@@ -45,7 +43,6 @@ Options:
   --pause SEC             Sleep between demo sections. Default: 1.2
   --no-pause              Disable sleeps between sections.
   --sample PATH           Single-skill demo sample.
-  --skip-tests            Skip pytest.
   --skip-single           Skip single-skill full analysis.
   --skip-mini-benchmark   Skip 2-case benchmark demo.
   --full                  Also run the 200-entry benchmark_full evaluation.
@@ -70,7 +67,6 @@ while [[ $# -gt 0 ]]; do
       RUN_DOCKER_SMOKE=1
       CONCISE=1
       QUIET_BUILD=1
-      SKIP_TESTS=1
       SKIP_MINI_BENCHMARK=1
       shift
       ;;
@@ -137,10 +133,6 @@ while [[ $# -gt 0 ]]; do
     --sample)
       SAMPLE_PATH="${2:?missing value for --sample}"
       shift 2
-      ;;
-    --skip-tests)
-      SKIP_TESTS=1
-      shift
       ;;
     --skip-single)
       SKIP_SINGLE=1
@@ -274,7 +266,7 @@ setup_environment() {
     run_long_cmd python_venv python3 -m venv .venv
   fi
   run_long_cmd pip_upgrade .venv/bin/python -m pip install --upgrade pip
-  run_long_cmd pip_install_project .venv/bin/python -m pip install -e . pytest semgrep
+  run_long_cmd pip_install_project .venv/bin/python -m pip install -e . semgrep
 
   need_command git
   need_command npm
@@ -317,20 +309,12 @@ else
 fi
 echo "Build logs:   $COMMAND_LOG_DIR"
 
-section "2. Source, deployment docs, and test materials"
+section "2. Source and deployment materials"
 if [[ "$CONCISE" == "1" ]]; then
   echo "Core source package: malskills/ ($(find malskills -name '*.py' -type f | wc -l | tr -d ' ') Python files)"
-  echo "Test materials: tests/ ($(find tests -name 'test_*.py' -type f | wc -l | tr -d ' ') test files)"
 else
   echo "Core source package:"
   print_tree_snapshot "malskills" 2 30
-  echo
-  echo "Test files:"
-  if [[ -d tests ]]; then
-    print_tree_snapshot "tests" 2 30
-  else
-    echo "tests/ not found"
-  fi
   echo
 fi
 echo "Reproduction and deployment files:"
@@ -359,7 +343,7 @@ echo "Docker build command:"
 echo "  docker build -t $DOCKER_IMAGE ."
 echo
 echo "Docker run command with OpenAI-compatible API:"
-echo "  docker run --rm -e MALSKILLS_LLM_MODE=openai_api -e OPENAI_API_KEY=\"\$OPENAI_API_KEY\" -v \"\$PWD/output:/app/output\" $DOCKER_IMAGE bash scripts/demo_reproduce.sh --no-pause --skip-tests"
+echo "  docker run --rm -e MALSKILLS_LLM_MODE=openai_api -e OPENAI_API_KEY=\"\$OPENAI_API_KEY\" -v \"\$PWD/output:/app/output\" $DOCKER_IMAGE bash scripts/demo_reproduce.sh --no-pause"
 echo
 if command -v docker >/dev/null 2>&1; then
   run_cmd docker --version
@@ -377,7 +361,7 @@ if command -v docker >/dev/null 2>&1; then
       DOCKER_RESULT="smoke_ok_reused_image"
     else
       echo "Docker image not found: $DOCKER_IMAGE"
-      echo "Build it once with: bash scripts/demo_reproduce.sh --docker-build --docker-run --skip-tests --skip-single --skip-mini-benchmark --no-pause"
+      echo "Build it once with: bash scripts/demo_reproduce.sh --docker-build --docker-run --skip-single --skip-mini-benchmark --no-pause"
       DOCKER_RESULT="image_missing"
     fi
   else
@@ -389,7 +373,6 @@ else
 fi
 
 if [[ ("$RUN_DOCKER_BUILD" == "1" || "$RUN_DOCKER_SMOKE" == "1") \
-  && "$SKIP_TESTS" == "1" \
   && "$SKIP_SINGLE" == "1" \
   && "$SKIP_MINI_BENCHMARK" == "1" \
   && "$RUN_FULL" != "1" ]]; then
@@ -425,7 +408,7 @@ run_cmd "$PY" - <<'PY'
 import json
 import sys
 from malskills.llm_runtime import describe_llm_runtime
-from malskills.primitive.yasa import YasaAdapter
+from malskills.sdg.yasa import YasaAdapter
 
 yasa = YasaAdapter()
 llm = describe_llm_runtime()
@@ -441,15 +424,6 @@ if not payload["yasa_available"]:
 if payload["llm_backend"] == "unavailable":
     raise SystemExit("LLM backend is unavailable. Configure Codex/Claude CLI or API credentials.")
 PY
-
-if [[ "$SKIP_TESTS" != "1" ]]; then
-  section "5. Test materials: unit tests"
-  run_cmd "$PY" -m pytest -q
-  PYTEST_RESULT="passed"
-else
-  section "5. Test materials: unit tests skipped"
-  echo "Skipped by --skip-tests"
-fi
 
 BENCHMARK_INDEX="$OUTPUT_DIR/ground_truth_benchmark.json"
 DEMO_BENCHMARK="$OUTPUT_DIR/demo_benchmark_2cases.json"
@@ -527,8 +501,8 @@ from pathlib import Path
 root = Path(sys.argv[1])
 verdict = json.loads((root / "verdict.json").read_text(encoding="utf-8"))
 feedback = json.loads((root / "feedback_loop.json").read_text(encoding="utf-8"))
-primitive_support = json.loads((root / "primitive_support_evidence.json").read_text(encoding="utf-8"))
-producers = Counter(item.get("producer", "unknown") for item in primitive_support)
+operand_resolutions = json.loads((root / "operand_resolutions.json").read_text(encoding="utf-8"))
+resolution_methods = Counter(item.get("method", "unknown") for item in operand_resolutions)
 llm_runtime = feedback.get("llm_feedback_runtime", {}) if isinstance(feedback.get("llm_feedback_runtime", {}), dict) else {}
 llm_backend = feedback.get("backend") or llm_runtime.get("backend")
 llm_model = feedback.get("model") or llm_runtime.get("model")
@@ -540,12 +514,12 @@ print(f"- suspicious_patterns: {verdict.get('suspicious_patterns', [])}")
 print("Engine participation")
 print(f"- llm_backend: {llm_backend}")
 print(f"- llm_model: {llm_model}")
-print(f"- primitive_support_producers: {dict(producers)}")
+print(f"- operand_resolution_methods: {dict(resolution_methods)}")
 print(f"- output: {root}")
 if llm_backend in {None, "unavailable"}:
     raise SystemExit("LLM backend was not recorded in feedback_loop.json")
-if producers.get("yasa", 0) < 1:
-    raise SystemExit("YASA did not produce primitive-support evidence for this demo sample")
+if resolution_methods.get("yasa", 0) < 1:
+    raise SystemExit("YASA did not produce operand resolutions for this demo sample")
 PY
 else
   if [[ "$SINGLE_DEMO" != "1" ]]; then
@@ -585,16 +559,16 @@ llm_cases = 0
 yasa_cases = 0
 for case_dir in case_root.iterdir():
     feedback_path = case_dir / "feedback_loop.json"
-    primitive_support_path = case_dir / "primitive_support_evidence.json"
+    operand_resolutions_path = case_dir / "operand_resolutions.json"
     if feedback_path.exists():
         feedback = json.loads(feedback_path.read_text(encoding="utf-8"))
         llm_runtime = feedback.get("llm_feedback_runtime", {}) if isinstance(feedback.get("llm_feedback_runtime", {}), dict) else {}
         llm_backend = feedback.get("backend") or llm_runtime.get("backend")
         if llm_backend not in {None, "unavailable"}:
             llm_cases += 1
-    if primitive_support_path.exists():
-        items = json.loads(primitive_support_path.read_text(encoding="utf-8"))
-        if any(item.get("producer") == "yasa" for item in items):
+    if operand_resolutions_path.exists():
+        items = json.loads(operand_resolutions_path.read_text(encoding="utf-8"))
+        if any(item.get("method") == "yasa" for item in items):
             yasa_cases += 1
 print("Mini benchmark summary")
 print(f"- entries: {int(metrics['num_entries'])}")
@@ -664,7 +638,7 @@ else
 fi
 CORE_REPORT="$OUTPUT_DIR/core_detection_report.md"
 DELIVERY_REPORT="$OUTPUT_DIR/delivery_report.md"
-run_cmd "$PY" - "$OUTPUT_DIR" "$DEMO_VARIANT" "$PYTEST_RESULT" "$DOCKER_RESULT" "$RUN_SETUP" "$RUN_FULL" "$SINGLE_DEMO" "$SAMPLE_PATH" "$SINGLE_OUTPUT_NAME" <<'PY'
+run_cmd "$PY" - "$OUTPUT_DIR" "$DEMO_VARIANT" "$DOCKER_RESULT" "$RUN_SETUP" "$RUN_FULL" "$SINGLE_DEMO" "$SAMPLE_PATH" "$SINGLE_OUTPUT_NAME" <<'PY'
 import json
 import sys
 from collections import Counter
@@ -672,13 +646,12 @@ from pathlib import Path
 
 output_dir = Path(sys.argv[1])
 variant = sys.argv[2]
-pytest_result = sys.argv[3]
-docker_result = sys.argv[4]
-setup_requested = sys.argv[5] == "1"
-full_requested = sys.argv[6] == "1"
-single_demo = sys.argv[7] == "1"
-sample_path = sys.argv[8]
-single_output_name = sys.argv[9]
+docker_result = sys.argv[3]
+setup_requested = sys.argv[4] == "1"
+full_requested = sys.argv[5] == "1"
+single_demo = sys.argv[6] == "1"
+sample_path = sys.argv[7]
+single_output_name = sys.argv[8]
 
 def read_json(path: Path):
     if not path.exists():
@@ -696,11 +669,11 @@ def feedback_runtime(feedback):
         "model": feedback.get("model") or runtime.get("model"),
     }
 
-def primitive_producers(path: Path):
+def resolution_methods(path: Path):
     items = read_json(path)
     if not items:
         return {}
-    return dict(Counter(item.get("producer", "unknown") for item in items))
+    return dict(Counter(item.get("method", "unknown") for item in items))
 
 def benchmark_summary(root: Path):
     payload = read_json(root / f"eval_{variant}.json")
@@ -726,8 +699,8 @@ def benchmark_summary(root: Path):
             runtime = feedback_runtime(read_json(case_dir / "feedback_loop.json"))
             if runtime.get("backend") not in {None, "unavailable"}:
                 llm_cases += 1
-            items = read_json(case_dir / "primitive_support_evidence.json") or []
-            if any(item.get("producer") == "yasa" for item in items):
+            items = read_json(case_dir / "operand_resolutions.json") or []
+            if any(item.get("method") == "yasa" for item in items):
                 yasa_cases += 1
     return {
         "entries": int(metrics["num_entries"]),
@@ -751,7 +724,7 @@ single_root = output_dir / single_output_name
 single_verdict = read_json(single_root / "verdict.json")
 single_feedback = read_json(single_root / "feedback_loop.json")
 single_runtime = feedback_runtime(single_feedback)
-single_producers = primitive_producers(single_root / "primitive_support_evidence.json")
+single_resolution_methods = resolution_methods(single_root / "operand_resolutions.json")
 mini = benchmark_summary(output_dir / "eval_mini")
 full = benchmark_summary(output_dir / "eval_full")
 single_label = single_verdict.get("label") if single_verdict else None
@@ -765,13 +738,11 @@ lines = [
     f"- Demo mode: {'single malicious sample' if single_demo else 'benchmark demo'}",
     f"- Environment deployment from scratch: {'yes' if setup_requested else 'no, reused existing local environment'}",
     f"- Docker deployment status: {docker_result}",
-    f"- Unit tests: {pytest_result}",
     f"- Full 200-entry benchmark requested: {'yes' if full_requested else 'no'}",
     "",
     "## 2. Standardized Artifacts",
     "",
     "- Source code: `malskills/`",
-    "- Test materials: `tests/` and `pytest`",
     "- Reproduction script: `scripts/demo_reproduce.sh`",
     "- Deployment document: `docs/DEMO_REPRODUCTION.md`",
     "- Containerization files: `Dockerfile`, `.dockerignore`",
@@ -791,7 +762,7 @@ if single_verdict:
         f"- Suspicious patterns: `{single_verdict.get('suspicious_patterns', [])}`",
         f"- LLM backend: `{single_runtime.get('backend')}`",
         f"- LLM model: `{single_runtime.get('model')}`",
-        f"- Primitive-support producers: `{single_producers}`",
+        f"- Operand resolution methods: `{single_resolution_methods}`",
         "- Interpretation: `suspicious` means the sample triggered a risk alert and should enter manual review.",
     ])
 else:
@@ -799,12 +770,12 @@ else:
 if single_demo:
     lines.extend([
         "",
-        "## 4. Evidence Files",
+        "## 4. Finding Files",
         "",
         "- Primary report for defense: `core_detection_report.md`",
         f"- Single-skill raw verdict: `{single_output_name}/verdict.json`",
-        f"- LLM runtime evidence: `{single_output_name}/feedback_loop.json`",
-        f"- YASA evidence: `{single_output_name}/primitive_support_evidence.json`",
+        f"- LLM runtime findings: `{single_output_name}/feedback_loop.json`",
+        f"- YASA operand resolutions: `{single_output_name}/operand_resolutions.json`",
         "- Full terminal log: `demo.log`",
         "",
         "## 5. Scope Note",
@@ -860,8 +831,7 @@ if single_demo:
         "",
         "- The runnable prototype is demonstrated by `analyze-skill` on one confirmed malicious sample.",
         "- Container deployment is demonstrated by the Dockerfile and the recorded Docker status above.",
-        "- Test materials are present in `tests/`; run `.venv/bin/python -m pytest -q` when live test evidence is required.",
-        "- Do not present `suspicious` as a final malicious conviction; present it as a risk alert with YASA and LLM evidence.",
+        "- Do not present `suspicious` as a final malicious conviction; present it as a risk alert with YASA and LLM findings.",
     ])
 else:
     lines.extend([
@@ -871,16 +841,15 @@ else:
         "- Primary report for defense: `core_detection_report.md`",
         "- Full terminal log: `demo.log`",
         f"- Single-skill raw verdict: `{single_output_name}/verdict.json`",
-        f"- LLM runtime evidence: `{single_output_name}/feedback_loop.json`",
-        f"- YASA evidence: `{single_output_name}/primitive_support_evidence.json`",
+        f"- LLM runtime findings: `{single_output_name}/feedback_loop.json`",
+        f"- YASA operand resolutions: `{single_output_name}/operand_resolutions.json`",
         "- Mini benchmark summary: `eval_mini/summary.md`",
         "",
         "## 7. Notes for Defense",
         "",
         "- The runnable prototype is demonstrated by `analyze-skill` and `run-eval`.",
         "- Container deployment is demonstrated by the Dockerfile and optional `--docker-build` run.",
-        "- Test evidence is demonstrated by `pytest` output and this report.",
-        "- Detection evidence is stored as JSON artifacts: `verdict.json`, `feedback_loop.json`, `primitive_support_evidence.json`, and `eval_*.json`.",
+        "- Detection results are stored as JSON artifacts: `verdict.json`, `feedback_loop.json`, `operand_resolutions.json`, and `eval_*.json`.",
     ])
 content = "\n".join(lines) + "\n"
 (output_dir / "core_detection_report.md").write_text(content, encoding="utf-8")
@@ -896,11 +865,11 @@ fi
 echo "Primary detection report:"
 echo "  $CORE_REPORT"
 echo
-echo "Raw evidence files:"
+echo "Raw findings files:"
 for file in \
   "$OUTPUT_DIR/$SINGLE_OUTPUT_NAME/verdict.json" \
   "$OUTPUT_DIR/$SINGLE_OUTPUT_NAME/feedback_loop.json" \
-  "$OUTPUT_DIR/$SINGLE_OUTPUT_NAME/primitive_support_evidence.json" \
+  "$OUTPUT_DIR/$SINGLE_OUTPUT_NAME/operand_resolutions.json" \
   "$OUTPUT_DIR/eval_mini/summary.md" \
   "$OUTPUT_DIR/eval_mini/eval_${DEMO_VARIANT}.json"; do
   if [[ -f "$file" ]]; then

@@ -5,7 +5,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: identity_switch
-      malskills_evidence_type: privilege_and_identity_manipulation
+      malskills_sso_category: privilege_and_identity_manipulation
     pattern-either:
       - pattern: os.setuid(...)
       - pattern: os.seteuid(...)
@@ -18,7 +18,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: privilege_adjustment
-      malskills_evidence_type: privilege_and_identity_manipulation
+      malskills_sso_category: privilege_and_identity_manipulation
     pattern-either:
       - pattern: capng.capng_update(...)
       - pattern: prctl.cap_effective.limit(...)
@@ -29,7 +29,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: group_or_acl_modification
-      malskills_evidence_type: privilege_and_identity_manipulation
+      malskills_sso_category: privilege_and_identity_manipulation
       malskills_value_metavar: $CMD
     patterns:
       - pattern-either:
@@ -46,7 +46,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: boundary_bypass
-      malskills_evidence_type: privilege_and_identity_manipulation
+      malskills_sso_category: privilege_and_identity_manipulation
       malskills_value_metavar: $CMD
     patterns:
       - pattern-either:

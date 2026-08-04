@@ -1,10 +1,11 @@
 from __future__ import annotations
 
+from collections.abc import Iterable
 from pathlib import Path
 
 from .models import ArtifactRecord
 from .taxonomy import (
-    EVIDENCE_TEXT_ARTIFACT_TYPES,
+    ANALYZABLE_TEXT_ARTIFACT_TYPES,
     FULLTEXT_MARKDOWN_NAMES,
     IGNORE_DIRS,
     MARKDOWN_NAMES,
@@ -45,14 +46,22 @@ class SkillIngestor:
         *,
         max_artifacts: int | None = None,
         max_total_text_bytes: int | None = None,
+        exclude_roots: Iterable[str | Path] | None = None,
     ) -> list[ArtifactRecord]:
         root = Path(skill_path).resolve()
         if not root.is_dir():
             raise FileNotFoundError(f"skill path is not a directory: {root}")
+        excluded = tuple(Path(path).resolve() for path in (exclude_roots or ()))
         artifacts: list[ArtifactRecord] = []
         index = 0
         total_text_bytes = 0
-        candidates = [path for path in sorted(root.rglob("*")) if path.is_file() and not any(part in IGNORE_DIRS for part in path.parts)]
+        candidates = [
+            path
+            for path in sorted(root.rglob("*"))
+            if path.is_file()
+            and not any(part in IGNORE_DIRS for part in path.parts)
+            and not self._is_excluded(path, excluded)
+        ]
         large_repo = len(candidates) > LARGE_REPO_ARTIFACT_THRESHOLD
         for path in candidates:
             if not path.is_file():
@@ -130,6 +139,10 @@ class SkillIngestor:
                     index += 1
         return artifacts
 
+    def _is_excluded(self, path: Path, excluded_roots: tuple[Path, ...]) -> bool:
+        resolved = path.resolve()
+        return any(root == resolved or root in resolved.parents for root in excluded_roots)
+
     def _derived_fence_artifacts(self, source_artifact: ArtifactRecord, content: str, *, start_index: int) -> list[ArtifactRecord]:
         derived: list[ArtifactRecord] = []
         source_rel = Path(source_artifact.relative_path)
@@ -176,12 +189,12 @@ class SkillIngestor:
         lower_name = rel.name.lower()
         suffix = rel.suffix.lower()
         if suffix in {".md", ".markdown", ".txt"} and len(parts) > 2:
-            if artifact_type not in EVIDENCE_TEXT_ARTIFACT_TYPES and lower_name not in MARKDOWN_NAMES and lower_name not in PROMPT_NAMES and "skill" not in lower_name and "prompt" not in lower_name:
+            if artifact_type not in ANALYZABLE_TEXT_ARTIFACT_TYPES and lower_name not in MARKDOWN_NAMES and lower_name not in PROMPT_NAMES and "skill" not in lower_name and "prompt" not in lower_name:
                 return True
         if large_repo:
             root_name = parts[0].lower()
             if len(parts) > 1 and root_name not in PRIORITY_ROOT_DIRS:
-                if artifact_type in EVIDENCE_TEXT_ARTIFACT_TYPES:
+                if artifact_type in ANALYZABLE_TEXT_ARTIFACT_TYPES:
                     return False
                 return True
             if root_name in PRIORITY_ROOT_DIRS and len(parts) > 3:

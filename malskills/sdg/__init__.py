@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-__all__ = ["LlmObjectAnalyzer", "PrimitiveCompiler", "YasaAdapter"]
+__all__ = ["LlmObjectAnalyzer", "SDGCompiler", "YasaAdapter"]
 
 
 def __getattr__(name: str):
-    if name == "PrimitiveCompiler":
-        from .compiler import PrimitiveCompiler
+    if name == "SDGCompiler":
+        from .compiler import SDGCompiler
 
-        return PrimitiveCompiler
+        return SDGCompiler
     if name == "LlmObjectAnalyzer":
         from .llm import LlmObjectAnalyzer
 

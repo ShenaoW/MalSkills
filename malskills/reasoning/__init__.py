@@ -1,9 +1,9 @@
-from .reasoner import FormalReasoner
+from .reasoner import PatternReasoner
 from .souffle import SouffleExporter
 from .verdict import HIGH_SEVERITY, MEDIUM_SEVERITY, PatternVerdictBuilder
 
 __all__ = [
-    "FormalReasoner",
+    "PatternReasoner",
     "SouffleExporter",
     "PatternVerdictBuilder",
     "HIGH_SEVERITY",

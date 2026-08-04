@@ -5,7 +5,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: process_attach
-      malskills_evidence_type: process_and_memory_manipulation
+      malskills_sso_category: process_and_memory_manipulation
     pattern-either:
       - pattern: ptrace.attach(...)
       - pattern: ptrace.debugger.PtraceDebugger().addProcess(...)
@@ -17,7 +17,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: cross_process_memory_read
-      malskills_evidence_type: process_and_memory_manipulation
+      malskills_sso_category: process_and_memory_manipulation
     pattern-either:
       - pattern: process.read_bytes(...)
       - pattern: pymem.Pymem(...).read_bytes(...)
@@ -29,7 +29,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: cross_process_memory_write
-      malskills_evidence_type: process_and_memory_manipulation
+      malskills_sso_category: process_and_memory_manipulation
     pattern-either:
       - pattern: pymem.Pymem(...).write_bytes(...)
       - pattern: process.write_bytes(...)
@@ -40,7 +40,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: executable_memory_mapping
-      malskills_evidence_type: process_and_memory_manipulation
+      malskills_sso_category: process_and_memory_manipulation
     pattern-either:
       - pattern: mmap.mmap(..., prot=mmap.PROT_EXEC, ...)
       - pattern: mmap.mmap(..., access=mmap.ACCESS_WRITE, ...)

@@ -5,6 +5,7 @@ description = "MalSkills: a neuro-symbolic static analyzer for malicious agent s
 requires-python = ">=3.9"
 authors = [{ name = "OpenCode" }]
 readme = "README.md"
+dependencies = ["PyYAML>=6.0"]
 
 [project.urls]
 Homepage = "https://github.com/ShenaoW/MalSkills"
@@ -21,6 +22,3 @@ render-report = "malskills.cli:main"
 
 [tool.setuptools.packages.find]
 include = ["malskills*"]
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]

@@ -1,12 +1,12 @@
 # MalSkills Reproduction and Delivery Guide
 
-本文档面向答辩中的“工程落地能力与标准化交付”评分项，覆盖可运行完整原型系统、容器化部署方案、可复现源码、部署文档、测试材料和检测结果展示。
+本文档面向答辩中的“工程落地能力与标准化交付”评分项，覆盖可运行完整原型系统、容器化部署方案、可复现源码、部署文档和检测结果展示。
 
 ## 1. 答辩推荐演示顺序
 
 建议录屏时按下面顺序展示：
 
-1. 源码与交付物：`malskills/`、`tests/`、`scripts/demo_reproduce.sh`、`Dockerfile`、`docs/DEMO_REPRODUCTION.md`。
+1. 源码与交付物：`malskills/`、`scripts/demo_reproduce.sh`、`Dockerfile`、`docs/DEMO_REPRODUCTION.md`。
 2. 环境部署：展示 `--from-scratch` 命令，必要时现场执行。
 3. 容器化部署：展示 `Dockerfile` 和 `docker build` 命令，网络稳定时现场执行 `--docker-build`。
 4. 检测演示：运行单个恶意样本的 YASA + LLM 完整分析。
@@ -36,12 +36,12 @@ bash scripts/demo_reproduce.sh --recording
 bash scripts/demo_reproduce.sh --from-scratch --no-pause
 ```
 
-该命令会创建或复用 `.venv`、安装 Python 依赖、安装测试工具，并在 `vendor/yasa` 目录内编译 YASA，然后继续运行测试与检测演示。安装日志默认不会刷屏，会写入输出目录的 `command_logs/`。
+该命令会创建或复用 `.venv`、安装 Python 依赖，并在 `vendor/yasa` 目录内编译 YASA，然后继续运行检测演示。安装日志默认不会刷屏，会写入输出目录的 `command_logs/`。
 
 首次构建 Docker 镜像：
 
 ```bash
-bash scripts/demo_reproduce.sh --docker-build --docker-run --skip-tests --skip-single --skip-mini-benchmark --no-pause
+bash scripts/demo_reproduce.sh --docker-build --docker-run --skip-single --skip-mini-benchmark --no-pause
 ```
 
 该命令只做容器构建与 smoke run，不跑 LLM 检测，适合在录屏前预热镜像缓存。
@@ -66,8 +66,9 @@ output/demo_reproduction/<timestamp>/
 - `core_detection_report.md`：答辩时最核心的检测报告，优先展示这个文件。
 - `delivery_report.md`：同 `core_detection_report.md`，保留兼容旧路径。
 - `single_sample_full/verdict.json`：单样本检测结论。
-- `single_sample_full/feedback_loop.json`：LLM 后端与模型记录。
-- `single_sample_full/primitive_support_evidence.json`：YASA 等证据来源记录。
+- `single_sample_full/feedback_loop.json`：规则学习状态；默认关闭候选收集，只有显式传入 `--rule-store` 和 `--collect-rule-candidates` 才会调用规则规格生成器。
+- `single_sample_full/analysis_metadata.json`：本次扫描加载的规则集摘要与抽取器状态。
+- `single_sample_full/operand_resolutions.json`：YASA 等分析器产生的 Operand 解析与值流记录。
 - `eval_mini/summary.md`：mini benchmark 汇总，仅 `--recording` 或未跳过 mini benchmark 时生成。
 - `eval_mini/eval_benchmark_full.json`：mini benchmark 结构化结果，仅 `--recording` 或未跳过 mini benchmark 时生成。
 - `command_logs/`：安装、Docker 构建、YASA 编译等长命令日志。
@@ -101,7 +102,7 @@ docker run --rm \
   -e OPENAI_MODEL="${OPENAI_MODEL:-gpt-5.3-codex-medium}" \
   -v "$PWD/output:/app/output" \
   malskills-demo:latest \
-  bash scripts/demo_reproduce.sh --no-pause --skip-tests
+  bash scripts/demo_reproduce.sh --no-pause
 ```
 
 说明：
@@ -118,7 +119,7 @@ docker run --rm \
 output/demo_reproduction/<timestamp>/core_detection_report.md
 ```
 
-这个文件已经把工程交付、Docker 状态、测试状态、单样本检测结果、mini benchmark 结果汇总在一起。
+这个文件已经把工程交付、Docker 状态、单样本检测结果、mini benchmark 结果汇总在一起。
 在 `--single-demo` 模式下，它只包含单样本检测结果，不包含 benchmark 指标。
 
 单样本演示使用：
@@ -134,7 +135,7 @@ data/ground_truth/malicious/clawhub/pepe276_publish-dist
 - Suspicious patterns：`Execution_and_Delivery`，`Information_Theft`
 - LLM backend：`codex_cli`
 - LLM model：`gpt-5.3-codex-medium`
-- YASA primitive-support evidence：`3`
+- YASA operand resolutions：`3`
 
 展示口径：这是一个已标注的恶意样本，系统给出的是风险告警 `suspicious`，表示需要进入人工复核；不要把它口头说成系统最终判定 `malicious`。
 
@@ -172,25 +173,7 @@ output/rq1_malskills/
 
 注意：当前严格评估口径只把 `malicious` 算作正类，`suspicious` 不算正类，因此全量 `summary.md` 中 precision/recall 可能显示为 `0.0`。脚本生成的 `core_detection_report.md` 会额外展示风险检出口径：把 `suspicious` 和 `malicious` 都视为需要人工复核的风险告警。答辩展示建议优先使用风险检出指标，同时保留严格指标作为补充说明。
 
-## 5. 测试材料
-
-运行全部测试：
-
-```bash
-.venv/bin/python -m pytest -q
-```
-
-当前版本已通过完整测试；测试总数会随测试材料增加而变化。
-
-脚本默认会运行测试；如果录屏时间有限，可以跳过测试：
-
-```bash
-bash scripts/demo_reproduce.sh --no-pause --skip-tests
-```
-
-如果用 `--recording`，默认仍会跑测试；如果只想快速检查检测链路，可加 `--skip-tests`。
-
-## 6. 全量实验复现
+## 5. 全量实验复现
 
 重新构建 benchmark：
 

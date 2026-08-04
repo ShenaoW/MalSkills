@@ -5,7 +5,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: scheduled_persistence
-      malskills_evidence_type: persistence_and_startup_control
+      malskills_sso_category: persistence_and_startup_control
       malskills_value_metavar: $CMD
     patterns:
       - pattern-either:
@@ -22,7 +22,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: startup_or_logon_persistence
-      malskills_evidence_type: persistence_and_startup_control
+      malskills_sso_category: persistence_and_startup_control
       malskills_value_metavar: $PATH
     patterns:
       - pattern-either:
@@ -39,7 +39,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: service_or_daemon_persistence
-      malskills_evidence_type: persistence_and_startup_control
+      malskills_sso_category: persistence_and_startup_control
       malskills_value_metavar: $CMD
     patterns:
       - pattern-either:

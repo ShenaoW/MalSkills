@@ -5,7 +5,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: security_tool_impairment
-      malskills_evidence_type: defense_evasion_and_anti_forensics
+      malskills_sso_category: defense_evasion_and_anti_forensics
       malskills_value_metavar: $CMD
     patterns:
       - pattern-either:
@@ -23,7 +23,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: logging_or_audit_suppression
-      malskills_evidence_type: defense_evasion_and_anti_forensics
+      malskills_sso_category: defense_evasion_and_anti_forensics
       malskills_value_metavar: $CMD
     patterns:
       - pattern-either:
@@ -39,7 +39,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: policy_or_access_control_weakening
-      malskills_evidence_type: defense_evasion_and_anti_forensics
+      malskills_sso_category: defense_evasion_and_anti_forensics
       malskills_value_metavar: $CMD
     patterns:
       - pattern-either:

@@ -5,7 +5,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: remote_login
-      malskills_evidence_type: lateral_movement_and_remote_execution
+      malskills_sso_category: lateral_movement_and_remote_execution
     pattern-either:
       - pattern: new Client().connect(...)
       - pattern: ssh2.connect(...)
@@ -16,10 +16,8 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: remote_command_execution
-      malskills_evidence_type: lateral_movement_and_remote_execution
-    pattern-either:
-      - pattern: $CLIENT.exec(...)
-      - pattern: ssh.execCommand(...)
+      malskills_sso_category: lateral_movement_and_remote_execution
+    pattern: $CLIENT.execCommand(...)
 
   - id: javascript.lateral_movement_and_remote_execution.remote_file_transfer
     languages: [javascript]
@@ -27,7 +25,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: remote_file_transfer
-      malskills_evidence_type: lateral_movement_and_remote_execution
+      malskills_sso_category: lateral_movement_and_remote_execution
     pattern-either:
       - pattern: scp2.scp(...)
       - pattern: sftp.fastPut(...)
@@ -39,9 +37,8 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: cluster_or_cloud_node_control
-      malskills_evidence_type: lateral_movement_and_remote_execution
+      malskills_sso_category: lateral_movement_and_remote_execution
     pattern-either:
       - pattern: k8sExec.exec(...)
       - pattern: new AWS.SSM().sendCommand(...)
       - pattern: docker.run(...)
-

@@ -5,7 +5,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: system_and_hardware_discovery
-      malskills_evidence_type: host_and_environment_discovery
+      malskills_sso_category: host_and_environment_discovery
     pattern-either:
       - pattern: os.hostname()
       - pattern: os.release()
@@ -21,7 +21,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: identity_and_account_discovery
-      malskills_evidence_type: host_and_environment_discovery
+      malskills_sso_category: host_and_environment_discovery
     pattern-either:
       - pattern: os.userInfo()
       - pattern: process.getuid()
@@ -33,7 +33,7 @@ rules:
     severity: WARNING
     metadata:
       malskills_subtype: process_and_service_discovery
-      malskills_evidence_type: host_and_environment_discovery
+      malskills_sso_category: host_and_environment_discovery
     pattern-either:
       - pattern: systeminformation.processes(...)
       - pattern: process.kill($PID, 0)
