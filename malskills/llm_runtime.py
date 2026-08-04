@@ -10,6 +10,11 @@ from pathlib import Path
 from typing import Any
 from urllib import error, request
 
+try:
+    import tomllib
+except ModuleNotFoundError:  # pragma: no cover - Python 3.9/3.10 compatibility
+    import tomli as tomllib
+
 from .utils import load_env_file
 
 
@@ -21,6 +26,8 @@ class EnvValue:
 
 @dataclass(frozen=True)
 class LlmRuntimeConfig:
+    stage: str
+    enabled: bool
     requested_mode: str
     backend: str
     model: str
@@ -34,20 +41,69 @@ class LlmRuntimeConfig:
     api_provider: str
     resolved_env: dict[str, str | None]
     reasoning_effort: str = ""
+    config_path: str = ""
 
 
-DEFAULT_OPENAI_MODEL = "gpt-5.6-sol"
+DEFAULT_OPENAI_MODEL = "gpt-5.6-luna"
 DEFAULT_ANTHROPIC_MODEL = "claude-sonnet-4-5"
 DEFAULT_CODEX_REASONING_EFFORT = "low"
 DEFAULT_TIMEOUT_SEC = 300
-LLM_RUNTIME_PROTOCOL_VERSION = "2026-07-28-v1"
+LLM_RUNTIME_PROTOCOL_VERSION = "2026-08-04-v2"
+LLM_CONFIG_FILENAME = "malskills.toml"
+LLM_STAGES = (
+    "sso_extraction",
+    "object_analysis",
+    "pattern_reasoning",
+    "rule_feedback",
+)
+LLM_CONFIG_KEYS = {
+    "enabled",
+    "mode",
+    "model",
+    "timeout_sec",
+    "reasoning_effort",
+    "base_url",
+    "codex_cli",
+    "claude_cli",
+}
+DEFAULT_LLM_STAGE_ENABLED = {
+    "sso_extraction": True,
+    "object_analysis": True,
+    "pattern_reasoning": True,
+    "rule_feedback": False,
+}
 
 
-def build_llm_runtime_config() -> LlmRuntimeConfig:
+def build_llm_runtime_config(stage: str = "general") -> LlmRuntimeConfig:
+    if stage != "general" and stage not in LLM_STAGES:
+        raise ValueError(f"unknown LLM stage: {stage}")
+
     load_env_file(Path(__file__).resolve().parents[1])
+    config_path, file_config = _load_llm_file_config()
+    global_config, stage_config = _llm_stage_config(file_config, stage)
 
-    requested_mode = _env_value("MALSKILLS_LLM_MODE").value.lower() or "auto"
-    model_env = _first_env("MALSKILLS_LLM_MODEL", "OPENAI_MODEL", "ANTHROPIC_MODEL", "LLM_MODEL")
+    stage_prefix = f"MALSKILLS_LLM_{stage.upper()}" if stage != "general" else ""
+    enabled = (
+        True
+        if stage == "general"
+        else resolve_llm_stage_enabled(
+            stage,
+            global_config=global_config,
+            stage_config=stage_config,
+        )
+    )
+    mode_env = _first_env(
+        *([f"{stage_prefix}_MODE"] if stage_prefix else []),
+        "MALSKILLS_LLM_MODE",
+    )
+    requested_mode = (mode_env.value or _config_text(stage_config, global_config, "mode") or "auto").lower()
+    model_env = _first_env(
+        *([f"{stage_prefix}_MODEL"] if stage_prefix else []),
+        "MALSKILLS_LLM_MODEL",
+        "OPENAI_MODEL",
+        "ANTHROPIC_MODEL",
+        "LLM_MODEL",
+    )
     base_url_env = _first_env("MALSKILLS_LLM_BASE_URL", "OPENAI_BASE_URL", "PACKY_API_URL", "ANTHROPIC_BASE_URL")
     api_key_env = _first_env(
         "MALSKILLS_LLM_API_KEY",
@@ -58,17 +114,25 @@ def build_llm_runtime_config() -> LlmRuntimeConfig:
     )
     codex_cli_env = _first_env("MALSKILLS_CODEX_CLI")
     claude_cli_env = _first_env("MALSKILLS_CLAUDE_CLI")
-    timeout_env = _first_env("MALSKILLS_LLM_TIMEOUT_SEC")
-    reasoning_effort_env = _first_env("MALSKILLS_LLM_REASONING_EFFORT")
+    timeout_env = _first_env(
+        *([f"{stage_prefix}_TIMEOUT_SEC"] if stage_prefix else []),
+        "MALSKILLS_LLM_TIMEOUT_SEC",
+    )
+    reasoning_effort_env = _first_env(
+        *([f"{stage_prefix}_REASONING_EFFORT"] if stage_prefix else []),
+        "MALSKILLS_LLM_REASONING_EFFORT",
+    )
 
-    codex_cli = codex_cli_env.value or "codex"
-    claude_cli = claude_cli_env.value or "claude"
+    codex_cli = codex_cli_env.value or _config_text(stage_config, global_config, "codex_cli") or "codex"
+    claude_cli = claude_cli_env.value or _config_text(stage_config, global_config, "claude_cli") or "claude"
     codex_cli_path = shutil.which(codex_cli) or ""
     claude_cli_path = shutil.which(claude_cli) or ""
 
-    api_provider = _infer_api_provider(requested_mode, model_env.value, base_url_env.value, api_key_env.name)
+    configured_model = model_env.value or _config_text(stage_config, global_config, "model")
+    configured_base_url = base_url_env.value or _config_text(stage_config, global_config, "base_url")
+    api_provider = _infer_api_provider(requested_mode, configured_model, configured_base_url, api_key_env.name)
     default_model = DEFAULT_ANTHROPIC_MODEL if api_provider == "anthropic" else DEFAULT_OPENAI_MODEL
-    model = model_env.value or default_model
+    model = configured_model or default_model
 
     backend = _resolve_backend(
         requested_mode=requested_mode,
@@ -77,24 +141,37 @@ def build_llm_runtime_config() -> LlmRuntimeConfig:
         api_available=bool(api_key_env.value),
         api_provider=api_provider,
     )
-    reasoning_effort = _parse_reasoning_effort(reasoning_effort_env.value)
+    configured_effort = reasoning_effort_env.value or _config_text(
+        stage_config,
+        global_config,
+        "reasoning_effort",
+    )
+    reasoning_effort = _parse_reasoning_effort(configured_effort)
     if backend == "codex_cli" and not reasoning_effort:
         reasoning_effort = DEFAULT_CODEX_REASONING_EFFORT
 
+    configured_timeout = timeout_env.value or _config_value(
+        stage_config,
+        global_config,
+        "timeout_sec",
+    )
+
     return LlmRuntimeConfig(
+        stage=stage,
+        enabled=enabled,
         requested_mode=requested_mode,
         backend=backend,
         model=model,
-        timeout_sec=_parse_timeout(timeout_env.value),
+        timeout_sec=_parse_timeout(configured_timeout),
         codex_cli=codex_cli,
         claude_cli=claude_cli,
         codex_cli_path=codex_cli_path,
         claude_cli_path=claude_cli_path,
-        base_url=base_url_env.value,
+        base_url=configured_base_url,
         api_key=api_key_env.value,
         api_provider=api_provider,
         resolved_env={
-            "mode": "MALSKILLS_LLM_MODE" if os.environ.get("MALSKILLS_LLM_MODE") else None,
+            "mode": mode_env.name,
             "model": model_env.name,
             "base_url": base_url_env.name,
             "api_key": api_key_env.name,
@@ -104,35 +181,40 @@ def build_llm_runtime_config() -> LlmRuntimeConfig:
             "reasoning_effort": reasoning_effort_env.name,
         },
         reasoning_effort=reasoning_effort,
+        config_path=str(config_path) if config_path is not None else "",
     )
 
 
 def describe_llm_runtime(config: LlmRuntimeConfig | None = None) -> dict[str, Any]:
-    runtime = config or build_llm_runtime_config()
+    if config is not None:
+        return _describe_runtime(config)
+    runtimes = {stage: build_llm_runtime_config(stage) for stage in LLM_STAGES}
+    config_paths = {runtime.config_path for runtime in runtimes.values() if runtime.config_path}
     return {
-        "requested_mode": runtime.requested_mode,
-        "resolved_backend": runtime.backend,
-        "model": runtime.model,
-        "timeout_sec": runtime.timeout_sec,
-        "reasoning_effort": runtime.reasoning_effort or None,
-        "local_cli": {
-            "codex_cli": runtime.codex_cli,
-            "codex_cli_path": runtime.codex_cli_path or None,
-            "claude_cli": runtime.claude_cli,
-            "claude_cli_path": runtime.claude_cli_path or None,
+        "config_file": next(iter(config_paths), None),
+        "stages": {
+            stage: _describe_runtime(runtime)
+            for stage, runtime in runtimes.items()
         },
-        "online_api": {
-            "provider": runtime.api_provider,
-            "base_url": runtime.base_url or None,
-            "api_key_configured": bool(runtime.api_key),
-        },
-        "resolved_env": runtime.resolved_env,
         "environment_variables": {
-            "selection": [
+            "config": ["MALSKILLS_CONFIG"],
+            "global_selection": [
+                "MALSKILLS_LLM_ENABLED",
                 "MALSKILLS_LLM_MODE",
                 "MALSKILLS_LLM_MODEL",
                 "MALSKILLS_LLM_TIMEOUT_SEC",
                 "MALSKILLS_LLM_REASONING_EFFORT",
+            ],
+            "stage_selection": [
+                f"MALSKILLS_LLM_{stage.upper()}_{suffix}"
+                for stage in LLM_STAGES
+                for suffix in (
+                    "ENABLED",
+                    "MODE",
+                    "MODEL",
+                    "TIMEOUT_SEC",
+                    "REASONING_EFFORT",
+                )
             ],
             "local_cli": ["MALSKILLS_CODEX_CLI", "MALSKILLS_CLAUDE_CLI"],
             "online_api": [
@@ -156,6 +238,133 @@ def describe_llm_runtime(config: LlmRuntimeConfig | None = None) -> dict[str, An
             ],
         },
     }
+
+
+def _describe_runtime(runtime: LlmRuntimeConfig) -> dict[str, Any]:
+    return {
+        "stage": runtime.stage,
+        "enabled": runtime.enabled,
+        "requested_mode": runtime.requested_mode,
+        "resolved_backend": runtime.backend,
+        "model": runtime.model,
+        "timeout_sec": runtime.timeout_sec,
+        "reasoning_effort": runtime.reasoning_effort or None,
+        "local_cli": {
+            "codex_cli": runtime.codex_cli,
+            "codex_cli_path": runtime.codex_cli_path or None,
+            "claude_cli": runtime.claude_cli,
+            "claude_cli_path": runtime.claude_cli_path or None,
+        },
+        "online_api": {
+            "provider": runtime.api_provider,
+            "base_url": runtime.base_url or None,
+            "api_key_configured": bool(runtime.api_key),
+        },
+        "resolved_env": runtime.resolved_env,
+        "config_file": runtime.config_path or None,
+    }
+
+
+def resolve_llm_stage_enabled(
+    stage: str,
+    *,
+    global_config: dict[str, Any] | None = None,
+    stage_config: dict[str, Any] | None = None,
+) -> bool:
+    if stage not in LLM_STAGES:
+        raise ValueError(f"unknown LLM stage: {stage}")
+    if global_config is None or stage_config is None:
+        load_env_file(Path(__file__).resolve().parents[1])
+        _, file_config = _load_llm_file_config()
+        global_config, stage_config = _llm_stage_config(file_config, stage)
+    stage_env = _env_value(f"MALSKILLS_LLM_{stage.upper()}_ENABLED")
+    global_env = _env_value("MALSKILLS_LLM_ENABLED")
+    if stage_env.value:
+        return _parse_bool(stage_env.value, f"{stage_env.name}")
+    if global_env.value:
+        return _parse_bool(global_env.value, f"{global_env.name}")
+    configured = _config_value(stage_config, global_config, "enabled")
+    if configured != "":
+        return _parse_bool(configured, f"[llm.{stage}].enabled")
+    return DEFAULT_LLM_STAGE_ENABLED[stage]
+
+
+def _load_llm_file_config() -> tuple[Path | None, dict[str, Any]]:
+    explicit = os.environ.get("MALSKILLS_CONFIG", "").strip()
+    if explicit:
+        path = Path(explicit).expanduser().resolve()
+        if not path.is_file():
+            raise FileNotFoundError(f"MalSkills config file does not exist: {path}")
+        return path, _read_toml(path)
+
+    candidates = [
+        Path.cwd() / LLM_CONFIG_FILENAME,
+        Path(__file__).resolve().parents[1] / LLM_CONFIG_FILENAME,
+    ]
+    seen: set[Path] = set()
+    for candidate in candidates:
+        path = candidate.resolve()
+        if path in seen:
+            continue
+        seen.add(path)
+        if path.is_file():
+            return path, _read_toml(path)
+    return None, {}
+
+
+def _read_toml(path: Path) -> dict[str, Any]:
+    with path.open("rb") as handle:
+        payload = tomllib.load(handle)
+    if not isinstance(payload, dict):
+        raise ValueError(f"MalSkills config must be a TOML table: {path}")
+    return payload
+
+
+def _llm_stage_config(
+    config: dict[str, Any],
+    stage: str,
+) -> tuple[dict[str, Any], dict[str, Any]]:
+    llm = config.get("llm", {})
+    if not isinstance(llm, dict):
+        raise ValueError("malskills.toml [llm] must be a table")
+    unknown = set(llm) - LLM_CONFIG_KEYS - set(LLM_STAGES)
+    if unknown:
+        names = ", ".join(sorted(unknown))
+        raise ValueError(f"unknown keys in malskills.toml [llm]: {names}")
+    global_config = {key: value for key, value in llm.items() if key in LLM_CONFIG_KEYS}
+    if stage == "general":
+        return global_config, {}
+    selected = llm.get(stage, {})
+    if not isinstance(selected, dict):
+        raise ValueError(f"malskills.toml [llm.{stage}] must be a table")
+    unknown_stage = set(selected) - LLM_CONFIG_KEYS
+    if unknown_stage:
+        names = ", ".join(sorted(unknown_stage))
+        raise ValueError(f"unknown keys in malskills.toml [llm.{stage}]: {names}")
+    return global_config, selected
+
+
+def _config_value(
+    stage_config: dict[str, Any],
+    global_config: dict[str, Any],
+    key: str,
+) -> Any:
+    if key in stage_config:
+        return stage_config[key]
+    return global_config.get(key, "")
+
+
+def _config_text(
+    stage_config: dict[str, Any],
+    global_config: dict[str, Any],
+    key: str,
+) -> str:
+    value = _config_value(stage_config, global_config, key)
+    if value in (None, ""):
+        return ""
+    if not isinstance(value, str):
+        raise ValueError(f"malskills.toml LLM setting '{key}' must be a string")
+    return value.strip()
 
 
 def invoke_structured_json(
@@ -445,7 +654,7 @@ def _env_value(name: str) -> EnvValue:
     return EnvValue(name=name if value is not None else None, value=(value or "").strip())
 
 
-def _parse_timeout(value: str) -> int:
+def _parse_timeout(value: Any) -> int:
     try:
         parsed = int(value)
     except (TypeError, ValueError):
@@ -453,8 +662,19 @@ def _parse_timeout(value: str) -> int:
     return max(1, parsed)
 
 
-def _parse_reasoning_effort(value: str) -> str:
-    normalized = value.strip().lower()
+def _parse_bool(value: Any, source: str) -> bool:
+    if isinstance(value, bool):
+        return value
+    normalized = str(value).strip().lower()
+    if normalized in {"1", "true", "yes", "on"}:
+        return True
+    if normalized in {"0", "false", "no", "off"}:
+        return False
+    raise ValueError(f"{source} must be a boolean")
+
+
+def _parse_reasoning_effort(value: Any) -> str:
+    normalized = str(value or "").strip().lower()
     if normalized in {"minimal", "low", "medium", "high", "xhigh", "max", "ultra"}:
         return normalized
     return ""

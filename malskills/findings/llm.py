@@ -273,7 +273,7 @@ class LlmSSOFindingExtractor:
         self.batch_threshold = batch_threshold
         configured_batch_size = int(os.environ.get("MALSKILLS_LLM_SSO_BATCH_SIZE", batch_size))
         self.batch_size = max(1, configured_batch_size)
-        self.runtime = build_llm_runtime_config()
+        self.runtime = build_llm_runtime_config("sso_extraction")
 
     def extract(self, artifacts: list[ArtifactRecord]) -> LlmSSOFindingResult:
         eligible = [artifact for artifact in artifacts if artifact.is_text and artifact.content and not artifact.generated]

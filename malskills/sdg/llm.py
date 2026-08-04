@@ -106,7 +106,7 @@ class LlmObjectAnalyzer:
         max_workers: int = 2,
         max_prompt_bytes: int = 80_000,
     ) -> None:
-        self.runtime = build_llm_runtime_config()
+        self.runtime = build_llm_runtime_config("object_analysis")
         default_cache = Path(".cache") / "malskills_llm_object"
         configured_cache = cache_dir or os.environ.get("MALSKILLS_LLM_OBJECT_CACHE") or default_cache
         self.cache_dir = Path(configured_cache)

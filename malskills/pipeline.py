@@ -1,11 +1,12 @@
 from __future__ import annotations
 
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from pathlib import Path
 
 from .findings import SSOFindingExtractor
 from .ingest import SkillIngestor
+from .llm_runtime import resolve_llm_stage_enabled
 from .models import AnalysisResult
 from .sdg import SDGCompiler
 from .reasoning.reasoner import PatternReasoner
@@ -16,17 +17,17 @@ from .utils import ensure_dir
 
 @dataclass
 class AnalyzerConfig:
-    enable_llm_sso_extraction: bool = True
-    enable_llm_object_analysis: bool = True
+    enable_llm_sso_extraction: bool | None = None
+    enable_llm_object_analysis: bool | None = None
     export_souffle: bool = True
     enable_semgrep: bool = True
     enable_yasa: bool = True
     enable_cross_artifact_resolution: bool = True
-    reasoning_mode: str = "hybrid"
+    reasoning_mode: str | None = None
     max_artifacts: int | None = None
     max_total_text_bytes: int | None = None
     rule_store_dir: str | Path | None = None
-    collect_rule_candidates: bool = False
+    collect_rule_candidates: bool | None = None
     rule_learning_group_id: str | None = None
 
 
@@ -39,7 +40,7 @@ class SkillAnalyzer:
         self.writer = ResultWriter()
 
     def analyze(self, skill_path: str | Path, output_dir: str | Path | None = None, config: AnalyzerConfig | None = None) -> AnalysisResult:
-        cfg = config or AnalyzerConfig()
+        cfg = self._resolve_config(config or AnalyzerConfig())
         started_at = time.perf_counter()
         skill_root = Path(skill_path).resolve()
         rule_registry: RuleRegistry | None = None
@@ -139,3 +140,32 @@ class SkillAnalyzer:
             if cfg.export_souffle:
                 self.reasoner.export_souffle(facts, destination / "souffle")
         return result
+
+    def _resolve_config(self, config: AnalyzerConfig) -> AnalyzerConfig:
+        sso_extraction = resolve_llm_stage_enabled("sso_extraction")
+        object_analysis = resolve_llm_stage_enabled("object_analysis")
+        pattern_reasoning = resolve_llm_stage_enabled("pattern_reasoning")
+        rule_feedback = resolve_llm_stage_enabled("rule_feedback")
+        return replace(
+            config,
+            enable_llm_sso_extraction=(
+                sso_extraction
+                if config.enable_llm_sso_extraction is None
+                else config.enable_llm_sso_extraction
+            ),
+            enable_llm_object_analysis=(
+                object_analysis
+                if config.enable_llm_object_analysis is None
+                else config.enable_llm_object_analysis
+            ),
+            reasoning_mode=(
+                config.reasoning_mode
+                if config.reasoning_mode is not None
+                else ("hybrid" if pattern_reasoning else "formal")
+            ),
+            collect_rule_candidates=(
+                rule_feedback
+                if config.collect_rule_candidates is None
+                else config.collect_rule_candidates
+            ),
+        )

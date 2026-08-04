@@ -205,7 +205,7 @@ class LlmPatternReasoner:
         configured = cache_dir or os.environ.get("MALSKILLS_LLM_REASONING_CACHE") or default_cache
         self.cache_dir = Path(configured)
         self.cache_dir.mkdir(parents=True, exist_ok=True)
-        self.runtime = build_llm_runtime_config()
+        self.runtime = build_llm_runtime_config("pattern_reasoning")
 
     def reason(
         self,

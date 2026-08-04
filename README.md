@@ -84,6 +84,46 @@ Inspect the resolved LLM runtime:
 malskills show-llm-config
 ```
 
+The default [malskills.toml](malskills.toml) uses `gpt-5.6-luna` for every LLM
+stage. Use another file for a local or deployment-specific configuration:
+
+```bash
+malskills show-llm-config --llm-config /path/to/malskills.toml
+malskills analyze-skill <skill-dir> --output <output-dir> \
+  --llm-config /path/to/malskills.toml
+```
+
+The file supports global defaults and per-stage overrides:
+
+```toml
+[llm]
+mode = "auto"
+model = "gpt-5.6-luna"
+reasoning_effort = "low"
+timeout_sec = 300
+
+[llm.sso_extraction]
+enabled = true
+model = "gpt-5.6-luna"
+
+[llm.object_analysis]
+enabled = true
+model = "gpt-5.6-luna"
+
+[llm.pattern_reasoning]
+enabled = true
+model = "gpt-5.6-luna"
+
+[llm.rule_feedback]
+enabled = false
+model = "gpt-5.6-luna"
+```
+
+Disabling `pattern_reasoning` makes the analyzer use formal reasoning unless
+`--reasoning-mode hybrid` or `--reasoning-mode llm` is supplied explicitly.
+Enabling `rule_feedback` also requires a rule store because that stage persists
+candidate observations.
+
 ## Main outputs
 
 Each analyzed skill produces:
@@ -208,11 +248,26 @@ The script reads model-specific settings from `.env`, runs each model separately
 
 General runtime variables:
 
+- `MALSKILLS_CONFIG`
+- `MALSKILLS_LLM_ENABLED`
 - `MALSKILLS_LLM_MODE`
 - `MALSKILLS_LLM_MODEL`
 - `MALSKILLS_LLM_API_KEY`
 - `MALSKILLS_LLM_BASE_URL`
 - `MALSKILLS_LLM_TIMEOUT_SEC`
+- `MALSKILLS_LLM_REASONING_EFFORT`
+
+Each stage also supports `MODE`, `MODEL`, `TIMEOUT_SEC`, and
+`REASONING_EFFORT` overrides using these prefixes. The corresponding
+`*_ENABLED` variable overrides the TOML `enabled` value:
+
+- `MALSKILLS_LLM_SSO_EXTRACTION_*`
+- `MALSKILLS_LLM_OBJECT_ANALYSIS_*`
+- `MALSKILLS_LLM_PATTERN_REASONING_*`
+- `MALSKILLS_LLM_RULE_FEEDBACK_*`
+
+The precedence is stage environment variable, global environment variable,
+stage TOML setting, global TOML setting, then the built-in default.
 
 RQ3 model-specific variables:
 

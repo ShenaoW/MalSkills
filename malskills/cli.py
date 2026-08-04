@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 from pathlib import Path
 
 import json
@@ -26,10 +27,11 @@ def build_parser() -> argparse.ArgumentParser:
     analyze.add_argument("--disable-semgrep", action="store_true")
     analyze.add_argument("--disable-yasa", action="store_true")
     analyze.add_argument("--disable-cross-artifact-resolution", action="store_true")
-    analyze.add_argument("--reasoning-mode", choices=["hybrid", "formal", "llm"], default="hybrid")
+    analyze.add_argument("--reasoning-mode", choices=["hybrid", "formal", "llm"])
     analyze.add_argument("--rule-store")
     analyze.add_argument("--collect-rule-candidates", action="store_true")
     analyze.add_argument("--rule-group-id")
+    analyze.add_argument("--llm-config")
 
     benchmark = subparsers.add_parser("build-benchmark-index")
     benchmark.add_argument("--output", required=True)
@@ -43,11 +45,13 @@ def build_parser() -> argparse.ArgumentParser:
     evaluate.add_argument("--dataset", action="append", dest="datasets")
     evaluate.add_argument("--split", action="append", dest="splits")
     evaluate.add_argument("--label", action="append", dest="labels")
+    evaluate.add_argument("--llm-config")
 
     render = subparsers.add_parser("render-report")
     render.add_argument("--results", required=True)
 
-    subparsers.add_parser("show-llm-config")
+    show_llm = subparsers.add_parser("show-llm-config")
+    show_llm.add_argument("--llm-config")
 
     rules = subparsers.add_parser("rules")
     rule_commands = rules.add_subparsers(dest="rules_command", required=True)
@@ -90,6 +94,9 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
+    llm_config = getattr(args, "llm_config", None)
+    if llm_config:
+        os.environ["MALSKILLS_CONFIG"] = str(Path(llm_config).expanduser().resolve())
     if args.command == "analyze-skill":
         analyzer = SkillAnalyzer()
         result = analyzer.analyze(
@@ -98,13 +105,19 @@ def main(argv: list[str] | None = None) -> int:
             config=AnalyzerConfig(
                 export_souffle=not args.no_souffle_export,
                 enable_semgrep=not args.disable_semgrep,
-                enable_llm_sso_extraction=not args.disable_llm_sso_extraction,
-                enable_llm_object_analysis=not args.disable_llm_object_analysis,
+                enable_llm_sso_extraction=(
+                    False if args.disable_llm_sso_extraction else None
+                ),
+                enable_llm_object_analysis=(
+                    False if args.disable_llm_object_analysis else None
+                ),
                 enable_yasa=not args.disable_yasa,
                 enable_cross_artifact_resolution=not args.disable_cross_artifact_resolution,
                 reasoning_mode=args.reasoning_mode,
                 rule_store_dir=args.rule_store,
-                collect_rule_candidates=args.collect_rule_candidates,
+                collect_rule_candidates=(
+                    True if args.collect_rule_candidates else None
+                ),
                 rule_learning_group_id=args.rule_group_id,
             ),
         )

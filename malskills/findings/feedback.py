@@ -211,7 +211,7 @@ class SSOFindingFeedbackAnalyzer:
         self.cache_dir = Path(configured)
         self.cache_dir.mkdir(parents=True, exist_ok=True)
         self.max_reviews = max(1, int(os.environ.get("MALSKILLS_LLM_FEEDBACK_MAX_REVIEWS", max_reviews)))
-        self.runtime = build_llm_runtime_config()
+        self.runtime = build_llm_runtime_config("rule_feedback")
 
     def analyze(
         self,
