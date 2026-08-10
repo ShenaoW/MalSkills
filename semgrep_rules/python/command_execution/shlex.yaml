@@ -1,24 +1,28 @@
 rules:
-- id: no-shlex-quote
+- id: sso.python.command_execution.shlex.0001.no-shlex-quote
   languages:
   - python
   message: Avoid using shlex.quote(), as it can lead to potential issues with command execution.
   metadata:
     api: shlex.quote()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: shlex.quote(...)
   - pattern: $VAR = shlex.quote
   severity: WARNING
   tags:
   - Command Execution
-- id: no-shlex-split
+- id: sso.python.command_execution.shlex.0002.no-shlex-split
   languages:
   - python
   message: Avoid using shlex.split(), as it can lead to potential issues with command execution.
   metadata:
     api: shlex.split()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: shlex.split(...)
   - pattern: $VAR = shlex.split

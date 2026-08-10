@@ -1,0 +1,19 @@
+{
+  "schema_version": "malskills-workflow-rule-v1",
+  "rule_id": "formal.graph.resource_abuse",
+  "pattern_name": "Resource_Abuse",
+  "workflow_name": "remote_work_hash_submit_loop",
+  "severity": "high",
+  "decision_effect": "malicious",
+  "source": "formal",
+  "roles": [
+    {"id": "work", "subtypes": ["data_receive"], "min_confidence": 0.0},
+    {"id": "compute", "subtypes": ["hashing", "cryptographic_operation", "system_command_execution"], "min_confidence": 0.0, "attributes": {"operation_class": ["resource_intensive_computation"]}},
+    {"id": "result", "subtypes": ["data_send"], "min_confidence": 0.0}
+  ],
+  "relations": [
+    {"kind": "value_flow", "left": "work", "right": "compute"},
+    {"kind": "value_flow", "left": "compute", "right": "result"}
+  ],
+  "explanation": "Remote work units flow through repeated cryptographic computation and results are submitted externally."
+}

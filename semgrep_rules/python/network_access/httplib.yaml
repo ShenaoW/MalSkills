@@ -1,24 +1,28 @@
 rules:
-- id: no-httplib-HTTPConnection
+- id: sso.python.network_access.httplib.0001.no-httplib-HTTPConnection
   languages:
   - python
   message: Avoid using httplib.HTTPConnection(), as it can lead to potential issues with network access.
   metadata:
     api: httplib.HTTPConnection()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: httplib.HTTPConnection(...)
   - pattern: $VAR = httplib.HTTPConnection
   severity: WARNING
   tags:
   - Network Access
-- id: no-httplib-HTTPSConnection
+- id: sso.python.network_access.httplib.0002.no-httplib-HTTPSConnection
   languages:
   - python
   message: Avoid using httplib.HTTPSConnection(), as it can lead to potential issues with network access.
   metadata:
     api: httplib.HTTPSConnection()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: httplib.HTTPSConnection(...)
   - pattern: $VAR = httplib.HTTPSConnection

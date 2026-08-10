@@ -1,89 +1,103 @@
 rules:
-- id: no-axios-delete
+- id: sso.javascript.network_access.axios.0001.no-axios-delete
   languages:
   - javascript
   message: Avoid using axios.delete(), as it can lead to potential issues with network access.
   metadata:
     api: axios.delete()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: axios.delete(...)
   - pattern: $VAR = axios.delete
   severity: WARNING
   tags:
   - Network Access
-- id: no-axios-get
+- id: sso.javascript.network_access.axios.0002.no-axios-get
   languages:
   - javascript
   message: Avoid using axios.get(), as it can lead to potential issues with network access.
   metadata:
     api: axios.get()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: axios.get(...)
   - pattern: $VAR = axios.get
   severity: WARNING
   tags:
   - Network Access
-- id: no-axios-head
+- id: sso.javascript.network_access.axios.0003.no-axios-head
   languages:
   - javascript
   message: Avoid using axios.head(), as it can lead to potential issues with network access.
   metadata:
     api: axios.head()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: axios.head(...)
   - pattern: $VAR = axios.head
   severity: WARNING
   tags:
   - Network Access
-- id: no-axios-patch
+- id: sso.javascript.network_access.axios.0004.no-axios-patch
   languages:
   - javascript
   message: Avoid using axios.patch(), as it can lead to potential issues with network access.
   metadata:
     api: axios.patch()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: axios.patch(...)
   - pattern: $VAR = axios.patch
   severity: WARNING
   tags:
   - Network Access
-- id: no-axios-post
+- id: sso.javascript.network_access.axios.0005.no-axios-post
   languages:
   - javascript
   message: Avoid using axios.post(), as it can lead to potential issues with network access.
   metadata:
     api: axios.post()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: axios.post(...)
   - pattern: $VAR = axios.post
   severity: WARNING
   tags:
   - Network Access
-- id: no-axios-put
+- id: sso.javascript.network_access.axios.0006.no-axios-put
   languages:
   - javascript
   message: Avoid using axios.put(), as it can lead to potential issues with network access.
   metadata:
     api: axios.put()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: axios.put(...)
   - pattern: $VAR = axios.put
   severity: WARNING
   tags:
   - Network Access
-- id: no-require-axios
+- id: sso.javascript.network_access.axios.0007.no-require-axios
   languages:
   - javascript
   message: Avoid using require('axios'), as it can lead to potential issues with network access.
   metadata:
     api: require('axios')
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern: require('axios')
   severity: WARNING
   tags:

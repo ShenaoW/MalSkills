@@ -1,11 +1,13 @@
 rules:
-- id: no-django-shortcuts-get_list_or_404
+- id: sso.python.command_execution.django.0001.no-django-shortcuts-get_list_or_404
   languages:
   - python
   message: Avoid using django.shortcuts.get_list_or_404(), as it can lead to potential issues with command execution.
   metadata:
     api: django.shortcuts.get_list_or_404()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: django.shortcuts.get_list_or_404(...)
   - pattern: $VAR = django.shortcuts.get_list_or_404
@@ -14,13 +16,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-django-shortcuts-get_object_or_404
+- id: sso.python.command_execution.django.0002.no-django-shortcuts-get_object_or_404
   languages:
   - python
   message: Avoid using django.shortcuts.get_object_or_404(), as it can lead to potential issues with command execution.
   metadata:
     api: django.shortcuts.get_object_or_404()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: django.shortcuts.get_object_or_404(...)
   - pattern: $VAR = django.shortcuts.get_object_or_404

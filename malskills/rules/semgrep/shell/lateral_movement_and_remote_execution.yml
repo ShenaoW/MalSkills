@@ -4,8 +4,8 @@ rules:
     message: Shell authenticates to a remote host
     severity: WARNING
     metadata:
-      malskills_subtype: remote_login
-      malskills_sso_category: lateral_movement_and_remote_execution
+      malskills_subtype: connection_create
+      malskills_sso_category: network_access
     pattern-regex: '(?i)\b(ssh|smbclient|winrs|mstsc)\b'
 
   - id: shell.lateral_movement_and_remote_execution.remote_command_execution
@@ -13,8 +13,8 @@ rules:
     message: Shell executes commands on a remote host
     severity: WARNING
     metadata:
-      malskills_subtype: remote_command_execution
-      malskills_sso_category: lateral_movement_and_remote_execution
+      malskills_subtype: system_command_execution
+      malskills_sso_category: payload_execution
     pattern-regex: '(?i)\b(ssh\s+\S+\s+.+|wmic\s+\/node|psexec|Invoke-Command)\b'
 
   - id: shell.lateral_movement_and_remote_execution.remote_file_transfer
@@ -22,8 +22,8 @@ rules:
     message: Shell transfers files between hosts
     severity: WARNING
     metadata:
-      malskills_subtype: remote_file_transfer
-      malskills_sso_category: lateral_movement_and_remote_execution
+      malskills_subtype: data_send
+      malskills_sso_category: network_access
     pattern-regex: '(?i)\b(scp|sftp|rsync|copy\s+\\\\\\\\)\b'
 
   - id: shell.lateral_movement_and_remote_execution.remote_management_abuse
@@ -31,8 +31,8 @@ rules:
     message: Shell abuses orchestration or remote management channels
     severity: WARNING
     metadata:
-      malskills_subtype: remote_management_abuse
-      malskills_sso_category: lateral_movement_and_remote_execution
+      malskills_subtype: connection_create
+      malskills_sso_category: network_access
     pattern-regex: '(?i)\b(ansible|salt|pdsh|wmic|sc\s+\\\\\\\\)\b'
 
   - id: shell.lateral_movement_and_remote_execution.cluster_or_cloud_node_control
@@ -40,7 +40,7 @@ rules:
     message: Shell controls cluster or cloud nodes
     severity: WARNING
     metadata:
-      malskills_subtype: cluster_or_cloud_node_control
-      malskills_sso_category: lateral_movement_and_remote_execution
+      malskills_subtype: connection_create
+      malskills_sso_category: network_access
     pattern-regex: '(?i)\b(kubectl\s+exec|kubectl\s+cp|docker\s+exec|aws\s+ssm\s+send-command)\b'
 

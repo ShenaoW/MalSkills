@@ -1,24 +1,28 @@
 rules:
-- id: no-dsa.syssign
+- id: sso.ruby.cryptography.dsa.0001.no-dsa.syssign
   languages:
   - ruby
   message: Avoid using dsa.syssign(), as it can lead to potential issues with cryptography.
   metadata:
     api: dsa.syssign()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
   pattern-either:
   - pattern: dsa.syssign(...)
   - pattern: $VAR = dsa.syssign
   severity: WARNING
   tags:
   - Cryptography
-- id: no-dsa.sysverify
+- id: sso.ruby.cryptography.dsa.0002.no-dsa.sysverify
   languages:
   - ruby
   message: Avoid using dsa.sysverify(), as it can lead to potential issues with cryptography.
   metadata:
     api: dsa.sysverify()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
   pattern-either:
   - pattern: dsa.sysverify(...)
   - pattern: $VAR = dsa.sysverify

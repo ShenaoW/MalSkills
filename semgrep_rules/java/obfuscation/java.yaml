@@ -1,11 +1,13 @@
 rules:
-- id: no-java-lang-Class-getDeclaredMethods
+- id: sso.java.obfuscation.java.0001.no-java-lang-Class-getDeclaredMethods
   languages:
   - java
   message: Avoid using java.lang.Class.getDeclaredMethods(), as it can lead to potential issues with obfuscation.
   metadata:
     api: java.lang.Class.getDeclaredMethods()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: new java.lang.Class.getDeclaredMethods(...)
   - pattern: java.lang.Class.getDeclaredMethods(...)
@@ -19,13 +21,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-java-lang-ClassLoader-getSystemClassLoader
+- id: sso.java.obfuscation.java.0002.no-java-lang-ClassLoader-getSystemClassLoader
   languages:
   - java
   message: Avoid using java.lang.ClassLoader.getSystemClassLoader(), as it can lead to potential issues with obfuscation.
   metadata:
     api: java.lang.ClassLoader.getSystemClassLoader()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: new java.lang.ClassLoader.getSystemClassLoader(...)
   - pattern: java.lang.ClassLoader.getSystemClassLoader(...)
@@ -42,13 +46,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-java-lang-String-concat
+- id: sso.java.obfuscation.java.0003.no-java-lang-String-concat
   languages:
   - java
   message: Avoid using java.lang.String.concat(), as it can lead to potential issues with obfuscation.
   metadata:
     api: java.lang.String.concat()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: new java.lang.String.concat(...)
   - pattern: java.lang.String.concat(...)
@@ -62,13 +68,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-java-lang-String-replace
+- id: sso.java.obfuscation.java.0004.no-java-lang-String-replace
   languages:
   - java
   message: Avoid using java.lang.String.replace(), as it can lead to potential issues with obfuscation.
   metadata:
     api: java.lang.String.replace()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: new java.lang.String.replace(...)
   - pattern: java.lang.String.replace(...)
@@ -82,13 +90,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-java-lang-String-substring
+- id: sso.java.obfuscation.java.0005.no-java-lang-String-substring
   languages:
   - java
   message: Avoid using java.lang.String.substring(), as it can lead to potential issues with obfuscation.
   metadata:
     api: java.lang.String.substring()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: new java.lang.String.substring(...)
   - pattern: java.lang.String.substring(...)
@@ -102,13 +112,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-java-lang-StringBuilder-toString
+- id: sso.java.obfuscation.java.0006.no-java-lang-StringBuilder-toString
   languages:
   - java
   message: Avoid using java.lang.StringBuilder.toString(), as it can lead to potential issues with obfuscation.
   metadata:
     api: java.lang.StringBuilder.toString()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: new java.lang.StringBuilder.toString(...)
   - pattern: java.lang.StringBuilder.toString(...)
@@ -122,13 +134,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-java-lang-invoke-MethodHandles-lookup
+- id: sso.java.obfuscation.java.0007.no-java-lang-invoke-MethodHandles-lookup
   languages:
   - java
   message: Avoid using java.lang.invoke.MethodHandles.lookup(), as it can lead to potential issues with obfuscation.
   metadata:
     api: java.lang.invoke.MethodHandles.lookup()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: new java.lang.invoke.MethodHandles.lookup(...)
   - pattern: java.lang.invoke.MethodHandles.lookup(...)
@@ -145,13 +159,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-java-lang-reflect-Field-get
+- id: sso.java.obfuscation.java.0008.no-java-lang-reflect-Field-get
   languages:
   - java
   message: Avoid using java.lang.reflect.Field.get(), as it can lead to potential issues with obfuscation.
   metadata:
     api: java.lang.reflect.Field.get()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: new java.lang.reflect.Field.get(...)
   - pattern: java.lang.reflect.Field.get(...)
@@ -168,13 +184,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-java-lang-reflect-Field-set
+- id: sso.java.obfuscation.java.0009.no-java-lang-reflect-Field-set
   languages:
   - java
   message: Avoid using java.lang.reflect.Field.set(), as it can lead to potential issues with obfuscation.
   metadata:
     api: java.lang.reflect.Field.set()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: new java.lang.reflect.Field.set(...)
   - pattern: java.lang.reflect.Field.set(...)
@@ -191,13 +209,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-java-util-Base64-Decoder-decode
+- id: sso.java.obfuscation.java.0010.no-java-util-Base64-Decoder-decode
   languages:
   - java
   message: Avoid using java.util.Base64.Decoder.decode(), as it can lead to potential issues with obfuscation.
   metadata:
     api: java.util.Base64.Decoder.decode()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: decoding
   pattern-either:
   - pattern: new java.util.Base64.Decoder.decode(...)
   - pattern: java.util.Base64.Decoder.decode(...)
@@ -214,13 +234,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-java-util-Base64-Encoder-encodeToString
+- id: sso.java.obfuscation.java.0011.no-java-util-Base64-Encoder-encodeToString
   languages:
   - java
   message: Avoid using java.util.Base64.Encoder.encodeToString(), as it can lead to potential issues with obfuscation.
   metadata:
     api: java.util.Base64.Encoder.encodeToString()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: new java.util.Base64.Encoder.encodeToString(...)
   - pattern: java.util.Base64.Encoder.encodeToString(...)
@@ -237,13 +259,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-java-util-Base64-getDecoder
+- id: sso.java.obfuscation.java.0012.no-java-util-Base64-getDecoder
   languages:
   - java
   message: Avoid using java.util.Base64.getDecoder(), as it can lead to potential issues with obfuscation.
   metadata:
     api: java.util.Base64.getDecoder()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: decoding
   pattern-either:
   - pattern: new java.util.Base64.getDecoder(...)
   - pattern: java.util.Base64.getDecoder(...)
@@ -257,13 +281,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-java-util-Base64-getEncoder
+- id: sso.java.obfuscation.java.0013.no-java-util-Base64-getEncoder
   languages:
   - java
   message: Avoid using java.util.Base64.getEncoder(), as it can lead to potential issues with obfuscation.
   metadata:
     api: java.util.Base64.getEncoder()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: new java.util.Base64.getEncoder(...)
   - pattern: java.util.Base64.getEncoder(...)

@@ -1,11 +1,13 @@
 rules:
-- id: no-Microsoft-CodeAnalysis-CSharp-CSharpCompilation-Create
+- id: sso.csharp.dynamic_execution.Microsoft.0001.no-Microsoft-CodeAnalysis-CSharp-CSharpCompilation-Create
   languages:
   - csharp
   message: Avoid using Microsoft.CodeAnalysis.CSharp.CSharpCompilation.Create(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: Microsoft.CodeAnalysis.CSharp.CSharpCompilation.Create()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: Microsoft.CodeAnalysis.CSharp.CSharpCompilation.Create(...)
   - pattern: $VAR = Microsoft.CodeAnalysis.CSharp.CSharpCompilation.Create
@@ -18,13 +20,15 @@ rules:
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-Microsoft-CodeAnalysis-Compilation-Emit
+- id: sso.csharp.dynamic_execution.Microsoft.0002.no-Microsoft-CodeAnalysis-Compilation-Emit
   languages:
   - csharp
   message: Avoid using Microsoft.CodeAnalysis.Compilation.Emit(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: Microsoft.CodeAnalysis.Compilation.Emit()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: Microsoft.CodeAnalysis.Compilation.Emit(...)
   - pattern: $VAR = Microsoft.CodeAnalysis.Compilation.Emit

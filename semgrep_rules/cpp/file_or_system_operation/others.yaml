@@ -1,1077 +1,1243 @@
 rules:
-- id: no-CloseHandle
+- id: sso.cpp.file_or_system_operation.others.0001.no-CloseHandle
   languages:
   - cpp
   message: Avoid using CloseHandle(), as it can lead to potential issues with file or system operation.
   metadata:
     api: CloseHandle()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: CloseHandle(...)
   - pattern: $VAR = CloseHandle
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-CopyFileA
+- id: sso.cpp.file_or_system_operation.others.0002.no-CopyFileA
   languages:
   - cpp
   message: Avoid using CopyFileA(), as it can lead to potential issues with file or system operation.
   metadata:
     api: CopyFileA()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: CopyFileA(...)
   - pattern: $VAR = CopyFileA
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-CopyFileW
+- id: sso.cpp.file_or_system_operation.others.0003.no-CopyFileW
   languages:
   - cpp
   message: Avoid using CopyFileW(), as it can lead to potential issues with file or system operation.
   metadata:
     api: CopyFileW()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: CopyFileW(...)
   - pattern: $VAR = CopyFileW
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-CreateDirectoryA
+- id: sso.cpp.file_or_system_operation.others.0004.no-CreateDirectoryA
   languages:
   - cpp
   message: Avoid using CreateDirectoryA(), as it can lead to potential issues with file or system operation.
   metadata:
     api: CreateDirectoryA()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
   pattern-either:
   - pattern: CreateDirectoryA(...)
   - pattern: $VAR = CreateDirectoryA
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-CreateDirectoryW
+- id: sso.cpp.file_or_system_operation.others.0005.no-CreateDirectoryW
   languages:
   - cpp
   message: Avoid using CreateDirectoryW(), as it can lead to potential issues with file or system operation.
   metadata:
     api: CreateDirectoryW()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
   pattern-either:
   - pattern: CreateDirectoryW(...)
   - pattern: $VAR = CreateDirectoryW
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-CreateFileA
+- id: sso.cpp.file_or_system_operation.others.0006.no-CreateFileA
   languages:
   - cpp
   message: Avoid using CreateFileA(), as it can lead to potential issues with file or system operation.
   metadata:
     api: CreateFileA()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
   pattern-either:
   - pattern: CreateFileA(...)
   - pattern: $VAR = CreateFileA
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-CreateFileW
+- id: sso.cpp.file_or_system_operation.others.0007.no-CreateFileW
   languages:
   - cpp
   message: Avoid using CreateFileW(), as it can lead to potential issues with file or system operation.
   metadata:
     api: CreateFileW()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
   pattern-either:
   - pattern: CreateFileW(...)
   - pattern: $VAR = CreateFileW
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-CreatePipe
+- id: sso.cpp.file_or_system_operation.others.0008.no-CreatePipe
   languages:
   - cpp
   message: Avoid using CreatePipe(), as it can lead to potential issues with file or system operation.
   metadata:
     api: CreatePipe()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
   pattern-either:
   - pattern: CreatePipe(...)
   - pattern: $VAR = CreatePipe
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-DeleteFileA
+- id: sso.cpp.file_or_system_operation.others.0009.no-DeleteFileA
   languages:
   - cpp
   message: Avoid using DeleteFileA(), as it can lead to potential issues with file or system operation.
   metadata:
     api: DeleteFileA()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
   pattern-either:
   - pattern: DeleteFileA(...)
   - pattern: $VAR = DeleteFileA
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-DeleteFileW
+- id: sso.cpp.file_or_system_operation.others.0010.no-DeleteFileW
   languages:
   - cpp
   message: Avoid using DeleteFileW(), as it can lead to potential issues with file or system operation.
   metadata:
     api: DeleteFileW()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
   pattern-either:
   - pattern: DeleteFileW(...)
   - pattern: $VAR = DeleteFileW
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-ExitProcess
+- id: sso.cpp.file_or_system_operation.others.0011.no-ExitProcess
   languages:
   - cpp
   message: Avoid using ExitProcess(), as it can lead to potential issues with file or system operation.
   metadata:
     api: ExitProcess()
     category: File or System Operation
+    malskills_sso_category: process_operation
+    malskills_subtype: process_control
   pattern-either:
   - pattern: ExitProcess(...)
   - pattern: $VAR = ExitProcess
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-FindClose
+- id: sso.cpp.file_or_system_operation.others.0012.no-FindClose
   languages:
   - cpp
   message: Avoid using FindClose(), as it can lead to potential issues with file or system operation.
   metadata:
     api: FindClose()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: FindClose(...)
   - pattern: $VAR = FindClose
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-FindFirstFileA
+- id: sso.cpp.file_or_system_operation.others.0013.no-FindFirstFileA
   languages:
   - cpp
   message: Avoid using FindFirstFileA(), as it can lead to potential issues with file or system operation.
   metadata:
     api: FindFirstFileA()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_search
   pattern-either:
   - pattern: FindFirstFileA(...)
   - pattern: $VAR = FindFirstFileA
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-FindFirstFileW
+- id: sso.cpp.file_or_system_operation.others.0014.no-FindFirstFileW
   languages:
   - cpp
   message: Avoid using FindFirstFileW(), as it can lead to potential issues with file or system operation.
   metadata:
     api: FindFirstFileW()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_search
   pattern-either:
   - pattern: FindFirstFileW(...)
   - pattern: $VAR = FindFirstFileW
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-FindNextFileA
+- id: sso.cpp.file_or_system_operation.others.0015.no-FindNextFileA
   languages:
   - cpp
   message: Avoid using FindNextFileA(), as it can lead to potential issues with file or system operation.
   metadata:
     api: FindNextFileA()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: FindNextFileA(...)
   - pattern: $VAR = FindNextFileA
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-FindNextFileW
+- id: sso.cpp.file_or_system_operation.others.0016.no-FindNextFileW
   languages:
   - cpp
   message: Avoid using FindNextFileW(), as it can lead to potential issues with file or system operation.
   metadata:
     api: FindNextFileW()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: FindNextFileW(...)
   - pattern: $VAR = FindNextFileW
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-GetCurrentDirectoryA
+- id: sso.cpp.file_or_system_operation.others.0017.no-GetCurrentDirectoryA
   languages:
   - cpp
   message: Avoid using GetCurrentDirectoryA(), as it can lead to potential issues with file or system operation.
   metadata:
     api: GetCurrentDirectoryA()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: GetCurrentDirectoryA(...)
   - pattern: $VAR = GetCurrentDirectoryA
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-GetCurrentDirectoryW
+- id: sso.cpp.file_or_system_operation.others.0018.no-GetCurrentDirectoryW
   languages:
   - cpp
   message: Avoid using GetCurrentDirectoryW(), as it can lead to potential issues with file or system operation.
   metadata:
     api: GetCurrentDirectoryW()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: GetCurrentDirectoryW(...)
   - pattern: $VAR = GetCurrentDirectoryW
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-GetEnvironmentVariableA
+- id: sso.cpp.file_or_system_operation.others.0019.no-GetEnvironmentVariableA
   languages:
   - cpp
   message: Avoid using GetEnvironmentVariableA(), as it can lead to potential issues with file or system operation.
   metadata:
     api: GetEnvironmentVariableA()
     category: File or System Operation
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: environment_access
   pattern-either:
   - pattern: GetEnvironmentVariableA(...)
   - pattern: $VAR = GetEnvironmentVariableA
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-GetEnvironmentVariableW
+- id: sso.cpp.file_or_system_operation.others.0020.no-GetEnvironmentVariableW
   languages:
   - cpp
   message: Avoid using GetEnvironmentVariableW(), as it can lead to potential issues with file or system operation.
   metadata:
     api: GetEnvironmentVariableW()
     category: File or System Operation
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: environment_access
   pattern-either:
   - pattern: GetEnvironmentVariableW(...)
   - pattern: $VAR = GetEnvironmentVariableW
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-GetFileAttributesA
+- id: sso.cpp.file_or_system_operation.others.0021.no-GetFileAttributesA
   languages:
   - cpp
   message: Avoid using GetFileAttributesA(), as it can lead to potential issues with file or system operation.
   metadata:
     api: GetFileAttributesA()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: GetFileAttributesA(...)
   - pattern: $VAR = GetFileAttributesA
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-GetFileAttributesW
+- id: sso.cpp.file_or_system_operation.others.0022.no-GetFileAttributesW
   languages:
   - cpp
   message: Avoid using GetFileAttributesW(), as it can lead to potential issues with file or system operation.
   metadata:
     api: GetFileAttributesW()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: GetFileAttributesW(...)
   - pattern: $VAR = GetFileAttributesW
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-GetModuleFileNameA
+- id: sso.cpp.file_or_system_operation.others.0023.no-GetModuleFileNameA
   languages:
   - cpp
   message: Avoid using GetModuleFileNameA(), as it can lead to potential issues with file or system operation.
   metadata:
     api: GetModuleFileNameA()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: GetModuleFileNameA(...)
   - pattern: $VAR = GetModuleFileNameA
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-GetModuleFileNameW
+- id: sso.cpp.file_or_system_operation.others.0024.no-GetModuleFileNameW
   languages:
   - cpp
   message: Avoid using GetModuleFileNameW(), as it can lead to potential issues with file or system operation.
   metadata:
     api: GetModuleFileNameW()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: GetModuleFileNameW(...)
   - pattern: $VAR = GetModuleFileNameW
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-GetSystemInfo
+- id: sso.cpp.file_or_system_operation.others.0025.no-GetSystemInfo
   languages:
   - cpp
   message: Avoid using GetSystemInfo(), as it can lead to potential issues with file or system operation.
   metadata:
     api: GetSystemInfo()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: GetSystemInfo(...)
   - pattern: $VAR = GetSystemInfo
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-GetTempFileNameA
+- id: sso.cpp.file_or_system_operation.others.0026.no-GetTempFileNameA
   languages:
   - cpp
   message: Avoid using GetTempFileNameA(), as it can lead to potential issues with file or system operation.
   metadata:
     api: GetTempFileNameA()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
   pattern-either:
   - pattern: GetTempFileNameA(...)
   - pattern: $VAR = GetTempFileNameA
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-GetTempFileNameW
+- id: sso.cpp.file_or_system_operation.others.0027.no-GetTempFileNameW
   languages:
   - cpp
   message: Avoid using GetTempFileNameW(), as it can lead to potential issues with file or system operation.
   metadata:
     api: GetTempFileNameW()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
   pattern-either:
   - pattern: GetTempFileNameW(...)
   - pattern: $VAR = GetTempFileNameW
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-MoveFileA
+- id: sso.cpp.file_or_system_operation.others.0028.no-MoveFileA
   languages:
   - cpp
   message: Avoid using MoveFileA(), as it can lead to potential issues with file or system operation.
   metadata:
     api: MoveFileA()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: MoveFileA(...)
   - pattern: $VAR = MoveFileA
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-MoveFileW
+- id: sso.cpp.file_or_system_operation.others.0029.no-MoveFileW
   languages:
   - cpp
   message: Avoid using MoveFileW(), as it can lead to potential issues with file or system operation.
   metadata:
     api: MoveFileW()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: MoveFileW(...)
   - pattern: $VAR = MoveFileW
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-PeekNamedPipe
+- id: sso.cpp.file_or_system_operation.others.0030.no-PeekNamedPipe
   languages:
   - cpp
   message: Avoid using PeekNamedPipe(), as it can lead to potential issues with file or system operation.
   metadata:
     api: PeekNamedPipe()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: PeekNamedPipe(...)
   - pattern: $VAR = PeekNamedPipe
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-ReadConsoleA
+- id: sso.cpp.file_or_system_operation.others.0031.no-ReadConsoleA
   languages:
   - cpp
   message: Avoid using ReadConsoleA(), as it can lead to potential issues with file or system operation.
   metadata:
     api: ReadConsoleA()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: ReadConsoleA(...)
   - pattern: $VAR = ReadConsoleA
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-ReadConsoleW
+- id: sso.cpp.file_or_system_operation.others.0032.no-ReadConsoleW
   languages:
   - cpp
   message: Avoid using ReadConsoleW(), as it can lead to potential issues with file or system operation.
   metadata:
     api: ReadConsoleW()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: ReadConsoleW(...)
   - pattern: $VAR = ReadConsoleW
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-ReadFile
+- id: sso.cpp.file_or_system_operation.others.0033.no-ReadFile
   languages:
   - cpp
   message: Avoid using ReadFile(), as it can lead to potential issues with file or system operation.
   metadata:
     api: ReadFile()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: ReadFile(...)
   - pattern: $VAR = ReadFile
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-RemoveDirectoryA
+- id: sso.cpp.file_or_system_operation.others.0034.no-RemoveDirectoryA
   languages:
   - cpp
   message: Avoid using RemoveDirectoryA(), as it can lead to potential issues with file or system operation.
   metadata:
     api: RemoveDirectoryA()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
   pattern-either:
   - pattern: RemoveDirectoryA(...)
   - pattern: $VAR = RemoveDirectoryA
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-RemoveDirectoryW
+- id: sso.cpp.file_or_system_operation.others.0035.no-RemoveDirectoryW
   languages:
   - cpp
   message: Avoid using RemoveDirectoryW(), as it can lead to potential issues with file or system operation.
   metadata:
     api: RemoveDirectoryW()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
   pattern-either:
   - pattern: RemoveDirectoryW(...)
   - pattern: $VAR = RemoveDirectoryW
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-SetCurrentDirectoryA
+- id: sso.cpp.file_or_system_operation.others.0036.no-SetCurrentDirectoryA
   languages:
   - cpp
   message: Avoid using SetCurrentDirectoryA(), as it can lead to potential issues with file or system operation.
   metadata:
     api: SetCurrentDirectoryA()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: SetCurrentDirectoryA(...)
   - pattern: $VAR = SetCurrentDirectoryA
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-SetCurrentDirectoryW
+- id: sso.cpp.file_or_system_operation.others.0037.no-SetCurrentDirectoryW
   languages:
   - cpp
   message: Avoid using SetCurrentDirectoryW(), as it can lead to potential issues with file or system operation.
   metadata:
     api: SetCurrentDirectoryW()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: SetCurrentDirectoryW(...)
   - pattern: $VAR = SetCurrentDirectoryW
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-SetEnvironmentVariableA
+- id: sso.cpp.file_or_system_operation.others.0038.no-SetEnvironmentVariableA
   languages:
   - cpp
   message: Avoid using SetEnvironmentVariableA(), as it can lead to potential issues with file or system operation.
   metadata:
     api: SetEnvironmentVariableA()
     category: File or System Operation
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: environment_access
   pattern-either:
   - pattern: SetEnvironmentVariableA(...)
   - pattern: $VAR = SetEnvironmentVariableA
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-SetEnvironmentVariableW
+- id: sso.cpp.file_or_system_operation.others.0039.no-SetEnvironmentVariableW
   languages:
   - cpp
   message: Avoid using SetEnvironmentVariableW(), as it can lead to potential issues with file or system operation.
   metadata:
     api: SetEnvironmentVariableW()
     category: File or System Operation
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: environment_access
   pattern-either:
   - pattern: SetEnvironmentVariableW(...)
   - pattern: $VAR = SetEnvironmentVariableW
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-SetFileAttributesA
+- id: sso.cpp.file_or_system_operation.others.0040.no-SetFileAttributesA
   languages:
   - cpp
   message: Avoid using SetFileAttributesA(), as it can lead to potential issues with file or system operation.
   metadata:
     api: SetFileAttributesA()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: SetFileAttributesA(...)
   - pattern: $VAR = SetFileAttributesA
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-SetFileAttributesW
+- id: sso.cpp.file_or_system_operation.others.0041.no-SetFileAttributesW
   languages:
   - cpp
   message: Avoid using SetFileAttributesW(), as it can lead to potential issues with file or system operation.
   metadata:
     api: SetFileAttributesW()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: SetFileAttributesW(...)
   - pattern: $VAR = SetFileAttributesW
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-ShellExecuteA
+- id: sso.cpp.file_or_system_operation.others.0042.no-ShellExecuteA
   languages:
   - cpp
   message: Avoid using ShellExecuteA(), as it can lead to potential issues with file or system operation.
   metadata:
     api: ShellExecuteA()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: ShellExecuteA(...)
   - pattern: $VAR = ShellExecuteA
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-ShellExecuteW
+- id: sso.cpp.file_or_system_operation.others.0043.no-ShellExecuteW
   languages:
   - cpp
   message: Avoid using ShellExecuteW(), as it can lead to potential issues with file or system operation.
   metadata:
     api: ShellExecuteW()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: ShellExecuteW(...)
   - pattern: $VAR = ShellExecuteW
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-TerminateProcess
+- id: sso.cpp.file_or_system_operation.others.0044.no-TerminateProcess
   languages:
   - cpp
   message: Avoid using TerminateProcess(), as it can lead to potential issues with file or system operation.
   metadata:
     api: TerminateProcess()
     category: File or System Operation
+    malskills_sso_category: process_operation
+    malskills_subtype: process_control
   pattern-either:
   - pattern: TerminateProcess(...)
   - pattern: $VAR = TerminateProcess
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-WriteConsoleA
+- id: sso.cpp.file_or_system_operation.others.0045.no-WriteConsoleA
   languages:
   - cpp
   message: Avoid using WriteConsoleA(), as it can lead to potential issues with file or system operation.
   metadata:
     api: WriteConsoleA()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: WriteConsoleA(...)
   - pattern: $VAR = WriteConsoleA
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-WriteConsoleW
+- id: sso.cpp.file_or_system_operation.others.0046.no-WriteConsoleW
   languages:
   - cpp
   message: Avoid using WriteConsoleW(), as it can lead to potential issues with file or system operation.
   metadata:
     api: WriteConsoleW()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: WriteConsoleW(...)
   - pattern: $VAR = WriteConsoleW
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-WriteFile
+- id: sso.cpp.file_or_system_operation.others.0047.no-WriteFile
   languages:
   - cpp
   message: Avoid using WriteFile(), as it can lead to potential issues with file or system operation.
   metadata:
     api: WriteFile()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: WriteFile(...)
   - pattern: $VAR = WriteFile
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-abort
+- id: sso.cpp.file_or_system_operation.others.0048.no-abort
   languages:
   - cpp
   message: Avoid using abort(), as it can lead to potential issues with file or system operation.
   metadata:
     api: abort()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: abort(...)
   - pattern: $VAR = abort
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-access
+- id: sso.cpp.file_or_system_operation.others.0049.no-access
   languages:
   - cpp
   message: Avoid using access(), as it can lead to potential issues with file or system operation.
   metadata:
     api: access()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: access(...)
   - pattern: $VAR = access
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-chdir
+- id: sso.cpp.file_or_system_operation.others.0050.no-chdir
   languages:
   - cpp
   message: Avoid using chdir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: chdir()
     category: File or System Operation
+    malskills_sso_category: system_configuration
+    malskills_subtype: system_configuration_modify
   pattern-either:
   - pattern: chdir(...)
   - pattern: $VAR = chdir
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-chmod
+- id: sso.cpp.file_or_system_operation.others.0051.no-chmod
   languages:
   - cpp
   message: Avoid using chmod(), as it can lead to potential issues with file or system operation.
   metadata:
     api: chmod()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
   pattern-either:
   - pattern: chmod(...)
   - pattern: $VAR = chmod
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-chown
+- id: sso.cpp.file_or_system_operation.others.0052.no-chown
   languages:
   - cpp
   message: Avoid using chown(), as it can lead to potential issues with file or system operation.
   metadata:
     api: chown()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
   pattern-either:
   - pattern: chown(...)
   - pattern: $VAR = chown
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-closedir
+- id: sso.cpp.file_or_system_operation.others.0053.no-closedir
   languages:
   - cpp
   message: Avoid using closedir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: closedir()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: closedir(...)
   - pattern: $VAR = closedir
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-exit
+- id: sso.cpp.file_or_system_operation.others.0054.no-exit
   languages:
   - cpp
   message: Avoid using exit(), as it can lead to potential issues with file or system operation.
   metadata:
     api: exit()
     category: File or System Operation
+    malskills_sso_category: process_operation
+    malskills_subtype: process_control
   pattern-either:
   - pattern: exit(...)
   - pattern: $VAR = exit
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fclose
+- id: sso.cpp.file_or_system_operation.others.0055.no-fclose
   languages:
   - cpp
   message: Avoid using fclose(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fclose()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fclose(...)
   - pattern: $VAR = fclose
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fflush
+- id: sso.cpp.file_or_system_operation.others.0056.no-fflush
   languages:
   - cpp
   message: Avoid using fflush(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fflush()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fflush(...)
   - pattern: $VAR = fflush
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fgets
+- id: sso.cpp.file_or_system_operation.others.0057.no-fgets
   languages:
   - cpp
   message: Avoid using fgets(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fgets()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fgets(...)
   - pattern: $VAR = fgets
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fopen
+- id: sso.cpp.file_or_system_operation.others.0058.no-fopen
   languages:
   - cpp
   message: Avoid using fopen(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fopen()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fopen(...)
   - pattern: $VAR = fopen
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fprintf
+- id: sso.cpp.file_or_system_operation.others.0059.no-fprintf
   languages:
   - cpp
   message: Avoid using fprintf(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fprintf()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fprintf(...)
   - pattern: $VAR = fprintf
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fputs
+- id: sso.cpp.file_or_system_operation.others.0060.no-fputs
   languages:
   - cpp
   message: Avoid using fputs(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fputs()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fputs(...)
   - pattern: $VAR = fputs
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fread
+- id: sso.cpp.file_or_system_operation.others.0061.no-fread
   languages:
   - cpp
   message: Avoid using fread(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fread()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: fread(...)
   - pattern: $VAR = fread
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fscanf
+- id: sso.cpp.file_or_system_operation.others.0062.no-fscanf
   languages:
   - cpp
   message: Avoid using fscanf(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fscanf()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fscanf(...)
   - pattern: $VAR = fscanf
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fwrite
+- id: sso.cpp.file_or_system_operation.others.0063.no-fwrite
   languages:
   - cpp
   message: Avoid using fwrite(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fwrite()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: fwrite(...)
   - pattern: $VAR = fwrite
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-getcwd
+- id: sso.cpp.file_or_system_operation.others.0064.no-getcwd
   languages:
   - cpp
   message: Avoid using getcwd(), as it can lead to potential issues with file or system operation.
   metadata:
     api: getcwd()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: getcwd(...)
   - pattern: $VAR = getcwd
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-getenv
+- id: sso.cpp.file_or_system_operation.others.0065.no-getenv
   languages:
   - cpp
   message: Avoid using getenv(), as it can lead to potential issues with file or system operation.
   metadata:
     api: getenv()
     category: File or System Operation
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: environment_access
   pattern-either:
   - pattern: getenv(...)
   - pattern: $VAR = getenv
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-lseek
+- id: sso.cpp.file_or_system_operation.others.0066.no-lseek
   languages:
   - cpp
   message: Avoid using lseek(), as it can lead to potential issues with file or system operation.
   metadata:
     api: lseek()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: lseek(...)
   - pattern: $VAR = lseek
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-mkdir
+- id: sso.cpp.file_or_system_operation.others.0067.no-mkdir
   languages:
   - cpp
   message: Avoid using mkdir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: mkdir()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
   pattern-either:
   - pattern: mkdir(...)
   - pattern: $VAR = mkdir
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-mkstemp
+- id: sso.cpp.file_or_system_operation.others.0068.no-mkstemp
   languages:
   - cpp
   message: Avoid using mkstemp(), as it can lead to potential issues with file or system operation.
   metadata:
     api: mkstemp()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
   pattern-either:
   - pattern: mkstemp(...)
   - pattern: $VAR = mkstemp
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-open
+- id: sso.cpp.file_or_system_operation.others.0069.no-open
   languages:
   - cpp
   message: Avoid using open(), as it can lead to potential issues with file or system operation.
   metadata:
     api: open()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: open(...)
   - pattern: $VAR = open
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-opendir
+- id: sso.cpp.file_or_system_operation.others.0070.no-opendir
   languages:
   - cpp
   message: Avoid using opendir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: opendir()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: opendir(...)
   - pattern: $VAR = opendir
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-putenv
+- id: sso.cpp.file_or_system_operation.others.0071.no-putenv
   languages:
   - cpp
   message: Avoid using putenv(), as it can lead to potential issues with file or system operation.
   metadata:
     api: putenv()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: putenv(...)
   - pattern: $VAR = putenv
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-read
+- id: sso.cpp.file_or_system_operation.others.0072.no-read
   languages:
   - cpp
   message: Avoid using read(), as it can lead to potential issues with file or system operation.
   metadata:
     api: read()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: read(...)
   - pattern: $VAR = read
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-readdir
+- id: sso.cpp.file_or_system_operation.others.0073.no-readdir
   languages:
   - cpp
   message: Avoid using readdir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: readdir()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_search
   pattern-either:
   - pattern: readdir(...)
   - pattern: $VAR = readdir
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-remove
+- id: sso.cpp.file_or_system_operation.others.0074.no-remove
   languages:
   - cpp
   message: Avoid using remove(), as it can lead to potential issues with file or system operation.
   metadata:
     api: remove()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
   pattern-either:
   - pattern: remove(...)
   - pattern: $VAR = remove
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-rename
+- id: sso.cpp.file_or_system_operation.others.0075.no-rename
   languages:
   - cpp
   message: Avoid using rename(), as it can lead to potential issues with file or system operation.
   metadata:
     api: rename()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: rename(...)
   - pattern: $VAR = rename
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-rewind
+- id: sso.cpp.file_or_system_operation.others.0076.no-rewind
   languages:
   - cpp
   message: Avoid using rewind(), as it can lead to potential issues with file or system operation.
   metadata:
     api: rewind()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: rewind(...)
   - pattern: $VAR = rewind
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-rmdir
+- id: sso.cpp.file_or_system_operation.others.0077.no-rmdir
   languages:
   - cpp
   message: Avoid using rmdir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: rmdir()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
   pattern-either:
   - pattern: rmdir(...)
   - pattern: $VAR = rmdir
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-stat
+- id: sso.cpp.file_or_system_operation.others.0078.no-stat
   languages:
   - cpp
   message: Avoid using stat(), as it can lead to potential issues with file or system operation.
   metadata:
     api: stat()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: stat(...)
   - pattern: $VAR = stat
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-tmpfile
+- id: sso.cpp.file_or_system_operation.others.0079.no-tmpfile
   languages:
   - cpp
   message: Avoid using tmpfile(), as it can lead to potential issues with file or system operation.
   metadata:
     api: tmpfile()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: tmpfile(...)
   - pattern: $VAR = tmpfile
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-tmpnam
+- id: sso.cpp.file_or_system_operation.others.0080.no-tmpnam
   languages:
   - cpp
   message: Avoid using tmpnam(), as it can lead to potential issues with file or system operation.
   metadata:
     api: tmpnam()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: tmpnam(...)
   - pattern: $VAR = tmpnam
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-unlink
+- id: sso.cpp.file_or_system_operation.others.0081.no-unlink
   languages:
   - cpp
   message: Avoid using unlink(), as it can lead to potential issues with file or system operation.
   metadata:
     api: unlink()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: link_operation
   pattern-either:
   - pattern: unlink(...)
   - pattern: $VAR = unlink
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-write
+- id: sso.cpp.file_or_system_operation.others.0082.no-write
   languages:
   - cpp
   message: Avoid using write(), as it can lead to potential issues with file or system operation.
   metadata:
     api: write()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: write(...)
   - pattern: $VAR = write
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fstream-open
+- id: sso.cpp.file_or_system_operation.others.0083.no-fstream-open
   languages:
   - cpp
   message: Avoid using fstream::open(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fstream::open()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fstream::open(...)
   - pattern: $VAR = fstream::open

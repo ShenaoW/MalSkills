@@ -1,102 +1,118 @@
 rules:
-- id: no-dustjs-linkedin-loadSource
+- id: sso.javascript.dynamic_execution.others.0001.no-dustjs-linkedin-loadSource
   languages:
   - javascript
   message: Avoid using dustjs-linkedin.loadSource(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: dustjs-linkedin.loadSource()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: dustjs-linkedin.loadSource(...)
   - pattern: $VAR = dustjs-linkedin.loadSource
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-istanbul-reports-create
+- id: sso.javascript.dynamic_execution.others.0002.no-istanbul-reports-create
   languages:
   - javascript
   message: Avoid using istanbul-reports.create(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: istanbul-reports.create()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: istanbul-reports.create(...)
   - pattern: $VAR = istanbul-reports.create
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-jade-compile
+- id: sso.javascript.dynamic_execution.others.0003.no-jade-compile
   languages:
   - javascript
   message: Avoid using jade.compile(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: jade.compile()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: jade.compile(...)
   - pattern: $VAR = jade.compile
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-lodash-template
+- id: sso.javascript.dynamic_execution.others.0004.no-lodash-template
   languages:
   - javascript
   message: Avoid using lodash.template(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: lodash.template()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: lodash.template(...)
   - pattern: $VAR = lodash.template
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-node-pre-gyp-Run
+- id: sso.javascript.dynamic_execution.others.0005.no-node-pre-gyp-Run
   languages:
   - javascript
   message: Avoid using node-pre-gyp.Run(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: node-pre-gyp.Run()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: node-pre-gyp.Run(...)
   - pattern: $VAR = node-pre-gyp.Run
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-pirates-addHook
+- id: sso.javascript.dynamic_execution.others.0006.no-pirates-addHook
   languages:
   - javascript
   message: Avoid using pirates.addHook(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: pirates.addHook()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: pirates.addHook(...)
   - pattern: $VAR = pirates.addHook
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-pug-compile
+- id: sso.javascript.dynamic_execution.others.0007.no-pug-compile
   languages:
   - javascript
   message: Avoid using pug.compile(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: pug.compile()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: pug.compile(...)
   - pattern: $VAR = pug.compile
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-underscore-template
+- id: sso.javascript.dynamic_execution.others.0008.no-underscore-template
   languages:
   - javascript
   message: Avoid using underscore.template(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: underscore.template()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: underscore.template(...)
   - pattern: $VAR = underscore.template

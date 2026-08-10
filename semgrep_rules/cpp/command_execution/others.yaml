@@ -1,453 +1,523 @@
 rules:
-- id: no-CreateProcess
+- id: sso.cpp.command_execution.others.0001.no-CreateProcess
   languages:
   - cpp
   message: Avoid using CreateProcess(), as it can lead to potential issues with command execution.
   metadata:
     api: CreateProcess()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: CreateProcess(...)
   - pattern: $VAR = CreateProcess
   severity: WARNING
   tags:
   - Command Execution
-- id: no-CreateProcessA
+- id: sso.cpp.command_execution.others.0002.no-CreateProcessA
   languages:
   - cpp
   message: Avoid using CreateProcessA(), as it can lead to potential issues with command execution.
   metadata:
     api: CreateProcessA()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: CreateProcessA(...)
   - pattern: $VAR = CreateProcessA
   severity: WARNING
   tags:
   - Command Execution
-- id: no-CreateProcessW
+- id: sso.cpp.command_execution.others.0003.no-CreateProcessW
   languages:
   - cpp
   message: Avoid using CreateProcessW(), as it can lead to potential issues with command execution.
   metadata:
     api: CreateProcessW()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: CreateProcessW(...)
   - pattern: $VAR = CreateProcessW
   severity: WARNING
   tags:
   - Command Execution
-- id: no-LoadLibrary
+- id: sso.cpp.command_execution.others.0004.no-LoadLibrary
   languages:
   - cpp
   message: Avoid using LoadLibrary(), as it can lead to potential issues with command execution.
   metadata:
     api: LoadLibrary()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: LoadLibrary(...)
   - pattern: $VAR = LoadLibrary
   severity: WARNING
   tags:
   - Command Execution
-- id: no-LoadLibraryA
+- id: sso.cpp.command_execution.others.0005.no-LoadLibraryA
   languages:
   - cpp
   message: Avoid using LoadLibraryA(), as it can lead to potential issues with command execution.
   metadata:
     api: LoadLibraryA()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: LoadLibraryA(...)
   - pattern: $VAR = LoadLibraryA
   severity: WARNING
   tags:
   - Command Execution
-- id: no-LoadLibraryW
+- id: sso.cpp.command_execution.others.0006.no-LoadLibraryW
   languages:
   - cpp
   message: Avoid using LoadLibraryW(), as it can lead to potential issues with command execution.
   metadata:
     api: LoadLibraryW()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: LoadLibraryW(...)
   - pattern: $VAR = LoadLibraryW
   severity: WARNING
   tags:
   - Command Execution
-- id: no-ShellExecute
+- id: sso.cpp.command_execution.others.0007.no-ShellExecute
   languages:
   - cpp
   message: Avoid using ShellExecute(), as it can lead to potential issues with command execution.
   metadata:
     api: ShellExecute()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: ShellExecute(...)
   - pattern: $VAR = ShellExecute
   severity: WARNING
   tags:
   - Command Execution
-- id: no-ShellExecuteEx
+- id: sso.cpp.command_execution.others.0008.no-ShellExecuteEx
   languages:
   - cpp
   message: Avoid using ShellExecuteEx(), as it can lead to potential issues with command execution.
   metadata:
     api: ShellExecuteEx()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: ShellExecuteEx(...)
   - pattern: $VAR = ShellExecuteEx
   severity: WARNING
   tags:
   - Command Execution
-- id: no-SystemParametersInfo
+- id: sso.cpp.command_execution.others.0009.no-SystemParametersInfo
   languages:
   - cpp
   message: Avoid using SystemParametersInfo(), as it can lead to potential issues with command execution.
   metadata:
     api: SystemParametersInfo()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: SystemParametersInfo(...)
   - pattern: $VAR = SystemParametersInfo
   severity: WARNING
   tags:
   - Command Execution
-- id: no-WinExec
+- id: sso.cpp.command_execution.others.0010.no-WinExec
   languages:
   - cpp
   message: Avoid using WinExec(), as it can lead to potential issues with command execution.
   metadata:
     api: WinExec()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: WinExec(...)
   - pattern: $VAR = WinExec
   severity: WARNING
   tags:
   - Command Execution
-- id: no-clone
+- id: sso.cpp.command_execution.others.0011.no-clone
   languages:
   - cpp
   message: Avoid using clone(), as it can lead to potential issues with command execution.
   metadata:
     api: clone()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: clone(...)
   - pattern: $VAR = clone
   severity: WARNING
   tags:
   - Command Execution
-- id: no-execl
+- id: sso.cpp.command_execution.others.0012.no-execl
   languages:
   - cpp
   message: Avoid using execl(), as it can lead to potential issues with command execution.
   metadata:
     api: execl()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: execl(...)
   - pattern: $VAR = execl
   severity: WARNING
   tags:
   - Command Execution
-- id: no-execle
+- id: sso.cpp.command_execution.others.0013.no-execle
   languages:
   - cpp
   message: Avoid using execle(), as it can lead to potential issues with command execution.
   metadata:
     api: execle()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: execle(...)
   - pattern: $VAR = execle
   severity: WARNING
   tags:
   - Command Execution
-- id: no-execlp
+- id: sso.cpp.command_execution.others.0014.no-execlp
   languages:
   - cpp
   message: Avoid using execlp(), as it can lead to potential issues with command execution.
   metadata:
     api: execlp()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: execlp(...)
   - pattern: $VAR = execlp
   severity: WARNING
   tags:
   - Command Execution
-- id: no-execute
+- id: sso.cpp.command_execution.others.0015.no-execute
   languages:
   - cpp
   message: Avoid using execute(), as it can lead to potential issues with command execution.
   metadata:
     api: execute()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: execute(...)
   - pattern: $VAR = execute
   severity: WARNING
   tags:
   - Command Execution
-- id: no-execv
+- id: sso.cpp.command_execution.others.0016.no-execv
   languages:
   - cpp
   message: Avoid using execv(), as it can lead to potential issues with command execution.
   metadata:
     api: execv()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: execv(...)
   - pattern: $VAR = execv
   severity: WARNING
   tags:
   - Command Execution
-- id: no-execve
+- id: sso.cpp.command_execution.others.0017.no-execve
   languages:
   - cpp
   message: Avoid using execve(), as it can lead to potential issues with command execution.
   metadata:
     api: execve()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: execve(...)
   - pattern: $VAR = execve
   severity: WARNING
   tags:
   - Command Execution
-- id: no-execvp
+- id: sso.cpp.command_execution.others.0018.no-execvp
   languages:
   - cpp
   message: Avoid using execvp(), as it can lead to potential issues with command execution.
   metadata:
     api: execvp()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: execvp(...)
   - pattern: $VAR = execvp
   severity: WARNING
   tags:
   - Command Execution
-- id: no-execvpe
+- id: sso.cpp.command_execution.others.0019.no-execvpe
   languages:
   - cpp
   message: Avoid using execvpe(), as it can lead to potential issues with command execution.
   metadata:
     api: execvpe()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: execvpe(...)
   - pattern: $VAR = execvpe
   severity: WARNING
   tags:
   - Command Execution
-- id: no-fork
+- id: sso.cpp.command_execution.others.0020.no-fork
   languages:
   - cpp
   message: Avoid using fork(), as it can lead to potential issues with command execution.
   metadata:
     api: fork()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: fork(...)
   - pattern: $VAR = fork
   severity: WARNING
   tags:
   - Command Execution
-- id: no-nsystem
+- id: sso.cpp.command_execution.others.0021.no-nsystem
   languages:
   - cpp
   message: Avoid using nsystem(), as it can lead to potential issues with command execution.
   metadata:
     api: nsystem()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: nsystem(...)
   - pattern: $VAR = nsystem
   severity: WARNING
   tags:
   - Command Execution
-- id: no-popen
+- id: sso.cpp.command_execution.others.0022.no-popen
   languages:
   - cpp
   message: Avoid using popen(), as it can lead to potential issues with command execution.
   metadata:
     api: popen()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: popen(...)
   - pattern: $VAR = popen
   severity: WARNING
   tags:
   - Command Execution
-- id: no-run_command
+- id: sso.cpp.command_execution.others.0023.no-run_command
   languages:
   - cpp
   message: Avoid using run_command(), as it can lead to potential issues with command execution.
   metadata:
     api: run_command()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: run_command(...)
   - pattern: $VAR = run_command
   severity: WARNING
   tags:
   - Command Execution
-- id: no-run_shell
+- id: sso.cpp.command_execution.others.0024.no-run_shell
   languages:
   - cpp
   message: Avoid using run_shell(), as it can lead to potential issues with command execution.
   metadata:
     api: run_shell()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: run_shell(...)
   - pattern: $VAR = run_shell
   severity: WARNING
   tags:
   - Command Execution
-- id: no-spawnl
+- id: sso.cpp.command_execution.others.0025.no-spawnl
   languages:
   - cpp
   message: Avoid using spawnl(), as it can lead to potential issues with command execution.
   metadata:
     api: spawnl()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: spawnl(...)
   - pattern: $VAR = spawnl
   severity: WARNING
   tags:
   - Command Execution
-- id: no-spawnle
+- id: sso.cpp.command_execution.others.0026.no-spawnle
   languages:
   - cpp
   message: Avoid using spawnle(), as it can lead to potential issues with command execution.
   metadata:
     api: spawnle()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: spawnle(...)
   - pattern: $VAR = spawnle
   severity: WARNING
   tags:
   - Command Execution
-- id: no-spawnlp
+- id: sso.cpp.command_execution.others.0027.no-spawnlp
   languages:
   - cpp
   message: Avoid using spawnlp(), as it can lead to potential issues with command execution.
   metadata:
     api: spawnlp()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: spawnlp(...)
   - pattern: $VAR = spawnlp
   severity: WARNING
   tags:
   - Command Execution
-- id: no-spawnlpe
+- id: sso.cpp.command_execution.others.0028.no-spawnlpe
   languages:
   - cpp
   message: Avoid using spawnlpe(), as it can lead to potential issues with command execution.
   metadata:
     api: spawnlpe()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: spawnlpe(...)
   - pattern: $VAR = spawnlpe
   severity: WARNING
   tags:
   - Command Execution
-- id: no-spawnv
+- id: sso.cpp.command_execution.others.0029.no-spawnv
   languages:
   - cpp
   message: Avoid using spawnv(), as it can lead to potential issues with command execution.
   metadata:
     api: spawnv()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: spawnv(...)
   - pattern: $VAR = spawnv
   severity: WARNING
   tags:
   - Command Execution
-- id: no-spawnve
+- id: sso.cpp.command_execution.others.0030.no-spawnve
   languages:
   - cpp
   message: Avoid using spawnve(), as it can lead to potential issues with command execution.
   metadata:
     api: spawnve()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: spawnve(...)
   - pattern: $VAR = spawnve
   severity: WARNING
   tags:
   - Command Execution
-- id: no-spawnvp
+- id: sso.cpp.command_execution.others.0031.no-spawnvp
   languages:
   - cpp
   message: Avoid using spawnvp(), as it can lead to potential issues with command execution.
   metadata:
     api: spawnvp()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: spawnvp(...)
   - pattern: $VAR = spawnvp
   severity: WARNING
   tags:
   - Command Execution
-- id: no-spawnvpe
+- id: sso.cpp.command_execution.others.0032.no-spawnvpe
   languages:
   - cpp
   message: Avoid using spawnvpe(), as it can lead to potential issues with command execution.
   metadata:
     api: spawnvpe()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: spawnvpe(...)
   - pattern: $VAR = spawnvpe
   severity: WARNING
   tags:
   - Command Execution
-- id: no-system
+- id: sso.cpp.command_execution.others.0033.no-system
   languages:
   - cpp
   message: Avoid using system(), as it can lead to potential issues with command execution.
   metadata:
     api: system()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: system(...)
   - pattern: $VAR = system
   severity: WARNING
   tags:
   - Command Execution
-- id: no-systemf
+- id: sso.cpp.command_execution.others.0034.no-systemf
   languages:
   - cpp
   message: Avoid using systemf(), as it can lead to potential issues with command execution.
   metadata:
     api: systemf()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: systemf(...)
   - pattern: $VAR = systemf
   severity: WARNING
   tags:
   - Command Execution
-- id: no-vfork
+- id: sso.cpp.command_execution.others.0035.no-vfork
   languages:
   - cpp
   message: Avoid using vfork(), as it can lead to potential issues with command execution.
   metadata:
     api: vfork()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: vfork(...)
   - pattern: $VAR = vfork

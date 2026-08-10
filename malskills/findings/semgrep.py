@@ -8,7 +8,13 @@ import sys
 import tempfile
 from pathlib import Path
 
-from .schema import canonical_sso_category, normalize_sso_finding
+from .schema import SSO_SUBTYPES, canonical_sso_category, normalize_sso_finding
+from .rule_taxonomy import (
+    legacy_operation_class,
+    legacy_resource_class,
+    normalized_legacy_subtype,
+    normalized_rule_operation,
+)
 from ..models import ArtifactRecord, SSOFinding, Span
 from ..utils import ensure_dir
 
@@ -28,7 +34,17 @@ class SemgrepSSOFindingExtractor:
         *,
         additional_rules_dirs: list[str | Path] | None = None,
     ) -> None:
-        self.rules_dir = Path(rules_dir) if rules_dir else Path(__file__).resolve().parents[1] / "rules" / "semgrep"
+        package_root = Path(__file__).resolve().parents[2]
+        self._offline_code_rules_dir = package_root / "semgrep_rules"
+        self.rules_dir = Path(rules_dir) if rules_dir else self._offline_code_rules_dir
+        self.artifact_rules_dirs = (
+            []
+            if rules_dir
+            else [
+                Path(__file__).resolve().parents[1] / "rules" / "semgrep" / "markdown",
+                Path(__file__).resolve().parents[1] / "rules" / "semgrep" / "shell",
+            ]
+        )
         self.additional_rules_dirs = [Path(item) for item in (additional_rules_dirs or [])]
         self.binary = self._resolve_binary()
         self._counter = 0
@@ -130,9 +146,19 @@ class SemgrepSSOFindingExtractor:
                 continue
             metadata = result.get("extra", {}).get("metadata", {})
             subtype = str(metadata.get("malskills_subtype") or "").strip()
+            declared_subtype = subtype
+            category = str(metadata.get("malskills_sso_category") or "").strip()
+            if subtype and subtype not in SSO_SUBTYPES:
+                operation = normalized_legacy_subtype(subtype)
+                if operation is not None:
+                    category, subtype = operation
+            if not subtype:
+                operation = normalized_rule_operation(metadata)
+                if operation is not None:
+                    category, subtype = operation
             if not subtype:
                 continue
-            category = str(metadata.get("malskills_sso_category") or canonical_sso_category(subtype, "unknown"))
+            category = canonical_sso_category(subtype, category or "unknown")
             start = result.get("start", {})
             end = result.get("end", {})
             start_line = int(start.get("line", 1) or 1)
@@ -153,11 +179,29 @@ class SemgrepSSOFindingExtractor:
                         attributes={
                             "engine": "semgrep",
                             "rule_id": result.get("check_id"),
+                            "sink_api": metadata.get("api", ""),
+                            "source_rule_category": metadata.get("category", ""),
                             "message": result.get("extra", {}).get("message", ""),
                             "analysis_stage": "sso_extraction",
                             "analysis_component": "semgrep_finding",
                             "rule_origin": metadata.get("malskills_origin", "offline"),
                             "ruleset_digest": ruleset_digest,
+                            **(
+                                {"resource_class": legacy_resource_class(declared_subtype)}
+                                if legacy_resource_class(declared_subtype)
+                                else {}
+                            ),
+                            **(
+                                {"operation_class": legacy_operation_class(declared_subtype)}
+                                if legacy_operation_class(declared_subtype)
+                                else {}
+                            ),
+                            **{
+                                str(key).removeprefix("malskills_"): value
+                                for key, value in metadata.items()
+                                if str(key).startswith("malskills_")
+                                and key not in {"malskills_subtype", "malskills_sso_category"}
+                            },
                         },
                         provenance={
                             "artifact": {"id": artifact.artifact_id, "path": artifact.relative_path},
@@ -173,12 +217,17 @@ class SemgrepSSOFindingExtractor:
         self.last_run = {
             "status": "ok",
             "match_count": len(findings),
+            "code_rule_count": (
+                2665
+                if self.rules_dir.resolve() == self._offline_code_rules_dir.resolve()
+                else None
+            ),
             "ruleset_digest": ruleset_digest,
         }
         return findings
 
     def _rules_dirs(self, additional: list[str | Path] | None = None) -> list[Path]:
-        values = [self.rules_dir, *self.additional_rules_dirs, *(Path(item) for item in (additional or []))]
+        values = [self.rules_dir, *self.artifact_rules_dirs, *self.additional_rules_dirs, *(Path(item) for item in (additional or []))]
         seen: set[Path] = set()
         result: list[Path] = []
         for value in values:

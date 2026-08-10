@@ -1,37 +1,43 @@
 rules:
-- id: no-needle-get
+- id: sso.javascript.network_access.needle.0001.no-needle-get
   languages:
   - javascript
   message: Avoid using needle.get(), as it can lead to potential issues with network access.
   metadata:
     api: needle.get()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: needle.get(...)
   - pattern: $VAR = needle.get
   severity: WARNING
   tags:
   - Network Access
-- id: no-needle-post
+- id: sso.javascript.network_access.needle.0002.no-needle-post
   languages:
   - javascript
   message: Avoid using needle.post(), as it can lead to potential issues with network access.
   metadata:
     api: needle.post()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: needle.post(...)
   - pattern: $VAR = needle.post
   severity: WARNING
   tags:
   - Network Access
-- id: no-require-needle
+- id: sso.javascript.network_access.needle.0003.no-require-needle
   languages:
   - javascript
   message: Avoid using require('needle'), as it can lead to potential issues with network access.
   metadata:
     api: require('needle')
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern: require('needle')
   severity: WARNING
   tags:

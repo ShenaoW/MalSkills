@@ -11,45 +11,18 @@ from .. import llm_runtime
 from ..llm_runtime import build_llm_runtime_config, invoke_structured_json
 from ..models import ArtifactRecord, SSOFinding, PatternMatch, SSORecord, WorkflowDiscovery
 
-REASONING_PROMPT_VERSION = "2026-08-04-v9"
+REASONING_PROMPT_VERSION = "2026-08-04-v10"
 
 PATTERN_TAXONOMY: dict[str, dict[str, str]] = {
-    "Execution_and_Delivery": {
-        "severity": "high",
-        "definition": "Execution-capable behavior is present, optionally linked to delivery of remote content or payload staging.",
-    },
-    "Persistence": {
-        "severity": "high",
-        "definition": "The skill establishes persistence through startup, service, scheduled, event-triggered, or boot-chain control.",
-    },
-    "Privilege_Escalation_and_Identity_Abuse": {
-        "severity": "high",
-        "definition": "The skill manipulates identities, privileges, tokens, groups, ACLs, or trust boundaries.",
-    },
-    "Injection_and_Covert_Residency": {
-        "severity": "high",
-        "definition": "The skill performs process, memory, or remote-thread style manipulation consistent with injection or covert residency.",
-    },
-    "Information_Theft": {
-        "severity": "high",
-        "definition": "The skill accesses credentials, secrets, or sensitive data, optionally linking that collection to staging or external transfer.",
-    },
-    "Command_and_Control": {
-        "severity": "high",
-        "definition": "The skill establishes or uses external command-and-control style communication channels.",
-    },
-    "Lateral_Movement": {
-        "severity": "high",
-        "definition": "The skill can authenticate to, execute on, transfer to, or control other hosts or remote nodes.",
-    },
-    "Defense_Evasion_and_Anti_Forensics": {
-        "severity": "high",
-        "definition": "The skill impairs defenses, suppresses logging, weakens policy controls, cleans artifacts, or hides objects.",
-    },
-    "Destruction_and_Ransomware": {
-        "severity": "high",
-        "definition": "The skill destroys data, encrypts or locks it, impairs recovery, disrupts availability, or damages low-level boot components.",
-    },
+    "Data_Exfiltration": {"severity": "high", "definition": "Sensitive or host data reaches an external data-transfer sink."},
+    "Credential_Theft": {"severity": "high", "definition": "Credential material is collected and reaches an exfiltration sink."},
+    "Remote_Code_Execution": {"severity": "high", "definition": "Network-controlled input reaches an execution-capable operation."},
+    "Malware_Delivery": {"severity": "high", "definition": "Received content is staged and subsequently executed."},
+    "Persistence": {"severity": "high", "definition": "An execution payload is registered in a startup or recurring-execution resource."},
+    "Reverse_Shell": {"severity": "high", "definition": "Network command input drives execution and its output returns through the network."},
+    "Ransomware": {"severity": "high", "definition": "File data flows through encryption into destructive rewrite or deletion."},
+    "Resource_Abuse": {"severity": "high", "definition": "Externally supplied work drives intensive computation and results are submitted externally."},
+    "Privilege_Escalation": {"severity": "high", "definition": "Execution is connected to a privilege or authorization boundary modification."},
 }
 
 LLM_REASONING_SYSTEM_PROMPT = """You are a reasoning engine for malicious-pattern classification.
@@ -71,15 +44,15 @@ Reusable workflow discovery:
 - Map the workflow to one existing pattern_name; do not invent a new verdict taxonomy.
 
 Allowed pattern taxonomy:
-- Execution_and_Delivery: execution-capable behavior is present, optionally linked to remote delivery or payload staging.
-- Persistence: the skill establishes persistence through startup, service, scheduled, event-triggered, or boot-chain control.
-- Privilege_Escalation_and_Identity_Abuse: the skill manipulates identities, privileges, tokens, groups, ACLs, or trust boundaries.
-- Injection_and_Covert_Residency: the skill performs process, memory, or remote-thread style manipulation consistent with injection or covert residency.
-- Information_Theft: the skill accesses credentials, secrets, or sensitive data, optionally linking that collection to staging or external transfer.
-- Command_and_Control: the skill establishes or uses external command-and-control style communication channels.
-- Lateral_Movement: the skill can authenticate to, execute on, transfer to, or control other hosts or remote nodes.
-- Defense_Evasion_and_Anti_Forensics: the skill impairs defenses, suppresses logging, weakens policy controls, cleans artifacts, or hides objects.
-- Destruction_and_Ransomware: the skill destroys data, encrypts or locks it, impairs recovery, disrupts availability, or damages low-level boot components.
+- Data_Exfiltration: sensitive or host data flows to a data_send sink.
+- Credential_Theft: credential data flows to an exfiltration sink.
+- Remote_Code_Execution: network-controlled input flows to execution.
+- Malware_Delivery: received content is staged and then executed.
+- Persistence: an execution payload is registered in a startup or recurring-execution resource.
+- Reverse_Shell: received commands flow to execution and execution output flows to data_send.
+- Ransomware: file data flows through encryption into rewrite or deletion.
+- Resource_Abuse: remote work flows through intensive computation and results are submitted externally.
+- Privilege_Escalation: execution is connected to a privilege-boundary modification.
 
 Reasoning discipline:
 - Base your answer on the provided structured facts, not on free-form speculation.
@@ -88,29 +61,22 @@ Reasoning discipline:
 - If a behavior is only a single sensitive operation without a higher-level malicious pattern, emit no pattern.
 - If no taxonomy pattern applies, return an empty list.
 
-Examples:
-1. curl/wget remote URL + shell execution or dynamic module load => Execution_and_Delivery.
-2. cron/systemd/RunKey/service registration => Persistence.
-3. setuid/sudo/UAC bypass/token impersonation => Privilege_Escalation_and_Identity_Abuse.
-4. ptrace/ReadProcessMemory/CreateRemoteThread/mprotect RWX => Injection_and_Covert_Residency.
-5. API key access, session token access, SSH key access, or sensitive file read flowing into an unauthorized outbound payload or staging operation => Information_Theft.
-6. listener/tunnel/proxy/protocol encapsulation or explicit external send channel => Command_and_Control.
-7. ssh/WinRM/remote exec/cluster node control => Lateral_Movement.
-8. stop EDR / clear logs / disable firewall / hide artifacts => Defense_Evasion_and_Anti_Forensics.
-9. data destruction / data encryption / recovery impairment / shutdown / boot damage => Destruction_and_Ransomware.
+Required graph reasoning:
+- Treat value_flow as directed; never reverse an edge to make a pattern fit.
+- Require all behavior roles to form one connected SDG subgraph.
+- Use same-object support only when object identity represents the handoff.
+- Standalone sensitive operations do not establish a behavior.
 
 Counterexamples:
-- A standalone outbound_connection to a benign-looking endpoint is not automatically a malicious pattern.
-- A standalone content_read_and_parse on an ordinary file is not enough for Information_Theft.
-- A credential used only in an Authorization or authentication header to access its intended service is not Information_Theft; require findings that sensitive data flows into an unauthorized payload, staging, or exfiltration sink.
-- HTTPS by itself is transport security, not Command_and_Control.
-- Running curl or wget only to query a documented API is network access, not Execution_and_Delivery; require a fetched executable, script, module, or payload that is subsequently launched or loaded.
+- A standalone connection_create to a benign-looking endpoint is not automatically a malicious pattern.
+- A standalone file_read is not Data_Exfiltration.
+- A credential used only for intended authentication is not Credential_Theft.
+- HTTPS or a listener by itself is not Reverse_Shell.
+- Downloading content without a linked staging-and-execution path is not Malware_Delivery.
 - A scheduled backup, documented service restart, process-manager cron restart, or ordinary recurring job is not malicious Persistence without an unauthorized or covert execution chain.
-- Deleting a calendar event or performing a documented backup restore/rollback is not Destruction_and_Ransomware.
-- Removing a stale application cache or local index is not Defense_Evasion_and_Anti_Forensics.
-- A local security audit, inventory, status, or diagnostic command is not Lateral_Movement or remote management abuse.
-- git reset, git clean, and ordinary source repository rollback are not recovery impairment or Destruction_and_Ransomware.
-- chmod +x on an application executable is not Privilege_Escalation_and_Identity_Abuse.
+- Deleting a calendar event or performing a documented backup restore is not Ransomware.
+- git reset, git clean, and ordinary source rollback are not Ransomware.
+- chmod +x on an ordinary application executable is not Privilege_Escalation.
 - Generic capability summaries are not patterns.
 - Use only the official reasoning taxonomy above; do not resurrect legacy pattern names.
 

@@ -1,11 +1,13 @@
 rules:
-- id: no-Microsoft-Win32-RegistryKey-CreateSubKey
+- id: sso.csharp.file_or_system_operation.Microsoft.0001.no-Microsoft-Win32-RegistryKey-CreateSubKey
   languages:
   - csharp
   message: Avoid using Microsoft.Win32.RegistryKey.CreateSubKey(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Microsoft.Win32.RegistryKey.CreateSubKey()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
   pattern-either:
   - pattern: Microsoft.Win32.RegistryKey.CreateSubKey(...)
   - pattern: $VAR = Microsoft.Win32.RegistryKey.CreateSubKey
@@ -16,13 +18,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Microsoft-Win32-RegistryKey-DeleteSubKey
+- id: sso.csharp.file_or_system_operation.Microsoft.0002.no-Microsoft-Win32-RegistryKey-DeleteSubKey
   languages:
   - csharp
   message: Avoid using Microsoft.Win32.RegistryKey.DeleteSubKey(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Microsoft.Win32.RegistryKey.DeleteSubKey()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
   pattern-either:
   - pattern: Microsoft.Win32.RegistryKey.DeleteSubKey(...)
   - pattern: $VAR = Microsoft.Win32.RegistryKey.DeleteSubKey
@@ -33,13 +37,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Microsoft-Win32-RegistryKey-DeleteValue
+- id: sso.csharp.file_or_system_operation.Microsoft.0003.no-Microsoft-Win32-RegistryKey-DeleteValue
   languages:
   - csharp
   message: Avoid using Microsoft.Win32.RegistryKey.DeleteValue(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Microsoft.Win32.RegistryKey.DeleteValue()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
   pattern-either:
   - pattern: Microsoft.Win32.RegistryKey.DeleteValue(...)
   - pattern: $VAR = Microsoft.Win32.RegistryKey.DeleteValue
@@ -50,13 +56,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Microsoft-Win32-RegistryKey-GetValue
+- id: sso.csharp.file_or_system_operation.Microsoft.0004.no-Microsoft-Win32-RegistryKey-GetValue
   languages:
   - csharp
   message: Avoid using Microsoft.Win32.RegistryKey.GetValue(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Microsoft.Win32.RegistryKey.GetValue()
     category: File or System Operation
+    malskills_sso_category: system_configuration
+    malskills_subtype: system_configuration_modify
   pattern-either:
   - pattern: Microsoft.Win32.RegistryKey.GetValue(...)
   - pattern: $VAR = Microsoft.Win32.RegistryKey.GetValue
@@ -67,13 +75,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Microsoft-Win32-RegistryKey-OpenSubKey
+- id: sso.csharp.file_or_system_operation.Microsoft.0005.no-Microsoft-Win32-RegistryKey-OpenSubKey
   languages:
   - csharp
   message: Avoid using Microsoft.Win32.RegistryKey.OpenSubKey(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Microsoft.Win32.RegistryKey.OpenSubKey()
     category: File or System Operation
+    malskills_sso_category: system_configuration
+    malskills_subtype: system_configuration_modify
   pattern-either:
   - pattern: Microsoft.Win32.RegistryKey.OpenSubKey(...)
   - pattern: $VAR = Microsoft.Win32.RegistryKey.OpenSubKey
@@ -84,13 +94,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Microsoft-Win32-RegistryKey-SetValue
+- id: sso.csharp.file_or_system_operation.Microsoft.0006.no-Microsoft-Win32-RegistryKey-SetValue
   languages:
   - csharp
   message: Avoid using Microsoft.Win32.RegistryKey.SetValue(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Microsoft.Win32.RegistryKey.SetValue()
     category: File or System Operation
+    malskills_sso_category: system_configuration
+    malskills_subtype: system_configuration_modify
   pattern-either:
   - pattern: Microsoft.Win32.RegistryKey.SetValue(...)
   - pattern: $VAR = Microsoft.Win32.RegistryKey.SetValue

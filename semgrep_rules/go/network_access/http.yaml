@@ -1,11 +1,13 @@
 rules:
-- id: no-http.Client.Do
+- id: sso.go.network_access.http.0001.no-http.Client.Do
   languages:
   - go
   message: Avoid using http.Client.Do(), as it can lead to potential issues with network access.
   metadata:
     api: http.Client.Do()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: http.Client.Do(...)
   - pattern: $VAR = http.Client.Do
@@ -14,13 +16,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-http.DefaultClient.Do
+- id: sso.go.network_access.http.0002.no-http.DefaultClient.Do
   languages:
   - go
   message: Avoid using http.DefaultClient.Do(), as it can lead to potential issues with network access.
   metadata:
     api: http.DefaultClient.Do()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: http.DefaultClient.Do(...)
   - pattern: $VAR = http.DefaultClient.Do
@@ -29,143 +33,165 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-http.Get
+- id: sso.go.network_access.http.0003.no-http.Get
   languages:
   - go
   message: Avoid using http.Get(), as it can lead to potential issues with network access.
   metadata:
     api: http.Get()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: http.Get(...)
   - pattern: $VAR = http.Get
   severity: WARNING
   tags:
   - Network Access
-- id: no-http.Handle
+- id: sso.go.network_access.http.0004.no-http.Handle
   languages:
   - go
   message: Avoid using http.Handle(), as it can lead to potential issues with network access.
   metadata:
     api: http.Handle()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: http.Handle(...)
   - pattern: $VAR = http.Handle
   severity: WARNING
   tags:
   - Network Access
-- id: no-http.HandleFunc
+- id: sso.go.network_access.http.0005.no-http.HandleFunc
   languages:
   - go
   message: Avoid using http.HandleFunc(), as it can lead to potential issues with network access.
   metadata:
     api: http.HandleFunc()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: http.HandleFunc(...)
   - pattern: $VAR = http.HandleFunc
   severity: WARNING
   tags:
   - Network Access
-- id: no-http.ListenAndServe
+- id: sso.go.network_access.http.0006.no-http.ListenAndServe
   languages:
   - go
   message: Avoid using http.ListenAndServe(), as it can lead to potential issues with network access.
   metadata:
     api: http.ListenAndServe()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
   pattern-either:
   - pattern: http.ListenAndServe(...)
   - pattern: $VAR = http.ListenAndServe
   severity: WARNING
   tags:
   - Network Access
-- id: no-http.ListenAndServeTLS
+- id: sso.go.network_access.http.0007.no-http.ListenAndServeTLS
   languages:
   - go
   message: Avoid using http.ListenAndServeTLS(), as it can lead to potential issues with network access.
   metadata:
     api: http.ListenAndServeTLS()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
   pattern-either:
   - pattern: http.ListenAndServeTLS(...)
   - pattern: $VAR = http.ListenAndServeTLS
   severity: WARNING
   tags:
   - Network Access
-- id: no-http.NewRequest
+- id: sso.go.network_access.http.0008.no-http.NewRequest
   languages:
   - go
   message: Avoid using http.NewRequest(), as it can lead to potential issues with network access.
   metadata:
     api: http.NewRequest()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: http.NewRequest(...)
   - pattern: $VAR = http.NewRequest
   severity: WARNING
   tags:
   - Network Access
-- id: no-http.NewRequestWithContext
+- id: sso.go.network_access.http.0009.no-http.NewRequestWithContext
   languages:
   - go
   message: Avoid using http.NewRequestWithContext(), as it can lead to potential issues with network access.
   metadata:
     api: http.NewRequestWithContext()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: http.NewRequestWithContext(...)
   - pattern: $VAR = http.NewRequestWithContext
   severity: WARNING
   tags:
   - Network Access
-- id: no-http.Post
+- id: sso.go.network_access.http.0010.no-http.Post
   languages:
   - go
   message: Avoid using http.Post(), as it can lead to potential issues with network access.
   metadata:
     api: http.Post()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: http.Post(...)
   - pattern: $VAR = http.Post
   severity: WARNING
   tags:
   - Network Access
-- id: no-http.PostForm
+- id: sso.go.network_access.http.0011.no-http.PostForm
   languages:
   - go
   message: Avoid using http.PostForm(), as it can lead to potential issues with network access.
   metadata:
     api: http.PostForm()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: http.PostForm(...)
   - pattern: $VAR = http.PostForm
   severity: WARNING
   tags:
   - Network Access
-- id: no-http.Serve
+- id: sso.go.network_access.http.0012.no-http.Serve
   languages:
   - go
   message: Avoid using http.Serve(), as it can lead to potential issues with network access.
   metadata:
     api: http.Serve()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: http.Serve(...)
   - pattern: $VAR = http.Serve
   severity: WARNING
   tags:
   - Network Access
-- id: no-http.ServeTLS
+- id: sso.go.network_access.http.0013.no-http.ServeTLS
   languages:
   - go
   message: Avoid using http.ServeTLS(), as it can lead to potential issues with network access.
   metadata:
     api: http.ServeTLS()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: http.ServeTLS(...)
   - pattern: $VAR = http.ServeTLS

@@ -1,11 +1,13 @@
 rules:
-- id: no-cryptography-fernet-Fernet
+- id: sso.python.cryptography.cryptography.0001.no-cryptography-fernet-Fernet
   languages:
   - python
   message: Avoid using cryptography.fernet.Fernet(), as it can lead to potential issues with cryptography.
   metadata:
     api: cryptography.fernet.Fernet()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
   pattern-either:
   - pattern: cryptography.fernet.Fernet(...)
   - pattern: $VAR = cryptography.fernet.Fernet
@@ -14,13 +16,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-cryptography-fernet-Fernet-decrypt
+- id: sso.python.cryptography.cryptography.0002.no-cryptography-fernet-Fernet-decrypt
   languages:
   - python
   message: Avoid using cryptography.fernet.Fernet.decrypt(), as it can lead to potential issues with cryptography.
   metadata:
     api: cryptography.fernet.Fernet.decrypt()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
   pattern-either:
   - pattern: cryptography.fernet.Fernet.decrypt(...)
   - pattern: $VAR = cryptography.fernet.Fernet.decrypt
@@ -31,13 +35,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-cryptography-fernet-Fernet-encrypt
+- id: sso.python.cryptography.cryptography.0003.no-cryptography-fernet-Fernet-encrypt
   languages:
   - python
   message: Avoid using cryptography.fernet.Fernet.encrypt(), as it can lead to potential issues with cryptography.
   metadata:
     api: cryptography.fernet.Fernet.encrypt()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
   pattern-either:
   - pattern: cryptography.fernet.Fernet.encrypt(...)
   - pattern: $VAR = cryptography.fernet.Fernet.encrypt
@@ -48,13 +54,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-cryptography-fernet-Fernet-generate_key
+- id: sso.python.cryptography.cryptography.0004.no-cryptography-fernet-Fernet-generate_key
   languages:
   - python
   message: Avoid using cryptography.fernet.Fernet.generate_key(), as it can lead to potential issues with cryptography.
   metadata:
     api: cryptography.fernet.Fernet.generate_key()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: cryptography.fernet.Fernet.generate_key(...)
   - pattern: $VAR = cryptography.fernet.Fernet.generate_key
@@ -65,13 +73,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-cryptography-hazmat-primitives-asymmetric-rsa-RSAPrivateKey-public_key
+- id: sso.python.cryptography.cryptography.0005.no-cryptography-hazmat-primitives-asymmetric-rsa-RSAPrivateKey-public_key
   languages:
   - python
   message: Avoid using cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey.public_key(), as it can lead to potential issues with cryptography.
   metadata:
     api: cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey.public_key()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey.public_key(...)
   - pattern: $VAR = cryptography.hazmat.primitives.asymmetric.rsa.RSAPrivateKey.public_key
@@ -88,13 +98,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-cryptography-hazmat-primitives-asymmetric-rsa-RSAPublicKey-encrypt
+- id: sso.python.cryptography.cryptography.0006.no-cryptography-hazmat-primitives-asymmetric-rsa-RSAPublicKey-encrypt
   languages:
   - python
   message: Avoid using cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey.encrypt(), as it can lead to potential issues with cryptography.
   metadata:
     api: cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey.encrypt()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
   pattern-either:
   - pattern: cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey.encrypt(...)
   - pattern: $VAR = cryptography.hazmat.primitives.asymmetric.rsa.RSAPublicKey.encrypt
@@ -111,13 +123,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-cryptography-hazmat-primitives-asymmetric-rsa-generate_private_key
+- id: sso.python.cryptography.cryptography.0007.no-cryptography-hazmat-primitives-asymmetric-rsa-generate_private_key
   languages:
   - python
   message: Avoid using cryptography.hazmat.primitives.asymmetric.rsa.generate_private_key(), as it can lead to potential issues with cryptography.
   metadata:
     api: cryptography.hazmat.primitives.asymmetric.rsa.generate_private_key()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: cryptography.hazmat.primitives.asymmetric.rsa.generate_private_key(...)
   - pattern: $VAR = cryptography.hazmat.primitives.asymmetric.rsa.generate_private_key

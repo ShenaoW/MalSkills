@@ -1,11 +1,13 @@
 rules:
-- id: no-OpenSSL_x__x_Cipher.decrypt
+- id: sso.ruby.cryptography.OpenSSL.0001.no-OpenSSL_x__x_Cipher.decrypt
   languages:
   - ruby
   message: Avoid using OpenSSL::Cipher.decrypt(), as it can lead to potential issues with cryptography.
   metadata:
     api: OpenSSL::Cipher.decrypt()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
   pattern-either:
   - pattern: OpenSSL::Cipher.decrypt(...)
   - pattern: $VAR = OpenSSL::Cipher.decrypt
@@ -14,13 +16,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-OpenSSL_x__x_Cipher.encrypt
+- id: sso.ruby.cryptography.OpenSSL.0002.no-OpenSSL_x__x_Cipher.encrypt
   languages:
   - ruby
   message: Avoid using OpenSSL::Cipher.encrypt(), as it can lead to potential issues with cryptography.
   metadata:
     api: OpenSSL::Cipher.encrypt()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
   pattern-either:
   - pattern: OpenSSL::Cipher.encrypt(...)
   - pattern: $VAR = OpenSSL::Cipher.encrypt
@@ -29,13 +33,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-OpenSSL_x__x_Cipher.new
+- id: sso.ruby.cryptography.OpenSSL.0003.no-OpenSSL_x__x_Cipher.new
   languages:
   - ruby
   message: Avoid using OpenSSL::Cipher.new(), as it can lead to potential issues with cryptography.
   metadata:
     api: OpenSSL::Cipher.new()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
   pattern-either:
   - pattern: OpenSSL::Cipher.new(...)
   - pattern: $VAR = OpenSSL::Cipher.new
@@ -44,13 +50,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-OpenSSL_x__x_Digest.digest
+- id: sso.ruby.cryptography.OpenSSL.0004.no-OpenSSL_x__x_Digest.digest
   languages:
   - ruby
   message: Avoid using OpenSSL::Digest.digest(), as it can lead to potential issues with cryptography.
   metadata:
     api: OpenSSL::Digest.digest()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: OpenSSL::Digest.digest(...)
   - pattern: $VAR = OpenSSL::Digest.digest
@@ -59,13 +67,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-OpenSSL_x__x_Digest.new
+- id: sso.ruby.cryptography.OpenSSL.0005.no-OpenSSL_x__x_Digest.new
   languages:
   - ruby
   message: Avoid using OpenSSL::Digest.new(), as it can lead to potential issues with cryptography.
   metadata:
     api: OpenSSL::Digest.new()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: OpenSSL::Digest.new(...)
   - pattern: $VAR = OpenSSL::Digest.new
@@ -74,13 +84,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-OpenSSL_x__x_HMAC.digest
+- id: sso.ruby.cryptography.OpenSSL.0006.no-OpenSSL_x__x_HMAC.digest
   languages:
   - ruby
   message: Avoid using OpenSSL::HMAC.digest(), as it can lead to potential issues with cryptography.
   metadata:
     api: OpenSSL::HMAC.digest()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: OpenSSL::HMAC.digest(...)
   - pattern: $VAR = OpenSSL::HMAC.digest
@@ -89,13 +101,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-OpenSSL_x__x_HMAC.hexdigest
+- id: sso.ruby.cryptography.OpenSSL.0007.no-OpenSSL_x__x_HMAC.hexdigest
   languages:
   - ruby
   message: Avoid using OpenSSL::HMAC.hexdigest(), as it can lead to potential issues with cryptography.
   metadata:
     api: OpenSSL::HMAC.hexdigest()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: OpenSSL::HMAC.hexdigest(...)
   - pattern: $VAR = OpenSSL::HMAC.hexdigest
@@ -104,13 +118,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-OpenSSL_x__x_HMAC.new
+- id: sso.ruby.cryptography.OpenSSL.0008.no-OpenSSL_x__x_HMAC.new
   languages:
   - ruby
   message: Avoid using OpenSSL::HMAC.new(), as it can lead to potential issues with cryptography.
   metadata:
     api: OpenSSL::HMAC.new()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: OpenSSL::HMAC.new(...)
   - pattern: $VAR = OpenSSL::HMAC.new
@@ -119,13 +135,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-OpenSSL_x__x_PKey_x__x_DSA.new
+- id: sso.ruby.cryptography.OpenSSL.0009.no-OpenSSL_x__x_PKey_x__x_DSA.new
   languages:
   - ruby
   message: Avoid using OpenSSL::PKey::DSA.new(), as it can lead to potential issues with cryptography.
   metadata:
     api: OpenSSL::PKey::DSA.new()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: OpenSSL::PKey::DSA.new(...)
   - pattern: $VAR = OpenSSL::PKey::DSA.new
@@ -136,13 +154,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-OpenSSL_x__x_PKey_x__x_RSA.new
+- id: sso.ruby.cryptography.OpenSSL.0010.no-OpenSSL_x__x_PKey_x__x_RSA.new
   languages:
   - ruby
   message: Avoid using OpenSSL::PKey::RSA.new(), as it can lead to potential issues with cryptography.
   metadata:
     api: OpenSSL::PKey::RSA.new()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: OpenSSL::PKey::RSA.new(...)
   - pattern: $VAR = OpenSSL::PKey::RSA.new
@@ -153,13 +173,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-OpenSSL_x__x_Random.random_bytes
+- id: sso.ruby.cryptography.OpenSSL.0011.no-OpenSSL_x__x_Random.random_bytes
   languages:
   - ruby
   message: Avoid using OpenSSL::Random.random_bytes(), as it can lead to potential issues with cryptography.
   metadata:
     api: OpenSSL::Random.random_bytes()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: OpenSSL::Random.random_bytes(...)
   - pattern: $VAR = OpenSSL::Random.random_bytes
@@ -168,13 +190,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-OpenSSL_x__x_Random.seed
+- id: sso.ruby.cryptography.OpenSSL.0012.no-OpenSSL_x__x_Random.seed
   languages:
   - ruby
   message: Avoid using OpenSSL::Random.seed(), as it can lead to potential issues with cryptography.
   metadata:
     api: OpenSSL::Random.seed()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: OpenSSL::Random.seed(...)
   - pattern: $VAR = OpenSSL::Random.seed

@@ -1,11 +1,13 @@
 rules:
-- id: no-java-security-KeyFactory-generatePrivate
+- id: sso.java.cryptography.java.0001.no-java-security-KeyFactory-generatePrivate
   languages:
   - java
   message: Avoid using java.security.KeyFactory.generatePrivate(), as it can lead to potential issues with cryptography.
   metadata:
     api: java.security.KeyFactory.generatePrivate()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: new java.security.KeyFactory.generatePrivate(...)
   - pattern: java.security.KeyFactory.generatePrivate(...)
@@ -19,13 +21,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-java-security-KeyFactory-generatePublic
+- id: sso.java.cryptography.java.0002.no-java-security-KeyFactory-generatePublic
   languages:
   - java
   message: Avoid using java.security.KeyFactory.generatePublic(), as it can lead to potential issues with cryptography.
   metadata:
     api: java.security.KeyFactory.generatePublic()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: new java.security.KeyFactory.generatePublic(...)
   - pattern: java.security.KeyFactory.generatePublic(...)
@@ -39,13 +43,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-java-security-KeyFactory-getInstance
+- id: sso.java.cryptography.java.0003.no-java-security-KeyFactory-getInstance
   languages:
   - java
   message: Avoid using java.security.KeyFactory.getInstance(), as it can lead to potential issues with cryptography.
   metadata:
     api: java.security.KeyFactory.getInstance()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: new java.security.KeyFactory.getInstance(...)
   - pattern: java.security.KeyFactory.getInstance(...)
@@ -59,13 +65,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-java-security-KeyPairGenerator-generateKeyPair
+- id: sso.java.cryptography.java.0004.no-java-security-KeyPairGenerator-generateKeyPair
   languages:
   - java
   message: Avoid using java.security.KeyPairGenerator.generateKeyPair(), as it can lead to potential issues with cryptography.
   metadata:
     api: java.security.KeyPairGenerator.generateKeyPair()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: new java.security.KeyPairGenerator.generateKeyPair(...)
   - pattern: java.security.KeyPairGenerator.generateKeyPair(...)
@@ -79,13 +87,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-java-security-KeyPairGenerator-getInstance
+- id: sso.java.cryptography.java.0005.no-java-security-KeyPairGenerator-getInstance
   languages:
   - java
   message: Avoid using java.security.KeyPairGenerator.getInstance(), as it can lead to potential issues with cryptography.
   metadata:
     api: java.security.KeyPairGenerator.getInstance()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: new java.security.KeyPairGenerator.getInstance(...)
   - pattern: java.security.KeyPairGenerator.getInstance(...)
@@ -99,13 +109,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-java-security-KeyPairGenerator-initialize
+- id: sso.java.cryptography.java.0006.no-java-security-KeyPairGenerator-initialize
   languages:
   - java
   message: Avoid using java.security.KeyPairGenerator.initialize(), as it can lead to potential issues with cryptography.
   metadata:
     api: java.security.KeyPairGenerator.initialize()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: new java.security.KeyPairGenerator.initialize(...)
   - pattern: java.security.KeyPairGenerator.initialize(...)
@@ -119,13 +131,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-java-security-MessageDigest-digest
+- id: sso.java.cryptography.java.0007.no-java-security-MessageDigest-digest
   languages:
   - java
   message: Avoid using java.security.MessageDigest.digest(), as it can lead to potential issues with cryptography.
   metadata:
     api: java.security.MessageDigest.digest()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: new java.security.MessageDigest.digest(...)
   - pattern: java.security.MessageDigest.digest(...)
@@ -139,13 +153,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-java-security-MessageDigest-getInstance
+- id: sso.java.cryptography.java.0008.no-java-security-MessageDigest-getInstance
   languages:
   - java
   message: Avoid using java.security.MessageDigest.getInstance(), as it can lead to potential issues with cryptography.
   metadata:
     api: java.security.MessageDigest.getInstance()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: new java.security.MessageDigest.getInstance(...)
   - pattern: java.security.MessageDigest.getInstance(...)
@@ -159,13 +175,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-java-security-SecureRandom-getInstance
+- id: sso.java.cryptography.java.0009.no-java-security-SecureRandom-getInstance
   languages:
   - java
   message: Avoid using java.security.SecureRandom.getInstance(), as it can lead to potential issues with cryptography.
   metadata:
     api: java.security.SecureRandom.getInstance()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: new java.security.SecureRandom.getInstance(...)
   - pattern: java.security.SecureRandom.getInstance(...)
@@ -179,13 +197,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-java-security-SecureRandom-nextBytes
+- id: sso.java.cryptography.java.0010.no-java-security-SecureRandom-nextBytes
   languages:
   - java
   message: Avoid using java.security.SecureRandom.nextBytes(), as it can lead to potential issues with cryptography.
   metadata:
     api: java.security.SecureRandom.nextBytes()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: new java.security.SecureRandom.nextBytes(...)
   - pattern: java.security.SecureRandom.nextBytes(...)
@@ -199,13 +219,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-java-security-SecureRandom-setSeed
+- id: sso.java.cryptography.java.0011.no-java-security-SecureRandom-setSeed
   languages:
   - java
   message: Avoid using java.security.SecureRandom.setSeed(), as it can lead to potential issues with cryptography.
   metadata:
     api: java.security.SecureRandom.setSeed()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: new java.security.SecureRandom.setSeed(...)
   - pattern: java.security.SecureRandom.setSeed(...)
@@ -219,13 +241,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-java-security-Signature-getInstance
+- id: sso.java.cryptography.java.0012.no-java-security-Signature-getInstance
   languages:
   - java
   message: Avoid using java.security.Signature.getInstance(), as it can lead to potential issues with cryptography.
   metadata:
     api: java.security.Signature.getInstance()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
   pattern-either:
   - pattern: new java.security.Signature.getInstance(...)
   - pattern: java.security.Signature.getInstance(...)
@@ -239,13 +263,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-java-security-Signature-initSign
+- id: sso.java.cryptography.java.0013.no-java-security-Signature-initSign
   languages:
   - java
   message: Avoid using java.security.Signature.initSign(), as it can lead to potential issues with cryptography.
   metadata:
     api: java.security.Signature.initSign()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
   pattern-either:
   - pattern: new java.security.Signature.initSign(...)
   - pattern: java.security.Signature.initSign(...)
@@ -259,13 +285,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-java-security-Signature-initVerify
+- id: sso.java.cryptography.java.0014.no-java-security-Signature-initVerify
   languages:
   - java
   message: Avoid using java.security.Signature.initVerify(), as it can lead to potential issues with cryptography.
   metadata:
     api: java.security.Signature.initVerify()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
   pattern-either:
   - pattern: new java.security.Signature.initVerify(...)
   - pattern: java.security.Signature.initVerify(...)
@@ -279,13 +307,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-java-security-Signature-sign
+- id: sso.java.cryptography.java.0015.no-java-security-Signature-sign
   languages:
   - java
   message: Avoid using java.security.Signature.sign(), as it can lead to potential issues with cryptography.
   metadata:
     api: java.security.Signature.sign()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
   pattern-either:
   - pattern: new java.security.Signature.sign(...)
   - pattern: java.security.Signature.sign(...)
@@ -299,13 +329,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-java-security-Signature-update
+- id: sso.java.cryptography.java.0016.no-java-security-Signature-update
   languages:
   - java
   message: Avoid using java.security.Signature.update(), as it can lead to potential issues with cryptography.
   metadata:
     api: java.security.Signature.update()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
   pattern-either:
   - pattern: new java.security.Signature.update(...)
   - pattern: java.security.Signature.update(...)
@@ -319,13 +351,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-java-security-Signature-verify
+- id: sso.java.cryptography.java.0017.no-java-security-Signature-verify
   languages:
   - java
   message: Avoid using java.security.Signature.verify(), as it can lead to potential issues with cryptography.
   metadata:
     api: java.security.Signature.verify()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
   pattern-either:
   - pattern: new java.security.Signature.verify(...)
   - pattern: java.security.Signature.verify(...)

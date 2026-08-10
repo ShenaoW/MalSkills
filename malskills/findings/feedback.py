@@ -29,17 +29,14 @@ REVIEWABLE_ARTIFACT_TYPES = {
 FEEDBACK_PROMPT_VERSION = "2026-07-27-v2"
 
 RULE_REVIEW_CATEGORY_PRIORITY = {
-    "privilege_and_identity_manipulation": 0,
-    "defense_evasion_and_anti_forensics": 0,
-    "impact_and_destruction": 0,
-    "persistence_and_startup_control": 1,
-    "lateral_movement_and_remote_execution": 1,
-    "process_and_memory_manipulation": 1,
-    "payload_execution": 2,
-    "credential_and_secret_access": 3,
-    "network_and_remote_communication": 4,
-    "file_and_data_access": 5,
-    "host_and_environment_discovery": 5,
+    "payload_execution": 0,
+    "network_access": 1,
+    "file_operation": 2,
+    "sensitive_data_access": 3,
+    "cryptography": 4,
+    "software_installation": 5,
+    "process_operation": 5,
+    "system_configuration": 5,
 }
 
 STRUCTURAL_MARKERS = (
@@ -133,17 +130,14 @@ Core principle:
 - Precision is more important than recall.
 
 Finding taxonomy:
-- payload_execution: direct_process_execution, shell_interpreter_execution, script_host_execution, dynamic_module_load, proxy_execution_or_lolbin_abuse
-- process_and_memory_manipulation: process_attach, cross_process_memory_read, cross_process_memory_write, remote_thread_or_async_execution, executable_memory_mapping, process_hollowing_or_image_replacement
-- persistence_and_startup_control: startup_or_logon_persistence, service_or_daemon_persistence, scheduled_persistence, event_triggered_persistence, boot_chain_persistence
-- privilege_and_identity_manipulation: identity_switch, privilege_adjustment, token_or_session_impersonation, group_or_acl_modification, boundary_bypass
-- credential_and_secret_access: password_or_hash_access, session_or_token_access, private_key_or_api_key_access, credential_decryption, authentication_input_capture
-- host_and_environment_discovery: system_and_hardware_discovery, identity_and_account_discovery, process_and_service_discovery, network_and_neighbor_discovery, domain_or_org_discovery, security_environment_discovery
-- file_and_data_access: file_enumeration_and_location, content_read_and_parse, bulk_copy_and_archive, config_or_metadata_modification, deletion_or_overwrite
-- network_and_remote_communication: outbound_connection, listener_and_receive, tunneling_and_forwarding, proxy_or_route_manipulation, protocol_encapsulation_or_encrypted_comm, traffic_capture_and_observation
-- lateral_movement_and_remote_execution: remote_login, remote_command_execution, remote_file_transfer, remote_management_abuse, cluster_or_cloud_node_control
-- defense_evasion_and_anti_forensics: security_tool_impairment, logging_or_audit_suppression, policy_or_access_control_weakening, artifact_cleanup_or_timestomp, object_hiding_or_visibility_evasion
-- impact_and_destruction: data_destruction, data_encryption_or_locking, recovery_impairment, availability_disruption, boot_or_low_level_destruction
+- payload_execution: system_command_execution, dynamic_code_execution, external_file_execution, unsafe_deserialization
+- network_access: connection_create, server_listen, dns_resolution, data_send, data_receive, network_configuration
+- file_operation: file_access, file_create, file_delete, file_read, file_write, file_permission_modify, link_operation, file_search
+- sensitive_data_access: system_information_access, environment_access, process_information_access, user_information_access, credential_data_access
+- cryptography: cipher_object_creation, encryption, decryption, hashing, encoding, decoding, cryptographic_operation
+- software_installation: package_installation, external_component_installation
+- process_operation: process_control, process_memory_access
+- system_configuration: system_configuration_modify
 
 Semgrep rule format requirements:
 - Output exactly one rule draft when decision is `propose_rule`.

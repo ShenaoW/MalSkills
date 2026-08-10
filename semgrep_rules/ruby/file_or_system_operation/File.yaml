@@ -1,479 +1,553 @@
 rules:
-- id: no-File.absolute_path
+- id: sso.ruby.file_or_system_operation.File.0001.no-File.absolute_path
   languages:
   - ruby
   message: Avoid using File.absolute_path(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.absolute_path()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: File.absolute_path(...)
   - pattern: $VAR = File.absolute_path
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.atime
+- id: sso.ruby.file_or_system_operation.File.0002.no-File.atime
   languages:
   - ruby
   message: Avoid using File.atime(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.atime()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: File.atime(...)
   - pattern: $VAR = File.atime
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.basename
+- id: sso.ruby.file_or_system_operation.File.0003.no-File.basename
   languages:
   - ruby
   message: Avoid using File.basename(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.basename()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: File.basename(...)
   - pattern: $VAR = File.basename
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.binread
+- id: sso.ruby.file_or_system_operation.File.0004.no-File.binread
   languages:
   - ruby
   message: Avoid using File.binread(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.binread()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: File.binread(...)
   - pattern: $VAR = File.binread
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.binwrite
+- id: sso.ruby.file_or_system_operation.File.0005.no-File.binwrite
   languages:
   - ruby
   message: Avoid using File.binwrite(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.binwrite()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: File.binwrite(...)
   - pattern: $VAR = File.binwrite
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.chmod
+- id: sso.ruby.file_or_system_operation.File.0006.no-File.chmod
   languages:
   - ruby
   message: Avoid using File.chmod(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.chmod()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
   pattern-either:
   - pattern: File.chmod(...)
   - pattern: $VAR = File.chmod
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.chown
+- id: sso.ruby.file_or_system_operation.File.0007.no-File.chown
   languages:
   - ruby
   message: Avoid using File.chown(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.chown()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
   pattern-either:
   - pattern: File.chown(...)
   - pattern: $VAR = File.chown
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.ctime
+- id: sso.ruby.file_or_system_operation.File.0008.no-File.ctime
   languages:
   - ruby
   message: Avoid using File.ctime(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.ctime()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: File.ctime(...)
   - pattern: $VAR = File.ctime
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.delete
+- id: sso.ruby.file_or_system_operation.File.0009.no-File.delete
   languages:
   - ruby
   message: Avoid using File.delete(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.delete()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
   pattern-either:
   - pattern: File.delete(...)
   - pattern: $VAR = File.delete
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.directory_x_
+- id: sso.ruby.file_or_system_operation.File.0010.no-File.directory_x_
   languages:
   - ruby
   message: Avoid using File.directory?(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.directory?()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: File.directory?(...)
   - pattern: $VAR = File.directory?
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.dirname
+- id: sso.ruby.file_or_system_operation.File.0011.no-File.dirname
   languages:
   - ruby
   message: Avoid using File.dirname(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.dirname()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: File.dirname(...)
   - pattern: $VAR = File.dirname
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.exist_x_
+- id: sso.ruby.file_or_system_operation.File.0012.no-File.exist_x_
   languages:
   - ruby
   message: Avoid using File.exist?(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.exist?()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: File.exist?(...)
   - pattern: $VAR = File.exist?
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.expand_path
+- id: sso.ruby.file_or_system_operation.File.0013.no-File.expand_path
   languages:
   - ruby
   message: Avoid using File.expand_path(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.expand_path()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: File.expand_path(...)
   - pattern: $VAR = File.expand_path
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.extname
+- id: sso.ruby.file_or_system_operation.File.0014.no-File.extname
   languages:
   - ruby
   message: Avoid using File.extname(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.extname()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: File.extname(...)
   - pattern: $VAR = File.extname
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.file_x_
+- id: sso.ruby.file_or_system_operation.File.0015.no-File.file_x_
   languages:
   - ruby
   message: Avoid using File.file?(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.file?()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: File.file?(...)
   - pattern: $VAR = File.file?
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.foreach
+- id: sso.ruby.file_or_system_operation.File.0016.no-File.foreach
   languages:
   - ruby
   message: Avoid using File.foreach(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.foreach()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: File.foreach(...)
   - pattern: $VAR = File.foreach
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.identical_x_
+- id: sso.ruby.file_or_system_operation.File.0017.no-File.identical_x_
   languages:
   - ruby
   message: Avoid using File.identical?(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.identical?()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: File.identical?(...)
   - pattern: $VAR = File.identical?
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.join
+- id: sso.ruby.file_or_system_operation.File.0018.no-File.join
   languages:
   - ruby
   message: Avoid using File.join(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.join()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: File.join(...)
   - pattern: $VAR = File.join
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.link
+- id: sso.ruby.file_or_system_operation.File.0019.no-File.link
   languages:
   - ruby
   message: Avoid using File.link(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.link()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: link_operation
   pattern-either:
   - pattern: File.link(...)
   - pattern: $VAR = File.link
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.lstat
+- id: sso.ruby.file_or_system_operation.File.0020.no-File.lstat
   languages:
   - ruby
   message: Avoid using File.lstat(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.lstat()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: File.lstat(...)
   - pattern: $VAR = File.lstat
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.mtime
+- id: sso.ruby.file_or_system_operation.File.0021.no-File.mtime
   languages:
   - ruby
   message: Avoid using File.mtime(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.mtime()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: File.mtime(...)
   - pattern: $VAR = File.mtime
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.open
+- id: sso.ruby.file_or_system_operation.File.0022.no-File.open
   languages:
   - ruby
   message: Avoid using File.open(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.open()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: File.open(...)
   - pattern: $VAR = File.open
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.path
+- id: sso.ruby.file_or_system_operation.File.0023.no-File.path
   languages:
   - ruby
   message: Avoid using File.path(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.path()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: File.path(...)
   - pattern: $VAR = File.path
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.pipe_x_
+- id: sso.ruby.file_or_system_operation.File.0024.no-File.pipe_x_
   languages:
   - ruby
   message: Avoid using File.pipe?(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.pipe?()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: File.pipe?(...)
   - pattern: $VAR = File.pipe?
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.read
+- id: sso.ruby.file_or_system_operation.File.0025.no-File.read
   languages:
   - ruby
   message: Avoid using File.read(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.read()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: File.read(...)
   - pattern: $VAR = File.read
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.readlines
+- id: sso.ruby.file_or_system_operation.File.0026.no-File.readlines
   languages:
   - ruby
   message: Avoid using File.readlines(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.readlines()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: File.readlines(...)
   - pattern: $VAR = File.readlines
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.rename
+- id: sso.ruby.file_or_system_operation.File.0027.no-File.rename
   languages:
   - ruby
   message: Avoid using File.rename(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.rename()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: File.rename(...)
   - pattern: $VAR = File.rename
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.size
+- id: sso.ruby.file_or_system_operation.File.0028.no-File.size
   languages:
   - ruby
   message: Avoid using File.size(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.size()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: File.size(...)
   - pattern: $VAR = File.size
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.split
+- id: sso.ruby.file_or_system_operation.File.0029.no-File.split
   languages:
   - ruby
   message: Avoid using File.split(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.split()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: File.split(...)
   - pattern: $VAR = File.split
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.stat
+- id: sso.ruby.file_or_system_operation.File.0030.no-File.stat
   languages:
   - ruby
   message: Avoid using File.stat(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.stat()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: File.stat(...)
   - pattern: $VAR = File.stat
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.symlink
+- id: sso.ruby.file_or_system_operation.File.0031.no-File.symlink
   languages:
   - ruby
   message: Avoid using File.symlink(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.symlink()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: link_operation
   pattern-either:
   - pattern: File.symlink(...)
   - pattern: $VAR = File.symlink
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.symlink_x_
+- id: sso.ruby.file_or_system_operation.File.0032.no-File.symlink_x_
   languages:
   - ruby
   message: Avoid using File.symlink?(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.symlink?()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: link_operation
   pattern-either:
   - pattern: File.symlink?(...)
   - pattern: $VAR = File.symlink?
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.truncate
+- id: sso.ruby.file_or_system_operation.File.0033.no-File.truncate
   languages:
   - ruby
   message: Avoid using File.truncate(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.truncate()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
   pattern-either:
   - pattern: File.truncate(...)
   - pattern: $VAR = File.truncate
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.unlink
+- id: sso.ruby.file_or_system_operation.File.0034.no-File.unlink
   languages:
   - ruby
   message: Avoid using File.unlink(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.unlink()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: link_operation
   pattern-either:
   - pattern: File.unlink(...)
   - pattern: $VAR = File.unlink
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.utime
+- id: sso.ruby.file_or_system_operation.File.0035.no-File.utime
   languages:
   - ruby
   message: Avoid using File.utime(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.utime()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: File.utime(...)
   - pattern: $VAR = File.utime
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.write
+- id: sso.ruby.file_or_system_operation.File.0036.no-File.write
   languages:
   - ruby
   message: Avoid using File.write(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.write()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: File.write(...)
   - pattern: $VAR = File.write
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-File.zero_x_
+- id: sso.ruby.file_or_system_operation.File.0037.no-File.zero_x_
   languages:
   - ruby
   message: Avoid using File.zero?(), as it can lead to potential issues with file or system operation.
   metadata:
     api: File.zero?()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: File.zero?(...)
   - pattern: $VAR = File.zero?

@@ -1,0 +1,16 @@
+rules:
+  - id: sso.python.sensitive_data.getpass.0001.no-getpass-getuser
+    languages:
+      - python
+    message: Detect access to the current user identity.
+    metadata:
+      api: getpass.getuser()
+      category: Sensitive Data
+      malskills_sso_category: sensitive_data_access
+      malskills_subtype: user_information_access
+    pattern-either:
+      - pattern: getpass.getuser()
+      - pattern: $VAR = getpass.getuser
+    severity: WARNING
+    tags:
+      - Sensitive Data

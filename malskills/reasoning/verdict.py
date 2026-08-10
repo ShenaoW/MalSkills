@@ -4,15 +4,15 @@ from ..models import PatternMatch, SkillVerdict
 
 
 HIGH_SEVERITY = {
-    "Execution_and_Delivery",
+    "Data_Exfiltration",
+    "Credential_Theft",
+    "Remote_Code_Execution",
+    "Malware_Delivery",
     "Persistence",
-    "Privilege_Escalation_and_Identity_Abuse",
-    "Injection_and_Covert_Residency",
-    "Information_Theft",
-    "Command_and_Control",
-    "Lateral_Movement",
-    "Defense_Evasion_and_Anti_Forensics",
-    "Destruction_and_Ransomware",
+    "Reverse_Shell",
+    "Ransomware",
+    "Resource_Abuse",
+    "Privilege_Escalation",
 }
 MEDIUM_SEVERITY = set()
 
@@ -48,10 +48,8 @@ class PatternVerdictBuilder:
         malicious_patterns = all_high_patterns or all_medium_patterns
         if malicious_patterns:
             label = "malicious"
-            score = round(min(0.99, 0.7 + 0.08 * len(malicious_patterns)), 2)
         else:
             label = "benign"
-            score = 0.1
         decision_chain = [
             {
                 "stage": "reasoning_sources",
@@ -69,13 +67,11 @@ class PatternVerdictBuilder:
             {
                 "stage": "verdict",
                 "label": label,
-                "score": score,
             },
         ]
         verdict = SkillVerdict(
             skill_path=skill_path,
             label=label,
-            score=score,
             malicious_patterns=malicious_patterns,
             summary=self.summarize(label, malicious_patterns),
         )
@@ -103,7 +99,6 @@ class PatternVerdictBuilder:
                 {
                     "stage": "verdict",
                     "label": verdict.label,
-                    "score": verdict.score,
                 },
             ])
         return verdict

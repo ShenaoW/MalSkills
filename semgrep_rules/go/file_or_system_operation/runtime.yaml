@@ -1,50 +1,58 @@
 rules:
-- id: no-runtime.GOARCH
+- id: sso.go.file_or_system_operation.runtime.0001.no-runtime.GOARCH
   languages:
   - go
   message: Avoid using runtime.GOARCH(), as it can lead to potential issues with file or system operation.
   metadata:
     api: runtime.GOARCH()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: runtime.GOARCH(...)
   - pattern: $VAR = runtime.GOARCH
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-runtime.GOMAXPROCS
+- id: sso.go.file_or_system_operation.runtime.0002.no-runtime.GOMAXPROCS
   languages:
   - go
   message: Avoid using runtime.GOMAXPROCS(), as it can lead to potential issues with file or system operation.
   metadata:
     api: runtime.GOMAXPROCS()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: runtime.GOMAXPROCS(...)
   - pattern: $VAR = runtime.GOMAXPROCS
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-runtime.GOOS
+- id: sso.go.file_or_system_operation.runtime.0003.no-runtime.GOOS
   languages:
   - go
   message: Avoid using runtime.GOOS(), as it can lead to potential issues with file or system operation.
   metadata:
     api: runtime.GOOS()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: runtime.GOOS(...)
   - pattern: $VAR = runtime.GOOS
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-runtime.NumCPU
+- id: sso.go.file_or_system_operation.runtime.0004.no-runtime.NumCPU
   languages:
   - go
   message: Avoid using runtime.NumCPU(), as it can lead to potential issues with file or system operation.
   metadata:
     api: runtime.NumCPU()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: runtime.NumCPU(...)
   - pattern: $VAR = runtime.NumCPU

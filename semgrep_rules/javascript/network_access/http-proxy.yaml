@@ -1,37 +1,43 @@
 rules:
-- id: no-http-proxy-createProxy
+- id: sso.javascript.network_access.http-proxy.0001.no-http-proxy-createProxy
   languages:
   - javascript
   message: Avoid using http-proxy.createProxy(), as it can lead to potential issues with network access.
   metadata:
     api: http-proxy.createProxy()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: network_configuration
   pattern-either:
   - pattern: http-proxy.createProxy(...)
   - pattern: $VAR = http-proxy.createProxy
   severity: WARNING
   tags:
   - Network Access
-- id: no-http-proxy-createProxyServer
+- id: sso.javascript.network_access.http-proxy.0002.no-http-proxy-createProxyServer
   languages:
   - javascript
   message: Avoid using http-proxy.createProxyServer(), as it can lead to potential issues with network access.
   metadata:
     api: http-proxy.createProxyServer()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
   pattern-either:
   - pattern: http-proxy.createProxyServer(...)
   - pattern: $VAR = http-proxy.createProxyServer
   severity: WARNING
   tags:
   - Network Access
-- id: no-require-http-proxy
+- id: sso.javascript.network_access.http-proxy.0003.no-require-http-proxy
   languages:
   - javascript
   message: Avoid using require('http-proxy'), as it can lead to potential issues with network access.
   metadata:
     api: require('http-proxy')
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: network_configuration
   pattern: require('http-proxy')
   severity: WARNING
   tags:

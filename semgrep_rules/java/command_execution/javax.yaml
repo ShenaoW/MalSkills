@@ -1,11 +1,13 @@
 rules:
-- id: no-javax-script-ScriptEngine-eval
+- id: sso.java.command_execution.javax.0001.no-javax-script-ScriptEngine-eval
   languages:
   - java
   message: Avoid using javax.script.ScriptEngine.eval(), as it can lead to potential issues with command execution.
   metadata:
     api: javax.script.ScriptEngine.eval()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: new javax.script.ScriptEngine.eval(...)
   - pattern: javax.script.ScriptEngine.eval(...)
@@ -19,13 +21,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-javax-script-ScriptEngineManager-getEngineByName
+- id: sso.java.command_execution.javax.0002.no-javax-script-ScriptEngineManager-getEngineByName
   languages:
   - java
   message: Avoid using javax.script.ScriptEngineManager.getEngineByName(), as it can lead to potential issues with command execution.
   metadata:
     api: javax.script.ScriptEngineManager.getEngineByName()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: new javax.script.ScriptEngineManager.getEngineByName(...)
   - pattern: javax.script.ScriptEngineManager.getEngineByName(...)

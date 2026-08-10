@@ -19,7 +19,7 @@ from .schema import (
     sanitize_llm_attributes,
 )
 
-FINDING_PROMPT_VERSION = "2026-08-04-v6"
+FINDING_PROMPT_VERSION = "2026-08-04-neutral-sso-v3"
 
 FINDING_SYSTEM_PROMPT = """You are extracting SSO findings, not verdicts.
 
@@ -251,10 +251,10 @@ Output:
 {"records":[]}
 """
 
-SEMANTIC_SYSTEM_PROMPT = """Extract source-grounded security-sensitive operations and their operands.
+SEMANTIC_SYSTEM_PROMPT = """Extract source-grounded, behavior-neutral security-sensitive operations and their operands.
 
 Return two arrays:
-- records: concrete SSO findings using only the schema taxonomy.
+- records: atomic sensitive operations using only the schema taxonomy.
 - operand_bindings: command, endpoint, payload, module, or path values bound to a sensitive sink.
 
 Rules:
@@ -264,17 +264,18 @@ Rules:
 - Third-party execution and network wrappers are real sinks.
 - Prefer stable object identity such as a config key or symbolic variable.
 - Existing static findings may be used to resolve operands but must not be duplicated unless the model identifies a distinct grounded operation.
-- Keep capability extraction distinct from malicious interpretation. Routine administration can be sensitive without belonging to an offensive subtype.
-- A user deleting one application record, message, calendar event, or other scoped business object is not data_destruction.
-- A documented backup, restore, rollback, service restart, or temporary service stop is not availability_disruption, recovery_impairment, or data_destruction merely because it moves or deletes an application directory.
-- chmod +x on a downloaded executable is ordinary setup, not group_or_acl_modification or privilege_adjustment. Reserve those subtypes for security-boundary or authorization changes.
-- A scheduled backup, documented process-manager restart, or ordinary recurring application job is not persistence unless it establishes unauthorized or covert continued execution.
-- Downloading a file from a remote repository is outbound_connection, not remote_file_transfer or lateral movement. Reserve remote_file_transfer for movement to or between remotely controlled hosts.
-- curl and wget are network sinks, not direct_process_execution. Emit an execution finding only when the text also launches an interpreter, script, or downloaded executable.
-- Explicit instructions to run, open, or launch a downloaded executable are direct_process_execution and must not be omitted when the executable name is grounded in the text.
-- Removing a stale application cache or local index is not artifact_cleanup_or_timestomp. Reserve anti-forensic cleanup for logs, audit records, execution traces, security evidence, or malicious artifacts.
-- Running a local security audit, inventory, status, or diagnostic command is not remote_management_abuse. That subtype requires control of a distinct remote host, session, or managed node.
-- git reset, git clean, and ordinary repository rollback affect source state; they are not recovery_impairment. Reserve recovery_impairment for disabling or deleting system backups, snapshots, recovery services, or boot recovery facilities.
+- Never emit malicious-behavior labels such as persistence, lateral movement, command and control, defense evasion, information theft, or ransomware.
+- Decompose compound statements into atomic operations. A download piped to a shell is data_receive plus system_command_execution; base64 decoding is a separate decoding operation.
+- Select data_send/data_receive only when the API or syntax establishes direction. Use connection_create for direction-ambiguous network APIs.
+- Select file_read/file_write/file_create/file_delete only when the operation establishes that effect. Use file_access for direction-ambiguous open or handle acquisition.
+- Environment, process, user, and system information access are sensitive facts but do not imply malicious intent.
+- Encoding, decoding, encryption, hashing, and package installation are neutral transformations or effects, not malicious conclusions.
+- Treat explicit archive extraction or decompression as a separate decoding operation with operation_class=archive_extraction. Do not merge it into a following execution operation.
+- For archive_extraction, emit one input binding for the archive and one output binding for each explicitly named extracted artifact. Reuse the exact object kind and identity_key used by the producing download and consuming execution bindings. Do not derive an output member from a similar filename or archive basename.
+- Explicit instructions to run, open, or launch a file are external_file_execution when the file operand is grounded.
+- Shell interpreters and process-spawn APIs are system_command_execution; eval/exec/script engines are dynamic_code_execution.
+- Emit operand bindings for each grounded sink operand, not only for URLs. For data_receive, bind the endpoint and also the returned or downloaded payload when the payload has a stable name. For external_file_execution, bind the executed path or named payload.
+- Resolve explicit local coreference such as "download X and run it" or "run the executable" within the same sentence or enumerated step by reusing one payload identity_key. Do not infer identity from line proximity, similar names, or separate prose sections.
 - Follow the structured schema exactly and return no explanatory text.
 """
 
@@ -288,6 +289,18 @@ SEMANTIC_OBJECT_KINDS = (
     "module",
     "unknown",
     "unresolved",
+)
+OPERAND_ROLES = (
+    "command",
+    "interpreter",
+    "endpoint",
+    "payload",
+    "path",
+    "credential",
+    "module",
+    "target",
+    "input",
+    "output",
 )
 
 
@@ -556,6 +569,11 @@ class LlmSSOFindingExtractor:
                             "model": self.runtime.model,
                             "analysis_stage": "sso_extraction",
                             "analysis_component": "llm_finding",
+                            **(
+                                {"operation_class": attrs["operation_class"]}
+                                if attrs.get("operation_class")
+                                else {}
+                            ),
                         },
                         provenance={
                             "artifact": {"id": artifact.artifact_id, "path": artifact.relative_path},
@@ -615,6 +633,11 @@ class LlmSSOFindingExtractor:
                             "model": self.runtime.model,
                             "analysis_stage": "sso_extraction",
                             "analysis_component": "llm_finding_batch",
+                            **(
+                                {"operation_class": attrs["operation_class"]}
+                                if attrs.get("operation_class")
+                                else {}
+                            ),
                         },
                         provenance={
                             "artifact": {"id": artifact.artifact_id, "path": artifact.relative_path},
@@ -652,7 +675,12 @@ class LlmSSOFindingExtractor:
             role = str(attributes.get("parameter_role", "")).strip()
             value = str(record.get("value", "")).strip()
             object_kind = str(descriptor.get("kind", "unknown")).strip() or "unknown"
-            if subtype not in SSO_SUBTYPES or not role or not value or object_kind not in SEMANTIC_OBJECT_KINDS:
+            if (
+                subtype not in SSO_SUBTYPES
+                or not role
+                or not value
+                or object_kind not in SEMANTIC_OBJECT_KINDS
+            ):
                 continue
             try:
                 confidence = min(max(float(record.get("confidence", 0.72)), 0.0), 1.0)
@@ -687,6 +715,7 @@ class LlmSSOFindingExtractor:
         return (
             "Analyze this artifact once. Extract new SSO findings and resolve operands for existing or new sensitive sinks.\n"
             f"Operand bindings enabled: {str(include_operand_bindings).lower()}. Return an empty operand_bindings array when disabled.\n"
+            f"Operand parameter_role must be one of: {', '.join(OPERAND_ROLES)}.\n"
             f"Existing static findings: {self._existing_findings_json(existing_findings or [])}\n\n"
             f"Artifact path: {artifact.relative_path}\n"
             f"Artifact type: {artifact.artifact_type}\n"
@@ -803,8 +832,12 @@ def _finding_schema() -> dict[str, object]:
                             "type": "object",
                             "properties": {
                                 "matched_text": {"type": "string"},
+                                "operation_class": {
+                                    "type": "string",
+                                    "enum": ["", "archive_extraction"],
+                                },
                             },
-                            "required": ["matched_text"],
+                            "required": ["matched_text", "operation_class"],
                             "additionalProperties": False,
                         },
                     },
@@ -844,7 +877,7 @@ def _semantic_schema(*, batch: bool) -> dict[str, object]:
                     "properties": {
                         "sink_api": {"type": "string"},
                         "sink_subtype": {"type": "string", "enum": sorted(SSO_SUBTYPES)},
-                        "parameter_role": {"type": "string"},
+                        "parameter_role": {"type": "string", "enum": list(OPERAND_ROLES)},
                     },
                     "required": ["sink_api", "sink_subtype", "parameter_role"],
                     "additionalProperties": False,

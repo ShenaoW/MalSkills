@@ -1,11 +1,13 @@
 rules:
-- id: no-eval
+- id: sso.typescript.command_execution.others.0001.no-eval
   languages:
   - typescript
   message: Avoid using eval(), as it can lead to potential issues with command execution.
   metadata:
     api: eval()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: eval(...)
   - pattern: $VAR = eval

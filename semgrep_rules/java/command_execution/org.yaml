@@ -1,11 +1,13 @@
 rules:
-- id: no-org-apache-commons-exec-CommandLine-parse
+- id: sso.java.command_execution.org.0001.no-org-apache-commons-exec-CommandLine-parse
   languages:
   - java
   message: Avoid using org.apache.commons.exec.CommandLine.parse(), as it can lead to potential issues with command execution.
   metadata:
     api: org.apache.commons.exec.CommandLine.parse()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: new org.apache.commons.exec.CommandLine.parse(...)
   - pattern: org.apache.commons.exec.CommandLine.parse(...)
@@ -25,13 +27,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-org-apache-commons-exec-DefaultExecutor-execute
+- id: sso.java.command_execution.org.0002.no-org-apache-commons-exec-DefaultExecutor-execute
   languages:
   - java
   message: Avoid using org.apache.commons.exec.DefaultExecutor.execute(), as it can lead to potential issues with command execution.
   metadata:
     api: org.apache.commons.exec.DefaultExecutor.execute()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: new org.apache.commons.exec.DefaultExecutor.execute(...)
   - pattern: org.apache.commons.exec.DefaultExecutor.execute(...)
@@ -54,13 +58,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-org-apache-commons-exec-Executor-execute
+- id: sso.java.command_execution.org.0003.no-org-apache-commons-exec-Executor-execute
   languages:
   - java
   message: Avoid using org.apache.commons.exec.Executor.execute(), as it can lead to potential issues with command execution.
   metadata:
     api: org.apache.commons.exec.Executor.execute()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: new org.apache.commons.exec.Executor.execute(...)
   - pattern: org.apache.commons.exec.Executor.execute(...)
@@ -83,13 +89,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-org-codehaus-groovy-runtime-ProcessGroovyMethods-execute
+- id: sso.java.command_execution.org.0004.no-org-codehaus-groovy-runtime-ProcessGroovyMethods-execute
   languages:
   - java
   message: Avoid using org.codehaus.groovy.runtime.ProcessGroovyMethods.execute(), as it can lead to potential issues with command execution.
   metadata:
     api: org.codehaus.groovy.runtime.ProcessGroovyMethods.execute()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: new org.codehaus.groovy.runtime.ProcessGroovyMethods.execute(...)
   - pattern: org.codehaus.groovy.runtime.ProcessGroovyMethods.execute(...)

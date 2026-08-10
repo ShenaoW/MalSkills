@@ -1,11 +1,13 @@
 rules:
-- id: no-Crypto-Cipher-AES-new
+- id: sso.python.cryptography.Crypto.0001.no-Crypto-Cipher-AES-new
   languages:
   - python
   message: Avoid using Crypto.Cipher.AES.new(), as it can lead to potential issues with cryptography.
   metadata:
     api: Crypto.Cipher.AES.new()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
   pattern-either:
   - pattern: Crypto.Cipher.AES.new(...)
   - pattern: $VAR = Crypto.Cipher.AES.new
@@ -16,13 +18,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-Crypto-Cipher-DES-new
+- id: sso.python.cryptography.Crypto.0002.no-Crypto-Cipher-DES-new
   languages:
   - python
   message: Avoid using Crypto.Cipher.DES.new(), as it can lead to potential issues with cryptography.
   metadata:
     api: Crypto.Cipher.DES.new()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
   pattern-either:
   - pattern: Crypto.Cipher.DES.new(...)
   - pattern: $VAR = Crypto.Cipher.DES.new
@@ -33,13 +37,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-Crypto-PublicKey-RSA-generate
+- id: sso.python.cryptography.Crypto.0003.no-Crypto-PublicKey-RSA-generate
   languages:
   - python
   message: Avoid using Crypto.PublicKey.RSA.generate(), as it can lead to potential issues with cryptography.
   metadata:
     api: Crypto.PublicKey.RSA.generate()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: Crypto.PublicKey.RSA.generate(...)
   - pattern: $VAR = Crypto.PublicKey.RSA.generate
@@ -50,13 +56,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-Crypto-PublicKey-RSA-import_key
+- id: sso.python.cryptography.Crypto.0004.no-Crypto-PublicKey-RSA-import_key
   languages:
   - python
   message: Avoid using Crypto.PublicKey.RSA.import_key(), as it can lead to potential issues with cryptography.
   metadata:
     api: Crypto.PublicKey.RSA.import_key()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: Crypto.PublicKey.RSA.import_key(...)
   - pattern: $VAR = Crypto.PublicKey.RSA.import_key

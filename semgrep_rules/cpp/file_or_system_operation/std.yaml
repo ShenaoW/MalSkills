@@ -1,11 +1,13 @@
 rules:
-- id: no-std-filesystem-copy
+- id: sso.cpp.file_or_system_operation.std.0001.no-std-filesystem-copy
   languages:
   - cpp
   message: Avoid using std::filesystem::copy(), as it can lead to potential issues with file or system operation.
   metadata:
     api: std::filesystem::copy()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: std::filesystem::copy(...)
   - pattern: $VAR = std::filesystem::copy
@@ -14,13 +16,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-std-filesystem-create_directory
+- id: sso.cpp.file_or_system_operation.std.0002.no-std-filesystem-create_directory
   languages:
   - cpp
   message: Avoid using std::filesystem::create_directory(), as it can lead to potential issues with file or system operation.
   metadata:
     api: std::filesystem::create_directory()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
   pattern-either:
   - pattern: std::filesystem::create_directory(...)
   - pattern: $VAR = std::filesystem::create_directory
@@ -29,13 +33,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-std-filesystem-current_path
+- id: sso.cpp.file_or_system_operation.std.0003.no-std-filesystem-current_path
   languages:
   - cpp
   message: Avoid using std::filesystem::current_path(), as it can lead to potential issues with file or system operation.
   metadata:
     api: std::filesystem::current_path()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: std::filesystem::current_path(...)
   - pattern: $VAR = std::filesystem::current_path
@@ -44,13 +50,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-std-filesystem-exists
+- id: sso.cpp.file_or_system_operation.std.0004.no-std-filesystem-exists
   languages:
   - cpp
   message: Avoid using std::filesystem::exists(), as it can lead to potential issues with file or system operation.
   metadata:
     api: std::filesystem::exists()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: std::filesystem::exists(...)
   - pattern: $VAR = std::filesystem::exists
@@ -59,13 +67,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-std-filesystem-file_size
+- id: sso.cpp.file_or_system_operation.std.0005.no-std-filesystem-file_size
   languages:
   - cpp
   message: Avoid using std::filesystem::file_size(), as it can lead to potential issues with file or system operation.
   metadata:
     api: std::filesystem::file_size()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: std::filesystem::file_size(...)
   - pattern: $VAR = std::filesystem::file_size
@@ -74,13 +84,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-std-filesystem-is_directory
+- id: sso.cpp.file_or_system_operation.std.0006.no-std-filesystem-is_directory
   languages:
   - cpp
   message: Avoid using std::filesystem::is_directory(), as it can lead to potential issues with file or system operation.
   metadata:
     api: std::filesystem::is_directory()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: std::filesystem::is_directory(...)
   - pattern: $VAR = std::filesystem::is_directory
@@ -89,13 +101,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-std-filesystem-is_regular_file
+- id: sso.cpp.file_or_system_operation.std.0007.no-std-filesystem-is_regular_file
   languages:
   - cpp
   message: Avoid using std::filesystem::is_regular_file(), as it can lead to potential issues with file or system operation.
   metadata:
     api: std::filesystem::is_regular_file()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: std::filesystem::is_regular_file(...)
   - pattern: $VAR = std::filesystem::is_regular_file
@@ -104,13 +118,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-std-filesystem-permissions
+- id: sso.cpp.file_or_system_operation.std.0008.no-std-filesystem-permissions
   languages:
   - cpp
   message: Avoid using std::filesystem::permissions(), as it can lead to potential issues with file or system operation.
   metadata:
     api: std::filesystem::permissions()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
   pattern-either:
   - pattern: std::filesystem::permissions(...)
   - pattern: $VAR = std::filesystem::permissions
@@ -119,13 +135,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-std-filesystem-remove
+- id: sso.cpp.file_or_system_operation.std.0009.no-std-filesystem-remove
   languages:
   - cpp
   message: Avoid using std::filesystem::remove(), as it can lead to potential issues with file or system operation.
   metadata:
     api: std::filesystem::remove()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
   pattern-either:
   - pattern: std::filesystem::remove(...)
   - pattern: $VAR = std::filesystem::remove
@@ -134,13 +152,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-std-filesystem-remove_all
+- id: sso.cpp.file_or_system_operation.std.0010.no-std-filesystem-remove_all
   languages:
   - cpp
   message: Avoid using std::filesystem::remove_all(), as it can lead to potential issues with file or system operation.
   metadata:
     api: std::filesystem::remove_all()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
   pattern-either:
   - pattern: std::filesystem::remove_all(...)
   - pattern: $VAR = std::filesystem::remove_all
@@ -149,13 +169,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-std-filesystem-rename
+- id: sso.cpp.file_or_system_operation.std.0011.no-std-filesystem-rename
   languages:
   - cpp
   message: Avoid using std::filesystem::rename(), as it can lead to potential issues with file or system operation.
   metadata:
     api: std::filesystem::rename()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: std::filesystem::rename(...)
   - pattern: $VAR = std::filesystem::rename
@@ -164,13 +186,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-std-filesystem-temp_directory_path
+- id: sso.cpp.file_or_system_operation.std.0012.no-std-filesystem-temp_directory_path
   languages:
   - cpp
   message: Avoid using std::filesystem::temp_directory_path(), as it can lead to potential issues with file or system operation.
   metadata:
     api: std::filesystem::temp_directory_path()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: std::filesystem::temp_directory_path(...)
   - pattern: $VAR = std::filesystem::temp_directory_path

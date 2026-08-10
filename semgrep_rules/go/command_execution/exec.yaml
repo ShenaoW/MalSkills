@@ -1,24 +1,28 @@
 rules:
-- id: no-exec.Command
+- id: sso.go.command_execution.exec.0001.no-exec.Command
   languages:
   - go
   message: Avoid using exec.Command(), as it can lead to potential issues with command execution.
   metadata:
     api: exec.Command()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: exec.Command(...)
   - pattern: $VAR = exec.Command
   severity: WARNING
   tags:
   - Command Execution
-- id: no-exec.CommandContext
+- id: sso.go.command_execution.exec.0002.no-exec.CommandContext
   languages:
   - go
   message: Avoid using exec.CommandContext(), as it can lead to potential issues with command execution.
   metadata:
     api: exec.CommandContext()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: exec.CommandContext(...)
   - pattern: $VAR = exec.CommandContext

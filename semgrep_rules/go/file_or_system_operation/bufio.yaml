@@ -1,50 +1,58 @@
 rules:
-- id: no-bufio.NewReader
+- id: sso.go.file_or_system_operation.bufio.0001.no-bufio.NewReader
   languages:
   - go
   message: Avoid using bufio.NewReader(), as it can lead to potential issues with file or system operation.
   metadata:
     api: bufio.NewReader()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: bufio.NewReader(...)
   - pattern: $VAR = bufio.NewReader
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-bufio.NewScanner
+- id: sso.go.file_or_system_operation.bufio.0002.no-bufio.NewScanner
   languages:
   - go
   message: Avoid using bufio.NewScanner(), as it can lead to potential issues with file or system operation.
   metadata:
     api: bufio.NewScanner()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: bufio.NewScanner(...)
   - pattern: $VAR = bufio.NewScanner
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-bufio.NewWriter
+- id: sso.go.file_or_system_operation.bufio.0003.no-bufio.NewWriter
   languages:
   - go
   message: Avoid using bufio.NewWriter(), as it can lead to potential issues with file or system operation.
   metadata:
     api: bufio.NewWriter()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: bufio.NewWriter(...)
   - pattern: $VAR = bufio.NewWriter
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-bufio.Reader.ReadString
+- id: sso.go.file_or_system_operation.bufio.0004.no-bufio.Reader.ReadString
   languages:
   - go
   message: Avoid using bufio.Reader.ReadString(), as it can lead to potential issues with file or system operation.
   metadata:
     api: bufio.Reader.ReadString()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: bufio.Reader.ReadString(...)
   - pattern: $VAR = bufio.Reader.ReadString
@@ -53,13 +61,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-bufio.Scanner.Scan
+- id: sso.go.file_or_system_operation.bufio.0005.no-bufio.Scanner.Scan
   languages:
   - go
   message: Avoid using bufio.Scanner.Scan(), as it can lead to potential issues with file or system operation.
   metadata:
     api: bufio.Scanner.Scan()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: bufio.Scanner.Scan(...)
   - pattern: $VAR = bufio.Scanner.Scan
@@ -68,13 +78,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-bufio.Writer.WriteString
+- id: sso.go.file_or_system_operation.bufio.0006.no-bufio.Writer.WriteString
   languages:
   - go
   message: Avoid using bufio.Writer.WriteString(), as it can lead to potential issues with file or system operation.
   metadata:
     api: bufio.Writer.WriteString()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: bufio.Writer.WriteString(...)
   - pattern: $VAR = bufio.Writer.WriteString

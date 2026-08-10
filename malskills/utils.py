@@ -74,10 +74,28 @@ def iter_code_fences(text: str) -> Iterable[tuple[str, str, int, int]]:
     pattern = re.compile(r"```([A-Za-z0-9_+-]*)\r?\n(.*?)```", re.DOTALL)
     for match in pattern.finditer(text):
         language = match.group(1).strip().lower()
-        body = match.group(2)
+        body = _normalize_quoted_fence_body(text, match.start(), match.group(2))
         start_line = text.count("\n", 0, match.start()) + 1
         end_line = start_line + body.count("\n") + 1
         yield language, body, start_line, end_line
+
+
+def _normalize_quoted_fence_body(text: str, fence_start: int, body: str) -> str:
+    """Remove Markdown blockquote markers that wrap a complete code fence."""
+    line_start = text.rfind("\n", 0, fence_start) + 1
+    prefix = text[line_start:fence_start]
+    quote_match = re.fullmatch(r"[ \t]*(?P<quotes>(?:>[ \t]*)+)", prefix)
+    if quote_match is None:
+        return body
+    quote_depth = quote_match.group("quotes").count(">")
+    quoted_line = re.compile(rf"^[ \t]*(?:>[ \t]*){{{quote_depth}}}")
+    normalized: list[str] = []
+    for line in body.splitlines(keepends=True):
+        content = line.rstrip("\r\n")
+        ending = line[len(content) :]
+        match = quoted_line.match(content)
+        normalized.append((content[match.end() :] if match else content) + ending)
+    return "".join(normalized)
 
 
 def find_urls(text: str) -> list[str]:

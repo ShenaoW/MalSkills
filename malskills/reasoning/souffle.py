@@ -42,7 +42,7 @@ class SouffleExporter:
             "pattern_support": [],
             "pattern_attr": [],
             "analysis_meta": [("reasoning_mode", reasoning_mode)],
-            "verdict": [(verdict.label, f"{verdict.score:.2f}")],
+            "verdict": [(verdict.label,)],
         }
         if runtime_sec is not None:
             facts["analysis_meta"].append(("runtime_sec", f"{runtime_sec:.4f}"))

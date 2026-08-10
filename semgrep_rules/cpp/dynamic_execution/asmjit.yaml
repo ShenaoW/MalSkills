@@ -1,11 +1,13 @@
 rules:
-- id: no-asmjit-CodeHolder-finalize
+- id: sso.cpp.dynamic_execution.asmjit.0001.no-asmjit-CodeHolder-finalize
   languages:
   - cpp
   message: Avoid using asmjit::CodeHolder::finalize(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: asmjit::CodeHolder::finalize()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: asmjit::CodeHolder::finalize(...)
   - pattern: $VAR = asmjit::CodeHolder::finalize
@@ -14,13 +16,15 @@ rules:
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-asmjit-JitRuntime-add
+- id: sso.cpp.dynamic_execution.asmjit.0002.no-asmjit-JitRuntime-add
   languages:
   - cpp
   message: Avoid using asmjit::JitRuntime::add(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: asmjit::JitRuntime::add()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: asmjit::JitRuntime::add(...)
   - pattern: $VAR = asmjit::JitRuntime::add

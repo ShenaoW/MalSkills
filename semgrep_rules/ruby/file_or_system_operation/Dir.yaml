@@ -1,180 +1,208 @@
 rules:
-- id: no-Dir.chdir
+- id: sso.ruby.file_or_system_operation.Dir.0001.no-Dir.chdir
   languages:
   - ruby
   message: Avoid using Dir.chdir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Dir.chdir()
     category: File or System Operation
+    malskills_sso_category: system_configuration
+    malskills_subtype: system_configuration_modify
   pattern-either:
   - pattern: Dir.chdir(...)
   - pattern: $VAR = Dir.chdir
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Dir.children
+- id: sso.ruby.file_or_system_operation.Dir.0002.no-Dir.children
   languages:
   - ruby
   message: Avoid using Dir.children(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Dir.children()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: Dir.children(...)
   - pattern: $VAR = Dir.children
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Dir.delete
+- id: sso.ruby.file_or_system_operation.Dir.0003.no-Dir.delete
   languages:
   - ruby
   message: Avoid using Dir.delete(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Dir.delete()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
   pattern-either:
   - pattern: Dir.delete(...)
   - pattern: $VAR = Dir.delete
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Dir.empty_x_
+- id: sso.ruby.file_or_system_operation.Dir.0004.no-Dir.empty_x_
   languages:
   - ruby
   message: Avoid using Dir.empty?(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Dir.empty?()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: Dir.empty?(...)
   - pattern: $VAR = Dir.empty?
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Dir.entries
+- id: sso.ruby.file_or_system_operation.Dir.0005.no-Dir.entries
   languages:
   - ruby
   message: Avoid using Dir.entries(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Dir.entries()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: Dir.entries(...)
   - pattern: $VAR = Dir.entries
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Dir.exist_x_
+- id: sso.ruby.file_or_system_operation.Dir.0006.no-Dir.exist_x_
   languages:
   - ruby
   message: Avoid using Dir.exist?(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Dir.exist?()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: Dir.exist?(...)
   - pattern: $VAR = Dir.exist?
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Dir.foreach
+- id: sso.ruby.file_or_system_operation.Dir.0007.no-Dir.foreach
   languages:
   - ruby
   message: Avoid using Dir.foreach(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Dir.foreach()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: Dir.foreach(...)
   - pattern: $VAR = Dir.foreach
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Dir.getwd
+- id: sso.ruby.file_or_system_operation.Dir.0008.no-Dir.getwd
   languages:
   - ruby
   message: Avoid using Dir.getwd(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Dir.getwd()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: Dir.getwd(...)
   - pattern: $VAR = Dir.getwd
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Dir.glob
+- id: sso.ruby.file_or_system_operation.Dir.0009.no-Dir.glob
   languages:
   - ruby
   message: Avoid using Dir.glob(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Dir.glob()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_search
   pattern-either:
   - pattern: Dir.glob(...)
   - pattern: $VAR = Dir.glob
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Dir.mkdir
+- id: sso.ruby.file_or_system_operation.Dir.0010.no-Dir.mkdir
   languages:
   - ruby
   message: Avoid using Dir.mkdir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Dir.mkdir()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
   pattern-either:
   - pattern: Dir.mkdir(...)
   - pattern: $VAR = Dir.mkdir
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Dir.mktmpdir
+- id: sso.ruby.file_or_system_operation.Dir.0011.no-Dir.mktmpdir
   languages:
   - ruby
   message: Avoid using Dir.mktmpdir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Dir.mktmpdir()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: Dir.mktmpdir(...)
   - pattern: $VAR = Dir.mktmpdir
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Dir.new
+- id: sso.ruby.file_or_system_operation.Dir.0012.no-Dir.new
   languages:
   - ruby
   message: Avoid using Dir.new(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Dir.new()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: Dir.new(...)
   - pattern: $VAR = Dir.new
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Dir.pwd
+- id: sso.ruby.file_or_system_operation.Dir.0013.no-Dir.pwd
   languages:
   - ruby
   message: Avoid using Dir.pwd(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Dir.pwd()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: Dir.pwd(...)
   - pattern: $VAR = Dir.pwd
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Dir.rmdir
+- id: sso.ruby.file_or_system_operation.Dir.0014.no-Dir.rmdir
   languages:
   - ruby
   message: Avoid using Dir.rmdir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Dir.rmdir()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
   pattern-either:
   - pattern: Dir.rmdir(...)
   - pattern: $VAR = Dir.rmdir

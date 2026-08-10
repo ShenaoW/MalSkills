@@ -1,76 +1,88 @@
 rules:
-- id: no-https-Agent
+- id: sso.typescript.network_access.https.0001.no-https-Agent
   languages:
   - typescript
   message: Avoid using https.Agent(), as it can lead to potential issues with network access.
   metadata:
     api: https.Agent()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: https.Agent(...)
   - pattern: $VAR = https.Agent
   severity: WARNING
   tags:
   - Network Access
-- id: no-https-Server
+- id: sso.typescript.network_access.https.0002.no-https-Server
   languages:
   - typescript
   message: Avoid using https.Server(), as it can lead to potential issues with network access.
   metadata:
     api: https.Server()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
   pattern-either:
   - pattern: https.Server(...)
   - pattern: $VAR = https.Server
   severity: WARNING
   tags:
   - Network Access
-- id: no-https-createServer
+- id: sso.typescript.network_access.https.0003.no-https-createServer
   languages:
   - typescript
   message: Avoid using https.createServer(), as it can lead to potential issues with network access.
   metadata:
     api: https.createServer()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
   pattern-either:
   - pattern: https.createServer(...)
   - pattern: $VAR = https.createServer
   severity: WARNING
   tags:
   - Network Access
-- id: no-https-get
+- id: sso.typescript.network_access.https.0004.no-https-get
   languages:
   - typescript
   message: Avoid using https.get(), as it can lead to potential issues with network access.
   metadata:
     api: https.get()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: https.get(...)
   - pattern: $VAR = https.get
   severity: WARNING
   tags:
   - Network Access
-- id: no-https-request
+- id: sso.typescript.network_access.https.0005.no-https-request
   languages:
   - typescript
   message: Avoid using https.request(), as it can lead to potential issues with network access.
   metadata:
     api: https.request()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: https.request(...)
   - pattern: $VAR = https.request
   severity: WARNING
   tags:
   - Network Access
-- id: no-require-https
+- id: sso.typescript.network_access.https.0006.no-require-https
   languages:
   - typescript
   message: Avoid using require('https'), as it can lead to potential issues with network access.
   metadata:
     api: require('https')
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern: require('https')
   severity: WARNING
   tags:

@@ -4,8 +4,8 @@ rules:
     message: Shell attaches to another process
     severity: WARNING
     metadata:
-      malskills_subtype: process_attach
-      malskills_sso_category: process_and_memory_manipulation
+      malskills_subtype: process_memory_access
+      malskills_sso_category: process_operation
     pattern-regex: '(?i)\b(gdb\s+-p|lldb\s+-p|strace\s+-p|ptrace)\b'
 
   - id: shell.process_and_memory_manipulation.cross_process_memory_read
@@ -13,8 +13,8 @@ rules:
     message: Shell reads another process memory
     severity: WARNING
     metadata:
-      malskills_subtype: cross_process_memory_read
-      malskills_sso_category: process_and_memory_manipulation
+      malskills_subtype: process_memory_access
+      malskills_sso_category: process_operation
     pattern-regex: '(?i)/proc/[0-9]+/mem|gcore\b'
 
   - id: shell.process_and_memory_manipulation.cross_process_memory_write
@@ -22,7 +22,7 @@ rules:
     message: Shell writes into another process memory
     severity: WARNING
     metadata:
-      malskills_subtype: cross_process_memory_write
-      malskills_sso_category: process_and_memory_manipulation
+      malskills_subtype: process_memory_access
+      malskills_sso_category: process_operation
     pattern-regex: '(?i)(gdb\b.*set\s+\{|\bdd\b.*\/proc\/[0-9]+\/mem)'
 

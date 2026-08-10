@@ -1,11 +1,13 @@
 rules:
-- id: no-javassist-ClassPool-get
+- id: sso.java.dynamic_execution.javassist.0001.no-javassist-ClassPool-get
   languages:
   - java
   message: Avoid using javassist.ClassPool.get(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: javassist.ClassPool.get()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: new javassist.ClassPool.get(...)
   - pattern: javassist.ClassPool.get(...)
@@ -16,13 +18,15 @@ rules:
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-javassist-CtClass-toClass
+- id: sso.java.dynamic_execution.javassist.0002.no-javassist-CtClass-toClass
   languages:
   - java
   message: Avoid using javassist.CtClass.toClass(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: javassist.CtClass.toClass()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: new javassist.CtClass.toClass(...)
   - pattern: javassist.CtClass.toClass(...)
@@ -33,13 +37,15 @@ rules:
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-javassist-CtMethod-insertBefore
+- id: sso.java.dynamic_execution.javassist.0003.no-javassist-CtMethod-insertBefore
   languages:
   - java
   message: Avoid using javassist.CtMethod.insertBefore(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: javassist.CtMethod.insertBefore()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: new javassist.CtMethod.insertBefore(...)
   - pattern: javassist.CtMethod.insertBefore(...)

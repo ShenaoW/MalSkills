@@ -1,11 +1,13 @@
 rules:
-- id: no-System-AppDomain-CurrentDomain-AssemblyResolve
+- id: sso.csharp.obfuscation.System.0001.no-System-AppDomain-CurrentDomain-AssemblyResolve
   languages:
   - csharp
   message: Avoid using System.AppDomain.CurrentDomain.AssemblyResolve(), as it can lead to potential issues with obfuscation.
   metadata:
     api: System.AppDomain.CurrentDomain.AssemblyResolve()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: System.AppDomain.CurrentDomain.AssemblyResolve(...)
   - pattern: $VAR = System.AppDomain.CurrentDomain.AssemblyResolve
@@ -16,13 +18,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-System-AppDomain-DefineDynamicAssembly
+- id: sso.csharp.obfuscation.System.0002.no-System-AppDomain-DefineDynamicAssembly
   languages:
   - csharp
   message: Avoid using System.AppDomain.DefineDynamicAssembly(), as it can lead to potential issues with obfuscation.
   metadata:
     api: System.AppDomain.DefineDynamicAssembly()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: System.AppDomain.DefineDynamicAssembly(...)
   - pattern: $VAR = System.AppDomain.DefineDynamicAssembly
@@ -31,13 +35,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-System-Convert-FromBase64String
+- id: sso.csharp.obfuscation.System.0003.no-System-Convert-FromBase64String
   languages:
   - csharp
   message: Avoid using System.Convert.FromBase64String(), as it can lead to potential issues with obfuscation.
   metadata:
     api: System.Convert.FromBase64String()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: System.Convert.FromBase64String(...)
   - pattern: $VAR = System.Convert.FromBase64String
@@ -46,13 +52,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-System-Convert-ToBase64String
+- id: sso.csharp.obfuscation.System.0004.no-System-Convert-ToBase64String
   languages:
   - csharp
   message: Avoid using System.Convert.ToBase64String(), as it can lead to potential issues with obfuscation.
   metadata:
     api: System.Convert.ToBase64String()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: System.Convert.ToBase64String(...)
   - pattern: $VAR = System.Convert.ToBase64String
@@ -61,13 +69,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-System-Delegate-CreateDelegate
+- id: sso.csharp.obfuscation.System.0005.no-System-Delegate-CreateDelegate
   languages:
   - csharp
   message: Avoid using System.Delegate.CreateDelegate(), as it can lead to potential issues with obfuscation.
   metadata:
     api: System.Delegate.CreateDelegate()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: System.Delegate.CreateDelegate(...)
   - pattern: $VAR = System.Delegate.CreateDelegate
@@ -76,13 +86,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-System-Reflection-Assembly-GetType
+- id: sso.csharp.obfuscation.System.0006.no-System-Reflection-Assembly-GetType
   languages:
   - csharp
   message: Avoid using System.Reflection.Assembly.GetType(), as it can lead to potential issues with obfuscation.
   metadata:
     api: System.Reflection.Assembly.GetType()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: System.Reflection.Assembly.GetType(...)
   - pattern: $VAR = System.Reflection.Assembly.GetType
@@ -93,13 +105,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-System-Reflection-Emit-AssemblyBuilder-DefineDynamicAssembly
+- id: sso.csharp.obfuscation.System.0007.no-System-Reflection-Emit-AssemblyBuilder-DefineDynamicAssembly
   languages:
   - csharp
   message: Avoid using System.Reflection.Emit.AssemblyBuilder.DefineDynamicAssembly(), as it can lead to potential issues with obfuscation.
   metadata:
     api: System.Reflection.Emit.AssemblyBuilder.DefineDynamicAssembly()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: System.Reflection.Emit.AssemblyBuilder.DefineDynamicAssembly(...)
   - pattern: $VAR = System.Reflection.Emit.AssemblyBuilder.DefineDynamicAssembly
@@ -112,13 +126,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-System-Reflection-Emit-ILGenerator-Emit
+- id: sso.csharp.obfuscation.System.0008.no-System-Reflection-Emit-ILGenerator-Emit
   languages:
   - csharp
   message: Avoid using System.Reflection.Emit.ILGenerator.Emit(), as it can lead to potential issues with obfuscation.
   metadata:
     api: System.Reflection.Emit.ILGenerator.Emit()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: System.Reflection.Emit.ILGenerator.Emit(...)
   - pattern: $VAR = System.Reflection.Emit.ILGenerator.Emit
@@ -131,13 +147,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-System-Reflection-Emit-ModuleBuilder-DefineDynamicModule
+- id: sso.csharp.obfuscation.System.0009.no-System-Reflection-Emit-ModuleBuilder-DefineDynamicModule
   languages:
   - csharp
   message: Avoid using System.Reflection.Emit.ModuleBuilder.DefineDynamicModule(), as it can lead to potential issues with obfuscation.
   metadata:
     api: System.Reflection.Emit.ModuleBuilder.DefineDynamicModule()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: System.Reflection.Emit.ModuleBuilder.DefineDynamicModule(...)
   - pattern: $VAR = System.Reflection.Emit.ModuleBuilder.DefineDynamicModule
@@ -150,13 +168,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-System-Reflection-Emit-TypeBuilder-CreateType
+- id: sso.csharp.obfuscation.System.0010.no-System-Reflection-Emit-TypeBuilder-CreateType
   languages:
   - csharp
   message: Avoid using System.Reflection.Emit.TypeBuilder.CreateType(), as it can lead to potential issues with obfuscation.
   metadata:
     api: System.Reflection.Emit.TypeBuilder.CreateType()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: System.Reflection.Emit.TypeBuilder.CreateType(...)
   - pattern: $VAR = System.Reflection.Emit.TypeBuilder.CreateType
@@ -169,13 +189,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-System-Reflection-Emit-TypeBuilder-DefineMethod
+- id: sso.csharp.obfuscation.System.0011.no-System-Reflection-Emit-TypeBuilder-DefineMethod
   languages:
   - csharp
   message: Avoid using System.Reflection.Emit.TypeBuilder.DefineMethod(), as it can lead to potential issues with obfuscation.
   metadata:
     api: System.Reflection.Emit.TypeBuilder.DefineMethod()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: System.Reflection.Emit.TypeBuilder.DefineMethod(...)
   - pattern: $VAR = System.Reflection.Emit.TypeBuilder.DefineMethod
@@ -188,13 +210,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-System-Text-Encoding-UTF8-GetBytes
+- id: sso.csharp.obfuscation.System.0012.no-System-Text-Encoding-UTF8-GetBytes
   languages:
   - csharp
   message: Avoid using System.Text.Encoding.UTF8.GetBytes(), as it can lead to potential issues with obfuscation.
   metadata:
     api: System.Text.Encoding.UTF8.GetBytes()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: System.Text.Encoding.UTF8.GetBytes(...)
   - pattern: $VAR = System.Text.Encoding.UTF8.GetBytes
@@ -207,13 +231,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-System-Text-Encoding-UTF8-GetString
+- id: sso.csharp.obfuscation.System.0013.no-System-Text-Encoding-UTF8-GetString
   languages:
   - csharp
   message: Avoid using System.Text.Encoding.UTF8.GetString(), as it can lead to potential issues with obfuscation.
   metadata:
     api: System.Text.Encoding.UTF8.GetString()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: System.Text.Encoding.UTF8.GetString(...)
   - pattern: $VAR = System.Text.Encoding.UTF8.GetString
@@ -226,13 +252,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-System-Text-Encoding-Unicode-GetBytes
+- id: sso.csharp.obfuscation.System.0014.no-System-Text-Encoding-Unicode-GetBytes
   languages:
   - csharp
   message: Avoid using System.Text.Encoding.Unicode.GetBytes(), as it can lead to potential issues with obfuscation.
   metadata:
     api: System.Text.Encoding.Unicode.GetBytes()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: System.Text.Encoding.Unicode.GetBytes(...)
   - pattern: $VAR = System.Text.Encoding.Unicode.GetBytes
@@ -245,13 +273,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-System-Text-Encoding-Unicode-GetString
+- id: sso.csharp.obfuscation.System.0015.no-System-Text-Encoding-Unicode-GetString
   languages:
   - csharp
   message: Avoid using System.Text.Encoding.Unicode.GetString(), as it can lead to potential issues with obfuscation.
   metadata:
     api: System.Text.Encoding.Unicode.GetString()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: System.Text.Encoding.Unicode.GetString(...)
   - pattern: $VAR = System.Text.Encoding.Unicode.GetString
@@ -264,13 +294,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-System-Type-GetField
+- id: sso.csharp.obfuscation.System.0016.no-System-Type-GetField
   languages:
   - csharp
   message: Avoid using System.Type.GetField(), as it can lead to potential issues with obfuscation.
   metadata:
     api: System.Type.GetField()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: System.Type.GetField(...)
   - pattern: $VAR = System.Type.GetField

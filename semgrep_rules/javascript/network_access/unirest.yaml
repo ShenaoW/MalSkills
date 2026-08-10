@@ -1,37 +1,43 @@
 rules:
-- id: no-unirest-get
+- id: sso.javascript.network_access.unirest.0001.no-unirest-get
   languages:
   - javascript
   message: Avoid using unirest.get(), as it can lead to potential issues with network access.
   metadata:
     api: unirest.get()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: unirest.get(...)
   - pattern: $VAR = unirest.get
   severity: WARNING
   tags:
   - Network Access
-- id: no-unirest-post
+- id: sso.javascript.network_access.unirest.0002.no-unirest-post
   languages:
   - javascript
   message: Avoid using unirest.post(), as it can lead to potential issues with network access.
   metadata:
     api: unirest.post()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: unirest.post(...)
   - pattern: $VAR = unirest.post
   severity: WARNING
   tags:
   - Network Access
-- id: no-require-unirest
+- id: sso.javascript.network_access.unirest.0003.no-require-unirest
   languages:
   - javascript
   message: Avoid using require('unirest'), as it can lead to potential issues with network access.
   metadata:
     api: require('unirest')
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern: require('unirest')
   severity: WARNING
   tags:

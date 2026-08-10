@@ -11,18 +11,18 @@ from typing import Any
 from ..models import PatternMatch, SSORecord, WorkflowDiscovery
 
 WORKFLOW_SCHEMA_VERSION = "malskills-workflow-rule-v1"
-ALLOWED_RELATIONS = {"same_object", "value_flow"}
+ALLOWED_RELATIONS = {"same_object", "value_flow", "value_flow_or_same_object"}
 MAX_WORKFLOW_MATCH_STATES = 100_000
 ALLOWED_PATTERN_NAMES = {
-    "Execution_and_Delivery",
+    "Data_Exfiltration",
+    "Credential_Theft",
+    "Remote_Code_Execution",
+    "Malware_Delivery",
     "Persistence",
-    "Privilege_Escalation_and_Identity_Abuse",
-    "Injection_and_Covert_Residency",
-    "Information_Theft",
-    "Command_and_Control",
-    "Lateral_Movement",
-    "Defense_Evasion_and_Anti_Forensics",
-    "Destruction_and_Ransomware",
+    "Reverse_Shell",
+    "Ransomware",
+    "Resource_Abuse",
+    "Privilege_Escalation",
 }
 
 
@@ -93,7 +93,7 @@ def build_workflow_spec(
         "pattern_name": discovery.pattern_name,
         "workflow_name": workflow_name,
         "severity": "high",
-        "decision_effect": "suspicious",
+        "decision_effect": "candidate",
         "roles": roles,
         "relations": canonical["relations"],
         "explanation": discovery.explanation,
@@ -129,7 +129,7 @@ class WorkflowRuleMatcher:
             rules.append(payload)
         return rules
 
-    def validate_rule(self, rule: object) -> None:
+    def validate_rule(self, rule: object, *, expected_source: str | None = None) -> None:
         if not isinstance(rule, dict):
             raise WorkflowRuleError("workflow rule must be an object")
         if rule.get("schema_version") != WORKFLOW_SCHEMA_VERSION:
@@ -143,8 +143,16 @@ class WorkflowRuleMatcher:
             raise WorkflowRuleError("workflow_name must be stable snake_case")
         if str(rule.get("severity", "")) != "high":
             raise WorkflowRuleError("workflow rule severity must match the reasoning taxonomy")
-        if rule.get("decision_effect", "suspicious") != "suspicious":
-            raise WorkflowRuleError("learned workflow rules may only have a suspicious decision effect")
+        source = str(rule.get("source", "learned"))
+        if source not in {"formal", "learned"}:
+            raise WorkflowRuleError("workflow rule source must be formal or learned")
+        if expected_source is not None and source != expected_source:
+            raise WorkflowRuleError(f"workflow rule source must be {expected_source}")
+        expected_effect = "malicious" if source == "formal" else "candidate"
+        if rule.get("decision_effect", expected_effect) != expected_effect:
+            raise WorkflowRuleError(
+                f"{source} workflow rules must have a {expected_effect} decision effect"
+            )
         roles = rule.get("roles")
         relations = rule.get("relations")
         if not isinstance(roles, list) or not 2 <= len(roles) <= 6:
@@ -169,6 +177,16 @@ class WorkflowRuleMatcher:
                 raise WorkflowRuleError("workflow role min_confidence must be numeric") from exc
             if not 0.0 <= minimum <= 1.0:
                 raise WorkflowRuleError("workflow role min_confidence must be between zero and one")
+            attributes = role.get("attributes", {})
+            if not isinstance(attributes, dict):
+                raise WorkflowRuleError("workflow role attributes must be an object")
+            for key, allowed_values in attributes.items():
+                if not isinstance(key, str) or not key:
+                    raise WorkflowRuleError("workflow role attribute names must be non-empty strings")
+                if not isinstance(allowed_values, list) or not allowed_values:
+                    raise WorkflowRuleError("workflow role attribute constraints must be non-empty lists")
+                if any(isinstance(value, (dict, list)) for value in allowed_values):
+                    raise WorkflowRuleError("workflow role attribute values must be scalar")
             role_ids.add(role_id)
         pairs: list[tuple[int, int]] = []
         role_order = {role_id: index for index, role_id in enumerate(sorted(role_ids))}
@@ -207,6 +225,7 @@ class WorkflowRuleMatcher:
                         item
                         for item in ssos
                         if item.subtype in allowed
+                        and self._attributes_match(item, role.get("attributes", {}))
                         and (
                             (item.confidence is not None and item.confidence >= minimum)
                             or (item.confidence is None and minimum == 0.0)
@@ -231,7 +250,11 @@ class WorkflowRuleMatcher:
             )
             matches.append(
                 PatternMatch(
-                    pattern_id=f"learned_pat_{counter:05d}",
+                    pattern_id=(
+                        f"formal_pat_{counter:05d}"
+                        if str(rule.get("source", "learned")) == "formal"
+                        else f"learned_pat_{counter:05d}"
+                    ),
                     name=str(rule["pattern_name"]),
                     severity=str(rule.get("severity", "high")),
                     rule_ids=[str(rule["rule_id"])],
@@ -243,11 +266,24 @@ class WorkflowRuleMatcher:
                             "Matched a validated reusable workflow rule.",
                         )
                     ),
-                    source="learned",
+                    source=str(rule.get("source", "learned")),
                 )
             )
             counter += 1
         return matches
+
+    def _attributes_match(self, sso: SSORecord, constraints: object) -> bool:
+        if not isinstance(constraints, dict):
+            return False
+        for key, allowed_values in constraints.items():
+            actual = sso.attributes.get(str(key))
+            allowed = list(allowed_values) if isinstance(allowed_values, list) else []
+            if isinstance(actual, list):
+                if not any(value in allowed for value in actual):
+                    return False
+            elif actual not in allowed:
+                return False
+        return True
 
     def _find_binding(
         self,
@@ -313,6 +349,10 @@ class WorkflowRuleMatcher:
                 return False
             if relation["kind"] == "value_flow" and not graph.has_value_flow(left, right):
                 return False
+            if relation["kind"] == "value_flow_or_same_object" and not (
+                graph.has_value_flow(left, right) or graph.share_object(left, right)
+            ):
+                return False
         return True
 
     def _partial_relations_hold(
@@ -350,6 +390,11 @@ def canonicalize_workflow_structure(
                     set(str(item) for item in roles[old_index]["subtypes"])
                 ),
                 "min_confidence": float(roles[old_index].get("min_confidence", 0.0)),
+                **(
+                    {"attributes": roles[old_index]["attributes"]}
+                    if roles[old_index].get("attributes")
+                    else {}
+                ),
             }
             for new_index, old_index in enumerate(permutation)
         ]
@@ -429,12 +474,12 @@ class _GraphIndex:
 
     def has_value_flow(self, left: SSORecord, right: SSORecord) -> bool:
         right_objects = self.objects(right)
-        targets = set(right_objects)
+        targets = {right.sso_id, *right_objects}
         for object_id in right_objects:
             targets.update(self.bound_values.get(object_id, set()))
         if not targets:
             return False
-        queue = deque((item, 0) for item in self.objects(left))
+        queue = deque((item, 0) for item in {left.sso_id, *self.objects(left)})
         seen = {item for item, _ in queue}
         while queue:
             current, depth = queue.popleft()

@@ -1,11 +1,13 @@
 rules:
-- id: no-plugin.Open
+- id: sso.go.dynamic_execution.others.0001.no-plugin.Open
   languages:
   - go
   message: Avoid using plugin.Open(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: plugin.Open()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: plugin.Open(...)
   - pattern: $VAR = plugin.Open

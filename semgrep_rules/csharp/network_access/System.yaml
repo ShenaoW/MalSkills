@@ -1,11 +1,13 @@
 rules:
-- id: no-System-Net-Dns-BeginGetHostAddresses
+- id: sso.csharp.network_access.System.0001.no-System-Net-Dns-BeginGetHostAddresses
   languages:
   - csharp
   message: Avoid using System.Net.Dns.BeginGetHostAddresses(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Dns.BeginGetHostAddresses()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: dns_resolution
   pattern-either:
   - pattern: System.Net.Dns.BeginGetHostAddresses(...)
   - pattern: $VAR = System.Net.Dns.BeginGetHostAddresses
@@ -16,13 +18,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Dns-EndGetHostAddresses
+- id: sso.csharp.network_access.System.0002.no-System-Net-Dns-EndGetHostAddresses
   languages:
   - csharp
   message: Avoid using System.Net.Dns.EndGetHostAddresses(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Dns.EndGetHostAddresses()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: dns_resolution
   pattern-either:
   - pattern: System.Net.Dns.EndGetHostAddresses(...)
   - pattern: $VAR = System.Net.Dns.EndGetHostAddresses
@@ -33,13 +37,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Dns-GetHostAddresses
+- id: sso.csharp.network_access.System.0003.no-System-Net-Dns-GetHostAddresses
   languages:
   - csharp
   message: Avoid using System.Net.Dns.GetHostAddresses(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Dns.GetHostAddresses()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: dns_resolution
   pattern-either:
   - pattern: System.Net.Dns.GetHostAddresses(...)
   - pattern: $VAR = System.Net.Dns.GetHostAddresses
@@ -50,13 +56,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Dns-GetHostEntry
+- id: sso.csharp.network_access.System.0004.no-System-Net-Dns-GetHostEntry
   languages:
   - csharp
   message: Avoid using System.Net.Dns.GetHostEntry(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Dns.GetHostEntry()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: dns_resolution
   pattern-either:
   - pattern: System.Net.Dns.GetHostEntry(...)
   - pattern: $VAR = System.Net.Dns.GetHostEntry
@@ -67,13 +75,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Dns-GetHostName
+- id: sso.csharp.network_access.System.0005.no-System-Net-Dns-GetHostName
   languages:
   - csharp
   message: Avoid using System.Net.Dns.GetHostName(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Dns.GetHostName()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: dns_resolution
   pattern-either:
   - pattern: System.Net.Dns.GetHostName(...)
   - pattern: $VAR = System.Net.Dns.GetHostName
@@ -84,13 +94,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-FtpWebRequest-GetResponse
+- id: sso.csharp.network_access.System.0006.no-System-Net-FtpWebRequest-GetResponse
   languages:
   - csharp
   message: Avoid using System.Net.FtpWebRequest.GetResponse(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.FtpWebRequest.GetResponse()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: System.Net.FtpWebRequest.GetResponse(...)
   - pattern: $VAR = System.Net.FtpWebRequest.GetResponse
@@ -101,13 +113,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Http-HttpClient-DeleteAsync
+- id: sso.csharp.network_access.System.0007.no-System-Net-Http-HttpClient-DeleteAsync
   languages:
   - csharp
   message: Avoid using System.Net.Http.HttpClient.DeleteAsync(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Http.HttpClient.DeleteAsync()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: System.Net.Http.HttpClient.DeleteAsync(...)
   - pattern: $VAR = System.Net.Http.HttpClient.DeleteAsync
@@ -120,13 +134,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Http-HttpClient-GetAsync
+- id: sso.csharp.network_access.System.0008.no-System-Net-Http-HttpClient-GetAsync
   languages:
   - csharp
   message: Avoid using System.Net.Http.HttpClient.GetAsync(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Http.HttpClient.GetAsync()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: System.Net.Http.HttpClient.GetAsync(...)
   - pattern: $VAR = System.Net.Http.HttpClient.GetAsync
@@ -139,13 +155,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Http-HttpClient-GetStreamAsync
+- id: sso.csharp.network_access.System.0009.no-System-Net-Http-HttpClient-GetStreamAsync
   languages:
   - csharp
   message: Avoid using System.Net.Http.HttpClient.GetStreamAsync(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Http.HttpClient.GetStreamAsync()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: System.Net.Http.HttpClient.GetStreamAsync(...)
   - pattern: $VAR = System.Net.Http.HttpClient.GetStreamAsync
@@ -158,13 +176,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Http-HttpClient-GetStringAsync
+- id: sso.csharp.network_access.System.0010.no-System-Net-Http-HttpClient-GetStringAsync
   languages:
   - csharp
   message: Avoid using System.Net.Http.HttpClient.GetStringAsync(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Http.HttpClient.GetStringAsync()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: System.Net.Http.HttpClient.GetStringAsync(...)
   - pattern: $VAR = System.Net.Http.HttpClient.GetStringAsync
@@ -177,13 +197,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Http-HttpClient-PostAsync
+- id: sso.csharp.network_access.System.0011.no-System-Net-Http-HttpClient-PostAsync
   languages:
   - csharp
   message: Avoid using System.Net.Http.HttpClient.PostAsync(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Http.HttpClient.PostAsync()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: System.Net.Http.HttpClient.PostAsync(...)
   - pattern: $VAR = System.Net.Http.HttpClient.PostAsync
@@ -196,13 +218,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Http-HttpClient-PutAsync
+- id: sso.csharp.network_access.System.0012.no-System-Net-Http-HttpClient-PutAsync
   languages:
   - csharp
   message: Avoid using System.Net.Http.HttpClient.PutAsync(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Http.HttpClient.PutAsync()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: System.Net.Http.HttpClient.PutAsync(...)
   - pattern: $VAR = System.Net.Http.HttpClient.PutAsync
@@ -215,13 +239,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Http-HttpClient-Send
+- id: sso.csharp.network_access.System.0013.no-System-Net-Http-HttpClient-Send
   languages:
   - csharp
   message: Avoid using System.Net.Http.HttpClient.Send(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Http.HttpClient.Send()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: System.Net.Http.HttpClient.Send(...)
   - pattern: $VAR = System.Net.Http.HttpClient.Send
@@ -234,13 +260,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Http-HttpClient-SendAsync
+- id: sso.csharp.network_access.System.0014.no-System-Net-Http-HttpClient-SendAsync
   languages:
   - csharp
   message: Avoid using System.Net.Http.HttpClient.SendAsync(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Http.HttpClient.SendAsync()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: System.Net.Http.HttpClient.SendAsync(...)
   - pattern: $VAR = System.Net.Http.HttpClient.SendAsync
@@ -253,13 +281,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-HttpWebRequest-BeginGetResponse
+- id: sso.csharp.network_access.System.0015.no-System-Net-HttpWebRequest-BeginGetResponse
   languages:
   - csharp
   message: Avoid using System.Net.HttpWebRequest.BeginGetResponse(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.HttpWebRequest.BeginGetResponse()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: System.Net.HttpWebRequest.BeginGetResponse(...)
   - pattern: $VAR = System.Net.HttpWebRequest.BeginGetResponse
@@ -270,13 +300,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-HttpWebRequest-EndGetResponse
+- id: sso.csharp.network_access.System.0016.no-System-Net-HttpWebRequest-EndGetResponse
   languages:
   - csharp
   message: Avoid using System.Net.HttpWebRequest.EndGetResponse(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.HttpWebRequest.EndGetResponse()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: System.Net.HttpWebRequest.EndGetResponse(...)
   - pattern: $VAR = System.Net.HttpWebRequest.EndGetResponse
@@ -287,13 +319,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-HttpWebRequest-GetResponse
+- id: sso.csharp.network_access.System.0017.no-System-Net-HttpWebRequest-GetResponse
   languages:
   - csharp
   message: Avoid using System.Net.HttpWebRequest.GetResponse(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.HttpWebRequest.GetResponse()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: System.Net.HttpWebRequest.GetResponse(...)
   - pattern: $VAR = System.Net.HttpWebRequest.GetResponse
@@ -304,13 +338,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-NetworkInformation-Ping-Send
+- id: sso.csharp.network_access.System.0018.no-System-Net-NetworkInformation-Ping-Send
   languages:
   - csharp
   message: Avoid using System.Net.NetworkInformation.Ping.Send(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.NetworkInformation.Ping.Send()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: System.Net.NetworkInformation.Ping.Send(...)
   - pattern: $VAR = System.Net.NetworkInformation.Ping.Send
@@ -323,13 +359,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-NetworkInformation-Ping-SendPingAsync
+- id: sso.csharp.network_access.System.0019.no-System-Net-NetworkInformation-Ping-SendPingAsync
   languages:
   - csharp
   message: Avoid using System.Net.NetworkInformation.Ping.SendPingAsync(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.NetworkInformation.Ping.SendPingAsync()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: System.Net.NetworkInformation.Ping.SendPingAsync(...)
   - pattern: $VAR = System.Net.NetworkInformation.Ping.SendPingAsync
@@ -342,13 +380,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Sockets-Socket-Accept
+- id: sso.csharp.network_access.System.0020.no-System-Net-Sockets-Socket-Accept
   languages:
   - csharp
   message: Avoid using System.Net.Sockets.Socket.Accept(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Sockets.Socket.Accept()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
   pattern-either:
   - pattern: System.Net.Sockets.Socket.Accept(...)
   - pattern: $VAR = System.Net.Sockets.Socket.Accept
@@ -361,13 +401,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Sockets-Socket-BeginAccept
+- id: sso.csharp.network_access.System.0021.no-System-Net-Sockets-Socket-BeginAccept
   languages:
   - csharp
   message: Avoid using System.Net.Sockets.Socket.BeginAccept(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Sockets.Socket.BeginAccept()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
   pattern-either:
   - pattern: System.Net.Sockets.Socket.BeginAccept(...)
   - pattern: $VAR = System.Net.Sockets.Socket.BeginAccept
@@ -380,13 +422,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Sockets-Socket-BeginConnect
+- id: sso.csharp.network_access.System.0022.no-System-Net-Sockets-Socket-BeginConnect
   languages:
   - csharp
   message: Avoid using System.Net.Sockets.Socket.BeginConnect(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Sockets.Socket.BeginConnect()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: System.Net.Sockets.Socket.BeginConnect(...)
   - pattern: $VAR = System.Net.Sockets.Socket.BeginConnect
@@ -399,13 +443,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Sockets-Socket-BeginReceive
+- id: sso.csharp.network_access.System.0023.no-System-Net-Sockets-Socket-BeginReceive
   languages:
   - csharp
   message: Avoid using System.Net.Sockets.Socket.BeginReceive(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Sockets.Socket.BeginReceive()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: System.Net.Sockets.Socket.BeginReceive(...)
   - pattern: $VAR = System.Net.Sockets.Socket.BeginReceive
@@ -418,13 +464,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Sockets-Socket-BeginSend
+- id: sso.csharp.network_access.System.0024.no-System-Net-Sockets-Socket-BeginSend
   languages:
   - csharp
   message: Avoid using System.Net.Sockets.Socket.BeginSend(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Sockets.Socket.BeginSend()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: System.Net.Sockets.Socket.BeginSend(...)
   - pattern: $VAR = System.Net.Sockets.Socket.BeginSend
@@ -437,13 +485,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Sockets-Socket-Bind
+- id: sso.csharp.network_access.System.0025.no-System-Net-Sockets-Socket-Bind
   languages:
   - csharp
   message: Avoid using System.Net.Sockets.Socket.Bind(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Sockets.Socket.Bind()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
   pattern-either:
   - pattern: System.Net.Sockets.Socket.Bind(...)
   - pattern: $VAR = System.Net.Sockets.Socket.Bind
@@ -456,13 +506,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Sockets-Socket-Connect
+- id: sso.csharp.network_access.System.0026.no-System-Net-Sockets-Socket-Connect
   languages:
   - csharp
   message: Avoid using System.Net.Sockets.Socket.Connect(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Sockets.Socket.Connect()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: System.Net.Sockets.Socket.Connect(...)
   - pattern: $VAR = System.Net.Sockets.Socket.Connect
@@ -475,13 +527,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Sockets-Socket-Listen
+- id: sso.csharp.network_access.System.0027.no-System-Net-Sockets-Socket-Listen
   languages:
   - csharp
   message: Avoid using System.Net.Sockets.Socket.Listen(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Sockets.Socket.Listen()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
   pattern-either:
   - pattern: System.Net.Sockets.Socket.Listen(...)
   - pattern: $VAR = System.Net.Sockets.Socket.Listen
@@ -494,13 +548,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Sockets-Socket-Receive
+- id: sso.csharp.network_access.System.0028.no-System-Net-Sockets-Socket-Receive
   languages:
   - csharp
   message: Avoid using System.Net.Sockets.Socket.Receive(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Sockets.Socket.Receive()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: System.Net.Sockets.Socket.Receive(...)
   - pattern: $VAR = System.Net.Sockets.Socket.Receive
@@ -513,13 +569,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Sockets-Socket-Send
+- id: sso.csharp.network_access.System.0029.no-System-Net-Sockets-Socket-Send
   languages:
   - csharp
   message: Avoid using System.Net.Sockets.Socket.Send(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Sockets.Socket.Send()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: System.Net.Sockets.Socket.Send(...)
   - pattern: $VAR = System.Net.Sockets.Socket.Send
@@ -532,13 +590,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Sockets-TcpClient-BeginConnect
+- id: sso.csharp.network_access.System.0030.no-System-Net-Sockets-TcpClient-BeginConnect
   languages:
   - csharp
   message: Avoid using System.Net.Sockets.TcpClient.BeginConnect(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Sockets.TcpClient.BeginConnect()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: System.Net.Sockets.TcpClient.BeginConnect(...)
   - pattern: $VAR = System.Net.Sockets.TcpClient.BeginConnect
@@ -551,13 +611,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Sockets-TcpClient-Connect
+- id: sso.csharp.network_access.System.0031.no-System-Net-Sockets-TcpClient-Connect
   languages:
   - csharp
   message: Avoid using System.Net.Sockets.TcpClient.Connect(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Sockets.TcpClient.Connect()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: System.Net.Sockets.TcpClient.Connect(...)
   - pattern: $VAR = System.Net.Sockets.TcpClient.Connect
@@ -570,13 +632,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Sockets-TcpClient-GetStream
+- id: sso.csharp.network_access.System.0032.no-System-Net-Sockets-TcpClient-GetStream
   languages:
   - csharp
   message: Avoid using System.Net.Sockets.TcpClient.GetStream(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Sockets.TcpClient.GetStream()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: System.Net.Sockets.TcpClient.GetStream(...)
   - pattern: $VAR = System.Net.Sockets.TcpClient.GetStream
@@ -589,13 +653,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Sockets-TcpListener-AcceptTcpClient
+- id: sso.csharp.network_access.System.0033.no-System-Net-Sockets-TcpListener-AcceptTcpClient
   languages:
   - csharp
   message: Avoid using System.Net.Sockets.TcpListener.AcceptTcpClient(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Sockets.TcpListener.AcceptTcpClient()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
   pattern-either:
   - pattern: System.Net.Sockets.TcpListener.AcceptTcpClient(...)
   - pattern: $VAR = System.Net.Sockets.TcpListener.AcceptTcpClient
@@ -608,13 +674,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Sockets-TcpListener-BeginAcceptTcpClient
+- id: sso.csharp.network_access.System.0034.no-System-Net-Sockets-TcpListener-BeginAcceptTcpClient
   languages:
   - csharp
   message: Avoid using System.Net.Sockets.TcpListener.BeginAcceptTcpClient(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Sockets.TcpListener.BeginAcceptTcpClient()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
   pattern-either:
   - pattern: System.Net.Sockets.TcpListener.BeginAcceptTcpClient(...)
   - pattern: $VAR = System.Net.Sockets.TcpListener.BeginAcceptTcpClient
@@ -627,13 +695,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Sockets-TcpListener-Start
+- id: sso.csharp.network_access.System.0035.no-System-Net-Sockets-TcpListener-Start
   languages:
   - csharp
   message: Avoid using System.Net.Sockets.TcpListener.Start(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Sockets.TcpListener.Start()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
   pattern-either:
   - pattern: System.Net.Sockets.TcpListener.Start(...)
   - pattern: $VAR = System.Net.Sockets.TcpListener.Start
@@ -646,13 +716,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Sockets-UdpClient-BeginReceive
+- id: sso.csharp.network_access.System.0036.no-System-Net-Sockets-UdpClient-BeginReceive
   languages:
   - csharp
   message: Avoid using System.Net.Sockets.UdpClient.BeginReceive(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Sockets.UdpClient.BeginReceive()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: System.Net.Sockets.UdpClient.BeginReceive(...)
   - pattern: $VAR = System.Net.Sockets.UdpClient.BeginReceive
@@ -665,13 +737,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Sockets-UdpClient-Receive
+- id: sso.csharp.network_access.System.0037.no-System-Net-Sockets-UdpClient-Receive
   languages:
   - csharp
   message: Avoid using System.Net.Sockets.UdpClient.Receive(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Sockets.UdpClient.Receive()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: System.Net.Sockets.UdpClient.Receive(...)
   - pattern: $VAR = System.Net.Sockets.UdpClient.Receive
@@ -684,13 +758,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-Sockets-UdpClient-Send
+- id: sso.csharp.network_access.System.0038.no-System-Net-Sockets-UdpClient-Send
   languages:
   - csharp
   message: Avoid using System.Net.Sockets.UdpClient.Send(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.Sockets.UdpClient.Send()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: System.Net.Sockets.UdpClient.Send(...)
   - pattern: $VAR = System.Net.Sockets.UdpClient.Send
@@ -703,13 +779,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-WebClient-DownloadData
+- id: sso.csharp.network_access.System.0039.no-System-Net-WebClient-DownloadData
   languages:
   - csharp
   message: Avoid using System.Net.WebClient.DownloadData(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.WebClient.DownloadData()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: System.Net.WebClient.DownloadData(...)
   - pattern: $VAR = System.Net.WebClient.DownloadData
@@ -720,13 +798,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-WebClient-DownloadFile
+- id: sso.csharp.network_access.System.0040.no-System-Net-WebClient-DownloadFile
   languages:
   - csharp
   message: Avoid using System.Net.WebClient.DownloadFile(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.WebClient.DownloadFile()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: System.Net.WebClient.DownloadFile(...)
   - pattern: $VAR = System.Net.WebClient.DownloadFile
@@ -737,13 +817,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-WebClient-DownloadString
+- id: sso.csharp.network_access.System.0041.no-System-Net-WebClient-DownloadString
   languages:
   - csharp
   message: Avoid using System.Net.WebClient.DownloadString(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.WebClient.DownloadString()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: System.Net.WebClient.DownloadString(...)
   - pattern: $VAR = System.Net.WebClient.DownloadString
@@ -754,13 +836,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-WebClient-OpenRead
+- id: sso.csharp.network_access.System.0042.no-System-Net-WebClient-OpenRead
   languages:
   - csharp
   message: Avoid using System.Net.WebClient.OpenRead(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.WebClient.OpenRead()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: System.Net.WebClient.OpenRead(...)
   - pattern: $VAR = System.Net.WebClient.OpenRead
@@ -771,13 +855,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-WebClient-OpenWrite
+- id: sso.csharp.network_access.System.0043.no-System-Net-WebClient-OpenWrite
   languages:
   - csharp
   message: Avoid using System.Net.WebClient.OpenWrite(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.WebClient.OpenWrite()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: System.Net.WebClient.OpenWrite(...)
   - pattern: $VAR = System.Net.WebClient.OpenWrite
@@ -788,13 +874,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-WebClient-UploadData
+- id: sso.csharp.network_access.System.0044.no-System-Net-WebClient-UploadData
   languages:
   - csharp
   message: Avoid using System.Net.WebClient.UploadData(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.WebClient.UploadData()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: System.Net.WebClient.UploadData(...)
   - pattern: $VAR = System.Net.WebClient.UploadData
@@ -805,13 +893,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-WebClient-UploadFile
+- id: sso.csharp.network_access.System.0045.no-System-Net-WebClient-UploadFile
   languages:
   - csharp
   message: Avoid using System.Net.WebClient.UploadFile(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.WebClient.UploadFile()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: System.Net.WebClient.UploadFile(...)
   - pattern: $VAR = System.Net.WebClient.UploadFile
@@ -822,13 +912,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-WebClient-UploadString
+- id: sso.csharp.network_access.System.0046.no-System-Net-WebClient-UploadString
   languages:
   - csharp
   message: Avoid using System.Net.WebClient.UploadString(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.WebClient.UploadString()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: System.Net.WebClient.UploadString(...)
   - pattern: $VAR = System.Net.WebClient.UploadString
@@ -839,13 +931,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-WebRequest-BeginGetResponse
+- id: sso.csharp.network_access.System.0047.no-System-Net-WebRequest-BeginGetResponse
   languages:
   - csharp
   message: Avoid using System.Net.WebRequest.BeginGetResponse(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.WebRequest.BeginGetResponse()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: System.Net.WebRequest.BeginGetResponse(...)
   - pattern: $VAR = System.Net.WebRequest.BeginGetResponse
@@ -856,13 +950,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-WebRequest-Create
+- id: sso.csharp.network_access.System.0048.no-System-Net-WebRequest-Create
   languages:
   - csharp
   message: Avoid using System.Net.WebRequest.Create(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.WebRequest.Create()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: System.Net.WebRequest.Create(...)
   - pattern: $VAR = System.Net.WebRequest.Create
@@ -873,13 +969,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-WebRequest-EndGetResponse
+- id: sso.csharp.network_access.System.0049.no-System-Net-WebRequest-EndGetResponse
   languages:
   - csharp
   message: Avoid using System.Net.WebRequest.EndGetResponse(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.WebRequest.EndGetResponse()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: System.Net.WebRequest.EndGetResponse(...)
   - pattern: $VAR = System.Net.WebRequest.EndGetResponse
@@ -890,13 +988,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-WebRequest-GetResponse
+- id: sso.csharp.network_access.System.0050.no-System-Net-WebRequest-GetResponse
   languages:
   - csharp
   message: Avoid using System.Net.WebRequest.GetResponse(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.WebRequest.GetResponse()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: System.Net.WebRequest.GetResponse(...)
   - pattern: $VAR = System.Net.WebRequest.GetResponse
@@ -907,13 +1007,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-System-Net-WebSockets-ClientWebSocket-ConnectAsync
+- id: sso.csharp.network_access.System.0051.no-System-Net-WebSockets-ClientWebSocket-ConnectAsync
   languages:
   - csharp
   message: Avoid using System.Net.WebSockets.ClientWebSocket.ConnectAsync(), as it can lead to potential issues with network access.
   metadata:
     api: System.Net.WebSockets.ClientWebSocket.ConnectAsync()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: System.Net.WebSockets.ClientWebSocket.ConnectAsync(...)
   - pattern: $VAR = System.Net.WebSockets.ClientWebSocket.ConnectAsync

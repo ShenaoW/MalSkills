@@ -1,37 +1,43 @@
 rules:
-- id: no-nt-system
+- id: sso.python.command_execution.others.0001.no-nt-system
   languages:
   - python
   message: Avoid using nt.system(), as it can lead to potential issues with command execution.
   metadata:
     api: nt.system()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: nt.system(...)
   - pattern: $VAR = nt.system
   severity: WARNING
   tags:
   - Command Execution
-- id: no-posix-system
+- id: sso.python.command_execution.others.0002.no-posix-system
   languages:
   - python
   message: Avoid using posix.system(), as it can lead to potential issues with command execution.
   metadata:
     api: posix.system()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: posix.system(...)
   - pattern: $VAR = posix.system
   severity: WARNING
   tags:
   - Command Execution
-- id: no-pty-spawn
+- id: sso.python.command_execution.others.0003.no-pty-spawn
   languages:
   - python
   message: Avoid using pty.spawn(), as it can lead to potential issues with command execution.
   metadata:
     api: pty.spawn()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: pty.spawn(...)
   - pattern: $VAR = pty.spawn

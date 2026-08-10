@@ -1,11 +1,13 @@
 rules:
-- id: no-urllib-parse-quote
+- id: sso.python.network_access.urllib.0001.no-urllib-parse-quote
   languages:
   - python
   message: Avoid using urllib.parse.quote(), as it can lead to potential issues with network access.
   metadata:
     api: urllib.parse.quote()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: urllib.parse.quote(...)
   - pattern: $VAR = urllib.parse.quote
@@ -14,13 +16,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-urllib-parse-quote_plus
+- id: sso.python.network_access.urllib.0002.no-urllib-parse-quote_plus
   languages:
   - python
   message: Avoid using urllib.parse.quote_plus(), as it can lead to potential issues with network access.
   metadata:
     api: urllib.parse.quote_plus()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: urllib.parse.quote_plus(...)
   - pattern: $VAR = urllib.parse.quote_plus
@@ -29,13 +33,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-urllib-parse-urlencode
+- id: sso.python.network_access.urllib.0003.no-urllib-parse-urlencode
   languages:
   - python
   message: Avoid using urllib.parse.urlencode(), as it can lead to potential issues with network access.
   metadata:
     api: urllib.parse.urlencode()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: urllib.parse.urlencode(...)
   - pattern: $VAR = urllib.parse.urlencode
@@ -44,13 +50,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-urllib-parse-urljoin
+- id: sso.python.network_access.urllib.0004.no-urllib-parse-urljoin
   languages:
   - python
   message: Avoid using urllib.parse.urljoin(), as it can lead to potential issues with network access.
   metadata:
     api: urllib.parse.urljoin()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: urllib.parse.urljoin(...)
   - pattern: $VAR = urllib.parse.urljoin
@@ -59,13 +67,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-urllib-parse-urlparse
+- id: sso.python.network_access.urllib.0005.no-urllib-parse-urlparse
   languages:
   - python
   message: Avoid using urllib.parse.urlparse(), as it can lead to potential issues with network access.
   metadata:
     api: urllib.parse.urlparse()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: urllib.parse.urlparse(...)
   - pattern: $VAR = urllib.parse.urlparse
@@ -74,13 +84,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-urllib-parse-urlunparse
+- id: sso.python.network_access.urllib.0006.no-urllib-parse-urlunparse
   languages:
   - python
   message: Avoid using urllib.parse.urlunparse(), as it can lead to potential issues with network access.
   metadata:
     api: urllib.parse.urlunparse()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: urllib.parse.urlunparse(...)
   - pattern: $VAR = urllib.parse.urlunparse
@@ -89,13 +101,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-urllib-request-Request
+- id: sso.python.network_access.urllib.0007.no-urllib-request-Request
   languages:
   - python
   message: Avoid using urllib.request.Request(), as it can lead to potential issues with network access.
   metadata:
     api: urllib.request.Request()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: urllib.request.Request(...)
   - pattern: $VAR = urllib.request.Request
@@ -104,13 +118,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-urllib-request-urlopen
+- id: sso.python.network_access.urllib.0008.no-urllib-request-urlopen
   languages:
   - python
   message: Avoid using urllib.request.urlopen(), as it can lead to potential issues with network access.
   metadata:
     api: urllib.request.urlopen()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: urllib.request.urlopen(...)
   - pattern: $VAR = urllib.request.urlopen
@@ -119,13 +135,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-urllib-request-urlretrieve
+- id: sso.python.network_access.urllib.0009.no-urllib-request-urlretrieve
   languages:
   - python
   message: Avoid using urllib.request.urlretrieve(), as it can lead to potential issues with network access.
   metadata:
     api: urllib.request.urlretrieve()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: urllib.request.urlretrieve(...)
   - pattern: $VAR = urllib.request.urlretrieve

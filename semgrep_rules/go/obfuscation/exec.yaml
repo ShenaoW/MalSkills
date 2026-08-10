@@ -1,11 +1,13 @@
 rules:
-- id: no-exec.Command_x__x_.Output
+- id: sso.go.obfuscation.exec.0001.no-exec.Command_x__x_.Output
   languages:
   - go
   message: Avoid using exec.Command().Output(), as it can lead to potential issues with obfuscation.
   metadata:
     api: exec.Command().Output()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: exec.Command().Output(...)
   - pattern: $VAR = exec.Command().Output
@@ -14,13 +16,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-exec.Command_x__x_.Run
+- id: sso.go.obfuscation.exec.0002.no-exec.Command_x__x_.Run
   languages:
   - go
   message: Avoid using exec.Command().Run(), as it can lead to potential issues with obfuscation.
   metadata:
     api: exec.Command().Run()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: exec.Command().Run(...)
   - pattern: $VAR = exec.Command().Run

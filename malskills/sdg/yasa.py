@@ -399,29 +399,28 @@ class YasaAdapter:
         sink_attr = str(sink_attribute or "").strip()
         lowered_api = sink_api.lower()
         attr_mapping = {
-            "NodejsSSRF": "outbound_connection",
-            "PythonSSRF": "outbound_connection",
-            "NodejsCommandInjection": "shell_interpreter_execution",
-            "PythonCommandInjection": "shell_interpreter_execution",
-            "NodejsExec": "direct_process_execution",
-            "PythonCommandExec": "direct_process_execution",
+            "NodejsSSRF": "connection_create",
+            "PythonSSRF": "connection_create",
+            "NodejsCommandInjection": "system_command_execution",
+            "PythonCommandInjection": "system_command_execution",
+            "NodejsExec": "system_command_execution",
+            "PythonCommandExec": "system_command_execution",
         }
         if sink_attr in attr_mapping:
             return attr_mapping[sink_attr]
         if any(token in lowered_api for token in ("requests.", "httpx.", "axios.", "fetch", "http.request", "https.request")):
-            return "outbound_connection"
+            return "connection_create"
         if any(token in lowered_api for token in ("subprocess.", "os.system", "child_process.exec", "child_process.spawn")):
-            return "direct_process_execution"
+            return "system_command_execution"
         return ""
 
     def _parameter_role_for(self, sink_subtype: str) -> str:
-        if sink_subtype == "outbound_connection":
+        if sink_subtype in {"connection_create", "data_send", "data_receive"}:
             return "endpoint"
         if sink_subtype in {
-            "direct_process_execution",
-            "shell_interpreter_execution",
-            "script_host_execution",
-            "proxy_execution_or_lolbin_abuse",
+            "system_command_execution",
+            "dynamic_code_execution",
+            "external_file_execution",
         }:
             return "command"
         return ""

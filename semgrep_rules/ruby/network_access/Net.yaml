@@ -1,11 +1,13 @@
 rules:
-- id: no-Net_x__x_FTP.new
+- id: sso.ruby.network_access.Net.0001.no-Net_x__x_FTP.new
   languages:
   - ruby
   message: Avoid using Net::FTP.new(), as it can lead to potential issues with network access.
   metadata:
     api: Net::FTP.new()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: Net::FTP.new(...)
   - pattern: $VAR = Net::FTP.new
@@ -14,13 +16,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-Net_x__x_HTTP.get
+- id: sso.ruby.network_access.Net.0002.no-Net_x__x_HTTP.get
   languages:
   - ruby
   message: Avoid using Net::HTTP.get(), as it can lead to potential issues with network access.
   metadata:
     api: Net::HTTP.get()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: Net::HTTP.get(...)
   - pattern: $VAR = Net::HTTP.get
@@ -29,13 +33,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-Net_x__x_HTTP.get_response
+- id: sso.ruby.network_access.Net.0003.no-Net_x__x_HTTP.get_response
   languages:
   - ruby
   message: Avoid using Net::HTTP.get_response(), as it can lead to potential issues with network access.
   metadata:
     api: Net::HTTP.get_response()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: Net::HTTP.get_response(...)
   - pattern: $VAR = Net::HTTP.get_response
@@ -44,13 +50,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-Net_x__x_HTTP.new
+- id: sso.ruby.network_access.Net.0004.no-Net_x__x_HTTP.new
   languages:
   - ruby
   message: Avoid using Net::HTTP.new(), as it can lead to potential issues with network access.
   metadata:
     api: Net::HTTP.new()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: Net::HTTP.new(...)
   - pattern: $VAR = Net::HTTP.new
@@ -59,13 +67,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-Net_x__x_HTTP.post
+- id: sso.ruby.network_access.Net.0005.no-Net_x__x_HTTP.post
   languages:
   - ruby
   message: Avoid using Net::HTTP.post(), as it can lead to potential issues with network access.
   metadata:
     api: Net::HTTP.post()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: Net::HTTP.post(...)
   - pattern: $VAR = Net::HTTP.post
@@ -74,13 +84,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-Net_x__x_HTTP.post_form
+- id: sso.ruby.network_access.Net.0006.no-Net_x__x_HTTP.post_form
   languages:
   - ruby
   message: Avoid using Net::HTTP.post_form(), as it can lead to potential issues with network access.
   metadata:
     api: Net::HTTP.post_form()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: Net::HTTP.post_form(...)
   - pattern: $VAR = Net::HTTP.post_form
@@ -89,13 +101,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-Net_x__x_HTTP.start
+- id: sso.ruby.network_access.Net.0007.no-Net_x__x_HTTP.start
   languages:
   - ruby
   message: Avoid using Net::HTTP.start(), as it can lead to potential issues with network access.
   metadata:
     api: Net::HTTP.start()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: Net::HTTP.start(...)
   - pattern: $VAR = Net::HTTP.start

@@ -1,167 +1,193 @@
 rules:
-- id: no-path-_makeLong
+- id: sso.typescript.file_or_system_operation.path.0001.no-path-_makeLong
   languages:
   - typescript
   message: Avoid using path._makeLong(), as it can lead to potential issues with file or system operation.
   metadata:
     api: path._makeLong()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: path._makeLong(...)
   - pattern: $VAR = path._makeLong
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-path-basename
+- id: sso.typescript.file_or_system_operation.path.0002.no-path-basename
   languages:
   - typescript
   message: Avoid using path.basename(), as it can lead to potential issues with file or system operation.
   metadata:
     api: path.basename()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: path.basename(...)
   - pattern: $VAR = path.basename
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-path-dirname
+- id: sso.typescript.file_or_system_operation.path.0003.no-path-dirname
   languages:
   - typescript
   message: Avoid using path.dirname(), as it can lead to potential issues with file or system operation.
   metadata:
     api: path.dirname()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: path.dirname(...)
   - pattern: $VAR = path.dirname
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-path-extname
+- id: sso.typescript.file_or_system_operation.path.0004.no-path-extname
   languages:
   - typescript
   message: Avoid using path.extname(), as it can lead to potential issues with file or system operation.
   metadata:
     api: path.extname()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: path.extname(...)
   - pattern: $VAR = path.extname
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-path-format
+- id: sso.typescript.file_or_system_operation.path.0005.no-path-format
   languages:
   - typescript
   message: Avoid using path.format(), as it can lead to potential issues with file or system operation.
   metadata:
     api: path.format()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: path.format(...)
   - pattern: $VAR = path.format
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-path-isAbsolute
+- id: sso.typescript.file_or_system_operation.path.0006.no-path-isAbsolute
   languages:
   - typescript
   message: Avoid using path.isAbsolute(), as it can lead to potential issues with file or system operation.
   metadata:
     api: path.isAbsolute()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: path.isAbsolute(...)
   - pattern: $VAR = path.isAbsolute
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-path-join
+- id: sso.typescript.file_or_system_operation.path.0007.no-path-join
   languages:
   - typescript
   message: Avoid using path.join(), as it can lead to potential issues with file or system operation.
   metadata:
     api: path.join()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: path.join(...)
   - pattern: $VAR = path.join
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-path-normalize
+- id: sso.typescript.file_or_system_operation.path.0008.no-path-normalize
   languages:
   - typescript
   message: Avoid using path.normalize(), as it can lead to potential issues with file or system operation.
   metadata:
     api: path.normalize()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: path.normalize(...)
   - pattern: $VAR = path.normalize
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-path-parse
+- id: sso.typescript.file_or_system_operation.path.0009.no-path-parse
   languages:
   - typescript
   message: Avoid using path.parse(), as it can lead to potential issues with file or system operation.
   metadata:
     api: path.parse()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: path.parse(...)
   - pattern: $VAR = path.parse
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-path-relative
+- id: sso.typescript.file_or_system_operation.path.0010.no-path-relative
   languages:
   - typescript
   message: Avoid using path.relative(), as it can lead to potential issues with file or system operation.
   metadata:
     api: path.relative()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: path.relative(...)
   - pattern: $VAR = path.relative
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-path-resolve
+- id: sso.typescript.file_or_system_operation.path.0011.no-path-resolve
   languages:
   - typescript
   message: Avoid using path.resolve(), as it can lead to potential issues with file or system operation.
   metadata:
     api: path.resolve()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: path.resolve(...)
   - pattern: $VAR = path.resolve
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-path-toNamespacedPath
+- id: sso.typescript.file_or_system_operation.path.0012.no-path-toNamespacedPath
   languages:
   - typescript
   message: Avoid using path.toNamespacedPath(), as it can lead to potential issues with file or system operation.
   metadata:
     api: path.toNamespacedPath()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: path.toNamespacedPath(...)
   - pattern: $VAR = path.toNamespacedPath
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-require-path
+- id: sso.typescript.file_or_system_operation.path.0013.no-require-path
   languages:
   - typescript
   message: Avoid using require('path'), as it can lead to potential issues with file or system operation.
   metadata:
     api: require('path')
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern: require('path')
   severity: WARNING
   tags:

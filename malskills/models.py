@@ -138,7 +138,6 @@ class WorkflowDiscovery:
 class SkillVerdict:
     skill_path: str
     label: str
-    score: float
     malicious_patterns: list[str]
     summary: str
 

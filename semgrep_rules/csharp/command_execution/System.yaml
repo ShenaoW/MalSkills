@@ -1,11 +1,13 @@
 rules:
-- id: no-System-Activator-CreateInstance
+- id: sso.csharp.command_execution.System.0001.no-System-Activator-CreateInstance
   languages:
   - csharp
   message: Avoid using System.Activator.CreateInstance(), as it can lead to potential issues with command execution.
   metadata:
     api: System.Activator.CreateInstance()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.Activator.CreateInstance(...)
   - pattern: $VAR = System.Activator.CreateInstance
@@ -14,13 +16,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-System-AppDomain-ExecuteAssembly
+- id: sso.csharp.command_execution.System.0002.no-System-AppDomain-ExecuteAssembly
   languages:
   - csharp
   message: Avoid using System.AppDomain.ExecuteAssembly(), as it can lead to potential issues with command execution.
   metadata:
     api: System.AppDomain.ExecuteAssembly()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.AppDomain.ExecuteAssembly(...)
   - pattern: $VAR = System.AppDomain.ExecuteAssembly
@@ -31,13 +35,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-System-CodeDom-Compiler-CodeDomProvider-CompileAssemblyFromSource
+- id: sso.csharp.command_execution.System.0003.no-System-CodeDom-Compiler-CodeDomProvider-CompileAssemblyFromSource
   languages:
   - csharp
   message: Avoid using System.CodeDom.Compiler.CodeDomProvider.CompileAssemblyFromSource(), as it can lead to potential issues with command execution.
   metadata:
     api: System.CodeDom.Compiler.CodeDomProvider.CompileAssemblyFromSource()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.CodeDom.Compiler.CodeDomProvider.CompileAssemblyFromSource(...)
   - pattern: $VAR = System.CodeDom.Compiler.CodeDomProvider.CompileAssemblyFromSource
@@ -50,13 +56,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-System-Diagnostics-Process-BeginErrorReadLine
+- id: sso.csharp.command_execution.System.0004.no-System-Diagnostics-Process-BeginErrorReadLine
   languages:
   - csharp
   message: Avoid using System.Diagnostics.Process.BeginErrorReadLine(), as it can lead to potential issues with command execution.
   metadata:
     api: System.Diagnostics.Process.BeginErrorReadLine()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.Diagnostics.Process.BeginErrorReadLine(...)
   - pattern: $VAR = System.Diagnostics.Process.BeginErrorReadLine
@@ -67,13 +75,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-System-Diagnostics-Process-BeginOutputReadLine
+- id: sso.csharp.command_execution.System.0005.no-System-Diagnostics-Process-BeginOutputReadLine
   languages:
   - csharp
   message: Avoid using System.Diagnostics.Process.BeginOutputReadLine(), as it can lead to potential issues with command execution.
   metadata:
     api: System.Diagnostics.Process.BeginOutputReadLine()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.Diagnostics.Process.BeginOutputReadLine(...)
   - pattern: $VAR = System.Diagnostics.Process.BeginOutputReadLine
@@ -84,13 +94,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-System-Diagnostics-Process-Kill
+- id: sso.csharp.command_execution.System.0006.no-System-Diagnostics-Process-Kill
   languages:
   - csharp
   message: Avoid using System.Diagnostics.Process.Kill(), as it can lead to potential issues with command execution.
   metadata:
     api: System.Diagnostics.Process.Kill()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.Diagnostics.Process.Kill(...)
   - pattern: $VAR = System.Diagnostics.Process.Kill
@@ -101,13 +113,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-System-Diagnostics-Process-Start
+- id: sso.csharp.command_execution.System.0007.no-System-Diagnostics-Process-Start
   languages:
   - csharp
   message: Avoid using System.Diagnostics.Process.Start(), as it can lead to potential issues with command execution.
   metadata:
     api: System.Diagnostics.Process.Start()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.Diagnostics.Process.Start(...)
   - pattern: $VAR = System.Diagnostics.Process.Start
@@ -118,13 +132,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-System-Diagnostics-Process-WaitForExit
+- id: sso.csharp.command_execution.System.0008.no-System-Diagnostics-Process-WaitForExit
   languages:
   - csharp
   message: Avoid using System.Diagnostics.Process.WaitForExit(), as it can lead to potential issues with command execution.
   metadata:
     api: System.Diagnostics.Process.WaitForExit()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.Diagnostics.Process.WaitForExit(...)
   - pattern: $VAR = System.Diagnostics.Process.WaitForExit
@@ -135,13 +151,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-System-IO-File-AppendAllText
+- id: sso.csharp.command_execution.System.0009.no-System-IO-File-AppendAllText
   languages:
   - csharp
   message: Avoid using System.IO.File.AppendAllText(), as it can lead to potential issues with command execution.
   metadata:
     api: System.IO.File.AppendAllText()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.IO.File.AppendAllText(...)
   - pattern: $VAR = System.IO.File.AppendAllText
@@ -152,13 +170,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-System-IO-File-CreateText
+- id: sso.csharp.command_execution.System.0010.no-System-IO-File-CreateText
   languages:
   - csharp
   message: Avoid using System.IO.File.CreateText(), as it can lead to potential issues with command execution.
   metadata:
     api: System.IO.File.CreateText()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.IO.File.CreateText(...)
   - pattern: $VAR = System.IO.File.CreateText
@@ -169,13 +189,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-System-IO-File-WriteAllBytes
+- id: sso.csharp.command_execution.System.0011.no-System-IO-File-WriteAllBytes
   languages:
   - csharp
   message: Avoid using System.IO.File.WriteAllBytes(), as it can lead to potential issues with command execution.
   metadata:
     api: System.IO.File.WriteAllBytes()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.IO.File.WriteAllBytes(...)
   - pattern: $VAR = System.IO.File.WriteAllBytes
@@ -186,13 +208,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-System-IO-File-WriteAllText
+- id: sso.csharp.command_execution.System.0012.no-System-IO-File-WriteAllText
   languages:
   - csharp
   message: Avoid using System.IO.File.WriteAllText(), as it can lead to potential issues with command execution.
   metadata:
     api: System.IO.File.WriteAllText()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.IO.File.WriteAllText(...)
   - pattern: $VAR = System.IO.File.WriteAllText
@@ -203,13 +227,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-System-IO-StreamWriter-WriteLine
+- id: sso.csharp.command_execution.System.0013.no-System-IO-StreamWriter-WriteLine
   languages:
   - csharp
   message: Avoid using System.IO.StreamWriter.WriteLine(), as it can lead to potential issues with command execution.
   metadata:
     api: System.IO.StreamWriter.WriteLine()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.IO.StreamWriter.WriteLine(...)
   - pattern: $VAR = System.IO.StreamWriter.WriteLine
@@ -220,13 +246,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-System-Management-ManagementClass-InvokeMethod
+- id: sso.csharp.command_execution.System.0014.no-System-Management-ManagementClass-InvokeMethod
   languages:
   - csharp
   message: Avoid using System.Management.ManagementClass.InvokeMethod(), as it can lead to potential issues with command execution.
   metadata:
     api: System.Management.ManagementClass.InvokeMethod()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.Management.ManagementClass.InvokeMethod(...)
   - pattern: $VAR = System.Management.ManagementClass.InvokeMethod
@@ -237,13 +265,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-System-Management-ManagementObject-InvokeMethod
+- id: sso.csharp.command_execution.System.0015.no-System-Management-ManagementObject-InvokeMethod
   languages:
   - csharp
   message: Avoid using System.Management.ManagementObject.InvokeMethod(), as it can lead to potential issues with command execution.
   metadata:
     api: System.Management.ManagementObject.InvokeMethod()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.Management.ManagementObject.InvokeMethod(...)
   - pattern: $VAR = System.Management.ManagementObject.InvokeMethod
@@ -254,13 +284,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-System-Reflection-Assembly-CreateInstance
+- id: sso.csharp.command_execution.System.0016.no-System-Reflection-Assembly-CreateInstance
   languages:
   - csharp
   message: Avoid using System.Reflection.Assembly.CreateInstance(), as it can lead to potential issues with command execution.
   metadata:
     api: System.Reflection.Assembly.CreateInstance()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.Reflection.Assembly.CreateInstance(...)
   - pattern: $VAR = System.Reflection.Assembly.CreateInstance
@@ -271,13 +303,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-System-Reflection-Assembly-Load
+- id: sso.csharp.command_execution.System.0017.no-System-Reflection-Assembly-Load
   languages:
   - csharp
   message: Avoid using System.Reflection.Assembly.Load(), as it can lead to potential issues with command execution.
   metadata:
     api: System.Reflection.Assembly.Load()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.Reflection.Assembly.Load(...)
   - pattern: $VAR = System.Reflection.Assembly.Load
@@ -288,13 +322,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-System-Reflection-Assembly-LoadFrom
+- id: sso.csharp.command_execution.System.0018.no-System-Reflection-Assembly-LoadFrom
   languages:
   - csharp
   message: Avoid using System.Reflection.Assembly.LoadFrom(), as it can lead to potential issues with command execution.
   metadata:
     api: System.Reflection.Assembly.LoadFrom()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.Reflection.Assembly.LoadFrom(...)
   - pattern: $VAR = System.Reflection.Assembly.LoadFrom
@@ -305,13 +341,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-System-Reflection-MethodInfo-Invoke
+- id: sso.csharp.command_execution.System.0019.no-System-Reflection-MethodInfo-Invoke
   languages:
   - csharp
   message: Avoid using System.Reflection.MethodInfo.Invoke(), as it can lead to potential issues with command execution.
   metadata:
     api: System.Reflection.MethodInfo.Invoke()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.Reflection.MethodInfo.Invoke(...)
   - pattern: $VAR = System.Reflection.MethodInfo.Invoke
@@ -322,13 +360,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-System-Runtime-InteropServices-Marshal-GetDelegateForFunctionPointer
+- id: sso.csharp.command_execution.System.0020.no-System-Runtime-InteropServices-Marshal-GetDelegateForFunctionPointer
   languages:
   - csharp
   message: Avoid using System.Runtime.InteropServices.Marshal.GetDelegateForFunctionPointer(), as it can lead to potential issues with command execution.
   metadata:
     api: System.Runtime.InteropServices.Marshal.GetDelegateForFunctionPointer()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.Runtime.InteropServices.Marshal.GetDelegateForFunctionPointer(...)
   - pattern: $VAR = System.Runtime.InteropServices.Marshal.GetDelegateForFunctionPointer
@@ -341,13 +381,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-System-Runtime-InteropServices-Marshal-WriteIntPtr
+- id: sso.csharp.command_execution.System.0021.no-System-Runtime-InteropServices-Marshal-WriteIntPtr
   languages:
   - csharp
   message: Avoid using System.Runtime.InteropServices.Marshal.WriteIntPtr(), as it can lead to potential issues with command execution.
   metadata:
     api: System.Runtime.InteropServices.Marshal.WriteIntPtr()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.Runtime.InteropServices.Marshal.WriteIntPtr(...)
   - pattern: $VAR = System.Runtime.InteropServices.Marshal.WriteIntPtr
@@ -360,13 +402,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-System-Threading-Tasks-Task-Run
+- id: sso.csharp.command_execution.System.0022.no-System-Threading-Tasks-Task-Run
   languages:
   - csharp
   message: Avoid using System.Threading.Tasks.Task.Run(), as it can lead to potential issues with command execution.
   metadata:
     api: System.Threading.Tasks.Task.Run()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.Threading.Tasks.Task.Run(...)
   - pattern: $VAR = System.Threading.Tasks.Task.Run
@@ -379,13 +423,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-System-Threading-Tasks-TaskFactory-StartNew
+- id: sso.csharp.command_execution.System.0023.no-System-Threading-Tasks-TaskFactory-StartNew
   languages:
   - csharp
   message: Avoid using System.Threading.Tasks.TaskFactory.StartNew(), as it can lead to potential issues with command execution.
   metadata:
     api: System.Threading.Tasks.TaskFactory.StartNew()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.Threading.Tasks.TaskFactory.StartNew(...)
   - pattern: $VAR = System.Threading.Tasks.TaskFactory.StartNew
@@ -398,13 +444,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-System-Threading-Thread-Start
+- id: sso.csharp.command_execution.System.0024.no-System-Threading-Thread-Start
   languages:
   - csharp
   message: Avoid using System.Threading.Thread.Start(), as it can lead to potential issues with command execution.
   metadata:
     api: System.Threading.Thread.Start()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: System.Threading.Thread.Start(...)
   - pattern: $VAR = System.Threading.Thread.Start

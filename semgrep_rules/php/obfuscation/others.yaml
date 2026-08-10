@@ -1,11 +1,13 @@
 rules:
-- id: no-base64_decode
+- id: sso.php.obfuscation.others.0001.no-base64_decode
   languages:
   - php
   message: Avoid using base64_decode(), as it can lead to potential issues with obfuscation.
   metadata:
     api: base64_decode()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: decoding
   pattern-either:
   - pattern: base64_decode(...)
   - pattern: $VAR = base64_decode(...)
@@ -14,13 +16,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-base64_encode
+- id: sso.php.obfuscation.others.0002.no-base64_encode
   languages:
   - php
   message: Avoid using base64_encode(), as it can lead to potential issues with obfuscation.
   metadata:
     api: base64_encode()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: base64_encode(...)
   - pattern: $VAR = base64_encode(...)
@@ -29,13 +33,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-bin2hex
+- id: sso.php.obfuscation.others.0003.no-bin2hex
   languages:
   - php
   message: Avoid using bin2hex(), as it can lead to potential issues with obfuscation.
   metadata:
     api: bin2hex()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: bin2hex(...)
   - pattern: $VAR = bin2hex(...)
@@ -44,13 +50,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-chr
+- id: sso.php.obfuscation.others.0004.no-chr
   languages:
   - php
   message: Avoid using chr(), as it can lead to potential issues with obfuscation.
   metadata:
     api: chr()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: chr(...)
   - pattern: $VAR = chr(...)
@@ -59,13 +67,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-crc32
+- id: sso.php.obfuscation.others.0005.no-crc32
   languages:
   - php
   message: Avoid using crc32(), as it can lead to potential issues with obfuscation.
   metadata:
     api: crc32()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: crc32(...)
   - pattern: $VAR = crc32(...)
@@ -74,13 +84,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-gzcompress
+- id: sso.php.obfuscation.others.0006.no-gzcompress
   languages:
   - php
   message: Avoid using gzcompress(), as it can lead to potential issues with obfuscation.
   metadata:
     api: gzcompress()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: gzcompress(...)
   - pattern: $VAR = gzcompress(...)
@@ -89,13 +101,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-gzdeflate
+- id: sso.php.obfuscation.others.0007.no-gzdeflate
   languages:
   - php
   message: Avoid using gzdeflate(), as it can lead to potential issues with obfuscation.
   metadata:
     api: gzdeflate()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: gzdeflate(...)
   - pattern: $VAR = gzdeflate(...)
@@ -104,13 +118,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-gzuncompress
+- id: sso.php.obfuscation.others.0008.no-gzuncompress
   languages:
   - php
   message: Avoid using gzuncompress(), as it can lead to potential issues with obfuscation.
   metadata:
     api: gzuncompress()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: gzuncompress(...)
   - pattern: $VAR = gzuncompress(...)
@@ -119,13 +135,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-hash
+- id: sso.php.obfuscation.others.0009.no-hash
   languages:
   - php
   message: Avoid using hash(), as it can lead to potential issues with obfuscation.
   metadata:
     api: hash()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: hash(...)
   - pattern: $VAR = hash(...)
@@ -134,13 +152,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-hash_hmac
+- id: sso.php.obfuscation.others.0010.no-hash_hmac
   languages:
   - php
   message: Avoid using hash_hmac(), as it can lead to potential issues with obfuscation.
   metadata:
     api: hash_hmac()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: hash_hmac(...)
   - pattern: $VAR = hash_hmac(...)
@@ -149,13 +169,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-hex2bin
+- id: sso.php.obfuscation.others.0011.no-hex2bin
   languages:
   - php
   message: Avoid using hex2bin(), as it can lead to potential issues with obfuscation.
   metadata:
     api: hex2bin()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: hex2bin(...)
   - pattern: $VAR = hex2bin(...)
@@ -164,13 +186,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-mt_rand
+- id: sso.php.obfuscation.others.0012.no-mt_rand
   languages:
   - php
   message: Avoid using mt_rand(), as it can lead to potential issues with obfuscation.
   metadata:
     api: mt_rand()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: mt_rand(...)
   - pattern: $VAR = mt_rand(...)
@@ -179,13 +203,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-ob_end_clean
+- id: sso.php.obfuscation.others.0013.no-ob_end_clean
   languages:
   - php
   message: Avoid using ob_end_clean(), as it can lead to potential issues with obfuscation.
   metadata:
     api: ob_end_clean()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: ob_end_clean(...)
   - pattern: $VAR = ob_end_clean(...)
@@ -194,13 +220,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-ob_end_flush
+- id: sso.php.obfuscation.others.0014.no-ob_end_flush
   languages:
   - php
   message: Avoid using ob_end_flush(), as it can lead to potential issues with obfuscation.
   metadata:
     api: ob_end_flush()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: ob_end_flush(...)
   - pattern: $VAR = ob_end_flush(...)
@@ -209,13 +237,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-ob_get_contents
+- id: sso.php.obfuscation.others.0015.no-ob_get_contents
   languages:
   - php
   message: Avoid using ob_get_contents(), as it can lead to potential issues with obfuscation.
   metadata:
     api: ob_get_contents()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: ob_get_contents(...)
   - pattern: $VAR = ob_get_contents(...)
@@ -224,13 +254,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-ob_start
+- id: sso.php.obfuscation.others.0016.no-ob_start
   languages:
   - php
   message: Avoid using ob_start(), as it can lead to potential issues with obfuscation.
   metadata:
     api: ob_start()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: ob_start(...)
   - pattern: $VAR = ob_start(...)
@@ -239,13 +271,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-ord
+- id: sso.php.obfuscation.others.0017.no-ord
   languages:
   - php
   message: Avoid using ord(), as it can lead to potential issues with obfuscation.
   metadata:
     api: ord()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: ord(...)
   - pattern: $VAR = ord(...)
@@ -254,13 +288,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-pack
+- id: sso.php.obfuscation.others.0018.no-pack
   languages:
   - php
   message: Avoid using pack(), as it can lead to potential issues with obfuscation.
   metadata:
     api: pack()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: pack(...)
   - pattern: $VAR = pack(...)
@@ -269,13 +305,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-rand
+- id: sso.php.obfuscation.others.0019.no-rand
   languages:
   - php
   message: Avoid using rand(), as it can lead to potential issues with obfuscation.
   metadata:
     api: rand()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: rand(...)
   - pattern: $VAR = rand(...)
@@ -284,13 +322,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-random_bytes
+- id: sso.php.obfuscation.others.0020.no-random_bytes
   languages:
   - php
   message: Avoid using random_bytes(), as it can lead to potential issues with obfuscation.
   metadata:
     api: random_bytes()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: random_bytes(...)
   - pattern: $VAR = random_bytes(...)
@@ -299,13 +339,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-serialize
+- id: sso.php.obfuscation.others.0021.no-serialize
   languages:
   - php
   message: Avoid using serialize(), as it can lead to potential issues with obfuscation.
   metadata:
     api: serialize()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: serialize(...)
   - pattern: $VAR = serialize(...)
@@ -314,13 +356,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-str_rot13
+- id: sso.php.obfuscation.others.0022.no-str_rot13
   languages:
   - php
   message: Avoid using str_rot13(), as it can lead to potential issues with obfuscation.
   metadata:
     api: str_rot13()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: str_rot13(...)
   - pattern: $VAR = str_rot13(...)
@@ -329,13 +373,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-str_shuffle
+- id: sso.php.obfuscation.others.0023.no-str_shuffle
   languages:
   - php
   message: Avoid using str_shuffle(), as it can lead to potential issues with obfuscation.
   metadata:
     api: str_shuffle()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: str_shuffle(...)
   - pattern: $VAR = str_shuffle(...)
@@ -344,13 +390,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-strrev
+- id: sso.php.obfuscation.others.0024.no-strrev
   languages:
   - php
   message: Avoid using strrev(), as it can lead to potential issues with obfuscation.
   metadata:
     api: strrev()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: strrev(...)
   - pattern: $VAR = strrev(...)
@@ -359,13 +407,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-strtr
+- id: sso.php.obfuscation.others.0025.no-strtr
   languages:
   - php
   message: Avoid using strtr(), as it can lead to potential issues with obfuscation.
   metadata:
     api: strtr()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: strtr(...)
   - pattern: $VAR = strtr(...)
@@ -374,13 +424,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-unpack
+- id: sso.php.obfuscation.others.0026.no-unpack
   languages:
   - php
   message: Avoid using unpack(), as it can lead to potential issues with obfuscation.
   metadata:
     api: unpack()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: unpack(...)
   - pattern: $VAR = unpack(...)
@@ -389,13 +441,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-unserialize
+- id: sso.php.obfuscation.others.0027.no-unserialize
   languages:
   - php
   message: Avoid using unserialize(), as it can lead to potential issues with obfuscation.
   metadata:
     api: unserialize()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: unserialize(...)
   - pattern: $VAR = unserialize(...)
@@ -404,13 +458,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-urldecode
+- id: sso.php.obfuscation.others.0028.no-urldecode
   languages:
   - php
   message: Avoid using urldecode(), as it can lead to potential issues with obfuscation.
   metadata:
     api: urldecode()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: decoding
   pattern-either:
   - pattern: urldecode(...)
   - pattern: $VAR = urldecode(...)
@@ -419,13 +475,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-urlencode
+- id: sso.php.obfuscation.others.0029.no-urlencode
   languages:
   - php
   message: Avoid using urlencode(), as it can lead to potential issues with obfuscation.
   metadata:
     api: urlencode()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: urlencode(...)
   - pattern: $VAR = urlencode(...)

@@ -46,6 +46,23 @@ def build_parser() -> argparse.ArgumentParser:
     evaluate.add_argument("--split", action="append", dest="splits")
     evaluate.add_argument("--label", action="append", dest="labels")
     evaluate.add_argument("--llm-config")
+    evaluate.add_argument(
+        "--progress-interval",
+        type=float,
+        default=30.0,
+        help="seconds between per-case heartbeat messages; use 0 to disable heartbeats",
+    )
+    evaluate.add_argument(
+        "--quiet",
+        action="store_true",
+        help="suppress per-case progress and print only the final summary",
+    )
+    evaluate.add_argument(
+        "--color",
+        choices=["auto", "always", "never"],
+        default="auto",
+        help="control ANSI colors in progress output",
+    )
 
     render = subparsers.add_parser("render-report")
     render.add_argument("--results", required=True)
@@ -121,7 +138,7 @@ def main(argv: list[str] | None = None) -> int:
                 rule_learning_group_id=args.rule_group_id,
             ),
         )
-        print(f"{result.verdict.label}\t{result.verdict.score:.2f}\t{result.skill_path}")
+        print(f"{result.verdict.label}\t{result.skill_path}")
         return 0
     if args.command == "build-benchmark-index":
         builder = BenchmarkBuilder(args.root)
@@ -132,7 +149,11 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps(summary, indent=2, sort_keys=True))
         return 0
     if args.command == "run-eval":
-        evaluator = Evaluator()
+        evaluator = Evaluator(
+            progress=not args.quiet,
+            progress_interval_sec=args.progress_interval,
+            color=args.color,
+        )
         if args.variant == "all":
             payload = evaluator.run_suite(
                 args.benchmark,

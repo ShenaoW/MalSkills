@@ -1,63 +1,73 @@
 rules:
-- id: no-UDPSocket.bind
+- id: sso.ruby.network_access.UDPSocket.0001.no-UDPSocket.bind
   languages:
   - ruby
   message: Avoid using UDPSocket.bind(), as it can lead to potential issues with network access.
   metadata:
     api: UDPSocket.bind()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
   pattern-either:
   - pattern: UDPSocket.bind(...)
   - pattern: $VAR = UDPSocket.bind
   severity: WARNING
   tags:
   - Network Access
-- id: no-UDPSocket.new
+- id: sso.ruby.network_access.UDPSocket.0002.no-UDPSocket.new
   languages:
   - ruby
   message: Avoid using UDPSocket.new(), as it can lead to potential issues with network access.
   metadata:
     api: UDPSocket.new()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: UDPSocket.new(...)
   - pattern: $VAR = UDPSocket.new
   severity: WARNING
   tags:
   - Network Access
-- id: no-UDPSocket.open
+- id: sso.ruby.network_access.UDPSocket.0003.no-UDPSocket.open
   languages:
   - ruby
   message: Avoid using UDPSocket.open(), as it can lead to potential issues with network access.
   metadata:
     api: UDPSocket.open()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: UDPSocket.open(...)
   - pattern: $VAR = UDPSocket.open
   severity: WARNING
   tags:
   - Network Access
-- id: no-UDPSocket.recvfrom
+- id: sso.ruby.network_access.UDPSocket.0004.no-UDPSocket.recvfrom
   languages:
   - ruby
   message: Avoid using UDPSocket.recvfrom(), as it can lead to potential issues with network access.
   metadata:
     api: UDPSocket.recvfrom()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: UDPSocket.recvfrom(...)
   - pattern: $VAR = UDPSocket.recvfrom
   severity: WARNING
   tags:
   - Network Access
-- id: no-UDPSocket.send
+- id: sso.ruby.network_access.UDPSocket.0005.no-UDPSocket.send
   languages:
   - ruby
   message: Avoid using UDPSocket.send(), as it can lead to potential issues with network access.
   metadata:
     api: UDPSocket.send()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: UDPSocket.send(...)
   - pattern: $VAR = UDPSocket.send

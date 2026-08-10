@@ -73,7 +73,7 @@ class ResultWriter:
         if include_souffle is None:
             include_souffle = (destination / "souffle").exists()
         return {
-            "schema_version": 4,
+            "schema_version": 5,
             "root": ".",
             "files": path_map,
             "directories": {
@@ -226,7 +226,6 @@ class ResultWriter:
                     "id": verdict_node_id,
                     "kind": "verdict",
                     "type": result.verdict.label,
-                    "score": result.verdict.score,
                 }
             )
         for pattern in result.patterns:
@@ -270,7 +269,6 @@ class ResultWriter:
             f"# Analysis Report: {result.skill_path}",
             "",
             f"- Verdict: `{result.verdict.label}`",
-            f"- Score: `{result.verdict.score:.2f}`",
             f"- Malicious patterns: {', '.join(result.verdict.malicious_patterns) or 'none'}",
             "",
             "## Artifact Inventory",
@@ -315,7 +313,6 @@ class ResultWriter:
             node_type = str(node.get("type", "")).strip()
             subtype = str(node.get("subtype", "")).strip()
             name = str(node.get("name", "")).strip()
-            score = node.get("score")
             path = str(node.get("path", "")).strip()
             if kind:
                 label_parts.append(f"kind={kind}")
@@ -325,8 +322,6 @@ class ResultWriter:
                 label_parts.append(f"subtype={subtype}")
             if name:
                 label_parts.append(f"name={name}")
-            if score is not None:
-                label_parts.append(f"score={score}")
             if path:
                 label_parts.append(f"path={path}")
             node_label = self._escape_dot("\n".join(label_parts))
@@ -367,7 +362,7 @@ class ResultWriter:
             "pattern_match": ["pattern_id", "pattern_name", "severity"],
             "pattern_support": ["pattern_id", "sso_id"],
             "pattern_attr": ["pattern_id", "key", "value"],
-            "verdict": ["label", "score"],
+            "verdict": ["label"],
         }
         if relation_name in schema:
             return schema[relation_name]

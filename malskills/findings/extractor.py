@@ -8,12 +8,14 @@ from ..ingest import LARGE_REPO_ARTIFACT_THRESHOLD
 from ..models import ArtifactRecord, OperandBinding, SSOFinding
 from .llm import LlmSSOFindingExtractor
 from .semgrep import SemgrepSSOFindingExtractor
+from .shell_semantics import extract_embedded_shell_findings
 
 
 @dataclass
 class SSOFindingExtractionResult:
     findings: list[SSOFinding]
     semgrep_findings: list[SSOFinding]
+    static_findings: list[SSOFinding]
     llm_findings: list[SSOFinding]
     llm_operand_bindings: list[OperandBinding]
     semantic_analysis_performed: bool
@@ -75,16 +77,20 @@ class SSOFindingExtractor:
             llm_findings = semantic.findings
             llm_operand_bindings = semantic.operand_bindings
             findings.extend(llm_findings)
+        static_findings = extract_embedded_shell_findings(artifacts)
+        findings.extend(static_findings)
         findings = self._dedupe_findings(findings)
         findings.sort(key=lambda item: (item.artifact_path, item.span.start_line if item.span else 0, item.finding_id))
         return SSOFindingExtractionResult(
             findings=findings,
             semgrep_findings=semgrep_findings,
+            static_findings=static_findings,
             llm_findings=llm_findings,
             llm_operand_bindings=llm_operand_bindings,
             semantic_analysis_performed=semantic_analysis_performed,
             metadata={
                 "semgrep": dict(self.semgrep.last_run),
+                "static_shell_semantics": {"finding_count": len(static_findings)},
                 "llm_semantic": {
                     "performed": semantic_analysis_performed,
                     "artifact_count": llm_artifact_count,

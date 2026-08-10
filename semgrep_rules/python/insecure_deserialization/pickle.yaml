@@ -1,11 +1,13 @@
 rules:
-- id: no-pickle-Unpickler-__init__
+- id: sso.python.insecure_deserialization.pickle.0001.no-pickle-Unpickler-__init__
   languages:
   - python
   message: Avoid using pickle.Unpickler.__init__(), as it can lead to potential issues with insecure deserialization.
   metadata:
     api: pickle.Unpickler.__init__()
     category: Insecure Deserialization
+    malskills_sso_category: payload_execution
+    malskills_subtype: unsafe_deserialization
   pattern-either:
   - pattern: pickle.Unpickler.__init__(...)
   - pattern: $VAR = pickle.Unpickler.__init__
@@ -14,26 +16,30 @@ rules:
   severity: WARNING
   tags:
   - Insecure Deserialization
-- id: no-pickle-load
+- id: sso.python.insecure_deserialization.pickle.0002.no-pickle-load
   languages:
   - python
   message: Avoid using pickle.load(), as it can lead to potential issues with insecure deserialization.
   metadata:
     api: pickle.load()
     category: Insecure Deserialization
+    malskills_sso_category: payload_execution
+    malskills_subtype: unsafe_deserialization
   pattern-either:
   - pattern: pickle.load(...)
   - pattern: $VAR = pickle.load
   severity: WARNING
   tags:
   - Insecure Deserialization
-- id: no-pickle-loads
+- id: sso.python.insecure_deserialization.pickle.0003.no-pickle-loads
   languages:
   - python
   message: Avoid using pickle.loads(), as it can lead to potential issues with insecure deserialization.
   metadata:
     api: pickle.loads()
     category: Insecure Deserialization
+    malskills_sso_category: payload_execution
+    malskills_subtype: unsafe_deserialization
   pattern-either:
   - pattern: pickle.loads(...)
   - pattern: $VAR = pickle.loads

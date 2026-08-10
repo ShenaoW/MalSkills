@@ -1,11 +1,13 @@
 rules:
-- id: no-java-lang-Class-newInstance
+- id: sso.java.dynamic_execution.java.0001.no-java-lang-Class-newInstance
   languages:
   - java
   message: Avoid using java.lang.Class.newInstance(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: java.lang.Class.newInstance()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: new java.lang.Class.newInstance(...)
   - pattern: java.lang.Class.newInstance(...)
@@ -19,13 +21,15 @@ rules:
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-java-lang-ClassLoader-loadClass
+- id: sso.java.dynamic_execution.java.0002.no-java-lang-ClassLoader-loadClass
   languages:
   - java
   message: Avoid using java.lang.ClassLoader.loadClass(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: java.lang.ClassLoader.loadClass()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: new java.lang.ClassLoader.loadClass(...)
   - pattern: java.lang.ClassLoader.loadClass(...)
@@ -39,13 +43,15 @@ rules:
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-java-net-URLClassLoader-getResourceAsStream
+- id: sso.java.dynamic_execution.java.0003.no-java-net-URLClassLoader-getResourceAsStream
   languages:
   - java
   message: Avoid using java.net.URLClassLoader.getResourceAsStream(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: java.net.URLClassLoader.getResourceAsStream()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: new java.net.URLClassLoader.getResourceAsStream(...)
   - pattern: java.net.URLClassLoader.getResourceAsStream(...)
@@ -59,13 +65,15 @@ rules:
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-java-net-URLClassLoader-loadClass
+- id: sso.java.dynamic_execution.java.0004.no-java-net-URLClassLoader-loadClass
   languages:
   - java
   message: Avoid using java.net.URLClassLoader.loadClass(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: java.net.URLClassLoader.loadClass()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: new java.net.URLClassLoader.loadClass(...)
   - pattern: java.net.URLClassLoader.loadClass(...)

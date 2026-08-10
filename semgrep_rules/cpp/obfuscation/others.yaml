@@ -1,115 +1,133 @@
 rules:
-- id: no-CheckRemoteDebuggerPresent
+- id: sso.cpp.obfuscation.others.0001.no-CheckRemoteDebuggerPresent
   languages:
   - cpp
   message: Avoid using CheckRemoteDebuggerPresent(), as it can lead to potential issues with obfuscation.
   metadata:
     api: CheckRemoteDebuggerPresent()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: CheckRemoteDebuggerPresent(...)
   - pattern: $VAR = CheckRemoteDebuggerPresent
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-IsDebuggerPresent
+- id: sso.cpp.obfuscation.others.0002.no-IsDebuggerPresent
   languages:
   - cpp
   message: Avoid using IsDebuggerPresent(), as it can lead to potential issues with obfuscation.
   metadata:
     api: IsDebuggerPresent()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: IsDebuggerPresent(...)
   - pattern: $VAR = IsDebuggerPresent
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-OutputDebugStringA
+- id: sso.cpp.obfuscation.others.0003.no-OutputDebugStringA
   languages:
   - cpp
   message: Avoid using OutputDebugStringA(), as it can lead to potential issues with obfuscation.
   metadata:
     api: OutputDebugStringA()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: OutputDebugStringA(...)
   - pattern: $VAR = OutputDebugStringA
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-OutputDebugStringW
+- id: sso.cpp.obfuscation.others.0004.no-OutputDebugStringW
   languages:
   - cpp
   message: Avoid using OutputDebugStringW(), as it can lead to potential issues with obfuscation.
   metadata:
     api: OutputDebugStringW()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: OutputDebugStringW(...)
   - pattern: $VAR = OutputDebugStringW
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-__asm
+- id: sso.cpp.obfuscation.others.0005.no-__asm
   languages:
   - cpp
   message: Avoid using __asm(), as it can lead to potential issues with obfuscation.
   metadata:
     api: __asm()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: __asm(...)
   - pattern: $VAR = __asm
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-__asm__
+- id: sso.cpp.obfuscation.others.0006.no-__asm__
   languages:
   - cpp
   message: Avoid using __asm__(), as it can lead to potential issues with obfuscation.
   metadata:
     api: __asm__()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: __asm__(...)
   - pattern: $VAR = __asm__
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-_asm
+- id: sso.cpp.obfuscation.others.0007.no-_asm
   languages:
   - cpp
   message: Avoid using _asm(), as it can lead to potential issues with obfuscation.
   metadata:
     api: _asm()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: _asm(...)
   - pattern: $VAR = _asm
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-macro
+- id: sso.cpp.obfuscation.others.0008.no-macro
   languages:
   - cpp
   message: Avoid using macro(), as it can lead to potential issues with obfuscation.
   metadata:
     api: macro()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: macro(...)
   - pattern: $VAR = macro
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-pclose
+- id: sso.cpp.obfuscation.others.0009.no-pclose
   languages:
   - cpp
   message: Avoid using pclose(), as it can lead to potential issues with obfuscation.
   metadata:
     api: pclose()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: pclose(...)
   - pattern: $VAR = pclose

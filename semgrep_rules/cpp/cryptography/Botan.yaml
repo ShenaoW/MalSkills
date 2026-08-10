@@ -1,11 +1,13 @@
 rules:
-- id: no-Botan-AES_128-decrypt
+- id: sso.cpp.cryptography.Botan.0001.no-Botan-AES_128-decrypt
   languages:
   - cpp
   message: Avoid using Botan::AES_128::decrypt(), as it can lead to potential issues with cryptography.
   metadata:
     api: Botan::AES_128::decrypt()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
   pattern-either:
   - pattern: Botan::AES_128::decrypt(...)
   - pattern: $VAR = Botan::AES_128::decrypt
@@ -14,13 +16,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-Botan-AES_128-encrypt
+- id: sso.cpp.cryptography.Botan.0002.no-Botan-AES_128-encrypt
   languages:
   - cpp
   message: Avoid using Botan::AES_128::encrypt(), as it can lead to potential issues with cryptography.
   metadata:
     api: Botan::AES_128::encrypt()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
   pattern-either:
   - pattern: Botan::AES_128::encrypt(...)
   - pattern: $VAR = Botan::AES_128::encrypt
@@ -29,13 +33,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-Botan-Cipher_Mode-finish
+- id: sso.cpp.cryptography.Botan.0003.no-Botan-Cipher_Mode-finish
   languages:
   - cpp
   message: Avoid using Botan::Cipher_Mode::finish(), as it can lead to potential issues with cryptography.
   metadata:
     api: Botan::Cipher_Mode::finish()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
   pattern-either:
   - pattern: Botan::Cipher_Mode::finish(...)
   - pattern: $VAR = Botan::Cipher_Mode::finish
@@ -44,13 +50,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-Botan-Cipher_Mode-start
+- id: sso.cpp.cryptography.Botan.0004.no-Botan-Cipher_Mode-start
   languages:
   - cpp
   message: Avoid using Botan::Cipher_Mode::start(), as it can lead to potential issues with cryptography.
   metadata:
     api: Botan::Cipher_Mode::start()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
   pattern-either:
   - pattern: Botan::Cipher_Mode::start(...)
   - pattern: $VAR = Botan::Cipher_Mode::start

@@ -1,11 +1,13 @@
 rules:
-- id: no-CryptoPP-AES-Decryption
+- id: sso.cpp.obfuscation.CryptoPP.0001.no-CryptoPP-AES-Decryption
   languages:
   - cpp
   message: Avoid using CryptoPP::AES::Decryption(), as it can lead to potential issues with obfuscation.
   metadata:
     api: CryptoPP::AES::Decryption()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
   pattern-either:
   - pattern: CryptoPP::AES::Decryption(...)
   - pattern: $VAR = CryptoPP::AES::Decryption
@@ -14,13 +16,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-CryptoPP-AES-Encryption
+- id: sso.cpp.obfuscation.CryptoPP.0002.no-CryptoPP-AES-Encryption
   languages:
   - cpp
   message: Avoid using CryptoPP::AES::Encryption(), as it can lead to potential issues with obfuscation.
   metadata:
     api: CryptoPP::AES::Encryption()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
   pattern-either:
   - pattern: CryptoPP::AES::Encryption(...)
   - pattern: $VAR = CryptoPP::AES::Encryption
@@ -29,39 +33,45 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-CryptoPP-HMAC
+- id: sso.cpp.obfuscation.CryptoPP.0003.no-CryptoPP-HMAC
   languages:
   - cpp
   message: Avoid using CryptoPP::HMAC(), as it can lead to potential issues with obfuscation.
   metadata:
     api: CryptoPP::HMAC()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: CryptoPP::HMAC(...)
   - pattern: $VAR = CryptoPP::HMAC
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-CryptoPP-MD5
+- id: sso.cpp.obfuscation.CryptoPP.0004.no-CryptoPP-MD5
   languages:
   - cpp
   message: Avoid using CryptoPP::MD5(), as it can lead to potential issues with obfuscation.
   metadata:
     api: CryptoPP::MD5()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: CryptoPP::MD5(...)
   - pattern: $VAR = CryptoPP::MD5
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-CryptoPP-RSA-Decryption
+- id: sso.cpp.obfuscation.CryptoPP.0005.no-CryptoPP-RSA-Decryption
   languages:
   - cpp
   message: Avoid using CryptoPP::RSA::Decryption(), as it can lead to potential issues with obfuscation.
   metadata:
     api: CryptoPP::RSA::Decryption()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
   pattern-either:
   - pattern: CryptoPP::RSA::Decryption(...)
   - pattern: $VAR = CryptoPP::RSA::Decryption
@@ -70,13 +80,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-CryptoPP-RSA-Encryption
+- id: sso.cpp.obfuscation.CryptoPP.0006.no-CryptoPP-RSA-Encryption
   languages:
   - cpp
   message: Avoid using CryptoPP::RSA::Encryption(), as it can lead to potential issues with obfuscation.
   metadata:
     api: CryptoPP::RSA::Encryption()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
   pattern-either:
   - pattern: CryptoPP::RSA::Encryption(...)
   - pattern: $VAR = CryptoPP::RSA::Encryption
@@ -85,13 +97,15 @@ rules:
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-CryptoPP-SHA256
+- id: sso.cpp.obfuscation.CryptoPP.0007.no-CryptoPP-SHA256
   languages:
   - cpp
   message: Avoid using CryptoPP::SHA256(), as it can lead to potential issues with obfuscation.
   metadata:
     api: CryptoPP::SHA256()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: CryptoPP::SHA256(...)
   - pattern: $VAR = CryptoPP::SHA256

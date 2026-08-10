@@ -787,7 +787,8 @@ class RuleRegistry:
         normalized["roles"] = roles
         normalized["relations"] = relations
         normalized["severity"] = "high"
-        normalized["decision_effect"] = "suspicious"
+        normalized["decision_effect"] = "candidate"
+        normalized["source"] = "learned"
         normalized["rule_id"] = f"learned.workflow.{spec['workflow_name']}.{fingerprint[:12]}"
         return normalized
 

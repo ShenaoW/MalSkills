@@ -1,11 +1,13 @@
 rules:
-- id: no-groovy-lang-GroovyShell-evaluate
+- id: sso.java.command_execution.groovy.0001.no-groovy-lang-GroovyShell-evaluate
   languages:
   - java
   message: Avoid using groovy.lang.GroovyShell.evaluate(), as it can lead to potential issues with command execution.
   metadata:
     api: groovy.lang.GroovyShell.evaluate()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: new groovy.lang.GroovyShell.evaluate(...)
   - pattern: groovy.lang.GroovyShell.evaluate(...)
@@ -19,13 +21,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-groovy-lang-GroovyShell-parse
+- id: sso.java.command_execution.groovy.0002.no-groovy-lang-GroovyShell-parse
   languages:
   - java
   message: Avoid using groovy.lang.GroovyShell.parse(), as it can lead to potential issues with command execution.
   metadata:
     api: groovy.lang.GroovyShell.parse()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: new groovy.lang.GroovyShell.parse(...)
   - pattern: groovy.lang.GroovyShell.parse(...)

@@ -1,24 +1,28 @@
 rules:
-- id: no-smtplib-SMTP
+- id: sso.python.network_access.smtplib.0001.no-smtplib-SMTP
   languages:
   - python
   message: Avoid using smtplib.SMTP(), as it can lead to potential issues with network access.
   metadata:
     api: smtplib.SMTP()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: smtplib.SMTP(...)
   - pattern: $VAR = smtplib.SMTP
   severity: WARNING
   tags:
   - Network Access
-- id: no-smtplib-SMTP-connect
+- id: sso.python.network_access.smtplib.0002.no-smtplib-SMTP-connect
   languages:
   - python
   message: Avoid using smtplib.SMTP.connect(), as it can lead to potential issues with network access.
   metadata:
     api: smtplib.SMTP.connect()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: smtplib.SMTP.connect(...)
   - pattern: $VAR = smtplib.SMTP.connect
@@ -27,13 +31,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-smtplib-SMTP-login
+- id: sso.python.network_access.smtplib.0003.no-smtplib-SMTP-login
   languages:
   - python
   message: Avoid using smtplib.SMTP.login(), as it can lead to potential issues with network access.
   metadata:
     api: smtplib.SMTP.login()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: smtplib.SMTP.login(...)
   - pattern: $VAR = smtplib.SMTP.login
@@ -42,13 +48,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-smtplib-SMTP-sendmail
+- id: sso.python.network_access.smtplib.0004.no-smtplib-SMTP-sendmail
   languages:
   - python
   message: Avoid using smtplib.SMTP.sendmail(), as it can lead to potential issues with network access.
   metadata:
     api: smtplib.SMTP.sendmail()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: smtplib.SMTP.sendmail(...)
   - pattern: $VAR = smtplib.SMTP.sendmail

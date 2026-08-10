@@ -1,37 +1,43 @@
 rules:
-- id: no-cipher.NewCBCDecrypter
+- id: sso.go.cryptography.cipher.0001.no-cipher.NewCBCDecrypter
   languages:
   - go
   message: Avoid using cipher.NewCBCDecrypter(), as it can lead to potential issues with cryptography.
   metadata:
     api: cipher.NewCBCDecrypter()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
   pattern-either:
   - pattern: cipher.NewCBCDecrypter(...)
   - pattern: $VAR = cipher.NewCBCDecrypter
   severity: WARNING
   tags:
   - Cryptography
-- id: no-cipher.NewCFBDecrypter
+- id: sso.go.cryptography.cipher.0002.no-cipher.NewCFBDecrypter
   languages:
   - go
   message: Avoid using cipher.NewCFBDecrypter(), as it can lead to potential issues with cryptography.
   metadata:
     api: cipher.NewCFBDecrypter()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
   pattern-either:
   - pattern: cipher.NewCFBDecrypter(...)
   - pattern: $VAR = cipher.NewCFBDecrypter
   severity: WARNING
   tags:
   - Cryptography
-- id: no-cipher.NewCTR
+- id: sso.go.cryptography.cipher.0003.no-cipher.NewCTR
   languages:
   - go
   message: Avoid using cipher.NewCTR(), as it can lead to potential issues with cryptography.
   metadata:
     api: cipher.NewCTR()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
   pattern-either:
   - pattern: cipher.NewCTR(...)
   - pattern: $VAR = cipher.NewCTR

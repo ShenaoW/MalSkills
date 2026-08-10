@@ -1,63 +1,73 @@
 rules:
-- id: no-IO.foreach
+- id: sso.ruby.file_or_system_operation.IO.0001.no-IO.foreach
   languages:
   - ruby
   message: Avoid using IO.foreach(), as it can lead to potential issues with file or system operation.
   metadata:
     api: IO.foreach()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: IO.foreach(...)
   - pattern: $VAR = IO.foreach
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-IO.open
+- id: sso.ruby.file_or_system_operation.IO.0002.no-IO.open
   languages:
   - ruby
   message: Avoid using IO.open(), as it can lead to potential issues with file or system operation.
   metadata:
     api: IO.open()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: IO.open(...)
   - pattern: $VAR = IO.open
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-IO.read
+- id: sso.ruby.file_or_system_operation.IO.0003.no-IO.read
   languages:
   - ruby
   message: Avoid using IO.read(), as it can lead to potential issues with file or system operation.
   metadata:
     api: IO.read()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: IO.read(...)
   - pattern: $VAR = IO.read
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-IO.readlines
+- id: sso.ruby.file_or_system_operation.IO.0004.no-IO.readlines
   languages:
   - ruby
   message: Avoid using IO.readlines(), as it can lead to potential issues with file or system operation.
   metadata:
     api: IO.readlines()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: IO.readlines(...)
   - pattern: $VAR = IO.readlines
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-IO.write
+- id: sso.ruby.file_or_system_operation.IO.0005.no-IO.write
   languages:
   - ruby
   message: Avoid using IO.write(), as it can lead to potential issues with file or system operation.
   metadata:
     api: IO.write()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: IO.write(...)
   - pattern: $VAR = IO.write

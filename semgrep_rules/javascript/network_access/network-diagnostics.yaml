@@ -1,63 +1,73 @@
 rules:
-- id: no-network-diagnostics-haveDNS
+- id: sso.javascript.network_access.network-diagnostics.0001.no-network-diagnostics-haveDNS
   languages:
   - javascript
   message: Avoid using network-diagnostics.haveDNS(), as it can lead to potential issues with network access.
   metadata:
     api: network-diagnostics.haveDNS()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: dns_resolution
   pattern-either:
   - pattern: network-diagnostics.haveDNS(...)
   - pattern: $VAR = network-diagnostics.haveDNS
   severity: WARNING
   tags:
   - Network Access
-- id: no-network-diagnostics-haveHTTP
+- id: sso.javascript.network_access.network-diagnostics.0002.no-network-diagnostics-haveHTTP
   languages:
   - javascript
   message: Avoid using network-diagnostics.haveHTTP(), as it can lead to potential issues with network access.
   metadata:
     api: network-diagnostics.haveHTTP()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: network-diagnostics.haveHTTP(...)
   - pattern: $VAR = network-diagnostics.haveHTTP
   severity: WARNING
   tags:
   - Network Access
-- id: no-network-diagnostics-haveHTTPS
+- id: sso.javascript.network_access.network-diagnostics.0003.no-network-diagnostics-haveHTTPS
   languages:
   - javascript
   message: Avoid using network-diagnostics.haveHTTPS(), as it can lead to potential issues with network access.
   metadata:
     api: network-diagnostics.haveHTTPS()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: network-diagnostics.haveHTTPS(...)
   - pattern: $VAR = network-diagnostics.haveHTTPS
   severity: WARNING
   tags:
   - Network Access
-- id: no-network-diagnostics-havePing
+- id: sso.javascript.network_access.network-diagnostics.0004.no-network-diagnostics-havePing
   languages:
   - javascript
   message: Avoid using network-diagnostics.havePing(), as it can lead to potential issues with network access.
   metadata:
     api: network-diagnostics.havePing()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: network-diagnostics.havePing(...)
   - pattern: $VAR = network-diagnostics.havePing
   severity: WARNING
   tags:
   - Network Access
-- id: no-require-network-diagnostics
+- id: sso.javascript.network_access.network-diagnostics.0005.no-require-network-diagnostics
   languages:
   - javascript
   message: Avoid using require('network-diagnostics'), as it can lead to potential issues with network access.
   metadata:
     api: require('network-diagnostics')
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern: require('network-diagnostics')
   severity: WARNING
   tags:

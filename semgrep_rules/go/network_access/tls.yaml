@@ -1,24 +1,28 @@
 rules:
-- id: no-tls.Dial
+- id: sso.go.network_access.tls.0001.no-tls.Dial
   languages:
   - go
   message: Avoid using tls.Dial(), as it can lead to potential issues with network access.
   metadata:
     api: tls.Dial()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: tls.Dial(...)
   - pattern: $VAR = tls.Dial
   severity: WARNING
   tags:
   - Network Access
-- id: no-tls.Listen
+- id: sso.go.network_access.tls.0002.no-tls.Listen
   languages:
   - go
   message: Avoid using tls.Listen(), as it can lead to potential issues with network access.
   metadata:
     api: tls.Listen()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
   pattern-either:
   - pattern: tls.Listen(...)
   - pattern: $VAR = tls.Listen

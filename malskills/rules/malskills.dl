@@ -17,7 +17,7 @@
 .decl pattern_match(id:symbol, name:symbol, severity:symbol)
 .decl pattern_support(id:symbol, sso_id:symbol)
 .decl analysis_meta(key:symbol, value:symbol)
-.decl verdict(label:symbol, score:symbol)
+.decl verdict(label:symbol)
 
 .input artifact
 .input artifact_meta

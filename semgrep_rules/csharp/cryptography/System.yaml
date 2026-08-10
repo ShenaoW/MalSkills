@@ -1,11 +1,13 @@
 rules:
-- id: no-System-Security-Cryptography-Aes-Create
+- id: sso.csharp.cryptography.System.0001.no-System-Security-Cryptography-Aes-Create
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.Aes.Create(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.Aes.Create()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: System.Security.Cryptography.Aes.Create(...)
   - pattern: $VAR = System.Security.Cryptography.Aes.Create
@@ -18,13 +20,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-AesManaged-CreateDecryptor
+- id: sso.csharp.cryptography.System.0002.no-System-Security-Cryptography-AesManaged-CreateDecryptor
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.AesManaged.CreateDecryptor(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.AesManaged.CreateDecryptor()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
   pattern-either:
   - pattern: System.Security.Cryptography.AesManaged.CreateDecryptor(...)
   - pattern: $VAR = System.Security.Cryptography.AesManaged.CreateDecryptor
@@ -37,13 +41,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-AesManaged-CreateEncryptor
+- id: sso.csharp.cryptography.System.0003.no-System-Security-Cryptography-AesManaged-CreateEncryptor
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.AesManaged.CreateEncryptor(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.AesManaged.CreateEncryptor()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
   pattern-either:
   - pattern: System.Security.Cryptography.AesManaged.CreateEncryptor(...)
   - pattern: $VAR = System.Security.Cryptography.AesManaged.CreateEncryptor
@@ -56,13 +62,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-DES-Create
+- id: sso.csharp.cryptography.System.0004.no-System-Security-Cryptography-DES-Create
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.DES.Create(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.DES.Create()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
   pattern-either:
   - pattern: System.Security.Cryptography.DES.Create(...)
   - pattern: $VAR = System.Security.Cryptography.DES.Create
@@ -75,13 +83,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-DESCryptoServiceProvider-CreateDecryptor
+- id: sso.csharp.cryptography.System.0005.no-System-Security-Cryptography-DESCryptoServiceProvider-CreateDecryptor
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.DESCryptoServiceProvider.CreateDecryptor(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.DESCryptoServiceProvider.CreateDecryptor()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
   pattern-either:
   - pattern: System.Security.Cryptography.DESCryptoServiceProvider.CreateDecryptor(...)
   - pattern: $VAR = System.Security.Cryptography.DESCryptoServiceProvider.CreateDecryptor
@@ -94,13 +104,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-DESCryptoServiceProvider-CreateEncryptor
+- id: sso.csharp.cryptography.System.0006.no-System-Security-Cryptography-DESCryptoServiceProvider-CreateEncryptor
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.DESCryptoServiceProvider.CreateEncryptor(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.DESCryptoServiceProvider.CreateEncryptor()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
   pattern-either:
   - pattern: System.Security.Cryptography.DESCryptoServiceProvider.CreateEncryptor(...)
   - pattern: $VAR = System.Security.Cryptography.DESCryptoServiceProvider.CreateEncryptor
@@ -113,13 +125,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-ECDsa-Create
+- id: sso.csharp.cryptography.System.0007.no-System-Security-Cryptography-ECDsa-Create
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.ECDsa.Create(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.ECDsa.Create()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: System.Security.Cryptography.ECDsa.Create(...)
   - pattern: $VAR = System.Security.Cryptography.ECDsa.Create
@@ -132,13 +146,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-ECDsa-SignData
+- id: sso.csharp.cryptography.System.0008.no-System-Security-Cryptography-ECDsa-SignData
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.ECDsa.SignData(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.ECDsa.SignData()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: System.Security.Cryptography.ECDsa.SignData(...)
   - pattern: $VAR = System.Security.Cryptography.ECDsa.SignData
@@ -151,13 +167,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-ECDsa-VerifyData
+- id: sso.csharp.cryptography.System.0009.no-System-Security-Cryptography-ECDsa-VerifyData
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.ECDsa.VerifyData(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.ECDsa.VerifyData()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: System.Security.Cryptography.ECDsa.VerifyData(...)
   - pattern: $VAR = System.Security.Cryptography.ECDsa.VerifyData
@@ -170,13 +188,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-HMACMD5-ComputeHash
+- id: sso.csharp.cryptography.System.0010.no-System-Security-Cryptography-HMACMD5-ComputeHash
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.HMACMD5.ComputeHash(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.HMACMD5.ComputeHash()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: System.Security.Cryptography.HMACMD5.ComputeHash(...)
   - pattern: $VAR = System.Security.Cryptography.HMACMD5.ComputeHash
@@ -189,13 +209,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-HMACSHA1-ComputeHash
+- id: sso.csharp.cryptography.System.0011.no-System-Security-Cryptography-HMACSHA1-ComputeHash
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.HMACSHA1.ComputeHash(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.HMACSHA1.ComputeHash()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: System.Security.Cryptography.HMACSHA1.ComputeHash(...)
   - pattern: $VAR = System.Security.Cryptography.HMACSHA1.ComputeHash
@@ -208,13 +230,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-HMACSHA256-ComputeHash
+- id: sso.csharp.cryptography.System.0012.no-System-Security-Cryptography-HMACSHA256-ComputeHash
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.HMACSHA256.ComputeHash(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.HMACSHA256.ComputeHash()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: System.Security.Cryptography.HMACSHA256.ComputeHash(...)
   - pattern: $VAR = System.Security.Cryptography.HMACSHA256.ComputeHash
@@ -227,13 +251,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-HashAlgorithm-Create
+- id: sso.csharp.cryptography.System.0013.no-System-Security-Cryptography-HashAlgorithm-Create
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.HashAlgorithm.Create(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.HashAlgorithm.Create()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: System.Security.Cryptography.HashAlgorithm.Create(...)
   - pattern: $VAR = System.Security.Cryptography.HashAlgorithm.Create
@@ -246,13 +272,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-KeyedHashAlgorithm-Create
+- id: sso.csharp.cryptography.System.0014.no-System-Security-Cryptography-KeyedHashAlgorithm-Create
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.KeyedHashAlgorithm.Create(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.KeyedHashAlgorithm.Create()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: System.Security.Cryptography.KeyedHashAlgorithm.Create(...)
   - pattern: $VAR = System.Security.Cryptography.KeyedHashAlgorithm.Create
@@ -265,13 +293,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-MD5-ComputeHash
+- id: sso.csharp.cryptography.System.0015.no-System-Security-Cryptography-MD5-ComputeHash
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.MD5.ComputeHash(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.MD5.ComputeHash()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: System.Security.Cryptography.MD5.ComputeHash(...)
   - pattern: $VAR = System.Security.Cryptography.MD5.ComputeHash
@@ -284,13 +314,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-MD5-Create
+- id: sso.csharp.cryptography.System.0016.no-System-Security-Cryptography-MD5-Create
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.MD5.Create(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.MD5.Create()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: System.Security.Cryptography.MD5.Create(...)
   - pattern: $VAR = System.Security.Cryptography.MD5.Create
@@ -303,13 +335,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-PasswordDeriveBytes-GetBytes
+- id: sso.csharp.cryptography.System.0017.no-System-Security-Cryptography-PasswordDeriveBytes-GetBytes
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.PasswordDeriveBytes.GetBytes(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.PasswordDeriveBytes.GetBytes()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
   pattern-either:
   - pattern: System.Security.Cryptography.PasswordDeriveBytes.GetBytes(...)
   - pattern: $VAR = System.Security.Cryptography.PasswordDeriveBytes.GetBytes
@@ -322,13 +356,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-RSA-Create
+- id: sso.csharp.cryptography.System.0018.no-System-Security-Cryptography-RSA-Create
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.RSA.Create(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.RSA.Create()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: System.Security.Cryptography.RSA.Create(...)
   - pattern: $VAR = System.Security.Cryptography.RSA.Create
@@ -341,13 +377,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-RSA-Decrypt
+- id: sso.csharp.cryptography.System.0019.no-System-Security-Cryptography-RSA-Decrypt
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.RSA.Decrypt(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.RSA.Decrypt()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
   pattern-either:
   - pattern: System.Security.Cryptography.RSA.Decrypt(...)
   - pattern: $VAR = System.Security.Cryptography.RSA.Decrypt
@@ -360,13 +398,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-RSA-Encrypt
+- id: sso.csharp.cryptography.System.0020.no-System-Security-Cryptography-RSA-Encrypt
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.RSA.Encrypt(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.RSA.Encrypt()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
   pattern-either:
   - pattern: System.Security.Cryptography.RSA.Encrypt(...)
   - pattern: $VAR = System.Security.Cryptography.RSA.Encrypt
@@ -379,13 +419,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-RSACryptoServiceProvider-Decrypt
+- id: sso.csharp.cryptography.System.0021.no-System-Security-Cryptography-RSACryptoServiceProvider-Decrypt
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.RSACryptoServiceProvider.Decrypt(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.RSACryptoServiceProvider.Decrypt()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
   pattern-either:
   - pattern: System.Security.Cryptography.RSACryptoServiceProvider.Decrypt(...)
   - pattern: $VAR = System.Security.Cryptography.RSACryptoServiceProvider.Decrypt
@@ -398,13 +440,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-RSACryptoServiceProvider-Encrypt
+- id: sso.csharp.cryptography.System.0022.no-System-Security-Cryptography-RSACryptoServiceProvider-Encrypt
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.RSACryptoServiceProvider.Encrypt(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.RSACryptoServiceProvider.Encrypt()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
   pattern-either:
   - pattern: System.Security.Cryptography.RSACryptoServiceProvider.Encrypt(...)
   - pattern: $VAR = System.Security.Cryptography.RSACryptoServiceProvider.Encrypt
@@ -417,13 +461,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-RandomNumberGenerator-Create
+- id: sso.csharp.cryptography.System.0023.no-System-Security-Cryptography-RandomNumberGenerator-Create
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.RandomNumberGenerator.Create(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.RandomNumberGenerator.Create()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: System.Security.Cryptography.RandomNumberGenerator.Create(...)
   - pattern: $VAR = System.Security.Cryptography.RandomNumberGenerator.Create
@@ -436,13 +482,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-RandomNumberGenerator-GetBytes
+- id: sso.csharp.cryptography.System.0024.no-System-Security-Cryptography-RandomNumberGenerator-GetBytes
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.RandomNumberGenerator.GetBytes(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.RandomNumberGenerator.GetBytes()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
   pattern-either:
   - pattern: System.Security.Cryptography.RandomNumberGenerator.GetBytes(...)
   - pattern: $VAR = System.Security.Cryptography.RandomNumberGenerator.GetBytes
@@ -455,13 +503,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-Rfc2898DeriveBytes-GetBytes
+- id: sso.csharp.cryptography.System.0025.no-System-Security-Cryptography-Rfc2898DeriveBytes-GetBytes
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.Rfc2898DeriveBytes.GetBytes(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.Rfc2898DeriveBytes.GetBytes()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
   pattern-either:
   - pattern: System.Security.Cryptography.Rfc2898DeriveBytes.GetBytes(...)
   - pattern: $VAR = System.Security.Cryptography.Rfc2898DeriveBytes.GetBytes
@@ -474,13 +524,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-Rfc2898DeriveBytes-Reset
+- id: sso.csharp.cryptography.System.0026.no-System-Security-Cryptography-Rfc2898DeriveBytes-Reset
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.Rfc2898DeriveBytes.Reset(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.Rfc2898DeriveBytes.Reset()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
   pattern-either:
   - pattern: System.Security.Cryptography.Rfc2898DeriveBytes.Reset(...)
   - pattern: $VAR = System.Security.Cryptography.Rfc2898DeriveBytes.Reset
@@ -493,13 +545,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-Rijndael-Create
+- id: sso.csharp.cryptography.System.0027.no-System-Security-Cryptography-Rijndael-Create
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.Rijndael.Create(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.Rijndael.Create()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
   pattern-either:
   - pattern: System.Security.Cryptography.Rijndael.Create(...)
   - pattern: $VAR = System.Security.Cryptography.Rijndael.Create
@@ -512,13 +566,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-RijndaelManaged-CreateDecryptor
+- id: sso.csharp.cryptography.System.0028.no-System-Security-Cryptography-RijndaelManaged-CreateDecryptor
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.RijndaelManaged.CreateDecryptor(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.RijndaelManaged.CreateDecryptor()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
   pattern-either:
   - pattern: System.Security.Cryptography.RijndaelManaged.CreateDecryptor(...)
   - pattern: $VAR = System.Security.Cryptography.RijndaelManaged.CreateDecryptor
@@ -531,13 +587,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-RijndaelManaged-CreateEncryptor
+- id: sso.csharp.cryptography.System.0029.no-System-Security-Cryptography-RijndaelManaged-CreateEncryptor
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.RijndaelManaged.CreateEncryptor(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.RijndaelManaged.CreateEncryptor()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
   pattern-either:
   - pattern: System.Security.Cryptography.RijndaelManaged.CreateEncryptor(...)
   - pattern: $VAR = System.Security.Cryptography.RijndaelManaged.CreateEncryptor
@@ -550,13 +608,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-SHA1-ComputeHash
+- id: sso.csharp.cryptography.System.0030.no-System-Security-Cryptography-SHA1-ComputeHash
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.SHA1.ComputeHash(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.SHA1.ComputeHash()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: System.Security.Cryptography.SHA1.ComputeHash(...)
   - pattern: $VAR = System.Security.Cryptography.SHA1.ComputeHash
@@ -569,13 +629,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-SHA1-Create
+- id: sso.csharp.cryptography.System.0031.no-System-Security-Cryptography-SHA1-Create
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.SHA1.Create(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.SHA1.Create()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: System.Security.Cryptography.SHA1.Create(...)
   - pattern: $VAR = System.Security.Cryptography.SHA1.Create
@@ -588,13 +650,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-SHA256-ComputeHash
+- id: sso.csharp.cryptography.System.0032.no-System-Security-Cryptography-SHA256-ComputeHash
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.SHA256.ComputeHash(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.SHA256.ComputeHash()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: System.Security.Cryptography.SHA256.ComputeHash(...)
   - pattern: $VAR = System.Security.Cryptography.SHA256.ComputeHash
@@ -607,13 +671,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-SHA256-Create
+- id: sso.csharp.cryptography.System.0033.no-System-Security-Cryptography-SHA256-Create
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.SHA256.Create(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.SHA256.Create()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: System.Security.Cryptography.SHA256.Create(...)
   - pattern: $VAR = System.Security.Cryptography.SHA256.Create
@@ -626,13 +692,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-SHA384-ComputeHash
+- id: sso.csharp.cryptography.System.0034.no-System-Security-Cryptography-SHA384-ComputeHash
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.SHA384.ComputeHash(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.SHA384.ComputeHash()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: System.Security.Cryptography.SHA384.ComputeHash(...)
   - pattern: $VAR = System.Security.Cryptography.SHA384.ComputeHash
@@ -645,13 +713,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-SHA384-Create
+- id: sso.csharp.cryptography.System.0035.no-System-Security-Cryptography-SHA384-Create
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.SHA384.Create(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.SHA384.Create()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: System.Security.Cryptography.SHA384.Create(...)
   - pattern: $VAR = System.Security.Cryptography.SHA384.Create
@@ -664,13 +734,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-SHA512-ComputeHash
+- id: sso.csharp.cryptography.System.0036.no-System-Security-Cryptography-SHA512-ComputeHash
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.SHA512.ComputeHash(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.SHA512.ComputeHash()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: System.Security.Cryptography.SHA512.ComputeHash(...)
   - pattern: $VAR = System.Security.Cryptography.SHA512.ComputeHash
@@ -683,13 +755,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-SHA512-Create
+- id: sso.csharp.cryptography.System.0037.no-System-Security-Cryptography-SHA512-Create
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.SHA512.Create(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.SHA512.Create()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
   pattern-either:
   - pattern: System.Security.Cryptography.SHA512.Create(...)
   - pattern: $VAR = System.Security.Cryptography.SHA512.Create
@@ -702,13 +776,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-SymmetricAlgorithm-CreateDecryptor
+- id: sso.csharp.cryptography.System.0038.no-System-Security-Cryptography-SymmetricAlgorithm-CreateDecryptor
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.SymmetricAlgorithm.CreateDecryptor(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.SymmetricAlgorithm.CreateDecryptor()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
   pattern-either:
   - pattern: System.Security.Cryptography.SymmetricAlgorithm.CreateDecryptor(...)
   - pattern: $VAR = System.Security.Cryptography.SymmetricAlgorithm.CreateDecryptor
@@ -721,13 +797,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-SymmetricAlgorithm-CreateEncryptor
+- id: sso.csharp.cryptography.System.0039.no-System-Security-Cryptography-SymmetricAlgorithm-CreateEncryptor
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.SymmetricAlgorithm.CreateEncryptor(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.SymmetricAlgorithm.CreateEncryptor()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
   pattern-either:
   - pattern: System.Security.Cryptography.SymmetricAlgorithm.CreateEncryptor(...)
   - pattern: $VAR = System.Security.Cryptography.SymmetricAlgorithm.CreateEncryptor
@@ -740,13 +818,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-TripleDES-Create
+- id: sso.csharp.cryptography.System.0040.no-System-Security-Cryptography-TripleDES-Create
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.TripleDES.Create(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.TripleDES.Create()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
   pattern-either:
   - pattern: System.Security.Cryptography.TripleDES.Create(...)
   - pattern: $VAR = System.Security.Cryptography.TripleDES.Create
@@ -759,13 +839,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-TripleDESCryptoServiceProvider-CreateDecryptor
+- id: sso.csharp.cryptography.System.0041.no-System-Security-Cryptography-TripleDESCryptoServiceProvider-CreateDecryptor
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.TripleDESCryptoServiceProvider.CreateDecryptor(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.TripleDESCryptoServiceProvider.CreateDecryptor()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
   pattern-either:
   - pattern: System.Security.Cryptography.TripleDESCryptoServiceProvider.CreateDecryptor(...)
   - pattern: $VAR = System.Security.Cryptography.TripleDESCryptoServiceProvider.CreateDecryptor
@@ -778,13 +860,15 @@ rules:
   severity: WARNING
   tags:
   - Cryptography
-- id: no-System-Security-Cryptography-TripleDESCryptoServiceProvider-CreateEncryptor
+- id: sso.csharp.cryptography.System.0042.no-System-Security-Cryptography-TripleDESCryptoServiceProvider-CreateEncryptor
   languages:
   - csharp
   message: Avoid using System.Security.Cryptography.TripleDESCryptoServiceProvider.CreateEncryptor(), as it can lead to potential issues with cryptography.
   metadata:
     api: System.Security.Cryptography.TripleDESCryptoServiceProvider.CreateEncryptor()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
   pattern-either:
   - pattern: System.Security.Cryptography.TripleDESCryptoServiceProvider.CreateEncryptor(...)
   - pattern: $VAR = System.Security.Cryptography.TripleDESCryptoServiceProvider.CreateEncryptor

@@ -1,24 +1,28 @@
 rules:
-- id: no-hex.DecodeString
+- id: sso.go.obfuscation.hex.0001.no-hex.DecodeString
   languages:
   - go
   message: Avoid using hex.DecodeString(), as it can lead to potential issues with obfuscation.
   metadata:
     api: hex.DecodeString()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: decoding
   pattern-either:
   - pattern: hex.DecodeString(...)
   - pattern: $VAR = hex.DecodeString
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-hex.EncodeToString
+- id: sso.go.obfuscation.hex.0002.no-hex.EncodeToString
   languages:
   - go
   message: Avoid using hex.EncodeToString(), as it can lead to potential issues with obfuscation.
   metadata:
     api: hex.EncodeToString()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: hex.EncodeToString(...)
   - pattern: $VAR = hex.EncodeToString

@@ -1,24 +1,28 @@
 rules:
-- id: no-gzip.NewReader
+- id: sso.go.obfuscation.gzip.0001.no-gzip.NewReader
   languages:
   - go
   message: Avoid using gzip.NewReader(), as it can lead to potential issues with obfuscation.
   metadata:
     api: gzip.NewReader()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: gzip.NewReader(...)
   - pattern: $VAR = gzip.NewReader
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-gzip.NewWriter
+- id: sso.go.obfuscation.gzip.0002.no-gzip.NewWriter
   languages:
   - go
   message: Avoid using gzip.NewWriter(), as it can lead to potential issues with obfuscation.
   metadata:
     api: gzip.NewWriter()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: gzip.NewWriter(...)
   - pattern: $VAR = gzip.NewWriter

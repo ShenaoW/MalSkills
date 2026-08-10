@@ -1,24 +1,28 @@
 rules:
-- id: no-sys-exit
+- id: sso.python.sensitive_data.sys.0001.no-sys-exit
   languages:
   - python
   message: Avoid using sys.exit(), as it can lead to potential issues with sensitive data.
   metadata:
     api: sys.exit()
     category: Sensitive Data
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: credential_data_access
   pattern-either:
   - pattern: sys.exit(...)
   - pattern: $VAR = sys.exit
   severity: WARNING
   tags:
   - Sensitive Data
-- id: no-sys-path
+- id: sso.python.sensitive_data.sys.0002.no-sys-path
   languages:
   - python
   message: Avoid using sys.path(), as it can lead to potential issues with sensitive data.
   metadata:
     api: sys.path()
     category: Sensitive Data
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: credential_data_access
   pattern-either:
   - pattern: sys.path(...)
   - pattern: $VAR = sys.path

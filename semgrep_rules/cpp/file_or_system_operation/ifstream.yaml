@@ -1,37 +1,43 @@
 rules:
-- id: no-ifstream-close
+- id: sso.cpp.file_or_system_operation.ifstream.0001.no-ifstream-close
   languages:
   - cpp
   message: Avoid using ifstream::close(), as it can lead to potential issues with file or system operation.
   metadata:
     api: ifstream::close()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: ifstream::close(...)
   - pattern: $VAR = ifstream::close
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-ifstream-open
+- id: sso.cpp.file_or_system_operation.ifstream.0002.no-ifstream-open
   languages:
   - cpp
   message: Avoid using ifstream::open(), as it can lead to potential issues with file or system operation.
   metadata:
     api: ifstream::open()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: ifstream::open(...)
   - pattern: $VAR = ifstream::open
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-ifstream-read
+- id: sso.cpp.file_or_system_operation.ifstream.0003.no-ifstream-read
   languages:
   - cpp
   message: Avoid using ifstream::read(), as it can lead to potential issues with file or system operation.
   metadata:
     api: ifstream::read()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: ifstream::read(...)
   - pattern: $VAR = ifstream::read

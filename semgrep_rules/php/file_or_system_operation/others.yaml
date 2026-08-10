@@ -1,11 +1,13 @@
 rules:
-- id: no-chgrp
+- id: sso.php.file_or_system_operation.others.0001.no-chgrp
   languages:
   - php
   message: Avoid using chgrp(), as it can lead to potential issues with file or system operation.
   metadata:
     api: chgrp()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: chgrp(...)
   - pattern: $VAR = chgrp(...)
@@ -14,13 +16,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-chmod
+- id: sso.php.file_or_system_operation.others.0002.no-chmod
   languages:
   - php
   message: Avoid using chmod(), as it can lead to potential issues with file or system operation.
   metadata:
     api: chmod()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
   pattern-either:
   - pattern: chmod(...)
   - pattern: $VAR = chmod(...)
@@ -29,13 +33,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-chown
+- id: sso.php.file_or_system_operation.others.0003.no-chown
   languages:
   - php
   message: Avoid using chown(), as it can lead to potential issues with file or system operation.
   metadata:
     api: chown()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
   pattern-either:
   - pattern: chown(...)
   - pattern: $VAR = chown(...)
@@ -44,13 +50,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-closedir
+- id: sso.php.file_or_system_operation.others.0004.no-closedir
   languages:
   - php
   message: Avoid using closedir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: closedir()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: closedir(...)
   - pattern: $VAR = closedir(...)
@@ -59,13 +67,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fclose
+- id: sso.php.file_or_system_operation.others.0005.no-fclose
   languages:
   - php
   message: Avoid using fclose(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fclose()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fclose(...)
   - pattern: $VAR = fclose(...)
@@ -74,13 +84,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-file
+- id: sso.php.file_or_system_operation.others.0006.no-file
   languages:
   - php
   message: Avoid using file(), as it can lead to potential issues with file or system operation.
   metadata:
     api: file()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: file(...)
   - pattern: $VAR = file(...)
@@ -89,13 +101,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-file_exists
+- id: sso.php.file_or_system_operation.others.0007.no-file_exists
   languages:
   - php
   message: Avoid using file_exists(), as it can lead to potential issues with file or system operation.
   metadata:
     api: file_exists()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: file_exists(...)
   - pattern: $VAR = file_exists(...)
@@ -104,13 +118,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-filegroup
+- id: sso.php.file_or_system_operation.others.0008.no-filegroup
   languages:
   - php
   message: Avoid using filegroup(), as it can lead to potential issues with file or system operation.
   metadata:
     api: filegroup()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: filegroup(...)
   - pattern: $VAR = filegroup(...)
@@ -119,13 +135,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fileowner
+- id: sso.php.file_or_system_operation.others.0009.no-fileowner
   languages:
   - php
   message: Avoid using fileowner(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fileowner()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fileowner(...)
   - pattern: $VAR = fileowner(...)
@@ -134,13 +152,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fileperms
+- id: sso.php.file_or_system_operation.others.0010.no-fileperms
   languages:
   - php
   message: Avoid using fileperms(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fileperms()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fileperms(...)
   - pattern: $VAR = fileperms(...)
@@ -149,13 +169,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fopen
+- id: sso.php.file_or_system_operation.others.0011.no-fopen
   languages:
   - php
   message: Avoid using fopen(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fopen()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fopen(...)
   - pattern: $VAR = fopen(...)
@@ -164,13 +186,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fread
+- id: sso.php.file_or_system_operation.others.0012.no-fread
   languages:
   - php
   message: Avoid using fread(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fread()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: fread(...)
   - pattern: $VAR = fread(...)
@@ -179,13 +203,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fwrite
+- id: sso.php.file_or_system_operation.others.0013.no-fwrite
   languages:
   - php
   message: Avoid using fwrite(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fwrite()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: fwrite(...)
   - pattern: $VAR = fwrite(...)
@@ -194,13 +220,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-glob
+- id: sso.php.file_or_system_operation.others.0014.no-glob
   languages:
   - php
   message: Avoid using glob(), as it can lead to potential issues with file or system operation.
   metadata:
     api: glob()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_search
   pattern-either:
   - pattern: glob(...)
   - pattern: $VAR = glob(...)
@@ -209,13 +237,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-is_dir
+- id: sso.php.file_or_system_operation.others.0015.no-is_dir
   languages:
   - php
   message: Avoid using is_dir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: is_dir()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: is_dir(...)
   - pattern: $VAR = is_dir(...)
@@ -224,13 +254,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-is_file
+- id: sso.php.file_or_system_operation.others.0016.no-is_file
   languages:
   - php
   message: Avoid using is_file(), as it can lead to potential issues with file or system operation.
   metadata:
     api: is_file()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: is_file(...)
   - pattern: $VAR = is_file(...)
@@ -239,13 +271,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-mkdir
+- id: sso.php.file_or_system_operation.others.0017.no-mkdir
   languages:
   - php
   message: Avoid using mkdir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: mkdir()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
   pattern-either:
   - pattern: mkdir(...)
   - pattern: $VAR = mkdir(...)
@@ -254,13 +288,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-opendir
+- id: sso.php.file_or_system_operation.others.0018.no-opendir
   languages:
   - php
   message: Avoid using opendir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: opendir()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: opendir(...)
   - pattern: $VAR = opendir(...)
@@ -269,13 +305,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-readdir
+- id: sso.php.file_or_system_operation.others.0019.no-readdir
   languages:
   - php
   message: Avoid using readdir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: readdir()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_search
   pattern-either:
   - pattern: readdir(...)
   - pattern: $VAR = readdir(...)
@@ -284,13 +322,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-rename
+- id: sso.php.file_or_system_operation.others.0020.no-rename
   languages:
   - php
   message: Avoid using rename(), as it can lead to potential issues with file or system operation.
   metadata:
     api: rename()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: rename(...)
   - pattern: $VAR = rename(...)
@@ -299,13 +339,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-rmdir
+- id: sso.php.file_or_system_operation.others.0021.no-rmdir
   languages:
   - php
   message: Avoid using rmdir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: rmdir()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
   pattern-either:
   - pattern: rmdir(...)
   - pattern: $VAR = rmdir(...)
@@ -314,13 +356,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-scandir
+- id: sso.php.file_or_system_operation.others.0022.no-scandir
   languages:
   - php
   message: Avoid using scandir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: scandir()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_search
   pattern-either:
   - pattern: scandir(...)
   - pattern: $VAR = scandir(...)
@@ -329,13 +373,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-stat
+- id: sso.php.file_or_system_operation.others.0023.no-stat
   languages:
   - php
   message: Avoid using stat(), as it can lead to potential issues with file or system operation.
   metadata:
     api: stat()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: stat(...)
   - pattern: $VAR = stat(...)
@@ -344,13 +390,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-touch
+- id: sso.php.file_or_system_operation.others.0024.no-touch
   languages:
   - php
   message: Avoid using touch(), as it can lead to potential issues with file or system operation.
   metadata:
     api: touch()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
   pattern-either:
   - pattern: touch(...)
   - pattern: $VAR = touch(...)
@@ -359,13 +407,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-unlink
+- id: sso.php.file_or_system_operation.others.0025.no-unlink
   languages:
   - php
   message: Avoid using unlink(), as it can lead to potential issues with file or system operation.
   metadata:
     api: unlink()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: link_operation
   pattern-either:
   - pattern: unlink(...)
   - pattern: $VAR = unlink(...)

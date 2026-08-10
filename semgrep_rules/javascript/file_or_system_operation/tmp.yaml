@@ -1,37 +1,43 @@
 rules:
-- id: no-tmp-dirSync
+- id: sso.javascript.file_or_system_operation.tmp.0001.no-tmp-dirSync
   languages:
   - javascript
   message: Avoid using tmp.dirSync(), as it can lead to potential issues with file or system operation.
   metadata:
     api: tmp.dirSync()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: tmp.dirSync(...)
   - pattern: $VAR = tmp.dirSync
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-tmp-fileSync
+- id: sso.javascript.file_or_system_operation.tmp.0002.no-tmp-fileSync
   languages:
   - javascript
   message: Avoid using tmp.fileSync(), as it can lead to potential issues with file or system operation.
   metadata:
     api: tmp.fileSync()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: tmp.fileSync(...)
   - pattern: $VAR = tmp.fileSync
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-require-tmp
+- id: sso.javascript.file_or_system_operation.tmp.0003.no-require-tmp
   languages:
   - javascript
   message: Avoid using require('tmp'), as it can lead to potential issues with file or system operation.
   metadata:
     api: require('tmp')
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern: require('tmp')
   severity: WARNING
   tags:

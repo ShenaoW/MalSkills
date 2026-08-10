@@ -72,6 +72,16 @@ malskills run-eval \
   --variant benchmark_full
 ```
 
+Evaluation prints colored stage events for every case: ingest, SSO extraction,
+SDG compilation, behavior reasoning, and result writing. It also prints a
+`WAIT` heartbeat every 30 seconds while a stage is running. The completed-case
+line includes the prediction, runtime, finding/SSO/operand counts, matched
+behavior patterns, the running confusion matrix, and its output directory.
+Change the heartbeat cadence with `--progress-interval SECONDS`, use
+`--color always` to preserve colors through a pipe such as `tee`, or use
+`--quiet` when only the final summary is needed. `NO_COLOR` disables ANSI color
+when `--color auto` is active.
+
 Render a readable report:
 
 ```bash
@@ -128,7 +138,7 @@ candidate observations.
 
 Each analyzed skill produces:
 
-- `verdict.json`: final label and score
+- `verdict.json`: final binary label, matched malicious patterns, and decision chain
 - `sso_findings.json`: source-grounded extractor findings used to form security-sensitive operations
 - `ssos.json`: normalized security-sensitive operations, with supporting Finding IDs and Operand IDs
 - `operands.json`: role-bearing objects used by SSOs, such as endpoint, command, payload, and path operands
@@ -146,6 +156,15 @@ The canonical analysis path is `SSOFinding -> SSO -> Operand -> Value -> Pattern
 `SSOFinding` records are source-grounded extractor outputs and are not SDG nodes.
 The canonical SDG path is `Artifact -> SSO -> Operand -> Value`; proven assignment
 or call propagation is represented by directional `Value -> Value` edges.
+
+SSO extraction uses a behavior-neutral taxonomy: code rules report atomic
+execution, network, file, sensitive-data, cryptographic, installation, process,
+and system-configuration operations rather than malicious tactics. The default
+code corpus contains 2,665 Semgrep rules across 10 languages; Markdown and Shell
+artifact rules are counted separately. See [the SSO taxonomy](docs/SSO_TAXONOMY.md).
+Formal behavior reasoning uses nine declarative, connected SDG queries rather
+than ATT&CK tactic labels or command-text matching. See
+[the behavior rules](docs/BEHAVIOR_RULES.md).
 
 ## Guarded rule learning
 

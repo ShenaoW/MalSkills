@@ -1,37 +1,43 @@
 rules:
-- id: no-nodemailer-createTestAccount
+- id: sso.javascript.network_access.nodemailer.0001.no-nodemailer-createTestAccount
   languages:
   - javascript
   message: Avoid using nodemailer.createTestAccount(), as it can lead to potential issues with network access.
   metadata:
     api: nodemailer.createTestAccount()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: nodemailer.createTestAccount(...)
   - pattern: $VAR = nodemailer.createTestAccount
   severity: WARNING
   tags:
   - Network Access
-- id: no-nodemailer-createTransport
+- id: sso.javascript.network_access.nodemailer.0002.no-nodemailer-createTransport
   languages:
   - javascript
   message: Avoid using nodemailer.createTransport(), as it can lead to potential issues with network access.
   metadata:
     api: nodemailer.createTransport()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: nodemailer.createTransport(...)
   - pattern: $VAR = nodemailer.createTransport
   severity: WARNING
   tags:
   - Network Access
-- id: no-require-nodemailer
+- id: sso.javascript.network_access.nodemailer.0003.no-require-nodemailer
   languages:
   - javascript
   message: Avoid using require('nodemailer'), as it can lead to potential issues with network access.
   metadata:
     api: require('nodemailer')
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern: require('nodemailer')
   severity: WARNING
   tags:

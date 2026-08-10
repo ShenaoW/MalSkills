@@ -1,11 +1,13 @@
 rules:
-- id: no-curl_close
+- id: sso.php.network_access.others.0001.no-curl_close
   languages:
   - php
   message: Avoid using curl_close(), as it can lead to potential issues with network access.
   metadata:
     api: curl_close()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: curl_close(...)
   - pattern: $VAR = curl_close(...)
@@ -14,13 +16,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-curl_exec
+- id: sso.php.network_access.others.0002.no-curl_exec
   languages:
   - php
   message: Avoid using curl_exec(), as it can lead to potential issues with network access.
   metadata:
     api: curl_exec()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: curl_exec(...)
   - pattern: $VAR = curl_exec(...)
@@ -29,13 +33,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-curl_getinfo
+- id: sso.php.network_access.others.0003.no-curl_getinfo
   languages:
   - php
   message: Avoid using curl_getinfo(), as it can lead to potential issues with network access.
   metadata:
     api: curl_getinfo()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: curl_getinfo(...)
   - pattern: $VAR = curl_getinfo(...)
@@ -44,13 +50,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-curl_init
+- id: sso.php.network_access.others.0004.no-curl_init
   languages:
   - php
   message: Avoid using curl_init(), as it can lead to potential issues with network access.
   metadata:
     api: curl_init()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: curl_init(...)
   - pattern: $VAR = curl_init(...)
@@ -59,13 +67,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-curl_multi_add_handle
+- id: sso.php.network_access.others.0005.no-curl_multi_add_handle
   languages:
   - php
   message: Avoid using curl_multi_add_handle(), as it can lead to potential issues with network access.
   metadata:
     api: curl_multi_add_handle()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: curl_multi_add_handle(...)
   - pattern: $VAR = curl_multi_add_handle(...)
@@ -74,13 +84,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-curl_multi_exec
+- id: sso.php.network_access.others.0006.no-curl_multi_exec
   languages:
   - php
   message: Avoid using curl_multi_exec(), as it can lead to potential issues with network access.
   metadata:
     api: curl_multi_exec()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: curl_multi_exec(...)
   - pattern: $VAR = curl_multi_exec(...)
@@ -89,13 +101,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-curl_multi_getcontent
+- id: sso.php.network_access.others.0007.no-curl_multi_getcontent
   languages:
   - php
   message: Avoid using curl_multi_getcontent(), as it can lead to potential issues with network access.
   metadata:
     api: curl_multi_getcontent()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: curl_multi_getcontent(...)
   - pattern: $VAR = curl_multi_getcontent(...)
@@ -104,13 +118,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-curl_multi_init
+- id: sso.php.network_access.others.0008.no-curl_multi_init
   languages:
   - php
   message: Avoid using curl_multi_init(), as it can lead to potential issues with network access.
   metadata:
     api: curl_multi_init()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: curl_multi_init(...)
   - pattern: $VAR = curl_multi_init(...)
@@ -119,13 +135,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-curl_setopt
+- id: sso.php.network_access.others.0009.no-curl_setopt
   languages:
   - php
   message: Avoid using curl_setopt(), as it can lead to potential issues with network access.
   metadata:
     api: curl_setopt()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: curl_setopt(...)
   - pattern: $VAR = curl_setopt(...)
@@ -134,13 +152,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-file_get_contents
+- id: sso.php.network_access.others.0010.no-file_get_contents
   languages:
   - php
   message: Avoid using file_get_contents(), as it can lead to potential issues with network access.
   metadata:
     api: file_get_contents()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: file_get_contents(...)
   - pattern: $VAR = file_get_contents(...)
@@ -149,13 +169,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-file_put_contents
+- id: sso.php.network_access.others.0011.no-file_put_contents
   languages:
   - php
   message: Avoid using file_put_contents(), as it can lead to potential issues with network access.
   metadata:
     api: file_put_contents()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: file_put_contents(...)
   - pattern: $VAR = file_put_contents(...)
@@ -164,13 +186,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-fsockopen
+- id: sso.php.network_access.others.0012.no-fsockopen
   languages:
   - php
   message: Avoid using fsockopen(), as it can lead to potential issues with network access.
   metadata:
     api: fsockopen()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: fsockopen(...)
   - pattern: $VAR = fsockopen(...)
@@ -179,13 +203,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-get_headers
+- id: sso.php.network_access.others.0013.no-get_headers
   languages:
   - php
   message: Avoid using get_headers(), as it can lead to potential issues with network access.
   metadata:
     api: get_headers()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: get_headers(...)
   - pattern: $VAR = get_headers(...)
@@ -194,13 +220,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-getenv
+- id: sso.php.network_access.others.0014.no-getenv
   languages:
   - php
   message: Avoid using getenv(), as it can lead to potential issues with network access.
   metadata:
     api: getenv()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: getenv(...)
   - pattern: $VAR = getenv(...)
@@ -209,13 +237,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-http_build_query
+- id: sso.php.network_access.others.0015.no-http_build_query
   languages:
   - php
   message: Avoid using http_build_query(), as it can lead to potential issues with network access.
   metadata:
     api: http_build_query()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: http_build_query(...)
   - pattern: $VAR = http_build_query(...)
@@ -224,13 +254,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-http_get
+- id: sso.php.network_access.others.0016.no-http_get
   languages:
   - php
   message: Avoid using http_get(), as it can lead to potential issues with network access.
   metadata:
     api: http_get()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: http_get(...)
   - pattern: $VAR = http_get(...)
@@ -239,13 +271,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-http_post
+- id: sso.php.network_access.others.0017.no-http_post
   languages:
   - php
   message: Avoid using http_post(), as it can lead to potential issues with network access.
   metadata:
     api: http_post()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: http_post(...)
   - pattern: $VAR = http_post(...)
@@ -254,13 +288,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-http_request
+- id: sso.php.network_access.others.0018.no-http_request
   languages:
   - php
   message: Avoid using http_request(), as it can lead to potential issues with network access.
   metadata:
     api: http_request()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: http_request(...)
   - pattern: $VAR = http_request(...)
@@ -269,13 +305,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-parse_url
+- id: sso.php.network_access.others.0019.no-parse_url
   languages:
   - php
   message: Avoid using parse_url(), as it can lead to potential issues with network access.
   metadata:
     api: parse_url()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: parse_url(...)
   - pattern: $VAR = parse_url(...)
@@ -284,13 +322,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-socket_close
+- id: sso.php.network_access.others.0020.no-socket_close
   languages:
   - php
   message: Avoid using socket_close(), as it can lead to potential issues with network access.
   metadata:
     api: socket_close()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: socket_close(...)
   - pattern: $VAR = socket_close(...)
@@ -299,13 +339,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-socket_connect
+- id: sso.php.network_access.others.0021.no-socket_connect
   languages:
   - php
   message: Avoid using socket_connect(), as it can lead to potential issues with network access.
   metadata:
     api: socket_connect()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: socket_connect(...)
   - pattern: $VAR = socket_connect(...)
@@ -314,13 +356,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-socket_create
+- id: sso.php.network_access.others.0022.no-socket_create
   languages:
   - php
   message: Avoid using socket_create(), as it can lead to potential issues with network access.
   metadata:
     api: socket_create()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: socket_create(...)
   - pattern: $VAR = socket_create(...)
@@ -329,13 +373,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-socket_read
+- id: sso.php.network_access.others.0023.no-socket_read
   languages:
   - php
   message: Avoid using socket_read(), as it can lead to potential issues with network access.
   metadata:
     api: socket_read()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: socket_read(...)
   - pattern: $VAR = socket_read(...)
@@ -344,13 +390,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-socket_write
+- id: sso.php.network_access.others.0024.no-socket_write
   languages:
   - php
   message: Avoid using socket_write(), as it can lead to potential issues with network access.
   metadata:
     api: socket_write()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: socket_write(...)
   - pattern: $VAR = socket_write(...)
@@ -359,13 +407,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-stream_context_create
+- id: sso.php.network_access.others.0025.no-stream_context_create
   languages:
   - php
   message: Avoid using stream_context_create(), as it can lead to potential issues with network access.
   metadata:
     api: stream_context_create()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: stream_context_create(...)
   - pattern: $VAR = stream_context_create(...)
@@ -374,13 +424,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-stream_context_get_options
+- id: sso.php.network_access.others.0026.no-stream_context_get_options
   languages:
   - php
   message: Avoid using stream_context_get_options(), as it can lead to potential issues with network access.
   metadata:
     api: stream_context_get_options()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: stream_context_get_options(...)
   - pattern: $VAR = stream_context_get_options(...)
@@ -389,13 +441,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-stream_context_set_option
+- id: sso.php.network_access.others.0027.no-stream_context_set_option
   languages:
   - php
   message: Avoid using stream_context_set_option(), as it can lead to potential issues with network access.
   metadata:
     api: stream_context_set_option()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: stream_context_set_option(...)
   - pattern: $VAR = stream_context_set_option(...)
@@ -404,13 +458,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-stream_select
+- id: sso.php.network_access.others.0028.no-stream_select
   languages:
   - php
   message: Avoid using stream_select(), as it can lead to potential issues with network access.
   metadata:
     api: stream_select()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: stream_select(...)
   - pattern: $VAR = stream_select(...)
@@ -419,13 +475,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-stream_socket_client
+- id: sso.php.network_access.others.0029.no-stream_socket_client
   languages:
   - php
   message: Avoid using stream_socket_client(), as it can lead to potential issues with network access.
   metadata:
     api: stream_socket_client()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: stream_socket_client(...)
   - pattern: $VAR = stream_socket_client(...)
@@ -434,13 +492,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-stream_socket_server
+- id: sso.php.network_access.others.0030.no-stream_socket_server
   languages:
   - php
   message: Avoid using stream_socket_server(), as it can lead to potential issues with network access.
   metadata:
     api: stream_socket_server()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
   pattern-either:
   - pattern: stream_socket_server(...)
   - pattern: $VAR = stream_socket_server(...)

@@ -3,9 +3,14 @@ from __future__ import annotations
 import hashlib
 import json
 import multiprocessing
+import os
+import queue as queue_module
 import re
+import sys
 import time
+from datetime import datetime
 from pathlib import Path
+from typing import Callable, TextIO
 
 from .baselines import (
     run_agentguard_baseline,
@@ -145,17 +150,29 @@ def _analyze_case_worker(skill_path: str, case_output_dir: str, config: Analyzer
             runner = _baseline_runners().get(config)
             if runner is None:
                 raise ValueError(f"unknown baseline config: {config}")
-            queue.put(runner(skill_path, case_output_dir))
+            queue.put({"message_type": "result", **runner(skill_path, case_output_dir)})
             return
         analyzer = SkillAnalyzer()
-        result = analyzer.analyze(skill_path, output_dir=case_output_dir, config=config)
+        result = analyzer.analyze(
+            skill_path,
+            output_dir=case_output_dir,
+            config=config,
+            progress=lambda event, fields: queue.put(
+                {
+                    "message_type": "progress",
+                    "event": event,
+                    "fields": fields,
+                }
+            ),
+        )
         queue.put(
             {
+                "message_type": "result",
                 "status": "ok",
                 "predicted": result.verdict.label,
-                "score": result.verdict.score,
                 "patterns": result.verdict.malicious_patterns,
                 "finding_count": len(result.findings),
+                "operand_count": len(result.operands),
                 "operand_resolution_count": len(result.operand_resolutions),
                 "sso_count": len(result.ssos),
             }
@@ -163,12 +180,13 @@ def _analyze_case_worker(skill_path: str, case_output_dir: str, config: Analyzer
     except Exception as exc:
         queue.put(
             {
+                "message_type": "result",
                 "status": "error",
                 "error": f"{type(exc).__name__}: {exc}",
                 "predicted": "error",
-                "score": 0.0,
                 "patterns": [],
                 "finding_count": 0,
+                "operand_count": 0,
                 "operand_resolution_count": 0,
                 "sso_count": 0,
             }
@@ -183,8 +201,60 @@ def _run_case_direct(skill_path: str, case_output_dir: Path, config: str) -> dic
 
 
 class Evaluator:
-    def __init__(self) -> None:
-        pass
+    def __init__(
+        self,
+        *,
+        progress: bool = False,
+        progress_interval_sec: float = 30.0,
+        progress_stream: TextIO | None = None,
+        color: str = "auto",
+    ) -> None:
+        self.progress = progress
+        self.progress_interval_sec = max(0.0, progress_interval_sec)
+        self.progress_stream = progress_stream or sys.stderr
+        self.color = color
+
+    def _colors_enabled(self) -> bool:
+        if self.color == "always":
+            return True
+        if self.color == "never" or os.environ.get("NO_COLOR") is not None:
+            return False
+        return bool(getattr(self.progress_stream, "isatty", lambda: False)())
+
+    def _paint(self, text: str, code: str) -> str:
+        if not self._colors_enabled():
+            return text
+        return f"\033[{code}m{text}\033[0m"
+
+    def _emit_progress(self, message: str, *, level: str = "INFO") -> None:
+        if self.progress:
+            level_colors = {
+                "DEBUG": "36",
+                "INFO": "34",
+                "SUCCESS": "32",
+                "WARNING": "33",
+                "ERROR": "31;1",
+            }
+            timestamp = datetime.now().strftime("%H:%M:%S.%f")[:-3]
+            rendered_level = self._paint(f"{level:<7}", level_colors.get(level, "0"))
+            rendered_time = self._paint(timestamp, "2")
+            print(
+                f"{rendered_time} | {rendered_level} | {message}",
+                file=self.progress_stream,
+                flush=True,
+            )
+
+    def _format_progress_fields(self, fields: object) -> str:
+        if not isinstance(fields, dict):
+            return ""
+        rendered = []
+        for key, value in fields.items():
+            if isinstance(value, (dict, list)):
+                text = json.dumps(value, sort_keys=True, ensure_ascii=True, separators=(",", ":"))
+            else:
+                text = str(value)
+            rendered.append(f"{key}={text}")
+        return " ".join(rendered)
 
     def run(
         self,
@@ -272,30 +342,69 @@ class Evaluator:
         destination = Path(output_dir)
         ensure_dir(destination)
         results = []
-        for entry in entries:
+        total = len(entries)
+        self._emit_progress(
+            f"[eval {variant}] START cases={total} output={destination.resolve()}"
+        )
+        for index, entry in enumerate(entries, start=1):
             started_at = time.perf_counter()
             case_output_dir = destination / "cases" / variant / self._stable_case_directory_name(entry.entry_id)
-            runtime_sec = time.perf_counter() - started_at
             manifest_path = case_output_dir / "output_manifest.json"
-            case_result = self._run_case(entry.local_path, case_output_dir, config)
+            prefix = f"[eval {variant} {index}/{total}]"
+            self._emit_progress(
+                f"{prefix} START gold={entry.label} id={entry.entry_id}"
+            )
+            case_result = self._run_case(
+                entry.local_path,
+                case_output_dir,
+                config,
+                on_wait=lambda elapsed, prefix=prefix, entry_id=entry.entry_id: self._emit_progress(
+                    f"{prefix} WAIT elapsed={elapsed:.0f}s id={entry_id}",
+                    level="WARNING",
+                ),
+                on_event=lambda event, fields, prefix=prefix: self._emit_progress(
+                    f"{prefix} {event.upper().replace('.', '_')} "
+                    f"{self._format_progress_fields(fields)}".rstrip(),
+                    level="SUCCESS" if event.endswith(".done") else "DEBUG",
+                ),
+            )
             runtime_sec = time.perf_counter() - started_at
-            results.append({
+            row = {
                 "entry_id": entry.entry_id,
                 "dataset": entry.dataset,
                 "split": entry.split,
                 "label": entry.label,
                 "status": case_result["status"],
                 "predicted": case_result["predicted"],
-                "score": case_result["score"],
                 "patterns": case_result["patterns"],
                 "runtime_sec": round(runtime_sec, 4),
                 "finding_count": case_result["finding_count"],
+                "operand_count": case_result.get("operand_count", 0),
                 "operand_resolution_count": case_result["operand_resolution_count"],
                 "sso_count": case_result["sso_count"],
                 "analysis_output_dir": str(case_output_dir.relative_to(destination)),
                 "analysis_manifest_path": str(manifest_path.relative_to(destination)),
                 "error": case_result.get("error", ""),
-            })
+            }
+            if "score" in case_result:
+                row["score"] = case_result["score"]
+            results.append(row)
+            running = self._compute_metrics(entries[:index], results)
+            pattern_text = ",".join(str(item) for item in row["patterns"]) or "none"
+            correct = row["predicted"] == row["label"]
+            self._emit_progress(
+                f"{prefix} DONE status={row['status']} gold={row['label']} "
+                f"pred={row['predicted']} correct={'yes' if correct else 'no'} "
+                f"time={runtime_sec:.1f}s findings={row['finding_count']} "
+                f"ssos={row['sso_count']} operands={row['operand_count']} "
+                f"resolutions={row['operand_resolution_count']} "
+                f"patterns={pattern_text} tp={int(running['tp'])} tn={int(running['tn'])} "
+                f"fp={int(running['fp'])} fn={int(running['fn'])} "
+                f"output={row['analysis_output_dir']}",
+                level="SUCCESS" if correct and row["status"] == "ok" else "ERROR",
+            )
+            if row["error"]:
+                self._emit_progress(f"{prefix} ERROR {row['error']}", level="ERROR")
         metrics = self._compute_metrics(entries, results)
         payload = {
             "variant": variant,
@@ -318,6 +427,14 @@ class Evaluator:
         payload["case_outputs"] = case_outputs
         (destination / f"eval_{variant}.json").write_text(json.dumps(to_jsonable(payload), indent=2, sort_keys=True), encoding="utf-8")
         (destination / f"case_outputs_{variant}.json").write_text(json.dumps(to_jsonable(case_outputs), indent=2, sort_keys=True), encoding="utf-8")
+        self._emit_progress(
+            f"[eval {variant}] COMPLETE cases={total} tp={int(metrics['tp'])} "
+            f"tn={int(metrics['tn'])} fp={int(metrics['fp'])} fn={int(metrics['fn'])} "
+            f"precision={metrics['precision']:.4f} recall={metrics['recall']:.4f} "
+            f"f1={metrics['f1']:.4f} errors={int(metrics['error_count'])} "
+            f"timeouts={int(metrics['timeout_count'])} "
+            f"report={(destination / f'eval_{variant}.json').resolve()}"
+        )
         return payload
 
     def _stable_case_directory_name(self, entry_id: str) -> str:
@@ -327,7 +444,15 @@ class Evaluator:
         digest = hashlib.sha1(entry_id.encode("utf-8")).hexdigest()[:10]
         return f"{slug}__{digest}"
 
-    def _run_case(self, skill_path: str, case_output_dir: Path, config: AnalyzerConfig | str) -> dict[str, object]:
+    def _run_case(
+        self,
+        skill_path: str,
+        case_output_dir: Path,
+        config: AnalyzerConfig | str,
+        *,
+        on_wait: Callable[[float], None] | None = None,
+        on_event: Callable[[str, dict[str, object]], None] | None = None,
+    ) -> dict[str, object]:
         ensure_dir(case_output_dir)
         if isinstance(config, str):
             try:
@@ -339,6 +464,7 @@ class Evaluator:
                     "score": 0.0,
                     "patterns": [],
                     "finding_count": 0,
+                    "operand_count": 0,
                     "operand_resolution_count": 0,
                     "sso_count": 0,
                     "error": f"{type(exc).__name__}: {exc}",
@@ -356,7 +482,50 @@ class Evaluator:
             daemon=True,
         )
         process.start()
-        process.join(BENCHMARK_CASE_TIMEOUT_SEC)
+        wait_started_at = time.monotonic()
+        last_heartbeat_at = wait_started_at
+        result_payload: dict[str, object] | None = None
+
+        def handle_message(message: object) -> None:
+            nonlocal result_payload
+            if not isinstance(message, dict):
+                return
+            if message.get("message_type") == "progress":
+                fields = message.get("fields", {})
+                if on_event is not None and isinstance(fields, dict):
+                    on_event(str(message.get("event", "progress")), fields)
+            elif message.get("message_type") == "result":
+                result_payload = {
+                    key: value
+                    for key, value in message.items()
+                    if key != "message_type"
+                }
+
+        def drain_messages() -> None:
+            while True:
+                try:
+                    message = queue.get_nowait()
+                except queue_module.Empty:
+                    break
+                handle_message(message)
+
+        while process.is_alive():
+            elapsed = time.monotonic() - wait_started_at
+            remaining = BENCHMARK_CASE_TIMEOUT_SEC - elapsed
+            if remaining <= 0:
+                break
+            wait_for = min(0.25, remaining)
+            process.join(wait_for)
+            drain_messages()
+            now = time.monotonic()
+            if (
+                process.is_alive()
+                and on_wait is not None
+                and self.progress_interval_sec > 0
+                and now - last_heartbeat_at >= self.progress_interval_sec
+            ):
+                on_wait(now - wait_started_at)
+                last_heartbeat_at = now
         if process.is_alive():
             process.terminate()
             process.join(5)
@@ -366,24 +535,31 @@ class Evaluator:
             payload = {
                 "status": "timeout",
                 "predicted": "timeout",
-                "score": 0.0,
                 "patterns": [],
                 "finding_count": 0,
+                "operand_count": 0,
                 "operand_resolution_count": 0,
                 "sso_count": 0,
                 "error": f"case timed out after {BENCHMARK_CASE_TIMEOUT_SEC}s",
             }
             (case_output_dir / "benchmark_case_status.json").write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
             return payload
-        if not queue.empty():
-            payload = dict(queue.get())
+        drain_messages()
+        result_deadline = time.monotonic() + 2.0
+        while result_payload is None and time.monotonic() < result_deadline:
+            try:
+                handle_message(queue.get(timeout=0.1))
+            except queue_module.Empty:
+                pass
+        if result_payload is not None:
+            payload = result_payload
         else:
             payload = {
                 "status": "error",
                 "predicted": "error",
-                "score": 0.0,
                 "patterns": [],
                 "finding_count": 0,
+                "operand_count": 0,
                 "operand_resolution_count": 0,
                 "sso_count": 0,
                 "error": "worker exited without result payload",
@@ -415,6 +591,7 @@ class Evaluator:
         avg_runtime = total_runtime / len(results) if results else 0.0
         throughput = len(results) / (total_runtime / 60.0) if total_runtime else 0.0
         avg_findings = sum(float(row.get("finding_count", 0.0)) for row in results) / len(results) if results else 0.0
+        avg_operands = sum(float(row.get("operand_count", 0.0)) for row in results) / len(results) if results else 0.0
         avg_operand_resolutions = sum(float(row.get("operand_resolution_count", 0.0)) for row in results) / len(results) if results else 0.0
         avg_ssos = sum(float(row.get("sso_count", 0.0)) for row in results) / len(results) if results else 0.0
         timeout_count = sum(1 for row in results if row.get("status") == "timeout")
@@ -435,6 +612,7 @@ class Evaluator:
             "avg_runtime_sec": round(avg_runtime, 4),
             "throughput_skills_per_min": round(throughput, 4),
             "avg_finding_count": round(avg_findings, 4),
+            "avg_operand_count": round(avg_operands, 4),
             "avg_operand_resolution_count": round(avg_operand_resolutions, 4),
             "avg_sso_count": round(avg_ssos, 4),
             "timeout_count": float(timeout_count),
@@ -477,6 +655,7 @@ def render_results(results_dir: str | Path) -> Path:
         lines.append(f"- Avg runtime (s): {metrics.get('avg_runtime_sec', 0.0)}")
         lines.append(f"- Throughput (skills/min): {metrics.get('throughput_skills_per_min', 0.0)}")
         lines.append(f"- Avg findings count: {metrics.get('avg_finding_count', 0.0)}")
+        lines.append(f"- Avg operand count: {metrics.get('avg_operand_count', 0.0)}")
         lines.append(f"- Avg operand resolution count: {metrics.get('avg_operand_resolution_count', 0.0)}")
         lines.append(f"- Avg SSO count: {metrics.get('avg_sso_count', 0.0)}")
         if all(key in metrics for key in ("tp", "fp", "fn", "tn")):

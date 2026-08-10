@@ -1,24 +1,28 @@
 rules:
-- id: no-Kernel.load
+- id: sso.ruby.file_or_system_operation.Kernel.0001.no-Kernel.load
   languages:
   - ruby
   message: Avoid using Kernel.load(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Kernel.load()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: Kernel.load(...)
   - pattern: $VAR = Kernel.load
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Kernel.require
+- id: sso.ruby.file_or_system_operation.Kernel.0002.no-Kernel.require
   languages:
   - ruby
   message: Avoid using Kernel.require(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Kernel.require()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: Kernel.require(...)
   - pattern: $VAR = Kernel.require

@@ -1,4 +1,36 @@
 rules:
+  - id: markdown.execution_control.explicit_download_then_execute
+    languages: [generic]
+    paths:
+      include:
+        - '*.md'
+        - '*.markdown'
+        - 'README*'
+        - 'SKILL.md'
+    message: Markdown explicitly executes the payload downloaded in the same instruction
+    severity: WARNING
+    metadata:
+      malskills_subtype: external_file_execution
+      malskills_sso_category: payload_execution
+      malskills_flow_hint: downloaded_payload
+    pattern-regex: '(?im)^[ \t]*(?:[-*][ \t]+|\d+\.[ \t]+)?[^\n]*\b(?:download|fetch|get)\b[^\n]*(?:https?://|\[[^]\n]+\]\(https?://)[^\n]*\b(?:and|then)\b[^\n]*\b(?:run|open|launch|execute)\b[ \t]+(?:it|the[ \t]+(?:downloaded[ \t]+)?(?:file|executable|installer|script))\b[^\n]*$'
+
+  - id: markdown.execution_control.explicit_archive_extract_then_execute
+    languages: [generic]
+    paths:
+      include:
+        - '*.md'
+        - '*.markdown'
+        - 'README*'
+        - 'SKILL.md'
+    message: Markdown explicitly extracts an archive or tool before executing a named artifact
+    severity: WARNING
+    metadata:
+      malskills_subtype: decoding
+      malskills_sso_category: cryptography
+      malskills_operation_class: archive_extraction
+    pattern-regex: '(?im)^[ \t]*(?:[-*>][ \t]+|\d+\.[ \t]+)?[^\n]*\b(?:extract|unzip|decompress)\b[^\n]*\b(?:and|then)\b[^\n]*\b(?:run|open|launch|execute)\b[ \t]+[^\n]*$'
+
   - id: markdown.execution_control.remote_script_pipeline
     languages: [generic]
     paths:
@@ -10,9 +42,9 @@ rules:
     message: Markdown contains an explicit remote-script execution pipeline
     severity: WARNING
     metadata:
-      malskills_subtype: shell_interpreter_execution
+      malskills_subtype: system_command_execution
       malskills_sso_category: payload_execution
-    pattern-regex: '(?im)^\s*(?:[-*]\s+|\d+\.\s+)?(?:`{1,3})?(?:sudo\s+)?(?:curl|wget)\b[^\n]*https?://[^\s`)"'']+[^\n|]*\|\s*(?:bash|sh)\b'
+    pattern-regex: '(?im)^\s*(?:>\s*)*(?:[-*]\s+|\d+\.\s+)?(?:`{1,3})?(?:sudo\s+)?(?:curl|wget)\b[^\n]*https?://[^\s`)"'']+[^\n|]*\|\s*(?:bash|sh)\b'
 
   - id: markdown.execution_control.base64_decoded_shell_pipeline
     languages: [generic]
@@ -25,9 +57,9 @@ rules:
     message: Markdown contains an explicit base64-decoded shell execution pipeline
     severity: WARNING
     metadata:
-      malskills_subtype: shell_interpreter_execution
+      malskills_subtype: system_command_execution
       malskills_sso_category: payload_execution
-    pattern-regex: '(?im)^\s*(?:[-*]\s+|\d+\.\s+)?(?:`{1,3})?(?=.*\|)\bbase64\s+(-d|-D|--decode)\b[^\n|]*\|\s*(?:bash|sh)\b'
+    pattern-regex: '(?im)^\s*(?:>\s*)*(?:[-*]\s+|\d+\.\s+)?(?:`{1,3})?(?=.*\|)\bbase64\s+(-d|-D|--decode)\b[^\n|]*\|\s*(?:bash|sh)\b'
 
   - id: markdown.execution_control.encoded_shell_payload_echo
     languages: [generic]
@@ -40,9 +72,9 @@ rules:
     message: Markdown contains an explicit encoded shell payload piped through base64 into a shell
     severity: WARNING
     metadata:
-      malskills_subtype: shell_interpreter_execution
+      malskills_subtype: system_command_execution
       malskills_sso_category: payload_execution
-    pattern-regex: '(?im)^\s*(?:[-*]\s+|\d+\.\s+)?(?:`{1,3})?(?:echo|printf)\b[^\n|]*[A-Za-z0-9+/=]{24,}[^\n|]*\|\s*base64\s+(-d|-D|--decode)\b[^\n|]*\|\s*(?:bash|sh)\b'
+    pattern-regex: '(?im)\b(?:echo|printf)\b[^\n|]*[A-Za-z0-9+/=]{24,}[^\n|]*\|\s*base64\s+(-d|-D|--decode)\b[^\n|]*\|\s*(?:bash|sh)\b'
 
   - id: markdown.execution_control.shell_command_substitution_fetch
     languages: [generic]
@@ -55,7 +87,7 @@ rules:
     message: Markdown contains an explicit shell command substitution that fetches remote content before execution
     severity: WARNING
     metadata:
-      malskills_subtype: shell_interpreter_execution
+      malskills_subtype: system_command_execution
       malskills_sso_category: payload_execution
     pattern-regex: '(?im)^\s*(?:[-*]\s+|\d+\.\s+)?(?:`{1,3})?(?:sudo\s+)?(?:bash|sh)\s+-c\b[^\n`]*\$\(\s*(?:curl|wget)\b[^\n)]*\)'
 
@@ -70,7 +102,7 @@ rules:
     message: Markdown contains an explicit interpreter one-liner execution pattern
     severity: WARNING
     metadata:
-      malskills_subtype: script_host_execution
+      malskills_subtype: dynamic_code_execution
       malskills_sso_category: payload_execution
     pattern-regex: '(?im)^\s*(?:[-*]\s+|\d+\.\s+)?(?:`{1,3})?(?:sudo\s+)?(?:python|python3|node|perl|ruby|php|powershell)\s+(-c|-e|-enc|-Command)\b[^\n]*'
 
@@ -85,7 +117,7 @@ rules:
     message: Markdown contains an explicit LOLBin or proxy-execution command
     severity: WARNING
     metadata:
-      malskills_subtype: proxy_execution_or_lolbin_abuse
+      malskills_subtype: system_command_execution
       malskills_sso_category: payload_execution
     pattern-regex: '(?im)^\s*(?:[-*]\s+|\d+\.\s+)?(?:`{1,3})?(?:sudo\s+)?(?:rundll32\b.+|regsvr32\b.+|mshta\b.+|wmic\s+process\s+call\s+create\b.+|osascript\s+(-e|\S+).+|powershell\s+(-enc|-Command)\b.+)$'
 
@@ -100,6 +132,6 @@ rules:
     message: Markdown contains an explicit dynamic module loading pattern
     severity: WARNING
     metadata:
-      malskills_subtype: dynamic_module_load
+      malskills_subtype: dynamic_code_execution
       malskills_sso_category: payload_execution
     pattern-regex: '(?im)^\s*(?:[-*]\s+|\d+\.\s+)?(?:`{1,3})?(?:export\s+)?(?:LD_PRELOAD=\S+|.*\b(?:dlopen|LoadLibrary)\s*\([^)]+\)|.*\b(?:require|import)\s*\([^)]+\)).*$'

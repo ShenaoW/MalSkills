@@ -1,102 +1,118 @@
 rules:
-- id: no-Process.getpgid
+- id: sso.ruby.file_or_system_operation.Process.0001.no-Process.getpgid
   languages:
   - ruby
   message: Avoid using Process.getpgid(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Process.getpgid()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: Process.getpgid(...)
   - pattern: $VAR = Process.getpgid
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Process.getpgrp
+- id: sso.ruby.file_or_system_operation.Process.0002.no-Process.getpgrp
   languages:
   - ruby
   message: Avoid using Process.getpgrp(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Process.getpgrp()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: Process.getpgrp(...)
   - pattern: $VAR = Process.getpgrp
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Process.gid
+- id: sso.ruby.file_or_system_operation.Process.0003.no-Process.gid
   languages:
   - ruby
   message: Avoid using Process.gid(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Process.gid()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: Process.gid(...)
   - pattern: $VAR = Process.gid
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Process.kill
+- id: sso.ruby.file_or_system_operation.Process.0004.no-Process.kill
   languages:
   - ruby
   message: Avoid using Process.kill(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Process.kill()
     category: File or System Operation
+    malskills_sso_category: process_operation
+    malskills_subtype: process_control
   pattern-either:
   - pattern: Process.kill(...)
   - pattern: $VAR = Process.kill
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Process.pid
+- id: sso.ruby.file_or_system_operation.Process.0005.no-Process.pid
   languages:
   - ruby
   message: Avoid using Process.pid(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Process.pid()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: Process.pid(...)
   - pattern: $VAR = Process.pid
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Process.ppid
+- id: sso.ruby.file_or_system_operation.Process.0006.no-Process.ppid
   languages:
   - ruby
   message: Avoid using Process.ppid(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Process.ppid()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: Process.ppid(...)
   - pattern: $VAR = Process.ppid
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Process.uid
+- id: sso.ruby.file_or_system_operation.Process.0007.no-Process.uid
   languages:
   - ruby
   message: Avoid using Process.uid(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Process.uid()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: Process.uid(...)
   - pattern: $VAR = Process.uid
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-Process.wait
+- id: sso.ruby.file_or_system_operation.Process.0008.no-Process.wait
   languages:
   - ruby
   message: Avoid using Process.wait(), as it can lead to potential issues with file or system operation.
   metadata:
     api: Process.wait()
     category: File or System Operation
+    malskills_sso_category: process_operation
+    malskills_subtype: process_control
   pattern-either:
   - pattern: Process.wait(...)
   - pattern: $VAR = Process.wait

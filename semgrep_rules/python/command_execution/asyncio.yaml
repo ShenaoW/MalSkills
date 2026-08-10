@@ -1,11 +1,13 @@
 rules:
-- id: no-asyncio-events-AbstractEventLoop-subprocess_exec
+- id: sso.python.command_execution.asyncio.0001.no-asyncio-events-AbstractEventLoop-subprocess_exec
   languages:
   - python
   message: Avoid using asyncio.events.AbstractEventLoop.subprocess_exec(), as it can lead to potential issues with command execution.
   metadata:
     api: asyncio.events.AbstractEventLoop.subprocess_exec()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: asyncio.events.AbstractEventLoop.subprocess_exec(...)
   - pattern: $VAR = asyncio.events.AbstractEventLoop.subprocess_exec
@@ -16,13 +18,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-asyncio-events-AbstractEventLoop-subprocess_shell
+- id: sso.python.command_execution.asyncio.0002.no-asyncio-events-AbstractEventLoop-subprocess_shell
   languages:
   - python
   message: Avoid using asyncio.events.AbstractEventLoop.subprocess_shell(), as it can lead to potential issues with command execution.
   metadata:
     api: asyncio.events.AbstractEventLoop.subprocess_shell()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: asyncio.events.AbstractEventLoop.subprocess_shell(...)
   - pattern: $VAR = asyncio.events.AbstractEventLoop.subprocess_shell
@@ -33,13 +37,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-asyncio-subprocess-create_subprocess_exec
+- id: sso.python.command_execution.asyncio.0003.no-asyncio-subprocess-create_subprocess_exec
   languages:
   - python
   message: Avoid using asyncio.subprocess.create_subprocess_exec(), as it can lead to potential issues with command execution.
   metadata:
     api: asyncio.subprocess.create_subprocess_exec()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: asyncio.subprocess.create_subprocess_exec(...)
   - pattern: $VAR = asyncio.subprocess.create_subprocess_exec
@@ -48,13 +54,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-asyncio-subprocess-create_subprocess_shell
+- id: sso.python.command_execution.asyncio.0004.no-asyncio-subprocess-create_subprocess_shell
   languages:
   - python
   message: Avoid using asyncio.subprocess.create_subprocess_shell(), as it can lead to potential issues with command execution.
   metadata:
     api: asyncio.subprocess.create_subprocess_shell()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: asyncio.subprocess.create_subprocess_shell(...)
   - pattern: $VAR = asyncio.subprocess.create_subprocess_shell

@@ -1,5 +1,5 @@
 rules:
-  - id: const-require-obfuscated
+  - id: sso.special.special.0001.const-require-obfuscated
     patterns:
       - pattern: require($X)
       - pattern-not: require("$_")
@@ -9,6 +9,8 @@ rules:
     metadata:
       api: require("Obfuscation")
       category: Obfuscation
+      malskills_sso_category: cryptography
+      malskills_subtype: encoding
     languages:
       - javascript
       - typescript

@@ -1,11 +1,13 @@
 rules:
-- id: no-Process
+- id: sso.java.command_execution.others.0001.no-Process
   languages:
   - java
   message: Avoid using Process(), as it can lead to potential issues with command execution.
   metadata:
     api: Process()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: new Process(...)
   - pattern: Process(...)
@@ -13,13 +15,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-ProcessBuilder
+- id: sso.java.command_execution.others.0002.no-ProcessBuilder
   languages:
   - java
   message: Avoid using ProcessBuilder(), as it can lead to potential issues with command execution.
   metadata:
     api: ProcessBuilder()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: new ProcessBuilder(...)
   - pattern: ProcessBuilder(...)
@@ -27,13 +31,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-Runtime
+- id: sso.java.command_execution.others.0003.no-Runtime
   languages:
   - java
   message: Avoid using Runtime(), as it can lead to potential issues with command execution.
   metadata:
     api: Runtime()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: new Runtime(...)
   - pattern: Runtime(...)

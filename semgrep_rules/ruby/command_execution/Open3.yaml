@@ -1,50 +1,58 @@
 rules:
-- id: no-Open3.capture2
+- id: sso.ruby.command_execution.Open3.0001.no-Open3.capture2
   languages:
   - ruby
   message: Avoid using Open3.capture2(), as it can lead to potential issues with command execution.
   metadata:
     api: Open3.capture2()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: Open3.capture2(...)
   - pattern: $VAR = Open3.capture2
   severity: WARNING
   tags:
   - Command Execution
-- id: no-Open3.capture3
+- id: sso.ruby.command_execution.Open3.0002.no-Open3.capture3
   languages:
   - ruby
   message: Avoid using Open3.capture3(), as it can lead to potential issues with command execution.
   metadata:
     api: Open3.capture3()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: Open3.capture3(...)
   - pattern: $VAR = Open3.capture3
   severity: WARNING
   tags:
   - Command Execution
-- id: no-Open3.pipeline
+- id: sso.ruby.command_execution.Open3.0003.no-Open3.pipeline
   languages:
   - ruby
   message: Avoid using Open3.pipeline(), as it can lead to potential issues with command execution.
   metadata:
     api: Open3.pipeline()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: Open3.pipeline(...)
   - pattern: $VAR = Open3.pipeline
   severity: WARNING
   tags:
   - Command Execution
-- id: no-Open3.popen3
+- id: sso.ruby.command_execution.Open3.0004.no-Open3.popen3
   languages:
   - ruby
   message: Avoid using Open3.popen3(), as it can lead to potential issues with command execution.
   metadata:
     api: Open3.popen3()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: Open3.popen3(...)
   - pattern: $VAR = Open3.popen3

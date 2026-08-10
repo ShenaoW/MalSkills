@@ -1,479 +1,553 @@
 rules:
-- id: no-zlib-BrotliCompress
+- id: sso.javascript.obfuscation.zlib.0001.no-zlib-BrotliCompress
   languages:
   - javascript
   message: Avoid using zlib.BrotliCompress(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.BrotliCompress()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.BrotliCompress(...)
   - pattern: $VAR = zlib.BrotliCompress
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-BrotliDecompress
+- id: sso.javascript.obfuscation.zlib.0002.no-zlib-BrotliDecompress
   languages:
   - javascript
   message: Avoid using zlib.BrotliDecompress(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.BrotliDecompress()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: decoding
   pattern-either:
   - pattern: zlib.BrotliDecompress(...)
   - pattern: $VAR = zlib.BrotliDecompress
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-Deflate
+- id: sso.javascript.obfuscation.zlib.0003.no-zlib-Deflate
   languages:
   - javascript
   message: Avoid using zlib.Deflate(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.Deflate()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.Deflate(...)
   - pattern: $VAR = zlib.Deflate
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-DeflateRaw
+- id: sso.javascript.obfuscation.zlib.0004.no-zlib-DeflateRaw
   languages:
   - javascript
   message: Avoid using zlib.DeflateRaw(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.DeflateRaw()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.DeflateRaw(...)
   - pattern: $VAR = zlib.DeflateRaw
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-Gunzip
+- id: sso.javascript.obfuscation.zlib.0005.no-zlib-Gunzip
   languages:
   - javascript
   message: Avoid using zlib.Gunzip(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.Gunzip()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.Gunzip(...)
   - pattern: $VAR = zlib.Gunzip
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-Gzip
+- id: sso.javascript.obfuscation.zlib.0006.no-zlib-Gzip
   languages:
   - javascript
   message: Avoid using zlib.Gzip(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.Gzip()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.Gzip(...)
   - pattern: $VAR = zlib.Gzip
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-Inflate
+- id: sso.javascript.obfuscation.zlib.0007.no-zlib-Inflate
   languages:
   - javascript
   message: Avoid using zlib.Inflate(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.Inflate()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.Inflate(...)
   - pattern: $VAR = zlib.Inflate
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-InflateRaw
+- id: sso.javascript.obfuscation.zlib.0008.no-zlib-InflateRaw
   languages:
   - javascript
   message: Avoid using zlib.InflateRaw(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.InflateRaw()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.InflateRaw(...)
   - pattern: $VAR = zlib.InflateRaw
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-Unzip
+- id: sso.javascript.obfuscation.zlib.0009.no-zlib-Unzip
   languages:
   - javascript
   message: Avoid using zlib.Unzip(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.Unzip()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.Unzip(...)
   - pattern: $VAR = zlib.Unzip
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-brotliCompress
+- id: sso.javascript.obfuscation.zlib.0010.no-zlib-brotliCompress
   languages:
   - javascript
   message: Avoid using zlib.brotliCompress(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.brotliCompress()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.brotliCompress(...)
   - pattern: $VAR = zlib.brotliCompress
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-brotliCompressSync
+- id: sso.javascript.obfuscation.zlib.0011.no-zlib-brotliCompressSync
   languages:
   - javascript
   message: Avoid using zlib.brotliCompressSync(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.brotliCompressSync()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.brotliCompressSync(...)
   - pattern: $VAR = zlib.brotliCompressSync
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-brotliDecompress
+- id: sso.javascript.obfuscation.zlib.0012.no-zlib-brotliDecompress
   languages:
   - javascript
   message: Avoid using zlib.brotliDecompress(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.brotliDecompress()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: decoding
   pattern-either:
   - pattern: zlib.brotliDecompress(...)
   - pattern: $VAR = zlib.brotliDecompress
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-brotliDecompressSync
+- id: sso.javascript.obfuscation.zlib.0013.no-zlib-brotliDecompressSync
   languages:
   - javascript
   message: Avoid using zlib.brotliDecompressSync(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.brotliDecompressSync()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: decoding
   pattern-either:
   - pattern: zlib.brotliDecompressSync(...)
   - pattern: $VAR = zlib.brotliDecompressSync
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-createBrotliCompress
+- id: sso.javascript.obfuscation.zlib.0014.no-zlib-createBrotliCompress
   languages:
   - javascript
   message: Avoid using zlib.createBrotliCompress(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.createBrotliCompress()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.createBrotliCompress(...)
   - pattern: $VAR = zlib.createBrotliCompress
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-createBrotliDecompress
+- id: sso.javascript.obfuscation.zlib.0015.no-zlib-createBrotliDecompress
   languages:
   - javascript
   message: Avoid using zlib.createBrotliDecompress(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.createBrotliDecompress()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: decoding
   pattern-either:
   - pattern: zlib.createBrotliDecompress(...)
   - pattern: $VAR = zlib.createBrotliDecompress
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-createDeflate
+- id: sso.javascript.obfuscation.zlib.0016.no-zlib-createDeflate
   languages:
   - javascript
   message: Avoid using zlib.createDeflate(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.createDeflate()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.createDeflate(...)
   - pattern: $VAR = zlib.createDeflate
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-createDeflateRaw
+- id: sso.javascript.obfuscation.zlib.0017.no-zlib-createDeflateRaw
   languages:
   - javascript
   message: Avoid using zlib.createDeflateRaw(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.createDeflateRaw()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.createDeflateRaw(...)
   - pattern: $VAR = zlib.createDeflateRaw
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-createGunzip
+- id: sso.javascript.obfuscation.zlib.0018.no-zlib-createGunzip
   languages:
   - javascript
   message: Avoid using zlib.createGunzip(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.createGunzip()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.createGunzip(...)
   - pattern: $VAR = zlib.createGunzip
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-createGzip
+- id: sso.javascript.obfuscation.zlib.0019.no-zlib-createGzip
   languages:
   - javascript
   message: Avoid using zlib.createGzip(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.createGzip()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.createGzip(...)
   - pattern: $VAR = zlib.createGzip
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-createInflate
+- id: sso.javascript.obfuscation.zlib.0020.no-zlib-createInflate
   languages:
   - javascript
   message: Avoid using zlib.createInflate(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.createInflate()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.createInflate(...)
   - pattern: $VAR = zlib.createInflate
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-createInflateRaw
+- id: sso.javascript.obfuscation.zlib.0021.no-zlib-createInflateRaw
   languages:
   - javascript
   message: Avoid using zlib.createInflateRaw(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.createInflateRaw()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.createInflateRaw(...)
   - pattern: $VAR = zlib.createInflateRaw
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-createUnzip
+- id: sso.javascript.obfuscation.zlib.0022.no-zlib-createUnzip
   languages:
   - javascript
   message: Avoid using zlib.createUnzip(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.createUnzip()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.createUnzip(...)
   - pattern: $VAR = zlib.createUnzip
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-deflate
+- id: sso.javascript.obfuscation.zlib.0023.no-zlib-deflate
   languages:
   - javascript
   message: Avoid using zlib.deflate(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.deflate()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.deflate(...)
   - pattern: $VAR = zlib.deflate
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-deflateRaw
+- id: sso.javascript.obfuscation.zlib.0024.no-zlib-deflateRaw
   languages:
   - javascript
   message: Avoid using zlib.deflateRaw(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.deflateRaw()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.deflateRaw(...)
   - pattern: $VAR = zlib.deflateRaw
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-deflateRawSync
+- id: sso.javascript.obfuscation.zlib.0025.no-zlib-deflateRawSync
   languages:
   - javascript
   message: Avoid using zlib.deflateRawSync(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.deflateRawSync()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.deflateRawSync(...)
   - pattern: $VAR = zlib.deflateRawSync
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-deflateSync
+- id: sso.javascript.obfuscation.zlib.0026.no-zlib-deflateSync
   languages:
   - javascript
   message: Avoid using zlib.deflateSync(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.deflateSync()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.deflateSync(...)
   - pattern: $VAR = zlib.deflateSync
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-gunzip
+- id: sso.javascript.obfuscation.zlib.0027.no-zlib-gunzip
   languages:
   - javascript
   message: Avoid using zlib.gunzip(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.gunzip()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.gunzip(...)
   - pattern: $VAR = zlib.gunzip
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-gunzipSync
+- id: sso.javascript.obfuscation.zlib.0028.no-zlib-gunzipSync
   languages:
   - javascript
   message: Avoid using zlib.gunzipSync(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.gunzipSync()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.gunzipSync(...)
   - pattern: $VAR = zlib.gunzipSync
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-gzip
+- id: sso.javascript.obfuscation.zlib.0029.no-zlib-gzip
   languages:
   - javascript
   message: Avoid using zlib.gzip(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.gzip()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.gzip(...)
   - pattern: $VAR = zlib.gzip
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-gzipSync
+- id: sso.javascript.obfuscation.zlib.0030.no-zlib-gzipSync
   languages:
   - javascript
   message: Avoid using zlib.gzipSync(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.gzipSync()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.gzipSync(...)
   - pattern: $VAR = zlib.gzipSync
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-inflate
+- id: sso.javascript.obfuscation.zlib.0031.no-zlib-inflate
   languages:
   - javascript
   message: Avoid using zlib.inflate(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.inflate()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.inflate(...)
   - pattern: $VAR = zlib.inflate
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-inflateRaw
+- id: sso.javascript.obfuscation.zlib.0032.no-zlib-inflateRaw
   languages:
   - javascript
   message: Avoid using zlib.inflateRaw(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.inflateRaw()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.inflateRaw(...)
   - pattern: $VAR = zlib.inflateRaw
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-inflateRawSync
+- id: sso.javascript.obfuscation.zlib.0033.no-zlib-inflateRawSync
   languages:
   - javascript
   message: Avoid using zlib.inflateRawSync(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.inflateRawSync()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.inflateRawSync(...)
   - pattern: $VAR = zlib.inflateRawSync
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-inflateSync
+- id: sso.javascript.obfuscation.zlib.0034.no-zlib-inflateSync
   languages:
   - javascript
   message: Avoid using zlib.inflateSync(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.inflateSync()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.inflateSync(...)
   - pattern: $VAR = zlib.inflateSync
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-unzip
+- id: sso.javascript.obfuscation.zlib.0035.no-zlib-unzip
   languages:
   - javascript
   message: Avoid using zlib.unzip(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.unzip()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.unzip(...)
   - pattern: $VAR = zlib.unzip
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-zlib-unzipSync
+- id: sso.javascript.obfuscation.zlib.0036.no-zlib-unzipSync
   languages:
   - javascript
   message: Avoid using zlib.unzipSync(), as it can lead to potential issues with obfuscation.
   metadata:
     api: zlib.unzipSync()
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern-either:
   - pattern: zlib.unzipSync(...)
   - pattern: $VAR = zlib.unzipSync
   severity: WARNING
   tags:
   - Obfuscation
-- id: no-require-zlib
+- id: sso.javascript.obfuscation.zlib.0037.no-require-zlib
   languages:
   - javascript
   message: Avoid using require('zlib'), as it can lead to potential issues with obfuscation.
   metadata:
     api: require('zlib')
     category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
   pattern: require('zlib')
   severity: WARNING
   tags:

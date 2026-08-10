@@ -1,37 +1,43 @@
 rules:
-- id: no-webbrowser-open
+- id: sso.python.network_access.webbrowser.0001.no-webbrowser-open
   languages:
   - python
   message: Avoid using webbrowser.open(), as it can lead to potential issues with network access.
   metadata:
     api: webbrowser.open()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: webbrowser.open(...)
   - pattern: $VAR = webbrowser.open
   severity: WARNING
   tags:
   - Network Access
-- id: no-webbrowser-open_new
+- id: sso.python.network_access.webbrowser.0002.no-webbrowser-open_new
   languages:
   - python
   message: Avoid using webbrowser.open_new(), as it can lead to potential issues with network access.
   metadata:
     api: webbrowser.open_new()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: webbrowser.open_new(...)
   - pattern: $VAR = webbrowser.open_new
   severity: WARNING
   tags:
   - Network Access
-- id: no-webbrowser-open_new_tab
+- id: sso.python.network_access.webbrowser.0003.no-webbrowser-open_new_tab
   languages:
   - python
   message: Avoid using webbrowser.open_new_tab(), as it can lead to potential issues with network access.
   metadata:
     api: webbrowser.open_new_tab()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: webbrowser.open_new_tab(...)
   - pattern: $VAR = webbrowser.open_new_tab

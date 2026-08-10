@@ -1,11 +1,13 @@
 rules:
-- id: no-pathlib-Path-__new__
+- id: sso.python.file_or_system_operation.pathlib.0001.no-pathlib-Path-__new__
   languages:
   - python
   message: Avoid using pathlib.Path.__new__(), as it can lead to potential issues with file or system operation.
   metadata:
     api: pathlib.Path.__new__()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: pathlib.Path.__new__(...)
   - pattern: $VAR = pathlib.Path.__new__
@@ -14,13 +16,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-pathlib-Path-chmod
+- id: sso.python.file_or_system_operation.pathlib.0002.no-pathlib-Path-chmod
   languages:
   - python
   message: Avoid using pathlib.Path.chmod(), as it can lead to potential issues with file or system operation.
   metadata:
     api: pathlib.Path.chmod()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
   pattern-either:
   - pattern: pathlib.Path.chmod(...)
   - pattern: $VAR = pathlib.Path.chmod
@@ -29,13 +33,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-pathlib-Path-lchmod
+- id: sso.python.file_or_system_operation.pathlib.0003.no-pathlib-Path-lchmod
   languages:
   - python
   message: Avoid using pathlib.Path.lchmod(), as it can lead to potential issues with file or system operation.
   metadata:
     api: pathlib.Path.lchmod()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
   pattern-either:
   - pattern: pathlib.Path.lchmod(...)
   - pattern: $VAR = pathlib.Path.lchmod
@@ -44,13 +50,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-pathlib-Path-mkdir
+- id: sso.python.file_or_system_operation.pathlib.0004.no-pathlib-Path-mkdir
   languages:
   - python
   message: Avoid using pathlib.Path.mkdir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: pathlib.Path.mkdir()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
   pattern-either:
   - pattern: pathlib.Path.mkdir(...)
   - pattern: $VAR = pathlib.Path.mkdir
@@ -59,13 +67,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-pathlib-Path-open
+- id: sso.python.file_or_system_operation.pathlib.0005.no-pathlib-Path-open
   languages:
   - python
   message: Avoid using pathlib.Path.open(), as it can lead to potential issues with file or system operation.
   metadata:
     api: pathlib.Path.open()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: pathlib.Path.open(...)
   - pattern: $VAR = pathlib.Path.open
@@ -74,13 +84,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-pathlib-Path-read_bytes
+- id: sso.python.file_or_system_operation.pathlib.0006.no-pathlib-Path-read_bytes
   languages:
   - python
   message: Avoid using pathlib.Path.read_bytes(), as it can lead to potential issues with file or system operation.
   metadata:
     api: pathlib.Path.read_bytes()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: pathlib.Path.read_bytes(...)
   - pattern: $VAR = pathlib.Path.read_bytes
@@ -89,13 +101,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-pathlib-Path-read_text
+- id: sso.python.file_or_system_operation.pathlib.0007.no-pathlib-Path-read_text
   languages:
   - python
   message: Avoid using pathlib.Path.read_text(), as it can lead to potential issues with file or system operation.
   metadata:
     api: pathlib.Path.read_text()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: pathlib.Path.read_text(...)
   - pattern: $VAR = pathlib.Path.read_text
@@ -104,13 +118,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-pathlib-Path-rename
+- id: sso.python.file_or_system_operation.pathlib.0008.no-pathlib-Path-rename
   languages:
   - python
   message: Avoid using pathlib.Path.rename(), as it can lead to potential issues with file or system operation.
   metadata:
     api: pathlib.Path.rename()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: pathlib.Path.rename(...)
   - pattern: $VAR = pathlib.Path.rename
@@ -119,13 +135,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-pathlib-Path-replace
+- id: sso.python.file_or_system_operation.pathlib.0009.no-pathlib-Path-replace
   languages:
   - python
   message: Avoid using pathlib.Path.replace(), as it can lead to potential issues with file or system operation.
   metadata:
     api: pathlib.Path.replace()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: pathlib.Path.replace(...)
   - pattern: $VAR = pathlib.Path.replace
@@ -134,13 +152,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-pathlib-Path-rglob
+- id: sso.python.file_or_system_operation.pathlib.0010.no-pathlib-Path-rglob
   languages:
   - python
   message: Avoid using pathlib.Path.rglob(), as it can lead to potential issues with file or system operation.
   metadata:
     api: pathlib.Path.rglob()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_search
   pattern-either:
   - pattern: pathlib.Path.rglob(...)
   - pattern: $VAR = pathlib.Path.rglob
@@ -149,13 +169,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-pathlib-Path-rmdir
+- id: sso.python.file_or_system_operation.pathlib.0011.no-pathlib-Path-rmdir
   languages:
   - python
   message: Avoid using pathlib.Path.rmdir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: pathlib.Path.rmdir()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
   pattern-either:
   - pattern: pathlib.Path.rmdir(...)
   - pattern: $VAR = pathlib.Path.rmdir
@@ -164,13 +186,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-pathlib-Path-symlink_to
+- id: sso.python.file_or_system_operation.pathlib.0012.no-pathlib-Path-symlink_to
   languages:
   - python
   message: Avoid using pathlib.Path.symlink_to(), as it can lead to potential issues with file or system operation.
   metadata:
     api: pathlib.Path.symlink_to()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: link_operation
   pattern-either:
   - pattern: pathlib.Path.symlink_to(...)
   - pattern: $VAR = pathlib.Path.symlink_to
@@ -179,13 +203,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-pathlib-Path-touch
+- id: sso.python.file_or_system_operation.pathlib.0013.no-pathlib-Path-touch
   languages:
   - python
   message: Avoid using pathlib.Path.touch(), as it can lead to potential issues with file or system operation.
   metadata:
     api: pathlib.Path.touch()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
   pattern-either:
   - pattern: pathlib.Path.touch(...)
   - pattern: $VAR = pathlib.Path.touch
@@ -194,13 +220,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-pathlib-Path-unlink
+- id: sso.python.file_or_system_operation.pathlib.0014.no-pathlib-Path-unlink
   languages:
   - python
   message: Avoid using pathlib.Path.unlink(), as it can lead to potential issues with file or system operation.
   metadata:
     api: pathlib.Path.unlink()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: link_operation
   pattern-either:
   - pattern: pathlib.Path.unlink(...)
   - pattern: $VAR = pathlib.Path.unlink
@@ -209,13 +237,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-pathlib-Path-write_bytes
+- id: sso.python.file_or_system_operation.pathlib.0015.no-pathlib-Path-write_bytes
   languages:
   - python
   message: Avoid using pathlib.Path.write_bytes(), as it can lead to potential issues with file or system operation.
   metadata:
     api: pathlib.Path.write_bytes()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: pathlib.Path.write_bytes(...)
   - pattern: $VAR = pathlib.Path.write_bytes
@@ -224,13 +254,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-pathlib-Path-write_text
+- id: sso.python.file_or_system_operation.pathlib.0016.no-pathlib-Path-write_text
   languages:
   - python
   message: Avoid using pathlib.Path.write_text(), as it can lead to potential issues with file or system operation.
   metadata:
     api: pathlib.Path.write_text()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: pathlib.Path.write_text(...)
   - pattern: $VAR = pathlib.Path.write_text
@@ -239,13 +271,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-pathlib-PurePath-__new__
+- id: sso.python.file_or_system_operation.pathlib.0017.no-pathlib-PurePath-__new__
   languages:
   - python
   message: Avoid using pathlib.PurePath.__new__(), as it can lead to potential issues with file or system operation.
   metadata:
     api: pathlib.PurePath.__new__()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: pathlib.PurePath.__new__(...)
   - pattern: $VAR = pathlib.PurePath.__new__
@@ -254,13 +288,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-pathlib-PurePath-__rtruediv__
+- id: sso.python.file_or_system_operation.pathlib.0018.no-pathlib-PurePath-__rtruediv__
   languages:
   - python
   message: Avoid using pathlib.PurePath.__rtruediv__(), as it can lead to potential issues with file or system operation.
   metadata:
     api: pathlib.PurePath.__rtruediv__()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: pathlib.PurePath.__rtruediv__(...)
   - pattern: $VAR = pathlib.PurePath.__rtruediv__
@@ -269,13 +305,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-pathlib-PurePath-__truediv__
+- id: sso.python.file_or_system_operation.pathlib.0019.no-pathlib-PurePath-__truediv__
   languages:
   - python
   message: Avoid using pathlib.PurePath.__truediv__(), as it can lead to potential issues with file or system operation.
   metadata:
     api: pathlib.PurePath.__truediv__()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: pathlib.PurePath.__truediv__(...)
   - pattern: $VAR = pathlib.PurePath.__truediv__

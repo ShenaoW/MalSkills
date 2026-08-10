@@ -1,11 +1,13 @@
 rules:
-- id: no-govaluate.EvaluableExpression.Evaluate
+- id: sso.go.dynamic_execution.govaluate.0001.no-govaluate.EvaluableExpression.Evaluate
   languages:
   - go
   message: Avoid using govaluate.EvaluableExpression.Evaluate(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: govaluate.EvaluableExpression.Evaluate()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: govaluate.EvaluableExpression.Evaluate(...)
   - pattern: $VAR = govaluate.EvaluableExpression.Evaluate
@@ -14,13 +16,15 @@ rules:
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-govaluate.NewEvaluableExpression
+- id: sso.go.dynamic_execution.govaluate.0002.no-govaluate.NewEvaluableExpression
   languages:
   - go
   message: Avoid using govaluate.NewEvaluableExpression(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: govaluate.NewEvaluableExpression()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: govaluate.NewEvaluableExpression(...)
   - pattern: $VAR = govaluate.NewEvaluableExpression

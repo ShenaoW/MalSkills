@@ -7,14 +7,14 @@ rules:
         - '*.markdown'
         - 'README*'
         - 'SKILL.md'
-    message: Markdown contains an explicit outbound fetch command
+    message: Markdown contains an explicit remote-data receive command
     severity: WARNING
     metadata:
-      malskills_subtype: outbound_connection
-      malskills_sso_category: network_and_remote_communication
-    pattern-regex: '(?im)^\s*(?:[-*]\s+|\d+\.\s+)?(?:`{1,3})?(?:sudo\s+)?(?:curl|wget|Invoke-WebRequest|iwr|openssl\s+s_client)\b[^\n]*https?://'
+      malskills_subtype: data_receive
+      malskills_sso_category: network_access
+    pattern-regex: '(?im)^\s*(?:>\s*)*(?:[-*]\s+|\d+\.\s+)?(?:`{1,3})?(?:sudo\s+)?(?:curl|wget|Invoke-WebRequest|iwr|openssl\s+s_client)\b[^\n]*https?://'
 
-  - id: markdown.network_and_remote_communication.script_or_archive_link
+  - id: markdown.network_and_remote_communication.imperative_script_or_archive_download
     languages: [generic]
     paths:
       include:
@@ -22,14 +22,14 @@ rules:
         - '*.markdown'
         - 'README*'
         - 'SKILL.md'
-    message: Markdown contains a structured external script or executable archive link
+    message: Markdown instructs the user to download an external script or archive
     severity: WARNING
     metadata:
-      malskills_subtype: outbound_connection
-      malskills_sso_category: network_and_remote_communication
-    pattern-regex: '(?i)\[[^]\n]+\]\((https?://[^)\s]+(\.sh|\.ps1|\.bat|\.exe|\.msi|\.pkg|\.dmg|\.zip|\.tar|\.tgz|/raw/[^)\s]*|raw\.githubusercontent\.com[^)\s]*))\)'
+      malskills_subtype: data_receive
+      malskills_sso_category: network_access
+    pattern-regex: '(?im)^\s*(?:>\s*)*(?:[-*]\s+|\d+\.\s+)?[^\n]*\b(?:download|fetch|get)\b[^\n]*\[[^]\n]+\]\(https?://[^)\s]+\)'
 
-  - id: markdown.network_and_remote_communication.socket_or_dns_command
+  - id: markdown.network_and_remote_communication.dns_command
     languages: [generic]
     paths:
       include:
@@ -37,9 +37,24 @@ rules:
         - '*.markdown'
         - 'README*'
         - 'SKILL.md'
-    message: Markdown contains an explicit socket or DNS communication command
+    message: Markdown contains an explicit DNS resolution command
     severity: WARNING
     metadata:
-      malskills_subtype: outbound_connection
-      malskills_sso_category: network_and_remote_communication
-    pattern-regex: '(?im)^\s*(?:[-*]\s+|\d+\.\s+)?(?:`{1,3})?(?:sudo\s+)?(?:dig\s+\S+|nslookup\s+\S+|ncat?\s+(?:-l\s+)?\S+(?:\s+\d+)?|socat\s+\S+:\S+,\S+|ssh\s+(?:-\S+\s+)*(?:\S+@\S+|\S+))\b'
+      malskills_subtype: dns_resolution
+      malskills_sso_category: network_access
+    pattern-regex: '(?im)^\s*(?:[-*]\s+|\d+\.\s+)?(?:`{1,3})?(?:dig|nslookup)\s+\S+'
+
+  - id: markdown.network_and_remote_communication.connection_command
+    languages: [generic]
+    paths:
+      include:
+        - '*.md'
+        - '*.markdown'
+        - 'README*'
+        - 'SKILL.md'
+    message: Markdown contains an explicit remote connection command
+    severity: WARNING
+    metadata:
+      malskills_subtype: connection_create
+      malskills_sso_category: network_access
+    pattern-regex: '(?im)^\s*(?:[-*]\s+|\d+\.\s+)?(?:`{1,3})?(?:sudo\s+)?(?:nc|ncat|socat|ssh)\b[^\n]+'

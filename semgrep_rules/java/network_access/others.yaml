@@ -1,11 +1,13 @@
 rules:
-- id: no-HttpClient
+- id: sso.java.network_access.others.0001.no-HttpClient
   languages:
   - java
   message: Avoid using HttpClient(), as it can lead to potential issues with network access.
   metadata:
     api: HttpClient()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: new HttpClient(...)
   - pattern: HttpClient(...)
@@ -13,13 +15,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-HttpURLConnection
+- id: sso.java.network_access.others.0002.no-HttpURLConnection
   languages:
   - java
   message: Avoid using HttpURLConnection(), as it can lead to potential issues with network access.
   metadata:
     api: HttpURLConnection()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: new HttpURLConnection(...)
   - pattern: HttpURLConnection(...)
@@ -27,13 +31,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-Socket
+- id: sso.java.network_access.others.0003.no-Socket
   languages:
   - java
   message: Avoid using Socket(), as it can lead to potential issues with network access.
   metadata:
     api: Socket()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: new Socket(...)
   - pattern: Socket(...)
@@ -41,13 +47,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-URL
+- id: sso.java.network_access.others.0004.no-URL
   languages:
   - java
   message: Avoid using URL(), as it can lead to potential issues with network access.
   metadata:
     api: URL()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: new URL(...)
   - pattern: URL(...)

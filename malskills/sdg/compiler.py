@@ -21,6 +21,12 @@ from ..models import (
 from ..taxonomy import command_class, endpoint_class, path_class, secret_class, url_class
 from ..findings.schema import SSO_SUBTYPES
 from .llm import LlmObjectAnalyzer
+from .shell_flow import (
+    build_embedded_shell_flow_edges,
+    build_explicit_archive_flow_edges,
+    build_explicit_text_flow_edges,
+    build_shell_flow_edges,
+)
 from .yasa import YasaAdapter
 
 
@@ -84,6 +90,7 @@ class SDGCompiler:
                         )
                     )
 
+        binding_facts = [self._normalize_operand_binding(item) for item in binding_facts]
         parameter_bindings = self._parameter_bindings_index(binding_facts)
 
         ssos_by_key: dict[tuple[str, str, int, str], SSORecord] = {}
@@ -117,6 +124,12 @@ class SDGCompiler:
             binding_facts,
             enable_cross_artifact_resolution=enable_cross_artifact_resolution,
         )
+        self._add_inter_sso_value_flows(graph, ssos, binding_facts)
+        self._add_transform_value_flows(graph, ssos, binding_facts)
+        graph["edges"].extend(build_shell_flow_edges(artifacts, ssos))
+        graph["edges"].extend(build_explicit_text_flow_edges(artifacts, ssos))
+        graph["edges"].extend(build_embedded_shell_flow_edges(ssos))
+        graph["edges"].extend(build_explicit_archive_flow_edges(artifacts, ssos))
         graph["nodes"] = self._dedupe_nodes(graph["nodes"])
         graph["edges"] = self._dedupe_edges(graph["edges"])
         return SDGCompilation(
@@ -172,35 +185,53 @@ class SDGCompiler:
     ) -> list[tuple[SSORecord, list[dict[str, str]], list[str]]]:
         subtype = item.subtype
         text = self._finding_text(item)
-        if subtype in {"direct_process_execution", "shell_interpreter_execution", "script_host_execution", "proxy_execution_or_lolbin_abuse"}:
+        if subtype in {
+            "system_command_execution",
+            "dynamic_code_execution",
+            "external_file_execution",
+            "unsafe_deserialization",
+        }:
             return [self._execution_sso_tuple(item, parameter_bindings)]
-        if subtype == "dynamic_module_load":
-            return [self._sso_tuple(item.subtype, item, {"matched_text": text}, self._generic_operation_object(item))]
-        if subtype == "outbound_connection":
-            subtype = item.subtype
-            return [self._network_sso_tuple(subtype, item, parameter_bindings)]
-        if subtype in {"listener_and_receive", "tunneling_and_forwarding", "proxy_or_route_manipulation", "protocol_encapsulation_or_encrypted_comm"}:
+        if subtype in {
+            "connection_create",
+            "server_listen",
+            "dns_resolution",
+            "data_send",
+            "data_receive",
+            "network_configuration",
+        }:
             return [self._network_sso_tuple(item.subtype, item, parameter_bindings)]
         if subtype in {
-            "private_key_or_api_key_access",
-            "password_or_hash_access",
-            "session_or_token_access",
-            "credential_decryption",
-            "authentication_input_capture",
+            "decoding",
+            "decryption",
+            "encoding",
+            "encryption",
+            "hashing",
+            "cryptographic_operation",
+        }:
+            return [self._transform_sso_tuple(item, parameter_bindings)]
+        if subtype in {
+            "system_information_access",
+            "environment_access",
+            "process_information_access",
+            "user_information_access",
+            "credential_data_access",
         }:
             params = {
                 "matched_text": text,
-                "sensitivity_class": "sensitive",
+                "sensitivity_class": (
+                    "sensitive" if subtype == "credential_data_access" else "contextual"
+                ),
                 "secret_class": secret_class(text),
             }
             return [self._sso_tuple(item.subtype, item, params, self._source_operation_object(item, text))]
-        if subtype == "file_enumeration_and_location":
+        if subtype == "file_search":
             params = {
                 "matched_text": text,
                 "path_class": self._path_class_from_text(text),
             }
             return [self._sso_tuple(item.subtype, item, params, self._source_operation_object(item, text))]
-        if subtype == "content_read_and_parse":
+        if subtype in {"file_access", "file_read"}:
             path_cls = self._path_class_from_text(text)
             params = {
                 "matched_text": text,
@@ -208,16 +239,14 @@ class SDGCompiler:
                 "sensitivity_class": "sensitive" if path_cls in {"system", "sensitive"} or self._looks_sensitive_text(text) else "ordinary",
             }
             return [self._sso_tuple(item.subtype, item, params, self._source_operation_object(item, text))]
-        if subtype in {"scheduled_persistence", "startup_or_logon_persistence", "service_or_daemon_persistence", "event_triggered_persistence", "boot_chain_persistence"}:
-            return [self._sso_tuple(item.subtype, item, {"text": text}, f"obj::instruction::{self._identity_fragment(str(text))}")]
         if subtype in SSO_SUBTYPES:
             params: dict[str, Any] = {
                 "matched_text": text,
                 "sso_category": item.category,
             }
-            if item.category == "file_and_data_access":
+            if item.category == "file_operation":
                 params["path_class"] = self._path_class_from_text(text)
-            if item.category == "credential_and_secret_access":
+            if item.category == "sensitive_data_access":
                 params["sensitivity_class"] = "sensitive"
                 params["secret_class"] = secret_class(text)
             return [
@@ -261,7 +290,7 @@ class SDGCompiler:
             "endpoint": endpoint_value,
             "endpoint_class": endpoint_cls,
             "dst_class": item.attributes.get("dst_class", endpoint_cls),
-            "network_role": "fetch" if self._looks_like_fetch(item) else "send",
+            "network_role": self._network_role(item),
             "parameter_bindings": [
                 {
                     "role": binding.role,
@@ -283,8 +312,21 @@ class SDGCompiler:
     ) -> tuple[SSORecord, list[dict[str, str]], list[str]]:
         text = self._finding_text(item)
         bindings = self._bindings_for_sink(item, parameter_bindings)
+        preferred_roles = (
+            ("path", "payload", "command", "input")
+            if item.subtype == "external_file_execution"
+            else ("payload", "command", "path", "input")
+            if item.subtype == "unsafe_deserialization"
+            else ("command", "payload", "path", "input")
+        )
         command_binding = next(
-            (binding for binding in bindings if binding.role == "command"), None
+            (
+                binding
+                for role in preferred_roles
+                for binding in bindings
+                if binding.role == role
+            ),
+            None,
         )
         operation_object = self._generic_operation_object(item)
         if command_binding is not None:
@@ -313,6 +355,51 @@ class SDGCompiler:
             operation_object,
         )
 
+    def _transform_sso_tuple(
+        self,
+        item: SSOFinding,
+        parameter_bindings: dict[tuple[str, str], list[OperandBinding]],
+    ) -> tuple[SSORecord, list[dict[str, str]], list[str]]:
+        bindings = self._bindings_for_sink(item, parameter_bindings)
+        transform_bindings = [
+            binding for binding in bindings if binding.role in {"input", "output"}
+        ]
+        related_objects = self._stable(
+            [
+                object_id
+                for binding in transform_bindings
+                for object_id in [self._object_id_from_binding(binding)]
+                if object_id
+            ]
+        )
+        output_binding = next(
+            (binding for binding in transform_bindings if binding.role == "output"),
+            None,
+        )
+        operation_object = (
+            self._object_id_from_binding(output_binding)
+            if output_binding is not None
+            else self._generic_operation_object(item)
+        )
+        params = {
+            "matched_text": self._finding_text(item),
+            "parameter_bindings": [
+                {
+                    "role": binding.role,
+                    "value": binding.value,
+                    "binding_id": binding.binding_id,
+                }
+                for binding in transform_bindings
+            ],
+        }
+        return self._sso_tuple(
+            item.subtype,
+            item,
+            params,
+            operation_object,
+            related_objects=related_objects,
+        )
+
     def _callsite_id(self, item: SSOFinding) -> str:
         start = item.span.start_line if item.span else 0
         end = item.span.end_line if item.span else start
@@ -336,6 +423,11 @@ class SDGCompiler:
         ]
         sso_attributes = {
             **params,
+            **{
+                key: item.attributes[key]
+                for key in ("resource_class", "operation_class", "flow_hint", "pipeline_group")
+                if key in item.attributes
+            },
             "operation_object": operation_object,
             "object_identity_kind": self._object_kind_from_id(operation_object),
             "source_start_line": item.span.start_line if item.span else 0,
@@ -355,6 +447,157 @@ class SDGCompiler:
         )
         self._counter += 1
         return sso, list(extra_edges or []), related_object_values
+
+    def _add_inter_sso_value_flows(
+        self,
+        graph: dict[str, Any],
+        ssos: list[SSORecord],
+        bindings: list[OperandBinding],
+    ) -> None:
+        """Materialize YASA source-to-sink paths as directed SSO taint edges."""
+        binding_by_id = {item.binding_id: item for item in bindings}
+        for sink in ssos:
+            sink_bindings = [
+                binding_by_id.get(str(item.get("binding_id", "")))
+                for item in sink.attributes.get("parameter_bindings", [])
+                if isinstance(item, dict)
+            ]
+            for binding in (item for item in sink_bindings if item is not None):
+                for step in binding.flow_steps[:-1]:
+                    if not isinstance(step, dict):
+                        continue
+                    path = str(step.get("artifact_path", binding.artifact_path))
+                    start = int(step.get("start_line", 0) or 0)
+                    end = int(step.get("end_line", start) or start)
+                    if not start:
+                        continue
+                    for source in ssos:
+                        if source.sso_id == sink.sso_id or path not in source.artifact_paths:
+                            continue
+                        source_start = int(source.attributes.get("source_start_line", 0) or 0)
+                        source_end = int(source.attributes.get("source_end_line", source_start) or source_start)
+                        if source_start <= end and start <= source_end:
+                            graph["edges"].append(
+                                {
+                                    "source": source.sso_id,
+                                    "target": sink.sso_id,
+                                    "type": "value_flow",
+                                    "flow_kind": "sso_taint",
+                                    "resolution_id": binding.binding_id,
+                                }
+                            )
+
+    def _add_transform_value_flows(
+        self,
+        graph: dict[str, Any],
+        ssos: list[SSORecord],
+        bindings: list[OperandBinding],
+    ) -> None:
+        """Connect explicitly bound transform inputs and outputs to SSO producers and consumers."""
+        binding_by_id = {item.binding_id: item for item in bindings}
+        role_objects = {
+            sso.sso_id: self._binding_objects_by_role(sso, binding_by_id)
+            for sso in ssos
+        }
+        transform_subtypes = {
+            "decoding",
+            "decryption",
+            "encoding",
+            "encryption",
+            "hashing",
+            "cryptographic_operation",
+        }
+        for transform in ssos:
+            if transform.subtype not in transform_subtypes:
+                continue
+            inputs = role_objects[transform.sso_id].get("input", set())
+            outputs = role_objects[transform.sso_id].get("output", set())
+            if not inputs and not outputs:
+                continue
+            if inputs:
+                for source in ssos:
+                    if source.sso_id == transform.sso_id:
+                        continue
+                    source_outputs = self._sso_output_objects(
+                        source,
+                        role_objects[source.sso_id],
+                    )
+                    if inputs & source_outputs:
+                        graph["edges"].append(
+                            {
+                                "source": source.sso_id,
+                                "target": transform.sso_id,
+                                "type": "value_flow",
+                                "flow_kind": "object_transform",
+                            }
+                        )
+            if outputs:
+                for target in ssos:
+                    if target.sso_id == transform.sso_id:
+                        continue
+                    target_inputs = self._sso_input_objects(
+                        target,
+                        role_objects[target.sso_id],
+                    )
+                    if outputs & target_inputs:
+                        graph["edges"].append(
+                            {
+                                "source": transform.sso_id,
+                                "target": target.sso_id,
+                                "type": "value_flow",
+                                "flow_kind": "object_transform",
+                            }
+                        )
+
+    def _binding_objects_by_role(
+        self,
+        sso: SSORecord,
+        binding_by_id: dict[str, OperandBinding],
+    ) -> dict[str, set[str]]:
+        objects: dict[str, set[str]] = defaultdict(set)
+        for descriptor in sso.attributes.get("parameter_bindings", []):
+            if not isinstance(descriptor, dict):
+                continue
+            binding = binding_by_id.get(str(descriptor.get("binding_id", "")))
+            if binding is None:
+                continue
+            object_id = self._object_id_from_binding(binding)
+            if object_id:
+                objects[binding.role].add(object_id)
+        return objects
+
+    def _sso_output_objects(
+        self,
+        sso: SSORecord,
+        role_objects: dict[str, set[str]],
+    ) -> set[str]:
+        if sso.subtype == "data_receive":
+            return set(role_objects.get("payload", set()))
+        return set(role_objects.get("output", set()))
+
+    def _sso_input_objects(
+        self,
+        sso: SSORecord,
+        role_objects: dict[str, set[str]],
+    ) -> set[str]:
+        if sso.subtype in {
+            "system_command_execution",
+            "dynamic_code_execution",
+            "external_file_execution",
+            "unsafe_deserialization",
+        }:
+            return {
+                object_id
+                for role in ("path", "payload", "command", "input")
+                for object_id in role_objects.get(role, set())
+            }
+        if sso.subtype in {"data_send", "file_create", "file_write"}:
+            return {
+                object_id
+                for role in ("payload", "input")
+                for object_id in role_objects.get(role, set())
+            }
+        return set(role_objects.get("input", set()))
 
     def _resolve_network_object(
         self,
@@ -738,22 +981,22 @@ class SDGCompiler:
         if object_id.startswith("obj::secret::"):
             return "credential"
         if sso.subtype in {
-            "outbound_connection",
-            "listener_and_receive",
-            "tunneling_and_forwarding",
-            "proxy_or_route_manipulation",
-            "protocol_encapsulation_or_encrypted_comm",
+            "connection_create",
+            "server_listen",
+            "dns_resolution",
+            "data_send",
+            "data_receive",
+            "network_configuration",
         }:
             return "endpoint"
         if sso.subtype in {
-            "direct_process_execution",
-            "shell_interpreter_execution",
-            "script_host_execution",
-            "dynamic_module_load",
-            "proxy_execution_or_lolbin_abuse",
+            "system_command_execution",
+            "dynamic_code_execution",
+            "external_file_execution",
+            "unsafe_deserialization",
         }:
             return "command"
-        if sso.category in {"file_and_data_access", "credential_and_secret_access"}:
+        if sso.category in {"file_operation", "sensitive_data_access"}:
             return "path"
         return "target"
 
@@ -858,6 +1101,63 @@ class SDGCompiler:
             grouped.setdefault((item.artifact_path, f"subtype::{item.sink_subtype}"), []).append(item)
         return grouped
 
+    def _normalize_operand_binding(self, binding: OperandBinding) -> OperandBinding:
+        raw = binding.role.strip().lower().replace("-", "_").replace(" ", "_")
+        subtype = binding.sink_subtype
+        if raw in {"input", "output"}:
+            role = raw
+        elif "interpreter" in raw:
+            role = "interpreter"
+        elif subtype in {
+            "system_command_execution",
+            "dynamic_code_execution",
+            "unsafe_deserialization",
+        }:
+            role = "command"
+        elif subtype == "external_file_execution":
+            role = "path"
+        elif subtype == "data_receive" and any(
+            token in raw
+            for token in ("payload", "body", "content", "response", "result", "data", "file")
+        ):
+            role = "payload"
+        elif subtype in {
+            "connection_create",
+            "server_listen",
+            "dns_resolution",
+            "data_receive",
+            "network_configuration",
+        }:
+            role = "endpoint"
+        elif subtype == "data_send" and any(
+            token in raw for token in ("payload", "body", "content", "message", "data")
+        ):
+            role = "payload"
+        elif subtype in {
+            "file_access",
+            "file_create",
+            "file_delete",
+            "file_read",
+            "file_write",
+            "file_permission_modify",
+            "link_operation",
+            "file_search",
+        }:
+            role = "path"
+        elif subtype == "credential_data_access":
+            role = "credential"
+        elif any(token in raw for token in ("url", "uri", "endpoint", "host", "address")):
+            role = "endpoint"
+        elif any(token in raw for token in ("command", "script", "code")):
+            role = "command"
+        elif any(token in raw for token in ("payload", "body", "content", "message", "data")):
+            role = "payload"
+        elif any(token in raw for token in ("path", "file", "directory")):
+            role = "path"
+        else:
+            role = "target"
+        return replace(binding, role=role)
+
     def _source_operation_object(self, item: SSOFinding, text: str) -> str:
         variable_name = self._assigned_variable_name(text)
         if variable_name:
@@ -912,9 +1212,20 @@ class SDGCompiler:
         text = self._finding_text(item).lower()
         return any(token in text for token in ("download", "curl", "wget", ".zip", ".tar", ".tgz", ".sh", ".ps1", ".exe", ".msi", ".pkg", ".dmg", "http://", "https://"))
 
+    def _network_role(self, item: SSOFinding) -> str:
+        if item.subtype == "data_send":
+            return "send"
+        if item.subtype == "data_receive":
+            return "receive"
+        if item.subtype == "server_listen":
+            return "listen"
+        if item.subtype == "dns_resolution":
+            return "resolve"
+        return "connect"
+
     def _command_class_for(self, item: SSOFinding) -> str:
         text = self._finding_text(item)
-        if item.subtype in {"shell_interpreter_execution", "proxy_execution_or_lolbin_abuse"}:
+        if item.subtype in {"system_command_execution", "dynamic_code_execution"}:
             return "high_risk"
         lowered = text.lower()
         if any(token in lowered for token in ("bash", "sh ", "powershell", "cmd ", "curl ", "wget ", "http://", "https://", "terminal", "run the executable")):

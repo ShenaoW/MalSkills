@@ -508,7 +508,6 @@ llm_backend = feedback.get("backend") or llm_runtime.get("backend")
 llm_model = feedback.get("model") or llm_runtime.get("model")
 print("Single-skill verdict")
 print(f"- label: {verdict.get('label')}")
-print(f"- score: {verdict.get('score')}")
 print(f"- malicious_patterns: {verdict.get('malicious_patterns', [])}")
 print("Engine participation")
 print(f"- llm_backend: {llm_backend}")
@@ -744,7 +743,6 @@ if single_verdict:
         "- Ground-truth label: `malicious`",
         f"- System decision: `{'RISK_ALERT' if single_risk_alert else 'NO_ALERT'}`",
         f"- Verdict label: `{single_verdict.get('label')}`",
-        f"- Score: `{single_verdict.get('score')}`",
         f"- Malicious patterns: `{single_verdict.get('malicious_patterns', [])}`",
         f"- LLM backend: `{single_runtime.get('backend')}`",
         f"- LLM model: `{single_runtime.get('model')}`",

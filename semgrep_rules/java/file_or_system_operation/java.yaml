@@ -1,11 +1,13 @@
 rules:
-- id: no-java-io-BufferedWriter-write
+- id: sso.java.file_or_system_operation.java.0001.no-java-io-BufferedWriter-write
   languages:
   - java
   message: Avoid using java.io.BufferedWriter.write(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.io.BufferedWriter.write()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: new java.io.BufferedWriter.write(...)
   - pattern: java.io.BufferedWriter.write(...)
@@ -19,13 +21,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-io-File-canExecute
+- id: sso.java.file_or_system_operation.java.0002.no-java-io-File-canExecute
   languages:
   - java
   message: Avoid using java.io.File.canExecute(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.io.File.canExecute()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: new java.io.File.canExecute(...)
   - pattern: java.io.File.canExecute(...)
@@ -42,13 +46,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-io-File-canRead
+- id: sso.java.file_or_system_operation.java.0003.no-java-io-File-canRead
   languages:
   - java
   message: Avoid using java.io.File.canRead(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.io.File.canRead()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: new java.io.File.canRead(...)
   - pattern: java.io.File.canRead(...)
@@ -62,13 +68,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-io-File-canWrite
+- id: sso.java.file_or_system_operation.java.0004.no-java-io-File-canWrite
   languages:
   - java
   message: Avoid using java.io.File.canWrite(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.io.File.canWrite()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: new java.io.File.canWrite(...)
   - pattern: java.io.File.canWrite(...)
@@ -82,13 +90,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-io-File-createNewFile
+- id: sso.java.file_or_system_operation.java.0005.no-java-io-File-createNewFile
   languages:
   - java
   message: Avoid using java.io.File.createNewFile(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.io.File.createNewFile()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
   pattern-either:
   - pattern: new java.io.File.createNewFile(...)
   - pattern: java.io.File.createNewFile(...)
@@ -102,13 +112,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-io-File-createTempFile
+- id: sso.java.file_or_system_operation.java.0006.no-java-io-File-createTempFile
   languages:
   - java
   message: Avoid using java.io.File.createTempFile(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.io.File.createTempFile()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
   pattern-either:
   - pattern: new java.io.File.createTempFile(...)
   - pattern: java.io.File.createTempFile(...)
@@ -122,13 +134,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-io-File-delete
+- id: sso.java.file_or_system_operation.java.0007.no-java-io-File-delete
   languages:
   - java
   message: Avoid using java.io.File.delete(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.io.File.delete()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
   pattern-either:
   - pattern: new java.io.File.delete(...)
   - pattern: java.io.File.delete(...)
@@ -142,13 +156,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-io-File-exists
+- id: sso.java.file_or_system_operation.java.0008.no-java-io-File-exists
   languages:
   - java
   message: Avoid using java.io.File.exists(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.io.File.exists()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: new java.io.File.exists(...)
   - pattern: java.io.File.exists(...)
@@ -162,13 +178,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-io-File-getAbsolutePath
+- id: sso.java.file_or_system_operation.java.0009.no-java-io-File-getAbsolutePath
   languages:
   - java
   message: Avoid using java.io.File.getAbsolutePath(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.io.File.getAbsolutePath()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: new java.io.File.getAbsolutePath(...)
   - pattern: java.io.File.getAbsolutePath(...)
@@ -182,13 +200,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-io-File-getCanonicalPath
+- id: sso.java.file_or_system_operation.java.0010.no-java-io-File-getCanonicalPath
   languages:
   - java
   message: Avoid using java.io.File.getCanonicalPath(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.io.File.getCanonicalPath()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: new java.io.File.getCanonicalPath(...)
   - pattern: java.io.File.getCanonicalPath(...)
@@ -202,13 +222,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-io-File-getName
+- id: sso.java.file_or_system_operation.java.0011.no-java-io-File-getName
   languages:
   - java
   message: Avoid using java.io.File.getName(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.io.File.getName()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: new java.io.File.getName(...)
   - pattern: java.io.File.getName(...)
@@ -222,13 +244,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-io-File-getParent
+- id: sso.java.file_or_system_operation.java.0012.no-java-io-File-getParent
   languages:
   - java
   message: Avoid using java.io.File.getParent(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.io.File.getParent()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: new java.io.File.getParent(...)
   - pattern: java.io.File.getParent(...)
@@ -242,13 +266,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-io-File-getPath
+- id: sso.java.file_or_system_operation.java.0013.no-java-io-File-getPath
   languages:
   - java
   message: Avoid using java.io.File.getPath(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.io.File.getPath()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: new java.io.File.getPath(...)
   - pattern: java.io.File.getPath(...)
@@ -262,13 +288,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-io-File-list
+- id: sso.java.file_or_system_operation.java.0014.no-java-io-File-list
   languages:
   - java
   message: Avoid using java.io.File.list(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.io.File.list()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: new java.io.File.list(...)
   - pattern: java.io.File.list(...)
@@ -282,13 +310,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-io-File-listFiles
+- id: sso.java.file_or_system_operation.java.0015.no-java-io-File-listFiles
   languages:
   - java
   message: Avoid using java.io.File.listFiles(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.io.File.listFiles()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: new java.io.File.listFiles(...)
   - pattern: java.io.File.listFiles(...)
@@ -302,13 +332,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-io-File-mkdir
+- id: sso.java.file_or_system_operation.java.0016.no-java-io-File-mkdir
   languages:
   - java
   message: Avoid using java.io.File.mkdir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.io.File.mkdir()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
   pattern-either:
   - pattern: new java.io.File.mkdir(...)
   - pattern: java.io.File.mkdir(...)
@@ -322,13 +354,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-io-File-mkdirs
+- id: sso.java.file_or_system_operation.java.0017.no-java-io-File-mkdirs
   languages:
   - java
   message: Avoid using java.io.File.mkdirs(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.io.File.mkdirs()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
   pattern-either:
   - pattern: new java.io.File.mkdirs(...)
   - pattern: java.io.File.mkdirs(...)
@@ -342,13 +376,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-io-File-renameTo
+- id: sso.java.file_or_system_operation.java.0018.no-java-io-File-renameTo
   languages:
   - java
   message: Avoid using java.io.File.renameTo(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.io.File.renameTo()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: new java.io.File.renameTo(...)
   - pattern: java.io.File.renameTo(...)
@@ -362,13 +398,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-io-FileInputStream-read
+- id: sso.java.file_or_system_operation.java.0019.no-java-io-FileInputStream-read
   languages:
   - java
   message: Avoid using java.io.FileInputStream.read(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.io.FileInputStream.read()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: new java.io.FileInputStream.read(...)
   - pattern: java.io.FileInputStream.read(...)
@@ -382,13 +420,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-io-FileOutputStream-write
+- id: sso.java.file_or_system_operation.java.0020.no-java-io-FileOutputStream-write
   languages:
   - java
   message: Avoid using java.io.FileOutputStream.write(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.io.FileOutputStream.write()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: new java.io.FileOutputStream.write(...)
   - pattern: java.io.FileOutputStream.write(...)
@@ -402,13 +442,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-io-FileReader-read
+- id: sso.java.file_or_system_operation.java.0021.no-java-io-FileReader-read
   languages:
   - java
   message: Avoid using java.io.FileReader.read(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.io.FileReader.read()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: new java.io.FileReader.read(...)
   - pattern: java.io.FileReader.read(...)
@@ -422,13 +464,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-io-FileWriter-write
+- id: sso.java.file_or_system_operation.java.0022.no-java-io-FileWriter-write
   languages:
   - java
   message: Avoid using java.io.FileWriter.write(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.io.FileWriter.write()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: new java.io.FileWriter.write(...)
   - pattern: java.io.FileWriter.write(...)
@@ -442,13 +486,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-lang-System-exit
+- id: sso.java.file_or_system_operation.java.0023.no-java-lang-System-exit
   languages:
   - java
   message: Avoid using java.lang.System.exit(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.lang.System.exit()
     category: File or System Operation
+    malskills_sso_category: process_operation
+    malskills_subtype: process_control
   pattern-either:
   - pattern: new java.lang.System.exit(...)
   - pattern: java.lang.System.exit(...)
@@ -462,13 +508,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-lang-System-getProperty
+- id: sso.java.file_or_system_operation.java.0024.no-java-lang-System-getProperty
   languages:
   - java
   message: Avoid using java.lang.System.getProperty(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.lang.System.getProperty()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: new java.lang.System.getProperty(...)
   - pattern: java.lang.System.getProperty(...)
@@ -482,13 +530,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-lang-System-getenv
+- id: sso.java.file_or_system_operation.java.0025.no-java-lang-System-getenv
   languages:
   - java
   message: Avoid using java.lang.System.getenv(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.lang.System.getenv()
     category: File or System Operation
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: environment_access
   pattern-either:
   - pattern: new java.lang.System.getenv(...)
   - pattern: java.lang.System.getenv(...)
@@ -502,13 +552,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-nio-file-Files-copy
+- id: sso.java.file_or_system_operation.java.0026.no-java-nio-file-Files-copy
   languages:
   - java
   message: Avoid using java.nio.file.Files.copy(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.nio.file.Files.copy()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: new java.nio.file.Files.copy(...)
   - pattern: java.nio.file.Files.copy(...)
@@ -525,13 +577,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-nio-file-Files-createDirectory
+- id: sso.java.file_or_system_operation.java.0027.no-java-nio-file-Files-createDirectory
   languages:
   - java
   message: Avoid using java.nio.file.Files.createDirectory(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.nio.file.Files.createDirectory()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
   pattern-either:
   - pattern: new java.nio.file.Files.createDirectory(...)
   - pattern: java.nio.file.Files.createDirectory(...)
@@ -548,13 +602,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-nio-file-Files-createFile
+- id: sso.java.file_or_system_operation.java.0028.no-java-nio-file-Files-createFile
   languages:
   - java
   message: Avoid using java.nio.file.Files.createFile(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.nio.file.Files.createFile()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
   pattern-either:
   - pattern: new java.nio.file.Files.createFile(...)
   - pattern: java.nio.file.Files.createFile(...)
@@ -571,13 +627,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-nio-file-Files-delete
+- id: sso.java.file_or_system_operation.java.0029.no-java-nio-file-Files-delete
   languages:
   - java
   message: Avoid using java.nio.file.Files.delete(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.nio.file.Files.delete()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
   pattern-either:
   - pattern: new java.nio.file.Files.delete(...)
   - pattern: java.nio.file.Files.delete(...)
@@ -594,13 +652,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-nio-file-Files-exists
+- id: sso.java.file_or_system_operation.java.0030.no-java-nio-file-Files-exists
   languages:
   - java
   message: Avoid using java.nio.file.Files.exists(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.nio.file.Files.exists()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: new java.nio.file.Files.exists(...)
   - pattern: java.nio.file.Files.exists(...)
@@ -617,13 +677,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-nio-file-Files-move
+- id: sso.java.file_or_system_operation.java.0031.no-java-nio-file-Files-move
   languages:
   - java
   message: Avoid using java.nio.file.Files.move(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.nio.file.Files.move()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: new java.nio.file.Files.move(...)
   - pattern: java.nio.file.Files.move(...)
@@ -640,13 +702,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-nio-file-Files-newBufferedReader
+- id: sso.java.file_or_system_operation.java.0032.no-java-nio-file-Files-newBufferedReader
   languages:
   - java
   message: Avoid using java.nio.file.Files.newBufferedReader(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.nio.file.Files.newBufferedReader()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: new java.nio.file.Files.newBufferedReader(...)
   - pattern: java.nio.file.Files.newBufferedReader(...)
@@ -663,13 +727,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-nio-file-Files-newBufferedWriter
+- id: sso.java.file_or_system_operation.java.0033.no-java-nio-file-Files-newBufferedWriter
   languages:
   - java
   message: Avoid using java.nio.file.Files.newBufferedWriter(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.nio.file.Files.newBufferedWriter()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: new java.nio.file.Files.newBufferedWriter(...)
   - pattern: java.nio.file.Files.newBufferedWriter(...)
@@ -686,13 +752,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-nio-file-Files-readAllBytes
+- id: sso.java.file_or_system_operation.java.0034.no-java-nio-file-Files-readAllBytes
   languages:
   - java
   message: Avoid using java.nio.file.Files.readAllBytes(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.nio.file.Files.readAllBytes()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: new java.nio.file.Files.readAllBytes(...)
   - pattern: java.nio.file.Files.readAllBytes(...)
@@ -709,13 +777,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-nio-file-Files-readAllLines
+- id: sso.java.file_or_system_operation.java.0035.no-java-nio-file-Files-readAllLines
   languages:
   - java
   message: Avoid using java.nio.file.Files.readAllLines(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.nio.file.Files.readAllLines()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: new java.nio.file.Files.readAllLines(...)
   - pattern: java.nio.file.Files.readAllLines(...)
@@ -732,13 +802,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-nio-file-Files-setPosixFilePermissions
+- id: sso.java.file_or_system_operation.java.0036.no-java-nio-file-Files-setPosixFilePermissions
   languages:
   - java
   message: Avoid using java.nio.file.Files.setPosixFilePermissions(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.nio.file.Files.setPosixFilePermissions()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
   pattern-either:
   - pattern: new java.nio.file.Files.setPosixFilePermissions(...)
   - pattern: java.nio.file.Files.setPosixFilePermissions(...)
@@ -755,13 +827,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-nio-file-Files-write
+- id: sso.java.file_or_system_operation.java.0037.no-java-nio-file-Files-write
   languages:
   - java
   message: Avoid using java.nio.file.Files.write(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.nio.file.Files.write()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: new java.nio.file.Files.write(...)
   - pattern: java.nio.file.Files.write(...)
@@ -778,13 +852,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-nio-file-Paths-get
+- id: sso.java.file_or_system_operation.java.0038.no-java-nio-file-Paths-get
   languages:
   - java
   message: Avoid using java.nio.file.Paths.get(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.nio.file.Paths.get()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: new java.nio.file.Paths.get(...)
   - pattern: java.nio.file.Paths.get(...)
@@ -801,13 +877,15 @@ rules:
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-java-nio-file-attribute-PosixFilePermissions-fromString
+- id: sso.java.file_or_system_operation.java.0039.no-java-nio-file-attribute-PosixFilePermissions-fromString
   languages:
   - java
   message: Avoid using java.nio.file.attribute.PosixFilePermissions.fromString(), as it can lead to potential issues with file or system operation.
   metadata:
     api: java.nio.file.attribute.PosixFilePermissions.fromString()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
   pattern-either:
   - pattern: new java.nio.file.attribute.PosixFilePermissions.fromString(...)
   - pattern: java.nio.file.attribute.PosixFilePermissions.fromString(...)

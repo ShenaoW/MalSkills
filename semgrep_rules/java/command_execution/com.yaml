@@ -1,11 +1,13 @@
 rules:
-- id: no-com-sun-jna-Native-load
+- id: sso.java.command_execution.com.0001.no-com-sun-jna-Native-load
   languages:
   - java
   message: Avoid using com.sun.jna.Native.load(), as it can lead to potential issues with command execution.
   metadata:
     api: com.sun.jna.Native.load()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: new com.sun.jna.Native.load(...)
   - pattern: com.sun.jna.Native.load(...)
@@ -22,13 +24,15 @@ rules:
   severity: WARNING
   tags:
   - Command Execution
-- id: no-com-sun-jna-NativeLibrary-getInstance
+- id: sso.java.command_execution.com.0002.no-com-sun-jna-NativeLibrary-getInstance
   languages:
   - java
   message: Avoid using com.sun.jna.NativeLibrary.getInstance(), as it can lead to potential issues with command execution.
   metadata:
     api: com.sun.jna.NativeLibrary.getInstance()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: new com.sun.jna.NativeLibrary.getInstance(...)
   - pattern: com.sun.jna.NativeLibrary.getInstance(...)

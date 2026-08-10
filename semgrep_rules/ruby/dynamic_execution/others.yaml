@@ -1,167 +1,193 @@
 rules:
-- id: no-class_eval
+- id: sso.ruby.dynamic_execution.others.0001.no-class_eval
   languages:
   - ruby
   message: Avoid using class_eval(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: class_eval()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: class_eval(...)
   - pattern: $VAR = class_eval
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-class_exec
+- id: sso.ruby.dynamic_execution.others.0002.no-class_exec
   languages:
   - ruby
   message: Avoid using class_exec(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: class_exec()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: class_exec(...)
   - pattern: $VAR = class_exec
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-define_method
+- id: sso.ruby.dynamic_execution.others.0003.no-define_method
   languages:
   - ruby
   message: Avoid using define_method(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: define_method()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: define_method(...)
   - pattern: $VAR = define_method
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-define_singleton_method
+- id: sso.ruby.dynamic_execution.others.0004.no-define_singleton_method
   languages:
   - ruby
   message: Avoid using define_singleton_method(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: define_singleton_method()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: define_singleton_method(...)
   - pattern: $VAR = define_singleton_method
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-eval
+- id: sso.ruby.dynamic_execution.others.0005.no-eval
   languages:
   - ruby
   message: Avoid using eval(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: eval()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: eval(...)
   - pattern: $VAR = eval
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-instance_eval
+- id: sso.ruby.dynamic_execution.others.0006.no-instance_eval
   languages:
   - ruby
   message: Avoid using instance_eval(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: instance_eval()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: instance_eval(...)
   - pattern: $VAR = instance_eval
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-instance_exec
+- id: sso.ruby.dynamic_execution.others.0007.no-instance_exec
   languages:
   - ruby
   message: Avoid using instance_exec(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: instance_exec()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: instance_exec(...)
   - pattern: $VAR = instance_exec
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-method_missing
+- id: sso.ruby.dynamic_execution.others.0008.no-method_missing
   languages:
   - ruby
   message: Avoid using method_missing(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: method_missing()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: method_missing(...)
   - pattern: $VAR = method_missing
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-module_eval
+- id: sso.ruby.dynamic_execution.others.0009.no-module_eval
   languages:
   - ruby
   message: Avoid using module_eval(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: module_eval()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: module_eval(...)
   - pattern: $VAR = module_eval
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-module_exec
+- id: sso.ruby.dynamic_execution.others.0010.no-module_exec
   languages:
   - ruby
   message: Avoid using module_exec(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: module_exec()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: module_exec(...)
   - pattern: $VAR = module_exec
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-Binding.eval
+- id: sso.ruby.dynamic_execution.others.0011.no-Binding.eval
   languages:
   - ruby
   message: Avoid using Binding.eval(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: Binding.eval()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: Binding.eval(...)
   - pattern: $VAR = Binding.eval
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-Kernel.eval
+- id: sso.ruby.dynamic_execution.others.0012.no-Kernel.eval
   languages:
   - ruby
   message: Avoid using Kernel.eval(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: Kernel.eval()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: Kernel.eval(...)
   - pattern: $VAR = Kernel.eval
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-TOPLEVEL_BINDING.eval
+- id: sso.ruby.dynamic_execution.others.0013.no-TOPLEVEL_BINDING.eval
   languages:
   - ruby
   message: Avoid using TOPLEVEL_BINDING.eval(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: TOPLEVEL_BINDING.eval()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: TOPLEVEL_BINDING.eval(...)
   - pattern: $VAR = TOPLEVEL_BINDING.eval

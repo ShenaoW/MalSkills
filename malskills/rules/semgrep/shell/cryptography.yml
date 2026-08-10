@@ -1,0 +1,27 @@
+rules:
+  - id: shell.cryptography.decode
+    languages: [bash]
+    message: Shell decodes encoded data
+    severity: WARNING
+    metadata:
+      malskills_subtype: decoding
+      malskills_sso_category: cryptography
+    pattern-regex: '(?i)\b(base64\s+(-d|-D|--decode)|openssl\s+base64\s+-d|xxd\s+-r)\b'
+
+  - id: shell.cryptography.encode
+    languages: [bash]
+    message: Shell encodes data
+    severity: WARNING
+    metadata:
+      malskills_subtype: encoding
+      malskills_sso_category: cryptography
+    pattern-regex: '(?i)\b(?:base64\b(?![^\n]*(?:\s-d\b|\s-D\b|--decode\b))|openssl\s+base64\b(?![^\n]*\s-d\b)|xxd\b(?![^\n]*\s-r\b))'
+
+  - id: shell.cryptography.encrypt
+    languages: [bash]
+    message: Shell encrypts data
+    severity: WARNING
+    metadata:
+      malskills_subtype: encryption
+      malskills_sso_category: cryptography
+    pattern-regex: '(?i)\b(openssl\s+enc|gpg\s+(-c|--symmetric|--encrypt))\b'

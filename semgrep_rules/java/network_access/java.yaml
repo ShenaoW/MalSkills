@@ -1,11 +1,13 @@
 rules:
-- id: no-java-io-BufferedReader-readLine
+- id: sso.java.network_access.java.0001.no-java-io-BufferedReader-readLine
   languages:
   - java
   message: Avoid using java.io.BufferedReader.readLine(), as it can lead to potential issues with network access.
   metadata:
     api: java.io.BufferedReader.readLine()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: new java.io.BufferedReader.readLine(...)
   - pattern: java.io.BufferedReader.readLine(...)
@@ -19,13 +21,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-io-InputStream-read
+- id: sso.java.network_access.java.0002.no-java-io-InputStream-read
   languages:
   - java
   message: Avoid using java.io.InputStream.read(), as it can lead to potential issues with network access.
   metadata:
     api: java.io.InputStream.read()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: new java.io.InputStream.read(...)
   - pattern: java.io.InputStream.read(...)
@@ -39,13 +43,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-io-OutputStream-write
+- id: sso.java.network_access.java.0003.no-java-io-OutputStream-write
   languages:
   - java
   message: Avoid using java.io.OutputStream.write(), as it can lead to potential issues with network access.
   metadata:
     api: java.io.OutputStream.write()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: new java.io.OutputStream.write(...)
   - pattern: java.io.OutputStream.write(...)
@@ -59,13 +65,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-io-PrintWriter-println
+- id: sso.java.network_access.java.0004.no-java-io-PrintWriter-println
   languages:
   - java
   message: Avoid using java.io.PrintWriter.println(), as it can lead to potential issues with network access.
   metadata:
     api: java.io.PrintWriter.println()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: new java.io.PrintWriter.println(...)
   - pattern: java.io.PrintWriter.println(...)
@@ -79,13 +87,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-net-DatagramSocket-receive
+- id: sso.java.network_access.java.0005.no-java-net-DatagramSocket-receive
   languages:
   - java
   message: Avoid using java.net.DatagramSocket.receive(), as it can lead to potential issues with network access.
   metadata:
     api: java.net.DatagramSocket.receive()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: new java.net.DatagramSocket.receive(...)
   - pattern: java.net.DatagramSocket.receive(...)
@@ -99,13 +109,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-net-DatagramSocket-send
+- id: sso.java.network_access.java.0006.no-java-net-DatagramSocket-send
   languages:
   - java
   message: Avoid using java.net.DatagramSocket.send(), as it can lead to potential issues with network access.
   metadata:
     api: java.net.DatagramSocket.send()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: new java.net.DatagramSocket.send(...)
   - pattern: java.net.DatagramSocket.send(...)
@@ -119,13 +131,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-net-HttpURLConnection-connect
+- id: sso.java.network_access.java.0007.no-java-net-HttpURLConnection-connect
   languages:
   - java
   message: Avoid using java.net.HttpURLConnection.connect(), as it can lead to potential issues with network access.
   metadata:
     api: java.net.HttpURLConnection.connect()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: new java.net.HttpURLConnection.connect(...)
   - pattern: java.net.HttpURLConnection.connect(...)
@@ -139,13 +153,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-net-HttpURLConnection-getInputStream
+- id: sso.java.network_access.java.0008.no-java-net-HttpURLConnection-getInputStream
   languages:
   - java
   message: Avoid using java.net.HttpURLConnection.getInputStream(), as it can lead to potential issues with network access.
   metadata:
     api: java.net.HttpURLConnection.getInputStream()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: new java.net.HttpURLConnection.getInputStream(...)
   - pattern: java.net.HttpURLConnection.getInputStream(...)
@@ -159,13 +175,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-net-HttpURLConnection-getOutputStream
+- id: sso.java.network_access.java.0009.no-java-net-HttpURLConnection-getOutputStream
   languages:
   - java
   message: Avoid using java.net.HttpURLConnection.getOutputStream(), as it can lead to potential issues with network access.
   metadata:
     api: java.net.HttpURLConnection.getOutputStream()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: new java.net.HttpURLConnection.getOutputStream(...)
   - pattern: java.net.HttpURLConnection.getOutputStream(...)
@@ -179,13 +197,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-net-HttpURLConnection-getResponseCode
+- id: sso.java.network_access.java.0010.no-java-net-HttpURLConnection-getResponseCode
   languages:
   - java
   message: Avoid using java.net.HttpURLConnection.getResponseCode(), as it can lead to potential issues with network access.
   metadata:
     api: java.net.HttpURLConnection.getResponseCode()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: new java.net.HttpURLConnection.getResponseCode(...)
   - pattern: java.net.HttpURLConnection.getResponseCode(...)
@@ -199,13 +219,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-net-HttpURLConnection-setRequestMethod
+- id: sso.java.network_access.java.0011.no-java-net-HttpURLConnection-setRequestMethod
   languages:
   - java
   message: Avoid using java.net.HttpURLConnection.setRequestMethod(), as it can lead to potential issues with network access.
   metadata:
     api: java.net.HttpURLConnection.setRequestMethod()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: new java.net.HttpURLConnection.setRequestMethod(...)
   - pattern: java.net.HttpURLConnection.setRequestMethod(...)
@@ -219,13 +241,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-net-ServerSocket-accept
+- id: sso.java.network_access.java.0012.no-java-net-ServerSocket-accept
   languages:
   - java
   message: Avoid using java.net.ServerSocket.accept(), as it can lead to potential issues with network access.
   metadata:
     api: java.net.ServerSocket.accept()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
   pattern-either:
   - pattern: new java.net.ServerSocket.accept(...)
   - pattern: java.net.ServerSocket.accept(...)
@@ -239,13 +263,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-net-Socket-connect
+- id: sso.java.network_access.java.0013.no-java-net-Socket-connect
   languages:
   - java
   message: Avoid using java.net.Socket.connect(), as it can lead to potential issues with network access.
   metadata:
     api: java.net.Socket.connect()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: new java.net.Socket.connect(...)
   - pattern: java.net.Socket.connect(...)
@@ -259,13 +285,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-net-Socket-getInputStream
+- id: sso.java.network_access.java.0014.no-java-net-Socket-getInputStream
   languages:
   - java
   message: Avoid using java.net.Socket.getInputStream(), as it can lead to potential issues with network access.
   metadata:
     api: java.net.Socket.getInputStream()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: new java.net.Socket.getInputStream(...)
   - pattern: java.net.Socket.getInputStream(...)
@@ -279,13 +307,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-net-Socket-getOutputStream
+- id: sso.java.network_access.java.0015.no-java-net-Socket-getOutputStream
   languages:
   - java
   message: Avoid using java.net.Socket.getOutputStream(), as it can lead to potential issues with network access.
   metadata:
     api: java.net.Socket.getOutputStream()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: new java.net.Socket.getOutputStream(...)
   - pattern: java.net.Socket.getOutputStream(...)
@@ -299,13 +329,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-net-URI-create
+- id: sso.java.network_access.java.0016.no-java-net-URI-create
   languages:
   - java
   message: Avoid using java.net.URI.create(), as it can lead to potential issues with network access.
   metadata:
     api: java.net.URI.create()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: new java.net.URI.create(...)
   - pattern: java.net.URI.create(...)
@@ -319,13 +351,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-net-URI-toURL
+- id: sso.java.network_access.java.0017.no-java-net-URI-toURL
   languages:
   - java
   message: Avoid using java.net.URI.toURL(), as it can lead to potential issues with network access.
   metadata:
     api: java.net.URI.toURL()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: new java.net.URI.toURL(...)
   - pattern: java.net.URI.toURL(...)
@@ -339,13 +373,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-net-URL-openConnection
+- id: sso.java.network_access.java.0018.no-java-net-URL-openConnection
   languages:
   - java
   message: Avoid using java.net.URL.openConnection(), as it can lead to potential issues with network access.
   metadata:
     api: java.net.URL.openConnection()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: new java.net.URL.openConnection(...)
   - pattern: java.net.URL.openConnection(...)
@@ -359,13 +395,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-net-URL-openStream
+- id: sso.java.network_access.java.0019.no-java-net-URL-openStream
   languages:
   - java
   message: Avoid using java.net.URL.openStream(), as it can lead to potential issues with network access.
   metadata:
     api: java.net.URL.openStream()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: new java.net.URL.openStream(...)
   - pattern: java.net.URL.openStream(...)
@@ -379,13 +417,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-net-URL-toURI
+- id: sso.java.network_access.java.0020.no-java-net-URL-toURI
   languages:
   - java
   message: Avoid using java.net.URL.toURI(), as it can lead to potential issues with network access.
   metadata:
     api: java.net.URL.toURI()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: new java.net.URL.toURI(...)
   - pattern: java.net.URL.toURI(...)
@@ -399,13 +439,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-net-http-HttpClient-newHttpClient
+- id: sso.java.network_access.java.0021.no-java-net-http-HttpClient-newHttpClient
   languages:
   - java
   message: Avoid using java.net.http.HttpClient.newHttpClient(), as it can lead to potential issues with network access.
   metadata:
     api: java.net.http.HttpClient.newHttpClient()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: new java.net.http.HttpClient.newHttpClient(...)
   - pattern: java.net.http.HttpClient.newHttpClient(...)
@@ -422,13 +464,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-net-http-HttpClient-send
+- id: sso.java.network_access.java.0022.no-java-net-http-HttpClient-send
   languages:
   - java
   message: Avoid using java.net.http.HttpClient.send(), as it can lead to potential issues with network access.
   metadata:
     api: java.net.http.HttpClient.send()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: new java.net.http.HttpClient.send(...)
   - pattern: java.net.http.HttpClient.send(...)
@@ -445,13 +489,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-net-http-HttpClient-sendAsync
+- id: sso.java.network_access.java.0023.no-java-net-http-HttpClient-sendAsync
   languages:
   - java
   message: Avoid using java.net.http.HttpClient.sendAsync(), as it can lead to potential issues with network access.
   metadata:
     api: java.net.http.HttpClient.sendAsync()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: new java.net.http.HttpClient.sendAsync(...)
   - pattern: java.net.http.HttpClient.sendAsync(...)
@@ -468,13 +514,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-net-http-HttpRequest-build
+- id: sso.java.network_access.java.0024.no-java-net-http-HttpRequest-build
   languages:
   - java
   message: Avoid using java.net.http.HttpRequest.build(), as it can lead to potential issues with network access.
   metadata:
     api: java.net.http.HttpRequest.build()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: new java.net.http.HttpRequest.build(...)
   - pattern: java.net.http.HttpRequest.build(...)
@@ -491,13 +539,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-net-http-HttpRequest-newBuilder
+- id: sso.java.network_access.java.0025.no-java-net-http-HttpRequest-newBuilder
   languages:
   - java
   message: Avoid using java.net.http.HttpRequest.newBuilder(), as it can lead to potential issues with network access.
   metadata:
     api: java.net.http.HttpRequest.newBuilder()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: new java.net.http.HttpRequest.newBuilder(...)
   - pattern: java.net.http.HttpRequest.newBuilder(...)
@@ -514,13 +564,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-nio-channels-ServerSocketChannel-accept
+- id: sso.java.network_access.java.0026.no-java-nio-channels-ServerSocketChannel-accept
   languages:
   - java
   message: Avoid using java.nio.channels.ServerSocketChannel.accept(), as it can lead to potential issues with network access.
   metadata:
     api: java.nio.channels.ServerSocketChannel.accept()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
   pattern-either:
   - pattern: new java.nio.channels.ServerSocketChannel.accept(...)
   - pattern: java.nio.channels.ServerSocketChannel.accept(...)
@@ -537,13 +589,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-nio-channels-ServerSocketChannel-open
+- id: sso.java.network_access.java.0027.no-java-nio-channels-ServerSocketChannel-open
   languages:
   - java
   message: Avoid using java.nio.channels.ServerSocketChannel.open(), as it can lead to potential issues with network access.
   metadata:
     api: java.nio.channels.ServerSocketChannel.open()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: new java.nio.channels.ServerSocketChannel.open(...)
   - pattern: java.nio.channels.ServerSocketChannel.open(...)
@@ -560,13 +614,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-nio-channels-SocketChannel-connect
+- id: sso.java.network_access.java.0028.no-java-nio-channels-SocketChannel-connect
   languages:
   - java
   message: Avoid using java.nio.channels.SocketChannel.connect(), as it can lead to potential issues with network access.
   metadata:
     api: java.nio.channels.SocketChannel.connect()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: new java.nio.channels.SocketChannel.connect(...)
   - pattern: java.nio.channels.SocketChannel.connect(...)
@@ -583,13 +639,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-java-nio-channels-SocketChannel-open
+- id: sso.java.network_access.java.0029.no-java-nio-channels-SocketChannel-open
   languages:
   - java
   message: Avoid using java.nio.channels.SocketChannel.open(), as it can lead to potential issues with network access.
   metadata:
     api: java.nio.channels.SocketChannel.open()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: new java.nio.channels.SocketChannel.open(...)
   - pattern: java.nio.channels.SocketChannel.open(...)

@@ -1,167 +1,193 @@
 rules:
-- id: no-systeminformation-bios
+- id: sso.javascript.command_execution.systeminformation.0001.no-systeminformation-bios
   languages:
   - javascript
   message: Avoid using systeminformation.bios(), as it can lead to potential issues with command execution.
   metadata:
     api: systeminformation.bios()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: systeminformation.bios(...)
   - pattern: $VAR = systeminformation.bios
   severity: WARNING
   tags:
   - Command Execution
-- id: no-systeminformation-cpuTemperature
+- id: sso.javascript.command_execution.systeminformation.0002.no-systeminformation-cpuTemperature
   languages:
   - javascript
   message: Avoid using systeminformation.cpuTemperature(), as it can lead to potential issues with command execution.
   metadata:
     api: systeminformation.cpuTemperature()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: systeminformation.cpuTemperature(...)
   - pattern: $VAR = systeminformation.cpuTemperature
   severity: WARNING
   tags:
   - Command Execution
-- id: no-systeminformation-diskLayout
+- id: sso.javascript.command_execution.systeminformation.0003.no-systeminformation-diskLayout
   languages:
   - javascript
   message: Avoid using systeminformation.diskLayout(), as it can lead to potential issues with command execution.
   metadata:
     api: systeminformation.diskLayout()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: systeminformation.diskLayout(...)
   - pattern: $VAR = systeminformation.diskLayout
   severity: WARNING
   tags:
   - Command Execution
-- id: no-systeminformation-dockerContainerStats
+- id: sso.javascript.command_execution.systeminformation.0004.no-systeminformation-dockerContainerStats
   languages:
   - javascript
   message: Avoid using systeminformation.dockerContainerStats(), as it can lead to potential issues with command execution.
   metadata:
     api: systeminformation.dockerContainerStats()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: systeminformation.dockerContainerStats(...)
   - pattern: $VAR = systeminformation.dockerContainerStats
   severity: WARNING
   tags:
   - Command Execution
-- id: no-systeminformation-fsSize
+- id: sso.javascript.command_execution.systeminformation.0005.no-systeminformation-fsSize
   languages:
   - javascript
   message: Avoid using systeminformation.fsSize(), as it can lead to potential issues with command execution.
   metadata:
     api: systeminformation.fsSize()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: systeminformation.fsSize(...)
   - pattern: $VAR = systeminformation.fsSize
   severity: WARNING
   tags:
   - Command Execution
-- id: no-systeminformation-fsStats
+- id: sso.javascript.command_execution.systeminformation.0006.no-systeminformation-fsStats
   languages:
   - javascript
   message: Avoid using systeminformation.fsStats(), as it can lead to potential issues with command execution.
   metadata:
     api: systeminformation.fsStats()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: systeminformation.fsStats(...)
   - pattern: $VAR = systeminformation.fsStats
   severity: WARNING
   tags:
   - Command Execution
-- id: no-systeminformation-mem
+- id: sso.javascript.command_execution.systeminformation.0007.no-systeminformation-mem
   languages:
   - javascript
   message: Avoid using systeminformation.mem(), as it can lead to potential issues with command execution.
   metadata:
     api: systeminformation.mem()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: systeminformation.mem(...)
   - pattern: $VAR = systeminformation.mem
   severity: WARNING
   tags:
   - Command Execution
-- id: no-systeminformation-networkConnections
+- id: sso.javascript.command_execution.systeminformation.0008.no-systeminformation-networkConnections
   languages:
   - javascript
   message: Avoid using systeminformation.networkConnections(), as it can lead to potential issues with command execution.
   metadata:
     api: systeminformation.networkConnections()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: systeminformation.networkConnections(...)
   - pattern: $VAR = systeminformation.networkConnections
   severity: WARNING
   tags:
   - Command Execution
-- id: no-systeminformation-osInfo
+- id: sso.javascript.command_execution.systeminformation.0009.no-systeminformation-osInfo
   languages:
   - javascript
   message: Avoid using systeminformation.osInfo(), as it can lead to potential issues with command execution.
   metadata:
     api: systeminformation.osInfo()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: systeminformation.osInfo(...)
   - pattern: $VAR = systeminformation.osInfo
   severity: WARNING
   tags:
   - Command Execution
-- id: no-systeminformation-services
+- id: sso.javascript.command_execution.systeminformation.0010.no-systeminformation-services
   languages:
   - javascript
   message: Avoid using systeminformation.services(), as it can lead to potential issues with command execution.
   metadata:
     api: systeminformation.services()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: systeminformation.services(...)
   - pattern: $VAR = systeminformation.services
   severity: WARNING
   tags:
   - Command Execution
-- id: no-systeminformation-system
+- id: sso.javascript.command_execution.systeminformation.0011.no-systeminformation-system
   languages:
   - javascript
   message: Avoid using systeminformation.system(), as it can lead to potential issues with command execution.
   metadata:
     api: systeminformation.system()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: systeminformation.system(...)
   - pattern: $VAR = systeminformation.system
   severity: WARNING
   tags:
   - Command Execution
-- id: no-systeminformation-versions
+- id: sso.javascript.command_execution.systeminformation.0012.no-systeminformation-versions
   languages:
   - javascript
   message: Avoid using systeminformation.versions(), as it can lead to potential issues with command execution.
   metadata:
     api: systeminformation.versions()
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern-either:
   - pattern: systeminformation.versions(...)
   - pattern: $VAR = systeminformation.versions
   severity: WARNING
   tags:
   - Command Execution
-- id: no-require-systeminformation
+- id: sso.javascript.command_execution.systeminformation.0013.no-require-systeminformation
   languages:
   - javascript
   message: Avoid using require('systeminformation'), as it can lead to potential issues with command execution.
   metadata:
     api: require('systeminformation')
     category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
   pattern: require('systeminformation')
   severity: WARNING
   tags:

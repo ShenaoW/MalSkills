@@ -1,24 +1,28 @@
 rules:
-- id: no-QNetworkAccessManager-get
+- id: sso.cpp.network_access.QNetworkAccessManager.0001.no-QNetworkAccessManager-get
   languages:
   - cpp
   message: Avoid using QNetworkAccessManager::get(), as it can lead to potential issues with network access.
   metadata:
     api: QNetworkAccessManager::get()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: QNetworkAccessManager::get(...)
   - pattern: $VAR = QNetworkAccessManager::get
   severity: WARNING
   tags:
   - Network Access
-- id: no-QNetworkAccessManager-post
+- id: sso.cpp.network_access.QNetworkAccessManager.0002.no-QNetworkAccessManager-post
   languages:
   - cpp
   message: Avoid using QNetworkAccessManager::post(), as it can lead to potential issues with network access.
   metadata:
     api: QNetworkAccessManager::post()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: QNetworkAccessManager::post(...)
   - pattern: $VAR = QNetworkAccessManager::post

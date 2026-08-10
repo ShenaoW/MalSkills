@@ -1,0 +1,15 @@
+{
+  "schema_version": "malskills-workflow-rule-v1",
+  "rule_id": "formal.graph.remote_code_execution",
+  "pattern_name": "Remote_Code_Execution",
+  "workflow_name": "network_input_to_execution_sink",
+  "severity": "high",
+  "decision_effect": "malicious",
+  "source": "formal",
+  "roles": [
+    {"id": "input", "subtypes": ["data_receive"], "min_confidence": 0.0},
+    {"id": "execution", "subtypes": ["system_command_execution", "dynamic_code_execution", "external_file_execution", "unsafe_deserialization"], "min_confidence": 0.0}
+  ],
+  "relations": [{"kind": "value_flow", "left": "input", "right": "execution"}],
+  "explanation": "Network-controlled input flows into an execution-capable operation."
+}

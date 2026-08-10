@@ -1,11 +1,13 @@
 rules:
-- id: no-boost-asio-ip-tcp-acceptor-accept
+- id: sso.cpp.network_access.boost.0001.no-boost-asio-ip-tcp-acceptor-accept
   languages:
   - cpp
   message: Avoid using boost::asio::ip::tcp::acceptor::accept(), as it can lead to potential issues with network access.
   metadata:
     api: boost::asio::ip::tcp::acceptor::accept()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
   pattern-either:
   - pattern: boost::asio::ip::tcp::acceptor::accept(...)
   - pattern: $VAR = boost::asio::ip::tcp::acceptor::accept
@@ -20,13 +22,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-boost-asio-ip-tcp-resolver-resolve
+- id: sso.cpp.network_access.boost.0002.no-boost-asio-ip-tcp-resolver-resolve
   languages:
   - cpp
   message: Avoid using boost::asio::ip::tcp::resolver::resolve(), as it can lead to potential issues with network access.
   metadata:
     api: boost::asio::ip::tcp::resolver::resolve()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: dns_resolution
   pattern-either:
   - pattern: boost::asio::ip::tcp::resolver::resolve(...)
   - pattern: $VAR = boost::asio::ip::tcp::resolver::resolve
@@ -41,13 +45,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-boost-asio-ip-tcp-socket-connect
+- id: sso.cpp.network_access.boost.0003.no-boost-asio-ip-tcp-socket-connect
   languages:
   - cpp
   message: Avoid using boost::asio::ip::tcp::socket::connect(), as it can lead to potential issues with network access.
   metadata:
     api: boost::asio::ip::tcp::socket::connect()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: boost::asio::ip::tcp::socket::connect(...)
   - pattern: $VAR = boost::asio::ip::tcp::socket::connect
@@ -62,13 +68,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-boost-asio-read
+- id: sso.cpp.network_access.boost.0004.no-boost-asio-read
   languages:
   - cpp
   message: Avoid using boost::asio::read(), as it can lead to potential issues with network access.
   metadata:
     api: boost::asio::read()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: boost::asio::read(...)
   - pattern: $VAR = boost::asio::read
@@ -77,13 +85,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-boost-asio-write
+- id: sso.cpp.network_access.boost.0005.no-boost-asio-write
   languages:
   - cpp
   message: Avoid using boost::asio::write(), as it can lead to potential issues with network access.
   metadata:
     api: boost::asio::write()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: boost::asio::write(...)
   - pattern: $VAR = boost::asio::write

@@ -1,11 +1,13 @@
 rules:
-- id: no-groovy-lang-Script-run
+- id: sso.java.dynamic_execution.others.0001.no-groovy-lang-Script-run
   languages:
   - java
   message: Avoid using groovy.lang.Script.run(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: groovy.lang.Script.run()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: new groovy.lang.Script.run(...)
   - pattern: groovy.lang.Script.run(...)
@@ -19,13 +21,15 @@ rules:
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-jdk-nashorn-api-scripting-NashornScriptEngine-eval
+- id: sso.java.dynamic_execution.others.0002.no-jdk-nashorn-api-scripting-NashornScriptEngine-eval
   languages:
   - java
   message: Avoid using jdk.nashorn.api.scripting.NashornScriptEngine.eval(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: jdk.nashorn.api.scripting.NashornScriptEngine.eval()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: new jdk.nashorn.api.scripting.NashornScriptEngine.eval(...)
   - pattern: jdk.nashorn.api.scripting.NashornScriptEngine.eval(...)
@@ -45,13 +49,15 @@ rules:
   severity: WARNING
   tags:
   - Dynamic Execution
-- id: no-org-apache-bcel-util-ClassLoader-loadClass
+- id: sso.java.dynamic_execution.others.0003.no-org-apache-bcel-util-ClassLoader-loadClass
   languages:
   - java
   message: Avoid using org.apache.bcel.util.ClassLoader.loadClass(), as it can lead to potential issues with dynamic code execution.
   metadata:
     api: org.apache.bcel.util.ClassLoader.loadClass()
     category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
   pattern-either:
   - pattern: new org.apache.bcel.util.ClassLoader.loadClass(...)
   - pattern: org.apache.bcel.util.ClassLoader.loadClass(...)

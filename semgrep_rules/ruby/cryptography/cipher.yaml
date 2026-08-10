@@ -1,24 +1,28 @@
 rules:
-- id: no-cipher.final
+- id: sso.ruby.cryptography.cipher.0001.no-cipher.final
   languages:
   - ruby
   message: Avoid using cipher.final(), as it can lead to potential issues with cryptography.
   metadata:
     api: cipher.final()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
   pattern-either:
   - pattern: cipher.final(...)
   - pattern: $VAR = cipher.final
   severity: WARNING
   tags:
   - Cryptography
-- id: no-cipher.update
+- id: sso.ruby.cryptography.cipher.0002.no-cipher.update
   languages:
   - ruby
   message: Avoid using cipher.update(), as it can lead to potential issues with cryptography.
   metadata:
     api: cipher.update()
     category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
   pattern-either:
   - pattern: cipher.update(...)
   - pattern: $VAR = cipher.update

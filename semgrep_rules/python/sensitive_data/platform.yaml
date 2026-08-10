@@ -1,76 +1,88 @@
 rules:
-- id: no-platform-machine
+- id: sso.python.sensitive_data.platform.0001.no-platform-machine
   languages:
   - python
   message: Avoid using platform.machine(), as it can lead to potential issues with sensitive data.
   metadata:
     api: platform.machine()
     category: Sensitive Data
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: system_information_access
   pattern-either:
   - pattern: platform.machine(...)
   - pattern: $VAR = platform.machine
   severity: WARNING
   tags:
   - Sensitive Data
-- id: no-platform-node
+- id: sso.python.sensitive_data.platform.0002.no-platform-node
   languages:
   - python
   message: Avoid using platform.node(), as it can lead to potential issues with sensitive data.
   metadata:
     api: platform.node()
     category: Sensitive Data
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: system_information_access
   pattern-either:
   - pattern: platform.node(...)
   - pattern: $VAR = platform.node
   severity: WARNING
   tags:
   - Sensitive Data
-- id: no-platform-platform
+- id: sso.python.sensitive_data.platform.0003.no-platform-platform
   languages:
   - python
   message: Avoid using platform.platform(), as it can lead to potential issues with sensitive data.
   metadata:
     api: platform.platform()
     category: Sensitive Data
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: system_information_access
   pattern-either:
   - pattern: platform.platform(...)
   - pattern: $VAR = platform.platform
   severity: WARNING
   tags:
   - Sensitive Data
-- id: no-platform-release
+- id: sso.python.sensitive_data.platform.0004.no-platform-release
   languages:
   - python
   message: Avoid using platform.release(), as it can lead to potential issues with sensitive data.
   metadata:
     api: platform.release()
     category: Sensitive Data
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: system_information_access
   pattern-either:
   - pattern: platform.release(...)
   - pattern: $VAR = platform.release
   severity: WARNING
   tags:
   - Sensitive Data
-- id: no-platform-system
+- id: sso.python.sensitive_data.platform.0005.no-platform-system
   languages:
   - python
   message: Avoid using platform.system(), as it can lead to potential issues with sensitive data.
   metadata:
     api: platform.system()
     category: Sensitive Data
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: system_information_access
   pattern-either:
   - pattern: platform.system(...)
   - pattern: $VAR = platform.system
   severity: WARNING
   tags:
   - Sensitive Data
-- id: no-platform-version
+- id: sso.python.sensitive_data.platform.0006.no-platform-version
   languages:
   - python
   message: Avoid using platform.version(), as it can lead to potential issues with sensitive data.
   metadata:
     api: platform.version()
     category: Sensitive Data
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: system_information_access
   pattern-either:
   - pattern: platform.version(...)
   - pattern: $VAR = platform.version

@@ -1,11 +1,13 @@
 rules:
-- id: no-requests-api-delete
+- id: sso.python.network_access.requests.0001.no-requests-api-delete
   languages:
   - python
   message: Avoid using requests.api.delete(), as it can lead to potential issues with network access.
   metadata:
     api: requests.api.delete()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: requests.api.delete(...)
   - pattern: $VAR = requests.api.delete
@@ -14,13 +16,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-requests-api-get
+- id: sso.python.network_access.requests.0002.no-requests-api-get
   languages:
   - python
   message: Avoid using requests.api.get(), as it can lead to potential issues with network access.
   metadata:
     api: requests.api.get()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: requests.api.get(...)
   - pattern: $VAR = requests.api.get
@@ -29,13 +33,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-requests-api-head
+- id: sso.python.network_access.requests.0003.no-requests-api-head
   languages:
   - python
   message: Avoid using requests.api.head(), as it can lead to potential issues with network access.
   metadata:
     api: requests.api.head()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: requests.api.head(...)
   - pattern: $VAR = requests.api.head
@@ -44,13 +50,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-requests-api-options
+- id: sso.python.network_access.requests.0004.no-requests-api-options
   languages:
   - python
   message: Avoid using requests.api.options(), as it can lead to potential issues with network access.
   metadata:
     api: requests.api.options()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: requests.api.options(...)
   - pattern: $VAR = requests.api.options
@@ -59,13 +67,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-requests-api-patch
+- id: sso.python.network_access.requests.0005.no-requests-api-patch
   languages:
   - python
   message: Avoid using requests.api.patch(), as it can lead to potential issues with network access.
   metadata:
     api: requests.api.patch()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: requests.api.patch(...)
   - pattern: $VAR = requests.api.patch
@@ -74,13 +84,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-requests-api-post
+- id: sso.python.network_access.requests.0006.no-requests-api-post
   languages:
   - python
   message: Avoid using requests.api.post(), as it can lead to potential issues with network access.
   metadata:
     api: requests.api.post()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: requests.api.post(...)
   - pattern: $VAR = requests.api.post
@@ -89,13 +101,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-requests-api-put
+- id: sso.python.network_access.requests.0007.no-requests-api-put
   languages:
   - python
   message: Avoid using requests.api.put(), as it can lead to potential issues with network access.
   metadata:
     api: requests.api.put()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: requests.api.put(...)
   - pattern: $VAR = requests.api.put
@@ -104,13 +118,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-requests-api-request
+- id: sso.python.network_access.requests.0008.no-requests-api-request
   languages:
   - python
   message: Avoid using requests.api.request(), as it can lead to potential issues with network access.
   metadata:
     api: requests.api.request()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: requests.api.request(...)
   - pattern: $VAR = requests.api.request
@@ -119,91 +135,105 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-requests-delete
+- id: sso.python.network_access.requests.0009.no-requests-delete
   languages:
   - python
   message: Avoid using requests.delete(), as it can lead to potential issues with network access.
   metadata:
     api: requests.delete()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: requests.delete(...)
   - pattern: $VAR = requests.delete
   severity: WARNING
   tags:
   - Network Access
-- id: no-requests-get
+- id: sso.python.network_access.requests.0010.no-requests-get
   languages:
   - python
   message: Avoid using requests.get(), as it can lead to potential issues with network access.
   metadata:
     api: requests.get()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: requests.get(...)
   - pattern: $VAR = requests.get
   severity: WARNING
   tags:
   - Network Access
-- id: no-requests-head
+- id: sso.python.network_access.requests.0011.no-requests-head
   languages:
   - python
   message: Avoid using requests.head(), as it can lead to potential issues with network access.
   metadata:
     api: requests.head()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: requests.head(...)
   - pattern: $VAR = requests.head
   severity: WARNING
   tags:
   - Network Access
-- id: no-requests-options
+- id: sso.python.network_access.requests.0012.no-requests-options
   languages:
   - python
   message: Avoid using requests.options(), as it can lead to potential issues with network access.
   metadata:
     api: requests.options()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: requests.options(...)
   - pattern: $VAR = requests.options
   severity: WARNING
   tags:
   - Network Access
-- id: no-requests-post
+- id: sso.python.network_access.requests.0013.no-requests-post
   languages:
   - python
   message: Avoid using requests.post(), as it can lead to potential issues with network access.
   metadata:
     api: requests.post()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: requests.post(...)
   - pattern: $VAR = requests.post
   severity: WARNING
   tags:
   - Network Access
-- id: no-requests-put
+- id: sso.python.network_access.requests.0014.no-requests-put
   languages:
   - python
   message: Avoid using requests.put(), as it can lead to potential issues with network access.
   metadata:
     api: requests.put()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: requests.put(...)
   - pattern: $VAR = requests.put
   severity: WARNING
   tags:
   - Network Access
-- id: no-requests-sessions-Session-delete
+- id: sso.python.network_access.requests.0015.no-requests-sessions-Session-delete
   languages:
   - python
   message: Avoid using requests.sessions.Session.delete(), as it can lead to potential issues with network access.
   metadata:
     api: requests.sessions.Session.delete()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: requests.sessions.Session.delete(...)
   - pattern: $VAR = requests.sessions.Session.delete
@@ -214,13 +244,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-requests-sessions-Session-get
+- id: sso.python.network_access.requests.0016.no-requests-sessions-Session-get
   languages:
   - python
   message: Avoid using requests.sessions.Session.get(), as it can lead to potential issues with network access.
   metadata:
     api: requests.sessions.Session.get()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
   pattern-either:
   - pattern: requests.sessions.Session.get(...)
   - pattern: $VAR = requests.sessions.Session.get
@@ -231,13 +263,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-requests-sessions-Session-head
+- id: sso.python.network_access.requests.0017.no-requests-sessions-Session-head
   languages:
   - python
   message: Avoid using requests.sessions.Session.head(), as it can lead to potential issues with network access.
   metadata:
     api: requests.sessions.Session.head()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: requests.sessions.Session.head(...)
   - pattern: $VAR = requests.sessions.Session.head
@@ -248,13 +282,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-requests-sessions-Session-options
+- id: sso.python.network_access.requests.0018.no-requests-sessions-Session-options
   languages:
   - python
   message: Avoid using requests.sessions.Session.options(), as it can lead to potential issues with network access.
   metadata:
     api: requests.sessions.Session.options()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: requests.sessions.Session.options(...)
   - pattern: $VAR = requests.sessions.Session.options
@@ -265,13 +301,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-requests-sessions-Session-patch
+- id: sso.python.network_access.requests.0019.no-requests-sessions-Session-patch
   languages:
   - python
   message: Avoid using requests.sessions.Session.patch(), as it can lead to potential issues with network access.
   metadata:
     api: requests.sessions.Session.patch()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: requests.sessions.Session.patch(...)
   - pattern: $VAR = requests.sessions.Session.patch
@@ -282,13 +320,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-requests-sessions-Session-post
+- id: sso.python.network_access.requests.0020.no-requests-sessions-Session-post
   languages:
   - python
   message: Avoid using requests.sessions.Session.post(), as it can lead to potential issues with network access.
   metadata:
     api: requests.sessions.Session.post()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: requests.sessions.Session.post(...)
   - pattern: $VAR = requests.sessions.Session.post
@@ -299,13 +339,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-requests-sessions-Session-put
+- id: sso.python.network_access.requests.0021.no-requests-sessions-Session-put
   languages:
   - python
   message: Avoid using requests.sessions.Session.put(), as it can lead to potential issues with network access.
   metadata:
     api: requests.sessions.Session.put()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
   pattern-either:
   - pattern: requests.sessions.Session.put(...)
   - pattern: $VAR = requests.sessions.Session.put
@@ -316,13 +358,15 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-requests-sessions-Session-request
+- id: sso.python.network_access.requests.0022.no-requests-sessions-Session-request
   languages:
   - python
   message: Avoid using requests.sessions.Session.request(), as it can lead to potential issues with network access.
   metadata:
     api: requests.sessions.Session.request()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: requests.sessions.Session.request(...)
   - pattern: $VAR = requests.sessions.Session.request

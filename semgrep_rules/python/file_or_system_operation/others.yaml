@@ -1,37 +1,43 @@
 rules:
-- id: no-open
+- id: sso.python.file_or_system_operation.others.0001.no-open
   languages:
   - python
   message: Avoid using open(), as it can lead to potential issues with file or system operation.
   metadata:
     api: open()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: open(...)
   - pattern: $VAR = open
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-bz2-open
+- id: sso.python.file_or_system_operation.others.0002.no-bz2-open
   languages:
   - python
   message: Avoid using bz2.open(), as it can lead to potential issues with file or system operation.
   metadata:
     api: bz2.open()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: bz2.open(...)
   - pattern: $VAR = bz2.open
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-zipfile-ZipFile-__init__
+- id: sso.python.file_or_system_operation.others.0003.no-zipfile-ZipFile-__init__
   languages:
   - python
   message: Avoid using zipfile.ZipFile.__init__(), as it can lead to potential issues with file or system operation.
   metadata:
     api: zipfile.ZipFile.__init__()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: zipfile.ZipFile.__init__(...)
   - pattern: $VAR = zipfile.ZipFile.__init__

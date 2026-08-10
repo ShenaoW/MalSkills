@@ -1,1077 +1,1243 @@
 rules:
-- id: no-chdir
+- id: sso.c.file_or_system_operation.others.0001.no-chdir
   languages:
   - c
   message: Avoid using chdir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: chdir()
     category: File or System Operation
+    malskills_sso_category: system_configuration
+    malskills_subtype: system_configuration_modify
   pattern-either:
   - pattern: chdir(...)
   - pattern: $VAR = chdir
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-chmod
+- id: sso.c.file_or_system_operation.others.0002.no-chmod
   languages:
   - c
   message: Avoid using chmod(), as it can lead to potential issues with file or system operation.
   metadata:
     api: chmod()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
   pattern-either:
   - pattern: chmod(...)
   - pattern: $VAR = chmod
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-chown
+- id: sso.c.file_or_system_operation.others.0003.no-chown
   languages:
   - c
   message: Avoid using chown(), as it can lead to potential issues with file or system operation.
   metadata:
     api: chown()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
   pattern-either:
   - pattern: chown(...)
   - pattern: $VAR = chown
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-chroot
+- id: sso.c.file_or_system_operation.others.0004.no-chroot
   languages:
   - c
   message: Avoid using chroot(), as it can lead to potential issues with file or system operation.
   metadata:
     api: chroot()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: chroot(...)
   - pattern: $VAR = chroot
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-close
+- id: sso.c.file_or_system_operation.others.0005.no-close
   languages:
   - c
   message: Avoid using close(), as it can lead to potential issues with file or system operation.
   metadata:
     api: close()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: close(...)
   - pattern: $VAR = close
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-closedir
+- id: sso.c.file_or_system_operation.others.0006.no-closedir
   languages:
   - c
   message: Avoid using closedir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: closedir()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: closedir(...)
   - pattern: $VAR = closedir
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fchmod
+- id: sso.c.file_or_system_operation.others.0007.no-fchmod
   languages:
   - c
   message: Avoid using fchmod(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fchmod()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
   pattern-either:
   - pattern: fchmod(...)
   - pattern: $VAR = fchmod
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fchown
+- id: sso.c.file_or_system_operation.others.0008.no-fchown
   languages:
   - c
   message: Avoid using fchown(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fchown()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
   pattern-either:
   - pattern: fchown(...)
   - pattern: $VAR = fchown
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fclose
+- id: sso.c.file_or_system_operation.others.0009.no-fclose
   languages:
   - c
   message: Avoid using fclose(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fclose()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fclose(...)
   - pattern: $VAR = fclose
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fcntl
+- id: sso.c.file_or_system_operation.others.0010.no-fcntl
   languages:
   - c
   message: Avoid using fcntl(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fcntl()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fcntl(...)
   - pattern: $VAR = fcntl
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fdatasync
+- id: sso.c.file_or_system_operation.others.0011.no-fdatasync
   languages:
   - c
   message: Avoid using fdatasync(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fdatasync()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fdatasync(...)
   - pattern: $VAR = fdatasync
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-feof
+- id: sso.c.file_or_system_operation.others.0012.no-feof
   languages:
   - c
   message: Avoid using feof(), as it can lead to potential issues with file or system operation.
   metadata:
     api: feof()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: feof(...)
   - pattern: $VAR = feof
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-ferror
+- id: sso.c.file_or_system_operation.others.0013.no-ferror
   languages:
   - c
   message: Avoid using ferror(), as it can lead to potential issues with file or system operation.
   metadata:
     api: ferror()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: ferror(...)
   - pattern: $VAR = ferror
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fflush
+- id: sso.c.file_or_system_operation.others.0014.no-fflush
   languages:
   - c
   message: Avoid using fflush(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fflush()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fflush(...)
   - pattern: $VAR = fflush
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fileno
+- id: sso.c.file_or_system_operation.others.0015.no-fileno
   languages:
   - c
   message: Avoid using fileno(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fileno()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fileno(...)
   - pattern: $VAR = fileno
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-flock
+- id: sso.c.file_or_system_operation.others.0016.no-flock
   languages:
   - c
   message: Avoid using flock(), as it can lead to potential issues with file or system operation.
   metadata:
     api: flock()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: flock(...)
   - pattern: $VAR = flock
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fopen
+- id: sso.c.file_or_system_operation.others.0017.no-fopen
   languages:
   - c
   message: Avoid using fopen(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fopen()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fopen(...)
   - pattern: $VAR = fopen
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fpathconf
+- id: sso.c.file_or_system_operation.others.0018.no-fpathconf
   languages:
   - c
   message: Avoid using fpathconf(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fpathconf()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fpathconf(...)
   - pattern: $VAR = fpathconf
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fprintf
+- id: sso.c.file_or_system_operation.others.0019.no-fprintf
   languages:
   - c
   message: Avoid using fprintf(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fprintf()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fprintf(...)
   - pattern: $VAR = fprintf
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fread
+- id: sso.c.file_or_system_operation.others.0020.no-fread
   languages:
   - c
   message: Avoid using fread(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fread()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: fread(...)
   - pattern: $VAR = fread
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fscanf
+- id: sso.c.file_or_system_operation.others.0021.no-fscanf
   languages:
   - c
   message: Avoid using fscanf(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fscanf()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fscanf(...)
   - pattern: $VAR = fscanf
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fseek
+- id: sso.c.file_or_system_operation.others.0022.no-fseek
   languages:
   - c
   message: Avoid using fseek(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fseek()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fseek(...)
   - pattern: $VAR = fseek
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fstat
+- id: sso.c.file_or_system_operation.others.0023.no-fstat
   languages:
   - c
   message: Avoid using fstat(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fstat()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fstat(...)
   - pattern: $VAR = fstat
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fstatvfs
+- id: sso.c.file_or_system_operation.others.0024.no-fstatvfs
   languages:
   - c
   message: Avoid using fstatvfs(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fstatvfs()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fstatvfs(...)
   - pattern: $VAR = fstatvfs
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fsync
+- id: sso.c.file_or_system_operation.others.0025.no-fsync
   languages:
   - c
   message: Avoid using fsync(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fsync()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: fsync(...)
   - pattern: $VAR = fsync
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-ftell
+- id: sso.c.file_or_system_operation.others.0026.no-ftell
   languages:
   - c
   message: Avoid using ftell(), as it can lead to potential issues with file or system operation.
   metadata:
     api: ftell()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: ftell(...)
   - pattern: $VAR = ftell
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-ftruncate
+- id: sso.c.file_or_system_operation.others.0027.no-ftruncate
   languages:
   - c
   message: Avoid using ftruncate(), as it can lead to potential issues with file or system operation.
   metadata:
     api: ftruncate()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
   pattern-either:
   - pattern: ftruncate(...)
   - pattern: $VAR = ftruncate
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-fwrite
+- id: sso.c.file_or_system_operation.others.0028.no-fwrite
   languages:
   - c
   message: Avoid using fwrite(), as it can lead to potential issues with file or system operation.
   metadata:
     api: fwrite()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: fwrite(...)
   - pattern: $VAR = fwrite
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-getcwd
+- id: sso.c.file_or_system_operation.others.0029.no-getcwd
   languages:
   - c
   message: Avoid using getcwd(), as it can lead to potential issues with file or system operation.
   metadata:
     api: getcwd()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: getcwd(...)
   - pattern: $VAR = getcwd
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-getcwd
+- id: sso.c.file_or_system_operation.others.0030.no-getcwd
   languages:
   - c
   message: Avoid using getcwd(), as it can lead to potential issues with file or system operation.
   metadata:
     api: getcwd()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: getcwd(...)
   - pattern: $VAR = getcwd
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-getegid
+- id: sso.c.file_or_system_operation.others.0031.no-getegid
   languages:
   - c
   message: Avoid using getegid(), as it can lead to potential issues with file or system operation.
   metadata:
     api: getegid()
     category: File or System Operation
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: user_information_access
   pattern-either:
   - pattern: getegid(...)
   - pattern: $VAR = getegid
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-getegid
+- id: sso.c.file_or_system_operation.others.0032.no-getegid
   languages:
   - c
   message: Avoid using getegid(), as it can lead to potential issues with file or system operation.
   metadata:
     api: getegid()
     category: File or System Operation
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: user_information_access
   pattern-either:
   - pattern: getegid(...)
   - pattern: $VAR = getegid
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-getenv
+- id: sso.c.file_or_system_operation.others.0033.no-getenv
   languages:
   - c
   message: Avoid using getenv(), as it can lead to potential issues with file or system operation.
   metadata:
     api: getenv()
     category: File or System Operation
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: environment_access
   pattern-either:
   - pattern: getenv(...)
   - pattern: $VAR = getenv
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-geteuid
+- id: sso.c.file_or_system_operation.others.0034.no-geteuid
   languages:
   - c
   message: Avoid using geteuid(), as it can lead to potential issues with file or system operation.
   metadata:
     api: geteuid()
     category: File or System Operation
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: user_information_access
   pattern-either:
   - pattern: geteuid(...)
   - pattern: $VAR = geteuid
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-geteuid
+- id: sso.c.file_or_system_operation.others.0035.no-geteuid
   languages:
   - c
   message: Avoid using geteuid(), as it can lead to potential issues with file or system operation.
   metadata:
     api: geteuid()
     category: File or System Operation
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: user_information_access
   pattern-either:
   - pattern: geteuid(...)
   - pattern: $VAR = geteuid
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-getgid
+- id: sso.c.file_or_system_operation.others.0036.no-getgid
   languages:
   - c
   message: Avoid using getgid(), as it can lead to potential issues with file or system operation.
   metadata:
     api: getgid()
     category: File or System Operation
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: user_information_access
   pattern-either:
   - pattern: getgid(...)
   - pattern: $VAR = getgid
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-getpid
+- id: sso.c.file_or_system_operation.others.0037.no-getpid
   languages:
   - c
   message: Avoid using getpid(), as it can lead to potential issues with file or system operation.
   metadata:
     api: getpid()
     category: File or System Operation
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: process_information_access
   pattern-either:
   - pattern: getpid(...)
   - pattern: $VAR = getpid
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-getppid
+- id: sso.c.file_or_system_operation.others.0038.no-getppid
   languages:
   - c
   message: Avoid using getppid(), as it can lead to potential issues with file or system operation.
   metadata:
     api: getppid()
     category: File or System Operation
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: process_information_access
   pattern-either:
   - pattern: getppid(...)
   - pattern: $VAR = getppid
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-getuid
+- id: sso.c.file_or_system_operation.others.0039.no-getuid
   languages:
   - c
   message: Avoid using getuid(), as it can lead to potential issues with file or system operation.
   metadata:
     api: getuid()
     category: File or System Operation
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: user_information_access
   pattern-either:
   - pattern: getuid(...)
   - pattern: $VAR = getuid
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-ioctl
+- id: sso.c.file_or_system_operation.others.0040.no-ioctl
   languages:
   - c
   message: Avoid using ioctl(), as it can lead to potential issues with file or system operation.
   metadata:
     api: ioctl()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: ioctl(...)
   - pattern: $VAR = ioctl
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-link
+- id: sso.c.file_or_system_operation.others.0041.no-link
   languages:
   - c
   message: Avoid using link(), as it can lead to potential issues with file or system operation.
   metadata:
     api: link()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: link_operation
   pattern-either:
   - pattern: link(...)
   - pattern: $VAR = link
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-ln
+- id: sso.c.file_or_system_operation.others.0042.no-ln
   languages:
   - c
   message: Avoid using ln(), as it can lead to potential issues with file or system operation.
   metadata:
     api: ln()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: ln(...)
   - pattern: $VAR = ln
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-lockf
+- id: sso.c.file_or_system_operation.others.0043.no-lockf
   languages:
   - c
   message: Avoid using lockf(), as it can lead to potential issues with file or system operation.
   metadata:
     api: lockf()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: lockf(...)
   - pattern: $VAR = lockf
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-lseek
+- id: sso.c.file_or_system_operation.others.0044.no-lseek
   languages:
   - c
   message: Avoid using lseek(), as it can lead to potential issues with file or system operation.
   metadata:
     api: lseek()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: lseek(...)
   - pattern: $VAR = lseek
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-lstat
+- id: sso.c.file_or_system_operation.others.0045.no-lstat
   languages:
   - c
   message: Avoid using lstat(), as it can lead to potential issues with file or system operation.
   metadata:
     api: lstat()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: lstat(...)
   - pattern: $VAR = lstat
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-mkdir
+- id: sso.c.file_or_system_operation.others.0046.no-mkdir
   languages:
   - c
   message: Avoid using mkdir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: mkdir()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
   pattern-either:
   - pattern: mkdir(...)
   - pattern: $VAR = mkdir
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-mkfifo
+- id: sso.c.file_or_system_operation.others.0047.no-mkfifo
   languages:
   - c
   message: Avoid using mkfifo(), as it can lead to potential issues with file or system operation.
   metadata:
     api: mkfifo()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: mkfifo(...)
   - pattern: $VAR = mkfifo
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-mknod
+- id: sso.c.file_or_system_operation.others.0048.no-mknod
   languages:
   - c
   message: Avoid using mknod(), as it can lead to potential issues with file or system operation.
   metadata:
     api: mknod()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: mknod(...)
   - pattern: $VAR = mknod
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-mmap
+- id: sso.c.file_or_system_operation.others.0049.no-mmap
   languages:
   - c
   message: Avoid using mmap(), as it can lead to potential issues with file or system operation.
   metadata:
     api: mmap()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: mmap(...)
   - pattern: $VAR = mmap
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-mount
+- id: sso.c.file_or_system_operation.others.0050.no-mount
   languages:
   - c
   message: Avoid using mount(), as it can lead to potential issues with file or system operation.
   metadata:
     api: mount()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: mount(...)
   - pattern: $VAR = mount
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-msync
+- id: sso.c.file_or_system_operation.others.0051.no-msync
   languages:
   - c
   message: Avoid using msync(), as it can lead to potential issues with file or system operation.
   metadata:
     api: msync()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: msync(...)
   - pattern: $VAR = msync
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-munmap
+- id: sso.c.file_or_system_operation.others.0052.no-munmap
   languages:
   - c
   message: Avoid using munmap(), as it can lead to potential issues with file or system operation.
   metadata:
     api: munmap()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: munmap(...)
   - pattern: $VAR = munmap
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-open
+- id: sso.c.file_or_system_operation.others.0053.no-open
   languages:
   - c
   message: Avoid using open(), as it can lead to potential issues with file or system operation.
   metadata:
     api: open()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: open(...)
   - pattern: $VAR = open
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-opendir
+- id: sso.c.file_or_system_operation.others.0054.no-opendir
   languages:
   - c
   message: Avoid using opendir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: opendir()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: opendir(...)
   - pattern: $VAR = opendir
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-pathconf
+- id: sso.c.file_or_system_operation.others.0055.no-pathconf
   languages:
   - c
   message: Avoid using pathconf(), as it can lead to potential issues with file or system operation.
   metadata:
     api: pathconf()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: pathconf(...)
   - pattern: $VAR = pathconf
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-posix_fadvise
+- id: sso.c.file_or_system_operation.others.0056.no-posix_fadvise
   languages:
   - c
   message: Avoid using posix_fadvise(), as it can lead to potential issues with file or system operation.
   metadata:
     api: posix_fadvise()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: posix_fadvise(...)
   - pattern: $VAR = posix_fadvise
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-posix_madvise
+- id: sso.c.file_or_system_operation.others.0057.no-posix_madvise
   languages:
   - c
   message: Avoid using posix_madvise(), as it can lead to potential issues with file or system operation.
   metadata:
     api: posix_madvise()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: posix_madvise(...)
   - pattern: $VAR = posix_madvise
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-putenv
+- id: sso.c.file_or_system_operation.others.0058.no-putenv
   languages:
   - c
   message: Avoid using putenv(), as it can lead to potential issues with file or system operation.
   metadata:
     api: putenv()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: putenv(...)
   - pattern: $VAR = putenv
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-read
+- id: sso.c.file_or_system_operation.others.0059.no-read
   languages:
   - c
   message: Avoid using read(), as it can lead to potential issues with file or system operation.
   metadata:
     api: read()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
   pattern-either:
   - pattern: read(...)
   - pattern: $VAR = read
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-readdir
+- id: sso.c.file_or_system_operation.others.0060.no-readdir
   languages:
   - c
   message: Avoid using readdir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: readdir()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_search
   pattern-either:
   - pattern: readdir(...)
   - pattern: $VAR = readdir
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-readlink
+- id: sso.c.file_or_system_operation.others.0061.no-readlink
   languages:
   - c
   message: Avoid using readlink(), as it can lead to potential issues with file or system operation.
   metadata:
     api: readlink()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: link_operation
   pattern-either:
   - pattern: readlink(...)
   - pattern: $VAR = readlink
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-remove
+- id: sso.c.file_or_system_operation.others.0062.no-remove
   languages:
   - c
   message: Avoid using remove(), as it can lead to potential issues with file or system operation.
   metadata:
     api: remove()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
   pattern-either:
   - pattern: remove(...)
   - pattern: $VAR = remove
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-rename
+- id: sso.c.file_or_system_operation.others.0063.no-rename
   languages:
   - c
   message: Avoid using rename(), as it can lead to potential issues with file or system operation.
   metadata:
     api: rename()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: rename(...)
   - pattern: $VAR = rename
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-rewind
+- id: sso.c.file_or_system_operation.others.0064.no-rewind
   languages:
   - c
   message: Avoid using rewind(), as it can lead to potential issues with file or system operation.
   metadata:
     api: rewind()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: rewind(...)
   - pattern: $VAR = rewind
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-rmdir
+- id: sso.c.file_or_system_operation.others.0065.no-rmdir
   languages:
   - c
   message: Avoid using rmdir(), as it can lead to potential issues with file or system operation.
   metadata:
     api: rmdir()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
   pattern-either:
   - pattern: rmdir(...)
   - pattern: $VAR = rmdir
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-setenv
+- id: sso.c.file_or_system_operation.others.0066.no-setenv
   languages:
   - c
   message: Avoid using setenv(), as it can lead to potential issues with file or system operation.
   metadata:
     api: setenv()
     category: File or System Operation
+    malskills_sso_category: system_configuration
+    malskills_subtype: system_configuration_modify
   pattern-either:
   - pattern: setenv(...)
   - pattern: $VAR = setenv
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-setgid
+- id: sso.c.file_or_system_operation.others.0067.no-setgid
   languages:
   - c
   message: Avoid using setgid(), as it can lead to potential issues with file or system operation.
   metadata:
     api: setgid()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: setgid(...)
   - pattern: $VAR = setgid
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-setuid
+- id: sso.c.file_or_system_operation.others.0068.no-setuid
   languages:
   - c
   message: Avoid using setuid(), as it can lead to potential issues with file or system operation.
   metadata:
     api: setuid()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: setuid(...)
   - pattern: $VAR = setuid
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-setvbuf
+- id: sso.c.file_or_system_operation.others.0069.no-setvbuf
   languages:
   - c
   message: Avoid using setvbuf(), as it can lead to potential issues with file or system operation.
   metadata:
     api: setvbuf()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: setvbuf(...)
   - pattern: $VAR = setvbuf
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-stat
+- id: sso.c.file_or_system_operation.others.0070.no-stat
   languages:
   - c
   message: Avoid using stat(), as it can lead to potential issues with file or system operation.
   metadata:
     api: stat()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: stat(...)
   - pattern: $VAR = stat
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-statvfs
+- id: sso.c.file_or_system_operation.others.0071.no-statvfs
   languages:
   - c
   message: Avoid using statvfs(), as it can lead to potential issues with file or system operation.
   metadata:
     api: statvfs()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: statvfs(...)
   - pattern: $VAR = statvfs
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-symlink
+- id: sso.c.file_or_system_operation.others.0072.no-symlink
   languages:
   - c
   message: Avoid using symlink(), as it can lead to potential issues with file or system operation.
   metadata:
     api: symlink()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: link_operation
   pattern-either:
   - pattern: symlink(...)
   - pattern: $VAR = symlink
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-sync
+- id: sso.c.file_or_system_operation.others.0073.no-sync
   languages:
   - c
   message: Avoid using sync(), as it can lead to potential issues with file or system operation.
   metadata:
     api: sync()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: sync(...)
   - pattern: $VAR = sync
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-syncfs
+- id: sso.c.file_or_system_operation.others.0074.no-syncfs
   languages:
   - c
   message: Avoid using syncfs(), as it can lead to potential issues with file or system operation.
   metadata:
     api: syncfs()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: syncfs(...)
   - pattern: $VAR = syncfs
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-tmpfile
+- id: sso.c.file_or_system_operation.others.0075.no-tmpfile
   languages:
   - c
   message: Avoid using tmpfile(), as it can lead to potential issues with file or system operation.
   metadata:
     api: tmpfile()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: tmpfile(...)
   - pattern: $VAR = tmpfile
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-tmpnam
+- id: sso.c.file_or_system_operation.others.0076.no-tmpnam
   languages:
   - c
   message: Avoid using tmpnam(), as it can lead to potential issues with file or system operation.
   metadata:
     api: tmpnam()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: tmpnam(...)
   - pattern: $VAR = tmpnam
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-truncate
+- id: sso.c.file_or_system_operation.others.0077.no-truncate
   languages:
   - c
   message: Avoid using truncate(), as it can lead to potential issues with file or system operation.
   metadata:
     api: truncate()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
   pattern-either:
   - pattern: truncate(...)
   - pattern: $VAR = truncate
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-umask
+- id: sso.c.file_or_system_operation.others.0078.no-umask
   languages:
   - c
   message: Avoid using umask(), as it can lead to potential issues with file or system operation.
   metadata:
     api: umask()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: umask(...)
   - pattern: $VAR = umask
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-umount
+- id: sso.c.file_or_system_operation.others.0079.no-umount
   languages:
   - c
   message: Avoid using umount(), as it can lead to potential issues with file or system operation.
   metadata:
     api: umount()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: umount(...)
   - pattern: $VAR = umount
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-unlink
+- id: sso.c.file_or_system_operation.others.0080.no-unlink
   languages:
   - c
   message: Avoid using unlink(), as it can lead to potential issues with file or system operation.
   metadata:
     api: unlink()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: link_operation
   pattern-either:
   - pattern: unlink(...)
   - pattern: $VAR = unlink
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-unsetenv
+- id: sso.c.file_or_system_operation.others.0081.no-unsetenv
   languages:
   - c
   message: Avoid using unsetenv(), as it can lead to potential issues with file or system operation.
   metadata:
     api: unsetenv()
     category: File or System Operation
+    malskills_sso_category: system_configuration
+    malskills_subtype: system_configuration_modify
   pattern-either:
   - pattern: unsetenv(...)
   - pattern: $VAR = unsetenv
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-utime
+- id: sso.c.file_or_system_operation.others.0082.no-utime
   languages:
   - c
   message: Avoid using utime(), as it can lead to potential issues with file or system operation.
   metadata:
     api: utime()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
   pattern-either:
   - pattern: utime(...)
   - pattern: $VAR = utime
   severity: WARNING
   tags:
   - File or System Operation
-- id: no-write
+- id: sso.c.file_or_system_operation.others.0083.no-write
   languages:
   - c
   message: Avoid using write(), as it can lead to potential issues with file or system operation.
   metadata:
     api: write()
     category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
   pattern-either:
   - pattern: write(...)
   - pattern: $VAR = write

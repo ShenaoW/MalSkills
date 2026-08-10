@@ -1,24 +1,28 @@
 rules:
-- id: no-open
+- id: sso.ruby.network_access.others.0001.no-open
   languages:
   - ruby
   message: Avoid using open(), as it can lead to potential issues with network access.
   metadata:
     api: open()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: open(...)
   - pattern: $VAR = open
   severity: WARNING
   tags:
   - Network Access
-- id: no-OpenSSL_x__x_SSL_x__x_SSLSocket.new
+- id: sso.ruby.network_access.others.0002.no-OpenSSL_x__x_SSL_x__x_SSLSocket.new
   languages:
   - ruby
   message: Avoid using OpenSSL::SSL::SSLSocket.new(), as it can lead to potential issues with network access.
   metadata:
     api: OpenSSL::SSL::SSLSocket.new()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: OpenSSL::SSL::SSLSocket.new(...)
   - pattern: $VAR = OpenSSL::SSL::SSLSocket.new
@@ -29,26 +33,30 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-TCPServer.new
+- id: sso.ruby.network_access.others.0003.no-TCPServer.new
   languages:
   - ruby
   message: Avoid using TCPServer.new(), as it can lead to potential issues with network access.
   metadata:
     api: TCPServer.new()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: TCPServer.new(...)
   - pattern: $VAR = TCPServer.new
   severity: WARNING
   tags:
   - Network Access
-- id: no-WEBrick_x__x_HTTPServer.new
+- id: sso.ruby.network_access.others.0004.no-WEBrick_x__x_HTTPServer.new
   languages:
   - ruby
   message: Avoid using WEBrick::HTTPServer.new(), as it can lead to potential issues with network access.
   metadata:
     api: WEBrick::HTTPServer.new()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: WEBrick::HTTPServer.new(...)
   - pattern: $VAR = WEBrick::HTTPServer.new
@@ -57,39 +65,45 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: no-http.request
+- id: sso.ruby.network_access.others.0005.no-http.request
   languages:
   - ruby
   message: Avoid using http.request(), as it can lead to potential issues with network access.
   metadata:
     api: http.request()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: http.request(...)
   - pattern: $VAR = http.request
   severity: WARNING
   tags:
   - Network Access
-- id: no-server.start
+- id: sso.ruby.network_access.others.0006.no-server.start
   languages:
   - ruby
   message: Avoid using server.start(), as it can lead to potential issues with network access.
   metadata:
     api: server.start()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: server.start(...)
   - pattern: $VAR = server.start
   severity: WARNING
   tags:
   - Network Access
-- id: no-ssl.connect
+- id: sso.ruby.network_access.others.0007.no-ssl.connect
   languages:
   - ruby
   message: Avoid using ssl.connect(), as it can lead to potential issues with network access.
   metadata:
     api: ssl.connect()
     category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
   pattern-either:
   - pattern: ssl.connect(...)
   - pattern: $VAR = ssl.connect

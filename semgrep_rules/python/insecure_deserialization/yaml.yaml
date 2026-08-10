@@ -1,24 +1,28 @@
 rules:
-- id: no-yaml-load
+- id: sso.python.insecure_deserialization.yaml.0001.no-yaml-load
   languages:
   - python
   message: Avoid using yaml.load(), as it can lead to potential issues with insecure deserialization.
   metadata:
     api: yaml.load()
     category: Insecure Deserialization
+    malskills_sso_category: payload_execution
+    malskills_subtype: unsafe_deserialization
   pattern-either:
   - pattern: yaml.load(...)
   - pattern: $VAR = yaml.load
   severity: WARNING
   tags:
   - Insecure Deserialization
-- id: no-yaml-load_all
+- id: sso.python.insecure_deserialization.yaml.0002.no-yaml-load_all
   languages:
   - python
   message: Avoid using yaml.load_all(), as it can lead to potential issues with insecure deserialization.
   metadata:
     api: yaml.load_all()
     category: Insecure Deserialization
+    malskills_sso_category: payload_execution
+    malskills_subtype: unsafe_deserialization
   pattern-either:
   - pattern: yaml.load_all(...)
   - pattern: $VAR = yaml.load_all
