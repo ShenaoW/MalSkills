@@ -82,7 +82,7 @@ def _build_env(profile: RuntimeProfile, timeout_sec: int) -> dict[str, str]:
             "MALSKILLS_LLM_API_KEY": api_key,
             "MALSKILLS_LLM_BASE_URL": base_url,
             "MALSKILLS_LLM_TIMEOUT_SEC": str(timeout_sec),
-            "MALSKILLS_LLM_CACHE": str((ROOT / ".cache" / "rq3" / profile.name / "evidence").resolve()),
+            "MALSKILLS_LLM_CACHE": str((ROOT / ".cache" / "rq3" / profile.name / "sso_findings").resolve()),
             "MALSKILLS_LLM_REASONING_CACHE": str((ROOT / ".cache" / "rq3" / profile.name / "reasoning").resolve()),
         }
     )

@@ -21,7 +21,6 @@ def build_parser() -> argparse.ArgumentParser:
     analyze = subparsers.add_parser("analyze-skill")
     analyze.add_argument("path")
     analyze.add_argument("--output", required=True)
-    analyze.add_argument("--no-souffle-export", action="store_true")
     analyze.add_argument("--disable-llm-sso-extraction", action="store_true")
     analyze.add_argument("--disable-llm-object-analysis", action="store_true")
     analyze.add_argument("--disable-semgrep", action="store_true")
@@ -120,7 +119,6 @@ def main(argv: list[str] | None = None) -> int:
             args.path,
             output_dir=args.output,
             config=AnalyzerConfig(
-                export_souffle=not args.no_souffle_export,
                 enable_semgrep=not args.disable_semgrep,
                 enable_llm_sso_extraction=(
                     False if args.disable_llm_sso_extraction else None

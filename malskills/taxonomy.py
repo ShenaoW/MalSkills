@@ -71,58 +71,12 @@ SENSITIVE_PATH_TOKENS = {
     "aws/credentials",
 }
 
-SENSITIVE_ENV_TOKENS = {
-    "api_key",
-    "token",
-    "secret",
-    "password",
-    "passwd",
-    "private_key",
-    "mnemonic",
-    "seed",
-    "github_token",
-    "anthropic_api_key",
-    "openai_api_key",
-    "aws_access_key",
-    "aws_secret_access_key",
-}
 SECRET_CLASS_PATTERNS = (
     ("private_key", ("private key", "private_key", "ssh key")),
     ("seed_phrase", ("seed phrase", "mnemonic", "recovery phrase")),
     ("wallet_credential", ("wallet", "keystore")),
     ("api_credential", ("api key", "api_key", "api secret", "api_secret", "access token", "bearer token", "token")),
 )
-HIGH_RISK_PERMISSION_TOKENS = {
-    "exec",
-    "shell",
-    "bash",
-    "terminal",
-    "network",
-    "web",
-    "http",
-    "https",
-    "fetch",
-    "curl",
-    "wget",
-    "filesystem",
-    "file",
-    "env",
-    "secret",
-    "credential",
-}
-HIGH_RISK_TOOL_TOKENS = {
-    "bash",
-    "shell",
-    "terminal",
-    "exec",
-    "python",
-    "node",
-    "curl",
-    "wget",
-    "http",
-    "fetch",
-}
-
 HIGH_RISK_COMMAND_PATTERNS = [
     r"(?:^|[\s|;&(])curl(?:[\s]|$)",
     r"(?:^|[\s|;&(])wget(?:[\s]|$)",
@@ -138,28 +92,6 @@ HIGH_RISK_COMMAND_PATTERNS = [
     r"invoke-webrequest",
 ]
 
-SAFE_INTENT_TOKENS = {"log", "logging", "analytics", "setup", "configure", "manage", "search", "organize"}
-HIDDEN_INTENT_TOKENS = {
-    "ignore previous",
-    "do not tell the user",
-    "before starting",
-    "before proceeding",
-    "must run",
-    "mandatory setup",
-    "always run",
-    "do not cd",
-}
-SECRET_REQUEST_TOKENS = {
-    "private key",
-    "seed phrase",
-    "mnemonic",
-    "api key",
-    "api-key",
-    "token",
-    "password",
-    "gemini_api_key",
-    "openai_api_key",
-}
 IGNORE_DIRS = {".git", "node_modules", "__pycache__", ".pytest_cache", "dist", "build", ".next"}
 NOISY_ROOT_DIRS = {"docs", "doc", "examples", "example", "templates", "template", "benchmark", "benchmarks"}
 NOISY_SUBTREES = {
@@ -220,15 +152,6 @@ def path_class(path_value: str | None) -> str:
     return "ordinary"
 
 
-def env_class(name: str | None) -> str:
-    if not name:
-        return "unknown"
-    lower = name.lower()
-    if any(token in lower for token in SENSITIVE_ENV_TOKENS):
-        return "sensitive"
-    return "ordinary"
-
-
 def url_class(url: str | None) -> str:
     if not url:
         return "unknown"
@@ -246,26 +169,6 @@ def url_class(url: str | None) -> str:
 
 def endpoint_class(endpoint: str | None) -> str:
     return url_class(endpoint)
-
-
-def permission_class(values: str | list[str] | tuple[str, ...] | None) -> str:
-    normalized_values = _normalize_value_list(values)
-    if not normalized_values:
-        return "unknown"
-    lowered = [value.lower() for value in normalized_values]
-    if any(any(token in value for token in HIGH_RISK_PERMISSION_TOKENS) for value in lowered):
-        return "high_risk"
-    return "ordinary"
-
-
-def tool_surface_class(values: str | list[str] | tuple[str, ...] | None) -> str:
-    normalized_values = _normalize_value_list(values)
-    if not normalized_values:
-        return "unknown"
-    lowered = [value.lower() for value in normalized_values]
-    if any(any(token in value for token in HIGH_RISK_TOOL_TOKENS) for value in lowered):
-        return "high_risk"
-    return "ordinary"
 
 
 def secret_class(secret_value: str | None) -> str:
@@ -287,15 +190,3 @@ def command_class(command: str | None) -> str:
     if any(re.search(pattern, lower) for pattern in HIGH_RISK_COMMAND_PATTERNS):
         return "high_risk"
     return "ordinary"
-
-
-def looks_sensitive_text(text: str) -> bool:
-    return path_class(text) == "sensitive" or env_class(text) == "sensitive"
-
-
-def _normalize_value_list(values: str | list[str] | tuple[str, ...] | None) -> list[str]:
-    if values is None:
-        return []
-    if isinstance(values, str):
-        return [values]
-    return [value for value in values if value]

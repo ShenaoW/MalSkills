@@ -38,7 +38,6 @@ class ResultWriter:
         self._write_json(destination / "feedback_loop.json", feedback_payload)
         self._write_json(destination / "workflow_discoveries.json", result.workflow_discoveries)
         self._write_json(destination / "analysis_metadata.json", result.analysis_metadata)
-        self._write_json(destination / "facts.json", self._build_facts_payload(result))
         self._write_json(destination / "sdg.json", graph_payload)
         self._write_text(destination / "sdg.dot", self._render_graph_dot(graph_payload))
         self._write_json(destination / "proofs.json", self._build_pattern_proofs(result))
@@ -46,12 +45,11 @@ class ResultWriter:
         self._write_markdown(destination / "human_report.md", result)
         self.write_output_manifest(destination)
 
-    def write_output_manifest(self, output_dir: str | Path, *, include_souffle: bool | None = None) -> None:
+    def write_output_manifest(self, output_dir: str | Path) -> None:
         destination = Path(output_dir)
-        self._write_json(destination / "output_manifest.json", self.build_output_manifest(destination, include_souffle=include_souffle))
+        self._write_json(destination / "output_manifest.json", self.build_output_manifest())
 
-    def build_output_manifest(self, output_dir: str | Path, *, include_souffle: bool | None = None) -> dict[str, object]:
-        destination = Path(output_dir)
+    def build_output_manifest(self) -> dict[str, object]:
         path_map = {
             "verdict": "verdict.json",
             "artifacts": "artifacts.json",
@@ -63,25 +61,18 @@ class ResultWriter:
             "feedback_loop": "feedback_loop.json",
             "workflow_discoveries": "workflow_discoveries.json",
             "analysis_metadata": "analysis_metadata.json",
-            "facts": "facts.json",
             "sdg_json": "sdg.json",
             "sdg_dot": "sdg.dot",
             "proofs": "proofs.json",
             "pattern_summary": "pattern_summary.json",
             "human_report": "human_report.md",
         }
-        if include_souffle is None:
-            include_souffle = (destination / "souffle").exists()
         return {
-            "schema_version": 5,
+            "schema_version": 6,
             "root": ".",
             "files": path_map,
-            "directories": {
-                "souffle": "souffle",
-            },
-            "available": {
-                "souffle": bool(include_souffle),
-            },
+            "directories": {},
+            "available": {},
         }
 
     def _write_json(self, path: Path, payload: object) -> None:
@@ -172,19 +163,6 @@ class ResultWriter:
         payload["decision_chain"] = getattr(result.verdict, "decision_chain", [])
         payload["supporting_patterns"] = self._build_pattern_proofs(result)
         return payload
-
-    def _build_facts_payload(self, result: AnalysisResult) -> dict[str, object]:
-        relations: dict[str, dict[str, object]] = {}
-        for relation_name, rows in sorted(result.facts.items()):
-            columns = self._fact_columns(relation_name, rows)
-            relations[relation_name] = {
-                "columns": columns,
-                "rows": [
-                    {column: to_jsonable(value) for column, value in zip(columns, row)}
-                    for row in rows
-                ],
-            }
-        return {"relations": relations}
 
     def _build_graph_payload(self, result: AnalysisResult) -> dict[str, object]:
         nodes = [dict(node) for node in result.graph.get("nodes", [])]
@@ -339,32 +317,3 @@ class ResultWriter:
 
     def _escape_dot(self, value: str) -> str:
         return value.replace("\\", "\\\\").replace('"', '\\"').replace("\n", "\\n")
-
-    def _fact_columns(self, relation_name: str, rows: list[tuple[object, ...]]) -> list[str]:
-        schema = {
-            "analysis_meta": ["key", "value"],
-            "artifact": ["artifact_id", "artifact_type", "artifact_path"],
-            "artifact_meta": ["artifact_id", "key", "value"],
-            "finding": ["finding_id", "artifact_id", "category", "subtype", "matched_text"],
-            "finding_attr": ["finding_id", "key", "value"],
-            "finding_confidence": ["finding_id", "confidence"],
-            "finding_span": ["finding_id", "start_line", "end_line"],
-            "graph_edge": ["source", "target", "type"],
-            "sso": ["sso_id", "category", "subtype"],
-            "sso_finding": ["sso_id", "finding_id"],
-            "sso_confidence": ["sso_id", "confidence"],
-            "sso_object": ["sso_id", "object_id", "object_identity_kind"],
-            "sso_attr": ["sso_id", "key", "value"],
-            "sso_operand": ["sso_id", "operand_id", "role"],
-            "operand": ["operand_id", "role", "object_kind", "identity_key"],
-            "value": ["value_id", "value_kind", "display_value"],
-            "value_flow": ["source", "target", "flow_kind"],
-            "pattern_match": ["pattern_id", "pattern_name", "severity"],
-            "pattern_support": ["pattern_id", "sso_id"],
-            "pattern_attr": ["pattern_id", "key", "value"],
-            "verdict": ["label"],
-        }
-        if relation_name in schema:
-            return schema[relation_name]
-        width = max((len(row) for row in rows), default=0)
-        return [f"col_{index}" for index in range(width)]

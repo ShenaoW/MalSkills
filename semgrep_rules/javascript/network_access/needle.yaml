@@ -1,31 +1,33 @@
 rules:
-- id: sso.javascript.network_access.needle.0001.no-needle-get
+- id: sso.javascript.network_access.needle.0001.http-wrapper-receive
   languages:
   - javascript
-  message: Avoid using needle.get(), as it can lead to potential issues with network access.
+  message: Detect receive-oriented third-party HTTP wrappers.
   metadata:
-    api: needle.get()
+    api: needle.get()/superagent.get()
     category: Network Access
     malskills_sso_category: network_access
     malskills_subtype: data_receive
   pattern-either:
   - pattern: needle.get(...)
   - pattern: $VAR = needle.get
+  - pattern: superagent.get(...)
   severity: WARNING
   tags:
   - Network Access
-- id: sso.javascript.network_access.needle.0002.no-needle-post
+- id: sso.javascript.network_access.needle.0002.http-wrapper-send
   languages:
   - javascript
-  message: Avoid using needle.post(), as it can lead to potential issues with network access.
+  message: Detect send-oriented third-party HTTP wrappers.
   metadata:
-    api: needle.post()
+    api: needle.post()/superagent.post()
     category: Network Access
     malskills_sso_category: network_access
     malskills_subtype: data_send
   pattern-either:
   - pattern: needle.post(...)
   - pattern: $VAR = needle.post
+  - pattern: superagent.post(...)
   severity: WARNING
   tags:
   - Network Access

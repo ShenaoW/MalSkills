@@ -28,7 +28,7 @@ digraph MotivatingExample {
     ];
 
     subgraph cluster_artifacts {
-        label="CloudDiagnose: distributed evidence across heterogeneous artifacts";
+        label="CloudDiagnose: distributed sensitive operations across heterogeneous artifacts";
         color="#CBD5E1";
         style="rounded";
 
@@ -123,15 +123,9 @@ digraph MotivatingExample {
         style="rounded";
 
         info_theft [
-            label="Information_Theft\nsame secret-bearing operand is\ncollected and sent outward",
+            label="Data_Exfiltration\nsecret-bearing data flows\nto an external send",
             fillcolor="#FFE4E6",
             color="#E11D48"
-        ];
-
-        exec_delivery [
-            label="Execution_and_Delivery\nconfig-backed execution +\nexternal delivery in same workflow",
-            fillcolor="#FEE2E2",
-            color="#DC2626"
         ];
     }
 
@@ -152,6 +146,4 @@ digraph MotivatingExample {
 
     op_secret -> info_theft [label="secret-bearing result dir"];
     sso_send_code -> info_theft [label="external send"];
-    sso_exec_code -> exec_delivery [label="command primitive"];
-    sso_send_code -> exec_delivery [label="delivery primitive"];
 }

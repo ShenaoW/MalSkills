@@ -21,7 +21,6 @@ from .utils import ensure_dir
 class AnalyzerConfig:
     enable_llm_sso_extraction: bool | None = None
     enable_llm_object_analysis: bool | None = None
-    export_souffle: bool = True
     enable_semgrep: bool = True
     enable_yasa: bool = True
     enable_cross_artifact_resolution: bool = True
@@ -173,17 +172,15 @@ class SkillAnalyzer:
             sso_subtypes=dict(sorted(sso_subtypes.items())),
             value_flows=dict(sorted(value_flow_kinds.items())),
         )
-        runtime_sec = time.perf_counter() - started_at
         stage_started_at = time.perf_counter()
         self._progress(progress, "reason.start", mode=cfg.reasoning_mode)
-        patterns, verdict, facts, workflow_discoveries = self.reasoner.reason(
+        patterns, verdict, workflow_discoveries = self.reasoner.reason(
             str(skill_root),
             compilation.ssos,
             artifacts=artifacts,
             findings=compilation.findings,
             graph=compilation.graph,
             mode=cfg.reasoning_mode,
-            runtime_sec=runtime_sec,
             learned_workflow_rules_dir=rule_snapshot.workflows_dir,
         )
         self._progress(
@@ -205,7 +202,6 @@ class SkillAnalyzer:
             patterns=patterns,
             verdict=verdict,
             graph=compilation.graph,
-            facts=facts,
             workflow_discoveries=workflow_discoveries,
             findings_by_producer={
                 "semgrep": extraction.semgrep_findings,
@@ -235,15 +231,12 @@ class SkillAnalyzer:
                 progress,
                 "write.start",
                 output_dir=str(destination),
-                souffle=cfg.export_souffle,
             )
             self.writer.write(
                 result,
                 destination,
                 feedback_payload=feedback_payload,
             )
-            if cfg.export_souffle:
-                self.reasoner.export_souffle(facts, destination / "souffle")
             self._progress(
                 progress,
                 "write.done",

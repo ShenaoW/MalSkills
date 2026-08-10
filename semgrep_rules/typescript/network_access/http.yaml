@@ -44,18 +44,21 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: sso.typescript.network_access.http.0004.no-http-OutgoingMessage
+- id: sso.typescript.network_access.http.0004.outgoing-and-http-wrapper-send
   languages:
   - typescript
-  message: Avoid using http.OutgoingMessage(), as it can lead to potential issues with network access.
+  message: Detect outgoing messages and send-oriented third-party HTTP wrappers.
   metadata:
-    api: http.OutgoingMessage()
+    api: http.OutgoingMessage()/superagent.post()/needle.post()/unirest.post()
     category: Network Access
     malskills_sso_category: network_access
     malskills_subtype: data_send
   pattern-either:
   - pattern: http.OutgoingMessage(...)
   - pattern: $VAR = http.OutgoingMessage
+  - pattern: superagent.post(...)
+  - pattern: needle.post(...)
+  - pattern: unirest.post(...)
   severity: WARNING
   tags:
   - Network Access
@@ -119,18 +122,21 @@ rules:
   severity: WARNING
   tags:
   - Network Access
-- id: sso.typescript.network_access.http.0009.no-http-get
+- id: sso.typescript.network_access.http.0009.http-and-wrapper-receive
   languages:
   - typescript
-  message: Avoid using http.get(), as it can lead to potential issues with network access.
+  message: Detect receive-oriented HTTP and third-party wrappers.
   metadata:
-    api: http.get()
+    api: http.get()/superagent.get()/needle.get()/unirest.get()
     category: Network Access
     malskills_sso_category: network_access
     malskills_subtype: data_receive
   pattern-either:
   - pattern: http.get(...)
   - pattern: $VAR = http.get
+  - pattern: superagent.get(...)
+  - pattern: needle.get(...)
+  - pattern: unirest.get(...)
   severity: WARNING
   tags:
   - Network Access

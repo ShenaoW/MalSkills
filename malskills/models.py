@@ -154,7 +154,6 @@ class AnalysisResult:
     patterns: list[PatternMatch]
     verdict: SkillVerdict
     graph: dict[str, Any]
-    facts: dict[str, list[tuple[Any, ...]]]
     workflow_discoveries: list[WorkflowDiscovery] = field(default_factory=list)
     findings_by_producer: dict[str, list[SSOFinding]] = field(default_factory=dict)
     analysis_metadata: dict[str, Any] = field(default_factory=dict)

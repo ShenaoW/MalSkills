@@ -13,13 +13,11 @@ from ..models import (
 )
 from ..rule_learning.workflow import WorkflowRuleMatcher
 from .llm import LlmPatternReasoner
-from .souffle import SouffleExporter
 from .verdict import PatternVerdictBuilder
 
 
 class PatternReasoner:
     def __init__(self) -> None:
-        self._exporter = SouffleExporter()
         self._verdicts = PatternVerdictBuilder()
         self._llm_reasoner = LlmPatternReasoner()
         self._workflow_rules = WorkflowRuleMatcher()
@@ -37,12 +35,10 @@ class PatternReasoner:
         findings: list[SSOFinding] | None = None,
         graph: dict[str, Any] | None = None,
         mode: str = "formal",
-        runtime_sec: float | None = None,
         learned_workflow_rules_dir: str | Path | None = None,
     ) -> tuple[
         list[PatternMatch],
         SkillVerdict,
-        dict[str, list[tuple[object, ...]]],
         list[WorkflowDiscovery],
     ]:
         workflow_discoveries: list[WorkflowDiscovery] = []
@@ -83,17 +79,7 @@ class PatternReasoner:
                 graph=graph or {},
                 learned_workflow_rules_dir=learned_workflow_rules_dir,
             )
-        facts = self._exporter.build_facts(
-            artifacts or [],
-            findings or [],
-            ssos,
-            graph or {},
-            patterns,
-            verdict,
-            runtime_sec=runtime_sec,
-            reasoning_mode=mode,
-        )
-        return patterns, verdict, facts, workflow_discoveries
+        return patterns, verdict, workflow_discoveries
 
     def _hybrid_reason(
         self,
@@ -156,13 +142,6 @@ class PatternReasoner:
             and discovery_ssos <= set(pattern.sso_ids)
             for pattern in symbolic_patterns
         )
-
-    def export_souffle(
-        self,
-        facts: dict[str, list[tuple[object, ...]]],
-        output_dir: str | Path,
-    ) -> None:
-        self._exporter.export_facts(facts, output_dir)
 
     def _formal_reason(
         self,

@@ -1,10 +1,10 @@
 rules:
-- id: sso.typescript.command_execution.child_process.0001.no-child_process-exec
+- id: sso.typescript.command_execution.child_process.0001.command-wrapper-execution
   languages:
   - typescript
-  message: Avoid using child_process.exec(), as it can lead to potential issues with command execution.
+  message: Detect child-process and third-party command-execution wrappers.
   metadata:
-    api: child_process.exec()
+    api: child_process.exec()/execa()/execaCommand()/shell.exec()
     category: Command Execution
     malskills_sso_category: payload_execution
     malskills_subtype: system_command_execution
@@ -13,6 +13,9 @@ rules:
   - pattern: $VAR = child_process.exec
   - pattern: exec(...)
   - pattern: $VAR = exec
+  - pattern: execa(...)
+  - pattern: execaCommand(...)
+  - pattern: shell.exec(...)
   severity: WARNING
   tags:
   - Command Execution

@@ -99,8 +99,8 @@ recover:
 - the remote delivery endpoint
 
 This means the motivating example reflects the actual design of our pipeline:
-symbolic extraction should recover concrete evidence facts before any higher-level
-reasoning begins.
+extraction should recover source-grounded `SSOFinding` records and canonical
+SSOs before any higher-level reasoning begins.
 
 ### Stage 2: Operand Resolution and SDG Generation
 
@@ -113,7 +113,7 @@ For this case, the SDG should expose at least the following logical objects:
 - a `config_key` object for `bundle_dir`
 - one or more command objects from `diagnostic.yaml`
 - a result-directory operand derived from secret-bearing targets
-- a network-send primitive that is associated with the same result-directory operand
+- a `data_send` SSO that is associated with the same result-directory operand
 
 This is also where `YASA` has a meaningful role. It should not be the only way
 to discover the behavior; instead, it should strengthen operand recovery through
@@ -126,22 +126,22 @@ pointer analysis by resolving that:
 
 In the methodology section, the SDG figure can therefore show both:
 
-- symbolic capability nodes recovered by `Semgrep`
+- canonical SSO nodes recovered from `Semgrep` findings
 - object and parameter edges that make the operational chain explicit
 
 ### Stage 3: Neuro-Symbolic Reasoning
 
 Once the SDG is available, the reasoning stage can make claims that are much
-more precise than "this skill has suspicious APIs":
+more precise than "this skill contains sensitive APIs":
 
 - a bundle operand is built from target groups that include secret-bearing local data
-- the same result-directory operand is associated with the outbound send primitive
-- the remote endpoint primitive is resolved to a config-backed network operand
+- the same result-directory operand is associated with the `data_send` SSO
+- the remote endpoint is resolved to a config-backed network operand
 
-This directly supports a rule-driven `Information_Theft` conclusion based on a
-secret-bearing bundle flowing into the external sink. It also supports an
-`Execution_and_Delivery` style pattern because the same workflow contains a
-config-backed execution primitive and an external delivery primitive.
+This directly supports a rule-driven `Data_Exfiltration` conclusion based on a
+secret-bearing bundle flowing into the external sink. The command-execution SSO
+remains contextual unless the SDG proves one of the supported malicious workflow
+relations; mere co-occurrence does not create a second behavior match.
 
 ## Why This Version Works Better for the Paper
 
@@ -149,7 +149,7 @@ Compared with a case that relies mostly on prompt semantics, this version is a
 better anchor for the whole paper:
 
 - the motivation section can use it to state the research challenge
-- the methodology section can reuse it to explain evidence facts, primitive facts, and the SDG
+- the methodology section can reuse it to explain SSO findings, canonical SSOs, and the SDG
 - the SDG figure can be drawn directly from the example's concrete objects and derived bundle operand
 - the reasoning section can show how formal rules fire on top of those objects
 

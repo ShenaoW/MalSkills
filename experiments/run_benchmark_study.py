@@ -19,8 +19,8 @@ from malskills.utils import ensure_dir
 
 CORE_ABLATIONS = [
     "benchmark_full",
-    "benchmark_semgrep_evidence_only",
-    "benchmark_llm_evidence_only",
+    "benchmark_semgrep_findings_only",
+    "benchmark_llm_findings_only",
     "benchmark_formal_reasoning_only",
     "benchmark_llm_reasoning_only",
     "benchmark_no_yasa",

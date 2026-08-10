@@ -807,7 +807,7 @@ if single_demo:
         "",
         "- The runnable prototype is demonstrated by `analyze-skill` on one confirmed malicious sample.",
         "- Container deployment is demonstrated by the Dockerfile and the recorded Docker status above.",
-        "- Do not present `suspicious` as a final malicious conviction; present it as a risk alert with YASA and LLM findings.",
+        "- The analyzer emits only `malicious` or `benign`; inspect the SDG proof and matched workflow rules when defending a result.",
     ])
 else:
     lines.extend([
