@@ -391,17 +391,23 @@ class Evaluator:
             results.append(row)
             running = self._compute_metrics(entries[:index], results)
             pattern_text = ",".join(str(item) for item in row["patterns"]) or "none"
+            excluded = row["predicted"] == "suspicious"
             correct = row["predicted"] == row["label"]
+            correctness = "excluded" if excluded else ("yes" if correct else "no")
             self._emit_progress(
                 f"{prefix} DONE status={row['status']} gold={row['label']} "
-                f"pred={row['predicted']} correct={'yes' if correct else 'no'} "
+                f"pred={row['predicted']} correct={correctness} "
                 f"time={runtime_sec:.1f}s findings={row['finding_count']} "
                 f"ssos={row['sso_count']} operands={row['operand_count']} "
                 f"resolutions={row['operand_resolution_count']} "
                 f"patterns={pattern_text} tp={int(running['tp'])} tn={int(running['tn'])} "
                 f"fp={int(running['fp'])} fn={int(running['fn'])} "
                 f"output={row['analysis_output_dir']}",
-                level="SUCCESS" if correct and row["status"] == "ok" else "ERROR",
+                level=(
+                    "WARNING"
+                    if excluded
+                    else ("SUCCESS" if correct and row["status"] == "ok" else "ERROR")
+                ),
             )
             if row["error"]:
                 self._emit_progress(f"{prefix} ERROR {row['error']}", level="ERROR")
@@ -568,8 +574,10 @@ class Evaluator:
         return payload
 
     def _compute_metrics(self, entries: list[BenchmarkEntry], results: list[dict[str, object]]) -> dict[str, float]:
-        gold_positive = {entry.entry_id for entry in entries if entry.label == "malicious"}
-        gold_negative = {entry.entry_id for entry in entries if entry.label != "malicious"}
+        suspicious = {row["entry_id"] for row in results if row["predicted"] == "suspicious"}
+        evaluated_entries = [entry for entry in entries if entry.entry_id not in suspicious]
+        gold_positive = {entry.entry_id for entry in evaluated_entries if entry.label == "malicious"}
+        gold_negative = {entry.entry_id for entry in evaluated_entries if entry.label != "malicious"}
         pred_positive = {row["entry_id"] for row in results if row["predicted"] == "malicious"}
         pred_strict_positive = {row["entry_id"] for row in results if row["predicted"] == "malicious"}
         tp = len(gold_positive & pred_positive)
@@ -596,6 +604,11 @@ class Evaluator:
         avg_ssos = sum(float(row.get("sso_count", 0.0)) for row in results) / len(results) if results else 0.0
         timeout_count = sum(1 for row in results if row.get("status") == "timeout")
         error_count = sum(1 for row in results if row.get("status") == "error")
+        suspicious_malicious_count = sum(
+            1 for entry in entries if entry.entry_id in suspicious and entry.label == "malicious"
+        )
+        suspicious_benign_count = len(suspicious) - suspicious_malicious_count
+        coverage = len(evaluated_entries) / len(entries) if entries else 0.0
         return {
             "precision": round(precision, 4),
             "recall": round(recall, 4),
@@ -608,7 +621,12 @@ class Evaluator:
             "fp": float(fp),
             "fn": float(fn),
             "tn": float(tn),
-            "num_entries": float(len(entries)),
+            "num_entries": float(len(evaluated_entries)),
+            "total_entries": float(len(entries)),
+            "suspicious_count": float(len(suspicious)),
+            "suspicious_malicious_count": float(suspicious_malicious_count),
+            "suspicious_benign_count": float(suspicious_benign_count),
+            "coverage": round(coverage, 4),
             "avg_runtime_sec": round(avg_runtime, 4),
             "throughput_skills_per_min": round(throughput, 4),
             "avg_finding_count": round(avg_findings, 4),

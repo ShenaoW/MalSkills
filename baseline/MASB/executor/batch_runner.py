@@ -16,17 +16,15 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from utils.config_loader import Config
-from utils.api_key_pool import APIKeyPool
 
 
-def run_task(line: str, config: Config, api_pool: APIKeyPool, ex_mode: bool = False) -> tuple:
+def run_task(line: str, config: Config, ex_mode: bool = False) -> tuple:
     """
     Execute a single skill task
 
     Args:
         line: Task line (format: skill_name|skill_path|prompt|repo_id|risk_level|top_level)
         config: Configuration object
-        api_pool: API key pool
         ex_mode: Extended mode flag
 
     Returns:
@@ -50,13 +48,8 @@ def run_task(line: str, config: Config, api_pool: APIKeyPool, ex_mode: bool = Fa
             repo_id = "unknown"
             risk_level = "unknown"
 
-        # Get API key from pool
-        api_key = api_pool.get_next_key()
-
         print(f"\n{'='*60}")
         print(f"Starting: {skill_name} ({repo_id}/{risk_level})")
-        if api_key:
-            print(f"API Key: {api_key[:20]}...")
         print(f"{'='*60}")
 
         sys.stdout.flush()
@@ -74,16 +67,7 @@ def run_task(line: str, config: Config, api_pool: APIKeyPool, ex_mode: bool = Fa
 
         # Set environment
         env = os.environ.copy()
-        if api_key:
-            env["OPENAI_API_KEY"] = api_key
-
-        base_url = config.get_with_env_fallback(
-            'analyzer.api.base_url_env',
-            'PACKY_API_URL',
-            'https://www.packyapi.com/v1'
-        )
-        env["OPENAI_BASE_URL"] = base_url
-        env["OPENAI_MODEL"] = os.environ.get('OPENAI_MODEL') or os.environ.get('LLM_MODEL', 'gpt-5.3-codex-medium')
+        env["OPENAI_MODEL"] = os.environ.get('OPENAI_MODEL') or os.environ.get('LLM_MODEL', 'gpt-5.6-luna')
 
         env["PROJECT_ROOT"] = str(config.root_dir)
         env["EXECUTION_LOGS_DIR"] = str(config.paths.execution_logs_dir)
@@ -143,16 +127,13 @@ def main():
     print(f"Mode: {'Sequential' if sequential else f'Concurrent (workers={workers})'}")
     print(f"{'='*60}\n")
 
-    # Initialize API key pool
-    api_pool = APIKeyPool(config.root_dir / "api_keys.conf")
-
     results = []
 
     if sequential:
         # Sequential execution
         for i, line in enumerate(lines, 1):
             print(f"\nProgress: [{i}/{total}]")
-            success, msg = run_task(line, config, api_pool)
+            success, msg = run_task(line, config)
             results.append(success)
             time.sleep(1)
     else:
@@ -160,7 +141,7 @@ def main():
         with ThreadPoolExecutor(max_workers=workers) as executor:
             futures = []
             for line in lines:
-                futures.append(executor.submit(run_task, line, config, api_pool))
+                futures.append(executor.submit(run_task, line, config))
                 time.sleep(2)  # Stagger submissions
 
             for future in as_completed(futures):

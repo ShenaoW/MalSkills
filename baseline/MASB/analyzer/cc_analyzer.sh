@@ -53,15 +53,6 @@ INDEX_FILE="$OUTPUT_DIR/index.cache"
 TODO_FILE="$OUTPUT_DIR/todo.cache"
 SKIPPED_LOG="$OUTPUT_DIR/logs/skipped.log"
 
-# API Key configuration
-API_KEY_CONF="$PROJECT_ROOT/api_keys.conf"
-KEY_INDEX_FILE="$PROJECT_ROOT/scan_results/logs/cc_api_key_index.txt"
-LOCK_FILE="$PROJECT_ROOT/scan_results/logs/cc_api_key_index.lock"
-
-# Initialize API key index
-mkdir -p "$(dirname "$KEY_INDEX_FILE")" 2>/dev/null
-echo "0" > "$KEY_INDEX_FILE"
-
 # Command line arguments
 QUEUE_FILE="${1:-}"
 SKIP_CROSS_CHECK="${2:-false}"
@@ -70,26 +61,6 @@ log() {
     local msg="$1"
     echo -e "$msg"
     echo -e "$msg" | sed 's/\x1b\[[0-9;]*m//g' >> "$LOG_FILE"
-}
-
-# Get next API key from pool
-get_next_api_key() {
-    if [ ! -f "$API_KEY_CONF" ]; then
-        return 1
-    fi
-
-    (
-        flock -x 200
-        local index=$(cat "$KEY_INDEX_FILE" 2>/dev/null || echo "0")
-        local keys=($(grep -v '^#' "$API_KEY_CONF" 2>/dev/null | grep -v '^[[:space:]]*$'))
-        if [ ${#keys[@]} -eq 0 ]; then
-            return 1
-        fi
-        local key="${keys[$index]}"
-        local next_index=$(( (index + 1) % ${#keys[@]} ))
-        echo "$next_index" > "$KEY_INDEX_FILE"
-        echo "$key"
-    ) 200>"$LOCK_FILE"
 }
 
 # Core analysis function
@@ -111,18 +82,11 @@ analyze_single_skill() {
 
     local custom_prompt=$(cat "$prompt_file")
 
-    # Get API key
-    local current_api_key=""
-    if current_api_key=$(get_next_api_key 2>/dev/null); then
-        export OPENAI_API_KEY="$current_api_key"
-    elif [ -n "${PACKY_API_KEY:-}" ]; then
-        export OPENAI_API_KEY="$PACKY_API_KEY"
-    fi
-    export OPENAI_BASE_URL="${OPENAI_BASE_URL:-${PACKY_API_URL:-https://www.packyapi.com/v1}}"
-    local codex_model="${OPENAI_MODEL:-${LLM_MODEL:-gpt-5.3-codex-medium}}"
+    local codex_model="${OPENAI_MODEL:-${LLM_MODEL:-gpt-5.6-luna}}"
+    local codex_cli="${MALSKILLS_CODEX_CLI:-codex}"
 
     # Execute Codex analysis
-    codex exec \
+    "$codex_cli" exec \
         --skip-git-repo-check \
         --dangerously-bypass-approvals-and-sandbox \
         --model "$codex_model" \
@@ -226,8 +190,8 @@ except:
     rm -f "$tmp_out"
 }
 
-export OUTPUT_DIR OUTPUT_SUFFIX PROJECT_ROOT PACKY_API_KEY PACKY_API_URL OPENAI_API_KEY OPENAI_BASE_URL OPENAI_MODEL LLM_MODEL
-export -f analyze_single_skill get_next_api_key
+export OUTPUT_DIR OUTPUT_SUFFIX PROJECT_ROOT OPENAI_MODEL LLM_MODEL MALSKILLS_CODEX_CLI
+export -f analyze_single_skill
 
 # Main execution
 main() {

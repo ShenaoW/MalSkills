@@ -7,6 +7,7 @@ from pathlib import Path
 import json
 
 from .benchmark import BenchmarkBuilder
+from .corpus_scan import CorpusScanner
 from .evaluation import VARIANTS, Evaluator, render_results
 from .llm_runtime import describe_llm_runtime
 from .pipeline import AnalyzerConfig, SkillAnalyzer
@@ -35,6 +36,27 @@ def build_parser() -> argparse.ArgumentParser:
     benchmark = subparsers.add_parser("build-benchmark-index")
     benchmark.add_argument("--output", required=True)
     benchmark.add_argument("--root", default=".")
+
+    scan = subparsers.add_parser("scan-corpus")
+    scan.add_argument("--corpus-root", required=True)
+    scan.add_argument("--output", required=True)
+    scan.add_argument("--sample-size", type=int, required=True)
+    scan.add_argument("--seed", type=int, default=1337)
+    scan.add_argument("--workers", type=int, default=min(8, os.cpu_count() or 1))
+    scan.add_argument("--source", action="append", dest="sources")
+    scan.add_argument("--profile", choices=["static", "full"], default="static")
+    scan.add_argument("--rule-store")
+    scan.add_argument("--retain", choices=["malicious", "all", "none"], default="malicious")
+    scan.add_argument("--resume", action="store_true")
+    scan.add_argument("--keep-content-duplicates", action="store_true")
+    scan.add_argument("--disable-yasa", action="store_true")
+    scan.add_argument("--disable-cross-artifact-resolution", action="store_true")
+    scan.add_argument("--max-artifacts", type=int, default=600)
+    scan.add_argument("--max-total-text-bytes", type=int, default=2_000_000)
+    scan.add_argument("--progress-every", type=int, default=1)
+    scan.add_argument("--quiet", action="store_true")
+    scan.add_argument("--color", choices=["auto", "always", "never"], default="auto")
+    scan.add_argument("--llm-config")
 
     evaluate = subparsers.add_parser("run-eval")
     evaluate.add_argument("--benchmark", required=True)
@@ -145,6 +167,35 @@ def main(argv: list[str] | None = None) -> int:
         summary = builder.summarize(entries)
         print(f"wrote {len(entries)} benchmark entries to {Path(args.output).resolve()}")
         print(json.dumps(summary, indent=2, sort_keys=True))
+        return 0
+    if args.command == "scan-corpus":
+        scanner = CorpusScanner(
+            progress=not args.quiet,
+            progress_every=args.progress_every,
+            color=args.color,
+        )
+        summary = scanner.run(
+            args.corpus_root,
+            args.output,
+            sample_size=args.sample_size,
+            seed=args.seed,
+            workers=args.workers,
+            sources=args.sources,
+            deduplicate_content=not args.keep_content_duplicates,
+            retain=args.retain,
+            resume=args.resume,
+            profile=args.profile,
+            rule_store_dir=args.rule_store,
+            enable_yasa=not args.disable_yasa,
+            enable_cross_artifact_resolution=not args.disable_cross_artifact_resolution,
+            max_artifacts=args.max_artifacts,
+            max_total_text_bytes=args.max_total_text_bytes,
+        )
+        print(
+            f"scanned={summary['completed']} malicious={summary['verdicts'].get('malicious', 0)} "
+            f"benign={summary['verdicts'].get('benign', 0)} errors={summary['statuses'].get('error', 0)} "
+            f"report={Path(args.output).resolve() / 'scan_summary.json'}"
+        )
         return 0
     if args.command == "run-eval":
         evaluator = Evaluator(

@@ -1,5 +1,6 @@
 [llm]
-mode = "auto"
+# MalSkills and every LLM-backed baseline reuse this Codex CLI runtime.
+mode = "codex_cli"
 model = "gpt-5.6-luna"
 reasoning_effort = "low"
 timeout_sec = 300

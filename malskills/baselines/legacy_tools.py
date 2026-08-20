@@ -10,10 +10,12 @@ from .external_tools import (
     SKILL_SCANNER_TIMEOUT_SEC,
     _finalize_baseline_result,
     _load_json_file,
+    _resolve_primary_skill_root,
     _resolve_tool_python,
     _run_baseline_command,
     _run_json_baseline_command,
 )
+from .codex_bridge import codex_cli_api_bridge
 
 
 LLM_BASELINE_TIMEOUT_SEC = 900
@@ -68,28 +70,43 @@ def run_snyk_agent_scan_baseline(skill_path: str | Path, output_dir: str | Path)
 
 
 def run_ai_infra_guard_baseline(skill_path: str | Path, output_dir: str | Path) -> dict[str, Any]:
-    skill_root = Path(skill_path).resolve()
+    skill_root = _resolve_primary_skill_root(skill_path)
     destination = Path(output_dir)
     ensure_dir(destination)
 
     source_root = _baseline_root() / "AI-Infra-Guard" / "skill-scan"
     raw_report = destination / "ai_infra_guard_raw.sarif.json"
-    command = [
-        _resolve_tool_python(source_root),
-        "-m",
-        "skill_scan",
-        "--repo",
-        str(skill_root),
-        "--language",
-        "en",
-        "--output",
-        str(raw_report),
-    ]
-    completed = _run_baseline_command(
-        command,
-        env_overrides={"PYTHONPATH": str(source_root)},
-        timeout_sec=LLM_BASELINE_TIMEOUT_SEC,
-    )
+    with codex_cli_api_bridge(cwd=skill_root) as bridge:
+        command = [
+            _resolve_tool_python(source_root),
+            "-m",
+            "skill_scan",
+            "--repo",
+            str(skill_root),
+            "--language",
+            "en",
+            "--model",
+            bridge.model,
+            "--api_key",
+            bridge.api_key,
+            "--base_url",
+            bridge.base_url,
+            "--output",
+            str(raw_report),
+        ]
+        completed = _run_baseline_command(
+            command,
+            env_overrides={
+                "PYTHONPATH": str(source_root),
+                "LLM_API_KEY": bridge.api_key,
+                "OPENAI_API_KEY": bridge.api_key,
+                "LLM_MODEL": bridge.model,
+                "OPENAI_MODEL": bridge.model,
+                "LLM_BASE_URL": bridge.base_url,
+                "OPENAI_BASE_URL": bridge.base_url,
+            },
+            timeout_sec=LLM_BASELINE_TIMEOUT_SEC,
+        )
     if not raw_report.exists():
         if completed.returncode != 0:
             raise subprocess.CalledProcessError(
@@ -111,6 +128,8 @@ def run_ai_infra_guard_baseline(skill_path: str | Path, output_dir: str | Path) 
             "tool": "aig-skill-scan",
             "attribution": "Tencent Zhuque Lab (https://github.com/Tencent/AI-Infra-Guard)",
             "command": command,
+            "llm_backend": "codex_cli",
+            "llm_model": bridge.model,
         },
         predicted=predicted,
         score=score,

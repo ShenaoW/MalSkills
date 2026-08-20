@@ -19,7 +19,11 @@ class ResultWriter:
         destination = Path(output_dir)
         ensure_dir(destination)
         graph_payload = self._build_graph_payload(result)
-        feedback_payload = feedback_payload or self.disabled_feedback_payload()
+        feedback_payload = (
+            feedback_payload
+            or result.feedback_payload
+            or self.disabled_feedback_payload()
+        )
         self._write_json(destination / "verdict.json", self._build_verdict_payload(result))
         self._write_json(destination / "artifacts.json", result.artifacts)
         self._write_json(

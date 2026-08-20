@@ -6,10 +6,12 @@ import shutil
 import signal
 import subprocess
 import sys
+import tempfile
 from pathlib import Path
 from typing import Any
 
 from ..utils import ensure_dir
+from .codex_bridge import codex_cli_api_bridge, resolve_baseline_codex_config
 
 
 DEFAULT_TIMEOUT_SEC = 120
@@ -67,7 +69,7 @@ def run_skill_security_scan_baseline(skill_path: str | Path, output_dir: str | P
 
 
 def run_masb_baseline(skill_path: str | Path, output_dir: str | Path) -> dict[str, Any]:
-    skill_root = Path(skill_path).resolve()
+    skill_root = _resolve_primary_skill_root(skill_path)
     destination = Path(output_dir)
     ensure_dir(destination)
 
@@ -79,15 +81,34 @@ def run_masb_baseline(skill_path: str | Path, output_dir: str | Path) -> dict[st
     if static_level not in {"CRITICAL", "HIGH", "MEDIUM", "LOW", "SAFE"}:
         raise RuntimeError(f"MASB static scan did not produce a usable risk level: {static_level}")
     normalized: dict[str, Any]
+    llm_runtime = None
     if static_level in {"CRITICAL", "HIGH"}:
-        follow_up_commands = [
+        llm_runtime = resolve_baseline_codex_config()
+        audit_commands = [
             ["bash", "scripts/05_gen_cc_queue.sh"],
             ["bash", "scripts/06_cc_analyze.sh"],
-            ["bash", "scripts/07_gen_run_queue.sh"],
-            ["bash", "scripts/08_execute.sh"],
         ]
-        command_results.extend(_run_masb_native_pipeline(runtime_root, follow_up_commands))
+        command_results.extend(
+            _run_masb_native_pipeline(
+                runtime_root,
+                audit_commands,
+                env_overrides={
+                    "OPENAI_MODEL": llm_runtime.model,
+                    "LLM_MODEL": llm_runtime.model,
+                    "MALSKILLS_CODEX_CLI": llm_runtime.cli_path,
+                },
+            )
+        )
         normalized = _collect_masb_runtime_payload_from_static(runtime_root, skill_root, static_payload)
+        if str(normalized.get("risk_level", "ERROR")).upper() == "MALICIOUS":
+            queue_commands = [["bash", "scripts/07_gen_run_queue.sh"]]
+            command_results.extend(_run_masb_native_pipeline(runtime_root, queue_commands))
+            run_queue = runtime_root / "runtime_tasks" / "run_queue.txt"
+            if run_queue.is_file() and run_queue.stat().st_size > 0:
+                command_results.extend(
+                    _run_masb_native_pipeline(runtime_root, [["bash", "scripts/08_execute.sh"]])
+                )
+                normalized = _collect_masb_runtime_payload_from_static(runtime_root, skill_root, static_payload)
     else:
         normalized = _normalize_masb_static_payload(static_payload, skill_root)
     if str(normalized.get("risk_level", "ERROR")).upper() == "ERROR":
@@ -102,6 +123,8 @@ def run_masb_baseline(skill_path: str | Path, output_dir: str | Path) -> dict[st
             "commands": [item["command"] for item in command_results],
             "results": command_results,
             "runtime_root": str(runtime_root),
+            "llm_backend": "codex_cli" if llm_runtime else "not_used",
+            "llm_model": llm_runtime.model if llm_runtime else None,
         },
         predicted=_map_masb_prediction(normalized),
         score=_map_masb_score(normalized),
@@ -199,15 +222,28 @@ def run_skills_security_audit_baseline(skill_path: str | Path, output_dir: str |
 
 
 def run_caterpillar_baseline(skill_path: str | Path, output_dir: str | Path) -> dict[str, Any]:
-    skill_root = Path(skill_path).resolve()
+    skill_root = _resolve_primary_skill_root(skill_path)
     destination = Path(output_dir)
     ensure_dir(destination)
 
-    command = _resolve_caterpillar_command(skill_root)
-    payload = _run_checked_json_baseline_command(
-        command,
-        accepted_returncodes={0, 1},
-    )
+    with codex_cli_api_bridge(cwd=skill_root) as bridge:
+        command = _resolve_caterpillar_command(skill_root)
+        fetch_shim = (_PROJECT_ROOT / "malskills" / "baselines" / "openai_fetch_bridge.cjs").resolve()
+        node_options = " ".join(
+            part
+            for part in (os.environ.get("NODE_OPTIONS", "").strip(), f"--require={fetch_shim}")
+            if part
+        )
+        payload = _run_checked_json_baseline_command(
+            command,
+            accepted_returncodes={0, 1},
+            env_overrides={
+                "OPENAI_API_KEY": bridge.api_key,
+                "MALSKILLS_OPENAI_BASE_URL": bridge.base_url,
+                "NODE_OPTIONS": node_options,
+            },
+            timeout_sec=DEFAULT_TIMEOUT_SEC * 8,
+        )
     _validate_caterpillar_payload(payload)
     normalized = _normalize_caterpillar_payload(payload)
     return _finalize_baseline_result(
@@ -218,6 +254,8 @@ def run_caterpillar_baseline(skill_path: str | Path, output_dir: str | Path) -> 
         runtime={
             "tool": "caterpillar",
             "command": command,
+            "llm_backend": "codex_cli",
+            "llm_model": bridge.model,
         },
         predicted=_map_caterpillar_prediction(normalized),
         score=_map_caterpillar_score(normalized),
@@ -232,7 +270,7 @@ def run_caterpillar_baseline(skill_path: str | Path, output_dir: str | Path) -> 
 
 
 def run_clawscan_baseline(skill_path: str | Path, output_dir: str | Path) -> dict[str, Any]:
-    skill_root = Path(skill_path).resolve()
+    skill_root = _resolve_primary_skill_root(skill_path)
     destination = Path(output_dir)
     ensure_dir(destination)
 
@@ -271,26 +309,40 @@ def run_clawscan_baseline(skill_path: str | Path, output_dir: str | Path) -> dic
 
 
 def run_skill_scanner_baseline(skill_path: str | Path, output_dir: str | Path) -> dict[str, Any]:
-    skill_root = Path(skill_path).resolve()
+    skill_root = _resolve_primary_skill_root(skill_path)
     destination = Path(output_dir)
     ensure_dir(destination)
 
     python_bin = _resolve_skill_scanner_python()
-    command = [
-        str(python_bin),
-        "-m",
-        "skill_scanner.cli.cli",
-        "scan",
-        str(skill_root),
-        "--format",
-        "json",
-    ]
-    payload = _run_checked_json_baseline_command(
-        command,
-        accepted_returncodes={0},
-        env_overrides={"PYTHONPATH": str((_PROJECT_ROOT / "baseline" / "skill-scanner").resolve())},
-        timeout_sec=SKILL_SCANNER_TIMEOUT_SEC,
-    )
+    with codex_cli_api_bridge(cwd=skill_root) as bridge:
+        command = [
+            str(python_bin),
+            "-m",
+            "skill_scanner.cli.cli",
+            "scan",
+            str(skill_root),
+            "--format",
+            "json",
+            "--use-behavioral",
+            "--use-llm",
+            "--enable-meta",
+            "--llm-provider",
+            "openai-compatible",
+        ]
+        payload = _run_checked_json_baseline_command(
+            command,
+            accepted_returncodes={0},
+            env_overrides={
+                "PYTHONPATH": str((_PROJECT_ROOT / "baseline" / "skill-scanner").resolve()),
+                "SKILL_SCANNER_LLM_API_KEY": bridge.api_key,
+                "SKILL_SCANNER_LLM_BASE_URL": bridge.base_url,
+                "SKILL_SCANNER_LLM_MODEL": bridge.model,
+                "SKILL_SCANNER_META_LLM_API_KEY": bridge.api_key,
+                "SKILL_SCANNER_META_LLM_BASE_URL": bridge.base_url,
+                "SKILL_SCANNER_META_LLM_MODEL": bridge.model,
+            },
+            timeout_sec=SKILL_SCANNER_TIMEOUT_SEC,
+        )
     _validate_skill_scanner_payload(payload)
     normalized = _normalize_skill_scanner_payload(payload)
     return _finalize_baseline_result(
@@ -301,6 +353,8 @@ def run_skill_scanner_baseline(skill_path: str | Path, output_dir: str | Path) -
         runtime={
             "tool": "skill-scanner",
             "command": command,
+            "llm_backend": "codex_cli",
+            "llm_model": bridge.model,
         },
         predicted=_map_skill_scanner_prediction(normalized),
         score=_map_skill_scanner_score(normalized),
@@ -325,17 +379,29 @@ def run_nova_proximity_baseline(skill_path: str | Path, output_dir: str | Path) 
     for stale_report in native_output.glob("nova_proximity_*.json"):
         stale_report.unlink()
     tool_root = _PROJECT_ROOT / "baseline" / "nova-proximity"
-    command = [
-        _resolve_tool_python(tool_root),
-        str((tool_root / "novaprox.py").resolve()),
-        "--skill",
-        str(skill_root),
-        "--skill-recursive",
-        "--json-report",
-        "--output-prefix",
-        str(output_prefix),
-    ]
-    completed = _run_baseline_command(command)
+    with codex_cli_api_bridge(cwd=skill_root) as bridge:
+        command = [
+            _resolve_tool_python(tool_root),
+            str((tool_root / "novaprox.py").resolve()),
+            "--skill",
+            str(skill_root),
+            "--skill-recursive",
+            "--nova-scan",
+            "--rule",
+            str((tool_root / "skill_rules.nov").resolve()),
+            "--evaluator",
+            "ollama",
+            "--model",
+            bridge.model,
+            "--json-report",
+            "--output-prefix",
+            str(output_prefix),
+        ]
+        completed = _run_baseline_command(
+            command,
+            env_overrides={"OLLAMA_HOST": bridge.base_url.removesuffix("/v1")},
+            timeout_sec=DEFAULT_TIMEOUT_SEC * 8,
+        )
     if completed.returncode != 0:
         raise subprocess.CalledProcessError(
             completed.returncode,
@@ -358,6 +424,8 @@ def run_nova_proximity_baseline(skill_path: str | Path, output_dir: str | Path) 
             "tool": "nova-proximity",
             "command": command,
             "native_report": str(report_paths[-1]),
+            "llm_backend": "codex_cli",
+            "llm_model": bridge.model,
         },
         predicted=_map_nova_proximity_prediction(normalized),
         score=_map_nova_proximity_score(normalized),
@@ -488,6 +556,11 @@ def _validate_nova_proximity_payload(payload: dict[str, Any]) -> None:
         errors = scan_results.get("errors")
         detail = errors[0] if isinstance(errors, list) and errors else "no skills were analyzed"
         raise RuntimeError(f"nova-proximity scan failed: {detail}")
+    if not isinstance(payload.get("nova_analysis"), dict):
+        raise RuntimeError(
+            "nova-proximity did not complete NOVA analysis; install its declared "
+            "`nova-hunting` dependency and verify the configured evaluator"
+        )
 
 
 def _run_baseline_command(
@@ -500,21 +573,31 @@ def _run_baseline_command(
     env = os.environ.copy()
     if env_overrides:
         env.update(env_overrides)
-    process = subprocess.Popen(
-        command,
-        text=True,
-        env=env,
-        cwd=str(Path(cwd).resolve()) if cwd else None,
-        start_new_session=True,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-    )
-    try:
-        stdout, stderr = process.communicate(timeout=timeout_sec)
-    except subprocess.TimeoutExpired as exc:
-        _terminate_process_group(process)
-        process.wait(timeout=5)
-        raise exc
+    # Several Node CLIs call process.exit() immediately after printing JSON.
+    # A pipe can lose the unflushed tail (commonly around 64 KiB), while a
+    # regular file receives the complete synchronous write.
+    with tempfile.TemporaryFile(mode="w+", encoding="utf-8") as stdout_file, tempfile.TemporaryFile(
+        mode="w+", encoding="utf-8"
+    ) as stderr_file:
+        process = subprocess.Popen(
+            command,
+            text=True,
+            env=env,
+            cwd=str(Path(cwd).resolve()) if cwd else None,
+            start_new_session=True,
+            stdout=stdout_file,
+            stderr=stderr_file,
+        )
+        try:
+            process.communicate(timeout=timeout_sec)
+        except subprocess.TimeoutExpired as exc:
+            _terminate_process_group(process)
+            process.wait(timeout=5)
+            raise exc
+        stdout_file.seek(0)
+        stderr_file.seek(0)
+        stdout = stdout_file.read()
+        stderr = stderr_file.read()
     completed = subprocess.CompletedProcess(
         args=command,
         returncode=process.returncode,
@@ -784,13 +867,24 @@ def _prepare_masb_runtime(skill_root: Path, destination: Path) -> Path:
     return runtime_root
 
 
-def _run_masb_native_pipeline(runtime_root: Path, commands: list[list[str]]) -> list[dict[str, Any]]:
+def _run_masb_native_pipeline(
+    runtime_root: Path,
+    commands: list[list[str]],
+    *,
+    env_overrides: dict[str, str] | None = None,
+) -> list[dict[str, Any]]:
     results: list[dict[str, Any]] = []
-    env_overrides = {
+    command_env = {
         "PYTHONPATH": str(runtime_root),
     }
+    command_env.update(env_overrides or {})
     for command in commands:
-        completed = _run_baseline_command(command, cwd=runtime_root, env_overrides=env_overrides, timeout_sec=DEFAULT_TIMEOUT_SEC * 8)
+        completed = _run_baseline_command(
+            command,
+            cwd=runtime_root,
+            env_overrides=command_env,
+            timeout_sec=DEFAULT_TIMEOUT_SEC * 8,
+        )
         results.append(
             {
                 "command": command,
@@ -887,13 +981,20 @@ def _collect_masb_static_payload(runtime_root: Path, skill_root: Path) -> dict[s
         raise FileNotFoundError(f"MASB static report not found under {workspace_root}")
 
     target_skill_name = skill_root.name
+    candidate_payloads: list[dict[str, Any]] = []
     for report_path in report_paths:
         payload = _load_json_file(report_path)
+        candidate_payloads.append(payload)
         for skill_report in payload.get("skills_reports", []):
             if not isinstance(skill_report, dict):
                 continue
             if str(skill_report.get("skill_name", "")).strip() == target_skill_name:
                 return payload
+
+    if len(candidate_payloads) == 1:
+        skill_reports = candidate_payloads[0].get("skills_reports", [])
+        if isinstance(skill_reports, list) and len(skill_reports) == 1 and isinstance(skill_reports[0], dict):
+            return candidate_payloads[0]
 
     raise FileNotFoundError(f"MASB static report for {target_skill_name} not found under {workspace_root}")
 
@@ -909,6 +1010,8 @@ def _normalize_masb_static_payload(payload: dict[str, Any], skill_root: Path) ->
             if str(item.get("skill_name", "")).strip() == target_skill_name:
                 target_report = item
                 break
+        if target_report is None and len(skill_reports) == 1 and isinstance(skill_reports[0], dict):
+            target_report = skill_reports[0]
     if target_report is None:
         target_report = {}
 
@@ -931,6 +1034,21 @@ def _normalize_masb_static_payload(payload: dict[str, Any], skill_root: Path) ->
         "vulnerabilities": vulnerabilities,
         "execution_artifacts": [],
     }
+
+
+def _resolve_primary_skill_root(skill_path: str | Path) -> Path:
+    skill_root = Path(skill_path).resolve()
+    if (skill_root / "SKILL.md").is_file():
+        return skill_root
+
+    manifests = [path for path in skill_root.rglob("SKILL.md") if path.is_file()]
+    if not manifests:
+        return skill_root
+    minimum_depth = min(len(path.relative_to(skill_root).parts) for path in manifests)
+    shallowest = [path for path in manifests if len(path.relative_to(skill_root).parts) == minimum_depth]
+    if len(shallowest) == 1:
+        return shallowest[0].parent
+    return skill_root
 
 
 def _map_skill_security_scan_prediction(payload: dict[str, Any]) -> str:
@@ -1107,7 +1225,7 @@ def _map_masb_score(payload: dict[str, Any]) -> float:
 
 def _resolve_caterpillar_command(skill_root: Path) -> list[str]:
     tool_root = _PROJECT_ROOT / "baseline" / "caterpillar"
-    args = ["ask", str(skill_root), "--json", "--mode", "offline"]
+    args = ["ask", str(skill_root), "--json", "--mode", "openai"]
     dist_entry = tool_root / "dist" / "cli.js"
     if dist_entry.is_file():
         return ["node", str(dist_entry.resolve()), *args]

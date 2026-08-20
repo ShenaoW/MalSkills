@@ -157,6 +157,7 @@ class AnalysisResult:
     workflow_discoveries: list[WorkflowDiscovery] = field(default_factory=list)
     findings_by_producer: dict[str, list[SSOFinding]] = field(default_factory=dict)
     analysis_metadata: dict[str, Any] = field(default_factory=dict)
+    feedback_payload: dict[str, Any] = field(default_factory=dict)
 
 
 @dataclass

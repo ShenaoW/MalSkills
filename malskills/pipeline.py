@@ -223,6 +223,13 @@ class SkillAnalyzer:
                 feedback_payload,
                 dedupe_group_id=cfg.rule_learning_group_id,
             )
+            result.feedback_payload = feedback_payload
+            result.analysis_metadata["rule_feedback_summary"] = feedback_payload.get(
+                "summary", {}
+            )
+            result.analysis_metadata["rule_learning"] = feedback_payload.get(
+                "rule_learning", {}
+            )
         if output_dir is not None:
             destination = Path(output_dir)
             ensure_dir(destination)

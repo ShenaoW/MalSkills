@@ -29,17 +29,7 @@ while [ "$SEARCH_DIR" != "/" ]; do
     SEARCH_DIR="$(dirname "$SEARCH_DIR")"
 done
 
-if [ -n "${OPENAI_API_KEY:-}" ]; then
-    API_KEY="$OPENAI_API_KEY"
-elif [ -n "${PACKY_API_KEY:-}" ]; then
-    API_KEY="$PACKY_API_KEY"
-else
-    echo "Error: OPENAI_API_KEY or PACKY_API_KEY not set"
-    exit 1
-fi
-
-API_BASE_URL="${OPENAI_BASE_URL:-${PACKY_API_URL:-https://www.packyapi.com/v1}}"
-API_MODEL="${OPENAI_MODEL:-${LLM_MODEL:-gpt-5.3-codex-medium}}"
+API_MODEL="${OPENAI_MODEL:-${LLM_MODEL:-gpt-5.6-luna}}"
 DOCKER_IMAGE="${DOCKER_IMAGE:-codex-skill-sandbox}"
 
 if [ "$IN_PLACE_LOG" = "true" ]; then
@@ -59,7 +49,12 @@ echo "Log Dir: $TEST_DIR"
 HOST_UID=$(id -u)
 HOST_GID=$(id -g)
 CONTAINER_NAME="skill-exec-${SKILL_NAME}-${REPO_ID}-$$"
-HOST_CODEX_DIR="${HOME:-$(getent passwd "$(id -u)" | cut -d: -f6)}/.codex"
+HOST_CODEX_DIR="${CODEX_HOME:-${HOME:-$(getent passwd "$(id -u)" | cut -d: -f6)}/.codex}"
+if [ ! -f "$HOST_CODEX_DIR/auth.json" ]; then
+    echo "Error: Codex CLI authentication not found in $HOST_CODEX_DIR/auth.json"
+    echo "Run 'codex login' on the host before executing the MASB dynamic stage"
+    exit 1
+fi
 
 if [ "$IN_PLACE_LOG" = "true" ]; then
     SKILL_PARENT_DIR="$(dirname "$SKILL_PATH")"
@@ -90,9 +85,6 @@ docker run --rm \
     -w /tmp \
     -e HOST_UID="$HOST_UID" \
     -e HOST_GID="$HOST_GID" \
-    -e OPENAI_API_KEY="$API_KEY" \
-    -e PACKY_API_KEY="$API_KEY" \
-    -e PACKY_API_URL="$API_BASE_URL" \
     -e LLM_MODEL="$API_MODEL" \
     -e SKILL_NAME="$SKILL_NAME" \
     -e USER_PROMPT="$USER_PROMPT" \
@@ -110,33 +102,13 @@ docker run --rm \
     export HOME="/home/appuser"
     export APPUSER_HOME="/home/appuser"
     export WORK_DIR="$APPUSER_HOME/workspace"
-    export OPENAI_API_KEY="${OPENAI_API_KEY}"
     mkdir -p "$APPUSER_HOME/.codex"
     if [ -f /host_codex/config.toml ]; then
-        cp /host_codex/config.toml "$APPUSER_HOME/.codex/config.host.toml" 2>/dev/null || true
+        cp /host_codex/config.toml "$APPUSER_HOME/.codex/config.toml"
     fi
     if [ -f /host_codex/auth.json ]; then
-        cp /host_codex/auth.json "$APPUSER_HOME/.codex/auth.host.json" 2>/dev/null || true
+        cp /host_codex/auth.json "$APPUSER_HOME/.codex/auth.json"
     fi
-    cat > "$APPUSER_HOME/.codex/config.toml" <<EOF
-model_provider = "packycode"
-model = "${LLM_MODEL}"
-model_reasoning_effort = "medium"
-disable_response_storage = true
-approvals_reviewer = "user"
-
-[model_providers.packycode]
-name = "packycode"
-base_url = "${PACKY_API_URL}"
-wire_api = "responses"
-requires_openai_auth = true
-
-[projects."$WORK_DIR/skill"]
-trust_level = "trusted"
-EOF
-    cat > "$APPUSER_HOME/.codex/auth.json" <<EOF
-{"OPENAI_API_KEY":"${OPENAI_API_KEY}"}
-EOF
     mkdir -p "$WORK_DIR/skill"
     cp -r /skill_source/. "$WORK_DIR/skill/"
     chown -R appuser:appuser "$WORK_DIR" "$APPUSER_HOME/.codex"

@@ -2,6 +2,21 @@
 
 MalSkills is a neuro-symbolic system for detecting malicious agent skills from heterogeneous skill artifacts.
 
+> [!IMPORTANT]
+> **Extended baseline reproduction notice.** The paper's RQ1 evaluated
+> MalSkills against five baselines (Cisco Skill Scanner, Nova-Proximity,
+> Skill-Sec-Scan, Caterpillar, and MASB) using
+> `gpt-5.3-codex-medium` for LLM-backed analysis. This repository now includes
+> a substantially larger baseline suite and defaults MalSkills and all
+> Codex-backed baselines to the newer `gpt-5.6-luna` model. Consequently,
+> newly generated baseline metrics and rankings are updated extended-study
+> results and are not expected to match the values in the paper's RQ1 table
+> exactly. When reporting results, keep the paper and current settings
+> separate and record the model, baseline revision, enabled analysis mode,
+> `suspicious`/error policy, and evaluated coverage. Selecting the paper model
+> alone does not guarantee exact reproduction because the baseline adapters
+> and supported execution paths have also been expanded since the paper.
+
 It works in three stages:
 
 1. **Security-Sensitive Operation extraction**: identify security-relevant operations from code, prompts, manifests, configuration files, and setup instructions.
@@ -23,7 +38,7 @@ It works in three stages:
 
 - Python `>= 3.9`
 - optional `semgrep` for parsing-based extraction
-- optional LLM API credentials in `.env` for full runs
+- Codex CLI installed and authenticated (`codex login`) for full LLM runs
 - baseline-specific Python, Node.js, Go, Docker, and API dependencies as listed below
 
 The project metadata is in `pyproject.toml`.
@@ -72,6 +87,36 @@ malskills run-eval \
   --variant benchmark_full
 ```
 
+Scan a deterministic sample from a large, unlabeled corpus:
+
+```bash
+malskills scan-corpus \
+  --corpus-root /path/to/skills \
+  --output output/corpus-scan-2000 \
+  --sample-size 2000 \
+  --seed 1337 \
+  --workers 4 \
+  --profile full \
+  --llm-config malskills.toml
+```
+
+`scan-corpus` treats each source's first-level directory as one logical Skill,
+selects one primary version tree, and removes exact duplicate primary
+`SKILL.md` content before sampling. The `full` profile enables Semgrep, LLM SSO
+and operand extraction, YASA, cross-artifact resolution, hybrid graph
+reasoning, and rule-candidate collection. Its rule store defaults to
+`<output>/learned_rules`. The static profile disables every LLM stage and uses
+formal graph reasoning.
+
+Results are appended to `scan_results.jsonl` as cases complete. Re-run the same
+command with `--resume` after an interruption. `sample_manifest.json` records
+the exact sample, `scan_config.json` prevents incompatible resume settings, and
+`scan_summary.json` reports throughput, flag rate, behavior distribution, and
+rule-candidate observations. Because corpus entries are unlabeled, flag rate is
+not reported as precision or malware prevalence. By default, complete evidence
+directories are retained only for malicious results and errors; use
+`--retain all` or `--retain none` to change that policy.
+
 Evaluation prints colored stage events for every case: ingest, SSO extraction,
 SDG compilation, behavior reasoning, and result writing. It also prints a
 `WAIT` heartbeat every 30 seconds while a stage is running. The completed-case
@@ -94,8 +139,12 @@ Inspect the resolved LLM runtime:
 malskills show-llm-config
 ```
 
-The default [malskills.toml](malskills.toml) uses `gpt-5.6-luna` for every LLM
-stage. Use another file for a local or deployment-specific configuration:
+The default [malskills.toml](malskills.toml) routes every MalSkills LLM stage
+and every LLM-backed baseline through the authenticated Codex CLI, using
+`gpt-5.6-luna`. The original paper experiments used
+`gpt-5.3-codex-medium` consistently; selecting that model is one required
+setting when attempting to reproduce the original paper experiment. Use
+another file for a local or deployment-specific configuration:
 
 ```bash
 malskills show-llm-config --llm-config /path/to/malskills.toml
@@ -107,7 +156,7 @@ The file supports global defaults and per-stage overrides:
 
 ```toml
 [llm]
-mode = "auto"
+mode = "codex_cli"
 model = "gpt-5.6-luna"
 reasoning_effort = "low"
 timeout_sec = 300
@@ -318,25 +367,34 @@ RQ3 model-specific variables:
 
 ## Baselines
 
+The paper's RQ1 comparison contained five baselines. The current artifact
+extends that comparison to the 22 adapters listed below, including newer
+static, LLM-assisted, and sandbox-backed scanners. This expanded suite is
+intended to evaluate the current tool landscape; it should be described as an
+updated baseline study rather than a verbatim reproduction of the original RQ1
+table. The current default model is `gpt-5.6-luna`, while the paper used
+`gpt-5.3-codex-medium` consistently for LLM-backed tools.
+
 Every adapter writes the upstream report, a normalized `output_manifest.json`,
 and the common benchmark fields (`predicted`, `score`, and `patterns`). The
 `benchmark_` prefix selects the same adapter while preserving the naming used
 by benchmark experiments.
 
-The default benchmark study includes the following deterministic static
-baselines:
+The default benchmark study includes the following baseline adapters. Several
+of these tools now run their full upstream LLM-assisted path through the shared
+Codex configuration rather than a reduced static-only mode:
 
 | Variant suffix | Tool | Runtime |
 |---|---|---|
 | `skill_security_audit_baseline` | skill-security-audit | Python |
 | `skill_security_scan_baseline` | skill-security-scan | Python |
 | `skills_security_audit_baseline` | skills_security_audit | Python |
-| `caterpillar_baseline` | Caterpillar offline scanner | Node.js |
+| `caterpillar_baseline` | Caterpillar | Node.js + authenticated Codex CLI |
 | `clawscan_baseline` | ClawScan by ClawGuard | Node.js |
-| `skill_scanner_baseline` | Cisco AI Defense skill-scanner | Python |
-| `nova_proximity_baseline` | Nova Proximity | Python |
+| `skill_scanner_baseline` | Cisco AI Defense skill-scanner | Python + authenticated Codex CLI |
+| `nova_proximity_baseline` | Nova Proximity | Python + authenticated Codex CLI |
 | `agentguard_baseline` | GoPlus AgentGuard | Node.js |
-| `skillspector_baseline` | NVIDIA SkillSpector (`--no-llm`) | Python |
+| `skillspector_baseline` | NVIDIA SkillSpector | Python + authenticated Codex CLI |
 | `agentverus_baseline` | AgentVerus Scanner | Node.js 22+ |
 | `skilltotal_baseline` | SkillTotal | Python 3.10+ |
 | `clawvet_baseline` | ClawVet offline scanner | Node.js 22+ |
@@ -344,18 +402,27 @@ baselines:
 | `openclaw_clawscan_baseline` | OpenClaw ClawScan static scanner | Go |
 | `skillfortify_baseline` | SkillFortify | Python 3.11+ |
 
-These integrations are available but remain opt-in because they require an
-external service, an LLM, or sandboxed execution:
+The following integrations remain opt-in because they require an external
+service, sandboxed execution, or substantially heavier runtime setup.
+Codex-backed adapters in both tables reuse the same Codex CLI authentication
+and `[llm]` model as MalSkills; they do not require separate OpenAI or LiteLLM
+credentials. Set `model` in `malskills.toml` or `MALSKILLS_LLM_MODEL` to
+override it for both MalSkills and these baselines.
 
 | Variant suffix | Tool | Additional requirement |
 |---|---|---|
-| `masb_baseline` | MaliciousAgentSkillsBench | Codex/OpenAI-compatible credentials for high-risk samples; `codex-skill-sandbox` for dynamic execution |
+| `masb_baseline` | MaliciousAgentSkillsBench | Authenticated Codex CLI; `codex-skill-sandbox` for dynamic execution |
 | `snyk_agent_scan_baseline` | Snyk Agent Scan | `SNYK_TOKEN` |
-| `ai_infra_guard_baseline` | Tencent AI-Infra-Guard | `LLM_API_KEY` or `OPENAI_API_KEY` |
-| `skillsieve_baseline` | SkillSieve | LiteLLM provider credentials |
-| `skillward_baseline` | SkillWard | provider credentials, Docker, and its sandbox image |
-| `runtime_skill_audit_baseline` | Runtime Skill Audit | LLM endpoint, OpenClaw, Docker, and `rsa_sandbox` |
-| `skill_sentinel_baseline` | Enkrypt AI Skill Sentinel | `OPENAI_API_KEY`; `VIRUSTOTAL_API_KEY` is optional |
+| `ai_infra_guard_baseline` | Tencent AI-Infra-Guard | Authenticated Codex CLI |
+| `skillsieve_baseline` | SkillSieve | Authenticated Codex CLI |
+| `skillward_baseline` | SkillWard | Authenticated Codex CLI, Docker, and its sandbox image |
+| `runtime_skill_audit_baseline` | Runtime Skill Audit | Authenticated Codex CLI, OpenClaw, Docker, and `rsa_sandbox` |
+| `skill_sentinel_baseline` | Enkrypt AI Skill Sentinel | Authenticated Codex CLI; `VIRUSTOTAL_API_KEY` is optional |
+
+Snyk Agent Scan is not an LLM baseline and continues to call the Snyk service
+with its own `SNYK_TOKEN`. The Codex compatibility bridge is local and
+short-lived: it translates each baseline's OpenAI-, Anthropic-, or
+Ollama-compatible request into `codex exec` using the shared model setting.
 
 Submodules pin source revisions but do not install upstream dependencies. Use
 an isolated environment for each Python tool and follow the corresponding
@@ -371,7 +438,7 @@ malskills run-eval \
   --variant benchmark_skillspector_baseline
 ```
 
-Run the study with MalSkills ablations and all offline static baselines:
+Run the study with MalSkills ablations and the default baseline set:
 
 ```bash
 python3 experiments/run_benchmark_study.py \

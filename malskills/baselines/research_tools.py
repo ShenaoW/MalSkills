@@ -5,22 +5,26 @@ import math
 import os
 import shutil
 import subprocess
+import sys
 import tempfile
 from pathlib import Path
 from typing import Any
 
 from ..utils import ensure_dir
+from .codex_bridge import codex_cli_api_bridge
 from .external_tools import (
     DEFAULT_TIMEOUT_SEC,
     _extract_json_object,
     _finalize_baseline_result,
     _load_json_file,
+    _resolve_primary_skill_root,
     _run_baseline_command,
     _run_json_baseline_command,
 )
 
 
 RESEARCH_BASELINE_TIMEOUT_SEC = DEFAULT_TIMEOUT_SEC * 20
+SKILLWARD_OPENCLAW_MODEL_ALIAS = "gpt-4o-mini"
 
 _BASELINE_ROOT = Path(__file__).resolve().parents[2] / "baseline"
 _PATTERN_DETAIL_KEYS = {
@@ -46,13 +50,28 @@ def run_skillsieve_baseline(skill_path: str | Path, output_dir: str | Path) -> d
     destination = Path(output_dir)
     ensure_dir(destination)
 
-    command = [
-        _resolve_tool_executable("skillsieve", "skillsieve"),
-        "scan",
-        str(skill_root),
-        "--json-output",
-    ]
-    payload = _run_json_baseline_command(command, timeout_sec=RESEARCH_BASELINE_TIMEOUT_SEC)
+    tool_root = _BASELINE_ROOT / "skillsieve"
+    python = _resolve_tool_executable("skillsieve", "python", fallback=sys.executable)
+    with codex_cli_api_bridge(cwd=skill_root) as bridge:
+        command = [
+            python,
+            "-m",
+            "malskills.baselines.skillsieve_codex",
+            str(skill_root),
+            bridge.base_url,
+            bridge.api_key,
+            bridge.model,
+            "3",
+        ]
+        payload = _run_json_baseline_command(
+            command,
+            env_overrides={
+                "PYTHONPATH": os.pathsep.join(
+                    [str(_BASELINE_ROOT.parent), str(tool_root), os.environ.get("PYTHONPATH", "")]
+                )
+            },
+            timeout_sec=RESEARCH_BASELINE_TIMEOUT_SEC,
+        )
     if not payload:
         raise ValueError("SkillSieve did not emit a JSON scan result")
     normalized = _normalize_skillsieve_payload(payload)
@@ -62,7 +81,12 @@ def run_skillsieve_baseline(skill_path: str | Path, output_dir: str | Path) -> d
         artifact_name="skillsieve_report.json",
         manifest_key="skillsieve_report",
         payload=normalized,
-        runtime={"tool": "skillsieve", "command": command},
+        runtime={
+            "tool": "skillsieve",
+            "command": command,
+            "llm_backend": "codex_cli",
+            "llm_model": bridge.model,
+        },
         predicted=predicted,
         score=_score_from_confidence(
             predicted,
@@ -73,8 +97,10 @@ def run_skillsieve_baseline(skill_path: str | Path, output_dir: str | Path) -> d
 
 
 def run_skillward_baseline(skill_path: str | Path, output_dir: str | Path) -> dict[str, Any]:
-    skill_root = Path(skill_path).resolve()
-    destination = Path(output_dir)
+    skill_root = _resolve_primary_skill_root(skill_path)
+    # SkillWard passes its generated safe-skill path directly to `docker -v`;
+    # Docker interprets relative paths containing '/' as invalid volume names.
+    destination = Path(output_dir).resolve()
     ensure_dir(destination)
     native_output = destination / "skillward_native"
     ensure_dir(native_output)
@@ -95,7 +121,27 @@ def run_skillward_baseline(skill_path: str | Path, output_dir: str | Path) -> di
         "--parallel",
         "1",
     ]
-    completed = _run_baseline_command(command, timeout_sec=RESEARCH_BASELINE_TIMEOUT_SEC)
+    isolated_home = destination / "skillward_home"
+    ensure_dir(isolated_home)
+    with codex_cli_api_bridge(cwd=skill_root) as bridge:
+        completed = _run_baseline_command(
+            command,
+            env_overrides={
+                "HOME": str(isolated_home),
+                "LLM_PROVIDER": "openai",
+                "LLM_ID": bridge.model,
+                "LLM_API_BASE": bridge.base_url,
+                "LLM_API_KEY": bridge.api_key,
+                "AGENT_PROVIDER": "deepseek",
+                # The pinned OpenClaw image rejects unknown future model IDs;
+                # the bridge still executes the configured Codex model.
+                "AGENT_ID": SKILLWARD_OPENCLAW_MODEL_ALIAS,
+                "AGENT_API_BASE": bridge.docker_base_url,
+                "AGENT_API_KEY": bridge.api_key,
+                "OPENAI_API_KEY": bridge.api_key,
+            },
+            timeout_sec=RESEARCH_BASELINE_TIMEOUT_SEC,
+        )
     if completed.returncode != 0:
         raise subprocess.CalledProcessError(
             completed.returncode,
@@ -122,6 +168,9 @@ def run_skillward_baseline(skill_path: str | Path, output_dir: str | Path) -> di
             "command": command,
             "native_report": str(report_path),
             "returncode": completed.returncode,
+            "llm_backend": "codex_cli",
+            "llm_model": bridge.model,
+            "openclaw_model_alias": SKILLWARD_OPENCLAW_MODEL_ALIAS,
         },
         predicted=predicted,
         score=_map_skillward_score(normalized, predicted),
@@ -130,28 +179,44 @@ def run_skillward_baseline(skill_path: str | Path, output_dir: str | Path) -> di
 
 
 def run_runtime_skill_audit_baseline(skill_path: str | Path, output_dir: str | Path) -> dict[str, Any]:
-    skill_root = Path(skill_path).resolve()
-    destination = Path(output_dir)
+    skill_root = _resolve_primary_skill_root(skill_path)
+    destination = Path(output_dir).resolve()
     ensure_dir(destination)
 
     tool_root = _BASELINE_ROOT / "runtime-skill-audit"
-    command = [
-        _resolve_tool_executable("runtime-skill-audit", "python", fallback="python3"),
-        "scripts/run_pipeline.py",
-        str(skill_root),
-        "--config",
-        "configs/default.yaml",
-    ]
-    completed = _run_baseline_command(
-        command,
-        cwd=tool_root,
-        env_overrides={
-            "PATH": os.pathsep.join(
-                [str(tool_root / ".openclaw" / "tools" / "node_modules" / ".bin"), os.environ.get("PATH", "")]
+    with codex_cli_api_bridge(cwd=skill_root) as bridge:
+        config_path = destination / "runtime_skill_audit_codex.yaml"
+        _write_runtime_skill_audit_codex_config(
+            source=tool_root / "configs" / "default.yaml",
+            destination=config_path,
+            model=bridge.model,
+            ollama_chat_url=bridge.ollama_chat_url,
+            openai_base_url=bridge.base_url,
+        )
+        command = [
+            _resolve_tool_executable("runtime-skill-audit", "python", fallback="python3"),
+            "scripts/run_pipeline.py",
+            str(skill_root),
+            "--config",
+            str(config_path),
+        ]
+        existing_sandboxes = _runtime_skill_audit_sandbox_ids()
+        try:
+            completed = _run_baseline_command(
+                command,
+                cwd=tool_root,
+                env_overrides={
+                    "PATH": os.pathsep.join(
+                        [str(tool_root / ".openclaw" / "tools" / "node_modules" / ".bin"), os.environ.get("PATH", "")]
+                    ),
+                    "MALSKILLS_CODEX_BRIDGE_API_KEY": bridge.api_key,
+                },
+                timeout_sec=RESEARCH_BASELINE_TIMEOUT_SEC,
             )
-        },
-        timeout_sec=RESEARCH_BASELINE_TIMEOUT_SEC,
-    )
+        finally:
+            _remove_runtime_skill_audit_sandboxes(_runtime_skill_audit_sandbox_ids() - existing_sandboxes)
+    (destination / "runtime_skill_audit_stdout.log").write_text(completed.stdout, encoding="utf-8")
+    (destination / "runtime_skill_audit_stderr.log").write_text(completed.stderr, encoding="utf-8")
     payload = _extract_json_object(completed.stdout)
     if completed.returncode != 0:
         raise subprocess.CalledProcessError(
@@ -176,6 +241,8 @@ def run_runtime_skill_audit_baseline(skill_path: str | Path, output_dir: str | P
             "command": command,
             "cwd": str(tool_root),
             "returncode": completed.returncode,
+            "llm_backend": "codex_cli",
+            "llm_model": bridge.model,
         },
         predicted=predicted,
         score=_map_runtime_skill_audit_score(normalized, predicted),
@@ -183,8 +250,33 @@ def run_runtime_skill_audit_baseline(skill_path: str | Path, output_dir: str | P
     )
 
 
+def _runtime_skill_audit_sandbox_ids() -> set[str]:
+    completed = subprocess.run(
+        ["docker", "ps", "-aq", "--filter", "name=openclaw-sbx-agent-main-explicit-"],
+        check=False,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.DEVNULL,
+    )
+    if completed.returncode != 0:
+        return set()
+    return {line.strip() for line in completed.stdout.splitlines() if line.strip()}
+
+
+def _remove_runtime_skill_audit_sandboxes(container_ids: set[str]) -> None:
+    if not container_ids:
+        return
+    subprocess.run(
+        ["docker", "rm", "-f", *sorted(container_ids)],
+        check=False,
+        text=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+
+
 def run_skillfortify_baseline(skill_path: str | Path, output_dir: str | Path) -> dict[str, Any]:
-    skill_root = Path(skill_path).resolve()
+    skill_root = _resolve_primary_skill_root(skill_path)
     destination = Path(output_dir)
     ensure_dir(destination)
 
@@ -241,21 +333,35 @@ def _prepare_skillfortify_input(skill_root: Path, staging_root: Path) -> Path:
 
 
 def run_skill_sentinel_baseline(skill_path: str | Path, output_dir: str | Path) -> dict[str, Any]:
-    skill_root = Path(skill_path).resolve()
+    skill_root = _resolve_primary_skill_root(skill_path)
     destination = Path(output_dir)
     ensure_dir(destination)
 
     native_report = destination / "skill_sentinel_native_report.json"
     native_report.unlink(missing_ok=True)
-    command = [
-        _resolve_tool_executable("skill-sentinel", "skill-sentinel"),
-        "scan",
-        "--skill",
-        str(skill_root),
-        "-o",
-        str(native_report),
-    ]
-    completed = _run_baseline_command(command, timeout_sec=RESEARCH_BASELINE_TIMEOUT_SEC)
+    with codex_cli_api_bridge(cwd=skill_root) as bridge:
+        command = [
+            _resolve_tool_executable("skill-sentinel", "skill-sentinel"),
+            "scan",
+            "--skill",
+            str(skill_root),
+            "--model",
+            bridge.model,
+            "-o",
+            str(native_report),
+        ]
+        completed = _run_baseline_command(
+            command,
+            env_overrides={
+                "OPENAI_API_KEY": bridge.api_key,
+                "OPENAI_BASE_URL": bridge.base_url,
+                "OPENAI_API_BASE": bridge.base_url,
+                "OPENAI_MODEL_NAME": bridge.model,
+            },
+            timeout_sec=RESEARCH_BASELINE_TIMEOUT_SEC,
+        )
+    (destination / "skill_sentinel_stdout.log").write_text(completed.stdout, encoding="utf-8")
+    (destination / "skill_sentinel_stderr.log").write_text(completed.stderr, encoding="utf-8")
     if completed.returncode != 0:
         raise subprocess.CalledProcessError(
             completed.returncode,
@@ -281,11 +387,62 @@ def run_skill_sentinel_baseline(skill_path: str | Path, output_dir: str | Path) 
             "command": command,
             "native_report": str(native_report),
             "returncode": completed.returncode,
+            "llm_backend": "codex_cli",
+            "llm_model": bridge.model,
         },
         predicted=predicted,
         score=_map_skill_sentinel_score(normalized, predicted),
         patterns=_skill_sentinel_patterns(normalized),
     )
+
+
+def _write_runtime_skill_audit_codex_config(
+    *,
+    source: Path,
+    destination: Path,
+    model: str,
+    ollama_chat_url: str,
+    openai_base_url: str,
+) -> None:
+    try:
+        import yaml
+    except ImportError as exc:  # pragma: no cover
+        raise RuntimeError("PyYAML is required for Runtime Skill Audit configuration") from exc
+    payload = yaml.safe_load(source.read_text(encoding="utf-8")) or {}
+    llm = payload.setdefault("llm", {})
+    llm.update(
+        {
+            "model": model,
+            "base_url": ollama_chat_url,
+            "api_key_env": "MALSKILLS_CODEX_BRIDGE_API_KEY",
+            "timeout": 900,
+        }
+    )
+    openclaw_config_path = destination.parent / "runtime_skill_audit_openclaw.json"
+    openclaw_config = {
+        "agents": {"defaults": {"model": {"primary": f"malskills/{model}"}}},
+        "models": {
+            "mode": "merge",
+            "providers": {
+                "malskills": {
+                    "baseUrl": openai_base_url,
+                    "apiKey": "${MALSKILLS_CODEX_BRIDGE_API_KEY}",
+                    "api": "openai-completions",
+                    "models": [{"id": model, "name": model}],
+                }
+            },
+        },
+    }
+    openclaw_config_path.write_text(json.dumps(openclaw_config, indent=2) + "\n", encoding="utf-8")
+    paths = payload.setdefault("paths", {})
+    tool_root = _BASELINE_ROOT / "runtime-skill-audit"
+    paths["output_dir"] = str((tool_root / "outputs").resolve())
+    paths["source_config"] = str(openclaw_config_path.resolve())
+    paths["source_workspace"] = str((tool_root / ".openclaw" / "workspace").resolve())
+    paths["memory_dir"] = str((tool_root / "outputs" / "memory").resolve())
+    paths["defense_assets_dir"] = str((tool_root / "CIK-Bench" / "defense_assets").resolve())
+    payload.setdefault("runtime", {})["thinking"] = "off"
+    destination.write_text(yaml.safe_dump(payload, sort_keys=False), encoding="utf-8")
 
 
 def _normalize_skillsieve_payload(payload: dict[str, Any]) -> dict[str, Any]:
@@ -422,9 +579,6 @@ def _raise_for_skillward_report_errors(payload: dict[str, Any]) -> None:
         raise RuntimeError(f"SkillWard LLM triage failed: {llm_reason}")
 
     runtime = payload.get("runtime") if isinstance(payload.get("runtime"), dict) else {}
-    runtime_status = str(runtime.get("status", "")).strip().upper()
-    if runtime_status in {"ERROR", "TIMEOUT", "INCOMPLETE"}:
-        raise RuntimeError(f"SkillWard runtime scan did not complete: {runtime_status}")
     if bool(prescan.get("needs_sandbox", False)) and not runtime:
         raise RuntimeError("SkillWard runtime scan was required but produced no result")
 

@@ -1,17 +1,20 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
 from typing import Any
 
 from ..utils import ensure_dir
+from .codex_bridge import resolve_baseline_codex_config
 from .external_tools import (
     DEFAULT_TIMEOUT_SEC,
     _extract_json_object,
     _finalize_baseline_result,
     _load_json_file,
+    _resolve_primary_skill_root,
     _run_baseline_command,
     _run_json_baseline_command,
 )
@@ -27,13 +30,24 @@ def run_skillspector_baseline(skill_path: str | Path, output_dir: str | Path) ->
     ensure_dir(destination)
 
     repo_root = _baseline_repo("skillspector", "SkillSpector")
+    llm_runtime = resolve_baseline_codex_config()
     command, env_overrides = _python_tool_command(
         repo_root=repo_root,
         source_root=repo_root / "src",
         module="skillspector.cli",
         entry_file=repo_root / "src" / "skillspector" / "cli.py",
         executable="skillspector",
-        args=["scan", str(skill_root), "--format", "json", "--no-llm"],
+        args=["scan", str(skill_root), "--format", "json"],
+    )
+    env_overrides = dict(env_overrides or {})
+    env_overrides.update(
+        {
+            "SKILLSPECTOR_PROVIDER": "codex_cli",
+            "SKILLSPECTOR_MODEL": llm_runtime.model,
+            "PATH": os.pathsep.join(
+                [str(Path(llm_runtime.cli_path).resolve().parent), os.environ.get("PATH", "")]
+            ),
+        }
     )
     payload = _run_required_json_baseline_command(
         command,
@@ -46,7 +60,12 @@ def run_skillspector_baseline(skill_path: str | Path, output_dir: str | Path) ->
         artifact_name="skillspector_report.json",
         manifest_key="skillspector_report",
         payload=payload,
-        runtime={"tool": "skillspector", "command": command},
+        runtime={
+            "tool": "skillspector",
+            "command": command,
+            "llm_backend": "codex_cli",
+            "llm_model": llm_runtime.model,
+        },
         predicted=predicted,
         score=score,
         patterns=patterns,
@@ -54,7 +73,7 @@ def run_skillspector_baseline(skill_path: str | Path, output_dir: str | Path) ->
 
 
 def run_agentverus_baseline(skill_path: str | Path, output_dir: str | Path) -> dict[str, Any]:
-    skill_root = Path(skill_path).resolve()
+    skill_root = _resolve_primary_skill_root(skill_path)
     destination = Path(output_dir)
     ensure_dir(destination)
 
@@ -113,7 +132,7 @@ def run_skilltotal_baseline(skill_path: str | Path, output_dir: str | Path) -> d
 
 
 def run_clawvet_baseline(skill_path: str | Path, output_dir: str | Path) -> dict[str, Any]:
-    skill_root = Path(skill_path).resolve()
+    skill_root = _resolve_primary_skill_root(skill_path)
     destination = Path(output_dir)
     ensure_dir(destination)
 
