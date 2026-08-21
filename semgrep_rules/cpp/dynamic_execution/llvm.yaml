@@ -1,0 +1,37 @@
+rules:
+- id: sso.cpp.dynamic_execution.llvm.0001.no-llvm-ExecutionEngine-runFunction
+  languages:
+  - cpp
+  message: Avoid using llvm::ExecutionEngine::runFunction(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: llvm::ExecutionEngine::runFunction()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: llvm::ExecutionEngine::runFunction(...)
+  - pattern: $VAR = llvm::ExecutionEngine::runFunction
+  - pattern: ExecutionEngine::runFunction(...)
+  - pattern: $VAR = ExecutionEngine::runFunction
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.llvm.0002.no-llvm-orc-LLJIT-addIRModule
+  languages:
+  - cpp
+  message: Avoid using llvm::orc::LLJIT::addIRModule(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: llvm::orc::LLJIT::addIRModule()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: llvm::orc::LLJIT::addIRModule(...)
+  - pattern: $VAR = llvm::orc::LLJIT::addIRModule
+  - pattern: orc::LLJIT::addIRModule(...)
+  - pattern: $VAR = orc::LLJIT::addIRModule
+  - pattern: LLJIT::addIRModule(...)
+  - pattern: $VAR = LLJIT::addIRModule
+  severity: WARNING
+  tags:
+  - Dynamic Execution

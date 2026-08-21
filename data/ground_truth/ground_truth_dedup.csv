@@ -1,0 +1,168 @@
+Source,Registry,Skill_name,Label,Ground_truth_path
+Koi Security,clawhub,aslaep123/base-agent,malicious,data/ground_truth/malicious/clawhub/aslaep123_base-agent
+Koi Security,clawhub,aslaep123/bybit-agent,malicious,data/ground_truth/malicious/clawhub/aslaep123_bybit-agent
+Koi Security,clawhub,aslaep123/polymarket-traiding-bot,malicious,data/ground_truth/malicious/clawhub/aslaep123_polymarket-traiding-bot
+Koi Security,clawhub,aslaep123/reddit-trends,malicious,data/ground_truth/malicious/clawhub/aslaep123_reddit-trends
+Koi Security,clawhub,gpaitai/polymarket-bot,malicious,data/ground_truth/malicious/clawhub/gpaitai_polymarket-bot
+Koi Security,clawhub,hightower6eu/auto-updater-161ks,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-161ks
+Koi Security,clawhub,hightower6eu/auto-updater-96ys3,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-96ys3
+Koi Security,clawhub,hightower6eu/autoupdate,malicious,data/ground_truth/malicious/clawhub/hightower6eu_autoupdate
+Koi Security,clawhub,hightower6eu/clawhub-6yr3b,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-6yr3b
+Koi Security,clawhub,hightower6eu/clawhubb,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhubb
+Koi Security,clawhub,hightower6eu/ethereum-gas-tracker-abxf0,malicious,data/ground_truth/malicious/clawhub/hightower6eu_ethereum-gas-tracker-abxf0
+Koi Security,clawhub,hightower6eu/google-workspace-2z5dp,malicious,data/ground_truth/malicious/clawhub/hightower6eu_google-workspace-2z5dp
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-1a7pi,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-1a7pi
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-r6wya,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-r6wya
+Koi Security,clawhub,hightower6eu/lost-bitcoin-10li1,malicious,data/ground_truth/malicious/clawhub/hightower6eu_lost-bitcoin-10li1
+Koi Security,clawhub,hightower6eu/openclaw-backup-dnkxm,malicious,data/ground_truth/malicious/clawhub/hightower6eu_openclaw-backup-dnkxm
+Koi Security,clawhub,hightower6eu/openclaw-backup-wrxw0,malicious,data/ground_truth/malicious/clawhub/hightower6eu_openclaw-backup-wrxw0
+Koi Security,clawhub,hightower6eu/pdf-1wso5,malicious,data/ground_truth/malicious/clawhub/hightower6eu_pdf-1wso5
+Koi Security,clawhub,hightower6eu/phantom-0jcvy,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-0jcvy
+Koi Security,clawhub,hightower6eu/phantom-bdacv,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-bdacv
+Koi Security,clawhub,hightower6eu/polym,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polym
+Koi Security,clawhub,hightower6eu/polymarket-25nwy,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-25nwy
+Koi Security,clawhub,hightower6eu/polymarket-cexex,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-cexex
+Koi Security,clawhub,hightower6eu/solana-07bcb,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-07bcb
+Koi Security,clawhub,hightower6eu/solana-9lplb,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-9lplb
+Koi Security,clawhub,hightower6eu/updater,malicious,data/ground_truth/malicious/clawhub/hightower6eu_updater
+Koi Security,clawhub,hightower6eu/wallet-tracker-0ghsk,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-0ghsk
+Koi Security,clawhub,hightower6eu/x-trends-0heof,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-0heof
+Koi Security,clawhub,hightower6eu/yahoo-finance-1h2ji,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-1h2ji
+Koi Security,clawhub,hightower6eu/youtube-summarize-11y0i,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-11y0i
+Koi Security,clawhub,hightower6eu/youtube-summarize-35o20,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-35o20
+Koi Security,clawhub,hightower6eu/youtube-summarize-ebw5x,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-ebw5x
+Koi Security,clawhub,hightower6eu/youtube-thumbnail-grabber-2dp6g,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-thumbnail-grabber-2dp6g
+Koi Security,clawhub,hightower6eu/youtube-thumbnail-grabber-sq374,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-thumbnail-grabber-sq374
+Koi Security,clawhub,hightower6eu/youtube-video-downloader-5qfuw,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-video-downloader-5qfuw
+Koi Security,clawhub,hightower6eu/youtube-video-downloader-fnkxw,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-video-downloader-fnkxw
+Koi Security,clawhub,moonshine-100rze/excel-1kl,malicious,data/ground_truth/malicious/clawhub/moonshine-100rze_excel-1kl
+Koi Security,clawhub,moonshine-100rze/moltbook-lm8,malicious,data/ground_truth/malicious/clawhub/moonshine-100rze_moltbook-lm8
+Koi Security,clawhub,moonshine-100rze/twitter-6ql,malicious,data/ground_truth/malicious/clawhub/moonshine-100rze_twitter-6ql
+Koi Security,clawhub,mosonchan2023/polymarket-market-maker,malicious,data/ground_truth/malicious/clawhub/mosonchan2023_polymarket-market-maker
+Koi Security,clawhub,noreplyboter/better-polymarket,malicious,data/ground_truth/malicious/clawhub/noreplyboter_better-polymarket
+Koi Security,clawhub,pepe276/publish-dist,malicious,data/ground_truth/malicious/clawhub/pepe276_publish-dist
+Koi Security,clawhub,rjnpage/rankaj,malicious,data/ground_truth/malicious/clawhub/rjnpage_rankaj
+Koi Security,clawhub,sakaen736jih/agent-browser-6aigix9qi2tu,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_agent-browser-6aigix9qi2tu
+Koi Security,clawhub,sakaen736jih/agent-browser-b2x7tvcmbjgp,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_agent-browser-b2x7tvcmbjgp
+Koi Security,clawhub,sakaen736jih/agent-browser-fopzsipap75u,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_agent-browser-fopzsipap75u
+Koi Security,clawhub,sakaen736jih/auto-updater-3miomc4dvir,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-3miomc4dvir
+Koi Security,clawhub,sakaen736jih/auto-updater-ah1,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-ah1
+Koi Security,clawhub,sakaen736jih/auto-updater-ek1qviijfp1,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-ek1qviijfp1
+Koi Security,clawhub,sakaen736jih/bird-0p,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-0p
+Koi Security,clawhub,sakaen736jih/bird-ag,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-ag
+Koi Security,clawhub,sakaen736jih/clawdhub-0ds2em57jf,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_clawdhub-0ds2em57jf
+Koi Security,clawhub,sakaen736jih/clawdhub-2trnbtcgyo,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_clawdhub-2trnbtcgyo
+Koi Security,clawhub,sakaen736jih/coding-agent-4ilvlj7rs,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-4ilvlj7rs
+Koi Security,clawhub,sakaen736jih/coding-agent-7k8p1tijc,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-7k8p1tijc
+Koi Security,clawhub,sakaen736jih/coding-agent-pekjzav3x,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-pekjzav3x
+Koi Security,clawhub,sakaen736jih/deep-research-eejukdjn,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_deep-research-eejukdjn
+Koi Security,clawhub,sakaen736jih/deep-research-eoo5vd95,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_deep-research-eoo5vd95
+Koi Security,clawhub,sakaen736jih/deep-research-kgenr3rn,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_deep-research-kgenr3rn
+Koi Security,clawhub,sakaen736jih/deep-research-v2h55k2w,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_deep-research-v2h55k2w
+Koi Security,clawhub,sakaen736jih/ethereum,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_ethereum
+Koi Security,clawhub,sakaen736jih/gas-tracker,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_gas-tracker
+Koi Security,clawhub,sakaen736jih/gog-5w7zvby,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_gog-5w7zvby
+Koi Security,clawhub,sakaen736jih/gog-g7ksras,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_gog-g7ksras
+Koi Security,clawhub,sakaen736jih/leo-wallet,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_leo-wallet
+Koi Security,clawhub,sakaen736jih/metamask,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_metamask
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-8ap3x7,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-8ap3x7
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-fxgpbf,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-fxgpbf
+Koi Security,clawhub,sakaen736jih/nano-pdf-9j7bj,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-pdf-9j7bj
+Koi Security,clawhub,sakaen736jih/nano-pdf-cr79t,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-pdf-cr79t
+Koi Security,clawhub,sakaen736jih/solana,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_solana
+Koi Security,clawhub,sakaen736jih/summarize-177r,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_summarize-177r
+Koi Security,clawhub,sakaen736jih/summarize-nrqj,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_summarize-nrqj
+Koi Security,clawhub,sakaen736jih/wacli-1sk,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-1sk
+Koi Security,clawhub,sakaen736jih/wacli-5qi,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-5qi
+Koi Security,clawhub,sakaen736jih/wacli-xcb,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-xcb
+Koi Security,clawhub,sakaen736jih/youtube-watchar,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watchar
+Koi Security,clawhub,sakaen736jih/youtube-watcher-7,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watcher-7
+Koi Security,clawhub,sakaen736jih/youtube-watcher-a,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watcher-a
+Koi Security,clawhub,sakaen736jih/youtube-watcher-k,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watcher-k
+Koi Security,clawhub,zaycv/autoupdater,malicious,data/ground_truth/malicious/clawhub/zaycv_autoupdater
+Koi Security,clawhub,zaycv/blrd,malicious,data/ground_truth/malicious/clawhub/zaycv_blrd
+Koi Security,clawhub,zaycv/browserautomation,malicious,data/ground_truth/malicious/clawhub/zaycv_browserautomation
+Koi Security,clawhub,zaycv/clawbhub,malicious,data/ground_truth/malicious/clawhub/zaycv_clawbhub
+Koi Security,clawhub,zaycv/clawdhab,malicious,data/ground_truth/malicious/clawhub/zaycv_clawdhab
+Koi Security,clawhub,zaycv/clawhub,malicious,data/ground_truth/malicious/clawhub/zaycv_clawhub
+Koi Security,clawhub,zaycv/codingagent,malicious,data/ground_truth/malicious/clawhub/zaycv_codingagent
+Koi Security,clawhub,zaycv/deepresearch,malicious,data/ground_truth/malicious/clawhub/zaycv_deepresearch
+Koi Security,clawhub,zaycv/googleworkspace,malicious,data/ground_truth/malicious/clawhub/zaycv_googleworkspace
+Koi Security,clawhub,zaycv/linkedin-job-application,malicious,data/ground_truth/malicious/clawhub/zaycv_linkedin-job-application
+Koi Security,clawhub,zaycv/nano-bananapro,malicious,data/ground_truth/malicious/clawhub/zaycv_nano-bananapro
+Koi Security,clawhub,zaycv/nanobanana-pro,malicious,data/ground_truth/malicious/clawhub/zaycv_nanobanana-pro
+Koi Security,clawhub,zaycv/nanopdf,malicious,data/ground_truth/malicious/clawhub/zaycv_nanopdf
+Koi Security,clawhub,zaycv/polymarket-assistant,malicious,data/ground_truth/malicious/clawhub/zaycv_polymarket-assistant
+Koi Security,clawhub,zaycv/polymarket-trading,malicious,data/ground_truth/malicious/clawhub/zaycv_polymarket-trading
+Koi Security,clawhub,zaycv/scalekit-agent,malicious,data/ground_truth/malicious/clawhub/zaycv_scalekit-agent
+Koi Security,clawhub,zaycv/shield,malicious,data/ground_truth/malicious/clawhub/zaycv_shield
+Koi Security,clawhub,zaycv/summarlze,malicious,data/ground_truth/malicious/clawhub/zaycv_summarlze
+Koi Security,clawhub,zaycv/whatsapp,malicious,data/ground_truth/malicious/clawhub/zaycv_whatsapp
+Koi Security,clawhub,zaycv/youtubewatcher,malicious,data/ground_truth/malicious/clawhub/zaycv_youtubewatcher
+MaliciousAgentSkillsBench,skills.rest,1169/sqlite-agent-amplification,malicious,data/ground_truth/malicious/skillsrest/1169_sqlite-agent-amplification
+MaliciousAgentSkillsBench,skills.rest,154/github-multi-repo,malicious,data/ground_truth/malicious/skillsrest/154_github-multi-repo
+MaliciousAgentSkillsBench,skills.rest,1659/math-calculator,malicious,data/ground_truth/malicious/skillsrest/1659_math-calculator
+MaliciousAgentSkillsBench,skills.rest,167/github-workflow-automation,malicious,data/ground_truth/malicious/skillsrest/167_github-workflow-automation
+MaliciousAgentSkillsBench,skills.rest,2313/database,malicious,data/ground_truth/malicious/skillsrest/2313_database
+MaliciousAgentSkillsBench,skills.rest,234/flow-nexus-platform,malicious,data/ground_truth/malicious/skillsrest/234_flow-nexus-platform
+MaliciousAgentSkillsBench,skills.rest,2347/sacred-space-protocol,malicious,data/ground_truth/malicious/skillsrest/2347_sacred-space-protocol
+MaliciousAgentSkillsBench,skills.rest,3103/github-code-review,malicious,data/ground_truth/malicious/skillsrest/3103_github-code-review
+MaliciousAgentSkillsBench,skills.rest,330/tailadmin-patterns,malicious,data/ground_truth/malicious/skillsrest/330_tailadmin-patterns
+MaliciousAgentSkillsBench,skills.rest,342/using-superpowers,malicious,data/ground_truth/malicious/skillsrest/342_using-superpowers
+MaliciousAgentSkillsBench,skills.rest,416/developer-growth-analysis,malicious,data/ground_truth/malicious/skillsrest/416_developer-growth-analysis
+MaliciousAgentSkillsBench,skills.rest,658/vercel-deploy,malicious,data/ground_truth/malicious/skillsrest/658_vercel-deploy
+MaliciousAgentSkillsBench,skills.rest,73/project-init,malicious,data/ground_truth/malicious/skillsrest/73_project-init
+MaliciousAgentSkillsBench,skills.rest,889/privilege-escalation-methods,malicious,data/ground_truth/malicious/skillsrest/889_privilege-escalation-methods
+MaliciousAgentSkillsBench,skillsmp.com,1139/bsa-brainstorm,malicious,data/ground_truth/malicious/skillsmp/1139_bsa-brainstorm
+MaliciousAgentSkillsBench,skillsmp.com,1160/hacs,malicious,data/ground_truth/malicious/skillsmp/1160_hacs
+MaliciousAgentSkillsBench,skillsmp.com,1535/jetaasc-newsletter,malicious,data/ground_truth/malicious/skillsmp/1535_jetaasc-newsletter
+MaliciousAgentSkillsBench,skillsmp.com,1881/nanobanana-base,malicious,data/ground_truth/malicious/skillsmp/1881_nanobanana-base
+MaliciousAgentSkillsBench,skillsmp.com,2343/gemini-image,malicious,data/ground_truth/malicious/skillsmp/2343_gemini-image
+MaliciousAgentSkillsBench,skillsmp.com,2362/codex-chat,malicious,data/ground_truth/malicious/skillsmp/2362_codex-chat
+MaliciousAgentSkillsBench,skillsmp.com,2370/hive-mind-advanced,malicious,data/ground_truth/malicious/skillsmp/2370_hive-mind-advanced
+MaliciousAgentSkillsBench,skillsmp.com,2485/full_upload_injected_pptx_skill,malicious,data/ground_truth/malicious/skillsmp/2485_full-upload-injected-pptx-skill
+MaliciousAgentSkillsBench,skillsmp.com,2559/hello,malicious,data/ground_truth/malicious/skillsmp/2559_hello
+MaliciousAgentSkillsBench,skillsmp.com,2663/ai-truthfulness-enforcer,malicious,data/ground_truth/malicious/skillsmp/2663_ai-truthfulness-enforcer
+MaliciousAgentSkillsBench,skillsmp.com,2670/weekly-plan,malicious,data/ground_truth/malicious/skillsmp/2670_weekly-plan
+MaliciousAgentSkillsBench,skillsmp.com,2795/email,malicious,data/ground_truth/malicious/skillsmp/2795_email
+MaliciousAgentSkillsBench,skillsmp.com,3101/setup-claude-skills-for-web,malicious,data/ground_truth/malicious/skillsmp/3101_setup-claude-skills-for-web
+MaliciousAgentSkillsBench,skillsmp.com,3588/browser-automation,malicious,data/ground_truth/malicious/skillsmp/3588_browser-automation
+MaliciousAgentSkillsBench,skillsmp.com,3604/dexter,malicious,data/ground_truth/malicious/skillsmp/3604_dexter
+MaliciousAgentSkillsBench,skillsmp.com,3639/network-conftest-generator,malicious,data/ground_truth/malicious/skillsmp/3639_network-conftest-generator
+MaliciousAgentSkillsBench,skillsmp.com,3764/analytics,malicious,data/ground_truth/malicious/skillsmp/3764_analytics
+MaliciousAgentSkillsBench,skillsmp.com,4367/page,malicious,data/ground_truth/malicious/skillsmp/4367_page
+MaliciousAgentSkillsBench,skillsmp.com,4412/agentic-jujutsu,malicious,data/ground_truth/malicious/skillsmp/4412_agentic-jujutsu
+MaliciousAgentSkillsBench,skillsmp.com,4727/my-skill,malicious,data/ground_truth/malicious/skillsmp/4727_my-skill
+MaliciousAgentSkillsBench,skillsmp.com,4729/ccw-maven-setup,malicious,data/ground_truth/malicious/skillsmp/4729_ccw-maven-setup
+MaliciousAgentSkillsBench,skillsmp.com,4914/graphics-api,malicious,data/ground_truth/malicious/skillsmp/4914_graphics-api
+MaliciousAgentSkillsBench,skillsmp.com,4977/runpod-ops,malicious,data/ground_truth/malicious/skillsmp/4977_runpod-ops
+MaliciousAgentSkillsBench,skillsmp.com,6028/slack-bridge,malicious,data/ground_truth/malicious/skillsmp/6028_slack-bridge
+MaliciousAgentSkillsBench,skillsmp.com,6344/chrome-devtools,malicious,data/ground_truth/malicious/skillsmp/6344_chrome-devtools
+MaliciousAgentSkillsBench,skillsmp.com,7251/flow-nexus-neural,malicious,data/ground_truth/malicious/skillsmp/7251_flow-nexus-neural
+MaliciousAgentSkillsBench,skillsmp.com,7332/idea-skill,malicious,data/ground_truth/malicious/skillsmp/7332_idea-skill
+MaliciousAgentSkillsBench,skillsmp.com,7676/oh-notes,malicious,data/ground_truth/malicious/skillsmp/7676_oh-notes
+MaliciousAgentSkillsBench,skillsmp.com,7843/updating-neon-logos,malicious,data/ground_truth/malicious/skillsmp/7843_updating-neon-logos
+MaliciousAgentSkillsBench,skillsmp.com,7974/load-skills,malicious,data/ground_truth/malicious/skillsmp/7974_load-skills
+MaliciousAgentSkillsBench,skillsmp.com,8313/twitter_poster,malicious,data/ground_truth/malicious/skillsmp/8313_twitter-poster
+MaliciousAgentSkillsBench,skillsmp.com,8380/cc10x-router,malicious,data/ground_truth/malicious/skillsmp/8380_cc10x-router
+MaliciousAgentSkillsBench,skillsmp.com,8452/flow-nexus-platform,malicious,data/ground_truth/malicious/skillsmp/8452_flow-nexus-platform
+MaliciousAgentSkillsBench,skillsmp.com,8593/worker,malicious,data/ground_truth/malicious/skillsmp/8593_worker
+MaliciousAgentSkillsBench,skillsmp.com,866/lark-agent-simple,malicious,data/ground_truth/malicious/skillsmp/866_lark-agent-simple
+MaliciousAgentSkillsBench,skillsmp.com,8691/doc-scraper,malicious,data/ground_truth/malicious/skillsmp/8691_doc-scraper
+MaliciousAgentSkillsBench,skillsmp.com,9014/plan-refine,malicious,data/ground_truth/malicious/skillsmp/9014_plan-refine
+MaliciousAgentSkillsBench,skillsmp.com,9021/find-incomplete-series,malicious,data/ground_truth/malicious/skillsmp/9021_find-incomplete-series
+MaliciousAgentSkillsBench,skillsmp.com,9124/image-generator,malicious,data/ground_truth/malicious/skillsmp/9124_image-generator
+MaliciousAgentSkillsBench,skillsmp.com,9692/yaml-workflow-executor,malicious,data/ground_truth/malicious/skillsmp/9692_yaml-workflow-executor
+collected,skills_directory,adaptationio-gemini-auth,malicious,data/ground_truth/malicious/skills_directory/adaptationio-gemini-auth
+collected,skills_directory,davekilleen-screenpipe-setup,malicious,data/ground_truth/malicious/skills_directory/davekilleen-screenpipe-setup
+collected,skills_directory,davila7-linux-privilege-escalation,malicious,data/ground_truth/malicious/skills_directory/davila7-linux-privilege-escalation
+collected,skills_directory,jackspace-route-tester-diet103,malicious,data/ground_truth/malicious/skills_directory/jackspace-route-tester-diet103
+collected,skills_directory,majiayu000-codex-auth,malicious,data/ground_truth/malicious/skills_directory/majiayu000-codex-auth
+collected,skills_directory,majiayu000-data-optimizer-pro,malicious,data/ground_truth/malicious/skills_directory/majiayu000-data-optimizer-pro
+collected,skills_directory,majiayu000-file-inclusion,malicious,data/ground_truth/malicious/skills_directory/majiayu000-file-inclusion
+collected,skills_directory,majiayu000-fresh-install-testing,malicious,data/ground_truth/malicious/skills_directory/majiayu000-fresh-install-testing
+collected,skills_directory,mcp-com-ai-swagger-to-mcp,malicious,data/ground_truth/malicious/skills_directory/mcp-com-ai-swagger-to-mcp
+collected,skills_directory,neversight-root,malicious,data/ground_truth/malicious/skills_directory/neversight-root
+collected,skills_directory,openclaw-email-daily-summary,malicious,data/ground_truth/malicious/skills_directory/openclaw-email-daily-summary
+collected,skills_directory,ryo-ebata-data-exfil,malicious,data/ground_truth/malicious/skills_directory/ryo-ebata-data-exfil
+collected,skills_directory,ryo-ebata-supply-chain,malicious,data/ground_truth/malicious/skills_directory/ryo-ebata-supply-chain

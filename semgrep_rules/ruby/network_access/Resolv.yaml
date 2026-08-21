@@ -1,0 +1,48 @@
+rules:
+- id: sso.ruby.network_access.Resolv.0001.no-Resolv.getaddress
+  languages:
+  - ruby
+  message: Avoid using Resolv.getaddress(), as it can lead to potential issues with network access.
+  metadata:
+    api: Resolv.getaddress()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: Resolv.getaddress(...)
+  - pattern: $VAR = Resolv.getaddress
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.ruby.network_access.Resolv.0002.no-Resolv.getname
+  languages:
+  - ruby
+  message: Avoid using Resolv.getname(), as it can lead to potential issues with network access.
+  metadata:
+    api: Resolv.getname()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: Resolv.getname(...)
+  - pattern: $VAR = Resolv.getname
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.ruby.network_access.Resolv.0003.no-Resolv_x__x_DNS.open
+  languages:
+  - ruby
+  message: Avoid using Resolv::DNS.open(), as it can lead to potential issues with network access.
+  metadata:
+    api: Resolv::DNS.open()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: dns_resolution
+  pattern-either:
+  - pattern: Resolv::DNS.open(...)
+  - pattern: $VAR = Resolv::DNS.open
+  - pattern: DNS.open(...)
+  - pattern: $VAR = DNS.open
+  severity: WARNING
+  tags:
+  - Network Access

@@ -1,0 +1,55 @@
+[project]
+name = "malskills"
+version = "0.1.0"
+description = "MalSkills: a neuro-symbolic static analyzer for malicious agent skills"
+requires-python = ">=3.9"
+authors = [
+  { name = "Shenao Wang" },
+  { name = "Junjie He" },
+  { name = "Yanjie Zhao" },
+  { name = "Yayi Wang" },
+  { name = "Kan Yu" },
+  { name = "Haoyu Wang" },
+]
+readme = "README.md"
+license = "Apache-2.0"
+dependencies = [
+  "PyYAML>=6.0",
+  "tomli>=2.0; python_version < '3.11'",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Security",
+  "Topic :: Software Development :: Quality Assurance",
+]
+
+[project.optional-dependencies]
+analysis = [
+  "semgrep>=1.168,<2",
+]
+
+[project.urls]
+Homepage = "https://github.com/security-pride/MalSkills"
+Repository = "https://github.com/security-pride/MalSkills.git"
+Issues = "https://github.com/security-pride/MalSkills/issues"
+
+[project.scripts]
+malskills = "malskills.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["malskills*"]
+
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"

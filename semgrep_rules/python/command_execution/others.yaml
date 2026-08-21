@@ -1,0 +1,49 @@
+rules:
+- id: sso.python.command_execution.others.0001.system-and-wrapper-execution
+  languages:
+  - python
+  message: Detect system and third-party command-execution wrappers.
+  metadata:
+    api: nt.system()/fabric.Connection.run()/invoke.run()/pexpect.run()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: nt.system(...)
+  - pattern: $VAR = nt.system
+  - pattern: fabric.Connection(...).run(...)
+  - pattern: invoke.run(...)
+  - pattern: pexpect.run(...)
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.python.command_execution.others.0002.no-posix-system
+  languages:
+  - python
+  message: Avoid using posix.system(), as it can lead to potential issues with command execution.
+  metadata:
+    api: posix.system()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: posix.system(...)
+  - pattern: $VAR = posix.system
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.python.command_execution.others.0003.no-pty-spawn
+  languages:
+  - python
+  message: Avoid using pty.spawn(), as it can lead to potential issues with command execution.
+  metadata:
+    api: pty.spawn()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: pty.spawn(...)
+  - pattern: $VAR = pty.spawn
+  severity: WARNING
+  tags:
+  - Command Execution

@@ -1,0 +1,91 @@
+rules:
+- id: sso.ruby.network_access.Socket.0001.no-Socket.connect
+  languages:
+  - ruby
+  message: Avoid using Socket.connect(), as it can lead to potential issues with network access.
+  metadata:
+    api: Socket.connect()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: Socket.connect(...)
+  - pattern: $VAR = Socket.connect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.ruby.network_access.Socket.0002.no-Socket.getaddrinfo
+  languages:
+  - ruby
+  message: Avoid using Socket.getaddrinfo(), as it can lead to potential issues with network access.
+  metadata:
+    api: Socket.getaddrinfo()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: dns_resolution
+  pattern-either:
+  - pattern: Socket.getaddrinfo(...)
+  - pattern: $VAR = Socket.getaddrinfo
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.ruby.network_access.Socket.0003.no-Socket.new
+  languages:
+  - ruby
+  message: Avoid using Socket.new(), as it can lead to potential issues with network access.
+  metadata:
+    api: Socket.new()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: Socket.new(...)
+  - pattern: $VAR = Socket.new
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.ruby.network_access.Socket.0004.no-Socket.open
+  languages:
+  - ruby
+  message: Avoid using Socket.open(), as it can lead to potential issues with network access.
+  metadata:
+    api: Socket.open()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: Socket.open(...)
+  - pattern: $VAR = Socket.open
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.ruby.network_access.Socket.0005.no-Socket.tcp
+  languages:
+  - ruby
+  message: Avoid using Socket.tcp(), as it can lead to potential issues with network access.
+  metadata:
+    api: Socket.tcp()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: Socket.tcp(...)
+  - pattern: $VAR = Socket.tcp
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.ruby.network_access.Socket.0006.no-Socket.udp
+  languages:
+  - ruby
+  message: Avoid using Socket.udp(), as it can lead to potential issues with network access.
+  metadata:
+    api: Socket.udp()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: Socket.udp(...)
+  - pattern: $VAR = Socket.udp
+  severity: WARNING
+  tags:
+  - Network Access

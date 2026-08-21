@@ -1,0 +1,215 @@
+rules:
+- id: sso.typescript.network_access.http.0001.no-http-Agent
+  languages:
+  - typescript
+  message: Avoid using http.Agent(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.Agent()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: http.Agent(...)
+  - pattern: $VAR = http.Agent
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.typescript.network_access.http.0002.no-http-ClientRequest
+  languages:
+  - typescript
+  message: Avoid using http.ClientRequest(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.ClientRequest()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: http.ClientRequest(...)
+  - pattern: $VAR = http.ClientRequest
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.typescript.network_access.http.0003.no-http-IncomingMessage
+  languages:
+  - typescript
+  message: Avoid using http.IncomingMessage(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.IncomingMessage()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
+  pattern-either:
+  - pattern: http.IncomingMessage(...)
+  - pattern: $VAR = http.IncomingMessage
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.typescript.network_access.http.0004.outgoing-and-http-wrapper-send
+  languages:
+  - typescript
+  message: Detect outgoing messages and send-oriented third-party HTTP wrappers.
+  metadata:
+    api: http.OutgoingMessage()/superagent.post()/needle.post()/unirest.post()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
+  pattern-either:
+  - pattern: http.OutgoingMessage(...)
+  - pattern: $VAR = http.OutgoingMessage
+  - pattern: superagent.post(...)
+  - pattern: needle.post(...)
+  - pattern: unirest.post(...)
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.typescript.network_access.http.0005.no-http-Server
+  languages:
+  - typescript
+  message: Avoid using http.Server(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.Server()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
+  pattern-either:
+  - pattern: http.Server(...)
+  - pattern: $VAR = http.Server
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.typescript.network_access.http.0006.no-http-ServerResponse
+  languages:
+  - typescript
+  message: Avoid using http.ServerResponse(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.ServerResponse()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
+  pattern-either:
+  - pattern: http.ServerResponse(...)
+  - pattern: $VAR = http.ServerResponse
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.typescript.network_access.http.0007.no-http-_connectionListener
+  languages:
+  - typescript
+  message: Avoid using http._connectionListener(), as it can lead to potential issues with network access.
+  metadata:
+    api: http._connectionListener()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
+  pattern-either:
+  - pattern: http._connectionListener(...)
+  - pattern: $VAR = http._connectionListener
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.typescript.network_access.http.0008.no-http-createServer
+  languages:
+  - typescript
+  message: Avoid using http.createServer(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.createServer()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
+  pattern-either:
+  - pattern: http.createServer(...)
+  - pattern: $VAR = http.createServer
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.typescript.network_access.http.0009.http-and-wrapper-receive
+  languages:
+  - typescript
+  message: Detect receive-oriented HTTP and third-party wrappers.
+  metadata:
+    api: http.get()/superagent.get()/needle.get()/unirest.get()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
+  pattern-either:
+  - pattern: http.get(...)
+  - pattern: $VAR = http.get
+  - pattern: superagent.get(...)
+  - pattern: needle.get(...)
+  - pattern: unirest.get(...)
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.typescript.network_access.http.0010.no-http-request
+  languages:
+  - typescript
+  message: Avoid using http.request(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.request()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: http.request(...)
+  - pattern: $VAR = http.request
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.typescript.network_access.http.0011.no-http-setMaxIdleHTTPParsers
+  languages:
+  - typescript
+  message: Avoid using http.setMaxIdleHTTPParsers(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.setMaxIdleHTTPParsers()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: http.setMaxIdleHTTPParsers(...)
+  - pattern: $VAR = http.setMaxIdleHTTPParsers
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.typescript.network_access.http.0012.no-http-validateHeaderName
+  languages:
+  - typescript
+  message: Avoid using http.validateHeaderName(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.validateHeaderName()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: http.validateHeaderName(...)
+  - pattern: $VAR = http.validateHeaderName
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.typescript.network_access.http.0013.no-http-validateHeaderValue
+  languages:
+  - typescript
+  message: Avoid using http.validateHeaderValue(), as it can lead to potential issues with network access.
+  metadata:
+    api: http.validateHeaderValue()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: http.validateHeaderValue(...)
+  - pattern: $VAR = http.validateHeaderValue
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.typescript.network_access.http.0014.no-require-http
+  languages:
+  - typescript
+  message: Avoid using require('http'), as it can lead to potential issues with network access.
+  metadata:
+    api: require('http')
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern: require('http')
+  severity: WARNING
+  tags:
+  - Network Access

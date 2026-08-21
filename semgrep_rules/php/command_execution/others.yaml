@@ -1,0 +1,290 @@
+rules:
+- id: sso.php.command_execution.others.0001.no-chroot
+  languages:
+  - php
+  message: Avoid using chroot(), as it can lead to potential issues with command execution.
+  metadata:
+    api: chroot()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: chroot(...)
+  - pattern: $VAR = chroot(...)
+  - pattern: $VAR = "chroot"
+  - pattern: $VAR = 'chroot'
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.php.command_execution.others.0002.no-escapeshellarg
+  languages:
+  - php
+  message: Avoid using escapeshellarg(), as it can lead to potential issues with command execution.
+  metadata:
+    api: escapeshellarg()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: escapeshellarg(...)
+  - pattern: $VAR = escapeshellarg(...)
+  - pattern: $VAR = "escapeshellarg"
+  - pattern: $VAR = 'escapeshellarg'
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.php.command_execution.others.0003.no-escapeshellcmd
+  languages:
+  - php
+  message: Avoid using escapeshellcmd(), as it can lead to potential issues with command execution.
+  metadata:
+    api: escapeshellcmd()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: escapeshellcmd(...)
+  - pattern: $VAR = escapeshellcmd(...)
+  - pattern: $VAR = "escapeshellcmd"
+  - pattern: $VAR = 'escapeshellcmd'
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.php.command_execution.others.0004.no-exec
+  languages:
+  - php
+  message: Avoid using exec(), as it can lead to potential issues with command execution.
+  metadata:
+    api: exec()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: exec(...)
+  - pattern: $VAR = exec(...)
+  - pattern: $VAR = "exec"
+  - pattern: $VAR = 'exec'
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.php.command_execution.others.0005.no-getrusage
+  languages:
+  - php
+  message: Avoid using getrusage(), as it can lead to potential issues with command execution.
+  metadata:
+    api: getrusage()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: getrusage(...)
+  - pattern: $VAR = getrusage(...)
+  - pattern: $VAR = "getrusage"
+  - pattern: $VAR = 'getrusage'
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.php.command_execution.others.0006.no-passthru
+  languages:
+  - php
+  message: Avoid using passthru(), as it can lead to potential issues with command execution.
+  metadata:
+    api: passthru()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: passthru(...)
+  - pattern: $VAR = passthru(...)
+  - pattern: $VAR = "passthru"
+  - pattern: $VAR = 'passthru'
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.php.command_execution.others.0007.no-pcntl_exec
+  languages:
+  - php
+  message: Avoid using pcntl_exec(), as it can lead to potential issues with command execution.
+  metadata:
+    api: pcntl_exec()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: pcntl_exec(...)
+  - pattern: $VAR = pcntl_exec(...)
+  - pattern: $VAR = "pcntl_exec"
+  - pattern: $VAR = 'pcntl_exec'
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.php.command_execution.others.0008.no-pcntl_fork
+  languages:
+  - php
+  message: Avoid using pcntl_fork(), as it can lead to potential issues with command execution.
+  metadata:
+    api: pcntl_fork()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: pcntl_fork(...)
+  - pattern: $VAR = pcntl_fork(...)
+  - pattern: $VAR = "pcntl_fork"
+  - pattern: $VAR = 'pcntl_fork'
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.php.command_execution.others.0009.no-pcntl_wait
+  languages:
+  - php
+  message: Avoid using pcntl_wait(), as it can lead to potential issues with command execution.
+  metadata:
+    api: pcntl_wait()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: pcntl_wait(...)
+  - pattern: $VAR = pcntl_wait(...)
+  - pattern: $VAR = "pcntl_wait"
+  - pattern: $VAR = 'pcntl_wait'
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.php.command_execution.others.0010.no-pcntl_waitpid
+  languages:
+  - php
+  message: Avoid using pcntl_waitpid(), as it can lead to potential issues with command execution.
+  metadata:
+    api: pcntl_waitpid()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: pcntl_waitpid(...)
+  - pattern: $VAR = pcntl_waitpid(...)
+  - pattern: $VAR = "pcntl_waitpid"
+  - pattern: $VAR = 'pcntl_waitpid'
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.php.command_execution.others.0011.no-popen
+  languages:
+  - php
+  message: Avoid using popen(), as it can lead to potential issues with command execution.
+  metadata:
+    api: popen()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: popen(...)
+  - pattern: $VAR = popen(...)
+  - pattern: $VAR = "popen"
+  - pattern: $VAR = 'popen'
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.php.command_execution.others.0012.no-proc_close
+  languages:
+  - php
+  message: Avoid using proc_close(), as it can lead to potential issues with command execution.
+  metadata:
+    api: proc_close()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: proc_close(...)
+  - pattern: $VAR = proc_close(...)
+  - pattern: $VAR = "proc_close"
+  - pattern: $VAR = 'proc_close'
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.php.command_execution.others.0013.no-proc_get_status
+  languages:
+  - php
+  message: Avoid using proc_get_status(), as it can lead to potential issues with command execution.
+  metadata:
+    api: proc_get_status()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: proc_get_status(...)
+  - pattern: $VAR = proc_get_status(...)
+  - pattern: $VAR = "proc_get_status"
+  - pattern: $VAR = 'proc_get_status'
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.php.command_execution.others.0014.no-proc_open
+  languages:
+  - php
+  message: Avoid using proc_open(), as it can lead to potential issues with command execution.
+  metadata:
+    api: proc_open()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: proc_open(...)
+  - pattern: $VAR = proc_open(...)
+  - pattern: $VAR = "proc_open"
+  - pattern: $VAR = 'proc_open'
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.php.command_execution.others.0015.no-proc_terminate
+  languages:
+  - php
+  message: Avoid using proc_terminate(), as it can lead to potential issues with command execution.
+  metadata:
+    api: proc_terminate()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: proc_terminate(...)
+  - pattern: $VAR = proc_terminate(...)
+  - pattern: $VAR = "proc_terminate"
+  - pattern: $VAR = 'proc_terminate'
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.php.command_execution.others.0016.no-shell_exec
+  languages:
+  - php
+  message: Avoid using shell_exec(), as it can lead to potential issues with command execution.
+  metadata:
+    api: shell_exec()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: shell_exec(...)
+  - pattern: $VAR = shell_exec(...)
+  - pattern: $VAR = "shell_exec"
+  - pattern: $VAR = 'shell_exec'
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.php.command_execution.others.0017.no-system
+  languages:
+  - php
+  message: Avoid using system(), as it can lead to potential issues with command execution.
+  metadata:
+    api: system()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: system(...)
+  - pattern: $VAR = system(...)
+  - pattern: $VAR = "system"
+  - pattern: $VAR = 'system'
+  severity: WARNING
+  tags:
+  - Command Execution

@@ -1,0 +1,30 @@
+rules:
+  - id: markdown.software_installation.package_manager_command
+    languages: [generic]
+    paths:
+      include:
+        - '*.md'
+        - '*.markdown'
+        - 'README*'
+        - 'SKILL.md'
+    message: Markdown contains an explicit package installation command
+    severity: WARNING
+    metadata:
+      malskills_subtype: package_installation
+      malskills_sso_category: software_installation
+    pattern-regex: '(?im)^\s*(?:[-*]\s+|\d+\.\s+)?(?:(?:run|execute|use)\s+)?(?:`{1,3})?(?:sudo\s+)?(?:pip3?|npm|yarn|pnpm|apt-get|apt|dnf|yum|apk|brew|gem|composer)\s+(?:install|add)\b[^\n]*'
+
+  - id: markdown.software_installation.external_component_command
+    languages: [generic]
+    paths:
+      include:
+        - '*.md'
+        - '*.markdown'
+        - 'README*'
+        - 'SKILL.md'
+    message: Markdown contains an explicit external component bootstrap command
+    severity: WARNING
+    metadata:
+      malskills_subtype: external_component_installation
+      malskills_sso_category: software_installation
+    pattern-regex: '(?im)^\s*(?:[-*]\s+|\d+\.\s+)?(?:`{1,3})?(?:sudo\s+)?(?:curl|wget)\b[^\n|]*\|\s*(?:bash|sh)\b'

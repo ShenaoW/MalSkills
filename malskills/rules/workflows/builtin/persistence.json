@@ -1,0 +1,15 @@
+{
+  "schema_version": "malskills-workflow-rule-v1",
+  "rule_id": "formal.graph.persistence",
+  "pattern_name": "Persistence",
+  "workflow_name": "execution_registered_in_startup_configuration",
+  "severity": "high",
+  "decision_effect": "malicious",
+  "source": "formal",
+  "roles": [
+    {"id": "execution", "subtypes": ["system_command_execution", "dynamic_code_execution", "external_file_execution"], "min_confidence": 0.0},
+    {"id": "registration", "subtypes": ["system_configuration_modify", "file_write"], "min_confidence": 0.0, "attributes": {"resource_class": ["startup_configuration"]}}
+  ],
+  "relations": [{"kind": "value_flow_or_same_object", "left": "execution", "right": "registration"}],
+  "explanation": "An execution payload is registered in a startup or recurring-execution resource."
+}

@@ -1,0 +1,31 @@
+rules:
+- id: sso.ruby.obfuscation.Marshal.0001.no-Marshal.dump
+  languages:
+  - ruby
+  message: Avoid using Marshal.dump(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: Marshal.dump()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: Marshal.dump(...)
+  - pattern: $VAR = Marshal.dump
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.Marshal.0002.no-Marshal.load
+  languages:
+  - ruby
+  message: Avoid using Marshal.load(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: Marshal.load()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: Marshal.load(...)
+  - pattern: $VAR = Marshal.load
+  severity: WARNING
+  tags:
+  - Obfuscation

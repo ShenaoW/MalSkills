@@ -1,0 +1,164 @@
+rules:
+- id: sso.javascript.network_access.tls.0001.no-tls-SecureContext
+  languages:
+  - javascript
+  message: Avoid using tls.SecureContext(), as it can lead to potential issues with network access.
+  metadata:
+    api: tls.SecureContext()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: tls.SecureContext(...)
+  - pattern: $VAR = tls.SecureContext
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.tls.0002.no-tls-Server
+  languages:
+  - javascript
+  message: Avoid using tls.Server(), as it can lead to potential issues with network access.
+  metadata:
+    api: tls.Server()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
+  pattern-either:
+  - pattern: tls.Server(...)
+  - pattern: $VAR = tls.Server
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.tls.0003.no-tls-TLSSocket
+  languages:
+  - javascript
+  message: Avoid using tls.TLSSocket(), as it can lead to potential issues with network access.
+  metadata:
+    api: tls.TLSSocket()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: tls.TLSSocket(...)
+  - pattern: $VAR = tls.TLSSocket
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.tls.0004.no-tls-checkServerIdentity
+  languages:
+  - javascript
+  message: Avoid using tls.checkServerIdentity(), as it can lead to potential issues with network access.
+  metadata:
+    api: tls.checkServerIdentity()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: tls.checkServerIdentity(...)
+  - pattern: $VAR = tls.checkServerIdentity
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.tls.0005.no-tls-connect
+  languages:
+  - javascript
+  message: Avoid using tls.connect(), as it can lead to potential issues with network access.
+  metadata:
+    api: tls.connect()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: tls.connect(...)
+  - pattern: $VAR = tls.connect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.tls.0006.no-tls-convertALPNProtocols
+  languages:
+  - javascript
+  message: Avoid using tls.convertALPNProtocols(), as it can lead to potential issues with network access.
+  metadata:
+    api: tls.convertALPNProtocols()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: tls.convertALPNProtocols(...)
+  - pattern: $VAR = tls.convertALPNProtocols
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.tls.0007.no-tls-createSecureContext
+  languages:
+  - javascript
+  message: Avoid using tls.createSecureContext(), as it can lead to potential issues with network access.
+  metadata:
+    api: tls.createSecureContext()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: tls.createSecureContext(...)
+  - pattern: $VAR = tls.createSecureContext
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.tls.0008.no-tls-createSecurePair
+  languages:
+  - javascript
+  message: Avoid using tls.createSecurePair(), as it can lead to potential issues with network access.
+  metadata:
+    api: tls.createSecurePair()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: tls.createSecurePair(...)
+  - pattern: $VAR = tls.createSecurePair
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.tls.0009.no-tls-createServer
+  languages:
+  - javascript
+  message: Avoid using tls.createServer(), as it can lead to potential issues with network access.
+  metadata:
+    api: tls.createServer()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
+  pattern-either:
+  - pattern: tls.createServer(...)
+  - pattern: $VAR = tls.createServer
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.tls.0010.no-tls-getCiphers
+  languages:
+  - javascript
+  message: Avoid using tls.getCiphers(), as it can lead to potential issues with network access.
+  metadata:
+    api: tls.getCiphers()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: tls.getCiphers(...)
+  - pattern: $VAR = tls.getCiphers
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.tls.0011.no-require-tls
+  languages:
+  - javascript
+  message: Avoid using require('tls'), as it can lead to potential issues with network access.
+  metadata:
+    api: require('tls')
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern: require('tls')
+  severity: WARNING
+  tags:
+  - Network Access

@@ -1,0 +1,106 @@
+rules:
+- id: sso.cpp.obfuscation.std.0001.no-std-bind
+  languages:
+  - cpp
+  message: Avoid using std::bind(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: std::bind()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: std::bind(...)
+  - pattern: $VAR = std::bind
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.cpp.obfuscation.std.0002.no-std-function
+  languages:
+  - cpp
+  message: Avoid using std::function(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: std::function()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: std::function(...)
+  - pattern: $VAR = std::function
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.cpp.obfuscation.std.0003.no-std-mem_fn
+  languages:
+  - cpp
+  message: Avoid using std::mem_fn(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: std::mem_fn()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: std::mem_fn(...)
+  - pattern: $VAR = std::mem_fn
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.cpp.obfuscation.std.0004.no-std-rand
+  languages:
+  - cpp
+  message: Avoid using std::rand(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: std::rand()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: std::rand(...)
+  - pattern: $VAR = std::rand
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.cpp.obfuscation.std.0005.no-std-random_device
+  languages:
+  - cpp
+  message: Avoid using std::random_device(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: std::random_device()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: std::random_device(...)
+  - pattern: $VAR = std::random_device
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.cpp.obfuscation.std.0006.no-std-uniform_int_distribution
+  languages:
+  - cpp
+  message: Avoid using std::uniform_int_distribution(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: std::uniform_int_distribution()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: std::uniform_int_distribution(...)
+  - pattern: $VAR = std::uniform_int_distribution
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.cpp.obfuscation.std.0007.no-std-uniform_real_distribution
+  languages:
+  - cpp
+  message: Avoid using std::uniform_real_distribution(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: std::uniform_real_distribution()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: std::uniform_real_distribution(...)
+  - pattern: $VAR = std::uniform_real_distribution
+  severity: WARNING
+  tags:
+  - Obfuscation

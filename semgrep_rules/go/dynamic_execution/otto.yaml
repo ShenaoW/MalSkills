@@ -1,0 +1,31 @@
+rules:
+- id: sso.go.dynamic_execution.otto.0001.no-otto.New
+  languages:
+  - go
+  message: Avoid using otto.New(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: otto.New()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: otto.New(...)
+  - pattern: $VAR = otto.New
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.go.dynamic_execution.otto.0002.no-otto.Run
+  languages:
+  - go
+  message: Avoid using otto.Run(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: otto.Run()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: otto.Run(...)
+  - pattern: $VAR = otto.Run
+  severity: WARNING
+  tags:
+  - Dynamic Execution

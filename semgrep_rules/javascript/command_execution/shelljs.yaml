@@ -1,0 +1,64 @@
+rules:
+- id: sso.javascript.command_execution.shelljs.0001.shell-wrapper-execution
+  languages:
+  - javascript
+  message: Detect shell and third-party command-execution wrappers.
+  metadata:
+    api: shelljs.exec()/execa()/execaCommand()/shell.exec()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: shelljs.exec(...)
+  - pattern: $VAR = shelljs.exec
+  - pattern: exec(...)
+  - pattern: $VAR = exec
+  - pattern: execa(...)
+  - pattern: execaCommand(...)
+  - pattern: shell.exec(...)
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.javascript.command_execution.shelljs.0002.no-shelljs-sed
+  languages:
+  - javascript
+  message: Avoid using shelljs.sed(), as it can lead to potential issues with command execution.
+  metadata:
+    api: shelljs.sed()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: shelljs.sed(...)
+  - pattern: $VAR = shelljs.sed
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.javascript.command_execution.shelljs.0003.no-shelljs-test
+  languages:
+  - javascript
+  message: Avoid using shelljs.test(), as it can lead to potential issues with command execution.
+  metadata:
+    api: shelljs.test()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: shelljs.test(...)
+  - pattern: $VAR = shelljs.test
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.javascript.command_execution.shelljs.0004.no-require-shelljs
+  languages:
+  - javascript
+  message: Avoid using require('shelljs'), as it can lead to potential issues with command execution.
+  metadata:
+    api: require('shelljs')
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern: require('shelljs')
+  severity: WARNING
+  tags:
+  - Command Execution

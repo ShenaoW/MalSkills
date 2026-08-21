@@ -1,0 +1,225 @@
+rules:
+- id: sso.csharp.dynamic_execution.System.0001.no-System-AppDomain-CreateInstance
+  languages:
+  - csharp
+  message: Avoid using System.AppDomain.CreateInstance(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: System.AppDomain.CreateInstance()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: System.AppDomain.CreateInstance(...)
+  - pattern: $VAR = System.AppDomain.CreateInstance
+  - pattern: AppDomain.CreateInstance(...)
+  - pattern: $VAR = AppDomain.CreateInstance
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.csharp.dynamic_execution.System.0002.no-System-AppDomain-CreateInstanceAndUnwrap
+  languages:
+  - csharp
+  message: Avoid using System.AppDomain.CreateInstanceAndUnwrap(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: System.AppDomain.CreateInstanceAndUnwrap()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: System.AppDomain.CreateInstanceAndUnwrap(...)
+  - pattern: $VAR = System.AppDomain.CreateInstanceAndUnwrap
+  - pattern: AppDomain.CreateInstanceAndUnwrap(...)
+  - pattern: $VAR = AppDomain.CreateInstanceAndUnwrap
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.csharp.dynamic_execution.System.0003.no-System-Delegate-DynamicInvoke
+  languages:
+  - csharp
+  message: Avoid using System.Delegate.DynamicInvoke(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: System.Delegate.DynamicInvoke()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: System.Delegate.DynamicInvoke(...)
+  - pattern: $VAR = System.Delegate.DynamicInvoke
+  - pattern: Delegate.DynamicInvoke(...)
+  - pattern: $VAR = Delegate.DynamicInvoke
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.csharp.dynamic_execution.System.0004.no-System-Linq-Expressions-Expression-Compile
+  languages:
+  - csharp
+  message: Avoid using System.Linq.Expressions.Expression.Compile(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: System.Linq.Expressions.Expression.Compile()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: System.Linq.Expressions.Expression.Compile(...)
+  - pattern: $VAR = System.Linq.Expressions.Expression.Compile
+  - pattern: Linq.Expressions.Expression.Compile(...)
+  - pattern: $VAR = Linq.Expressions.Expression.Compile
+  - pattern: Expressions.Expression.Compile(...)
+  - pattern: $VAR = Expressions.Expression.Compile
+  - pattern: Expression.Compile(...)
+  - pattern: $VAR = Expression.Compile
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.csharp.dynamic_execution.System.0005.no-System-Linq-Expressions-Expression-Lambda
+  languages:
+  - csharp
+  message: Avoid using System.Linq.Expressions.Expression.Lambda(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: System.Linq.Expressions.Expression.Lambda()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: System.Linq.Expressions.Expression.Lambda(...)
+  - pattern: $VAR = System.Linq.Expressions.Expression.Lambda
+  - pattern: Linq.Expressions.Expression.Lambda(...)
+  - pattern: $VAR = Linq.Expressions.Expression.Lambda
+  - pattern: Expressions.Expression.Lambda(...)
+  - pattern: $VAR = Expressions.Expression.Lambda
+  - pattern: Expression.Lambda(...)
+  - pattern: $VAR = Expression.Lambda
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.csharp.dynamic_execution.System.0006.no-System-Reflection-Assembly-LoadFile
+  languages:
+  - csharp
+  message: Avoid using System.Reflection.Assembly.LoadFile(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: System.Reflection.Assembly.LoadFile()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: System.Reflection.Assembly.LoadFile(...)
+  - pattern: $VAR = System.Reflection.Assembly.LoadFile
+  - pattern: Reflection.Assembly.LoadFile(...)
+  - pattern: $VAR = Reflection.Assembly.LoadFile
+  - pattern: Assembly.LoadFile(...)
+  - pattern: $VAR = Assembly.LoadFile
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.csharp.dynamic_execution.System.0007.no-System-Reflection-ConstructorInfo-Invoke
+  languages:
+  - csharp
+  message: Avoid using System.Reflection.ConstructorInfo.Invoke(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: System.Reflection.ConstructorInfo.Invoke()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: System.Reflection.ConstructorInfo.Invoke(...)
+  - pattern: $VAR = System.Reflection.ConstructorInfo.Invoke
+  - pattern: Reflection.ConstructorInfo.Invoke(...)
+  - pattern: $VAR = Reflection.ConstructorInfo.Invoke
+  - pattern: ConstructorInfo.Invoke(...)
+  - pattern: $VAR = ConstructorInfo.Invoke
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.csharp.dynamic_execution.System.0008.no-System-Runtime-InteropServices-Marshal-GetFunctionPointerForDelegate
+  languages:
+  - csharp
+  message: Avoid using System.Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: System.Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: System.Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate(...)
+  - pattern: $VAR = System.Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate
+  - pattern: Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate(...)
+  - pattern: $VAR = Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate
+  - pattern: InteropServices.Marshal.GetFunctionPointerForDelegate(...)
+  - pattern: $VAR = InteropServices.Marshal.GetFunctionPointerForDelegate
+  - pattern: Marshal.GetFunctionPointerForDelegate(...)
+  - pattern: $VAR = Marshal.GetFunctionPointerForDelegate
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.csharp.dynamic_execution.System.0009.no-System-Runtime-Loader-AssemblyLoadContext-LoadFromAssemblyPath
+  languages:
+  - csharp
+  message: Avoid using System.Runtime.Loader.AssemblyLoadContext.LoadFromAssemblyPath(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: System.Runtime.Loader.AssemblyLoadContext.LoadFromAssemblyPath()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: System.Runtime.Loader.AssemblyLoadContext.LoadFromAssemblyPath(...)
+  - pattern: $VAR = System.Runtime.Loader.AssemblyLoadContext.LoadFromAssemblyPath
+  - pattern: Runtime.Loader.AssemblyLoadContext.LoadFromAssemblyPath(...)
+  - pattern: $VAR = Runtime.Loader.AssemblyLoadContext.LoadFromAssemblyPath
+  - pattern: Loader.AssemblyLoadContext.LoadFromAssemblyPath(...)
+  - pattern: $VAR = Loader.AssemblyLoadContext.LoadFromAssemblyPath
+  - pattern: AssemblyLoadContext.LoadFromAssemblyPath(...)
+  - pattern: $VAR = AssemblyLoadContext.LoadFromAssemblyPath
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.csharp.dynamic_execution.System.0010.no-System-Type-GetMethod
+  languages:
+  - csharp
+  message: Avoid using System.Type.GetMethod(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: System.Type.GetMethod()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: System.Type.GetMethod(...)
+  - pattern: $VAR = System.Type.GetMethod
+  - pattern: Type.GetMethod(...)
+  - pattern: $VAR = Type.GetMethod
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.csharp.dynamic_execution.System.0011.no-System-Type-GetProperty
+  languages:
+  - csharp
+  message: Avoid using System.Type.GetProperty(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: System.Type.GetProperty()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: System.Type.GetProperty(...)
+  - pattern: $VAR = System.Type.GetProperty
+  - pattern: Type.GetProperty(...)
+  - pattern: $VAR = Type.GetProperty
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.csharp.dynamic_execution.System.0012.no-System-Type-InvokeMember
+  languages:
+  - csharp
+  message: Avoid using System.Type.InvokeMember(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: System.Type.InvokeMember()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: System.Type.InvokeMember(...)
+  - pattern: $VAR = System.Type.InvokeMember
+  - pattern: Type.InvokeMember(...)
+  - pattern: $VAR = Type.InvokeMember
+  severity: WARNING
+  tags:
+  - Dynamic Execution

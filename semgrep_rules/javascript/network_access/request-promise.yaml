@@ -1,0 +1,44 @@
+rules:
+- id: sso.javascript.network_access.request-promise.0001.no-request-promise-get
+  languages:
+  - javascript
+  message: Avoid using request-promise.get(), as it can lead to potential issues with network access.
+  metadata:
+    api: request-promise.get()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
+  pattern-either:
+  - pattern: request-promise.get(...)
+  - pattern: $VAR = request-promise.get
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.request-promise.0002.no-request-promise-post
+  languages:
+  - javascript
+  message: Avoid using request-promise.post(), as it can lead to potential issues with network access.
+  metadata:
+    api: request-promise.post()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
+  pattern-either:
+  - pattern: request-promise.post(...)
+  - pattern: $VAR = request-promise.post
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.request-promise.0003.no-require-request-promise
+  languages:
+  - javascript
+  message: Avoid using require('request-promise'), as it can lead to potential issues with network access.
+  metadata:
+    api: require('request-promise')
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern: require('request-promise')
+  severity: WARNING
+  tags:
+  - Network Access

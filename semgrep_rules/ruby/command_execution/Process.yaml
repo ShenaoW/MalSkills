@@ -1,0 +1,33 @@
+rules:
+- id: sso.ruby.command_execution.Process.0001.no-Process.fork
+  languages:
+  - ruby
+  message: Avoid using Process.fork(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Process.fork()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: Process.fork(...)
+  - pattern: $VAR = Process.fork
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.ruby.command_execution.Process.0002.no-Process.spawn
+  languages:
+  - ruby
+  message: Avoid using Process.spawn(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Process.spawn()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: Process.spawn(...)
+  - pattern: $VAR = Process.spawn
+  - pattern: spawn(...)
+  - pattern: $VAR = spawn
+  severity: WARNING
+  tags:
+  - Command Execution

@@ -1,0 +1,33 @@
+rules:
+- id: sso.java.cryptography.others.0001.no-Cipher
+  languages:
+  - java
+  message: Avoid using Cipher(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: Cipher()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: new Cipher(...)
+  - pattern: Cipher(...)
+  - pattern: $VAR = Cipher
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.java.cryptography.others.0002.no-KeyGenerator
+  languages:
+  - java
+  message: Avoid using KeyGenerator(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: KeyGenerator()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: new KeyGenerator(...)
+  - pattern: KeyGenerator(...)
+  - pattern: $VAR = KeyGenerator
+  severity: WARNING
+  tags:
+  - Cryptography

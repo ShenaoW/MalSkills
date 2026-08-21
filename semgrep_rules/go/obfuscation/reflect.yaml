@@ -1,0 +1,65 @@
+rules:
+- id: sso.go.obfuscation.reflect.0001.no-reflect.TypeOf
+  languages:
+  - go
+  message: Avoid using reflect.TypeOf(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: reflect.TypeOf()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: reflect.TypeOf(...)
+  - pattern: $VAR = reflect.TypeOf
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.go.obfuscation.reflect.0002.no-reflect.Value.Call
+  languages:
+  - go
+  message: Avoid using reflect.Value.Call(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: reflect.Value.Call()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: reflect.Value.Call(...)
+  - pattern: $VAR = reflect.Value.Call
+  - pattern: Value.Call(...)
+  - pattern: $VAR = Value.Call
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.go.obfuscation.reflect.0003.no-reflect.Value.MethodByName
+  languages:
+  - go
+  message: Avoid using reflect.Value.MethodByName(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: reflect.Value.MethodByName()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: reflect.Value.MethodByName(...)
+  - pattern: $VAR = reflect.Value.MethodByName
+  - pattern: Value.MethodByName(...)
+  - pattern: $VAR = Value.MethodByName
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.go.obfuscation.reflect.0004.no-reflect.ValueOf
+  languages:
+  - go
+  message: Avoid using reflect.ValueOf(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: reflect.ValueOf()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: reflect.ValueOf(...)
+  - pattern: $VAR = reflect.ValueOf
+  severity: WARNING
+  tags:
+  - Obfuscation

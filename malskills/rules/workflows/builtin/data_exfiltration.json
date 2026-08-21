@@ -1,0 +1,15 @@
+{
+  "schema_version": "malskills-workflow-rule-v1",
+  "rule_id": "formal.graph.data_exfiltration",
+  "pattern_name": "Data_Exfiltration",
+  "workflow_name": "sensitive_data_to_network_sink",
+  "severity": "high",
+  "decision_effect": "malicious",
+  "source": "formal",
+  "roles": [
+    {"id": "source", "subtypes": ["system_information_access", "environment_access", "process_information_access", "user_information_access", "credential_data_access", "file_read", "file_access"], "min_confidence": 0.0, "attributes": {"sensitivity_class": ["sensitive", "contextual"]}},
+    {"id": "sink", "subtypes": ["data_send"], "min_confidence": 0.0, "attributes": {"dst_class": ["external"]}}
+  ],
+  "relations": [{"kind": "value_flow", "left": "source", "right": "sink"}],
+  "explanation": "Sensitive or host data flows into a network send operation."
+}

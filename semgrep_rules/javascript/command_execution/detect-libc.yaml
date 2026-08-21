@@ -1,0 +1,44 @@
+rules:
+- id: sso.javascript.command_execution.detect-libc.0001.no-detect-libc-familySync
+  languages:
+  - javascript
+  message: Avoid using detect-libc.familySync(), as it can lead to potential issues with command execution.
+  metadata:
+    api: detect-libc.familySync()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: detect-libc.familySync(...)
+  - pattern: $VAR = detect-libc.familySync
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.javascript.command_execution.detect-libc.0002.no-detect-libc-versionSync
+  languages:
+  - javascript
+  message: Avoid using detect-libc.versionSync(), as it can lead to potential issues with command execution.
+  metadata:
+    api: detect-libc.versionSync()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: detect-libc.versionSync(...)
+  - pattern: $VAR = detect-libc.versionSync
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.javascript.command_execution.detect-libc.0003.no-require-detect-libc
+  languages:
+  - javascript
+  message: Avoid using require('detect-libc'), as it can lead to potential issues with command execution.
+  metadata:
+    api: require('detect-libc')
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern: require('detect-libc')
+  severity: WARNING
+  tags:
+  - Command Execution

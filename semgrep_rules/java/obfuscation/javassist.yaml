@@ -1,0 +1,39 @@
+rules:
+- id: sso.java.obfuscation.javassist.0001.no-javassist-ClassPool-getDefault
+  languages:
+  - java
+  message: Avoid using javassist.ClassPool.getDefault(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: javassist.ClassPool.getDefault()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: new javassist.ClassPool.getDefault(...)
+  - pattern: javassist.ClassPool.getDefault(...)
+  - pattern: $VAR = javassist.ClassPool.getDefault
+  - pattern: new ClassPool.getDefault(...)
+  - pattern: ClassPool.getDefault(...)
+  - pattern: $VAR = ClassPool.getDefault
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.java.obfuscation.javassist.0002.no-javassist-ClassPool-makeClass
+  languages:
+  - java
+  message: Avoid using javassist.ClassPool.makeClass(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: javassist.ClassPool.makeClass()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: new javassist.ClassPool.makeClass(...)
+  - pattern: javassist.ClassPool.makeClass(...)
+  - pattern: $VAR = javassist.ClassPool.makeClass
+  - pattern: new ClassPool.makeClass(...)
+  - pattern: ClassPool.makeClass(...)
+  - pattern: $VAR = ClassPool.makeClass
+  severity: WARNING
+  tags:
+  - Obfuscation

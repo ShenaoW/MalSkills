@@ -1,0 +1,451 @@
+rules:
+- id: sso.ruby.obfuscation.others.0001.no-Array_x_join
+  languages:
+  - ruby
+  message: Avoid using Array#join(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: Array#join()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: Array#join(...)
+  - pattern: $VAR = Array#join
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0002.no-Object_x_class_eval
+  languages:
+  - ruby
+  message: Avoid using Object#class_eval(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: Object#class_eval()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: Object#class_eval(...)
+  - pattern: $VAR = Object#class_eval
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0003.no-Object_x_instance_variable_get
+  languages:
+  - ruby
+  message: Avoid using Object#instance_variable_get(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: Object#instance_variable_get()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: Object#instance_variable_get(...)
+  - pattern: $VAR = Object#instance_variable_get
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0004.no-Object_x_instance_variable_set
+  languages:
+  - ruby
+  message: Avoid using Object#instance_variable_set(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: Object#instance_variable_set()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: Object#instance_variable_set(...)
+  - pattern: $VAR = Object#instance_variable_set
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0005.no-String_x__x__x_
+  languages:
+  - ruby
+  message: Avoid using String#<<(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: String#<<()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: String#<<(...)
+  - pattern: $VAR = String#<<
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0006.no-String_x_bytes
+  languages:
+  - ruby
+  message: Avoid using String#bytes(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: String#bytes()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: String#bytes(...)
+  - pattern: $VAR = String#bytes
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0007.no-String_x_chars
+  languages:
+  - ruby
+  message: Avoid using String#chars(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: String#chars()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: String#chars(...)
+  - pattern: $VAR = String#chars
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0008.no-String_x_concat
+  languages:
+  - ruby
+  message: Avoid using String#concat(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: String#concat()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: String#concat(...)
+  - pattern: $VAR = String#concat
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0009.no-String_x_crypt
+  languages:
+  - ruby
+  message: Avoid using String#crypt(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: String#crypt()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: String#crypt(...)
+  - pattern: $VAR = String#crypt
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0010.no-String_x_encode
+  languages:
+  - ruby
+  message: Avoid using String#encode(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: String#encode()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: String#encode(...)
+  - pattern: $VAR = String#encode
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0011.no-String_x_gsub
+  languages:
+  - ruby
+  message: Avoid using String#gsub(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: String#gsub()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: String#gsub(...)
+  - pattern: $VAR = String#gsub
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0012.no-String_x_reverse
+  languages:
+  - ruby
+  message: Avoid using String#reverse(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: String#reverse()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: String#reverse(...)
+  - pattern: $VAR = String#reverse
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0013.no-String_x_scrub
+  languages:
+  - ruby
+  message: Avoid using String#scrub(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: String#scrub()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: String#scrub(...)
+  - pattern: $VAR = String#scrub
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0014.no-String_x_swapcase
+  languages:
+  - ruby
+  message: Avoid using String#swapcase(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: String#swapcase()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: String#swapcase(...)
+  - pattern: $VAR = String#swapcase
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0015.no-String_x_to_sym
+  languages:
+  - ruby
+  message: Avoid using String#to_sym(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: String#to_sym()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: String#to_sym(...)
+  - pattern: $VAR = String#to_sym
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0016.no-String_x_tr
+  languages:
+  - ruby
+  message: Avoid using String#tr(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: String#tr()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: String#tr(...)
+  - pattern: $VAR = String#tr
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0017.no-String_x_unpack
+  languages:
+  - ruby
+  message: Avoid using String#unpack(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: String#unpack()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: String#unpack(...)
+  - pattern: $VAR = String#unpack
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0018.no-String_x_unpack1
+  languages:
+  - ruby
+  message: Avoid using String#unpack1(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: String#unpack1()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: String#unpack1(...)
+  - pattern: $VAR = String#unpack1
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0019.no-Symbol_x_to_proc
+  languages:
+  - ruby
+  message: Avoid using Symbol#to_proc(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: Symbol#to_proc()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: Symbol#to_proc(...)
+  - pattern: $VAR = Symbol#to_proc
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0020.no-alias_method
+  languages:
+  - ruby
+  message: Avoid using alias_method(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: alias_method()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: alias_method(...)
+  - pattern: $VAR = alias_method
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0021.no-lambda
+  languages:
+  - ruby
+  message: Avoid using lambda(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: lambda()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: lambda(...)
+  - pattern: $VAR = lambda
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0022.no-method
+  languages:
+  - ruby
+  message: Avoid using method(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: method()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: method(...)
+  - pattern: $VAR = method
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0023.no-proc
+  languages:
+  - ruby
+  message: Avoid using proc(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: proc()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: proc(...)
+  - pattern: $VAR = proc
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0024.no-public_send
+  languages:
+  - ruby
+  message: Avoid using public_send(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: public_send()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: public_send(...)
+  - pattern: $VAR = public_send
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0025.no-send
+  languages:
+  - ruby
+  message: Avoid using send(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: send()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: send(...)
+  - pattern: $VAR = send
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0026.no-sleep
+  languages:
+  - ruby
+  message: Avoid using sleep(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: sleep()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: sleep(...)
+  - pattern: $VAR = sleep
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0027.no-ObjectSpace.each_object
+  languages:
+  - ruby
+  message: Avoid using ObjectSpace.each_object(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: ObjectSpace.each_object()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: ObjectSpace.each_object(...)
+  - pattern: $VAR = ObjectSpace.each_object
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0028.no-Proc.new
+  languages:
+  - ruby
+  message: Avoid using Proc.new(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: Proc.new()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: Proc.new(...)
+  - pattern: $VAR = Proc.new
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0029.no-Thread.new
+  languages:
+  - ruby
+  message: Avoid using Thread.new(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: Thread.new()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: Thread.new(...)
+  - pattern: $VAR = Thread.new
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.others.0030.no-binding.eval
+  languages:
+  - ruby
+  message: Avoid using binding.eval(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: binding.eval()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: binding.eval(...)
+  - pattern: $VAR = binding.eval
+  severity: WARNING
+  tags:
+  - Obfuscation

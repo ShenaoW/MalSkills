@@ -1,0 +1,5 @@
+# Skill-Security-Scanner 白名单配置
+
+whitelist:
+  # 可以添加误报规则ID，例如:
+  # - "CMD001"

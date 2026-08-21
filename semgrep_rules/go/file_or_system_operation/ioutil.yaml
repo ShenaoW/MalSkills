@@ -1,0 +1,61 @@
+rules:
+- id: sso.go.file_or_system_operation.ioutil.0001.no-ioutil.ReadDir
+  languages:
+  - go
+  message: Avoid using ioutil.ReadDir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: ioutil.ReadDir()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_search
+  pattern-either:
+  - pattern: ioutil.ReadDir(...)
+  - pattern: $VAR = ioutil.ReadDir
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.go.file_or_system_operation.ioutil.0002.no-ioutil.TempDir
+  languages:
+  - go
+  message: Avoid using ioutil.TempDir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: ioutil.TempDir()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: ioutil.TempDir(...)
+  - pattern: $VAR = ioutil.TempDir
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.go.file_or_system_operation.ioutil.0003.no-ioutil.TempFile
+  languages:
+  - go
+  message: Avoid using ioutil.TempFile(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: ioutil.TempFile()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
+  pattern-either:
+  - pattern: ioutil.TempFile(...)
+  - pattern: $VAR = ioutil.TempFile
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.go.file_or_system_operation.ioutil.0004.no-ioutil.WriteFile
+  languages:
+  - go
+  message: Avoid using ioutil.WriteFile(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: ioutil.WriteFile()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: ioutil.WriteFile(...)
+  - pattern: $VAR = ioutil.WriteFile
+  severity: WARNING
+  tags:
+  - File or System Operation

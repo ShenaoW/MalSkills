@@ -1,0 +1,19 @@
+{
+  "schema_version": "malskills-workflow-rule-v1",
+  "rule_id": "formal.graph.ransomware",
+  "pattern_name": "Ransomware",
+  "workflow_name": "file_encrypt_rewrite_chain",
+  "severity": "high",
+  "decision_effect": "malicious",
+  "source": "formal",
+  "roles": [
+    {"id": "read", "subtypes": ["file_read", "file_access"], "min_confidence": 0.0},
+    {"id": "encrypt", "subtypes": ["encryption"], "min_confidence": 0.0},
+    {"id": "impact", "subtypes": ["file_write", "file_delete"], "min_confidence": 0.0, "attributes": {"operation_class": ["destructive_rewrite"]}}
+  ],
+  "relations": [
+    {"kind": "value_flow", "left": "read", "right": "encrypt"},
+    {"kind": "value_flow_or_same_object", "left": "encrypt", "right": "impact"}
+  ],
+  "explanation": "File content is encrypted and then written back or the original is removed."
+}

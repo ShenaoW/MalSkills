@@ -1,0 +1,106 @@
+rules:
+- id: sso.python.command_execution.subprocess.0001.no-subprocess-Popen
+  languages:
+  - python
+  message: Avoid using subprocess.Popen(), as it can lead to potential issues with command execution.
+  metadata:
+    api: subprocess.Popen()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: subprocess.Popen(...)
+  - pattern: $VAR = subprocess.Popen
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.python.command_execution.subprocess.0002.no-subprocess-call
+  languages:
+  - python
+  message: Avoid using subprocess.call(), as it can lead to potential issues with command execution.
+  metadata:
+    api: subprocess.call()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: subprocess.call(...)
+  - pattern: $VAR = subprocess.call
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.python.command_execution.subprocess.0003.no-subprocess-check_call
+  languages:
+  - python
+  message: Avoid using subprocess.check_call(), as it can lead to potential issues with command execution.
+  metadata:
+    api: subprocess.check_call()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: subprocess.check_call(...)
+  - pattern: $VAR = subprocess.check_call
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.python.command_execution.subprocess.0004.no-subprocess-check_output
+  languages:
+  - python
+  message: Avoid using subprocess.check_output(), as it can lead to potential issues with command execution.
+  metadata:
+    api: subprocess.check_output()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: subprocess.check_output(...)
+  - pattern: $VAR = subprocess.check_output
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.python.command_execution.subprocess.0005.no-subprocess-getoutput
+  languages:
+  - python
+  message: Avoid using subprocess.getoutput(), as it can lead to potential issues with command execution.
+  metadata:
+    api: subprocess.getoutput()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: subprocess.getoutput(...)
+  - pattern: $VAR = subprocess.getoutput
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.python.command_execution.subprocess.0006.no-subprocess-getstatusoutput
+  languages:
+  - python
+  message: Avoid using subprocess.getstatusoutput(), as it can lead to potential issues with command execution.
+  metadata:
+    api: subprocess.getstatusoutput()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: subprocess.getstatusoutput(...)
+  - pattern: $VAR = subprocess.getstatusoutput
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.python.command_execution.subprocess.0007.no-subprocess-run
+  languages:
+  - python
+  message: Avoid using subprocess.run(), as it can lead to potential issues with command execution.
+  metadata:
+    api: subprocess.run()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: subprocess.run(...)
+  - pattern: $VAR = subprocess.run
+  severity: WARNING
+  tags:
+  - Command Execution

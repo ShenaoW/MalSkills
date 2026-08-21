@@ -1,0 +1,76 @@
+rules:
+- id: sso.javascript.file_or_system_operation.shelljs.0001.no-shelljs-cd
+  languages:
+  - javascript
+  message: Avoid using shelljs.cd(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: shelljs.cd()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: shelljs.cd(...)
+  - pattern: $VAR = shelljs.cd
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.javascript.file_or_system_operation.shelljs.0002.no-shelljs-cp
+  languages:
+  - javascript
+  message: Avoid using shelljs.cp(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: shelljs.cp()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: shelljs.cp(...)
+  - pattern: $VAR = shelljs.cp
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.javascript.file_or_system_operation.shelljs.0003.no-shelljs-ls
+  languages:
+  - javascript
+  message: Avoid using shelljs.ls(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: shelljs.ls()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: shelljs.ls(...)
+  - pattern: $VAR = shelljs.ls
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.javascript.file_or_system_operation.shelljs.0004.no-shelljs-mkdir
+  languages:
+  - javascript
+  message: Avoid using shelljs.mkdir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: shelljs.mkdir()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
+  pattern-either:
+  - pattern: shelljs.mkdir(...)
+  - pattern: $VAR = shelljs.mkdir
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.javascript.file_or_system_operation.shelljs.0005.no-shelljs-rm
+  languages:
+  - javascript
+  message: Avoid using shelljs.rm(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: shelljs.rm()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: shelljs.rm(...)
+  - pattern: $VAR = shelljs.rm
+  severity: WARNING
+  tags:
+  - File or System Operation

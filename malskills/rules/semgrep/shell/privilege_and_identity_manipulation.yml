@@ -1,0 +1,40 @@
+rules:
+  - id: shell.privilege_and_identity_manipulation.identity_switch
+    languages: [bash]
+    message: Shell switches user or account context
+    severity: WARNING
+    metadata:
+      malskills_subtype: process_control
+      malskills_sso_category: process_operation
+      malskills_resource_class: privilege_boundary
+    pattern-regex: '(?i)\b(su|sudo|runas|newgrp)\b'
+
+  - id: shell.privilege_and_identity_manipulation.privilege_adjustment
+    languages: [bash]
+    message: Shell adjusts privileges or execution capabilities
+    severity: WARNING
+    metadata:
+      malskills_subtype: system_configuration_modify
+      malskills_sso_category: system_configuration
+      malskills_resource_class: privilege_boundary
+    pattern-regex: '(?i)\b(setcap|chmod\s+u\+s|chmod\s+4755)\b'
+
+  - id: shell.privilege_and_identity_manipulation.group_or_acl_modification
+    languages: [bash]
+    message: Shell modifies group membership or ACLs
+    severity: WARNING
+    metadata:
+      malskills_subtype: file_permission_modify
+      malskills_sso_category: file_operation
+      malskills_resource_class: privilege_boundary
+    pattern-regex: '(?i)\b(usermod\s+-aG|net\s+localgroup|setfacl|icacls)\b'
+
+  - id: shell.privilege_and_identity_manipulation.boundary_bypass
+    languages: [bash]
+    message: Shell invokes boundary bypass or privileged container context
+    severity: WARNING
+    metadata:
+      malskills_subtype: system_configuration_modify
+      malskills_sso_category: system_configuration
+      malskills_resource_class: privilege_boundary
+    pattern-regex: '(?i)\b(pkexec|unshare|nsenter|docker\s+run\s+--privileged)\b'

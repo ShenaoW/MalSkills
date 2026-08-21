@@ -1,0 +1,76 @@
+rules:
+- id: sso.go.command_execution.Cmd.0001.no-Cmd.CombinedOutput
+  languages:
+  - go
+  message: Avoid using Cmd.CombinedOutput(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Cmd.CombinedOutput()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: Cmd.CombinedOutput(...)
+  - pattern: $VAR = Cmd.CombinedOutput
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.go.command_execution.Cmd.0002.no-Cmd.Output
+  languages:
+  - go
+  message: Avoid using Cmd.Output(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Cmd.Output()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: Cmd.Output(...)
+  - pattern: $VAR = Cmd.Output
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.go.command_execution.Cmd.0003.no-Cmd.Run
+  languages:
+  - go
+  message: Avoid using Cmd.Run(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Cmd.Run()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: Cmd.Run(...)
+  - pattern: $VAR = Cmd.Run
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.go.command_execution.Cmd.0004.no-Cmd.Start
+  languages:
+  - go
+  message: Avoid using Cmd.Start(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Cmd.Start()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: Cmd.Start(...)
+  - pattern: $VAR = Cmd.Start
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.go.command_execution.Cmd.0005.no-Cmd.Wait
+  languages:
+  - go
+  message: Avoid using Cmd.Wait(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Cmd.Wait()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: Cmd.Wait(...)
+  - pattern: $VAR = Cmd.Wait
+  severity: WARNING
+  tags:
+  - Command Execution

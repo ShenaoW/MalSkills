@@ -1,0 +1,31 @@
+rules:
+- id: sso.python.insecure_deserialization.marshal.0001.no-marshal-load
+  languages:
+  - python
+  message: Avoid using marshal.load(), as it can lead to potential issues with insecure deserialization.
+  metadata:
+    api: marshal.load()
+    category: Insecure Deserialization
+    malskills_sso_category: payload_execution
+    malskills_subtype: unsafe_deserialization
+  pattern-either:
+  - pattern: marshal.load(...)
+  - pattern: $VAR = marshal.load
+  severity: WARNING
+  tags:
+  - Insecure Deserialization
+- id: sso.python.insecure_deserialization.marshal.0002.no-marshal-loads
+  languages:
+  - python
+  message: Avoid using marshal.loads(), as it can lead to potential issues with insecure deserialization.
+  metadata:
+    api: marshal.loads()
+    category: Insecure Deserialization
+    malskills_sso_category: payload_execution
+    malskills_subtype: unsafe_deserialization
+  pattern-either:
+  - pattern: marshal.loads(...)
+  - pattern: $VAR = marshal.loads
+  severity: WARNING
+  tags:
+  - Insecure Deserialization

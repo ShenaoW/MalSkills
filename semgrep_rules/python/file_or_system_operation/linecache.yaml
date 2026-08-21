@@ -1,0 +1,31 @@
+rules:
+- id: sso.python.file_or_system_operation.linecache.0001.no-linecache-getline
+  languages:
+  - python
+  message: Avoid using linecache.getline(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: linecache.getline()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: linecache.getline(...)
+  - pattern: $VAR = linecache.getline
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.python.file_or_system_operation.linecache.0002.no-linecache-lazycache
+  languages:
+  - python
+  message: Avoid using linecache.lazycache(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: linecache.lazycache()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: linecache.lazycache(...)
+  - pattern: $VAR = linecache.lazycache
+  severity: WARNING
+  tags:
+  - File or System Operation

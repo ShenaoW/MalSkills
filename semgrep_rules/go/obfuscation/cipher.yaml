@@ -1,0 +1,46 @@
+rules:
+- id: sso.go.obfuscation.cipher.0001.no-cipher.NewCBCEncrypter
+  languages:
+  - go
+  message: Avoid using cipher.NewCBCEncrypter(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: cipher.NewCBCEncrypter()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: cipher.NewCBCEncrypter(...)
+  - pattern: $VAR = cipher.NewCBCEncrypter
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.go.obfuscation.cipher.0002.no-cipher.NewCFBEncrypter
+  languages:
+  - go
+  message: Avoid using cipher.NewCFBEncrypter(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: cipher.NewCFBEncrypter()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: cipher.NewCFBEncrypter(...)
+  - pattern: $VAR = cipher.NewCFBEncrypter
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.go.obfuscation.cipher.0003.no-cipher.NewGCM
+  languages:
+  - go
+  message: Avoid using cipher.NewGCM(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: cipher.NewGCM()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: cipher.NewGCM(...)
+  - pattern: $VAR = cipher.NewGCM
+  severity: WARNING
+  tags:
+  - Obfuscation

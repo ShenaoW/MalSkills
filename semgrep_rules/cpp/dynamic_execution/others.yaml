@@ -1,0 +1,498 @@
+rules:
+- id: sso.cpp.dynamic_execution.others.0001.no-CallWindowProc
+  languages:
+  - cpp
+  message: Avoid using CallWindowProc(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: CallWindowProc()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: CallWindowProc(...)
+  - pattern: $VAR = CallWindowProc
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0002.no-CoCreateInstance
+  languages:
+  - cpp
+  message: Avoid using CoCreateInstance(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: CoCreateInstance()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: CoCreateInstance(...)
+  - pattern: $VAR = CoCreateInstance
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0003.no-CreateRemoteThread
+  languages:
+  - cpp
+  message: Avoid using CreateRemoteThread(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: CreateRemoteThread()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: CreateRemoteThread(...)
+  - pattern: $VAR = CreateRemoteThread
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0004.no-CreateThread
+  languages:
+  - cpp
+  message: Avoid using CreateThread(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: CreateThread()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: CreateThread(...)
+  - pattern: $VAR = CreateThread
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0005.no-EnumWindows
+  languages:
+  - cpp
+  message: Avoid using EnumWindows(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: EnumWindows()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: EnumWindows(...)
+  - pattern: $VAR = EnumWindows
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0006.no-FreeLibrary
+  languages:
+  - cpp
+  message: Avoid using FreeLibrary(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: FreeLibrary()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: FreeLibrary(...)
+  - pattern: $VAR = FreeLibrary
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0007.no-GetProcAddress
+  languages:
+  - cpp
+  message: Avoid using GetProcAddress(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: GetProcAddress()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: GetProcAddress(...)
+  - pattern: $VAR = GetProcAddress
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0008.no-OleRun
+  languages:
+  - cpp
+  message: Avoid using OleRun(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: OleRun()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: OleRun(...)
+  - pattern: $VAR = OleRun
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0009.no-PyRun_SimpleString
+  languages:
+  - cpp
+  message: Avoid using PyRun_SimpleString(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: PyRun_SimpleString()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: PyRun_SimpleString(...)
+  - pattern: $VAR = PyRun_SimpleString
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0010.no-PyRun_String
+  languages:
+  - cpp
+  message: Avoid using PyRun_String(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: PyRun_String()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: PyRun_String(...)
+  - pattern: $VAR = PyRun_String
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0011.no-QueueUserAPC
+  languages:
+  - cpp
+  message: Avoid using QueueUserAPC(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: QueueUserAPC()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: QueueUserAPC(...)
+  - pattern: $VAR = QueueUserAPC
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0012.no-SetWindowsHookEx
+  languages:
+  - cpp
+  message: Avoid using SetWindowsHookEx(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: SetWindowsHookEx()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: SetWindowsHookEx(...)
+  - pattern: $VAR = SetWindowsHookEx
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0013.no-VirtualAlloc
+  languages:
+  - cpp
+  message: Avoid using VirtualAlloc(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: VirtualAlloc()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: VirtualAlloc(...)
+  - pattern: $VAR = VirtualAlloc
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0014.no-VirtualAllocEx
+  languages:
+  - cpp
+  message: Avoid using VirtualAllocEx(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: VirtualAllocEx()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: VirtualAllocEx(...)
+  - pattern: $VAR = VirtualAllocEx
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0015.no-VirtualProtect
+  languages:
+  - cpp
+  message: Avoid using VirtualProtect(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: VirtualProtect()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: VirtualProtect(...)
+  - pattern: $VAR = VirtualProtect
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0016.no-VirtualProtectEx
+  languages:
+  - cpp
+  message: Avoid using VirtualProtectEx(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: VirtualProtectEx()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: VirtualProtectEx(...)
+  - pattern: $VAR = VirtualProtectEx
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0017.no-dladdr
+  languages:
+  - cpp
+  message: Avoid using dladdr(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: dladdr()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: dladdr(...)
+  - pattern: $VAR = dladdr
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0018.no-dlclose
+  languages:
+  - cpp
+  message: Avoid using dlclose(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: dlclose()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: dlclose(...)
+  - pattern: $VAR = dlclose
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0019.no-dlopen
+  languages:
+  - cpp
+  message: Avoid using dlopen(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: dlopen()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: dlopen(...)
+  - pattern: $VAR = dlopen
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0020.no-dlsym
+  languages:
+  - cpp
+  message: Avoid using dlsym(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: dlsym()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: dlsym(...)
+  - pattern: $VAR = dlsym
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0021.no-duk_eval_string
+  languages:
+  - cpp
+  message: Avoid using duk_eval_string(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: duk_eval_string()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: duk_eval_string(...)
+  - pattern: $VAR = duk_eval_string
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0022.no-eval_code
+  languages:
+  - cpp
+  message: Avoid using eval_code(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: eval_code()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: eval_code(...)
+  - pattern: $VAR = eval_code
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0023.no-execute_code
+  languages:
+  - cpp
+  message: Avoid using execute_code(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: execute_code()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: execute_code(...)
+  - pattern: $VAR = execute_code
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0024.no-luaL_dostring
+  languages:
+  - cpp
+  message: Avoid using luaL_dostring(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: luaL_dostring()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: luaL_dostring(...)
+  - pattern: $VAR = luaL_dostring
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0025.no-luaL_loadstring
+  languages:
+  - cpp
+  message: Avoid using luaL_loadstring(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: luaL_loadstring()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: luaL_loadstring(...)
+  - pattern: $VAR = luaL_loadstring
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0026.no-memcmp
+  languages:
+  - cpp
+  message: Avoid using memcmp(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: memcmp()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: memcmp(...)
+  - pattern: $VAR = memcmp
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0027.no-memcpy
+  languages:
+  - cpp
+  message: Avoid using memcpy(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: memcpy()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: memcpy(...)
+  - pattern: $VAR = memcpy
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0028.no-mmap
+  languages:
+  - cpp
+  message: Avoid using mmap(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: mmap()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: mmap(...)
+  - pattern: $VAR = mmap
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0029.no-mprotect
+  languages:
+  - cpp
+  message: Avoid using mprotect(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: mprotect()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: mprotect(...)
+  - pattern: $VAR = mprotect
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0030.no-run_script
+  languages:
+  - cpp
+  message: Avoid using run_script(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: run_script()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: run_script(...)
+  - pattern: $VAR = run_script
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0031.no-ICLRRuntimeHost-ExecuteInDefaultAppDomain
+  languages:
+  - cpp
+  message: Avoid using ICLRRuntimeHost::ExecuteInDefaultAppDomain(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: ICLRRuntimeHost::ExecuteInDefaultAppDomain()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: ICLRRuntimeHost::ExecuteInDefaultAppDomain(...)
+  - pattern: $VAR = ICLRRuntimeHost::ExecuteInDefaultAppDomain
+  - pattern: ExecuteInDefaultAppDomain(...)
+  - pattern: $VAR = ExecuteInDefaultAppDomain
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0032.no-IDispatch-Invoke
+  languages:
+  - cpp
+  message: Avoid using IDispatch::Invoke(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: IDispatch::Invoke()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: IDispatch::Invoke(...)
+  - pattern: $VAR = IDispatch::Invoke
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.cpp.dynamic_execution.others.0033.no-IUnknown-Invoke
+  languages:
+  - cpp
+  message: Avoid using IUnknown::Invoke(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: IUnknown::Invoke()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: IUnknown::Invoke(...)
+  - pattern: $VAR = IUnknown::Invoke
+  severity: WARNING
+  tags:
+  - Dynamic Execution

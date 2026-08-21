@@ -1,0 +1,50 @@
+rules:
+- id: sso.go.network_access.websocket.0001.no-websocket.DefaultDialer.Dial
+  languages:
+  - go
+  message: Avoid using websocket.DefaultDialer.Dial(), as it can lead to potential issues with network access.
+  metadata:
+    api: websocket.DefaultDialer.Dial()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: websocket.DefaultDialer.Dial(...)
+  - pattern: $VAR = websocket.DefaultDialer.Dial
+  - pattern: DefaultDialer.Dial(...)
+  - pattern: $VAR = DefaultDialer.Dial
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.websocket.0002.no-websocket.Dial
+  languages:
+  - go
+  message: Avoid using websocket.Dial(), as it can lead to potential issues with network access.
+  metadata:
+    api: websocket.Dial()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: websocket.Dial(...)
+  - pattern: $VAR = websocket.Dial
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.websocket.0003.no-websocket.Upgrader.Upgrade
+  languages:
+  - go
+  message: Avoid using websocket.Upgrader.Upgrade(), as it can lead to potential issues with network access.
+  metadata:
+    api: websocket.Upgrader.Upgrade()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: websocket.Upgrader.Upgrade(...)
+  - pattern: $VAR = websocket.Upgrader.Upgrade
+  - pattern: Upgrader.Upgrade(...)
+  - pattern: $VAR = Upgrader.Upgrade
+  severity: WARNING
+  tags:
+  - Network Access

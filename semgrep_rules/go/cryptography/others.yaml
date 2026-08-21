@@ -1,0 +1,76 @@
+rules:
+- id: sso.go.cryptography.others.0001.no-md5.New
+  languages:
+  - go
+  message: Avoid using md5.New(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: md5.New()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: md5.New(...)
+  - pattern: $VAR = md5.New
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.go.cryptography.others.0002.no-pbkdf2.Key
+  languages:
+  - go
+  message: Avoid using pbkdf2.Key(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: pbkdf2.Key()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: pbkdf2.Key(...)
+  - pattern: $VAR = pbkdf2.Key
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.go.cryptography.others.0003.no-sha1.New
+  languages:
+  - go
+  message: Avoid using sha1.New(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: sha1.New()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: sha1.New(...)
+  - pattern: $VAR = sha1.New
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.go.cryptography.others.0004.no-sha256.New
+  languages:
+  - go
+  message: Avoid using sha256.New(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: sha256.New()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: sha256.New(...)
+  - pattern: $VAR = sha256.New
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.go.cryptography.others.0005.no-sha512.New
+  languages:
+  - go
+  message: Avoid using sha512.New(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: sha512.New()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: sha512.New(...)
+  - pattern: $VAR = sha512.New
+  severity: WARNING
+  tags:
+  - Cryptography

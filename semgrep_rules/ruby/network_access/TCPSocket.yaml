@@ -1,0 +1,31 @@
+rules:
+- id: sso.ruby.network_access.TCPSocket.0001.no-TCPSocket.new
+  languages:
+  - ruby
+  message: Avoid using TCPSocket.new(), as it can lead to potential issues with network access.
+  metadata:
+    api: TCPSocket.new()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: TCPSocket.new(...)
+  - pattern: $VAR = TCPSocket.new
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.ruby.network_access.TCPSocket.0002.no-TCPSocket.open
+  languages:
+  - ruby
+  message: Avoid using TCPSocket.open(), as it can lead to potential issues with network access.
+  metadata:
+    api: TCPSocket.open()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: TCPSocket.open(...)
+  - pattern: $VAR = TCPSocket.open
+  severity: WARNING
+  tags:
+  - Network Access

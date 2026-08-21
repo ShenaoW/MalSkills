@@ -1,0 +1,120 @@
+rules:
+- id: sso.ruby.cryptography.Digest.0001.no-Digest_x__x_HMAC.hexdigest
+  languages:
+  - ruby
+  message: Avoid using Digest::HMAC.hexdigest(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: Digest::HMAC.hexdigest()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: Digest::HMAC.hexdigest(...)
+  - pattern: $VAR = Digest::HMAC.hexdigest
+  - pattern: HMAC.hexdigest(...)
+  - pattern: $VAR = HMAC.hexdigest
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.ruby.cryptography.Digest.0002.no-Digest_x__x_MD5.hexdigest
+  languages:
+  - ruby
+  message: Avoid using Digest::MD5.hexdigest(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: Digest::MD5.hexdigest()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: Digest::MD5.hexdigest(...)
+  - pattern: $VAR = Digest::MD5.hexdigest
+  - pattern: MD5.hexdigest(...)
+  - pattern: $VAR = MD5.hexdigest
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.ruby.cryptography.Digest.0003.no-Digest_x__x_SHA1.hexdigest
+  languages:
+  - ruby
+  message: Avoid using Digest::SHA1.hexdigest(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: Digest::SHA1.hexdigest()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: Digest::SHA1.hexdigest(...)
+  - pattern: $VAR = Digest::SHA1.hexdigest
+  - pattern: SHA1.hexdigest(...)
+  - pattern: $VAR = SHA1.hexdigest
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.ruby.cryptography.Digest.0004.no-Digest_x__x_SHA2.new
+  languages:
+  - ruby
+  message: Avoid using Digest::SHA2.new(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: Digest::SHA2.new()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: Digest::SHA2.new(...)
+  - pattern: $VAR = Digest::SHA2.new
+  - pattern: SHA2.new(...)
+  - pattern: $VAR = SHA2.new
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.ruby.cryptography.Digest.0005.no-Digest_x__x_SHA256.hexdigest
+  languages:
+  - ruby
+  message: Avoid using Digest::SHA256.hexdigest(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: Digest::SHA256.hexdigest()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: Digest::SHA256.hexdigest(...)
+  - pattern: $VAR = Digest::SHA256.hexdigest
+  - pattern: SHA256.hexdigest(...)
+  - pattern: $VAR = SHA256.hexdigest
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.ruby.cryptography.Digest.0006.no-Digest_x__x_SHA384.hexdigest
+  languages:
+  - ruby
+  message: Avoid using Digest::SHA384.hexdigest(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: Digest::SHA384.hexdigest()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: Digest::SHA384.hexdigest(...)
+  - pattern: $VAR = Digest::SHA384.hexdigest
+  - pattern: SHA384.hexdigest(...)
+  - pattern: $VAR = SHA384.hexdigest
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.ruby.cryptography.Digest.0007.no-Digest_x__x_SHA512.hexdigest
+  languages:
+  - ruby
+  message: Avoid using Digest::SHA512.hexdigest(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: Digest::SHA512.hexdigest()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: Digest::SHA512.hexdigest(...)
+  - pattern: $VAR = Digest::SHA512.hexdigest
+  - pattern: SHA512.hexdigest(...)
+  - pattern: $VAR = SHA512.hexdigest
+  severity: WARNING
+  tags:
+  - Cryptography

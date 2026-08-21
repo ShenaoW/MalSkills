@@ -1,0 +1,46 @@
+rules:
+- id: sso.cpp.file_or_system_operation.ofstream.0001.no-ofstream-close
+  languages:
+  - cpp
+  message: Avoid using ofstream::close(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: ofstream::close()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: ofstream::close(...)
+  - pattern: $VAR = ofstream::close
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.cpp.file_or_system_operation.ofstream.0002.no-ofstream-open
+  languages:
+  - cpp
+  message: Avoid using ofstream::open(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: ofstream::open()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: ofstream::open(...)
+  - pattern: $VAR = ofstream::open
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.cpp.file_or_system_operation.ofstream.0003.no-ofstream-write
+  languages:
+  - cpp
+  message: Avoid using ofstream::write(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: ofstream::write()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: ofstream::write(...)
+  - pattern: $VAR = ofstream::write
+  severity: WARNING
+  tags:
+  - File or System Operation

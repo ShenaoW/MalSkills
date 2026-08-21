@@ -1,0 +1,106 @@
+rules:
+- id: sso.ruby.file_or_system_operation.FileUtils.0001.no-FileUtils.chmod
+  languages:
+  - ruby
+  message: Avoid using FileUtils.chmod(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: FileUtils.chmod()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
+  pattern-either:
+  - pattern: FileUtils.chmod(...)
+  - pattern: $VAR = FileUtils.chmod
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.ruby.file_or_system_operation.FileUtils.0002.no-FileUtils.cp
+  languages:
+  - ruby
+  message: Avoid using FileUtils.cp(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: FileUtils.cp()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: FileUtils.cp(...)
+  - pattern: $VAR = FileUtils.cp
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.ruby.file_or_system_operation.FileUtils.0003.no-FileUtils.mkdir_p
+  languages:
+  - ruby
+  message: Avoid using FileUtils.mkdir_p(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: FileUtils.mkdir_p()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
+  pattern-either:
+  - pattern: FileUtils.mkdir_p(...)
+  - pattern: $VAR = FileUtils.mkdir_p
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.ruby.file_or_system_operation.FileUtils.0004.no-FileUtils.mv
+  languages:
+  - ruby
+  message: Avoid using FileUtils.mv(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: FileUtils.mv()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: FileUtils.mv(...)
+  - pattern: $VAR = FileUtils.mv
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.ruby.file_or_system_operation.FileUtils.0005.no-FileUtils.rm
+  languages:
+  - ruby
+  message: Avoid using FileUtils.rm(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: FileUtils.rm()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: FileUtils.rm(...)
+  - pattern: $VAR = FileUtils.rm
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.ruby.file_or_system_operation.FileUtils.0006.no-FileUtils.rm_rf
+  languages:
+  - ruby
+  message: Avoid using FileUtils.rm_rf(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: FileUtils.rm_rf()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: FileUtils.rm_rf(...)
+  - pattern: $VAR = FileUtils.rm_rf
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.ruby.file_or_system_operation.FileUtils.0007.no-FileUtils.touch
+  languages:
+  - ruby
+  message: Avoid using FileUtils.touch(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: FileUtils.touch()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
+  pattern-either:
+  - pattern: FileUtils.touch(...)
+  - pattern: $VAR = FileUtils.touch
+  severity: WARNING
+  tags:
+  - File or System Operation

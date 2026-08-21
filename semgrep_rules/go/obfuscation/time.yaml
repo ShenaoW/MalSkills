@@ -1,0 +1,46 @@
+rules:
+- id: sso.go.obfuscation.time.0001.no-time.AfterFunc
+  languages:
+  - go
+  message: Avoid using time.AfterFunc(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: time.AfterFunc()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: time.AfterFunc(...)
+  - pattern: $VAR = time.AfterFunc
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.go.obfuscation.time.0002.no-time.NewTimer
+  languages:
+  - go
+  message: Avoid using time.NewTimer(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: time.NewTimer()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: time.NewTimer(...)
+  - pattern: $VAR = time.NewTimer
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.go.obfuscation.time.0003.no-time.Sleep
+  languages:
+  - go
+  message: Avoid using time.Sleep(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: time.Sleep()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: time.Sleep(...)
+  - pattern: $VAR = time.Sleep
+  severity: WARNING
+  tags:
+  - Obfuscation

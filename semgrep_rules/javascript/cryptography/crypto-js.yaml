@@ -1,0 +1,48 @@
+rules:
+- id: sso.javascript.cryptography.crypto-js.0001.no-crypto-js-AES-decrypt
+  languages:
+  - javascript
+  message: Avoid using crypto-js.AES.decrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto-js.AES.decrypt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: crypto-js.AES.decrypt(...)
+  - pattern: $VAR = crypto-js.AES.decrypt
+  - pattern: AES.decrypt(...)
+  - pattern: $VAR = AES.decrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.javascript.cryptography.crypto-js.0002.no-crypto-js-DES-decrypt
+  languages:
+  - javascript
+  message: Avoid using crypto-js.DES.decrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto-js.DES.decrypt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: crypto-js.DES.decrypt(...)
+  - pattern: $VAR = crypto-js.DES.decrypt
+  - pattern: DES.decrypt(...)
+  - pattern: $VAR = DES.decrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.javascript.cryptography.crypto-js.0003.no-require-crypto-js
+  languages:
+  - javascript
+  message: Avoid using require('crypto-js'), as it can lead to potential issues with cryptography.
+  metadata:
+    api: require('crypto-js')
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern: require('crypto-js')
+  severity: WARNING
+  tags:
+  - Cryptography

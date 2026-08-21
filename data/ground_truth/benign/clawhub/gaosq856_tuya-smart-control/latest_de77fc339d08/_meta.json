@@ -1,0 +1,11 @@
+{
+  "owner": "gaosq856",
+  "slug": "tuya-smart-control",
+  "displayName": "Tuya Smart Control",
+  "latest": {
+    "version": "1.0.2",
+    "publishedAt": 1774084707488,
+    "commit": "https://github.com/openclaw/skills/commit/316e4e05db5b9cb5302e4c1d2f7bcdb42609d9e2"
+  },
+  "history": []
+}

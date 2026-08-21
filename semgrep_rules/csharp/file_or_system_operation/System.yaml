@@ -1,0 +1,829 @@
+rules:
+- id: sso.csharp.file_or_system_operation.System.0001.no-System-Diagnostics-Process-CloseMainWindow
+  languages:
+  - csharp
+  message: Avoid using System.Diagnostics.Process.CloseMainWindow(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.Diagnostics.Process.CloseMainWindow()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: System.Diagnostics.Process.CloseMainWindow(...)
+  - pattern: $VAR = System.Diagnostics.Process.CloseMainWindow
+  - pattern: Diagnostics.Process.CloseMainWindow(...)
+  - pattern: $VAR = Diagnostics.Process.CloseMainWindow
+  - pattern: Process.CloseMainWindow(...)
+  - pattern: $VAR = Process.CloseMainWindow
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0002.no-System-Diagnostics-Process-GetCurrentProcess
+  languages:
+  - csharp
+  message: Avoid using System.Diagnostics.Process.GetCurrentProcess(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.Diagnostics.Process.GetCurrentProcess()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: System.Diagnostics.Process.GetCurrentProcess(...)
+  - pattern: $VAR = System.Diagnostics.Process.GetCurrentProcess
+  - pattern: Diagnostics.Process.GetCurrentProcess(...)
+  - pattern: $VAR = Diagnostics.Process.GetCurrentProcess
+  - pattern: Process.GetCurrentProcess(...)
+  - pattern: $VAR = Process.GetCurrentProcess
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0003.no-System-Diagnostics-Process-GetProcesses
+  languages:
+  - csharp
+  message: Avoid using System.Diagnostics.Process.GetProcesses(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.Diagnostics.Process.GetProcesses()
+    category: File or System Operation
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: process_information_access
+  pattern-either:
+  - pattern: System.Diagnostics.Process.GetProcesses(...)
+  - pattern: $VAR = System.Diagnostics.Process.GetProcesses
+  - pattern: Diagnostics.Process.GetProcesses(...)
+  - pattern: $VAR = Diagnostics.Process.GetProcesses
+  - pattern: Process.GetProcesses(...)
+  - pattern: $VAR = Process.GetProcesses
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0004.no-System-Environment-Exit
+  languages:
+  - csharp
+  message: Avoid using System.Environment.Exit(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.Environment.Exit()
+    category: File or System Operation
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: environment_access
+  pattern-either:
+  - pattern: System.Environment.Exit(...)
+  - pattern: $VAR = System.Environment.Exit
+  - pattern: Environment.Exit(...)
+  - pattern: $VAR = Environment.Exit
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0005.no-System-Environment-GetEnvironmentVariable
+  languages:
+  - csharp
+  message: Avoid using System.Environment.GetEnvironmentVariable(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.Environment.GetEnvironmentVariable()
+    category: File or System Operation
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: environment_access
+  pattern-either:
+  - pattern: System.Environment.GetEnvironmentVariable(...)
+  - pattern: $VAR = System.Environment.GetEnvironmentVariable
+  - pattern: Environment.GetEnvironmentVariable(...)
+  - pattern: $VAR = Environment.GetEnvironmentVariable
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0006.no-System-Environment-GetFolderPath
+  languages:
+  - csharp
+  message: Avoid using System.Environment.GetFolderPath(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.Environment.GetFolderPath()
+    category: File or System Operation
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: environment_access
+  pattern-either:
+  - pattern: System.Environment.GetFolderPath(...)
+  - pattern: $VAR = System.Environment.GetFolderPath
+  - pattern: Environment.GetFolderPath(...)
+  - pattern: $VAR = Environment.GetFolderPath
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0007.no-System-Environment-SetEnvironmentVariable
+  languages:
+  - csharp
+  message: Avoid using System.Environment.SetEnvironmentVariable(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.Environment.SetEnvironmentVariable()
+    category: File or System Operation
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: environment_access
+  pattern-either:
+  - pattern: System.Environment.SetEnvironmentVariable(...)
+  - pattern: $VAR = System.Environment.SetEnvironmentVariable
+  - pattern: Environment.SetEnvironmentVariable(...)
+  - pattern: $VAR = Environment.SetEnvironmentVariable
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0008.no-System-IO-BinaryReader-ReadBytes
+  languages:
+  - csharp
+  message: Avoid using System.IO.BinaryReader.ReadBytes(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.BinaryReader.ReadBytes()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
+  pattern-either:
+  - pattern: System.IO.BinaryReader.ReadBytes(...)
+  - pattern: $VAR = System.IO.BinaryReader.ReadBytes
+  - pattern: IO.BinaryReader.ReadBytes(...)
+  - pattern: $VAR = IO.BinaryReader.ReadBytes
+  - pattern: BinaryReader.ReadBytes(...)
+  - pattern: $VAR = BinaryReader.ReadBytes
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0009.no-System-IO-BinaryWriter-Write
+  languages:
+  - csharp
+  message: Avoid using System.IO.BinaryWriter.Write(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.BinaryWriter.Write()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: System.IO.BinaryWriter.Write(...)
+  - pattern: $VAR = System.IO.BinaryWriter.Write
+  - pattern: IO.BinaryWriter.Write(...)
+  - pattern: $VAR = IO.BinaryWriter.Write
+  - pattern: BinaryWriter.Write(...)
+  - pattern: $VAR = BinaryWriter.Write
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0010.no-System-IO-Directory-CreateDirectory
+  languages:
+  - csharp
+  message: Avoid using System.IO.Directory.CreateDirectory(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.Directory.CreateDirectory()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
+  pattern-either:
+  - pattern: System.IO.Directory.CreateDirectory(...)
+  - pattern: $VAR = System.IO.Directory.CreateDirectory
+  - pattern: IO.Directory.CreateDirectory(...)
+  - pattern: $VAR = IO.Directory.CreateDirectory
+  - pattern: Directory.CreateDirectory(...)
+  - pattern: $VAR = Directory.CreateDirectory
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0011.no-System-IO-Directory-Delete
+  languages:
+  - csharp
+  message: Avoid using System.IO.Directory.Delete(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.Directory.Delete()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
+  pattern-either:
+  - pattern: System.IO.Directory.Delete(...)
+  - pattern: $VAR = System.IO.Directory.Delete
+  - pattern: IO.Directory.Delete(...)
+  - pattern: $VAR = IO.Directory.Delete
+  - pattern: Directory.Delete(...)
+  - pattern: $VAR = Directory.Delete
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0012.no-System-IO-Directory-EnumerateDirectories
+  languages:
+  - csharp
+  message: Avoid using System.IO.Directory.EnumerateDirectories(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.Directory.EnumerateDirectories()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: System.IO.Directory.EnumerateDirectories(...)
+  - pattern: $VAR = System.IO.Directory.EnumerateDirectories
+  - pattern: IO.Directory.EnumerateDirectories(...)
+  - pattern: $VAR = IO.Directory.EnumerateDirectories
+  - pattern: Directory.EnumerateDirectories(...)
+  - pattern: $VAR = Directory.EnumerateDirectories
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0013.no-System-IO-Directory-EnumerateFiles
+  languages:
+  - csharp
+  message: Avoid using System.IO.Directory.EnumerateFiles(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.Directory.EnumerateFiles()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: System.IO.Directory.EnumerateFiles(...)
+  - pattern: $VAR = System.IO.Directory.EnumerateFiles
+  - pattern: IO.Directory.EnumerateFiles(...)
+  - pattern: $VAR = IO.Directory.EnumerateFiles
+  - pattern: Directory.EnumerateFiles(...)
+  - pattern: $VAR = Directory.EnumerateFiles
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0014.no-System-IO-Directory-Exists
+  languages:
+  - csharp
+  message: Avoid using System.IO.Directory.Exists(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.Directory.Exists()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: System.IO.Directory.Exists(...)
+  - pattern: $VAR = System.IO.Directory.Exists
+  - pattern: IO.Directory.Exists(...)
+  - pattern: $VAR = IO.Directory.Exists
+  - pattern: Directory.Exists(...)
+  - pattern: $VAR = Directory.Exists
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0015.no-System-IO-Directory-GetDirectories
+  languages:
+  - csharp
+  message: Avoid using System.IO.Directory.GetDirectories(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.Directory.GetDirectories()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: System.IO.Directory.GetDirectories(...)
+  - pattern: $VAR = System.IO.Directory.GetDirectories
+  - pattern: IO.Directory.GetDirectories(...)
+  - pattern: $VAR = IO.Directory.GetDirectories
+  - pattern: Directory.GetDirectories(...)
+  - pattern: $VAR = Directory.GetDirectories
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0016.no-System-IO-Directory-GetFiles
+  languages:
+  - csharp
+  message: Avoid using System.IO.Directory.GetFiles(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.Directory.GetFiles()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: System.IO.Directory.GetFiles(...)
+  - pattern: $VAR = System.IO.Directory.GetFiles
+  - pattern: IO.Directory.GetFiles(...)
+  - pattern: $VAR = IO.Directory.GetFiles
+  - pattern: Directory.GetFiles(...)
+  - pattern: $VAR = Directory.GetFiles
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0017.no-System-IO-Directory-Move
+  languages:
+  - csharp
+  message: Avoid using System.IO.Directory.Move(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.Directory.Move()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: System.IO.Directory.Move(...)
+  - pattern: $VAR = System.IO.Directory.Move
+  - pattern: IO.Directory.Move(...)
+  - pattern: $VAR = IO.Directory.Move
+  - pattern: Directory.Move(...)
+  - pattern: $VAR = Directory.Move
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0018.no-System-IO-DirectoryInfo-CreateSubdirectory
+  languages:
+  - csharp
+  message: Avoid using System.IO.DirectoryInfo.CreateSubdirectory(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.DirectoryInfo.CreateSubdirectory()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
+  pattern-either:
+  - pattern: System.IO.DirectoryInfo.CreateSubdirectory(...)
+  - pattern: $VAR = System.IO.DirectoryInfo.CreateSubdirectory
+  - pattern: IO.DirectoryInfo.CreateSubdirectory(...)
+  - pattern: $VAR = IO.DirectoryInfo.CreateSubdirectory
+  - pattern: DirectoryInfo.CreateSubdirectory(...)
+  - pattern: $VAR = DirectoryInfo.CreateSubdirectory
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0019.no-System-IO-DirectoryInfo-Delete
+  languages:
+  - csharp
+  message: Avoid using System.IO.DirectoryInfo.Delete(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.DirectoryInfo.Delete()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
+  pattern-either:
+  - pattern: System.IO.DirectoryInfo.Delete(...)
+  - pattern: $VAR = System.IO.DirectoryInfo.Delete
+  - pattern: IO.DirectoryInfo.Delete(...)
+  - pattern: $VAR = IO.DirectoryInfo.Delete
+  - pattern: DirectoryInfo.Delete(...)
+  - pattern: $VAR = DirectoryInfo.Delete
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0020.no-System-IO-DirectoryInfo-GetFiles
+  languages:
+  - csharp
+  message: Avoid using System.IO.DirectoryInfo.GetFiles(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.DirectoryInfo.GetFiles()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: System.IO.DirectoryInfo.GetFiles(...)
+  - pattern: $VAR = System.IO.DirectoryInfo.GetFiles
+  - pattern: IO.DirectoryInfo.GetFiles(...)
+  - pattern: $VAR = IO.DirectoryInfo.GetFiles
+  - pattern: DirectoryInfo.GetFiles(...)
+  - pattern: $VAR = DirectoryInfo.GetFiles
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0021.no-System-IO-File-Copy
+  languages:
+  - csharp
+  message: Avoid using System.IO.File.Copy(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.File.Copy()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: System.IO.File.Copy(...)
+  - pattern: $VAR = System.IO.File.Copy
+  - pattern: IO.File.Copy(...)
+  - pattern: $VAR = IO.File.Copy
+  - pattern: File.Copy(...)
+  - pattern: $VAR = File.Copy
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0022.no-System-IO-File-Create
+  languages:
+  - csharp
+  message: Avoid using System.IO.File.Create(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.File.Create()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
+  pattern-either:
+  - pattern: System.IO.File.Create(...)
+  - pattern: $VAR = System.IO.File.Create
+  - pattern: IO.File.Create(...)
+  - pattern: $VAR = IO.File.Create
+  - pattern: File.Create(...)
+  - pattern: $VAR = File.Create
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0023.no-System-IO-File-Delete
+  languages:
+  - csharp
+  message: Avoid using System.IO.File.Delete(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.File.Delete()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
+  pattern-either:
+  - pattern: System.IO.File.Delete(...)
+  - pattern: $VAR = System.IO.File.Delete
+  - pattern: IO.File.Delete(...)
+  - pattern: $VAR = IO.File.Delete
+  - pattern: File.Delete(...)
+  - pattern: $VAR = File.Delete
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0024.no-System-IO-File-Exists
+  languages:
+  - csharp
+  message: Avoid using System.IO.File.Exists(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.File.Exists()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: System.IO.File.Exists(...)
+  - pattern: $VAR = System.IO.File.Exists
+  - pattern: IO.File.Exists(...)
+  - pattern: $VAR = IO.File.Exists
+  - pattern: File.Exists(...)
+  - pattern: $VAR = File.Exists
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0025.no-System-IO-File-Move
+  languages:
+  - csharp
+  message: Avoid using System.IO.File.Move(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.File.Move()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: System.IO.File.Move(...)
+  - pattern: $VAR = System.IO.File.Move
+  - pattern: IO.File.Move(...)
+  - pattern: $VAR = IO.File.Move
+  - pattern: File.Move(...)
+  - pattern: $VAR = File.Move
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0026.no-System-IO-File-Open
+  languages:
+  - csharp
+  message: Avoid using System.IO.File.Open(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.File.Open()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: System.IO.File.Open(...)
+  - pattern: $VAR = System.IO.File.Open
+  - pattern: IO.File.Open(...)
+  - pattern: $VAR = IO.File.Open
+  - pattern: File.Open(...)
+  - pattern: $VAR = File.Open
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0027.no-System-IO-File-OpenRead
+  languages:
+  - csharp
+  message: Avoid using System.IO.File.OpenRead(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.File.OpenRead()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
+  pattern-either:
+  - pattern: System.IO.File.OpenRead(...)
+  - pattern: $VAR = System.IO.File.OpenRead
+  - pattern: IO.File.OpenRead(...)
+  - pattern: $VAR = IO.File.OpenRead
+  - pattern: File.OpenRead(...)
+  - pattern: $VAR = File.OpenRead
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0028.no-System-IO-File-OpenWrite
+  languages:
+  - csharp
+  message: Avoid using System.IO.File.OpenWrite(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.File.OpenWrite()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: System.IO.File.OpenWrite(...)
+  - pattern: $VAR = System.IO.File.OpenWrite
+  - pattern: IO.File.OpenWrite(...)
+  - pattern: $VAR = IO.File.OpenWrite
+  - pattern: File.OpenWrite(...)
+  - pattern: $VAR = File.OpenWrite
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0029.no-System-IO-File-ReadAllBytes
+  languages:
+  - csharp
+  message: Avoid using System.IO.File.ReadAllBytes(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.File.ReadAllBytes()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
+  pattern-either:
+  - pattern: System.IO.File.ReadAllBytes(...)
+  - pattern: $VAR = System.IO.File.ReadAllBytes
+  - pattern: IO.File.ReadAllBytes(...)
+  - pattern: $VAR = IO.File.ReadAllBytes
+  - pattern: File.ReadAllBytes(...)
+  - pattern: $VAR = File.ReadAllBytes
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0030.no-System-IO-File-ReadAllLines
+  languages:
+  - csharp
+  message: Avoid using System.IO.File.ReadAllLines(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.File.ReadAllLines()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
+  pattern-either:
+  - pattern: System.IO.File.ReadAllLines(...)
+  - pattern: $VAR = System.IO.File.ReadAllLines
+  - pattern: IO.File.ReadAllLines(...)
+  - pattern: $VAR = IO.File.ReadAllLines
+  - pattern: File.ReadAllLines(...)
+  - pattern: $VAR = File.ReadAllLines
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0031.no-System-IO-File-ReadAllText
+  languages:
+  - csharp
+  message: Avoid using System.IO.File.ReadAllText(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.File.ReadAllText()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
+  pattern-either:
+  - pattern: System.IO.File.ReadAllText(...)
+  - pattern: $VAR = System.IO.File.ReadAllText
+  - pattern: IO.File.ReadAllText(...)
+  - pattern: $VAR = IO.File.ReadAllText
+  - pattern: File.ReadAllText(...)
+  - pattern: $VAR = File.ReadAllText
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0032.no-System-IO-File-WriteAllLines
+  languages:
+  - csharp
+  message: Avoid using System.IO.File.WriteAllLines(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.File.WriteAllLines()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: System.IO.File.WriteAllLines(...)
+  - pattern: $VAR = System.IO.File.WriteAllLines
+  - pattern: IO.File.WriteAllLines(...)
+  - pattern: $VAR = IO.File.WriteAllLines
+  - pattern: File.WriteAllLines(...)
+  - pattern: $VAR = File.WriteAllLines
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0033.no-System-IO-FileInfo-CopyTo
+  languages:
+  - csharp
+  message: Avoid using System.IO.FileInfo.CopyTo(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.FileInfo.CopyTo()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: System.IO.FileInfo.CopyTo(...)
+  - pattern: $VAR = System.IO.FileInfo.CopyTo
+  - pattern: IO.FileInfo.CopyTo(...)
+  - pattern: $VAR = IO.FileInfo.CopyTo
+  - pattern: FileInfo.CopyTo(...)
+  - pattern: $VAR = FileInfo.CopyTo
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0034.no-System-IO-FileInfo-Delete
+  languages:
+  - csharp
+  message: Avoid using System.IO.FileInfo.Delete(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.FileInfo.Delete()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
+  pattern-either:
+  - pattern: System.IO.FileInfo.Delete(...)
+  - pattern: $VAR = System.IO.FileInfo.Delete
+  - pattern: IO.FileInfo.Delete(...)
+  - pattern: $VAR = IO.FileInfo.Delete
+  - pattern: FileInfo.Delete(...)
+  - pattern: $VAR = FileInfo.Delete
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0035.no-System-IO-FileInfo-MoveTo
+  languages:
+  - csharp
+  message: Avoid using System.IO.FileInfo.MoveTo(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.FileInfo.MoveTo()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: System.IO.FileInfo.MoveTo(...)
+  - pattern: $VAR = System.IO.FileInfo.MoveTo
+  - pattern: IO.FileInfo.MoveTo(...)
+  - pattern: $VAR = IO.FileInfo.MoveTo
+  - pattern: FileInfo.MoveTo(...)
+  - pattern: $VAR = FileInfo.MoveTo
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0036.no-System-IO-FileInfo-OpenRead
+  languages:
+  - csharp
+  message: Avoid using System.IO.FileInfo.OpenRead(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.FileInfo.OpenRead()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
+  pattern-either:
+  - pattern: System.IO.FileInfo.OpenRead(...)
+  - pattern: $VAR = System.IO.FileInfo.OpenRead
+  - pattern: IO.FileInfo.OpenRead(...)
+  - pattern: $VAR = IO.FileInfo.OpenRead
+  - pattern: FileInfo.OpenRead(...)
+  - pattern: $VAR = FileInfo.OpenRead
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0037.no-System-IO-FileInfo-OpenWrite
+  languages:
+  - csharp
+  message: Avoid using System.IO.FileInfo.OpenWrite(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.FileInfo.OpenWrite()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: System.IO.FileInfo.OpenWrite(...)
+  - pattern: $VAR = System.IO.FileInfo.OpenWrite
+  - pattern: IO.FileInfo.OpenWrite(...)
+  - pattern: $VAR = IO.FileInfo.OpenWrite
+  - pattern: FileInfo.OpenWrite(...)
+  - pattern: $VAR = FileInfo.OpenWrite
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0038.no-System-IO-Path-Combine
+  languages:
+  - csharp
+  message: Avoid using System.IO.Path.Combine(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.Path.Combine()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: System.IO.Path.Combine(...)
+  - pattern: $VAR = System.IO.Path.Combine
+  - pattern: IO.Path.Combine(...)
+  - pattern: $VAR = IO.Path.Combine
+  - pattern: Path.Combine(...)
+  - pattern: $VAR = Path.Combine
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0039.no-System-IO-Path-GetDirectoryName
+  languages:
+  - csharp
+  message: Avoid using System.IO.Path.GetDirectoryName(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.Path.GetDirectoryName()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: System.IO.Path.GetDirectoryName(...)
+  - pattern: $VAR = System.IO.Path.GetDirectoryName
+  - pattern: IO.Path.GetDirectoryName(...)
+  - pattern: $VAR = IO.Path.GetDirectoryName
+  - pattern: Path.GetDirectoryName(...)
+  - pattern: $VAR = Path.GetDirectoryName
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0040.no-System-IO-Path-GetExtension
+  languages:
+  - csharp
+  message: Avoid using System.IO.Path.GetExtension(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.Path.GetExtension()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: System.IO.Path.GetExtension(...)
+  - pattern: $VAR = System.IO.Path.GetExtension
+  - pattern: IO.Path.GetExtension(...)
+  - pattern: $VAR = IO.Path.GetExtension
+  - pattern: Path.GetExtension(...)
+  - pattern: $VAR = Path.GetExtension
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0041.no-System-IO-Path-GetFileName
+  languages:
+  - csharp
+  message: Avoid using System.IO.Path.GetFileName(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.Path.GetFileName()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: System.IO.Path.GetFileName(...)
+  - pattern: $VAR = System.IO.Path.GetFileName
+  - pattern: IO.Path.GetFileName(...)
+  - pattern: $VAR = IO.Path.GetFileName
+  - pattern: Path.GetFileName(...)
+  - pattern: $VAR = Path.GetFileName
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0042.no-System-IO-Path-GetFullPath
+  languages:
+  - csharp
+  message: Avoid using System.IO.Path.GetFullPath(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.Path.GetFullPath()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: System.IO.Path.GetFullPath(...)
+  - pattern: $VAR = System.IO.Path.GetFullPath
+  - pattern: IO.Path.GetFullPath(...)
+  - pattern: $VAR = IO.Path.GetFullPath
+  - pattern: Path.GetFullPath(...)
+  - pattern: $VAR = Path.GetFullPath
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0043.no-System-IO-StreamReader-ReadToEnd
+  languages:
+  - csharp
+  message: Avoid using System.IO.StreamReader.ReadToEnd(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.StreamReader.ReadToEnd()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
+  pattern-either:
+  - pattern: System.IO.StreamReader.ReadToEnd(...)
+  - pattern: $VAR = System.IO.StreamReader.ReadToEnd
+  - pattern: IO.StreamReader.ReadToEnd(...)
+  - pattern: $VAR = IO.StreamReader.ReadToEnd
+  - pattern: StreamReader.ReadToEnd(...)
+  - pattern: $VAR = StreamReader.ReadToEnd
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.System.0044.no-System-IO-StreamWriter-Write
+  languages:
+  - csharp
+  message: Avoid using System.IO.StreamWriter.Write(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: System.IO.StreamWriter.Write()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: System.IO.StreamWriter.Write(...)
+  - pattern: $VAR = System.IO.StreamWriter.Write
+  - pattern: IO.StreamWriter.Write(...)
+  - pattern: $VAR = IO.StreamWriter.Write
+  - pattern: StreamWriter.Write(...)
+  - pattern: $VAR = StreamWriter.Write
+  severity: WARNING
+  tags:
+  - File or System Operation

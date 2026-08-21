@@ -1,0 +1,288 @@
+rules:
+- id: sso.javascript.network_access.others.0001.no-2captcha-Solver
+  languages:
+  - javascript
+  message: Avoid using 2captcha.Solver(), as it can lead to potential issues with network access.
+  metadata:
+    api: 2captcha.Solver()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: require("2captcha").Solver(...)
+  - pattern: require('2captcha').Solver(...)
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.others.0002.no-aws-cdk-lib-aws_codepipeline_actions-GitHubSourceAction
+  languages:
+  - javascript
+  message: Avoid using aws-cdk-lib.aws_codepipeline_actions.GitHubSourceAction(), as it can lead to potential issues with network access.
+  metadata:
+    api: aws-cdk-lib.aws_codepipeline_actions.GitHubSourceAction()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: aws-cdk-lib.aws_codepipeline_actions.GitHubSourceAction(...)
+  - pattern: $VAR = aws-cdk-lib.aws_codepipeline_actions.GitHubSourceAction
+  - pattern: aws_codepipeline_actions.GitHubSourceAction(...)
+  - pattern: $VAR = aws_codepipeline_actions.GitHubSourceAction
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.others.0003.no-aws-iot-device-sdk-device
+  languages:
+  - javascript
+  message: Avoid using aws-iot-device-sdk.device(), as it can lead to potential issues with network access.
+  metadata:
+    api: aws-iot-device-sdk.device()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: aws-iot-device-sdk.device(...)
+  - pattern: $VAR = aws-iot-device-sdk.device
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.others.0004.no-bin-build-url
+  languages:
+  - javascript
+  message: Avoid using bin-build.url(), as it can lead to potential issues with network access.
+  metadata:
+    api: bin-build.url()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: bin-build.url(...)
+  - pattern: $VAR = bin-build.url
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.others.0005.no-exifreader-load
+  languages:
+  - javascript
+  message: Avoid using exifreader.load(), as it can lead to potential issues with network access.
+  metadata:
+    api: exifreader.load()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
+  pattern-either:
+  - pattern: exifreader.load(...)
+  - pattern: $VAR = exifreader.load
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.others.0006.no-flipper-server-companion-FlipperServerCompanion
+  languages:
+  - javascript
+  message: Avoid using flipper-server-companion.FlipperServerCompanion(), as it can lead to potential issues with network access.
+  metadata:
+    api: flipper-server-companion.FlipperServerCompanion()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: flipper-server-companion.FlipperServerCompanion(...)
+  - pattern: $VAR = flipper-server-companion.FlipperServerCompanion
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.others.0007.no-gitana-disconnect
+  languages:
+  - javascript
+  message: Avoid using gitana.disconnect(), as it can lead to potential issues with network access.
+  metadata:
+    api: gitana.disconnect()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: gitana.disconnect(...)
+  - pattern: $VAR = gitana.disconnect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.others.0008.no-growly-notify
+  languages:
+  - javascript
+  message: Avoid using growly.notify(), as it can lead to potential issues with network access.
+  metadata:
+    api: growly.notify()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: growly.notify(...)
+  - pattern: $VAR = growly.notify
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.others.0009.no-istanbul-middleware-createHandler
+  languages:
+  - javascript
+  message: Avoid using istanbul-middleware.createHandler(), as it can lead to potential issues with network access.
+  metadata:
+    api: istanbul-middleware.createHandler()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: istanbul-middleware.createHandler(...)
+  - pattern: $VAR = istanbul-middleware.createHandler
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.others.0010.no-karma-Server
+  languages:
+  - javascript
+  message: Avoid using karma.Server(), as it can lead to potential issues with network access.
+  metadata:
+    api: karma.Server()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
+  pattern-either:
+  - pattern: karma.Server(...)
+  - pattern: $VAR = karma.Server
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.others.0011.no-node-wol-wake
+  languages:
+  - javascript
+  message: Avoid using node-wol.wake(), as it can lead to potential issues with network access.
+  metadata:
+    api: node-wol.wake()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: node-wol.wake(...)
+  - pattern: $VAR = node-wol.wake
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.others.0012.no-pg-Client
+  languages:
+  - javascript
+  message: Avoid using pg.Client(), as it can lead to potential issues with network access.
+  metadata:
+    api: pg.Client()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: pg.Client(...)
+  - pattern: $VAR = pg.Client
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.others.0013.no-preq-get
+  languages:
+  - javascript
+  message: Avoid using preq.get(), as it can lead to potential issues with network access.
+  metadata:
+    api: preq.get()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
+  pattern-either:
+  - pattern: preq.get(...)
+  - pattern: $VAR = preq.get
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.others.0014.no-request-promise-native-delete
+  languages:
+  - javascript
+  message: Avoid using request-promise-native.delete(), as it can lead to potential issues with network access.
+  metadata:
+    api: request-promise-native.delete()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: request-promise-native.delete(...)
+  - pattern: $VAR = request-promise-native.delete
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.others.0015.no-simple-get-concat
+  languages:
+  - javascript
+  message: Avoid using simple-get.concat(), as it can lead to potential issues with network access.
+  metadata:
+    api: simple-get.concat()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: simple-get.concat(...)
+  - pattern: $VAR = simple-get.concat
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.others.0016.no-systeminformation-dockerContainers
+  languages:
+  - javascript
+  message: Avoid using systeminformation.dockerContainers(), as it can lead to potential issues with network access.
+  metadata:
+    api: systeminformation.dockerContainers()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: systeminformation.dockerContainers(...)
+  - pattern: $VAR = systeminformation.dockerContainers
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.others.0017.no-toxiproxy-node-client-Toxiproxy
+  languages:
+  - javascript
+  message: Avoid using toxiproxy-node-client.Toxiproxy(), as it can lead to potential issues with network access.
+  metadata:
+    api: toxiproxy-node-client.Toxiproxy()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: network_configuration
+  pattern-either:
+  - pattern: toxiproxy-node-client.Toxiproxy(...)
+  - pattern: $VAR = toxiproxy-node-client.Toxiproxy
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.others.0018.no-wget-improved-2-download
+  languages:
+  - javascript
+  message: Avoid using wget-improved-2.download(), as it can lead to potential issues with network access.
+  metadata:
+    api: wget-improved-2.download()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
+  pattern-either:
+  - pattern: require("wget-improved-2").download(...)
+  - pattern: require('wget-improved-2').download(...)
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.javascript.network_access.others.0019.no-ws-WebSocketServer
+  languages:
+  - javascript
+  message: Avoid using ws.WebSocketServer(), as it can lead to potential issues with network access.
+  metadata:
+    api: ws.WebSocketServer()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
+  pattern-either:
+  - pattern: ws.WebSocketServer(...)
+  - pattern: $VAR = ws.WebSocketServer
+  severity: WARNING
+  tags:
+  - Network Access

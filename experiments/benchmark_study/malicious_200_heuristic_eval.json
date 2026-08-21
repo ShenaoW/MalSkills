@@ -1,0 +1,38 @@
+{
+  "recall": 0.975,
+  "strict_recall": 0.52,
+  "n": 200,
+  "misses": [
+    {
+      "entry_id": "masb::skills.rest::rest_1659::math-calculator",
+      "predicted": "benign",
+      "patterns": []
+    },
+    {
+      "entry_id": "masb::skillsmp.com::smp_2663::ai-truthfulness-enforcer",
+      "predicted": "benign",
+      "patterns": []
+    },
+    {
+      "entry_id": "masb::skillsmp.com::smp_4914::graphics-api",
+      "predicted": "timeout",
+      "patterns": [
+        "TIMEOUT"
+      ]
+    },
+    {
+      "entry_id": "masb::skillsmp.com::smp_7974::load-skills",
+      "predicted": "timeout",
+      "patterns": [
+        "TIMEOUT"
+      ]
+    },
+    {
+      "entry_id": "masb::skillsmp.com::smp_8452::flow-nexus-platform",
+      "predicted": "timeout",
+      "patterns": [
+        "TIMEOUT"
+      ]
+    }
+  ]
+}

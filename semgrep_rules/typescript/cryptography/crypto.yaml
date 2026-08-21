@@ -1,0 +1,1034 @@
+rules:
+- id: sso.typescript.cryptography.crypto.0001.no-crypto-Certificate
+  languages:
+  - typescript
+  message: Avoid using crypto.Certificate(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.Certificate()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.Certificate(...)
+  - pattern: $VAR = crypto.Certificate
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0002.no-crypto-Cipher
+  languages:
+  - typescript
+  message: Avoid using crypto.Cipher(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.Cipher()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: crypto.Cipher(...)
+  - pattern: $VAR = crypto.Cipher
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0003.no-crypto-Cipheriv
+  languages:
+  - typescript
+  message: Avoid using crypto.Cipheriv(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.Cipheriv()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: crypto.Cipheriv(...)
+  - pattern: $VAR = crypto.Cipheriv
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0004.no-crypto-Decipher
+  languages:
+  - typescript
+  message: Avoid using crypto.Decipher(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.Decipher()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: crypto.Decipher(...)
+  - pattern: $VAR = crypto.Decipher
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0005.no-crypto-Decipheriv
+  languages:
+  - typescript
+  message: Avoid using crypto.Decipheriv(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.Decipheriv()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: crypto.Decipheriv(...)
+  - pattern: $VAR = crypto.Decipheriv
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0006.no-crypto-DiffieHellman
+  languages:
+  - typescript
+  message: Avoid using crypto.DiffieHellman(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.DiffieHellman()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.DiffieHellman(...)
+  - pattern: $VAR = crypto.DiffieHellman
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0007.no-crypto-DiffieHellmanGroup
+  languages:
+  - typescript
+  message: Avoid using crypto.DiffieHellmanGroup(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.DiffieHellmanGroup()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.DiffieHellmanGroup(...)
+  - pattern: $VAR = crypto.DiffieHellmanGroup
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0008.no-crypto-ECDH
+  languages:
+  - typescript
+  message: Avoid using crypto.ECDH(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.ECDH()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.ECDH(...)
+  - pattern: $VAR = crypto.ECDH
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0009.no-crypto-Hash
+  languages:
+  - typescript
+  message: Avoid using crypto.Hash(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.Hash()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: crypto.Hash(...)
+  - pattern: $VAR = crypto.Hash
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0010.no-crypto-Hmac
+  languages:
+  - typescript
+  message: Avoid using crypto.Hmac(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.Hmac()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: crypto.Hmac(...)
+  - pattern: $VAR = crypto.Hmac
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0011.no-crypto-KeyObject
+  languages:
+  - typescript
+  message: Avoid using crypto.KeyObject(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.KeyObject()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: crypto.KeyObject(...)
+  - pattern: $VAR = crypto.KeyObject
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0012.no-crypto-Sign
+  languages:
+  - typescript
+  message: Avoid using crypto.Sign(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.Sign()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.Sign(...)
+  - pattern: $VAR = crypto.Sign
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0013.no-crypto-Verify
+  languages:
+  - typescript
+  message: Avoid using crypto.Verify(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.Verify()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.Verify(...)
+  - pattern: $VAR = crypto.Verify
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0014.no-crypto-X509Certificate
+  languages:
+  - typescript
+  message: Avoid using crypto.X509Certificate(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.X509Certificate()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.X509Certificate(...)
+  - pattern: $VAR = crypto.X509Certificate
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0015.no-crypto-checkPrime
+  languages:
+  - typescript
+  message: Avoid using crypto.checkPrime(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.checkPrime()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.checkPrime(...)
+  - pattern: $VAR = crypto.checkPrime
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0016.no-crypto-checkPrimeSync
+  languages:
+  - typescript
+  message: Avoid using crypto.checkPrimeSync(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.checkPrimeSync()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.checkPrimeSync(...)
+  - pattern: $VAR = crypto.checkPrimeSync
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0017.no-crypto-createCipher
+  languages:
+  - typescript
+  message: Avoid using crypto.createCipher(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.createCipher()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: crypto.createCipher(...)
+  - pattern: $VAR = crypto.createCipher
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0018.no-crypto-createCipheriv
+  languages:
+  - typescript
+  message: Avoid using crypto.createCipheriv(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.createCipheriv()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: crypto.createCipheriv(...)
+  - pattern: $VAR = crypto.createCipheriv
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0019.no-crypto-createDecipher
+  languages:
+  - typescript
+  message: Avoid using crypto.createDecipher(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.createDecipher()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: crypto.createDecipher(...)
+  - pattern: $VAR = crypto.createDecipher
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0020.no-crypto-createDecipheriv
+  languages:
+  - typescript
+  message: Avoid using crypto.createDecipheriv(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.createDecipheriv()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: crypto.createDecipheriv(...)
+  - pattern: $VAR = crypto.createDecipheriv
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0021.no-crypto-createDiffieHellman
+  languages:
+  - typescript
+  message: Avoid using crypto.createDiffieHellman(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.createDiffieHellman()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.createDiffieHellman(...)
+  - pattern: $VAR = crypto.createDiffieHellman
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0022.no-crypto-createDiffieHellmanGroup
+  languages:
+  - typescript
+  message: Avoid using crypto.createDiffieHellmanGroup(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.createDiffieHellmanGroup()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.createDiffieHellmanGroup(...)
+  - pattern: $VAR = crypto.createDiffieHellmanGroup
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0023.no-crypto-createECDH
+  languages:
+  - typescript
+  message: Avoid using crypto.createECDH(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.createECDH()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.createECDH(...)
+  - pattern: $VAR = crypto.createECDH
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0024.no-crypto-createHash
+  languages:
+  - typescript
+  message: Avoid using crypto.createHash(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.createHash()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: crypto.createHash(...)
+  - pattern: $VAR = crypto.createHash
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0025.no-crypto-createHmac
+  languages:
+  - typescript
+  message: Avoid using crypto.createHmac(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.createHmac()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: crypto.createHmac(...)
+  - pattern: $VAR = crypto.createHmac
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0026.no-crypto-createPrivateKey
+  languages:
+  - typescript
+  message: Avoid using crypto.createPrivateKey(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.createPrivateKey()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: crypto.createPrivateKey(...)
+  - pattern: $VAR = crypto.createPrivateKey
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0027.no-crypto-createPublicKey
+  languages:
+  - typescript
+  message: Avoid using crypto.createPublicKey(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.createPublicKey()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: crypto.createPublicKey(...)
+  - pattern: $VAR = crypto.createPublicKey
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0028.no-crypto-createSecretKey
+  languages:
+  - typescript
+  message: Avoid using crypto.createSecretKey(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.createSecretKey()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: crypto.createSecretKey(...)
+  - pattern: $VAR = crypto.createSecretKey
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0029.no-crypto-createSign
+  languages:
+  - typescript
+  message: Avoid using crypto.createSign(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.createSign()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.createSign(...)
+  - pattern: $VAR = crypto.createSign
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0030.no-crypto-createVerify
+  languages:
+  - typescript
+  message: Avoid using crypto.createVerify(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.createVerify()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.createVerify(...)
+  - pattern: $VAR = crypto.createVerify
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0031.no-crypto-diffieHellman
+  languages:
+  - typescript
+  message: Avoid using crypto.diffieHellman(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.diffieHellman()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.diffieHellman(...)
+  - pattern: $VAR = crypto.diffieHellman
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0032.no-crypto-generateKey
+  languages:
+  - typescript
+  message: Avoid using crypto.generateKey(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.generateKey()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: crypto.generateKey(...)
+  - pattern: $VAR = crypto.generateKey
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0033.no-crypto-generateKeyPair
+  languages:
+  - typescript
+  message: Avoid using crypto.generateKeyPair(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.generateKeyPair()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: crypto.generateKeyPair(...)
+  - pattern: $VAR = crypto.generateKeyPair
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0034.no-crypto-generateKeyPairSync
+  languages:
+  - typescript
+  message: Avoid using crypto.generateKeyPairSync(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.generateKeyPairSync()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: crypto.generateKeyPairSync(...)
+  - pattern: $VAR = crypto.generateKeyPairSync
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0035.no-crypto-generateKeySync
+  languages:
+  - typescript
+  message: Avoid using crypto.generateKeySync(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.generateKeySync()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: crypto.generateKeySync(...)
+  - pattern: $VAR = crypto.generateKeySync
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0036.no-crypto-generatePrime
+  languages:
+  - typescript
+  message: Avoid using crypto.generatePrime(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.generatePrime()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.generatePrime(...)
+  - pattern: $VAR = crypto.generatePrime
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0037.no-crypto-generatePrimeSync
+  languages:
+  - typescript
+  message: Avoid using crypto.generatePrimeSync(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.generatePrimeSync()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.generatePrimeSync(...)
+  - pattern: $VAR = crypto.generatePrimeSync
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0038.no-crypto-getCipherInfo
+  languages:
+  - typescript
+  message: Avoid using crypto.getCipherInfo(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.getCipherInfo()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: crypto.getCipherInfo(...)
+  - pattern: $VAR = crypto.getCipherInfo
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0039.no-crypto-getCiphers
+  languages:
+  - typescript
+  message: Avoid using crypto.getCiphers(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.getCiphers()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: crypto.getCiphers(...)
+  - pattern: $VAR = crypto.getCiphers
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0040.no-crypto-getCurves
+  languages:
+  - typescript
+  message: Avoid using crypto.getCurves(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.getCurves()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.getCurves(...)
+  - pattern: $VAR = crypto.getCurves
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0041.no-crypto-getDiffieHellman
+  languages:
+  - typescript
+  message: Avoid using crypto.getDiffieHellman(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.getDiffieHellman()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.getDiffieHellman(...)
+  - pattern: $VAR = crypto.getDiffieHellman
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0042.no-crypto-getFips
+  languages:
+  - typescript
+  message: Avoid using crypto.getFips(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.getFips()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.getFips(...)
+  - pattern: $VAR = crypto.getFips
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0043.no-crypto-getHashes
+  languages:
+  - typescript
+  message: Avoid using crypto.getHashes(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.getHashes()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: crypto.getHashes(...)
+  - pattern: $VAR = crypto.getHashes
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0044.no-crypto-getRandomValues
+  languages:
+  - typescript
+  message: Avoid using crypto.getRandomValues(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.getRandomValues()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: crypto.getRandomValues(...)
+  - pattern: $VAR = crypto.getRandomValues
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0045.no-crypto-hkdf
+  languages:
+  - typescript
+  message: Avoid using crypto.hkdf(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.hkdf()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.hkdf(...)
+  - pattern: $VAR = crypto.hkdf
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0046.no-crypto-hkdfSync
+  languages:
+  - typescript
+  message: Avoid using crypto.hkdfSync(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.hkdfSync()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.hkdfSync(...)
+  - pattern: $VAR = crypto.hkdfSync
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0047.no-crypto-pbkdf2
+  languages:
+  - typescript
+  message: Avoid using crypto.pbkdf2(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.pbkdf2()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.pbkdf2(...)
+  - pattern: $VAR = crypto.pbkdf2
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0048.no-crypto-pbkdf2Sync
+  languages:
+  - typescript
+  message: Avoid using crypto.pbkdf2Sync(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.pbkdf2Sync()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.pbkdf2Sync(...)
+  - pattern: $VAR = crypto.pbkdf2Sync
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0049.no-crypto-privateDecrypt
+  languages:
+  - typescript
+  message: Avoid using crypto.privateDecrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.privateDecrypt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: crypto.privateDecrypt(...)
+  - pattern: $VAR = crypto.privateDecrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0050.no-crypto-privateEncrypt
+  languages:
+  - typescript
+  message: Avoid using crypto.privateEncrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.privateEncrypt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: crypto.privateEncrypt(...)
+  - pattern: $VAR = crypto.privateEncrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0051.no-crypto-prng
+  languages:
+  - typescript
+  message: Avoid using crypto.prng(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.prng()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.prng(...)
+  - pattern: $VAR = crypto.prng
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0052.no-crypto-pseudoRandomBytes
+  languages:
+  - typescript
+  message: Avoid using crypto.pseudoRandomBytes(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.pseudoRandomBytes()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: crypto.pseudoRandomBytes(...)
+  - pattern: $VAR = crypto.pseudoRandomBytes
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0053.no-crypto-publicDecrypt
+  languages:
+  - typescript
+  message: Avoid using crypto.publicDecrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.publicDecrypt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: crypto.publicDecrypt(...)
+  - pattern: $VAR = crypto.publicDecrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0054.no-crypto-publicEncrypt
+  languages:
+  - typescript
+  message: Avoid using crypto.publicEncrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.publicEncrypt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: crypto.publicEncrypt(...)
+  - pattern: $VAR = crypto.publicEncrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0055.no-crypto-randomBytes
+  languages:
+  - typescript
+  message: Avoid using crypto.randomBytes(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.randomBytes()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: crypto.randomBytes(...)
+  - pattern: $VAR = crypto.randomBytes
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0056.no-crypto-randomFill
+  languages:
+  - typescript
+  message: Avoid using crypto.randomFill(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.randomFill()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: crypto.randomFill(...)
+  - pattern: $VAR = crypto.randomFill
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0057.no-crypto-randomFillSync
+  languages:
+  - typescript
+  message: Avoid using crypto.randomFillSync(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.randomFillSync()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: crypto.randomFillSync(...)
+  - pattern: $VAR = crypto.randomFillSync
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0058.no-crypto-randomInt
+  languages:
+  - typescript
+  message: Avoid using crypto.randomInt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.randomInt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: crypto.randomInt(...)
+  - pattern: $VAR = crypto.randomInt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0059.no-crypto-randomUUID
+  languages:
+  - typescript
+  message: Avoid using crypto.randomUUID(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.randomUUID()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: crypto.randomUUID(...)
+  - pattern: $VAR = crypto.randomUUID
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0060.no-crypto-rng
+  languages:
+  - typescript
+  message: Avoid using crypto.rng(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.rng()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.rng(...)
+  - pattern: $VAR = crypto.rng
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0061.no-crypto-scrypt
+  languages:
+  - typescript
+  message: Avoid using crypto.scrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.scrypt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.scrypt(...)
+  - pattern: $VAR = crypto.scrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0062.no-crypto-scryptSync
+  languages:
+  - typescript
+  message: Avoid using crypto.scryptSync(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.scryptSync()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.scryptSync(...)
+  - pattern: $VAR = crypto.scryptSync
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0063.no-crypto-secureHeapUsed
+  languages:
+  - typescript
+  message: Avoid using crypto.secureHeapUsed(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.secureHeapUsed()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.secureHeapUsed(...)
+  - pattern: $VAR = crypto.secureHeapUsed
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0064.no-crypto-setEngine
+  languages:
+  - typescript
+  message: Avoid using crypto.setEngine(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.setEngine()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.setEngine(...)
+  - pattern: $VAR = crypto.setEngine
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0065.no-crypto-setFips
+  languages:
+  - typescript
+  message: Avoid using crypto.setFips(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.setFips()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.setFips(...)
+  - pattern: $VAR = crypto.setFips
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0066.no-crypto-sign
+  languages:
+  - typescript
+  message: Avoid using crypto.sign(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.sign()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.sign(...)
+  - pattern: $VAR = crypto.sign
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0067.no-crypto-timingSafeEqual
+  languages:
+  - typescript
+  message: Avoid using crypto.timingSafeEqual(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.timingSafeEqual()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.timingSafeEqual(...)
+  - pattern: $VAR = crypto.timingSafeEqual
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0068.no-crypto-verify
+  languages:
+  - typescript
+  message: Avoid using crypto.verify(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto.verify()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto.verify(...)
+  - pattern: $VAR = crypto.verify
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.typescript.cryptography.crypto.0069.no-require-crypto
+  languages:
+  - typescript
+  message: Avoid using require('crypto'), as it can lead to potential issues with cryptography.
+  metadata:
+    api: require('crypto')
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern: require('crypto')
+  severity: WARNING
+  tags:
+  - Cryptography

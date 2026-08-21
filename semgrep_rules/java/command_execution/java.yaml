@@ -1,0 +1,318 @@
+rules:
+- id: sso.java.command_execution.java.0001.no-java-lang-Class-forName
+  languages:
+  - java
+  message: Avoid using java.lang.Class.forName(), as it can lead to potential issues with command execution.
+  metadata:
+    api: java.lang.Class.forName()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: new java.lang.Class.forName(...)
+  - pattern: java.lang.Class.forName(...)
+  - pattern: $VAR = java.lang.Class.forName
+  - pattern: new lang.Class.forName(...)
+  - pattern: lang.Class.forName(...)
+  - pattern: $VAR = lang.Class.forName
+  - pattern: new Class.forName(...)
+  - pattern: Class.forName(...)
+  - pattern: $VAR = Class.forName
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.java.command_execution.java.0002.no-java-lang-Class-getDeclaredMethod
+  languages:
+  - java
+  message: Avoid using java.lang.Class.getDeclaredMethod(), as it can lead to potential issues with command execution.
+  metadata:
+    api: java.lang.Class.getDeclaredMethod()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: new java.lang.Class.getDeclaredMethod(...)
+  - pattern: java.lang.Class.getDeclaredMethod(...)
+  - pattern: $VAR = java.lang.Class.getDeclaredMethod
+  - pattern: new lang.Class.getDeclaredMethod(...)
+  - pattern: lang.Class.getDeclaredMethod(...)
+  - pattern: $VAR = lang.Class.getDeclaredMethod
+  - pattern: new Class.getDeclaredMethod(...)
+  - pattern: Class.getDeclaredMethod(...)
+  - pattern: $VAR = Class.getDeclaredMethod
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.java.command_execution.java.0003.no-java-lang-Class-getMethod
+  languages:
+  - java
+  message: Avoid using java.lang.Class.getMethod(), as it can lead to potential issues with command execution.
+  metadata:
+    api: java.lang.Class.getMethod()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: new java.lang.Class.getMethod(...)
+  - pattern: java.lang.Class.getMethod(...)
+  - pattern: $VAR = java.lang.Class.getMethod
+  - pattern: new lang.Class.getMethod(...)
+  - pattern: lang.Class.getMethod(...)
+  - pattern: $VAR = lang.Class.getMethod
+  - pattern: new Class.getMethod(...)
+  - pattern: Class.getMethod(...)
+  - pattern: $VAR = Class.getMethod
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.java.command_execution.java.0004.no-java-lang-Process-getErrorStream
+  languages:
+  - java
+  message: Avoid using java.lang.Process.getErrorStream(), as it can lead to potential issues with command execution.
+  metadata:
+    api: java.lang.Process.getErrorStream()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: new java.lang.Process.getErrorStream(...)
+  - pattern: java.lang.Process.getErrorStream(...)
+  - pattern: $VAR = java.lang.Process.getErrorStream
+  - pattern: new lang.Process.getErrorStream(...)
+  - pattern: lang.Process.getErrorStream(...)
+  - pattern: $VAR = lang.Process.getErrorStream
+  - pattern: new Process.getErrorStream(...)
+  - pattern: Process.getErrorStream(...)
+  - pattern: $VAR = Process.getErrorStream
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.java.command_execution.java.0005.no-java-lang-Process-getInputStream
+  languages:
+  - java
+  message: Avoid using java.lang.Process.getInputStream(), as it can lead to potential issues with command execution.
+  metadata:
+    api: java.lang.Process.getInputStream()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: new java.lang.Process.getInputStream(...)
+  - pattern: java.lang.Process.getInputStream(...)
+  - pattern: $VAR = java.lang.Process.getInputStream
+  - pattern: new lang.Process.getInputStream(...)
+  - pattern: lang.Process.getInputStream(...)
+  - pattern: $VAR = lang.Process.getInputStream
+  - pattern: new Process.getInputStream(...)
+  - pattern: Process.getInputStream(...)
+  - pattern: $VAR = Process.getInputStream
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.java.command_execution.java.0006.no-java-lang-Process-getOutputStream
+  languages:
+  - java
+  message: Avoid using java.lang.Process.getOutputStream(), as it can lead to potential issues with command execution.
+  metadata:
+    api: java.lang.Process.getOutputStream()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: new java.lang.Process.getOutputStream(...)
+  - pattern: java.lang.Process.getOutputStream(...)
+  - pattern: $VAR = java.lang.Process.getOutputStream
+  - pattern: new lang.Process.getOutputStream(...)
+  - pattern: lang.Process.getOutputStream(...)
+  - pattern: $VAR = lang.Process.getOutputStream
+  - pattern: new Process.getOutputStream(...)
+  - pattern: Process.getOutputStream(...)
+  - pattern: $VAR = Process.getOutputStream
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.java.command_execution.java.0007.no-java-lang-Process-waitFor
+  languages:
+  - java
+  message: Avoid using java.lang.Process.waitFor(), as it can lead to potential issues with command execution.
+  metadata:
+    api: java.lang.Process.waitFor()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: new java.lang.Process.waitFor(...)
+  - pattern: java.lang.Process.waitFor(...)
+  - pattern: $VAR = java.lang.Process.waitFor
+  - pattern: new lang.Process.waitFor(...)
+  - pattern: lang.Process.waitFor(...)
+  - pattern: $VAR = lang.Process.waitFor
+  - pattern: new Process.waitFor(...)
+  - pattern: Process.waitFor(...)
+  - pattern: $VAR = Process.waitFor
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.java.command_execution.java.0008.no-java-lang-ProcessBuilder-command
+  languages:
+  - java
+  message: Avoid using java.lang.ProcessBuilder.command(), as it can lead to potential issues with command execution.
+  metadata:
+    api: java.lang.ProcessBuilder.command()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: new java.lang.ProcessBuilder.command(...)
+  - pattern: java.lang.ProcessBuilder.command(...)
+  - pattern: $VAR = java.lang.ProcessBuilder.command
+  - pattern: new lang.ProcessBuilder.command(...)
+  - pattern: lang.ProcessBuilder.command(...)
+  - pattern: $VAR = lang.ProcessBuilder.command
+  - pattern: new ProcessBuilder.command(...)
+  - pattern: ProcessBuilder.command(...)
+  - pattern: $VAR = ProcessBuilder.command
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.java.command_execution.java.0009.no-java-lang-ProcessBuilder-redirectErrorStream
+  languages:
+  - java
+  message: Avoid using java.lang.ProcessBuilder.redirectErrorStream(), as it can lead to potential issues with command execution.
+  metadata:
+    api: java.lang.ProcessBuilder.redirectErrorStream()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: new java.lang.ProcessBuilder.redirectErrorStream(...)
+  - pattern: java.lang.ProcessBuilder.redirectErrorStream(...)
+  - pattern: $VAR = java.lang.ProcessBuilder.redirectErrorStream
+  - pattern: new lang.ProcessBuilder.redirectErrorStream(...)
+  - pattern: lang.ProcessBuilder.redirectErrorStream(...)
+  - pattern: $VAR = lang.ProcessBuilder.redirectErrorStream
+  - pattern: new ProcessBuilder.redirectErrorStream(...)
+  - pattern: ProcessBuilder.redirectErrorStream(...)
+  - pattern: $VAR = ProcessBuilder.redirectErrorStream
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.java.command_execution.java.0010.no-java-lang-ProcessBuilder-start
+  languages:
+  - java
+  message: Avoid using java.lang.ProcessBuilder.start(), as it can lead to potential issues with command execution.
+  metadata:
+    api: java.lang.ProcessBuilder.start()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: new java.lang.ProcessBuilder.start(...)
+  - pattern: java.lang.ProcessBuilder.start(...)
+  - pattern: $VAR = java.lang.ProcessBuilder.start
+  - pattern: new lang.ProcessBuilder.start(...)
+  - pattern: lang.ProcessBuilder.start(...)
+  - pattern: $VAR = lang.ProcessBuilder.start
+  - pattern: new ProcessBuilder.start(...)
+  - pattern: ProcessBuilder.start(...)
+  - pattern: $VAR = ProcessBuilder.start
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.java.command_execution.java.0011.no-java-lang-Runtime-exec
+  languages:
+  - java
+  message: Avoid using java.lang.Runtime.exec(), as it can lead to potential issues with command execution.
+  metadata:
+    api: java.lang.Runtime.exec()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: new java.lang.Runtime.exec(...)
+  - pattern: java.lang.Runtime.exec(...)
+  - pattern: $VAR = java.lang.Runtime.exec
+  - pattern: new lang.Runtime.exec(...)
+  - pattern: lang.Runtime.exec(...)
+  - pattern: $VAR = lang.Runtime.exec
+  - pattern: new Runtime.exec(...)
+  - pattern: Runtime.exec(...)
+  - pattern: $VAR = Runtime.exec
+  - pattern: new exec(...)
+  - pattern: exec(...)
+  - pattern: $VAR = exec
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.java.command_execution.java.0012.no-java-lang-Runtime-getRuntime
+  languages:
+  - java
+  message: Avoid using java.lang.Runtime.getRuntime(), as it can lead to potential issues with command execution.
+  metadata:
+    api: java.lang.Runtime.getRuntime()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: new java.lang.Runtime.getRuntime(...)
+  - pattern: java.lang.Runtime.getRuntime(...)
+  - pattern: $VAR = java.lang.Runtime.getRuntime
+  - pattern: new lang.Runtime.getRuntime(...)
+  - pattern: lang.Runtime.getRuntime(...)
+  - pattern: $VAR = lang.Runtime.getRuntime
+  - pattern: new Runtime.getRuntime(...)
+  - pattern: Runtime.getRuntime(...)
+  - pattern: $VAR = Runtime.getRuntime
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.java.command_execution.java.0013.no-java-lang-reflect-Constructor-newInstance
+  languages:
+  - java
+  message: Avoid using java.lang.reflect.Constructor.newInstance(), as it can lead to potential issues with command execution.
+  metadata:
+    api: java.lang.reflect.Constructor.newInstance()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: new java.lang.reflect.Constructor.newInstance(...)
+  - pattern: java.lang.reflect.Constructor.newInstance(...)
+  - pattern: $VAR = java.lang.reflect.Constructor.newInstance
+  - pattern: new lang.reflect.Constructor.newInstance(...)
+  - pattern: lang.reflect.Constructor.newInstance(...)
+  - pattern: $VAR = lang.reflect.Constructor.newInstance
+  - pattern: new reflect.Constructor.newInstance(...)
+  - pattern: reflect.Constructor.newInstance(...)
+  - pattern: $VAR = reflect.Constructor.newInstance
+  - pattern: new Constructor.newInstance(...)
+  - pattern: Constructor.newInstance(...)
+  - pattern: $VAR = Constructor.newInstance
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.java.command_execution.java.0014.no-java-lang-reflect-Method-invoke
+  languages:
+  - java
+  message: Avoid using java.lang.reflect.Method.invoke(), as it can lead to potential issues with command execution.
+  metadata:
+    api: java.lang.reflect.Method.invoke()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: new java.lang.reflect.Method.invoke(...)
+  - pattern: java.lang.reflect.Method.invoke(...)
+  - pattern: $VAR = java.lang.reflect.Method.invoke
+  - pattern: new lang.reflect.Method.invoke(...)
+  - pattern: lang.reflect.Method.invoke(...)
+  - pattern: $VAR = lang.reflect.Method.invoke
+  - pattern: new reflect.Method.invoke(...)
+  - pattern: reflect.Method.invoke(...)
+  - pattern: $VAR = reflect.Method.invoke
+  - pattern: new Method.invoke(...)
+  - pattern: Method.invoke(...)
+  - pattern: $VAR = Method.invoke
+  severity: WARNING
+  tags:
+  - Command Execution

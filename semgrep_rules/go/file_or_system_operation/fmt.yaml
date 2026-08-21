@@ -1,0 +1,91 @@
+rules:
+- id: sso.go.file_or_system_operation.fmt.0001.no-fmt.Fprint
+  languages:
+  - go
+  message: Avoid using fmt.Fprint(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fmt.Fprint()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fmt.Fprint(...)
+  - pattern: $VAR = fmt.Fprint
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.go.file_or_system_operation.fmt.0002.no-fmt.Fprintf
+  languages:
+  - go
+  message: Avoid using fmt.Fprintf(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fmt.Fprintf()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fmt.Fprintf(...)
+  - pattern: $VAR = fmt.Fprintf
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.go.file_or_system_operation.fmt.0003.no-fmt.Fprintln
+  languages:
+  - go
+  message: Avoid using fmt.Fprintln(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fmt.Fprintln()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fmt.Fprintln(...)
+  - pattern: $VAR = fmt.Fprintln
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.go.file_or_system_operation.fmt.0004.no-fmt.Print
+  languages:
+  - go
+  message: Avoid using fmt.Print(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fmt.Print()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fmt.Print(...)
+  - pattern: $VAR = fmt.Print
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.go.file_or_system_operation.fmt.0005.no-fmt.Printf
+  languages:
+  - go
+  message: Avoid using fmt.Printf(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fmt.Printf()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fmt.Printf(...)
+  - pattern: $VAR = fmt.Printf
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.go.file_or_system_operation.fmt.0006.no-fmt.Println
+  languages:
+  - go
+  message: Avoid using fmt.Println(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fmt.Println()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fmt.Println(...)
+  - pattern: $VAR = fmt.Println
+  severity: WARNING
+  tags:
+  - File or System Operation

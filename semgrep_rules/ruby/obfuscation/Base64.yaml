@@ -1,0 +1,61 @@
+rules:
+- id: sso.ruby.obfuscation.Base64.0001.no-Base64.decode64
+  languages:
+  - ruby
+  message: Avoid using Base64.decode64(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: Base64.decode64()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: decoding
+  pattern-either:
+  - pattern: Base64.decode64(...)
+  - pattern: $VAR = Base64.decode64
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.Base64.0002.no-Base64.encode64
+  languages:
+  - ruby
+  message: Avoid using Base64.encode64(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: Base64.encode64()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: Base64.encode64(...)
+  - pattern: $VAR = Base64.encode64
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.Base64.0003.no-Base64.strict_decode64
+  languages:
+  - ruby
+  message: Avoid using Base64.strict_decode64(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: Base64.strict_decode64()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: decoding
+  pattern-either:
+  - pattern: Base64.strict_decode64(...)
+  - pattern: $VAR = Base64.strict_decode64
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.ruby.obfuscation.Base64.0004.no-Base64.strict_encode64
+  languages:
+  - ruby
+  message: Avoid using Base64.strict_encode64(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: Base64.strict_encode64()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: Base64.strict_encode64(...)
+  - pattern: $VAR = Base64.strict_encode64
+  severity: WARNING
+  tags:
+  - Obfuscation

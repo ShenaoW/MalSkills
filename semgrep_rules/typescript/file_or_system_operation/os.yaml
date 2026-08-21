@@ -1,0 +1,314 @@
+rules:
+- id: sso.typescript.file_or_system_operation.os.0001.no-os-arch
+  languages:
+  - typescript
+  message: Avoid using os.arch(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.arch()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: os.arch(...)
+  - pattern: $VAR = os.arch
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.os.0002.no-os-availableParallelism
+  languages:
+  - typescript
+  message: Avoid using os.availableParallelism(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.availableParallelism()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: os.availableParallelism(...)
+  - pattern: $VAR = os.availableParallelism
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.os.0003.no-os-cpus
+  languages:
+  - typescript
+  message: Avoid using os.cpus(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.cpus()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: os.cpus(...)
+  - pattern: $VAR = os.cpus
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.os.0004.no-os-endianness
+  languages:
+  - typescript
+  message: Avoid using os.endianness(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.endianness()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: os.endianness(...)
+  - pattern: $VAR = os.endianness
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.os.0005.no-os-freemem
+  languages:
+  - typescript
+  message: Avoid using os.freemem(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.freemem()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: os.freemem(...)
+  - pattern: $VAR = os.freemem
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.os.0006.no-os-getPriority
+  languages:
+  - typescript
+  message: Avoid using os.getPriority(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.getPriority()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: os.getPriority(...)
+  - pattern: $VAR = os.getPriority
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.os.0007.no-os-homedir
+  languages:
+  - typescript
+  message: Avoid using os.homedir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.homedir()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: os.homedir(...)
+  - pattern: $VAR = os.homedir
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.os.0008.no-os-hostname
+  languages:
+  - typescript
+  message: Avoid using os.hostname(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.hostname()
+    category: File or System Operation
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: system_information_access
+  pattern-either:
+  - pattern: os.hostname(...)
+  - pattern: $VAR = os.hostname
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.os.0009.no-os-loadavg
+  languages:
+  - typescript
+  message: Avoid using os.loadavg(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.loadavg()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
+  pattern-either:
+  - pattern: os.loadavg(...)
+  - pattern: $VAR = os.loadavg
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.os.0010.no-os-machine
+  languages:
+  - typescript
+  message: Avoid using os.machine(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.machine()
+    category: File or System Operation
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: system_information_access
+  pattern-either:
+  - pattern: os.machine(...)
+  - pattern: $VAR = os.machine
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.os.0011.no-os-networkInterfaces
+  languages:
+  - typescript
+  message: Avoid using os.networkInterfaces(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.networkInterfaces()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: os.networkInterfaces(...)
+  - pattern: $VAR = os.networkInterfaces
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.os.0012.no-os-platform
+  languages:
+  - typescript
+  message: Avoid using os.platform(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.platform()
+    category: File or System Operation
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: system_information_access
+  pattern-either:
+  - pattern: os.platform(...)
+  - pattern: $VAR = os.platform
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.os.0013.no-os-release
+  languages:
+  - typescript
+  message: Avoid using os.release(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.release()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: os.release(...)
+  - pattern: $VAR = os.release
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.os.0014.no-os-setPriority
+  languages:
+  - typescript
+  message: Avoid using os.setPriority(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.setPriority()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: os.setPriority(...)
+  - pattern: $VAR = os.setPriority
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.os.0015.no-os-tmpdir
+  languages:
+  - typescript
+  message: Avoid using os.tmpdir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.tmpdir()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: os.tmpdir(...)
+  - pattern: $VAR = os.tmpdir
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.os.0016.no-os-totalmem
+  languages:
+  - typescript
+  message: Avoid using os.totalmem(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.totalmem()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: os.totalmem(...)
+  - pattern: $VAR = os.totalmem
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.os.0017.no-os-type
+  languages:
+  - typescript
+  message: Avoid using os.type(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.type()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: os.type(...)
+  - pattern: $VAR = os.type
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.os.0018.no-os-uptime
+  languages:
+  - typescript
+  message: Avoid using os.uptime(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.uptime()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: os.uptime(...)
+  - pattern: $VAR = os.uptime
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.os.0019.no-os-userInfo
+  languages:
+  - typescript
+  message: Avoid using os.userInfo(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.userInfo()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: os.userInfo(...)
+  - pattern: $VAR = os.userInfo
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.os.0020.no-os-version
+  languages:
+  - typescript
+  message: Avoid using os.version(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: os.version()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: os.version(...)
+  - pattern: $VAR = os.version
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.os.0021.no-require-os
+  languages:
+  - typescript
+  message: Avoid using require('os'), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: require('os')
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern: require('os')
+  severity: WARNING
+  tags:
+  - File or System Operation

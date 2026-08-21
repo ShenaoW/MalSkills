@@ -1,0 +1,198 @@
+rules:
+- id: sso.javascript.command_execution.others.0001.no-eval
+  languages:
+  - javascript
+  message: Avoid using eval(), as it can lead to potential issues with command execution.
+  metadata:
+    api: eval()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: eval(...)
+  - pattern: $VAR = eval
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.javascript.command_execution.others.0002.no-7zip-min-win-asar-support-unpack
+  languages:
+  - javascript
+  message: Avoid using 7zip-min-win-asar-support.unpack(), as it can lead to potential issues with command execution.
+  metadata:
+    api: 7zip-min-win-asar-support.unpack()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: require("7zip-min-win-asar-support").unpack(...)
+  - pattern: require('7zip-min-win-asar-support').unpack(...)
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.javascript.command_execution.others.0003.no-ape-releasing-releasePackage
+  languages:
+  - javascript
+  message: Avoid using ape-releasing.releasePackage(), as it can lead to potential issues with command execution.
+  metadata:
+    api: ape-releasing.releasePackage()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: ape-releasing.releasePackage(...)
+  - pattern: $VAR = ape-releasing.releasePackage
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.javascript.command_execution.others.0004.no-cron-CronJob
+  languages:
+  - javascript
+  message: Avoid using cron.CronJob(), as it can lead to potential issues with command execution.
+  metadata:
+    api: cron.CronJob()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: cron.CronJob(...)
+  - pattern: $VAR = cron.CronJob
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.javascript.command_execution.others.0005.no-cross-spawn-sync
+  languages:
+  - javascript
+  message: Avoid using cross-spawn.sync(), as it can lead to potential issues with command execution.
+  metadata:
+    api: cross-spawn.sync()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: cross-spawn.sync(...)
+  - pattern: $VAR = cross-spawn.sync
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.javascript.command_execution.others.0006.no-html-pdf-create
+  languages:
+  - javascript
+  message: Avoid using html-pdf.create(), as it can lead to potential issues with command execution.
+  metadata:
+    api: html-pdf.create()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: html-pdf.create(...)
+  - pattern: $VAR = html-pdf.create
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.javascript.command_execution.others.0007.no-imagemagick-cli-exec
+  languages:
+  - javascript
+  message: Avoid using imagemagick-cli.exec(), as it can lead to potential issues with command execution.
+  metadata:
+    api: imagemagick-cli.exec()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: imagemagick-cli.exec(...)
+  - pattern: $VAR = imagemagick-cli.exec
+  - pattern: exec(...)
+  - pattern: $VAR = exec
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.javascript.command_execution.others.0008.no-node-cmd-runSync
+  languages:
+  - javascript
+  message: Avoid using node-cmd.runSync(), as it can lead to potential issues with command execution.
+  metadata:
+    api: node-cmd.runSync()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: node-cmd.runSync(...)
+  - pattern: $VAR = node-cmd.runSync
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.javascript.command_execution.others.0009.no-node-pty-prebuilt-multiarch-cp-spawn
+  languages:
+  - javascript
+  message: Avoid using node-pty-prebuilt-multiarch-cp.spawn(), as it can lead to potential issues with command execution.
+  metadata:
+    api: node-pty-prebuilt-multiarch-cp.spawn()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: node-pty-prebuilt-multiarch-cp.spawn(...)
+  - pattern: $VAR = node-pty-prebuilt-multiarch-cp.spawn
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.javascript.command_execution.others.0010.no-node-pty-spawn
+  languages:
+  - javascript
+  message: Avoid using node-pty.spawn(), as it can lead to potential issues with command execution.
+  metadata:
+    api: node-pty.spawn()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: node-pty.spawn(...)
+  - pattern: $VAR = node-pty.spawn
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.javascript.command_execution.others.0011.no-osenv-home
+  languages:
+  - javascript
+  message: Avoid using osenv.home(), as it can lead to potential issues with command execution.
+  metadata:
+    api: osenv.home()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: osenv.home(...)
+  - pattern: $VAR = osenv.home
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.javascript.command_execution.others.0012.no-regedit-putValue
+  languages:
+  - javascript
+  message: Avoid using regedit.putValue(), as it can lead to potential issues with command execution.
+  metadata:
+    api: regedit.putValue()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: regedit.putValue(...)
+  - pattern: $VAR = regedit.putValue
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.javascript.command_execution.others.0013.no-vscode-test-runTests
+  languages:
+  - javascript
+  message: Avoid using vscode-test.runTests(), as it can lead to potential issues with command execution.
+  metadata:
+    api: vscode-test.runTests()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: vscode-test.runTests(...)
+  - pattern: $VAR = vscode-test.runTests
+  severity: WARNING
+  tags:
+  - Command Execution

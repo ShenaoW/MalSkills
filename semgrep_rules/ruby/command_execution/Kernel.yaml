@@ -1,0 +1,65 @@
+rules:
+- id: sso.ruby.command_execution.Kernel.0001.no-Kernel.exec
+  languages:
+  - ruby
+  message: Avoid using Kernel.exec(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Kernel.exec()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: Kernel.exec(...)
+  - pattern: $VAR = Kernel.exec
+  - pattern: exec(...)
+  - pattern: $VAR = exec
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.ruby.command_execution.Kernel.0002.no-Kernel.open
+  languages:
+  - ruby
+  message: Avoid using Kernel.open(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Kernel.open()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: Kernel.open(...)
+  - pattern: $VAR = Kernel.open
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.ruby.command_execution.Kernel.0003.no-Kernel.send
+  languages:
+  - ruby
+  message: Avoid using Kernel.send(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Kernel.send()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: Kernel.send(...)
+  - pattern: $VAR = Kernel.send
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.ruby.command_execution.Kernel.0004.no-Kernel.system
+  languages:
+  - ruby
+  message: Avoid using Kernel.system(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Kernel.system()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: Kernel.system(...)
+  - pattern: $VAR = Kernel.system
+  - pattern: system(...)
+  - pattern: $VAR = system
+  severity: WARNING
+  tags:
+  - Command Execution

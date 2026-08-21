@@ -1,0 +1,301 @@
+rules:
+- id: sso.c.command_execution.others.0001.no-execl
+  languages:
+  - c
+  message: Avoid using execl(), as it can lead to potential issues with command execution.
+  metadata:
+    api: execl()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: execl(...)
+  - pattern: $VAR = execl
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.c.command_execution.others.0002.no-execle
+  languages:
+  - c
+  message: Avoid using execle(), as it can lead to potential issues with command execution.
+  metadata:
+    api: execle()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: execle(...)
+  - pattern: $VAR = execle
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.c.command_execution.others.0003.no-execlp
+  languages:
+  - c
+  message: Avoid using execlp(), as it can lead to potential issues with command execution.
+  metadata:
+    api: execlp()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: execlp(...)
+  - pattern: $VAR = execlp
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.c.command_execution.others.0004.no-execp
+  languages:
+  - c
+  message: Avoid using execp(), as it can lead to potential issues with command execution.
+  metadata:
+    api: execp()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: execp(...)
+  - pattern: $VAR = execp
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.c.command_execution.others.0005.no-execv
+  languages:
+  - c
+  message: Avoid using execv(), as it can lead to potential issues with command execution.
+  metadata:
+    api: execv()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: execv(...)
+  - pattern: $VAR = execv
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.c.command_execution.others.0006.no-execve
+  languages:
+  - c
+  message: Avoid using execve(), as it can lead to potential issues with command execution.
+  metadata:
+    api: execve()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: execve(...)
+  - pattern: $VAR = execve
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.c.command_execution.others.0007.no-execvp
+  languages:
+  - c
+  message: Avoid using execvp(), as it can lead to potential issues with command execution.
+  metadata:
+    api: execvp()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: execvp(...)
+  - pattern: $VAR = execvp
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.c.command_execution.others.0008.no-fork
+  languages:
+  - c
+  message: Avoid using fork(), as it can lead to potential issues with command execution.
+  metadata:
+    api: fork()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: fork(...)
+  - pattern: $VAR = fork
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.c.command_execution.others.0009.no-pclose
+  languages:
+  - c
+  message: Avoid using pclose(), as it can lead to potential issues with command execution.
+  metadata:
+    api: pclose()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: pclose(...)
+  - pattern: $VAR = pclose
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.c.command_execution.others.0010.no-popen
+  languages:
+  - c
+  message: Avoid using popen(), as it can lead to potential issues with command execution.
+  metadata:
+    api: popen()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: popen(...)
+  - pattern: $VAR = popen
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.c.command_execution.others.0011.no-setenv
+  languages:
+  - c
+  message: Avoid using setenv(), as it can lead to potential issues with command execution.
+  metadata:
+    api: setenv()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: setenv(...)
+  - pattern: $VAR = setenv
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.c.command_execution.others.0012.no-setgid
+  languages:
+  - c
+  message: Avoid using setgid(), as it can lead to potential issues with command execution.
+  metadata:
+    api: setgid()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: setgid(...)
+  - pattern: $VAR = setgid
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.c.command_execution.others.0013.no-setuid
+  languages:
+  - c
+  message: Avoid using setuid(), as it can lead to potential issues with command execution.
+  metadata:
+    api: setuid()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: setuid(...)
+  - pattern: $VAR = setuid
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.c.command_execution.others.0014.no-spawn
+  languages:
+  - c
+  message: Avoid using spawn(), as it can lead to potential issues with command execution.
+  metadata:
+    api: spawn()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: spawn(...)
+  - pattern: $VAR = spawn
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.c.command_execution.others.0015.no-system
+  languages:
+  - c
+  message: Avoid using system(), as it can lead to potential issues with command execution.
+  metadata:
+    api: system()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: system(...)
+  - pattern: $VAR = system
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.c.command_execution.others.0016.no-system
+  languages:
+  - c
+  message: Avoid using system(), as it can lead to potential issues with command execution.
+  metadata:
+    api: system()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: system(...)
+  - pattern: $VAR = system
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.c.command_execution.others.0017.no-unsetenv
+  languages:
+  - c
+  message: Avoid using unsetenv(), as it can lead to potential issues with command execution.
+  metadata:
+    api: unsetenv()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: unsetenv(...)
+  - pattern: $VAR = unsetenv
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.c.command_execution.others.0018.no-vfork
+  languages:
+  - c
+  message: Avoid using vfork(), as it can lead to potential issues with command execution.
+  metadata:
+    api: vfork()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: vfork(...)
+  - pattern: $VAR = vfork
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.c.command_execution.others.0019.no-wait
+  languages:
+  - c
+  message: Avoid using wait(), as it can lead to potential issues with command execution.
+  metadata:
+    api: wait()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: wait(...)
+  - pattern: $VAR = wait
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.c.command_execution.others.0020.no-waitpid
+  languages:
+  - c
+  message: Avoid using waitpid(), as it can lead to potential issues with command execution.
+  metadata:
+    api: waitpid()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: waitpid(...)
+  - pattern: $VAR = waitpid
+  severity: WARNING
+  tags:
+  - Command Execution

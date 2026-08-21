@@ -1,0 +1,50 @@
+rules:
+- id: sso.go.command_execution.syscall.0001.no-syscall.Exec
+  languages:
+  - go
+  message: Avoid using syscall.Exec(), as it can lead to potential issues with command execution.
+  metadata:
+    api: syscall.Exec()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: syscall.Exec(...)
+  - pattern: $VAR = syscall.Exec
+  - pattern: Exec(...)
+  - pattern: $VAR = Exec
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.go.command_execution.syscall.0002.no-syscall.ForkExec
+  languages:
+  - go
+  message: Avoid using syscall.ForkExec(), as it can lead to potential issues with command execution.
+  metadata:
+    api: syscall.ForkExec()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: syscall.ForkExec(...)
+  - pattern: $VAR = syscall.ForkExec
+  - pattern: ForkExec(...)
+  - pattern: $VAR = ForkExec
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.go.command_execution.syscall.0003.no-syscall.StartProcess
+  languages:
+  - go
+  message: Avoid using syscall.StartProcess(), as it can lead to potential issues with command execution.
+  metadata:
+    api: syscall.StartProcess()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: syscall.StartProcess(...)
+  - pattern: $VAR = syscall.StartProcess
+  severity: WARNING
+  tags:
+  - Command Execution

@@ -1,0 +1,19 @@
+{
+  "schema_version": "malskills-workflow-rule-v1",
+  "rule_id": "formal.graph.reverse_shell",
+  "pattern_name": "Reverse_Shell",
+  "workflow_name": "network_command_execution_response_loop",
+  "severity": "high",
+  "decision_effect": "malicious",
+  "source": "formal",
+  "roles": [
+    {"id": "command_input", "subtypes": ["data_receive"], "min_confidence": 0.0},
+    {"id": "execution", "subtypes": ["system_command_execution", "dynamic_code_execution"], "min_confidence": 0.0},
+    {"id": "response", "subtypes": ["data_send"], "min_confidence": 0.0}
+  ],
+  "relations": [
+    {"kind": "value_flow", "left": "command_input", "right": "execution"},
+    {"kind": "value_flow", "left": "execution", "right": "response"}
+  ],
+  "explanation": "Network input drives command execution whose output flows back to the network."
+}

@@ -1,0 +1,11 @@
+{
+  "owner": "mosonchan2023",
+  "slug": "polymarket-market-maker",
+  "displayName": "Polymarket Market Maker",
+  "latest": {
+    "version": "1.0.1",
+    "publishedAt": 1772752841063,
+    "commit": "https://github.com/openclaw/skills/commit/4ac54b2f33996228f5d82e1f255ade310a892c03"
+  },
+  "history": []
+}

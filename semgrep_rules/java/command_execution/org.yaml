@@ -1,0 +1,122 @@
+rules:
+- id: sso.java.command_execution.org.0001.no-org-apache-commons-exec-CommandLine-parse
+  languages:
+  - java
+  message: Avoid using org.apache.commons.exec.CommandLine.parse(), as it can lead to potential issues with command execution.
+  metadata:
+    api: org.apache.commons.exec.CommandLine.parse()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: new org.apache.commons.exec.CommandLine.parse(...)
+  - pattern: org.apache.commons.exec.CommandLine.parse(...)
+  - pattern: $VAR = org.apache.commons.exec.CommandLine.parse
+  - pattern: new apache.commons.exec.CommandLine.parse(...)
+  - pattern: apache.commons.exec.CommandLine.parse(...)
+  - pattern: $VAR = apache.commons.exec.CommandLine.parse
+  - pattern: new commons.exec.CommandLine.parse(...)
+  - pattern: commons.exec.CommandLine.parse(...)
+  - pattern: $VAR = commons.exec.CommandLine.parse
+  - pattern: new exec.CommandLine.parse(...)
+  - pattern: exec.CommandLine.parse(...)
+  - pattern: $VAR = exec.CommandLine.parse
+  - pattern: new CommandLine.parse(...)
+  - pattern: CommandLine.parse(...)
+  - pattern: $VAR = CommandLine.parse
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.java.command_execution.org.0002.no-org-apache-commons-exec-DefaultExecutor-execute
+  languages:
+  - java
+  message: Avoid using org.apache.commons.exec.DefaultExecutor.execute(), as it can lead to potential issues with command execution.
+  metadata:
+    api: org.apache.commons.exec.DefaultExecutor.execute()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: new org.apache.commons.exec.DefaultExecutor.execute(...)
+  - pattern: org.apache.commons.exec.DefaultExecutor.execute(...)
+  - pattern: $VAR = org.apache.commons.exec.DefaultExecutor.execute
+  - pattern: new apache.commons.exec.DefaultExecutor.execute(...)
+  - pattern: apache.commons.exec.DefaultExecutor.execute(...)
+  - pattern: $VAR = apache.commons.exec.DefaultExecutor.execute
+  - pattern: new commons.exec.DefaultExecutor.execute(...)
+  - pattern: commons.exec.DefaultExecutor.execute(...)
+  - pattern: $VAR = commons.exec.DefaultExecutor.execute
+  - pattern: new exec.DefaultExecutor.execute(...)
+  - pattern: exec.DefaultExecutor.execute(...)
+  - pattern: $VAR = exec.DefaultExecutor.execute
+  - pattern: new DefaultExecutor.execute(...)
+  - pattern: DefaultExecutor.execute(...)
+  - pattern: $VAR = DefaultExecutor.execute
+  - pattern: new execute(...)
+  - pattern: execute(...)
+  - pattern: $VAR = execute
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.java.command_execution.org.0003.no-org-apache-commons-exec-Executor-execute
+  languages:
+  - java
+  message: Avoid using org.apache.commons.exec.Executor.execute(), as it can lead to potential issues with command execution.
+  metadata:
+    api: org.apache.commons.exec.Executor.execute()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: new org.apache.commons.exec.Executor.execute(...)
+  - pattern: org.apache.commons.exec.Executor.execute(...)
+  - pattern: $VAR = org.apache.commons.exec.Executor.execute
+  - pattern: new apache.commons.exec.Executor.execute(...)
+  - pattern: apache.commons.exec.Executor.execute(...)
+  - pattern: $VAR = apache.commons.exec.Executor.execute
+  - pattern: new commons.exec.Executor.execute(...)
+  - pattern: commons.exec.Executor.execute(...)
+  - pattern: $VAR = commons.exec.Executor.execute
+  - pattern: new exec.Executor.execute(...)
+  - pattern: exec.Executor.execute(...)
+  - pattern: $VAR = exec.Executor.execute
+  - pattern: new Executor.execute(...)
+  - pattern: Executor.execute(...)
+  - pattern: $VAR = Executor.execute
+  - pattern: new execute(...)
+  - pattern: execute(...)
+  - pattern: $VAR = execute
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.java.command_execution.org.0004.no-org-codehaus-groovy-runtime-ProcessGroovyMethods-execute
+  languages:
+  - java
+  message: Avoid using org.codehaus.groovy.runtime.ProcessGroovyMethods.execute(), as it can lead to potential issues with command execution.
+  metadata:
+    api: org.codehaus.groovy.runtime.ProcessGroovyMethods.execute()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: new org.codehaus.groovy.runtime.ProcessGroovyMethods.execute(...)
+  - pattern: org.codehaus.groovy.runtime.ProcessGroovyMethods.execute(...)
+  - pattern: $VAR = org.codehaus.groovy.runtime.ProcessGroovyMethods.execute
+  - pattern: new codehaus.groovy.runtime.ProcessGroovyMethods.execute(...)
+  - pattern: codehaus.groovy.runtime.ProcessGroovyMethods.execute(...)
+  - pattern: $VAR = codehaus.groovy.runtime.ProcessGroovyMethods.execute
+  - pattern: new groovy.runtime.ProcessGroovyMethods.execute(...)
+  - pattern: groovy.runtime.ProcessGroovyMethods.execute(...)
+  - pattern: $VAR = groovy.runtime.ProcessGroovyMethods.execute
+  - pattern: new runtime.ProcessGroovyMethods.execute(...)
+  - pattern: runtime.ProcessGroovyMethods.execute(...)
+  - pattern: $VAR = runtime.ProcessGroovyMethods.execute
+  - pattern: new ProcessGroovyMethods.execute(...)
+  - pattern: ProcessGroovyMethods.execute(...)
+  - pattern: $VAR = ProcessGroovyMethods.execute
+  - pattern: new execute(...)
+  - pattern: execute(...)
+  - pattern: $VAR = execute
+  severity: WARNING
+  tags:
+  - Command Execution

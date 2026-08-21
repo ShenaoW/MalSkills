@@ -1,0 +1,16 @@
+rules:
+- id: sso.ruby.file_or_system_operation.others.0001.no-Tempfile.new
+  languages:
+  - ruby
+  message: Avoid using Tempfile.new(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: Tempfile.new()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
+  pattern-either:
+  - pattern: Tempfile.new(...)
+  - pattern: $VAR = Tempfile.new
+  severity: WARNING
+  tags:
+  - File or System Operation

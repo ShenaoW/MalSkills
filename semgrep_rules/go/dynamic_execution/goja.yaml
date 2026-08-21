@@ -1,0 +1,33 @@
+rules:
+- id: sso.go.dynamic_execution.goja.0001.no-goja.New
+  languages:
+  - go
+  message: Avoid using goja.New(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: goja.New()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: goja.New(...)
+  - pattern: $VAR = goja.New
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.go.dynamic_execution.goja.0002.no-goja.Runtime.RunString
+  languages:
+  - go
+  message: Avoid using goja.Runtime.RunString(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: goja.Runtime.RunString()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: goja.Runtime.RunString(...)
+  - pattern: $VAR = goja.Runtime.RunString
+  - pattern: Runtime.RunString(...)
+  - pattern: $VAR = Runtime.RunString
+  severity: WARNING
+  tags:
+  - Dynamic Execution

@@ -1,0 +1,76 @@
+rules:
+- id: sso.python.cryptography.rsa.0001.no-rsa-PrivateKey
+  languages:
+  - python
+  message: Avoid using rsa.PrivateKey(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: rsa.PrivateKey()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: rsa.PrivateKey(...)
+  - pattern: $VAR = rsa.PrivateKey
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.python.cryptography.rsa.0002.no-rsa-PublicKey
+  languages:
+  - python
+  message: Avoid using rsa.PublicKey(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: rsa.PublicKey()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: rsa.PublicKey(...)
+  - pattern: $VAR = rsa.PublicKey
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.python.cryptography.rsa.0003.no-rsa-decrypt
+  languages:
+  - python
+  message: Avoid using rsa.decrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: rsa.decrypt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: rsa.decrypt(...)
+  - pattern: $VAR = rsa.decrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.python.cryptography.rsa.0004.no-rsa-encrypt
+  languages:
+  - python
+  message: Avoid using rsa.encrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: rsa.encrypt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: rsa.encrypt(...)
+  - pattern: $VAR = rsa.encrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.python.cryptography.rsa.0005.no-rsa-newkeys
+  languages:
+  - python
+  message: Avoid using rsa.newkeys(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: rsa.newkeys()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: rsa.newkeys(...)
+  - pattern: $VAR = rsa.newkeys
+  severity: WARNING
+  tags:
+  - Cryptography

@@ -1,0 +1,305 @@
+rules:
+- id: sso.java.obfuscation.java.0001.no-java-lang-Class-getDeclaredMethods
+  languages:
+  - java
+  message: Avoid using java.lang.Class.getDeclaredMethods(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: java.lang.Class.getDeclaredMethods()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: new java.lang.Class.getDeclaredMethods(...)
+  - pattern: java.lang.Class.getDeclaredMethods(...)
+  - pattern: $VAR = java.lang.Class.getDeclaredMethods
+  - pattern: new lang.Class.getDeclaredMethods(...)
+  - pattern: lang.Class.getDeclaredMethods(...)
+  - pattern: $VAR = lang.Class.getDeclaredMethods
+  - pattern: new Class.getDeclaredMethods(...)
+  - pattern: Class.getDeclaredMethods(...)
+  - pattern: $VAR = Class.getDeclaredMethods
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.java.obfuscation.java.0002.no-java-lang-ClassLoader-getSystemClassLoader
+  languages:
+  - java
+  message: Avoid using java.lang.ClassLoader.getSystemClassLoader(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: java.lang.ClassLoader.getSystemClassLoader()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: new java.lang.ClassLoader.getSystemClassLoader(...)
+  - pattern: java.lang.ClassLoader.getSystemClassLoader(...)
+  - pattern: $VAR = java.lang.ClassLoader.getSystemClassLoader
+  - pattern: new lang.ClassLoader.getSystemClassLoader(...)
+  - pattern: lang.ClassLoader.getSystemClassLoader(...)
+  - pattern: $VAR = lang.ClassLoader.getSystemClassLoader
+  - pattern: new ClassLoader.getSystemClassLoader(...)
+  - pattern: ClassLoader.getSystemClassLoader(...)
+  - pattern: $VAR = ClassLoader.getSystemClassLoader
+  - pattern: new getSystemClassLoader(...)
+  - pattern: getSystemClassLoader(...)
+  - pattern: $VAR = getSystemClassLoader
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.java.obfuscation.java.0003.no-java-lang-String-concat
+  languages:
+  - java
+  message: Avoid using java.lang.String.concat(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: java.lang.String.concat()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: new java.lang.String.concat(...)
+  - pattern: java.lang.String.concat(...)
+  - pattern: $VAR = java.lang.String.concat
+  - pattern: new lang.String.concat(...)
+  - pattern: lang.String.concat(...)
+  - pattern: $VAR = lang.String.concat
+  - pattern: new String.concat(...)
+  - pattern: String.concat(...)
+  - pattern: $VAR = String.concat
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.java.obfuscation.java.0004.no-java-lang-String-replace
+  languages:
+  - java
+  message: Avoid using java.lang.String.replace(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: java.lang.String.replace()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: new java.lang.String.replace(...)
+  - pattern: java.lang.String.replace(...)
+  - pattern: $VAR = java.lang.String.replace
+  - pattern: new lang.String.replace(...)
+  - pattern: lang.String.replace(...)
+  - pattern: $VAR = lang.String.replace
+  - pattern: new String.replace(...)
+  - pattern: String.replace(...)
+  - pattern: $VAR = String.replace
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.java.obfuscation.java.0005.no-java-lang-String-substring
+  languages:
+  - java
+  message: Avoid using java.lang.String.substring(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: java.lang.String.substring()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: new java.lang.String.substring(...)
+  - pattern: java.lang.String.substring(...)
+  - pattern: $VAR = java.lang.String.substring
+  - pattern: new lang.String.substring(...)
+  - pattern: lang.String.substring(...)
+  - pattern: $VAR = lang.String.substring
+  - pattern: new String.substring(...)
+  - pattern: String.substring(...)
+  - pattern: $VAR = String.substring
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.java.obfuscation.java.0006.no-java-lang-StringBuilder-toString
+  languages:
+  - java
+  message: Avoid using java.lang.StringBuilder.toString(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: java.lang.StringBuilder.toString()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: new java.lang.StringBuilder.toString(...)
+  - pattern: java.lang.StringBuilder.toString(...)
+  - pattern: $VAR = java.lang.StringBuilder.toString
+  - pattern: new lang.StringBuilder.toString(...)
+  - pattern: lang.StringBuilder.toString(...)
+  - pattern: $VAR = lang.StringBuilder.toString
+  - pattern: new StringBuilder.toString(...)
+  - pattern: StringBuilder.toString(...)
+  - pattern: $VAR = StringBuilder.toString
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.java.obfuscation.java.0007.no-java-lang-invoke-MethodHandles-lookup
+  languages:
+  - java
+  message: Avoid using java.lang.invoke.MethodHandles.lookup(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: java.lang.invoke.MethodHandles.lookup()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: new java.lang.invoke.MethodHandles.lookup(...)
+  - pattern: java.lang.invoke.MethodHandles.lookup(...)
+  - pattern: $VAR = java.lang.invoke.MethodHandles.lookup
+  - pattern: new lang.invoke.MethodHandles.lookup(...)
+  - pattern: lang.invoke.MethodHandles.lookup(...)
+  - pattern: $VAR = lang.invoke.MethodHandles.lookup
+  - pattern: new invoke.MethodHandles.lookup(...)
+  - pattern: invoke.MethodHandles.lookup(...)
+  - pattern: $VAR = invoke.MethodHandles.lookup
+  - pattern: new MethodHandles.lookup(...)
+  - pattern: MethodHandles.lookup(...)
+  - pattern: $VAR = MethodHandles.lookup
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.java.obfuscation.java.0008.no-java-lang-reflect-Field-get
+  languages:
+  - java
+  message: Avoid using java.lang.reflect.Field.get(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: java.lang.reflect.Field.get()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: new java.lang.reflect.Field.get(...)
+  - pattern: java.lang.reflect.Field.get(...)
+  - pattern: $VAR = java.lang.reflect.Field.get
+  - pattern: new lang.reflect.Field.get(...)
+  - pattern: lang.reflect.Field.get(...)
+  - pattern: $VAR = lang.reflect.Field.get
+  - pattern: new reflect.Field.get(...)
+  - pattern: reflect.Field.get(...)
+  - pattern: $VAR = reflect.Field.get
+  - pattern: new Field.get(...)
+  - pattern: Field.get(...)
+  - pattern: $VAR = Field.get
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.java.obfuscation.java.0009.no-java-lang-reflect-Field-set
+  languages:
+  - java
+  message: Avoid using java.lang.reflect.Field.set(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: java.lang.reflect.Field.set()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: new java.lang.reflect.Field.set(...)
+  - pattern: java.lang.reflect.Field.set(...)
+  - pattern: $VAR = java.lang.reflect.Field.set
+  - pattern: new lang.reflect.Field.set(...)
+  - pattern: lang.reflect.Field.set(...)
+  - pattern: $VAR = lang.reflect.Field.set
+  - pattern: new reflect.Field.set(...)
+  - pattern: reflect.Field.set(...)
+  - pattern: $VAR = reflect.Field.set
+  - pattern: new Field.set(...)
+  - pattern: Field.set(...)
+  - pattern: $VAR = Field.set
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.java.obfuscation.java.0010.no-java-util-Base64-Decoder-decode
+  languages:
+  - java
+  message: Avoid using java.util.Base64.Decoder.decode(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: java.util.Base64.Decoder.decode()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: decoding
+  pattern-either:
+  - pattern: new java.util.Base64.Decoder.decode(...)
+  - pattern: java.util.Base64.Decoder.decode(...)
+  - pattern: $VAR = java.util.Base64.Decoder.decode
+  - pattern: new util.Base64.Decoder.decode(...)
+  - pattern: util.Base64.Decoder.decode(...)
+  - pattern: $VAR = util.Base64.Decoder.decode
+  - pattern: new Base64.Decoder.decode(...)
+  - pattern: Base64.Decoder.decode(...)
+  - pattern: $VAR = Base64.Decoder.decode
+  - pattern: new Decoder.decode(...)
+  - pattern: Decoder.decode(...)
+  - pattern: $VAR = Decoder.decode
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.java.obfuscation.java.0011.no-java-util-Base64-Encoder-encodeToString
+  languages:
+  - java
+  message: Avoid using java.util.Base64.Encoder.encodeToString(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: java.util.Base64.Encoder.encodeToString()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: new java.util.Base64.Encoder.encodeToString(...)
+  - pattern: java.util.Base64.Encoder.encodeToString(...)
+  - pattern: $VAR = java.util.Base64.Encoder.encodeToString
+  - pattern: new util.Base64.Encoder.encodeToString(...)
+  - pattern: util.Base64.Encoder.encodeToString(...)
+  - pattern: $VAR = util.Base64.Encoder.encodeToString
+  - pattern: new Base64.Encoder.encodeToString(...)
+  - pattern: Base64.Encoder.encodeToString(...)
+  - pattern: $VAR = Base64.Encoder.encodeToString
+  - pattern: new Encoder.encodeToString(...)
+  - pattern: Encoder.encodeToString(...)
+  - pattern: $VAR = Encoder.encodeToString
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.java.obfuscation.java.0012.no-java-util-Base64-getDecoder
+  languages:
+  - java
+  message: Avoid using java.util.Base64.getDecoder(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: java.util.Base64.getDecoder()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: decoding
+  pattern-either:
+  - pattern: new java.util.Base64.getDecoder(...)
+  - pattern: java.util.Base64.getDecoder(...)
+  - pattern: $VAR = java.util.Base64.getDecoder
+  - pattern: new util.Base64.getDecoder(...)
+  - pattern: util.Base64.getDecoder(...)
+  - pattern: $VAR = util.Base64.getDecoder
+  - pattern: new Base64.getDecoder(...)
+  - pattern: Base64.getDecoder(...)
+  - pattern: $VAR = Base64.getDecoder
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.java.obfuscation.java.0013.no-java-util-Base64-getEncoder
+  languages:
+  - java
+  message: Avoid using java.util.Base64.getEncoder(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: java.util.Base64.getEncoder()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: new java.util.Base64.getEncoder(...)
+  - pattern: java.util.Base64.getEncoder(...)
+  - pattern: $VAR = java.util.Base64.getEncoder
+  - pattern: new util.Base64.getEncoder(...)
+  - pattern: util.Base64.getEncoder(...)
+  - pattern: $VAR = util.Base64.getEncoder
+  - pattern: new Base64.getEncoder(...)
+  - pattern: Base64.getEncoder(...)
+  - pattern: $VAR = Base64.getEncoder
+  severity: WARNING
+  tags:
+  - Obfuscation

@@ -1,0 +1,115 @@
+rules:
+- id: sso.csharp.file_or_system_operation.Microsoft.0001.no-Microsoft-Win32-RegistryKey-CreateSubKey
+  languages:
+  - csharp
+  message: Avoid using Microsoft.Win32.RegistryKey.CreateSubKey(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: Microsoft.Win32.RegistryKey.CreateSubKey()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
+  pattern-either:
+  - pattern: Microsoft.Win32.RegistryKey.CreateSubKey(...)
+  - pattern: $VAR = Microsoft.Win32.RegistryKey.CreateSubKey
+  - pattern: Win32.RegistryKey.CreateSubKey(...)
+  - pattern: $VAR = Win32.RegistryKey.CreateSubKey
+  - pattern: RegistryKey.CreateSubKey(...)
+  - pattern: $VAR = RegistryKey.CreateSubKey
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.Microsoft.0002.no-Microsoft-Win32-RegistryKey-DeleteSubKey
+  languages:
+  - csharp
+  message: Avoid using Microsoft.Win32.RegistryKey.DeleteSubKey(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: Microsoft.Win32.RegistryKey.DeleteSubKey()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
+  pattern-either:
+  - pattern: Microsoft.Win32.RegistryKey.DeleteSubKey(...)
+  - pattern: $VAR = Microsoft.Win32.RegistryKey.DeleteSubKey
+  - pattern: Win32.RegistryKey.DeleteSubKey(...)
+  - pattern: $VAR = Win32.RegistryKey.DeleteSubKey
+  - pattern: RegistryKey.DeleteSubKey(...)
+  - pattern: $VAR = RegistryKey.DeleteSubKey
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.Microsoft.0003.no-Microsoft-Win32-RegistryKey-DeleteValue
+  languages:
+  - csharp
+  message: Avoid using Microsoft.Win32.RegistryKey.DeleteValue(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: Microsoft.Win32.RegistryKey.DeleteValue()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
+  pattern-either:
+  - pattern: Microsoft.Win32.RegistryKey.DeleteValue(...)
+  - pattern: $VAR = Microsoft.Win32.RegistryKey.DeleteValue
+  - pattern: Win32.RegistryKey.DeleteValue(...)
+  - pattern: $VAR = Win32.RegistryKey.DeleteValue
+  - pattern: RegistryKey.DeleteValue(...)
+  - pattern: $VAR = RegistryKey.DeleteValue
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.Microsoft.0004.no-Microsoft-Win32-RegistryKey-GetValue
+  languages:
+  - csharp
+  message: Avoid using Microsoft.Win32.RegistryKey.GetValue(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: Microsoft.Win32.RegistryKey.GetValue()
+    category: File or System Operation
+    malskills_sso_category: system_configuration
+    malskills_subtype: system_configuration_modify
+  pattern-either:
+  - pattern: Microsoft.Win32.RegistryKey.GetValue(...)
+  - pattern: $VAR = Microsoft.Win32.RegistryKey.GetValue
+  - pattern: Win32.RegistryKey.GetValue(...)
+  - pattern: $VAR = Win32.RegistryKey.GetValue
+  - pattern: RegistryKey.GetValue(...)
+  - pattern: $VAR = RegistryKey.GetValue
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.Microsoft.0005.no-Microsoft-Win32-RegistryKey-OpenSubKey
+  languages:
+  - csharp
+  message: Avoid using Microsoft.Win32.RegistryKey.OpenSubKey(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: Microsoft.Win32.RegistryKey.OpenSubKey()
+    category: File or System Operation
+    malskills_sso_category: system_configuration
+    malskills_subtype: system_configuration_modify
+  pattern-either:
+  - pattern: Microsoft.Win32.RegistryKey.OpenSubKey(...)
+  - pattern: $VAR = Microsoft.Win32.RegistryKey.OpenSubKey
+  - pattern: Win32.RegistryKey.OpenSubKey(...)
+  - pattern: $VAR = Win32.RegistryKey.OpenSubKey
+  - pattern: RegistryKey.OpenSubKey(...)
+  - pattern: $VAR = RegistryKey.OpenSubKey
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.csharp.file_or_system_operation.Microsoft.0006.no-Microsoft-Win32-RegistryKey-SetValue
+  languages:
+  - csharp
+  message: Avoid using Microsoft.Win32.RegistryKey.SetValue(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: Microsoft.Win32.RegistryKey.SetValue()
+    category: File or System Operation
+    malskills_sso_category: system_configuration
+    malskills_subtype: system_configuration_modify
+  pattern-either:
+  - pattern: Microsoft.Win32.RegistryKey.SetValue(...)
+  - pattern: $VAR = Microsoft.Win32.RegistryKey.SetValue
+  - pattern: Win32.RegistryKey.SetValue(...)
+  - pattern: $VAR = Win32.RegistryKey.SetValue
+  - pattern: RegistryKey.SetValue(...)
+  - pattern: $VAR = RegistryKey.SetValue
+  severity: WARNING
+  tags:
+  - File or System Operation

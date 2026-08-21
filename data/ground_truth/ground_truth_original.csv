@@ -1,0 +1,671 @@
+Source,Registry,Skill_name,Label,Ground_truth_path
+MaliciousAgentSkillsBench,skills.rest,1169/sqlite-agent-amplification,malicious,data/ground_truth/malicious/skillsrest/1169_sqlite-agent-amplification
+MaliciousAgentSkillsBench,skills.rest,154/github-multi-repo,malicious,data/ground_truth/malicious/skillsrest/154_github-multi-repo
+MaliciousAgentSkillsBench,skills.rest,1659/math-calculator,malicious,data/ground_truth/malicious/skillsrest/1659_math-calculator
+MaliciousAgentSkillsBench,skills.rest,167/github-workflow-automation,malicious,data/ground_truth/malicious/skillsrest/167_github-workflow-automation
+MaliciousAgentSkillsBench,skills.rest,2313/database,malicious,data/ground_truth/malicious/skillsrest/2313_database
+MaliciousAgentSkillsBench,skills.rest,2347/sacred-space-protocol,malicious,data/ground_truth/malicious/skillsrest/2347_sacred-space-protocol
+MaliciousAgentSkillsBench,skills.rest,234/flow-nexus-platform,malicious,data/ground_truth/malicious/skillsrest/234_flow-nexus-platform
+MaliciousAgentSkillsBench,skills.rest,3103/github-code-review,malicious,data/ground_truth/malicious/skillsrest/3103_github-code-review
+MaliciousAgentSkillsBench,skills.rest,330/tailadmin-patterns,malicious,data/ground_truth/malicious/skillsrest/330_tailadmin-patterns
+MaliciousAgentSkillsBench,skills.rest,342/using-superpowers,malicious,data/ground_truth/malicious/skillsrest/342_using-superpowers
+MaliciousAgentSkillsBench,skills.rest,416/developer-growth-analysis,malicious,data/ground_truth/malicious/skillsrest/416_developer-growth-analysis
+MaliciousAgentSkillsBench,skills.rest,658/vercel-deploy,malicious,data/ground_truth/malicious/skillsrest/658_vercel-deploy
+MaliciousAgentSkillsBench,skills.rest,73/project-init,malicious,data/ground_truth/malicious/skillsrest/73_project-init
+MaliciousAgentSkillsBench,skills.rest,889/privilege-escalation-methods,malicious,data/ground_truth/malicious/skillsrest/889_privilege-escalation-methods
+MaliciousAgentSkillsBench,skillsmp.com,1139/bsa-brainstorm,malicious,data/ground_truth/malicious/skillsmp/1139_bsa-brainstorm
+MaliciousAgentSkillsBench,skillsmp.com,1160/hacs,malicious,data/ground_truth/malicious/skillsmp/1160_hacs
+MaliciousAgentSkillsBench,skillsmp.com,1535/jetaasc-newsletter,malicious,data/ground_truth/malicious/skillsmp/1535_jetaasc-newsletter
+MaliciousAgentSkillsBench,skillsmp.com,1881/nanobanana-base,malicious,data/ground_truth/malicious/skillsmp/1881_nanobanana-base
+MaliciousAgentSkillsBench,skillsmp.com,2343/gemini-image,malicious,data/ground_truth/malicious/skillsmp/2343_gemini-image
+MaliciousAgentSkillsBench,skillsmp.com,2362/codex-chat,malicious,data/ground_truth/malicious/skillsmp/2362_codex-chat
+MaliciousAgentSkillsBench,skillsmp.com,2362/codex-tools,malicious,data/ground_truth/malicious/skillsmp/2362_codex-tools
+MaliciousAgentSkillsBench,skillsmp.com,2362/terra-data,malicious,data/ground_truth/malicious/skillsmp/2362_terra-data
+MaliciousAgentSkillsBench,skillsmp.com,2370/hive-mind-advanced,malicious,data/ground_truth/malicious/skillsmp/2370_hive-mind-advanced
+MaliciousAgentSkillsBench,skillsmp.com,2485/full_upload_injected_pptx_skill,malicious,data/ground_truth/malicious/skillsmp/2485_full-upload-injected-pptx-skill
+MaliciousAgentSkillsBench,skillsmp.com,2485/url_injected_pptx_skill,malicious,data/ground_truth/malicious/skillsmp/2485_url-injected-pptx-skill
+MaliciousAgentSkillsBench,skillsmp.com,2559/hello,malicious,data/ground_truth/malicious/skillsmp/2559_hello
+MaliciousAgentSkillsBench,skillsmp.com,2663/ai-truthfulness-enforcer,malicious,data/ground_truth/malicious/skillsmp/2663_ai-truthfulness-enforcer
+MaliciousAgentSkillsBench,skillsmp.com,2670/weekly-plan,malicious,data/ground_truth/malicious/skillsmp/2670_weekly-plan
+MaliciousAgentSkillsBench,skillsmp.com,2795/email,malicious,data/ground_truth/malicious/skillsmp/2795_email
+MaliciousAgentSkillsBench,skillsmp.com,3101/setup-claude-skills-for-web,malicious,data/ground_truth/malicious/skillsmp/3101_setup-claude-skills-for-web
+MaliciousAgentSkillsBench,skillsmp.com,3588/browser-automation,malicious,data/ground_truth/malicious/skillsmp/3588_browser-automation
+MaliciousAgentSkillsBench,skillsmp.com,3604/dexter,malicious,data/ground_truth/malicious/skillsmp/3604_dexter
+MaliciousAgentSkillsBench,skillsmp.com,3639/network-conftest-generator,malicious,data/ground_truth/malicious/skillsmp/3639_network-conftest-generator
+MaliciousAgentSkillsBench,skillsmp.com,3764/analytics,malicious,data/ground_truth/malicious/skillsmp/3764_analytics
+MaliciousAgentSkillsBench,skillsmp.com,4367/page,malicious,data/ground_truth/malicious/skillsmp/4367_page
+MaliciousAgentSkillsBench,skillsmp.com,4412/agentic-jujutsu,malicious,data/ground_truth/malicious/skillsmp/4412_agentic-jujutsu
+MaliciousAgentSkillsBench,skillsmp.com,4727/my-skill,malicious,data/ground_truth/malicious/skillsmp/4727_my-skill
+MaliciousAgentSkillsBench,skillsmp.com,4729/ccw-maven-setup,malicious,data/ground_truth/malicious/skillsmp/4729_ccw-maven-setup
+MaliciousAgentSkillsBench,skillsmp.com,4914/graphics-api,malicious,data/ground_truth/malicious/skillsmp/4914_graphics-api
+MaliciousAgentSkillsBench,skillsmp.com,4977/runpod-ops,malicious,data/ground_truth/malicious/skillsmp/4977_runpod-ops
+MaliciousAgentSkillsBench,skillsmp.com,6028/slack-bridge,malicious,data/ground_truth/malicious/skillsmp/6028_slack-bridge
+MaliciousAgentSkillsBench,skillsmp.com,6344/chrome-devtools,malicious,data/ground_truth/malicious/skillsmp/6344_chrome-devtools
+MaliciousAgentSkillsBench,skillsmp.com,7251/flow-nexus-neural,malicious,data/ground_truth/malicious/skillsmp/7251_flow-nexus-neural
+MaliciousAgentSkillsBench,skillsmp.com,7332/idea-skill,malicious,data/ground_truth/malicious/skillsmp/7332_idea-skill
+MaliciousAgentSkillsBench,skillsmp.com,7676/oh-notes,malicious,data/ground_truth/malicious/skillsmp/7676_oh-notes
+MaliciousAgentSkillsBench,skillsmp.com,7843/updating-neon-logos,malicious,data/ground_truth/malicious/skillsmp/7843_updating-neon-logos
+MaliciousAgentSkillsBench,skillsmp.com,7974/load-skills,malicious,data/ground_truth/malicious/skillsmp/7974_load-skills
+MaliciousAgentSkillsBench,skillsmp.com,8313/twitter_poster,malicious,data/ground_truth/malicious/skillsmp/8313_twitter-poster
+MaliciousAgentSkillsBench,skillsmp.com,8380/cc10x-router,malicious,data/ground_truth/malicious/skillsmp/8380_cc10x-router
+MaliciousAgentSkillsBench,skillsmp.com,8452/flow-nexus-platform,malicious,data/ground_truth/malicious/skillsmp/8452_flow-nexus-platform
+MaliciousAgentSkillsBench,skillsmp.com,8593/worker,malicious,data/ground_truth/malicious/skillsmp/8593_worker
+MaliciousAgentSkillsBench,skillsmp.com,866/lark-agent-simple,malicious,data/ground_truth/malicious/skillsmp/866_lark-agent-simple
+MaliciousAgentSkillsBench,skillsmp.com,8691/doc-scraper,malicious,data/ground_truth/malicious/skillsmp/8691_doc-scraper
+MaliciousAgentSkillsBench,skillsmp.com,9014/plan-refine,malicious,data/ground_truth/malicious/skillsmp/9014_plan-refine
+MaliciousAgentSkillsBench,skillsmp.com,9021/find-incomplete-series,malicious,data/ground_truth/malicious/skillsmp/9021_find-incomplete-series
+MaliciousAgentSkillsBench,skillsmp.com,9124/image-generator,malicious,data/ground_truth/malicious/skillsmp/9124_image-generator
+MaliciousAgentSkillsBench,skillsmp.com,9692/yaml-workflow-executor,malicious,data/ground_truth/malicious/skillsmp/9692_yaml-workflow-executor
+Koi Security,clawhub,aslaep123/base-agent,malicious,data/ground_truth/malicious/clawhub/aslaep123_base-agent
+Koi Security,clawhub,aslaep123/bybit-agent,malicious,data/ground_truth/malicious/clawhub/aslaep123_bybit-agent
+Koi Security,clawhub,aslaep123/polymarket-traiding-bot,malicious,data/ground_truth/malicious/clawhub/aslaep123_polymarket-traiding-bot
+Koi Security,clawhub,aslaep123/reddit-trends,malicious,data/ground_truth/malicious/clawhub/aslaep123_reddit-trends
+Koi Security,clawhub,gpaitai/polymarket-bot,malicious,data/ground_truth/malicious/clawhub/gpaitai_polymarket-bot
+Koi Security,clawhub,hightower6eu/auto-updater-161ks,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-161ks
+Koi Security,clawhub,hightower6eu/auto-updater-2yq87,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-2yq87
+Koi Security,clawhub,hightower6eu/auto-updater-3rk1s,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-3rk1s
+Koi Security,clawhub,hightower6eu/auto-updater-43c6i,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-43c6i
+Koi Security,clawhub,hightower6eu/auto-updater-5buwl,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-5buwl
+Koi Security,clawhub,hightower6eu/auto-updater-5fhqm,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-5fhqm
+Koi Security,clawhub,hightower6eu/auto-updater-8xwp6,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-8xwp6
+Koi Security,clawhub,hightower6eu/auto-updater-96ys3,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-96ys3
+Koi Security,clawhub,hightower6eu/auto-updater-deza8,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-deza8
+Koi Security,clawhub,hightower6eu/auto-updater-dzuba,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-dzuba
+Koi Security,clawhub,hightower6eu/auto-updater-e89da,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-e89da
+Koi Security,clawhub,hightower6eu/auto-updater-eclpb,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-eclpb
+Koi Security,clawhub,hightower6eu/auto-updater-gw6f5,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-gw6f5
+Koi Security,clawhub,hightower6eu/auto-updater-hfmct,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-hfmct
+Koi Security,clawhub,hightower6eu/auto-updater-jkiuq,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-jkiuq
+Koi Security,clawhub,hightower6eu/auto-updater-lth9t,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-lth9t
+Koi Security,clawhub,hightower6eu/auto-updater-m0fsa,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-m0fsa
+Koi Security,clawhub,hightower6eu/auto-updater-mclql,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-mclql
+Koi Security,clawhub,hightower6eu/auto-updater-mkukz,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-mkukz
+Koi Security,clawhub,hightower6eu/auto-updater-mn5ri,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-mn5ri
+Koi Security,clawhub,hightower6eu/auto-updater-nlt3m,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-nlt3m
+Koi Security,clawhub,hightower6eu/auto-updater-ocn18,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-ocn18
+Koi Security,clawhub,hightower6eu/auto-updater-p5rmt,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-p5rmt
+Koi Security,clawhub,hightower6eu/auto-updater-qdyme,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-qdyme
+Koi Security,clawhub,hightower6eu/auto-updater-se38e,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-se38e
+Koi Security,clawhub,hightower6eu/auto-updater-sxdg2,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-sxdg2
+Koi Security,clawhub,hightower6eu/auto-updater-xcgnm,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-xcgnm
+Koi Security,clawhub,hightower6eu/auto-updater-xsunp,malicious,data/ground_truth/malicious/clawhub/hightower6eu_auto-updater-xsunp
+Koi Security,clawhub,hightower6eu/autoupdate,malicious,data/ground_truth/malicious/clawhub/hightower6eu_autoupdate
+Koi Security,clawhub,hightower6eu/clawhub-6yr3b,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-6yr3b
+Koi Security,clawhub,hightower6eu/clawhub-c9y4p,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-c9y4p
+Koi Security,clawhub,hightower6eu/clawhub-d4kxr,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-d4kxr
+Koi Security,clawhub,hightower6eu/clawhub-f3qcn,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-f3qcn
+Koi Security,clawhub,hightower6eu/clawhub-gpcrq,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-gpcrq
+Koi Security,clawhub,hightower6eu/clawhub-gpwp7,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-gpwp7
+Koi Security,clawhub,hightower6eu/clawhub-gstca,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-gstca
+Koi Security,clawhub,hightower6eu/clawhub-hh1fd,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-hh1fd
+Koi Security,clawhub,hightower6eu/clawhub-hh2km,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-hh2km
+Koi Security,clawhub,hightower6eu/clawhub-hylhq,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-hylhq
+Koi Security,clawhub,hightower6eu/clawhub-i7oci,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-i7oci
+Koi Security,clawhub,hightower6eu/clawhub-i9zhz,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-i9zhz
+Koi Security,clawhub,hightower6eu/clawhub-ja7eh,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-ja7eh
+Koi Security,clawhub,hightower6eu/clawhub-krmvq,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-krmvq
+Koi Security,clawhub,hightower6eu/clawhub-oihpl,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-oihpl
+Koi Security,clawhub,hightower6eu/clawhub-olgys,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-olgys
+Koi Security,clawhub,hightower6eu/clawhub-osasg,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-osasg
+Koi Security,clawhub,hightower6eu/clawhub-rkvny,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-rkvny
+Koi Security,clawhub,hightower6eu/clawhub-sxtsn,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-sxtsn
+Koi Security,clawhub,hightower6eu/clawhub-tlxx5,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-tlxx5
+Koi Security,clawhub,hightower6eu/clawhub-uoeym,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-uoeym
+Koi Security,clawhub,hightower6eu/clawhub-wixce,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-wixce
+Koi Security,clawhub,hightower6eu/clawhub-wotp2,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhub-wotp2
+Koi Security,clawhub,hightower6eu/clawhubb,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhubb
+Koi Security,clawhub,hightower6eu/clawhubcli,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawhubcli
+Koi Security,clawhub,hightower6eu/clawwhub,malicious,data/ground_truth/malicious/clawhub/hightower6eu_clawwhub
+Koi Security,clawhub,hightower6eu/cllawhub,malicious,data/ground_truth/malicious/clawhub/hightower6eu_cllawhub
+Koi Security,clawhub,hightower6eu/ethereum-gas-tracker-abxf0,malicious,data/ground_truth/malicious/clawhub/hightower6eu_ethereum-gas-tracker-abxf0
+Koi Security,clawhub,hightower6eu/ethereum-gas-tracker-esupl,malicious,data/ground_truth/malicious/clawhub/hightower6eu_ethereum-gas-tracker-esupl
+Koi Security,clawhub,hightower6eu/ethereum-gas-tracker-fygz0,malicious,data/ground_truth/malicious/clawhub/hightower6eu_ethereum-gas-tracker-fygz0
+Koi Security,clawhub,hightower6eu/ethereum-gas-tracker-gon2c,malicious,data/ground_truth/malicious/clawhub/hightower6eu_ethereum-gas-tracker-gon2c
+Koi Security,clawhub,hightower6eu/ethereum-gas-tracker-hx8j0,malicious,data/ground_truth/malicious/clawhub/hightower6eu_ethereum-gas-tracker-hx8j0
+Koi Security,clawhub,hightower6eu/ethereum-gas-tracker-k51pi,malicious,data/ground_truth/malicious/clawhub/hightower6eu_ethereum-gas-tracker-k51pi
+Koi Security,clawhub,hightower6eu/ethereum-gas-tracker-k9hfk,malicious,data/ground_truth/malicious/clawhub/hightower6eu_ethereum-gas-tracker-k9hfk
+Koi Security,clawhub,hightower6eu/ethereum-gas-tracker-leifg,malicious,data/ground_truth/malicious/clawhub/hightower6eu_ethereum-gas-tracker-leifg
+Koi Security,clawhub,hightower6eu/ethereum-gas-tracker-lm4cv,malicious,data/ground_truth/malicious/clawhub/hightower6eu_ethereum-gas-tracker-lm4cv
+Koi Security,clawhub,hightower6eu/ethereum-gas-tracker-mnsfw,malicious,data/ground_truth/malicious/clawhub/hightower6eu_ethereum-gas-tracker-mnsfw
+Koi Security,clawhub,hightower6eu/ethereum-gas-tracker-nmcq5,malicious,data/ground_truth/malicious/clawhub/hightower6eu_ethereum-gas-tracker-nmcq5
+Koi Security,clawhub,hightower6eu/ethereum-gas-tracker-osr2u,malicious,data/ground_truth/malicious/clawhub/hightower6eu_ethereum-gas-tracker-osr2u
+Koi Security,clawhub,hightower6eu/ethereum-gas-tracker-pz0kz,malicious,data/ground_truth/malicious/clawhub/hightower6eu_ethereum-gas-tracker-pz0kz
+Koi Security,clawhub,hightower6eu/ethereum-gas-tracker-qxorv,malicious,data/ground_truth/malicious/clawhub/hightower6eu_ethereum-gas-tracker-qxorv
+Koi Security,clawhub,hightower6eu/ethereum-gas-tracker-rmiu4,malicious,data/ground_truth/malicious/clawhub/hightower6eu_ethereum-gas-tracker-rmiu4
+Koi Security,clawhub,hightower6eu/ethereum-gas-tracker-t8oaj,malicious,data/ground_truth/malicious/clawhub/hightower6eu_ethereum-gas-tracker-t8oaj
+Koi Security,clawhub,hightower6eu/google-workspace-2z5dp,malicious,data/ground_truth/malicious/clawhub/hightower6eu_google-workspace-2z5dp
+Koi Security,clawhub,hightower6eu/google-workspace-7ylf0,malicious,data/ground_truth/malicious/clawhub/hightower6eu_google-workspace-7ylf0
+Koi Security,clawhub,hightower6eu/google-workspace-8zdgy,malicious,data/ground_truth/malicious/clawhub/hightower6eu_google-workspace-8zdgy
+Koi Security,clawhub,hightower6eu/google-workspace-auqud,malicious,data/ground_truth/malicious/clawhub/hightower6eu_google-workspace-auqud
+Koi Security,clawhub,hightower6eu/google-workspace-devfw,malicious,data/ground_truth/malicious/clawhub/hightower6eu_google-workspace-devfw
+Koi Security,clawhub,hightower6eu/google-workspace-gbvyc,malicious,data/ground_truth/malicious/clawhub/hightower6eu_google-workspace-gbvyc
+Koi Security,clawhub,hightower6eu/google-workspace-izypr,malicious,data/ground_truth/malicious/clawhub/hightower6eu_google-workspace-izypr
+Koi Security,clawhub,hightower6eu/google-workspace-m2hcx,malicious,data/ground_truth/malicious/clawhub/hightower6eu_google-workspace-m2hcx
+Koi Security,clawhub,hightower6eu/google-workspace-ndlt1,malicious,data/ground_truth/malicious/clawhub/hightower6eu_google-workspace-ndlt1
+Koi Security,clawhub,hightower6eu/google-workspace-ozgdc,malicious,data/ground_truth/malicious/clawhub/hightower6eu_google-workspace-ozgdc
+Koi Security,clawhub,hightower6eu/google-workspace-t9lkr,malicious,data/ground_truth/malicious/clawhub/hightower6eu_google-workspace-t9lkr
+Koi Security,clawhub,hightower6eu/google-workspace-tqhmn,malicious,data/ground_truth/malicious/clawhub/hightower6eu_google-workspace-tqhmn
+Koi Security,clawhub,hightower6eu/google-workspace-vxw0q,malicious,data/ground_truth/malicious/clawhub/hightower6eu_google-workspace-vxw0q
+Koi Security,clawhub,hightower6eu/google-workspace-womvg,malicious,data/ground_truth/malicious/clawhub/hightower6eu_google-workspace-womvg
+Koi Security,clawhub,hightower6eu/google-workspace-wwxem,malicious,data/ground_truth/malicious/clawhub/hightower6eu_google-workspace-wwxem
+Koi Security,clawhub,hightower6eu/google-workspace-yj9ug,malicious,data/ground_truth/malicious/clawhub/hightower6eu_google-workspace-yj9ug
+Koi Security,clawhub,hightower6eu/google-workspace-ytrqj,malicious,data/ground_truth/malicious/clawhub/hightower6eu_google-workspace-ytrqj
+Koi Security,clawhub,hightower6eu/google-workspace-zg8ad,malicious,data/ground_truth/malicious/clawhub/hightower6eu_google-workspace-zg8ad
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-1a7pi,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-1a7pi
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-2fz1g,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-2fz1g
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-57h4t,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-57h4t
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-9dlka,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-9dlka
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-art4q,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-art4q
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-bjs4y,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-bjs4y
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-btj6c,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-btj6c
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-c86ge,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-c86ge
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-cv1d9,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-cv1d9
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-djiq0,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-djiq0
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-firui,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-firui
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-gxgfy,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-gxgfy
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-h5syo,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-h5syo
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-hbmjm,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-hbmjm
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-im29o,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-im29o
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-jacit,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-jacit
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-kq9nv,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-kq9nv
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-mk3w3,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-mk3w3
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-ngv64,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-ngv64
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-nq6a9,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-nq6a9
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-q9qng,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-q9qng
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-qjkug,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-qjkug
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-r6wya,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-r6wya
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-tivyf,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-tivyf
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-zah8d,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-zah8d
+Koi Security,clawhub,hightower6eu/insider-wallets-finder-zzs2p,malicious,data/ground_truth/malicious/clawhub/hightower6eu_insider-wallets-finder-zzs2p
+Koi Security,clawhub,hightower6eu/lost-bitcoin-10li1,malicious,data/ground_truth/malicious/clawhub/hightower6eu_lost-bitcoin-10li1
+Koi Security,clawhub,hightower6eu/lost-bitcoin-dbrgt,malicious,data/ground_truth/malicious/clawhub/hightower6eu_lost-bitcoin-dbrgt
+Koi Security,clawhub,hightower6eu/lost-bitcoin-eabml,malicious,data/ground_truth/malicious/clawhub/hightower6eu_lost-bitcoin-eabml
+Koi Security,clawhub,hightower6eu/openclaw-backup-dnkxm,malicious,data/ground_truth/malicious/clawhub/hightower6eu_openclaw-backup-dnkxm
+Koi Security,clawhub,hightower6eu/openclaw-backup-wrxw0,malicious,data/ground_truth/malicious/clawhub/hightower6eu_openclaw-backup-wrxw0
+Koi Security,clawhub,hightower6eu/pdf-1wso5,malicious,data/ground_truth/malicious/clawhub/hightower6eu_pdf-1wso5
+Koi Security,clawhub,hightower6eu/phantom-0jcvy,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-0jcvy
+Koi Security,clawhub,hightower6eu/phantom-0snsv,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-0snsv
+Koi Security,clawhub,hightower6eu/phantom-3uttg,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-3uttg
+Koi Security,clawhub,hightower6eu/phantom-64juz,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-64juz
+Koi Security,clawhub,hightower6eu/phantom-afnuz,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-afnuz
+Koi Security,clawhub,hightower6eu/phantom-ahdwb,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-ahdwb
+Koi Security,clawhub,hightower6eu/phantom-bdacv,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-bdacv
+Koi Security,clawhub,hightower6eu/phantom-fdjtg,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-fdjtg
+Koi Security,clawhub,hightower6eu/phantom-fsvib,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-fsvib
+Koi Security,clawhub,hightower6eu/phantom-ftbrg,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-ftbrg
+Koi Security,clawhub,hightower6eu/phantom-fvizs,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-fvizs
+Koi Security,clawhub,hightower6eu/phantom-ggjrq,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-ggjrq
+Koi Security,clawhub,hightower6eu/phantom-hpwmb,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-hpwmb
+Koi Security,clawhub,hightower6eu/phantom-iebcc,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-iebcc
+Koi Security,clawhub,hightower6eu/phantom-jwik3,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-jwik3
+Koi Security,clawhub,hightower6eu/phantom-kxcuj,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-kxcuj
+Koi Security,clawhub,hightower6eu/phantom-lpnfp,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-lpnfp
+Koi Security,clawhub,hightower6eu/phantom-lxnyf,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-lxnyf
+Koi Security,clawhub,hightower6eu/phantom-mdr3q,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-mdr3q
+Koi Security,clawhub,hightower6eu/phantom-nrqdw,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-nrqdw
+Koi Security,clawhub,hightower6eu/phantom-pcue3,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-pcue3
+Koi Security,clawhub,hightower6eu/phantom-pvber,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-pvber
+Koi Security,clawhub,hightower6eu/phantom-q8ark,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-q8ark
+Koi Security,clawhub,hightower6eu/phantom-qs450,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-qs450
+Koi Security,clawhub,hightower6eu/phantom-sokos,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-sokos
+Koi Security,clawhub,hightower6eu/phantom-syjqj,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-syjqj
+Koi Security,clawhub,hightower6eu/phantom-vpnfy,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-vpnfy
+Koi Security,clawhub,hightower6eu/phantom-vwlfb,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-vwlfb
+Koi Security,clawhub,hightower6eu/phantom-xivjh,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-xivjh
+Koi Security,clawhub,hightower6eu/phantom-ygmjc,malicious,data/ground_truth/malicious/clawhub/hightower6eu_phantom-ygmjc
+Koi Security,clawhub,hightower6eu/poly,malicious,data/ground_truth/malicious/clawhub/hightower6eu_poly
+Koi Security,clawhub,hightower6eu/polym,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polym
+Koi Security,clawhub,hightower6eu/polymarket-25nwy,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-25nwy
+Koi Security,clawhub,hightower6eu/polymarket-33efn,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-33efn
+Koi Security,clawhub,hightower6eu/polymarket-4rrsh,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-4rrsh
+Koi Security,clawhub,hightower6eu/polymarket-5dylt,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-5dylt
+Koi Security,clawhub,hightower6eu/polymarket-6ehca,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-6ehca
+Koi Security,clawhub,hightower6eu/polymarket-7ceau,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-7ceau
+Koi Security,clawhub,hightower6eu/polymarket-bpnyq,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-bpnyq
+Koi Security,clawhub,hightower6eu/polymarket-cexex,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-cexex
+Koi Security,clawhub,hightower6eu/polymarket-dfknh,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-dfknh
+Koi Security,clawhub,hightower6eu/polymarket-esfbk,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-esfbk
+Koi Security,clawhub,hightower6eu/polymarket-fpwui,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-fpwui
+Koi Security,clawhub,hightower6eu/polymarket-gxyrz,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-gxyrz
+Koi Security,clawhub,hightower6eu/polymarket-hoedg,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-hoedg
+Koi Security,clawhub,hightower6eu/polymarket-ik168,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-ik168
+Koi Security,clawhub,hightower6eu/polymarket-jezc4,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-jezc4
+Koi Security,clawhub,hightower6eu/polymarket-juui0,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-juui0
+Koi Security,clawhub,hightower6eu/polymarket-lzgm8,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-lzgm8
+Koi Security,clawhub,hightower6eu/polymarket-mjjsc,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-mjjsc
+Koi Security,clawhub,hightower6eu/polymarket-n7dic,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-n7dic
+Koi Security,clawhub,hightower6eu/polymarket-phqtc,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-phqtc
+Koi Security,clawhub,hightower6eu/polymarket-qjypn,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-qjypn
+Koi Security,clawhub,hightower6eu/polymarket-qpi7w,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-qpi7w
+Koi Security,clawhub,hightower6eu/polymarket-qxjyy,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-qxjyy
+Koi Security,clawhub,hightower6eu/polymarket-s7x4d,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-s7x4d
+Koi Security,clawhub,hightower6eu/polymarket-vah82,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-vah82
+Koi Security,clawhub,hightower6eu/polymarket-vj5zb,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-vj5zb
+Koi Security,clawhub,hightower6eu/polymarket-vx875,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-vx875
+Koi Security,clawhub,hightower6eu/polymarket-wapbk,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-wapbk
+Koi Security,clawhub,hightower6eu/polymarket-y0c8k,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-y0c8k
+Koi Security,clawhub,hightower6eu/polymarket-z7lwp,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarket-z7lwp
+Koi Security,clawhub,hightower6eu/polymarkets,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polymarkets
+Koi Security,clawhub,hightower6eu/polytrading,malicious,data/ground_truth/malicious/clawhub/hightower6eu_polytrading
+Koi Security,clawhub,hightower6eu/solana-07bcb,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-07bcb
+Koi Security,clawhub,hightower6eu/solana-1fuhx,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-1fuhx
+Koi Security,clawhub,hightower6eu/solana-1tfnz,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-1tfnz
+Koi Security,clawhub,hightower6eu/solana-1xv96,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-1xv96
+Koi Security,clawhub,hightower6eu/solana-7rrh8,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-7rrh8
+Koi Security,clawhub,hightower6eu/solana-9ahmt,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-9ahmt
+Koi Security,clawhub,hightower6eu/solana-9lplb,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-9lplb
+Koi Security,clawhub,hightower6eu/solana-a8wjy,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-a8wjy
+Koi Security,clawhub,hightower6eu/solana-d95dl,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-d95dl
+Koi Security,clawhub,hightower6eu/solana-dddhn,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-dddhn
+Koi Security,clawhub,hightower6eu/solana-dgipr,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-dgipr
+Koi Security,clawhub,hightower6eu/solana-fckyq,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-fckyq
+Koi Security,clawhub,hightower6eu/solana-gamka,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-gamka
+Koi Security,clawhub,hightower6eu/solana-gj8sl,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-gj8sl
+Koi Security,clawhub,hightower6eu/solana-goq2i,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-goq2i
+Koi Security,clawhub,hightower6eu/solana-ifxeq,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-ifxeq
+Koi Security,clawhub,hightower6eu/solana-imont,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-imont
+Koi Security,clawhub,hightower6eu/solana-ixqvy,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-ixqvy
+Koi Security,clawhub,hightower6eu/solana-k7hyt,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-k7hyt
+Koi Security,clawhub,hightower6eu/solana-kbhhl,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-kbhhl
+Koi Security,clawhub,hightower6eu/solana-kief4,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-kief4
+Koi Security,clawhub,hightower6eu/solana-pjnom,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-pjnom
+Koi Security,clawhub,hightower6eu/solana-qpkqu,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-qpkqu
+Koi Security,clawhub,hightower6eu/solana-rpozu,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-rpozu
+Koi Security,clawhub,hightower6eu/solana-t1nyq,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-t1nyq
+Koi Security,clawhub,hightower6eu/solana-tbcxe,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-tbcxe
+Koi Security,clawhub,hightower6eu/solana-uxcvc,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-uxcvc
+Koi Security,clawhub,hightower6eu/solana-vwgfq,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-vwgfq
+Koi Security,clawhub,hightower6eu/solana-wi1cy,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-wi1cy
+Koi Security,clawhub,hightower6eu/solana-wlnn4,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-wlnn4
+Koi Security,clawhub,hightower6eu/solana-wrq1l,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-wrq1l
+Koi Security,clawhub,hightower6eu/solana-xx1q5,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-xx1q5
+Koi Security,clawhub,hightower6eu/solana-ydqh7,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-ydqh7
+Koi Security,clawhub,hightower6eu/solana-ytzgw,malicious,data/ground_truth/malicious/clawhub/hightower6eu_solana-ytzgw
+Koi Security,clawhub,hightower6eu/update,malicious,data/ground_truth/malicious/clawhub/hightower6eu_update
+Koi Security,clawhub,hightower6eu/updater,malicious,data/ground_truth/malicious/clawhub/hightower6eu_updater
+Koi Security,clawhub,hightower6eu/wallet-tracker-0ghsk,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-0ghsk
+Koi Security,clawhub,hightower6eu/wallet-tracker-0waih,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-0waih
+Koi Security,clawhub,hightower6eu/wallet-tracker-8orkd,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-8orkd
+Koi Security,clawhub,hightower6eu/wallet-tracker-af1i6,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-af1i6
+Koi Security,clawhub,hightower6eu/wallet-tracker-al7er,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-al7er
+Koi Security,clawhub,hightower6eu/wallet-tracker-auqlh,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-auqlh
+Koi Security,clawhub,hightower6eu/wallet-tracker-bf3bs,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-bf3bs
+Koi Security,clawhub,hightower6eu/wallet-tracker-bqahy,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-bqahy
+Koi Security,clawhub,hightower6eu/wallet-tracker-bs5ur,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-bs5ur
+Koi Security,clawhub,hightower6eu/wallet-tracker-bxb0a,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-bxb0a
+Koi Security,clawhub,hightower6eu/wallet-tracker-fntdr,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-fntdr
+Koi Security,clawhub,hightower6eu/wallet-tracker-gel8n,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-gel8n
+Koi Security,clawhub,hightower6eu/wallet-tracker-hhjpv,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-hhjpv
+Koi Security,clawhub,hightower6eu/wallet-tracker-ijyto,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-ijyto
+Koi Security,clawhub,hightower6eu/wallet-tracker-l7dst,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-l7dst
+Koi Security,clawhub,hightower6eu/wallet-tracker-mgwpt,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-mgwpt
+Koi Security,clawhub,hightower6eu/wallet-tracker-oozrx,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-oozrx
+Koi Security,clawhub,hightower6eu/wallet-tracker-pbckx,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-pbckx
+Koi Security,clawhub,hightower6eu/wallet-tracker-qoa9k,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-qoa9k
+Koi Security,clawhub,hightower6eu/wallet-tracker-rcoux,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-rcoux
+Koi Security,clawhub,hightower6eu/wallet-tracker-s5hx9,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-s5hx9
+Koi Security,clawhub,hightower6eu/wallet-tracker-udqiq,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-udqiq
+Koi Security,clawhub,hightower6eu/wallet-tracker-ue8hv,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-ue8hv
+Koi Security,clawhub,hightower6eu/wallet-tracker-x76ik,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-x76ik
+Koi Security,clawhub,hightower6eu/wallet-tracker-zih4w,malicious,data/ground_truth/malicious/clawhub/hightower6eu_wallet-tracker-zih4w
+Koi Security,clawhub,hightower6eu/x-trends-0heof,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-0heof
+Koi Security,clawhub,hightower6eu/x-trends-9y6gc,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-9y6gc
+Koi Security,clawhub,hightower6eu/x-trends-axy84,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-axy84
+Koi Security,clawhub,hightower6eu/x-trends-bjcps,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-bjcps
+Koi Security,clawhub,hightower6eu/x-trends-cpif3,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-cpif3
+Koi Security,clawhub,hightower6eu/x-trends-dijrb,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-dijrb
+Koi Security,clawhub,hightower6eu/x-trends-el5qn,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-el5qn
+Koi Security,clawhub,hightower6eu/x-trends-hloqe,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-hloqe
+Koi Security,clawhub,hightower6eu/x-trends-kujtp,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-kujtp
+Koi Security,clawhub,hightower6eu/x-trends-ky4xt,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-ky4xt
+Koi Security,clawhub,hightower6eu/x-trends-kzcxt,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-kzcxt
+Koi Security,clawhub,hightower6eu/x-trends-mtzmi,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-mtzmi
+Koi Security,clawhub,hightower6eu/x-trends-ngw4s,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-ngw4s
+Koi Security,clawhub,hightower6eu/x-trends-nvdfx,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-nvdfx
+Koi Security,clawhub,hightower6eu/x-trends-orwhp,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-orwhp
+Koi Security,clawhub,hightower6eu/x-trends-ovdpf,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-ovdpf
+Koi Security,clawhub,hightower6eu/x-trends-p7ivk,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-p7ivk
+Koi Security,clawhub,hightower6eu/x-trends-qfpkj,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-qfpkj
+Koi Security,clawhub,hightower6eu/x-trends-qhz9c,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-qhz9c
+Koi Security,clawhub,hightower6eu/x-trends-qpaoo,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-qpaoo
+Koi Security,clawhub,hightower6eu/x-trends-qylxo,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-qylxo
+Koi Security,clawhub,hightower6eu/x-trends-rjmtk,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-rjmtk
+Koi Security,clawhub,hightower6eu/x-trends-rwskq,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-rwskq
+Koi Security,clawhub,hightower6eu/x-trends-wbc5p,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-wbc5p
+Koi Security,clawhub,hightower6eu/x-trends-ypqjp,malicious,data/ground_truth/malicious/clawhub/hightower6eu_x-trends-ypqjp
+Koi Security,clawhub,hightower6eu/yahoo-finance-1h2ji,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-1h2ji
+Koi Security,clawhub,hightower6eu/yahoo-finance-2s8cv,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-2s8cv
+Koi Security,clawhub,hightower6eu/yahoo-finance-55ykj,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-55ykj
+Koi Security,clawhub,hightower6eu/yahoo-finance-5fhu3,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-5fhu3
+Koi Security,clawhub,hightower6eu/yahoo-finance-6icpt,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-6icpt
+Koi Security,clawhub,hightower6eu/yahoo-finance-7txap,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-7txap
+Koi Security,clawhub,hightower6eu/yahoo-finance-bzrvt,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-bzrvt
+Koi Security,clawhub,hightower6eu/yahoo-finance-cv8ev,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-cv8ev
+Koi Security,clawhub,hightower6eu/yahoo-finance-eqosk,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-eqosk
+Koi Security,clawhub,hightower6eu/yahoo-finance-ijybk,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-ijybk
+Koi Security,clawhub,hightower6eu/yahoo-finance-jdlqs,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-jdlqs
+Koi Security,clawhub,hightower6eu/yahoo-finance-jzgua,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-jzgua
+Koi Security,clawhub,hightower6eu/yahoo-finance-kmhxs,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-kmhxs
+Koi Security,clawhub,hightower6eu/yahoo-finance-m16op,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-m16op
+Koi Security,clawhub,hightower6eu/yahoo-finance-mb9wu,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-mb9wu
+Koi Security,clawhub,hightower6eu/yahoo-finance-mz1nt,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-mz1nt
+Koi Security,clawhub,hightower6eu/yahoo-finance-om4g4,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-om4g4
+Koi Security,clawhub,hightower6eu/yahoo-finance-saosh,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-saosh
+Koi Security,clawhub,hightower6eu/yahoo-finance-tqxkb,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-tqxkb
+Koi Security,clawhub,hightower6eu/yahoo-finance-uelhr,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-uelhr
+Koi Security,clawhub,hightower6eu/yahoo-finance-w3wo2,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-w3wo2
+Koi Security,clawhub,hightower6eu/yahoo-finance-wcr6j,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-wcr6j
+Koi Security,clawhub,hightower6eu/yahoo-finance-xsnez,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-xsnez
+Koi Security,clawhub,hightower6eu/yahoo-finance-y7mbx,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-y7mbx
+Koi Security,clawhub,hightower6eu/yahoo-finance-ztbyq,malicious,data/ground_truth/malicious/clawhub/hightower6eu_yahoo-finance-ztbyq
+Koi Security,clawhub,hightower6eu/youtube-summarize-11y0i,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-11y0i
+Koi Security,clawhub,hightower6eu/youtube-summarize-35o20,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-35o20
+Koi Security,clawhub,hightower6eu/youtube-summarize-3hazy,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-3hazy
+Koi Security,clawhub,hightower6eu/youtube-summarize-3luwa,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-3luwa
+Koi Security,clawhub,hightower6eu/youtube-summarize-5oixh,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-5oixh
+Koi Security,clawhub,hightower6eu/youtube-summarize-7vnwu,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-7vnwu
+Koi Security,clawhub,hightower6eu/youtube-summarize-8edua,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-8edua
+Koi Security,clawhub,hightower6eu/youtube-summarize-beqh9,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-beqh9
+Koi Security,clawhub,hightower6eu/youtube-summarize-ebw5x,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-ebw5x
+Koi Security,clawhub,hightower6eu/youtube-summarize-gctcr,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-gctcr
+Koi Security,clawhub,hightower6eu/youtube-summarize-genms,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-genms
+Koi Security,clawhub,hightower6eu/youtube-summarize-hr5oh,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-hr5oh
+Koi Security,clawhub,hightower6eu/youtube-summarize-iagv2,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-iagv2
+Koi Security,clawhub,hightower6eu/youtube-summarize-ib7el,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-ib7el
+Koi Security,clawhub,hightower6eu/youtube-summarize-ietsw,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-ietsw
+Koi Security,clawhub,hightower6eu/youtube-summarize-k67rk,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-k67rk
+Koi Security,clawhub,hightower6eu/youtube-summarize-kodxd,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-kodxd
+Koi Security,clawhub,hightower6eu/youtube-summarize-l4hjv,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-l4hjv
+Koi Security,clawhub,hightower6eu/youtube-summarize-l8nmj,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-l8nmj
+Koi Security,clawhub,hightower6eu/youtube-summarize-lh9rq,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-lh9rq
+Koi Security,clawhub,hightower6eu/youtube-summarize-mnoqm,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-mnoqm
+Koi Security,clawhub,hightower6eu/youtube-summarize-mxmlp,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-mxmlp
+Koi Security,clawhub,hightower6eu/youtube-summarize-noyux,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-noyux
+Koi Security,clawhub,hightower6eu/youtube-summarize-ohxkm,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-ohxkm
+Koi Security,clawhub,hightower6eu/youtube-summarize-ppfxa,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-ppfxa
+Koi Security,clawhub,hightower6eu/youtube-summarize-r5ajr,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-r5ajr
+Koi Security,clawhub,hightower6eu/youtube-summarize-tvtrh,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-tvtrh
+Koi Security,clawhub,hightower6eu/youtube-summarize-umait,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-umait
+Koi Security,clawhub,hightower6eu/youtube-summarize-z7kli,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-z7kli
+Koi Security,clawhub,hightower6eu/youtube-summarize-zserr,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-zserr
+Koi Security,clawhub,hightower6eu/youtube-summarize-zwl3z,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-summarize-zwl3z
+Koi Security,clawhub,hightower6eu/youtube-thumbnail-grabber-2dp6g,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-thumbnail-grabber-2dp6g
+Koi Security,clawhub,hightower6eu/youtube-thumbnail-grabber-2vx4b,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-thumbnail-grabber-2vx4b
+Koi Security,clawhub,hightower6eu/youtube-thumbnail-grabber-bg45o,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-thumbnail-grabber-bg45o
+Koi Security,clawhub,hightower6eu/youtube-thumbnail-grabber-h67cl,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-thumbnail-grabber-h67cl
+Koi Security,clawhub,hightower6eu/youtube-thumbnail-grabber-jes1t,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-thumbnail-grabber-jes1t
+Koi Security,clawhub,hightower6eu/youtube-thumbnail-grabber-jwnwx,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-thumbnail-grabber-jwnwx
+Koi Security,clawhub,hightower6eu/youtube-thumbnail-grabber-ktwoe,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-thumbnail-grabber-ktwoe
+Koi Security,clawhub,hightower6eu/youtube-thumbnail-grabber-mgaww,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-thumbnail-grabber-mgaww
+Koi Security,clawhub,hightower6eu/youtube-thumbnail-grabber-qvizx,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-thumbnail-grabber-qvizx
+Koi Security,clawhub,hightower6eu/youtube-thumbnail-grabber-rzncj,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-thumbnail-grabber-rzncj
+Koi Security,clawhub,hightower6eu/youtube-thumbnail-grabber-sq374,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-thumbnail-grabber-sq374
+Koi Security,clawhub,hightower6eu/youtube-thumbnail-grabber-tzilx,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-thumbnail-grabber-tzilx
+Koi Security,clawhub,hightower6eu/youtube-thumbnail-grabber-w7har,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-thumbnail-grabber-w7har
+Koi Security,clawhub,hightower6eu/youtube-video-downloader-5qfuw,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-video-downloader-5qfuw
+Koi Security,clawhub,hightower6eu/youtube-video-downloader-9br7p,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-video-downloader-9br7p
+Koi Security,clawhub,hightower6eu/youtube-video-downloader-9kscv,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-video-downloader-9kscv
+Koi Security,clawhub,hightower6eu/youtube-video-downloader-cjmxp,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-video-downloader-cjmxp
+Koi Security,clawhub,hightower6eu/youtube-video-downloader-fnkxw,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-video-downloader-fnkxw
+Koi Security,clawhub,hightower6eu/youtube-video-downloader-hvzyq,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-video-downloader-hvzyq
+Koi Security,clawhub,hightower6eu/youtube-video-downloader-jobxc,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-video-downloader-jobxc
+Koi Security,clawhub,hightower6eu/youtube-video-downloader-kcbjr,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-video-downloader-kcbjr
+Koi Security,clawhub,hightower6eu/youtube-video-downloader-pydzq,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-video-downloader-pydzq
+Koi Security,clawhub,hightower6eu/youtube-video-downloader-tnot1,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-video-downloader-tnot1
+Koi Security,clawhub,hightower6eu/youtube-video-downloader-vsmhd,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-video-downloader-vsmhd
+Koi Security,clawhub,hightower6eu/youtube-video-downloader-wibsd,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-video-downloader-wibsd
+Koi Security,clawhub,hightower6eu/youtube-video-downloader-xx9sy,malicious,data/ground_truth/malicious/clawhub/hightower6eu_youtube-video-downloader-xx9sy
+Koi Security,clawhub,moonshine-100rze/excel-1kl,malicious,data/ground_truth/malicious/clawhub/moonshine-100rze_excel-1kl
+Koi Security,clawhub,moonshine-100rze/moltbook-lm8,malicious,data/ground_truth/malicious/clawhub/moonshine-100rze_moltbook-lm8
+Koi Security,clawhub,moonshine-100rze/twitter-6ql,malicious,data/ground_truth/malicious/clawhub/moonshine-100rze_twitter-6ql
+Koi Security,clawhub,mosonchan2023/polymarket-market-maker,malicious,data/ground_truth/malicious/clawhub/mosonchan2023_polymarket-market-maker
+Koi Security,clawhub,noreplyboter/better-polymarket,malicious,data/ground_truth/malicious/clawhub/noreplyboter_better-polymarket
+Koi Security,clawhub,noreplyboter/polymarket-all-in-one,malicious,data/ground_truth/malicious/clawhub/noreplyboter_polymarket-all-in-one
+Koi Security,clawhub,pepe276/publish-dist,malicious,data/ground_truth/malicious/clawhub/pepe276_publish-dist
+Koi Security,clawhub,rjnpage/rankaj,malicious,data/ground_truth/malicious/clawhub/rjnpage_rankaj
+Koi Security,clawhub,sakaen736jih/agent-browser-6aigix9qi2tu,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_agent-browser-6aigix9qi2tu
+Koi Security,clawhub,sakaen736jih/agent-browser-b2x7tvcmbjgp,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_agent-browser-b2x7tvcmbjgp
+Koi Security,clawhub,sakaen736jih/agent-browser-bzsqiuw0rznw,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_agent-browser-bzsqiuw0rznw
+Koi Security,clawhub,sakaen736jih/agent-browser-fopzsipap75u,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_agent-browser-fopzsipap75u
+Koi Security,clawhub,sakaen736jih/agent-browser-ha2gvrwrmbil,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_agent-browser-ha2gvrwrmbil
+Koi Security,clawhub,sakaen736jih/agent-browser-jrdv4mcscrb2,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_agent-browser-jrdv4mcscrb2
+Koi Security,clawhub,sakaen736jih/agent-browser-npzrafdduyrm,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_agent-browser-npzrafdduyrm
+Koi Security,clawhub,sakaen736jih/agent-browser-plyd56pz7air,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_agent-browser-plyd56pz7air
+Koi Security,clawhub,sakaen736jih/agent-browser-shdaumcajgxf,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_agent-browser-shdaumcajgxf
+Koi Security,clawhub,sakaen736jih/agent-browser-txfumuva5m6u,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_agent-browser-txfumuva5m6u
+Koi Security,clawhub,sakaen736jih/agent-browser-ufymjtykwuas,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_agent-browser-ufymjtykwuas
+Koi Security,clawhub,sakaen736jih/agent-browser-ymepfebfpc2x,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_agent-browser-ymepfebfpc2x
+Koi Security,clawhub,sakaen736jih/agent-browser-zd1dook9mtfz,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_agent-browser-zd1dook9mtfz
+Koi Security,clawhub,sakaen736jih/auto-updater-3miomc4dvir,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-3miomc4dvir
+Koi Security,clawhub,sakaen736jih/auto-updater-5cnufr8quj5,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-5cnufr8quj5
+Koi Security,clawhub,sakaen736jih/auto-updater-ah1,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-ah1
+Koi Security,clawhub,sakaen736jih/auto-updater-drvd2u5bgft,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-drvd2u5bgft
+Koi Security,clawhub,sakaen736jih/auto-updater-dyismmj5csx,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-dyismmj5csx
+Koi Security,clawhub,sakaen736jih/auto-updater-ek1qviijfp1,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-ek1qviijfp1
+Koi Security,clawhub,sakaen736jih/auto-updater-eu0vxzedkgb,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-eu0vxzedkgb
+Koi Security,clawhub,sakaen736jih/auto-updater-jhsfi4ehp1b,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-jhsfi4ehp1b
+Koi Security,clawhub,sakaen736jih/auto-updater-jrpkyiayibm,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-jrpkyiayibm
+Koi Security,clawhub,sakaen736jih/auto-updater-lrssiatzxpx,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-lrssiatzxpx
+Koi Security,clawhub,sakaen736jih/auto-updater-nz2uvldrokd,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-nz2uvldrokd
+Koi Security,clawhub,sakaen736jih/auto-updater-pb70kpsnfof,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-pb70kpsnfof
+Koi Security,clawhub,sakaen736jih/auto-updater-qahxnvcnurj,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-qahxnvcnurj
+Koi Security,clawhub,sakaen736jih/auto-updater-qg0anavwlmt,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-qg0anavwlmt
+Koi Security,clawhub,sakaen736jih/auto-updater-sgr,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-sgr
+Koi Security,clawhub,sakaen736jih/auto-updater-sgtm55aoazj,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-sgtm55aoazj
+Koi Security,clawhub,sakaen736jih/auto-updater-uqmlhjh7pgz,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-uqmlhjh7pgz
+Koi Security,clawhub,sakaen736jih/auto-updater-vombw4ciwc0,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_auto-updater-vombw4ciwc0
+Koi Security,clawhub,sakaen736jih/bird-0p,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-0p
+Koi Security,clawhub,sakaen736jih/bird-2l,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-2l
+Koi Security,clawhub,sakaen736jih/bird-ag,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-ag
+Koi Security,clawhub,sakaen736jih/bird-ar,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-ar
+Koi Security,clawhub,sakaen736jih/bird-ch,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-ch
+Koi Security,clawhub,sakaen736jih/bird-co,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-co
+Koi Security,clawhub,sakaen736jih/bird-fa,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-fa
+Koi Security,clawhub,sakaen736jih/bird-h4,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-h4
+Koi Security,clawhub,sakaen736jih/bird-hg,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-hg
+Koi Security,clawhub,sakaen736jih/bird-js,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-js
+Koi Security,clawhub,sakaen736jih/bird-mh,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-mh
+Koi Security,clawhub,sakaen736jih/bird-nc,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-nc
+Koi Security,clawhub,sakaen736jih/bird-rl,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-rl
+Koi Security,clawhub,sakaen736jih/bird-su,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-su
+Koi Security,clawhub,sakaen736jih/bird-vu,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-vu
+Koi Security,clawhub,sakaen736jih/bird-wo,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-wo
+Koi Security,clawhub,sakaen736jih/bird-xn,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-xn
+Koi Security,clawhub,sakaen736jih/bird-yf,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-yf
+Koi Security,clawhub,sakaen736jih/bird-yt,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-yt
+Koi Security,clawhub,sakaen736jih/bird-za,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_bird-za
+Koi Security,clawhub,sakaen736jih/clawdhub-0ds2em57jf,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_clawdhub-0ds2em57jf
+Koi Security,clawhub,sakaen736jih/clawdhub-1qbvz9cvc3,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_clawdhub-1qbvz9cvc3
+Koi Security,clawhub,sakaen736jih/clawdhub-2trnbtcgyo,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_clawdhub-2trnbtcgyo
+Koi Security,clawhub,sakaen736jih/clawdhub-3ffldvumfb,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_clawdhub-3ffldvumfb
+Koi Security,clawhub,sakaen736jih/clawdhub-3jv6c6gijf,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_clawdhub-3jv6c6gijf
+Koi Security,clawhub,sakaen736jih/clawdhub-8rhr8q1zgy,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_clawdhub-8rhr8q1zgy
+Koi Security,clawhub,sakaen736jih/clawdhub-aecm6lh6uo,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_clawdhub-aecm6lh6uo
+Koi Security,clawhub,sakaen736jih/clawdhub-hklg5xzjbc,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_clawdhub-hklg5xzjbc
+Koi Security,clawhub,sakaen736jih/clawdhub-i6qfm0cay3,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_clawdhub-i6qfm0cay3
+Koi Security,clawhub,sakaen736jih/clawdhub-ilhnghd1c0,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_clawdhub-ilhnghd1c0
+Koi Security,clawhub,sakaen736jih/clawdhub-itmu0eevs9,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_clawdhub-itmu0eevs9
+Koi Security,clawhub,sakaen736jih/clawdhub-l91mzsalr7,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_clawdhub-l91mzsalr7
+Koi Security,clawhub,sakaen736jih/clawdhub-lhhr7b7jsj,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_clawdhub-lhhr7b7jsj
+Koi Security,clawhub,sakaen736jih/clawdhub-lyass2awyp,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_clawdhub-lyass2awyp
+Koi Security,clawhub,sakaen736jih/clawdhub-xupj4k8euh,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_clawdhub-xupj4k8euh
+Koi Security,clawhub,sakaen736jih/clawdhub-yskkhfqscj,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_clawdhub-yskkhfqscj
+Koi Security,clawhub,sakaen736jih/clawdhub-za29sitx9w,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_clawdhub-za29sitx9w
+Koi Security,clawhub,sakaen736jih/clawdhub-zegimab3ze,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_clawdhub-zegimab3ze
+Koi Security,clawhub,sakaen736jih/clawdhub-zh7v47hpwk,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_clawdhub-zh7v47hpwk
+Koi Security,clawhub,sakaen736jih/coding-agent-4ilvlj7rs,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-4ilvlj7rs
+Koi Security,clawhub,sakaen736jih/coding-agent-7k8p1tijc,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-7k8p1tijc
+Koi Security,clawhub,sakaen736jih/coding-agent-8wyxxelkv,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-8wyxxelkv
+Koi Security,clawhub,sakaen736jih/coding-agent-boz67cmsl,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-boz67cmsl
+Koi Security,clawhub,sakaen736jih/coding-agent-by6ghzyes,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-by6ghzyes
+Koi Security,clawhub,sakaen736jih/coding-agent-du7t1pmcd,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-du7t1pmcd
+Koi Security,clawhub,sakaen736jih/coding-agent-ggeu0hlk4,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-ggeu0hlk4
+Koi Security,clawhub,sakaen736jih/coding-agent-hmxr2rtke,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-hmxr2rtke
+Koi Security,clawhub,sakaen736jih/coding-agent-kpeg9c2rq,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-kpeg9c2rq
+Koi Security,clawhub,sakaen736jih/coding-agent-my1tb1kam,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-my1tb1kam
+Koi Security,clawhub,sakaen736jih/coding-agent-o10sk4yyb,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-o10sk4yyb
+Koi Security,clawhub,sakaen736jih/coding-agent-ojd1iijmg,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-ojd1iijmg
+Koi Security,clawhub,sakaen736jih/coding-agent-p2kq1f9ou,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-p2kq1f9ou
+Koi Security,clawhub,sakaen736jih/coding-agent-p6k84e0fv,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-p6k84e0fv
+Koi Security,clawhub,sakaen736jih/coding-agent-pekjzav3x,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-pekjzav3x
+Koi Security,clawhub,sakaen736jih/coding-agent-tvmz0qsg1,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-tvmz0qsg1
+Koi Security,clawhub,sakaen736jih/coding-agent-vwho0kmqi,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-vwho0kmqi
+Koi Security,clawhub,sakaen736jih/coding-agent-yzyvfg9hn,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-yzyvfg9hn
+Koi Security,clawhub,sakaen736jih/coding-agent-z1qldmg0f,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_coding-agent-z1qldmg0f
+Koi Security,clawhub,sakaen736jih/deep-research-eejukdjn,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_deep-research-eejukdjn
+Koi Security,clawhub,sakaen736jih/deep-research-eoo5vd95,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_deep-research-eoo5vd95
+Koi Security,clawhub,sakaen736jih/deep-research-hsk9iq5w,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_deep-research-hsk9iq5w
+Koi Security,clawhub,sakaen736jih/deep-research-kgenr3rn,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_deep-research-kgenr3rn
+Koi Security,clawhub,sakaen736jih/deep-research-omvwp9ki,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_deep-research-omvwp9ki
+Koi Security,clawhub,sakaen736jih/deep-research-pjazdzyd,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_deep-research-pjazdzyd
+Koi Security,clawhub,sakaen736jih/deep-research-pqgwiuep,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_deep-research-pqgwiuep
+Koi Security,clawhub,sakaen736jih/deep-research-qvewifgk,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_deep-research-qvewifgk
+Koi Security,clawhub,sakaen736jih/deep-research-rio7el6w,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_deep-research-rio7el6w
+Koi Security,clawhub,sakaen736jih/deep-research-v2h55k2w,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_deep-research-v2h55k2w
+Koi Security,clawhub,sakaen736jih/deep-research-vc3veoel,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_deep-research-vc3veoel
+Koi Security,clawhub,sakaen736jih/ethereum,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_ethereum
+Koi Security,clawhub,sakaen736jih/gas-tracker,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_gas-tracker
+Koi Security,clawhub,sakaen736jih/gog-5w7zvby,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_gog-5w7zvby
+Koi Security,clawhub,sakaen736jih/gog-ee3cg9w,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_gog-ee3cg9w
+Koi Security,clawhub,sakaen736jih/gog-g7ksras,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_gog-g7ksras
+Koi Security,clawhub,sakaen736jih/gog-iezecg1,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_gog-iezecg1
+Koi Security,clawhub,sakaen736jih/gog-kcjgdv2,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_gog-kcjgdv2
+Koi Security,clawhub,sakaen736jih/gog-kfnluze,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_gog-kfnluze
+Koi Security,clawhub,sakaen736jih/gog-kvlmtdd,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_gog-kvlmtdd
+Koi Security,clawhub,sakaen736jih/gog-shbjktj,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_gog-shbjktj
+Koi Security,clawhub,sakaen736jih/gog-sywovxv,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_gog-sywovxv
+Koi Security,clawhub,sakaen736jih/gog-vjlu0ls,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_gog-vjlu0ls
+Koi Security,clawhub,sakaen736jih/gog-ybiur2h,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_gog-ybiur2h
+Koi Security,clawhub,sakaen736jih/leo-wallet,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_leo-wallet
+Koi Security,clawhub,sakaen736jih/metamask,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_metamask
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-8ap3x7,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-8ap3x7
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-c16jff,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-c16jff
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-e3c48l,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-e3c48l
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-eug1jw,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-eug1jw
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-fxgpbf,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-fxgpbf
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-glfq7a,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-glfq7a
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-gyyjbx,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-gyyjbx
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-hu1vfx,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-hu1vfx
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-lldjo1,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-lldjo1
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-lrmva2,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-lrmva2
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-mauf71,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-mauf71
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-mzvmth,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-mzvmth
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-ogmcrj,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-ogmcrj
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-oinrw3,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-oinrw3
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-pcgniu,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-pcgniu
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-pqcucx,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-pqcucx
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-ptnlkl,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-ptnlkl
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-srlqfn,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-srlqfn
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-stl6ak,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-stl6ak
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-wepcdp,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-wepcdp
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-xeqcnk,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-xeqcnk
+Koi Security,clawhub,sakaen736jih/nano-banana-pro-yywjf1,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-banana-pro-yywjf1
+Koi Security,clawhub,sakaen736jih/nano-pdf-9j7bj,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-pdf-9j7bj
+Koi Security,clawhub,sakaen736jih/nano-pdf-cr79t,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-pdf-cr79t
+Koi Security,clawhub,sakaen736jih/nano-pdf-eeadu,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-pdf-eeadu
+Koi Security,clawhub,sakaen736jih/nano-pdf-ey8zb,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-pdf-ey8zb
+Koi Security,clawhub,sakaen736jih/nano-pdf-gbegf,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-pdf-gbegf
+Koi Security,clawhub,sakaen736jih/nano-pdf-kxufw,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-pdf-kxufw
+Koi Security,clawhub,sakaen736jih/nano-pdf-lqbmv,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-pdf-lqbmv
+Koi Security,clawhub,sakaen736jih/nano-pdf-mns57,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-pdf-mns57
+Koi Security,clawhub,sakaen736jih/nano-pdf-n2hcr,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-pdf-n2hcr
+Koi Security,clawhub,sakaen736jih/nano-pdf-q3e3z,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-pdf-q3e3z
+Koi Security,clawhub,sakaen736jih/nano-pdf-quqdg,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-pdf-quqdg
+Koi Security,clawhub,sakaen736jih/nano-pdf-rt9y1,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-pdf-rt9y1
+Koi Security,clawhub,sakaen736jih/nano-pdf-sdjzy,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-pdf-sdjzy
+Koi Security,clawhub,sakaen736jih/nano-pdf-tkqfw,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-pdf-tkqfw
+Koi Security,clawhub,sakaen736jih/nano-pdf-vbdin,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-pdf-vbdin
+Koi Security,clawhub,sakaen736jih/nano-pdf-vhitx,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-pdf-vhitx
+Koi Security,clawhub,sakaen736jih/nano-pdf-xyixq,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-pdf-xyixq
+Koi Security,clawhub,sakaen736jih/nano-pdf-yqsfx,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-pdf-yqsfx
+Koi Security,clawhub,sakaen736jih/nano-pdf-zpgdu,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_nano-pdf-zpgdu
+Koi Security,clawhub,sakaen736jih/solana,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_solana
+Koi Security,clawhub,sakaen736jih/summarize-177r,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_summarize-177r
+Koi Security,clawhub,sakaen736jih/summarize-7mfv,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_summarize-7mfv
+Koi Security,clawhub,sakaen736jih/summarize-ienz,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_summarize-ienz
+Koi Security,clawhub,sakaen736jih/summarize-ilyc,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_summarize-ilyc
+Koi Security,clawhub,sakaen736jih/summarize-jd4g,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_summarize-jd4g
+Koi Security,clawhub,sakaen736jih/summarize-jqoq,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_summarize-jqoq
+Koi Security,clawhub,sakaen736jih/summarize-kx5u,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_summarize-kx5u
+Koi Security,clawhub,sakaen736jih/summarize-nrqj,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_summarize-nrqj
+Koi Security,clawhub,sakaen736jih/summarize-rjig,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_summarize-rjig
+Koi Security,clawhub,sakaen736jih/summarize-syis,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_summarize-syis
+Koi Security,clawhub,sakaen736jih/summarize-v8w3,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_summarize-v8w3
+Koi Security,clawhub,sakaen736jih/summarize-wy5c,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_summarize-wy5c
+Koi Security,clawhub,sakaen736jih/wacli-1sk,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-1sk
+Koi Security,clawhub,sakaen736jih/wacli-339,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-339
+Koi Security,clawhub,sakaen736jih/wacli-5qi,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-5qi
+Koi Security,clawhub,sakaen736jih/wacli-ayv,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-ayv
+Koi Security,clawhub,sakaen736jih/wacli-e7x,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-e7x
+Koi Security,clawhub,sakaen736jih/wacli-eco,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-eco
+Koi Security,clawhub,sakaen736jih/wacli-era,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-era
+Koi Security,clawhub,sakaen736jih/wacli-evv,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-evv
+Koi Security,clawhub,sakaen736jih/wacli-hdg,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-hdg
+Koi Security,clawhub,sakaen736jih/wacli-hq4,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-hq4
+Koi Security,clawhub,sakaen736jih/wacli-ikx,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-ikx
+Koi Security,clawhub,sakaen736jih/wacli-klt,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-klt
+Koi Security,clawhub,sakaen736jih/wacli-mch,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-mch
+Koi Security,clawhub,sakaen736jih/wacli-muk,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-muk
+Koi Security,clawhub,sakaen736jih/wacli-mwj,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-mwj
+Koi Security,clawhub,sakaen736jih/wacli-pma,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-pma
+Koi Security,clawhub,sakaen736jih/wacli-w3y,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-w3y
+Koi Security,clawhub,sakaen736jih/wacli-xcb,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-xcb
+Koi Security,clawhub,sakaen736jih/wacli-ydw,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_wacli-ydw
+Koi Security,clawhub,sakaen736jih/youtube-watchar,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watchar
+Koi Security,clawhub,sakaen736jih/youtube-watcher-7,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watcher-7
+Koi Security,clawhub,sakaen736jih/youtube-watcher-8,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watcher-8
+Koi Security,clawhub,sakaen736jih/youtube-watcher-a,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watcher-a
+Koi Security,clawhub,sakaen736jih/youtube-watcher-c,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watcher-c
+Koi Security,clawhub,sakaen736jih/youtube-watcher-d,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watcher-d
+Koi Security,clawhub,sakaen736jih/youtube-watcher-g,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watcher-g
+Koi Security,clawhub,sakaen736jih/youtube-watcher-h,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watcher-h
+Koi Security,clawhub,sakaen736jih/youtube-watcher-j,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watcher-j
+Koi Security,clawhub,sakaen736jih/youtube-watcher-k,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watcher-k
+Koi Security,clawhub,sakaen736jih/youtube-watcher-n,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watcher-n
+Koi Security,clawhub,sakaen736jih/youtube-watcher-p,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watcher-p
+Koi Security,clawhub,sakaen736jih/youtube-watcher-u,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watcher-u
+Koi Security,clawhub,sakaen736jih/youtube-watcher-w,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watcher-w
+Koi Security,clawhub,sakaen736jih/youtube-watcher-x,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watcher-x
+Koi Security,clawhub,sakaen736jih/youtube-watcher-z,malicious,data/ground_truth/malicious/clawhub/sakaen736jih_youtube-watcher-z
+Koi Security,clawhub,seedamir/amir,malicious,data/ground_truth/malicious/clawhub/seedamir_amir
+Koi Security,clawhub,timclawbot/update,malicious,data/ground_truth/malicious/clawhub/timclawbot_update
+Koi Security,clawhub,zaycv/autoupdater,malicious,data/ground_truth/malicious/clawhub/zaycv_autoupdater
+Koi Security,clawhub,zaycv/blrd,malicious,data/ground_truth/malicious/clawhub/zaycv_blrd
+Koi Security,clawhub,zaycv/browserautomation,malicious,data/ground_truth/malicious/clawhub/zaycv_browserautomation
+Koi Security,clawhub,zaycv/clawbhub,malicious,data/ground_truth/malicious/clawhub/zaycv_clawbhub
+Koi Security,clawhub,zaycv/clawdhab,malicious,data/ground_truth/malicious/clawhub/zaycv_clawdhab
+Koi Security,clawhub,zaycv/clawhub1,malicious,data/ground_truth/malicious/clawhub/zaycv_clawhub1
+Koi Security,clawhub,zaycv/clawhub,malicious,data/ground_truth/malicious/clawhub/zaycv_clawhub
+Koi Security,clawhub,zaycv/clawhud,malicious,data/ground_truth/malicious/clawhub/zaycv_clawhud
+Koi Security,clawhub,zaycv/codingagent,malicious,data/ground_truth/malicious/clawhub/zaycv_codingagent
+Koi Security,clawhub,zaycv/deepresearch,malicious,data/ground_truth/malicious/clawhub/zaycv_deepresearch
+Koi Security,clawhub,zaycv/googleworkspace,malicious,data/ground_truth/malicious/clawhub/zaycv_googleworkspace
+Koi Security,clawhub,zaycv/linkedin-job-application,malicious,data/ground_truth/malicious/clawhub/zaycv_linkedin-job-application
+Koi Security,clawhub,zaycv/nano-bananapro,malicious,data/ground_truth/malicious/clawhub/zaycv_nano-bananapro
+Koi Security,clawhub,zaycv/nanobanana-pro,malicious,data/ground_truth/malicious/clawhub/zaycv_nanobanana-pro
+Koi Security,clawhub,zaycv/nanopdf,malicious,data/ground_truth/malicious/clawhub/zaycv_nanopdf
+Koi Security,clawhub,zaycv/polymarket-assistant,malicious,data/ground_truth/malicious/clawhub/zaycv_polymarket-assistant
+Koi Security,clawhub,zaycv/polymarket-hyperliquid-trading,malicious,data/ground_truth/malicious/clawhub/zaycv_polymarket-hyperliquid-trading
+Koi Security,clawhub,zaycv/polymarket-trading,malicious,data/ground_truth/malicious/clawhub/zaycv_polymarket-trading
+Koi Security,clawhub,zaycv/scalekit-agent,malicious,data/ground_truth/malicious/clawhub/zaycv_scalekit-agent
+Koi Security,clawhub,zaycv/shield,malicious,data/ground_truth/malicious/clawhub/zaycv_shield
+Koi Security,clawhub,zaycv/summarlze,malicious,data/ground_truth/malicious/clawhub/zaycv_summarlze
+Koi Security,clawhub,zaycv/whatsapp,malicious,data/ground_truth/malicious/clawhub/zaycv_whatsapp
+Koi Security,clawhub,zaycv/youtubewatcher,malicious,data/ground_truth/malicious/clawhub/zaycv_youtubewatcher
+Koi Security,clawhub,zaycv/yt-watcher,malicious,data/ground_truth/malicious/clawhub/zaycv_yt-watcher
+collected,skills_directory,adaptationio-gemini-auth,malicious,data/ground_truth/malicious/skills_directory/adaptationio-gemini-auth
+collected,skills_directory,davekilleen-screenpipe-setup,malicious,data/ground_truth/malicious/skills_directory/davekilleen-screenpipe-setup
+collected,skills_directory,davila7-linux-privilege-escalation,malicious,data/ground_truth/malicious/skills_directory/davila7-linux-privilege-escalation
+collected,skills_directory,jackspace-route-tester-diet103,malicious,data/ground_truth/malicious/skills_directory/jackspace-route-tester-diet103
+collected,skills_directory,majiayu000-codex-auth,malicious,data/ground_truth/malicious/skills_directory/majiayu000-codex-auth
+collected,skills_directory,majiayu000-data-optimizer-pro,malicious,data/ground_truth/malicious/skills_directory/majiayu000-data-optimizer-pro
+collected,skills_directory,majiayu000-file-inclusion,malicious,data/ground_truth/malicious/skills_directory/majiayu000-file-inclusion
+collected,skills_directory,majiayu000-fresh-install-testing,malicious,data/ground_truth/malicious/skills_directory/majiayu000-fresh-install-testing
+collected,skills_directory,mcp-com-ai-swagger-to-mcp,malicious,data/ground_truth/malicious/skills_directory/mcp-com-ai-swagger-to-mcp
+collected,skills_directory,neversight-root,malicious,data/ground_truth/malicious/skills_directory/neversight-root
+collected,skills_directory,openclaw-email-daily-summary,malicious,data/ground_truth/malicious/skills_directory/openclaw-email-daily-summary
+collected,skills_directory,openclaw-polymarket-hyperliquid-trading,malicious,data/ground_truth/malicious/skills_directory/openclaw-polymarket-hyperliquid-trading
+collected,skills_directory,openclaw-polymarket-trading,malicious,data/ground_truth/malicious/skills_directory/openclaw-polymarket-trading
+collected,skills_directory,ryo-ebata-data-exfil,malicious,data/ground_truth/malicious/skills_directory/ryo-ebata-data-exfil
+collected,skills_directory,ryo-ebata-supply-chain,malicious,data/ground_truth/malicious/skills_directory/ryo-ebata-supply-chain
+collected,skills_directory,sundial-org-bybit-trading,malicious,data/ground_truth/malicious/skills_directory/sundial-org-bybit-trading

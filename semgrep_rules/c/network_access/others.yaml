@@ -1,0 +1,961 @@
+rules:
+- id: sso.c.network_access.others.0001.no-accept
+  languages:
+  - c
+  message: Avoid using accept(), as it can lead to potential issues with network access.
+  metadata:
+    api: accept()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
+  pattern-either:
+  - pattern: accept(...)
+  - pattern: $VAR = accept
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0002.no-bind
+  languages:
+  - c
+  message: Avoid using bind(), as it can lead to potential issues with network access.
+  metadata:
+    api: bind()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
+  pattern-either:
+  - pattern: bind(...)
+  - pattern: $VAR = bind
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0003.no-bindresvport
+  languages:
+  - c
+  message: Avoid using bindresvport(), as it can lead to potential issues with network access.
+  metadata:
+    api: bindresvport()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
+  pattern-either:
+  - pattern: bindresvport(...)
+  - pattern: $VAR = bindresvport
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0004.no-close
+  languages:
+  - c
+  message: Avoid using close(), as it can lead to potential issues with network access.
+  metadata:
+    api: close()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: close(...)
+  - pattern: $VAR = close
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0005.no-connect
+  languages:
+  - c
+  message: Avoid using connect(), as it can lead to potential issues with network access.
+  metadata:
+    api: connect()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: connect(...)
+  - pattern: $VAR = connect
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0006.no-epoll_create
+  languages:
+  - c
+  message: Avoid using epoll_create(), as it can lead to potential issues with network access.
+  metadata:
+    api: epoll_create()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: epoll_create(...)
+  - pattern: $VAR = epoll_create
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0007.no-epoll_create
+  languages:
+  - c
+  message: Avoid using epoll_create(), as it can lead to potential issues with network access.
+  metadata:
+    api: epoll_create()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: epoll_create(...)
+  - pattern: $VAR = epoll_create
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0008.no-epoll_ctl
+  languages:
+  - c
+  message: Avoid using epoll_ctl(), as it can lead to potential issues with network access.
+  metadata:
+    api: epoll_ctl()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: epoll_ctl(...)
+  - pattern: $VAR = epoll_ctl
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0009.no-epoll_ctl
+  languages:
+  - c
+  message: Avoid using epoll_ctl(), as it can lead to potential issues with network access.
+  metadata:
+    api: epoll_ctl()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: epoll_ctl(...)
+  - pattern: $VAR = epoll_ctl
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0010.no-epoll_wait
+  languages:
+  - c
+  message: Avoid using epoll_wait(), as it can lead to potential issues with network access.
+  metadata:
+    api: epoll_wait()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: epoll_wait(...)
+  - pattern: $VAR = epoll_wait
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0011.no-epoll_wait
+  languages:
+  - c
+  message: Avoid using epoll_wait(), as it can lead to potential issues with network access.
+  metadata:
+    api: epoll_wait()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: epoll_wait(...)
+  - pattern: $VAR = epoll_wait
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0012.no-fcntl
+  languages:
+  - c
+  message: Avoid using fcntl(), as it can lead to potential issues with network access.
+  metadata:
+    api: fcntl()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: fcntl(...)
+  - pattern: $VAR = fcntl
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0013.no-freeaddrinfo
+  languages:
+  - c
+  message: Avoid using freeaddrinfo(), as it can lead to potential issues with network access.
+  metadata:
+    api: freeaddrinfo()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: freeaddrinfo(...)
+  - pattern: $VAR = freeaddrinfo
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0014.no-freeaddrinfo
+  languages:
+  - c
+  message: Avoid using freeaddrinfo(), as it can lead to potential issues with network access.
+  metadata:
+    api: freeaddrinfo()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: freeaddrinfo(...)
+  - pattern: $VAR = freeaddrinfo
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0015.no-getaddrinfo
+  languages:
+  - c
+  message: Avoid using getaddrinfo(), as it can lead to potential issues with network access.
+  metadata:
+    api: getaddrinfo()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: dns_resolution
+  pattern-either:
+  - pattern: getaddrinfo(...)
+  - pattern: $VAR = getaddrinfo
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0016.no-getaddrinfo
+  languages:
+  - c
+  message: Avoid using getaddrinfo(), as it can lead to potential issues with network access.
+  metadata:
+    api: getaddrinfo()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: dns_resolution
+  pattern-either:
+  - pattern: getaddrinfo(...)
+  - pattern: $VAR = getaddrinfo
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0017.no-getaddrinfo
+  languages:
+  - c
+  message: Avoid using getaddrinfo(), as it can lead to potential issues with network access.
+  metadata:
+    api: getaddrinfo()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: dns_resolution
+  pattern-either:
+  - pattern: getaddrinfo(...)
+  - pattern: $VAR = getaddrinfo
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0018.no-gethostbyaddr
+  languages:
+  - c
+  message: Avoid using gethostbyaddr(), as it can lead to potential issues with network access.
+  metadata:
+    api: gethostbyaddr()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: dns_resolution
+  pattern-either:
+  - pattern: gethostbyaddr(...)
+  - pattern: $VAR = gethostbyaddr
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0019.no-gethostbyname
+  languages:
+  - c
+  message: Avoid using gethostbyname(), as it can lead to potential issues with network access.
+  metadata:
+    api: gethostbyname()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: dns_resolution
+  pattern-either:
+  - pattern: gethostbyname(...)
+  - pattern: $VAR = gethostbyname
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0020.no-gethostname
+  languages:
+  - c
+  message: Avoid using gethostname(), as it can lead to potential issues with network access.
+  metadata:
+    api: gethostname()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: gethostname(...)
+  - pattern: $VAR = gethostname
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0021.no-getnameinfo
+  languages:
+  - c
+  message: Avoid using getnameinfo(), as it can lead to potential issues with network access.
+  metadata:
+    api: getnameinfo()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: getnameinfo(...)
+  - pattern: $VAR = getnameinfo
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0022.no-getpeername
+  languages:
+  - c
+  message: Avoid using getpeername(), as it can lead to potential issues with network access.
+  metadata:
+    api: getpeername()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: getpeername(...)
+  - pattern: $VAR = getpeername
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0023.no-getservbyname
+  languages:
+  - c
+  message: Avoid using getservbyname(), as it can lead to potential issues with network access.
+  metadata:
+    api: getservbyname()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: getservbyname(...)
+  - pattern: $VAR = getservbyname
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0024.no-getservbyport
+  languages:
+  - c
+  message: Avoid using getservbyport(), as it can lead to potential issues with network access.
+  metadata:
+    api: getservbyport()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: getservbyport(...)
+  - pattern: $VAR = getservbyport
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0025.no-getsockname
+  languages:
+  - c
+  message: Avoid using getsockname(), as it can lead to potential issues with network access.
+  metadata:
+    api: getsockname()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: getsockname(...)
+  - pattern: $VAR = getsockname
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0026.no-getsockopt
+  languages:
+  - c
+  message: Avoid using getsockopt(), as it can lead to potential issues with network access.
+  metadata:
+    api: getsockopt()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: getsockopt(...)
+  - pattern: $VAR = getsockopt
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0027.no-getsockopt
+  languages:
+  - c
+  message: Avoid using getsockopt(), as it can lead to potential issues with network access.
+  metadata:
+    api: getsockopt()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: getsockopt(...)
+  - pattern: $VAR = getsockopt
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0028.no-htonl
+  languages:
+  - c
+  message: Avoid using htonl(), as it can lead to potential issues with network access.
+  metadata:
+    api: htonl()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: htonl(...)
+  - pattern: $VAR = htonl
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0029.no-htonl
+  languages:
+  - c
+  message: Avoid using htonl(), as it can lead to potential issues with network access.
+  metadata:
+    api: htonl()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: htonl(...)
+  - pattern: $VAR = htonl
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0030.no-htonl
+  languages:
+  - c
+  message: Avoid using htonl(), as it can lead to potential issues with network access.
+  metadata:
+    api: htonl()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: htonl(...)
+  - pattern: $VAR = htonl
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0031.no-htons
+  languages:
+  - c
+  message: Avoid using htons(), as it can lead to potential issues with network access.
+  metadata:
+    api: htons()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: htons(...)
+  - pattern: $VAR = htons
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0032.no-htons
+  languages:
+  - c
+  message: Avoid using htons(), as it can lead to potential issues with network access.
+  metadata:
+    api: htons()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: htons(...)
+  - pattern: $VAR = htons
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0033.no-htons
+  languages:
+  - c
+  message: Avoid using htons(), as it can lead to potential issues with network access.
+  metadata:
+    api: htons()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: htons(...)
+  - pattern: $VAR = htons
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0034.no-in6addr_any
+  languages:
+  - c
+  message: Avoid using in6addr_any(), as it can lead to potential issues with network access.
+  metadata:
+    api: in6addr_any()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: in6addr_any(...)
+  - pattern: $VAR = in6addr_any
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0035.no-in6addr_loopback
+  languages:
+  - c
+  message: Avoid using in6addr_loopback(), as it can lead to potential issues with network access.
+  metadata:
+    api: in6addr_loopback()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: in6addr_loopback(...)
+  - pattern: $VAR = in6addr_loopback
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0036.no-inet_ntoa
+  languages:
+  - c
+  message: Avoid using inet_ntoa(), as it can lead to potential issues with network access.
+  metadata:
+    api: inet_ntoa()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: inet_ntoa(...)
+  - pattern: $VAR = inet_ntoa
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0037.no-inet_ntop
+  languages:
+  - c
+  message: Avoid using inet_ntop(), as it can lead to potential issues with network access.
+  metadata:
+    api: inet_ntop()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: inet_ntop(...)
+  - pattern: $VAR = inet_ntop
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0038.no-inet_ntop
+  languages:
+  - c
+  message: Avoid using inet_ntop(), as it can lead to potential issues with network access.
+  metadata:
+    api: inet_ntop()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: inet_ntop(...)
+  - pattern: $VAR = inet_ntop
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0039.no-inet_pton
+  languages:
+  - c
+  message: Avoid using inet_pton(), as it can lead to potential issues with network access.
+  metadata:
+    api: inet_pton()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: inet_pton(...)
+  - pattern: $VAR = inet_pton
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0040.no-inet_pton
+  languages:
+  - c
+  message: Avoid using inet_pton(), as it can lead to potential issues with network access.
+  metadata:
+    api: inet_pton()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: inet_pton(...)
+  - pattern: $VAR = inet_pton
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0041.no-ioctl
+  languages:
+  - c
+  message: Avoid using ioctl(), as it can lead to potential issues with network access.
+  metadata:
+    api: ioctl()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: ioctl(...)
+  - pattern: $VAR = ioctl
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0042.no-listen
+  languages:
+  - c
+  message: Avoid using listen(), as it can lead to potential issues with network access.
+  metadata:
+    api: listen()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
+  pattern-either:
+  - pattern: listen(...)
+  - pattern: $VAR = listen
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0043.no-listen
+  languages:
+  - c
+  message: Avoid using listen(), as it can lead to potential issues with network access.
+  metadata:
+    api: listen()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
+  pattern-either:
+  - pattern: listen(...)
+  - pattern: $VAR = listen
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0044.no-ntohl
+  languages:
+  - c
+  message: Avoid using ntohl(), as it can lead to potential issues with network access.
+  metadata:
+    api: ntohl()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: ntohl(...)
+  - pattern: $VAR = ntohl
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0045.no-ntohl
+  languages:
+  - c
+  message: Avoid using ntohl(), as it can lead to potential issues with network access.
+  metadata:
+    api: ntohl()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: ntohl(...)
+  - pattern: $VAR = ntohl
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0046.no-ntohs
+  languages:
+  - c
+  message: Avoid using ntohs(), as it can lead to potential issues with network access.
+  metadata:
+    api: ntohs()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: ntohs(...)
+  - pattern: $VAR = ntohs
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0047.no-ntohs
+  languages:
+  - c
+  message: Avoid using ntohs(), as it can lead to potential issues with network access.
+  metadata:
+    api: ntohs()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: ntohs(...)
+  - pattern: $VAR = ntohs
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0048.no-poll
+  languages:
+  - c
+  message: Avoid using poll(), as it can lead to potential issues with network access.
+  metadata:
+    api: poll()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: poll(...)
+  - pattern: $VAR = poll
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0049.no-poll
+  languages:
+  - c
+  message: Avoid using poll(), as it can lead to potential issues with network access.
+  metadata:
+    api: poll()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: poll(...)
+  - pattern: $VAR = poll
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0050.no-recv
+  languages:
+  - c
+  message: Avoid using recv(), as it can lead to potential issues with network access.
+  metadata:
+    api: recv()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
+  pattern-either:
+  - pattern: recv(...)
+  - pattern: $VAR = recv
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0051.no-recvfrom
+  languages:
+  - c
+  message: Avoid using recvfrom(), as it can lead to potential issues with network access.
+  metadata:
+    api: recvfrom()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
+  pattern-either:
+  - pattern: recvfrom(...)
+  - pattern: $VAR = recvfrom
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0052.no-recvmsg
+  languages:
+  - c
+  message: Avoid using recvmsg(), as it can lead to potential issues with network access.
+  metadata:
+    api: recvmsg()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_receive
+  pattern-either:
+  - pattern: recvmsg(...)
+  - pattern: $VAR = recvmsg
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0053.no-select
+  languages:
+  - c
+  message: Avoid using select(), as it can lead to potential issues with network access.
+  metadata:
+    api: select()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: select(...)
+  - pattern: $VAR = select
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0054.no-select
+  languages:
+  - c
+  message: Avoid using select(), as it can lead to potential issues with network access.
+  metadata:
+    api: select()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: select(...)
+  - pattern: $VAR = select
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0055.no-send
+  languages:
+  - c
+  message: Avoid using send(), as it can lead to potential issues with network access.
+  metadata:
+    api: send()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
+  pattern-either:
+  - pattern: send(...)
+  - pattern: $VAR = send
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0056.no-sendfile
+  languages:
+  - c
+  message: Avoid using sendfile(), as it can lead to potential issues with network access.
+  metadata:
+    api: sendfile()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
+  pattern-either:
+  - pattern: sendfile(...)
+  - pattern: $VAR = sendfile
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0057.no-sendmsg
+  languages:
+  - c
+  message: Avoid using sendmsg(), as it can lead to potential issues with network access.
+  metadata:
+    api: sendmsg()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
+  pattern-either:
+  - pattern: sendmsg(...)
+  - pattern: $VAR = sendmsg
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0058.no-sendto
+  languages:
+  - c
+  message: Avoid using sendto(), as it can lead to potential issues with network access.
+  metadata:
+    api: sendto()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: data_send
+  pattern-either:
+  - pattern: sendto(...)
+  - pattern: $VAR = sendto
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0059.no-setsockopt
+  languages:
+  - c
+  message: Avoid using setsockopt(), as it can lead to potential issues with network access.
+  metadata:
+    api: setsockopt()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: network_configuration
+  pattern-either:
+  - pattern: setsockopt(...)
+  - pattern: $VAR = setsockopt
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0060.no-setsockopt
+  languages:
+  - c
+  message: Avoid using setsockopt(), as it can lead to potential issues with network access.
+  metadata:
+    api: setsockopt()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: network_configuration
+  pattern-either:
+  - pattern: setsockopt(...)
+  - pattern: $VAR = setsockopt
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0061.no-shutdown
+  languages:
+  - c
+  message: Avoid using shutdown(), as it can lead to potential issues with network access.
+  metadata:
+    api: shutdown()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: shutdown(...)
+  - pattern: $VAR = shutdown
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0062.no-socket
+  languages:
+  - c
+  message: Avoid using socket(), as it can lead to potential issues with network access.
+  metadata:
+    api: socket()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: socket(...)
+  - pattern: $VAR = socket
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0063.no-socketpair
+  languages:
+  - c
+  message: Avoid using socketpair(), as it can lead to potential issues with network access.
+  metadata:
+    api: socketpair()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: socketpair(...)
+  - pattern: $VAR = socketpair
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.c.network_access.others.0064.no-socketpair
+  languages:
+  - c
+  message: Avoid using socketpair(), as it can lead to potential issues with network access.
+  metadata:
+    api: socketpair()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: socketpair(...)
+  - pattern: $VAR = socketpair
+  severity: WARNING
+  tags:
+  - Network Access

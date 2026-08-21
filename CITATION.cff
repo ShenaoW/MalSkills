@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+message: "If you use MalSkills, please cite the ASE 2026 paper."
+title: MalSkills
+type: software
+version: 0.1.0
+license: Apache-2.0
+repository-code: "https://github.com/security-pride/MalSkills"
+authors:
+  - family-names: Wang
+    given-names: Shenao
+  - family-names: He
+    given-names: Junjie
+  - family-names: Zhao
+    given-names: Yanjie
+  - family-names: Wang
+    given-names: Yayi
+  - family-names: Yu
+    given-names: Kan
+  - family-names: Wang
+    given-names: Haoyu
+preferred-citation:
+  type: conference-paper
+  title: "MalSkills: Detecting Malicious Skills in the Agentic Supply Chain via Neuro-Symbolic Reasoning"
+  authors:
+    - family-names: Wang
+      given-names: Shenao
+    - family-names: He
+      given-names: Junjie
+    - family-names: Zhao
+      given-names: Yanjie
+    - family-names: Wang
+      given-names: Yayi
+    - family-names: Yu
+      given-names: Kan
+    - family-names: Wang
+      given-names: Haoyu
+  collection-title: "Proceedings of the 41st IEEE/ACM International Conference on Automated Software Engineering (ASE '26)"
+  year: 2026
+  month: 10
+  doi: 10.1145/3832783.3834375

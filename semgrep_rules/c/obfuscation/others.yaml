@@ -1,0 +1,136 @@
+rules:
+- id: sso.c.obfuscation.others.0001.no-aes_decrypt
+  languages:
+  - c
+  message: Avoid using aes_decrypt(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: aes_decrypt()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: aes_decrypt(...)
+  - pattern: $VAR = aes_decrypt
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.c.obfuscation.others.0002.no-aes_encrypt
+  languages:
+  - c
+  message: Avoid using aes_encrypt(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: aes_encrypt()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: aes_encrypt(...)
+  - pattern: $VAR = aes_encrypt
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.c.obfuscation.others.0003.no-base64_decode
+  languages:
+  - c
+  message: Avoid using base64_decode(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: base64_decode()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: decoding
+  pattern-either:
+  - pattern: base64_decode(...)
+  - pattern: $VAR = base64_decode
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.c.obfuscation.others.0004.no-base64_encode
+  languages:
+  - c
+  message: Avoid using base64_encode(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: base64_encode()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: base64_encode(...)
+  - pattern: $VAR = base64_encode
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.c.obfuscation.others.0005.no-lz77_compress
+  languages:
+  - c
+  message: Avoid using lz77_compress(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: lz77_compress()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: lz77_compress(...)
+  - pattern: $VAR = lz77_compress
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.c.obfuscation.others.0006.no-lz77_decompress
+  languages:
+  - c
+  message: Avoid using lz77_decompress(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: lz77_decompress()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: decoding
+  pattern-either:
+  - pattern: lz77_decompress(...)
+  - pattern: $VAR = lz77_decompress
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.c.obfuscation.others.0007.no-rc4_encrypt
+  languages:
+  - c
+  message: Avoid using rc4_encrypt(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: rc4_encrypt()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: rc4_encrypt(...)
+  - pattern: $VAR = rc4_encrypt
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.c.obfuscation.others.0008.no-zlib_compress
+  languages:
+  - c
+  message: Avoid using zlib_compress(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: zlib_compress()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: zlib_compress(...)
+  - pattern: $VAR = zlib_compress
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.c.obfuscation.others.0009.no-zlib_uncompress
+  languages:
+  - c
+  message: Avoid using zlib_uncompress(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: zlib_uncompress()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: zlib_uncompress(...)
+  - pattern: $VAR = zlib_uncompress
+  severity: WARNING
+  tags:
+  - Obfuscation

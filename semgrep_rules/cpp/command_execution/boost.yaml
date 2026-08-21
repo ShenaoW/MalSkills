@@ -1,0 +1,37 @@
+rules:
+- id: sso.cpp.command_execution.boost.0001.no-boost-process-child
+  languages:
+  - cpp
+  message: Avoid using boost::process::child(), as it can lead to potential issues with command execution.
+  metadata:
+    api: boost::process::child()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: boost::process::child(...)
+  - pattern: $VAR = boost::process::child
+  - pattern: process::child(...)
+  - pattern: $VAR = process::child
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.cpp.command_execution.boost.0002.no-boost-process-system
+  languages:
+  - cpp
+  message: Avoid using boost::process::system(), as it can lead to potential issues with command execution.
+  metadata:
+    api: boost::process::system()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: boost::process::system(...)
+  - pattern: $VAR = boost::process::system
+  - pattern: process::system(...)
+  - pattern: $VAR = process::system
+  - pattern: system(...)
+  - pattern: $VAR = system
+  severity: WARNING
+  tags:
+  - Command Execution

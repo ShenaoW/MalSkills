@@ -1,0 +1,58 @@
+rules:
+- id: sso.csharp.command_execution.Microsoft.0001.no-Microsoft-CSharp-CSharpCodeProvider-CompileAssemblyFromSource
+  languages:
+  - csharp
+  message: Avoid using Microsoft.CSharp.CSharpCodeProvider.CompileAssemblyFromSource(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Microsoft.CSharp.CSharpCodeProvider.CompileAssemblyFromSource()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: Microsoft.CSharp.CSharpCodeProvider.CompileAssemblyFromSource(...)
+  - pattern: $VAR = Microsoft.CSharp.CSharpCodeProvider.CompileAssemblyFromSource
+  - pattern: CSharp.CSharpCodeProvider.CompileAssemblyFromSource(...)
+  - pattern: $VAR = CSharp.CSharpCodeProvider.CompileAssemblyFromSource
+  - pattern: CSharpCodeProvider.CompileAssemblyFromSource(...)
+  - pattern: $VAR = CSharpCodeProvider.CompileAssemblyFromSource
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.csharp.command_execution.Microsoft.0002.no-Microsoft-Win32-Registry-GetValue
+  languages:
+  - csharp
+  message: Avoid using Microsoft.Win32.Registry.GetValue(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Microsoft.Win32.Registry.GetValue()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: Microsoft.Win32.Registry.GetValue(...)
+  - pattern: $VAR = Microsoft.Win32.Registry.GetValue
+  - pattern: Win32.Registry.GetValue(...)
+  - pattern: $VAR = Win32.Registry.GetValue
+  - pattern: Registry.GetValue(...)
+  - pattern: $VAR = Registry.GetValue
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.csharp.command_execution.Microsoft.0003.no-Microsoft-Win32-Registry-SetValue
+  languages:
+  - csharp
+  message: Avoid using Microsoft.Win32.Registry.SetValue(), as it can lead to potential issues with command execution.
+  metadata:
+    api: Microsoft.Win32.Registry.SetValue()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: Microsoft.Win32.Registry.SetValue(...)
+  - pattern: $VAR = Microsoft.Win32.Registry.SetValue
+  - pattern: Win32.Registry.SetValue(...)
+  - pattern: $VAR = Win32.Registry.SetValue
+  - pattern: Registry.SetValue(...)
+  - pattern: $VAR = Registry.SetValue
+  severity: WARNING
+  tags:
+  - Command Execution

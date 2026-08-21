@@ -1,0 +1,48 @@
+rules:
+- id: sso.cpp.command_execution.QProcess.0001.no-QProcess-execute
+  languages:
+  - cpp
+  message: Avoid using QProcess::execute(), as it can lead to potential issues with command execution.
+  metadata:
+    api: QProcess::execute()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: QProcess::execute(...)
+  - pattern: $VAR = QProcess::execute
+  - pattern: execute(...)
+  - pattern: $VAR = execute
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.cpp.command_execution.QProcess.0002.no-QProcess-start
+  languages:
+  - cpp
+  message: Avoid using QProcess::start(), as it can lead to potential issues with command execution.
+  metadata:
+    api: QProcess::start()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: QProcess::start(...)
+  - pattern: $VAR = QProcess::start
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.cpp.command_execution.QProcess.0003.no-QProcess-startDetached
+  languages:
+  - cpp
+  message: Avoid using QProcess::startDetached(), as it can lead to potential issues with command execution.
+  metadata:
+    api: QProcess::startDetached()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: QProcess::startDetached(...)
+  - pattern: $VAR = QProcess::startDetached
+  severity: WARNING
+  tags:
+  - Command Execution

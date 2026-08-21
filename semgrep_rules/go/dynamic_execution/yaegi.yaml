@@ -1,0 +1,31 @@
+rules:
+- id: sso.go.dynamic_execution.yaegi.0001.no-yaegi.Eval
+  languages:
+  - go
+  message: Avoid using yaegi.Eval(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: yaegi.Eval()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: yaegi.Eval(...)
+  - pattern: $VAR = yaegi.Eval
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.go.dynamic_execution.yaegi.0002.no-yaegi.Interpret
+  languages:
+  - go
+  message: Avoid using yaegi.Interpret(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: yaegi.Interpret()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: yaegi.Interpret(...)
+  - pattern: $VAR = yaegi.Interpret
+  severity: WARNING
+  tags:
+  - Dynamic Execution

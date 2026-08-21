@@ -1,0 +1,22 @@
+{
+  "owner": "shawn92",
+  "slug": "ftshare-market-data",
+  "displayName": "Skills of A-share market data released by ft.tech.",
+  "latest": {
+    "version": "1.0.3",
+    "publishedAt": 1774160535288,
+    "commit": "https://github.com/openclaw/skills/commit/d04a694d3f0b26677284934e345bf4a2267fabc8"
+  },
+  "history": [
+    {
+      "version": "1.0.2",
+      "publishedAt": 1773747564545,
+      "commit": "https://github.com/openclaw/skills/commit/e8e3ded3a8870391e37d0511a25b9767645bac5a"
+    },
+    {
+      "version": "1.0.1",
+      "publishedAt": 1773404410528,
+      "commit": "https://github.com/openclaw/skills/commit/4d296ed54c7e8503da360734e6f6f793d98ba86a"
+    }
+  ]
+}

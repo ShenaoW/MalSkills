@@ -1,0 +1,406 @@
+rules:
+- id: sso.go.network_access.net.0001.no-net.Dial
+  languages:
+  - go
+  message: Avoid using net.Dial(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.Dial()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: net.Dial(...)
+  - pattern: $VAR = net.Dial
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0002.no-net.DialTCP
+  languages:
+  - go
+  message: Avoid using net.DialTCP(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.DialTCP()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: net.DialTCP(...)
+  - pattern: $VAR = net.DialTCP
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0003.no-net.DialTimeout
+  languages:
+  - go
+  message: Avoid using net.DialTimeout(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.DialTimeout()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: net.DialTimeout(...)
+  - pattern: $VAR = net.DialTimeout
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0004.no-net.DialUDP
+  languages:
+  - go
+  message: Avoid using net.DialUDP(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.DialUDP()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: net.DialUDP(...)
+  - pattern: $VAR = net.DialUDP
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0005.no-net.DialUnix
+  languages:
+  - go
+  message: Avoid using net.DialUnix(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.DialUnix()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: net.DialUnix(...)
+  - pattern: $VAR = net.DialUnix
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0006.no-net.InterfaceAddrs
+  languages:
+  - go
+  message: Avoid using net.InterfaceAddrs(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.InterfaceAddrs()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: net.InterfaceAddrs(...)
+  - pattern: $VAR = net.InterfaceAddrs
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0007.no-net.InterfaceByIndex
+  languages:
+  - go
+  message: Avoid using net.InterfaceByIndex(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.InterfaceByIndex()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: net.InterfaceByIndex(...)
+  - pattern: $VAR = net.InterfaceByIndex
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0008.no-net.InterfaceByName
+  languages:
+  - go
+  message: Avoid using net.InterfaceByName(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.InterfaceByName()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: net.InterfaceByName(...)
+  - pattern: $VAR = net.InterfaceByName
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0009.no-net.Interfaces
+  languages:
+  - go
+  message: Avoid using net.Interfaces(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.Interfaces()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: net.Interfaces(...)
+  - pattern: $VAR = net.Interfaces
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0010.no-net.Listen
+  languages:
+  - go
+  message: Avoid using net.Listen(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.Listen()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
+  pattern-either:
+  - pattern: net.Listen(...)
+  - pattern: $VAR = net.Listen
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0011.no-net.ListenPacket
+  languages:
+  - go
+  message: Avoid using net.ListenPacket(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.ListenPacket()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
+  pattern-either:
+  - pattern: net.ListenPacket(...)
+  - pattern: $VAR = net.ListenPacket
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0012.no-net.ListenTCP
+  languages:
+  - go
+  message: Avoid using net.ListenTCP(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.ListenTCP()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
+  pattern-either:
+  - pattern: net.ListenTCP(...)
+  - pattern: $VAR = net.ListenTCP
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0013.no-net.ListenUDP
+  languages:
+  - go
+  message: Avoid using net.ListenUDP(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.ListenUDP()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
+  pattern-either:
+  - pattern: net.ListenUDP(...)
+  - pattern: $VAR = net.ListenUDP
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0014.no-net.ListenUnix
+  languages:
+  - go
+  message: Avoid using net.ListenUnix(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.ListenUnix()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: server_listen
+  pattern-either:
+  - pattern: net.ListenUnix(...)
+  - pattern: $VAR = net.ListenUnix
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0015.no-net.LookupAddr
+  languages:
+  - go
+  message: Avoid using net.LookupAddr(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.LookupAddr()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: net.LookupAddr(...)
+  - pattern: $VAR = net.LookupAddr
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0016.no-net.LookupCNAME
+  languages:
+  - go
+  message: Avoid using net.LookupCNAME(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.LookupCNAME()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: net.LookupCNAME(...)
+  - pattern: $VAR = net.LookupCNAME
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0017.no-net.LookupHost
+  languages:
+  - go
+  message: Avoid using net.LookupHost(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.LookupHost()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: net.LookupHost(...)
+  - pattern: $VAR = net.LookupHost
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0018.no-net.LookupIP
+  languages:
+  - go
+  message: Avoid using net.LookupIP(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.LookupIP()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: net.LookupIP(...)
+  - pattern: $VAR = net.LookupIP
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0019.no-net.LookupMX
+  languages:
+  - go
+  message: Avoid using net.LookupMX(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.LookupMX()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: net.LookupMX(...)
+  - pattern: $VAR = net.LookupMX
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0020.no-net.LookupNS
+  languages:
+  - go
+  message: Avoid using net.LookupNS(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.LookupNS()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: net.LookupNS(...)
+  - pattern: $VAR = net.LookupNS
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0021.no-net.LookupPort
+  languages:
+  - go
+  message: Avoid using net.LookupPort(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.LookupPort()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: net.LookupPort(...)
+  - pattern: $VAR = net.LookupPort
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0022.no-net.LookupSRV
+  languages:
+  - go
+  message: Avoid using net.LookupSRV(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.LookupSRV()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: net.LookupSRV(...)
+  - pattern: $VAR = net.LookupSRV
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0023.no-net.LookupTXT
+  languages:
+  - go
+  message: Avoid using net.LookupTXT(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.LookupTXT()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: connection_create
+  pattern-either:
+  - pattern: net.LookupTXT(...)
+  - pattern: $VAR = net.LookupTXT
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0024.no-net.ResolveIPAddr
+  languages:
+  - go
+  message: Avoid using net.ResolveIPAddr(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.ResolveIPAddr()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: dns_resolution
+  pattern-either:
+  - pattern: net.ResolveIPAddr(...)
+  - pattern: $VAR = net.ResolveIPAddr
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0025.no-net.ResolveTCPAddr
+  languages:
+  - go
+  message: Avoid using net.ResolveTCPAddr(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.ResolveTCPAddr()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: dns_resolution
+  pattern-either:
+  - pattern: net.ResolveTCPAddr(...)
+  - pattern: $VAR = net.ResolveTCPAddr
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0026.no-net.ResolveUDPAddr
+  languages:
+  - go
+  message: Avoid using net.ResolveUDPAddr(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.ResolveUDPAddr()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: dns_resolution
+  pattern-either:
+  - pattern: net.ResolveUDPAddr(...)
+  - pattern: $VAR = net.ResolveUDPAddr
+  severity: WARNING
+  tags:
+  - Network Access
+- id: sso.go.network_access.net.0027.no-net.ResolveUnixAddr
+  languages:
+  - go
+  message: Avoid using net.ResolveUnixAddr(), as it can lead to potential issues with network access.
+  metadata:
+    api: net.ResolveUnixAddr()
+    category: Network Access
+    malskills_sso_category: network_access
+    malskills_subtype: dns_resolution
+  pattern-either:
+  - pattern: net.ResolveUnixAddr(...)
+  - pattern: $VAR = net.ResolveUnixAddr
+  severity: WARNING
+  tags:
+  - Network Access

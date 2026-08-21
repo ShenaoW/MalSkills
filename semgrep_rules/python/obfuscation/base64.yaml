@@ -1,0 +1,61 @@
+rules:
+- id: sso.python.obfuscation.base64.0001.no-base64-b64decode
+  languages:
+  - python
+  message: Avoid using base64.b64decode(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: base64.b64decode()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: decoding
+  pattern-either:
+  - pattern: base64.b64decode(...)
+  - pattern: $VAR = base64.b64decode
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.python.obfuscation.base64.0002.no-base64-b64encode
+  languages:
+  - python
+  message: Avoid using base64.b64encode(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: base64.b64encode()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: base64.b64encode(...)
+  - pattern: $VAR = base64.b64encode
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.python.obfuscation.base64.0003.no-base64-urlsafe_b64decode
+  languages:
+  - python
+  message: Avoid using base64.urlsafe_b64decode(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: base64.urlsafe_b64decode()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: decoding
+  pattern-either:
+  - pattern: base64.urlsafe_b64decode(...)
+  - pattern: $VAR = base64.urlsafe_b64decode
+  severity: WARNING
+  tags:
+  - Obfuscation
+- id: sso.python.obfuscation.base64.0004.no-base64-urlsafe_b64encode
+  languages:
+  - python
+  message: Avoid using base64.urlsafe_b64encode(), as it can lead to potential issues with obfuscation.
+  metadata:
+    api: base64.urlsafe_b64encode()
+    category: Obfuscation
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: base64.urlsafe_b64encode(...)
+  - pattern: $VAR = base64.urlsafe_b64encode
+  severity: WARNING
+  tags:
+  - Obfuscation

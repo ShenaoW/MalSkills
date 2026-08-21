@@ -1,0 +1,48 @@
+rules:
+- id: sso.javascript.command_execution.sudo-prompt.0001.no-sudo-prompt-exec
+  languages:
+  - javascript
+  message: Avoid using sudo-prompt.exec(), as it can lead to potential issues with command execution.
+  metadata:
+    api: sudo-prompt.exec()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: sudo-prompt.exec(...)
+  - pattern: $VAR = sudo-prompt.exec
+  - pattern: exec(...)
+  - pattern: $VAR = exec
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.javascript.command_execution.sudo-prompt.0002.no-sudo-prompt-exec-bind
+  languages:
+  - javascript
+  message: Avoid using sudo-prompt.exec.bind(), as it can lead to potential issues with command execution.
+  metadata:
+    api: sudo-prompt.exec.bind()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: sudo-prompt.exec.bind(...)
+  - pattern: $VAR = sudo-prompt.exec.bind
+  - pattern: exec.bind(...)
+  - pattern: $VAR = exec.bind
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.javascript.command_execution.sudo-prompt.0003.no-require-sudo-prompt
+  languages:
+  - javascript
+  message: Avoid using require('sudo-prompt'), as it can lead to potential issues with command execution.
+  metadata:
+    api: require('sudo-prompt')
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern: require('sudo-prompt')
+  severity: WARNING
+  tags:
+  - Command Execution

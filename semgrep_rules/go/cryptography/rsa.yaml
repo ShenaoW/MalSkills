@@ -1,0 +1,106 @@
+rules:
+- id: sso.go.cryptography.rsa.0001.no-rsa.DecryptOAEP
+  languages:
+  - go
+  message: Avoid using rsa.DecryptOAEP(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: rsa.DecryptOAEP()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: rsa.DecryptOAEP(...)
+  - pattern: $VAR = rsa.DecryptOAEP
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.go.cryptography.rsa.0002.no-rsa.DecryptPKCS1v15
+  languages:
+  - go
+  message: Avoid using rsa.DecryptPKCS1v15(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: rsa.DecryptPKCS1v15()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: rsa.DecryptPKCS1v15(...)
+  - pattern: $VAR = rsa.DecryptPKCS1v15
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.go.cryptography.rsa.0003.no-rsa.EncryptOAEP
+  languages:
+  - go
+  message: Avoid using rsa.EncryptOAEP(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: rsa.EncryptOAEP()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: rsa.EncryptOAEP(...)
+  - pattern: $VAR = rsa.EncryptOAEP
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.go.cryptography.rsa.0004.no-rsa.EncryptPKCS1v15
+  languages:
+  - go
+  message: Avoid using rsa.EncryptPKCS1v15(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: rsa.EncryptPKCS1v15()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: rsa.EncryptPKCS1v15(...)
+  - pattern: $VAR = rsa.EncryptPKCS1v15
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.go.cryptography.rsa.0005.no-rsa.GenerateKey
+  languages:
+  - go
+  message: Avoid using rsa.GenerateKey(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: rsa.GenerateKey()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: rsa.GenerateKey(...)
+  - pattern: $VAR = rsa.GenerateKey
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.go.cryptography.rsa.0006.no-rsa.SignPKCS1v15
+  languages:
+  - go
+  message: Avoid using rsa.SignPKCS1v15(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: rsa.SignPKCS1v15()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: rsa.SignPKCS1v15(...)
+  - pattern: $VAR = rsa.SignPKCS1v15
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.go.cryptography.rsa.0007.no-rsa.VerifyPKCS1v15
+  languages:
+  - go
+  message: Avoid using rsa.VerifyPKCS1v15(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: rsa.VerifyPKCS1v15()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: rsa.VerifyPKCS1v15(...)
+  - pattern: $VAR = rsa.VerifyPKCS1v15
+  severity: WARNING
+  tags:
+  - Cryptography

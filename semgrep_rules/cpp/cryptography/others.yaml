@@ -1,0 +1,1171 @@
+rules:
+- id: sso.cpp.cryptography.others.0001.no-AES_decrypt
+  languages:
+  - cpp
+  message: Avoid using AES_decrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: AES_decrypt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: AES_decrypt(...)
+  - pattern: $VAR = AES_decrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0002.no-AES_encrypt
+  languages:
+  - cpp
+  message: Avoid using AES_encrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: AES_encrypt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: AES_encrypt(...)
+  - pattern: $VAR = AES_encrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0003.no-AES_set_decrypt_key
+  languages:
+  - cpp
+  message: Avoid using AES_set_decrypt_key(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: AES_set_decrypt_key()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: AES_set_decrypt_key(...)
+  - pattern: $VAR = AES_set_decrypt_key
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0004.no-AES_set_encrypt_key
+  languages:
+  - cpp
+  message: Avoid using AES_set_encrypt_key(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: AES_set_encrypt_key()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: AES_set_encrypt_key(...)
+  - pattern: $VAR = AES_set_encrypt_key
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0005.no-BCryptCloseAlgorithmProvider
+  languages:
+  - cpp
+  message: Avoid using BCryptCloseAlgorithmProvider(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: BCryptCloseAlgorithmProvider()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: BCryptCloseAlgorithmProvider(...)
+  - pattern: $VAR = BCryptCloseAlgorithmProvider
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0006.no-BCryptDecrypt
+  languages:
+  - cpp
+  message: Avoid using BCryptDecrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: BCryptDecrypt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: BCryptDecrypt(...)
+  - pattern: $VAR = BCryptDecrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0007.no-BCryptDestroyKey
+  languages:
+  - cpp
+  message: Avoid using BCryptDestroyKey(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: BCryptDestroyKey()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: BCryptDestroyKey(...)
+  - pattern: $VAR = BCryptDestroyKey
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0008.no-BCryptEncrypt
+  languages:
+  - cpp
+  message: Avoid using BCryptEncrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: BCryptEncrypt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: BCryptEncrypt(...)
+  - pattern: $VAR = BCryptEncrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0009.no-BCryptGenerateSymmetricKey
+  languages:
+  - cpp
+  message: Avoid using BCryptGenerateSymmetricKey(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: BCryptGenerateSymmetricKey()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: BCryptGenerateSymmetricKey(...)
+  - pattern: $VAR = BCryptGenerateSymmetricKey
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0010.no-BCryptOpenAlgorithmProvider
+  languages:
+  - cpp
+  message: Avoid using BCryptOpenAlgorithmProvider(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: BCryptOpenAlgorithmProvider()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: BCryptOpenAlgorithmProvider(...)
+  - pattern: $VAR = BCryptOpenAlgorithmProvider
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0011.no-BN_bin2bn
+  languages:
+  - cpp
+  message: Avoid using BN_bin2bn(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: BN_bin2bn()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: BN_bin2bn(...)
+  - pattern: $VAR = BN_bin2bn
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0012.no-BN_bn2bin
+  languages:
+  - cpp
+  message: Avoid using BN_bn2bin(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: BN_bn2bin()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: BN_bn2bin(...)
+  - pattern: $VAR = BN_bn2bin
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0013.no-BN_new
+  languages:
+  - cpp
+  message: Avoid using BN_new(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: BN_new()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: BN_new(...)
+  - pattern: $VAR = BN_new
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0014.no-BN_set_word
+  languages:
+  - cpp
+  message: Avoid using BN_set_word(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: BN_set_word()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: BN_set_word(...)
+  - pattern: $VAR = BN_set_word
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0015.no-CryptAcquireContext
+  languages:
+  - cpp
+  message: Avoid using CryptAcquireContext(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: CryptAcquireContext()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: CryptAcquireContext(...)
+  - pattern: $VAR = CryptAcquireContext
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0016.no-CryptCreateHash
+  languages:
+  - cpp
+  message: Avoid using CryptCreateHash(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: CryptCreateHash()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: CryptCreateHash(...)
+  - pattern: $VAR = CryptCreateHash
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0017.no-CryptDecrypt
+  languages:
+  - cpp
+  message: Avoid using CryptDecrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: CryptDecrypt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: CryptDecrypt(...)
+  - pattern: $VAR = CryptDecrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0018.no-CryptDeriveKey
+  languages:
+  - cpp
+  message: Avoid using CryptDeriveKey(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: CryptDeriveKey()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: CryptDeriveKey(...)
+  - pattern: $VAR = CryptDeriveKey
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0019.no-CryptDestroyHash
+  languages:
+  - cpp
+  message: Avoid using CryptDestroyHash(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: CryptDestroyHash()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: CryptDestroyHash(...)
+  - pattern: $VAR = CryptDestroyHash
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0020.no-CryptDestroyKey
+  languages:
+  - cpp
+  message: Avoid using CryptDestroyKey(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: CryptDestroyKey()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: CryptDestroyKey(...)
+  - pattern: $VAR = CryptDestroyKey
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0021.no-CryptEncrypt
+  languages:
+  - cpp
+  message: Avoid using CryptEncrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: CryptEncrypt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: CryptEncrypt(...)
+  - pattern: $VAR = CryptEncrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0022.no-CryptExportKey
+  languages:
+  - cpp
+  message: Avoid using CryptExportKey(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: CryptExportKey()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: CryptExportKey(...)
+  - pattern: $VAR = CryptExportKey
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0023.no-CryptGenKey
+  languages:
+  - cpp
+  message: Avoid using CryptGenKey(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: CryptGenKey()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: CryptGenKey(...)
+  - pattern: $VAR = CryptGenKey
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0024.no-CryptHashData
+  languages:
+  - cpp
+  message: Avoid using CryptHashData(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: CryptHashData()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: CryptHashData(...)
+  - pattern: $VAR = CryptHashData
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0025.no-CryptImportKey
+  languages:
+  - cpp
+  message: Avoid using CryptImportKey(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: CryptImportKey()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: CryptImportKey(...)
+  - pattern: $VAR = CryptImportKey
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0026.no-CryptReleaseContext
+  languages:
+  - cpp
+  message: Avoid using CryptReleaseContext(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: CryptReleaseContext()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: CryptReleaseContext(...)
+  - pattern: $VAR = CryptReleaseContext
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0027.no-EVP_CipherFinal
+  languages:
+  - cpp
+  message: Avoid using EVP_CipherFinal(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: EVP_CipherFinal()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: EVP_CipherFinal(...)
+  - pattern: $VAR = EVP_CipherFinal
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0028.no-EVP_CipherInit
+  languages:
+  - cpp
+  message: Avoid using EVP_CipherInit(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: EVP_CipherInit()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: EVP_CipherInit(...)
+  - pattern: $VAR = EVP_CipherInit
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0029.no-EVP_CipherUpdate
+  languages:
+  - cpp
+  message: Avoid using EVP_CipherUpdate(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: EVP_CipherUpdate()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: EVP_CipherUpdate(...)
+  - pattern: $VAR = EVP_CipherUpdate
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0030.no-EVP_DecodeFinal
+  languages:
+  - cpp
+  message: Avoid using EVP_DecodeFinal(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: EVP_DecodeFinal()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decoding
+  pattern-either:
+  - pattern: EVP_DecodeFinal(...)
+  - pattern: $VAR = EVP_DecodeFinal
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0031.no-EVP_DecodeInit
+  languages:
+  - cpp
+  message: Avoid using EVP_DecodeInit(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: EVP_DecodeInit()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decoding
+  pattern-either:
+  - pattern: EVP_DecodeInit(...)
+  - pattern: $VAR = EVP_DecodeInit
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0032.no-EVP_DecodeUpdate
+  languages:
+  - cpp
+  message: Avoid using EVP_DecodeUpdate(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: EVP_DecodeUpdate()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decoding
+  pattern-either:
+  - pattern: EVP_DecodeUpdate(...)
+  - pattern: $VAR = EVP_DecodeUpdate
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0033.no-EVP_DecryptFinal
+  languages:
+  - cpp
+  message: Avoid using EVP_DecryptFinal(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: EVP_DecryptFinal()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: EVP_DecryptFinal(...)
+  - pattern: $VAR = EVP_DecryptFinal
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0034.no-EVP_DecryptInit
+  languages:
+  - cpp
+  message: Avoid using EVP_DecryptInit(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: EVP_DecryptInit()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: EVP_DecryptInit(...)
+  - pattern: $VAR = EVP_DecryptInit
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0035.no-EVP_DecryptUpdate
+  languages:
+  - cpp
+  message: Avoid using EVP_DecryptUpdate(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: EVP_DecryptUpdate()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: EVP_DecryptUpdate(...)
+  - pattern: $VAR = EVP_DecryptUpdate
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0036.no-EVP_DigestFinal
+  languages:
+  - cpp
+  message: Avoid using EVP_DigestFinal(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: EVP_DigestFinal()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: EVP_DigestFinal(...)
+  - pattern: $VAR = EVP_DigestFinal
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0037.no-EVP_DigestInit
+  languages:
+  - cpp
+  message: Avoid using EVP_DigestInit(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: EVP_DigestInit()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: EVP_DigestInit(...)
+  - pattern: $VAR = EVP_DigestInit
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0038.no-EVP_DigestUpdate
+  languages:
+  - cpp
+  message: Avoid using EVP_DigestUpdate(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: EVP_DigestUpdate()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: EVP_DigestUpdate(...)
+  - pattern: $VAR = EVP_DigestUpdate
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0039.no-EVP_EncodeFinal
+  languages:
+  - cpp
+  message: Avoid using EVP_EncodeFinal(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: EVP_EncodeFinal()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: EVP_EncodeFinal(...)
+  - pattern: $VAR = EVP_EncodeFinal
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0040.no-EVP_EncodeInit
+  languages:
+  - cpp
+  message: Avoid using EVP_EncodeInit(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: EVP_EncodeInit()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: EVP_EncodeInit(...)
+  - pattern: $VAR = EVP_EncodeInit
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0041.no-EVP_EncodeUpdate
+  languages:
+  - cpp
+  message: Avoid using EVP_EncodeUpdate(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: EVP_EncodeUpdate()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: EVP_EncodeUpdate(...)
+  - pattern: $VAR = EVP_EncodeUpdate
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0042.no-EVP_EncryptFinal
+  languages:
+  - cpp
+  message: Avoid using EVP_EncryptFinal(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: EVP_EncryptFinal()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: EVP_EncryptFinal(...)
+  - pattern: $VAR = EVP_EncryptFinal
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0043.no-EVP_EncryptInit
+  languages:
+  - cpp
+  message: Avoid using EVP_EncryptInit(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: EVP_EncryptInit()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: EVP_EncryptInit(...)
+  - pattern: $VAR = EVP_EncryptInit
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0044.no-EVP_EncryptUpdate
+  languages:
+  - cpp
+  message: Avoid using EVP_EncryptUpdate(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: EVP_EncryptUpdate()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: EVP_EncryptUpdate(...)
+  - pattern: $VAR = EVP_EncryptUpdate
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0045.no-EVP_OpenInit
+  languages:
+  - cpp
+  message: Avoid using EVP_OpenInit(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: EVP_OpenInit()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: EVP_OpenInit(...)
+  - pattern: $VAR = EVP_OpenInit
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0046.no-EVP_SealInit
+  languages:
+  - cpp
+  message: Avoid using EVP_SealInit(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: EVP_SealInit()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: EVP_SealInit(...)
+  - pattern: $VAR = EVP_SealInit
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0047.no-MD5_Final
+  languages:
+  - cpp
+  message: Avoid using MD5_Final(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: MD5_Final()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: MD5_Final(...)
+  - pattern: $VAR = MD5_Final
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0048.no-MD5_Init
+  languages:
+  - cpp
+  message: Avoid using MD5_Init(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: MD5_Init()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: MD5_Init(...)
+  - pattern: $VAR = MD5_Init
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0049.no-MD5_Update
+  languages:
+  - cpp
+  message: Avoid using MD5_Update(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: MD5_Update()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: MD5_Update(...)
+  - pattern: $VAR = MD5_Update
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0050.no-RAND_bytes
+  languages:
+  - cpp
+  message: Avoid using RAND_bytes(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: RAND_bytes()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: RAND_bytes(...)
+  - pattern: $VAR = RAND_bytes
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0051.no-RAND_pseudo_bytes
+  languages:
+  - cpp
+  message: Avoid using RAND_pseudo_bytes(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: RAND_pseudo_bytes()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: RAND_pseudo_bytes(...)
+  - pattern: $VAR = RAND_pseudo_bytes
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0052.no-RSA_new
+  languages:
+  - cpp
+  message: Avoid using RSA_new(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: RSA_new()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: RSA_new(...)
+  - pattern: $VAR = RSA_new
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0053.no-RSA_private_decrypt
+  languages:
+  - cpp
+  message: Avoid using RSA_private_decrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: RSA_private_decrypt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: RSA_private_decrypt(...)
+  - pattern: $VAR = RSA_private_decrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0054.no-RSA_private_encrypt
+  languages:
+  - cpp
+  message: Avoid using RSA_private_encrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: RSA_private_encrypt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: RSA_private_encrypt(...)
+  - pattern: $VAR = RSA_private_encrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0055.no-RSA_public_decrypt
+  languages:
+  - cpp
+  message: Avoid using RSA_public_decrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: RSA_public_decrypt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: RSA_public_decrypt(...)
+  - pattern: $VAR = RSA_public_decrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0056.no-RSA_public_encrypt
+  languages:
+  - cpp
+  message: Avoid using RSA_public_encrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: RSA_public_encrypt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: RSA_public_encrypt(...)
+  - pattern: $VAR = RSA_public_encrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0057.no-SHA1_Final
+  languages:
+  - cpp
+  message: Avoid using SHA1_Final(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: SHA1_Final()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: SHA1_Final(...)
+  - pattern: $VAR = SHA1_Final
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0058.no-SHA1_Init
+  languages:
+  - cpp
+  message: Avoid using SHA1_Init(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: SHA1_Init()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: SHA1_Init(...)
+  - pattern: $VAR = SHA1_Init
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0059.no-SHA1_Update
+  languages:
+  - cpp
+  message: Avoid using SHA1_Update(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: SHA1_Update()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: SHA1_Update(...)
+  - pattern: $VAR = SHA1_Update
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0060.no-SHA256_Final
+  languages:
+  - cpp
+  message: Avoid using SHA256_Final(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: SHA256_Final()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: SHA256_Final(...)
+  - pattern: $VAR = SHA256_Final
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0061.no-SHA256_Init
+  languages:
+  - cpp
+  message: Avoid using SHA256_Init(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: SHA256_Init()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: SHA256_Init(...)
+  - pattern: $VAR = SHA256_Init
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0062.no-SHA256_Update
+  languages:
+  - cpp
+  message: Avoid using SHA256_Update(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: SHA256_Update()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: SHA256_Update(...)
+  - pattern: $VAR = SHA256_Update
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0063.no-SHA512_Final
+  languages:
+  - cpp
+  message: Avoid using SHA512_Final(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: SHA512_Final()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: SHA512_Final(...)
+  - pattern: $VAR = SHA512_Final
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0064.no-SHA512_Init
+  languages:
+  - cpp
+  message: Avoid using SHA512_Init(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: SHA512_Init()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: SHA512_Init(...)
+  - pattern: $VAR = SHA512_Init
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0065.no-SHA512_Update
+  languages:
+  - cpp
+  message: Avoid using SHA512_Update(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: SHA512_Update()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: SHA512_Update(...)
+  - pattern: $VAR = SHA512_Update
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0066.no-crypto_box_keypair
+  languages:
+  - cpp
+  message: Avoid using crypto_box_keypair(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto_box_keypair()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: crypto_box_keypair(...)
+  - pattern: $VAR = crypto_box_keypair
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0067.no-crypto_box_open_seal
+  languages:
+  - cpp
+  message: Avoid using crypto_box_open_seal(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto_box_open_seal()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto_box_open_seal(...)
+  - pattern: $VAR = crypto_box_open_seal
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0068.no-crypto_box_seal
+  languages:
+  - cpp
+  message: Avoid using crypto_box_seal(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto_box_seal()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto_box_seal(...)
+  - pattern: $VAR = crypto_box_seal
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0069.no-crypto_secretbox_easy
+  languages:
+  - cpp
+  message: Avoid using crypto_secretbox_easy(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto_secretbox_easy()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto_secretbox_easy(...)
+  - pattern: $VAR = crypto_secretbox_easy
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0070.no-crypto_secretbox_open_easy
+  languages:
+  - cpp
+  message: Avoid using crypto_secretbox_open_easy(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto_secretbox_open_easy()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto_secretbox_open_easy(...)
+  - pattern: $VAR = crypto_secretbox_open_easy
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0071.no-crypto_sign
+  languages:
+  - cpp
+  message: Avoid using crypto_sign(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto_sign()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto_sign(...)
+  - pattern: $VAR = crypto_sign
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0072.no-crypto_sign_open
+  languages:
+  - cpp
+  message: Avoid using crypto_sign_open(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: crypto_sign_open()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: crypto_sign_open(...)
+  - pattern: $VAR = crypto_sign_open
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0073.no-custom_cipher
+  languages:
+  - cpp
+  message: Avoid using custom_cipher(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: custom_cipher()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: custom_cipher(...)
+  - pattern: $VAR = custom_cipher
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0074.no-randombytes_buf
+  languages:
+  - cpp
+  message: Avoid using randombytes_buf(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: randombytes_buf()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: randombytes_buf(...)
+  - pattern: $VAR = randombytes_buf
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0075.no-simple_decrypt
+  languages:
+  - cpp
+  message: Avoid using simple_decrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: simple_decrypt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: simple_decrypt(...)
+  - pattern: $VAR = simple_decrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0076.no-simple_encrypt
+  languages:
+  - cpp
+  message: Avoid using simple_encrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: simple_encrypt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: simple_encrypt(...)
+  - pattern: $VAR = simple_encrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0077.no-xor_decrypt
+  languages:
+  - cpp
+  message: Avoid using xor_decrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: xor_decrypt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: xor_decrypt(...)
+  - pattern: $VAR = xor_decrypt
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.others.0078.no-xor_encrypt
+  languages:
+  - cpp
+  message: Avoid using xor_encrypt(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: xor_encrypt()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: xor_encrypt(...)
+  - pattern: $VAR = xor_encrypt
+  severity: WARNING
+  tags:
+  - Cryptography

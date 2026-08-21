@@ -1,0 +1,59 @@
+rules:
+- id: sso.javascript.command_execution.webp-converter.0001.no-webp-converter-cwebp
+  languages:
+  - javascript
+  message: Avoid using webp-converter.cwebp(), as it can lead to potential issues with command execution.
+  metadata:
+    api: webp-converter.cwebp()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: webp-converter.cwebp(...)
+  - pattern: $VAR = webp-converter.cwebp
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.javascript.command_execution.webp-converter.0002.no-webp-converter-dwebp
+  languages:
+  - javascript
+  message: Avoid using webp-converter.dwebp(), as it can lead to potential issues with command execution.
+  metadata:
+    api: webp-converter.dwebp()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: webp-converter.dwebp(...)
+  - pattern: $VAR = webp-converter.dwebp
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.javascript.command_execution.webp-converter.0003.no-webp-converter-webpmux_add
+  languages:
+  - javascript
+  message: Avoid using webp-converter.webpmux_add(), as it can lead to potential issues with command execution.
+  metadata:
+    api: webp-converter.webpmux_add()
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern-either:
+  - pattern: webp-converter.webpmux_add(...)
+  - pattern: $VAR = webp-converter.webpmux_add
+  severity: WARNING
+  tags:
+  - Command Execution
+- id: sso.javascript.command_execution.webp-converter.0004.no-require-webp-converter
+  languages:
+  - javascript
+  message: Avoid using require('webp-converter'), as it can lead to potential issues with command execution.
+  metadata:
+    api: require('webp-converter')
+    category: Command Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: system_command_execution
+  pattern: require('webp-converter')
+  severity: WARNING
+  tags:
+  - Command Execution

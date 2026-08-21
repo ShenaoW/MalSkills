@@ -1,0 +1,249 @@
+rules:
+- id: sso.javascript.file_or_system_operation.others.0001.no-ape-updating-updateDependencies
+  languages:
+  - javascript
+  message: Avoid using ape-updating.updateDependencies(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: ape-updating.updateDependencies()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: ape-updating.updateDependencies(...)
+  - pattern: $VAR = ape-updating.updateDependencies
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.javascript.file_or_system_operation.others.0002.no-bplist-parser-parseFile
+  languages:
+  - javascript
+  message: Avoid using bplist-parser.parseFile(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: bplist-parser.parseFile()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: bplist-parser.parseFile(...)
+  - pattern: $VAR = bplist-parser.parseFile
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.javascript.file_or_system_operation.others.0003.no-copy-dir-sync
+  languages:
+  - javascript
+  message: Avoid using copy-dir.sync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: copy-dir.sync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: copy-dir.sync(...)
+  - pattern: $VAR = copy-dir.sync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.javascript.file_or_system_operation.others.0004.no-exceljs-stream-xlsx-WorkbookWriter
+  languages:
+  - javascript
+  message: Avoid using exceljs.stream.xlsx.WorkbookWriter(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: exceljs.stream.xlsx.WorkbookWriter()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: exceljs.stream.xlsx.WorkbookWriter(...)
+  - pattern: $VAR = exceljs.stream.xlsx.WorkbookWriter
+  - pattern: stream.xlsx.WorkbookWriter(...)
+  - pattern: $VAR = stream.xlsx.WorkbookWriter
+  - pattern: xlsx.WorkbookWriter(...)
+  - pattern: $VAR = xlsx.WorkbookWriter
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.javascript.file_or_system_operation.others.0005.no-heapdump-writeSnapshot
+  languages:
+  - javascript
+  message: Avoid using heapdump.writeSnapshot(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: heapdump.writeSnapshot()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: heapdump.writeSnapshot(...)
+  - pattern: $VAR = heapdump.writeSnapshot
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.javascript.file_or_system_operation.others.0006.no-import-from-silent
+  languages:
+  - javascript
+  message: Avoid using import-from.silent(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: import-from.silent()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: require("import-from").silent(...)
+  - pattern: require('import-from').silent(...)
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.javascript.file_or_system_operation.others.0007.no-nconf-File
+  languages:
+  - javascript
+  message: Avoid using nconf.File(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: nconf.File()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: nconf.File(...)
+  - pattern: $VAR = nconf.File
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.javascript.file_or_system_operation.others.0008.no-promise-fs-writeFile
+  languages:
+  - javascript
+  message: Avoid using promise-fs.writeFile(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: promise-fs.writeFile()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: promise-fs.writeFile(...)
+  - pattern: $VAR = promise-fs.writeFile
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.javascript.file_or_system_operation.others.0009.no-tar-fs-extract
+  languages:
+  - javascript
+  message: Avoid using tar-fs.extract(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: tar-fs.extract()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: tar-fs.extract(...)
+  - pattern: $VAR = tar-fs.extract
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.javascript.file_or_system_operation.others.0010.no-targz-decompress
+  languages:
+  - javascript
+  message: Avoid using targz.decompress(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: targz.decompress()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: targz.decompress(...)
+  - pattern: $VAR = targz.decompress
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.javascript.file_or_system_operation.others.0011.no-unzipper-Extract
+  languages:
+  - javascript
+  message: Avoid using unzipper.Extract(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: unzipper.Extract()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: unzipper.Extract(...)
+  - pattern: $VAR = unzipper.Extract
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.javascript.file_or_system_operation.others.0012.no-watch-watchTree
+  languages:
+  - javascript
+  message: Avoid using watch.watchTree(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: watch.watchTree()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: watch.watchTree(...)
+  - pattern: $VAR = watch.watchTree
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.javascript.file_or_system_operation.others.0013.no-winston-transports-File
+  languages:
+  - javascript
+  message: Avoid using winston.transports.File(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: winston.transports.File()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: winston.transports.File(...)
+  - pattern: $VAR = winston.transports.File
+  - pattern: transports.File(...)
+  - pattern: $VAR = transports.File
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.javascript.file_or_system_operation.others.0014.no-yamljs-parseFile
+  languages:
+  - javascript
+  message: Avoid using yamljs.parseFile(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: yamljs.parseFile()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: yamljs.parseFile(...)
+  - pattern: $VAR = yamljs.parseFile
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.javascript.file_or_system_operation.others.0015.no-yauzl-open
+  languages:
+  - javascript
+  message: Avoid using yauzl.open(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: yauzl.open()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: yauzl.open(...)
+  - pattern: $VAR = yauzl.open
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.javascript.file_or_system_operation.others.0016.no-zip-local-sync-zip
+  languages:
+  - javascript
+  message: Avoid using zip-local.sync.zip(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: zip-local.sync.zip()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: zip-local.sync.zip(...)
+  - pattern: $VAR = zip-local.sync.zip
+  - pattern: sync.zip(...)
+  - pattern: $VAR = sync.zip
+  severity: WARNING
+  tags:
+  - File or System Operation

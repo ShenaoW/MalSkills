@@ -1,0 +1,93 @@
+rules:
+- id: sso.python.sensitive_data.os.0001.no-os-environ
+  languages:
+  - python
+  message: Detect access to environment variables.
+  metadata:
+    api: os.getenv()/os.environ[]
+    category: Sensitive Data
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: environment_access
+  pattern-either:
+  - pattern: os.getenv(...)
+  - pattern: os.environ[$KEY]
+  - pattern: os.environ.get(...)
+  - pattern: $VAR = os.environ
+  severity: WARNING
+  tags:
+  - Sensitive Data
+- id: sso.python.sensitive_data.os.0002.no-os-getcwd
+  languages:
+  - python
+  message: Avoid using os.getcwd(), as it can lead to potential issues with sensitive data.
+  metadata:
+    api: os.getcwd()
+    category: Sensitive Data
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: credential_data_access
+  pattern-either:
+  - pattern: os.getcwd(...)
+  - pattern: $VAR = os.getcwd
+  severity: WARNING
+  tags:
+  - Sensitive Data
+- id: sso.python.sensitive_data.os.0003.no-os-getpid
+  languages:
+  - python
+  message: Avoid using os.getpid(), as it can lead to potential issues with sensitive data.
+  metadata:
+    api: os.getpid()
+    category: Sensitive Data
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: process_information_access
+  pattern-either:
+  - pattern: os.getpid(...)
+  - pattern: $VAR = os.getpid
+  severity: WARNING
+  tags:
+  - Sensitive Data
+- id: sso.python.sensitive_data.os.0004.no-os-getppid
+  languages:
+  - python
+  message: Avoid using os.getppid(), as it can lead to potential issues with sensitive data.
+  metadata:
+    api: os.getppid()
+    category: Sensitive Data
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: process_information_access
+  pattern-either:
+  - pattern: os.getppid(...)
+  - pattern: $VAR = os.getppid
+  severity: WARNING
+  tags:
+  - Sensitive Data
+- id: sso.python.sensitive_data.os.0005.no-os-path
+  languages:
+  - python
+  message: Avoid using os.path(), as it can lead to potential issues with sensitive data.
+  metadata:
+    api: os.path()
+    category: Sensitive Data
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: credential_data_access
+  pattern-either:
+  - pattern: os.path(...)
+  - pattern: $VAR = os.path
+  severity: WARNING
+  tags:
+  - Sensitive Data
+- id: sso.python.sensitive_data.os.0006.no-os-uname
+  languages:
+  - python
+  message: Avoid using os.uname(), as it can lead to potential issues with sensitive data.
+  metadata:
+    api: os.uname()
+    category: Sensitive Data
+    malskills_sso_category: sensitive_data_access
+    malskills_subtype: system_information_access
+  pattern-either:
+  - pattern: os.uname(...)
+  - pattern: $VAR = os.uname
+  severity: WARNING
+  tags:
+  - Sensitive Data

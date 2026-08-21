@@ -1,0 +1,18 @@
+rules:
+  - id: sso.special.special.0001.dynamic-require
+    patterns:
+      - pattern: require($X)
+      - pattern-not: require("$_")
+      - pattern-not: require('$_')
+    message: "Detect dynamic module loading through a non-literal require call"
+    severity: WARNING
+    metadata:
+      api: require(dynamic)
+      category: Dynamic Execution
+      malskills_sso_category: payload_execution
+      malskills_subtype: dynamic_code_execution
+    languages:
+      - javascript
+      - typescript
+    tags:
+      - Dynamic Execution

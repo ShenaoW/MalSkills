@@ -1,0 +1,18 @@
+rules:
+  - id: shell.software_installation.package_manager
+    languages: [bash]
+    message: Shell invokes a software package installer
+    severity: WARNING
+    metadata:
+      malskills_subtype: package_installation
+      malskills_sso_category: software_installation
+    pattern-regex: '(?i)\b(pip3?|npm|yarn|pnpm|apt-get|apt|dnf|yum|apk|brew|gem|composer)\s+(install|add)\b'
+
+  - id: shell.software_installation.external_component
+    languages: [bash]
+    message: Shell installs an external component from a fetched script
+    severity: WARNING
+    metadata:
+      malskills_subtype: external_component_installation
+      malskills_sso_category: software_installation
+    pattern-regex: '(?i)\b(curl|wget)\b[^\n|]*\|\s*(bash|sh)\b'

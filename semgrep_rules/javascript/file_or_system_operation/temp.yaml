@@ -1,0 +1,59 @@
+rules:
+- id: sso.javascript.file_or_system_operation.temp.0001.no-temp-mkdirSync
+  languages:
+  - javascript
+  message: Avoid using temp.mkdirSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: temp.mkdirSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
+  pattern-either:
+  - pattern: temp.mkdirSync(...)
+  - pattern: $VAR = temp.mkdirSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.javascript.file_or_system_operation.temp.0002.no-temp-open
+  languages:
+  - javascript
+  message: Avoid using temp.open(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: temp.open()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: temp.open(...)
+  - pattern: $VAR = temp.open
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.javascript.file_or_system_operation.temp.0003.no-temp-openSync
+  languages:
+  - javascript
+  message: Avoid using temp.openSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: temp.openSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: temp.openSync(...)
+  - pattern: $VAR = temp.openSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.javascript.file_or_system_operation.temp.0004.no-require-temp
+  languages:
+  - javascript
+  message: Avoid using require('temp'), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: require('temp')
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern: require('temp')
+  severity: WARNING
+  tags:
+  - File or System Operation

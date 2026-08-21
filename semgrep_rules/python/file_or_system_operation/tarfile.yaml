@@ -1,0 +1,35 @@
+rules:
+- id: sso.python.file_or_system_operation.tarfile.0001.no-tarfile-TarFile-__init__
+  languages:
+  - python
+  message: Avoid using tarfile.TarFile.__init__(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: tarfile.TarFile.__init__()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: tarfile.TarFile.__init__(...)
+  - pattern: $VAR = tarfile.TarFile.__init__
+  - pattern: TarFile.__init__(...)
+  - pattern: $VAR = TarFile.__init__
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.python.file_or_system_operation.tarfile.0002.no-tarfile-TarFile-open
+  languages:
+  - python
+  message: Avoid using tarfile.TarFile.open(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: tarfile.TarFile.open()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: tarfile.TarFile.open(...)
+  - pattern: $VAR = tarfile.TarFile.open
+  - pattern: TarFile.open(...)
+  - pattern: $VAR = TarFile.open
+  severity: WARNING
+  tags:
+  - File or System Operation

@@ -1,0 +1,70 @@
+rules:
+- id: sso.java.dynamic_execution.javax.0001.no-javax-tools-JavaCompiler-getTask
+  languages:
+  - java
+  message: Avoid using javax.tools.JavaCompiler.getTask(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: javax.tools.JavaCompiler.getTask()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: new javax.tools.JavaCompiler.getTask(...)
+  - pattern: javax.tools.JavaCompiler.getTask(...)
+  - pattern: $VAR = javax.tools.JavaCompiler.getTask
+  - pattern: new tools.JavaCompiler.getTask(...)
+  - pattern: tools.JavaCompiler.getTask(...)
+  - pattern: $VAR = tools.JavaCompiler.getTask
+  - pattern: new JavaCompiler.getTask(...)
+  - pattern: JavaCompiler.getTask(...)
+  - pattern: $VAR = JavaCompiler.getTask
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.java.dynamic_execution.javax.0002.no-javax-tools-JavaCompiler-run
+  languages:
+  - java
+  message: Avoid using javax.tools.JavaCompiler.run(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: javax.tools.JavaCompiler.run()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: new javax.tools.JavaCompiler.run(...)
+  - pattern: javax.tools.JavaCompiler.run(...)
+  - pattern: $VAR = javax.tools.JavaCompiler.run
+  - pattern: new tools.JavaCompiler.run(...)
+  - pattern: tools.JavaCompiler.run(...)
+  - pattern: $VAR = tools.JavaCompiler.run
+  - pattern: new JavaCompiler.run(...)
+  - pattern: JavaCompiler.run(...)
+  - pattern: $VAR = JavaCompiler.run
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.java.dynamic_execution.javax.0003.no-javax-tools-ToolProvider-getSystemJavaCompiler
+  languages:
+  - java
+  message: Avoid using javax.tools.ToolProvider.getSystemJavaCompiler(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: javax.tools.ToolProvider.getSystemJavaCompiler()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: new javax.tools.ToolProvider.getSystemJavaCompiler(...)
+  - pattern: javax.tools.ToolProvider.getSystemJavaCompiler(...)
+  - pattern: $VAR = javax.tools.ToolProvider.getSystemJavaCompiler
+  - pattern: new tools.ToolProvider.getSystemJavaCompiler(...)
+  - pattern: tools.ToolProvider.getSystemJavaCompiler(...)
+  - pattern: $VAR = tools.ToolProvider.getSystemJavaCompiler
+  - pattern: new ToolProvider.getSystemJavaCompiler(...)
+  - pattern: ToolProvider.getSystemJavaCompiler(...)
+  - pattern: $VAR = ToolProvider.getSystemJavaCompiler
+  - pattern: new getSystemJavaCompiler(...)
+  - pattern: getSystemJavaCompiler(...)
+  - pattern: $VAR = getSystemJavaCompiler
+  severity: WARNING
+  tags:
+  - Dynamic Execution

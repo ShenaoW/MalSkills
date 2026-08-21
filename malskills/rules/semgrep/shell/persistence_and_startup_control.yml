@@ -1,0 +1,30 @@
+rules:
+  - id: shell.persistence_and_startup_control.scheduled_persistence
+    languages: [bash]
+    message: Shell scheduled persistence
+    severity: WARNING
+    metadata:
+      malskills_subtype: system_configuration_modify
+      malskills_sso_category: system_configuration
+      malskills_resource_class: startup_configuration
+    pattern-regex: '(?i)\b(crontab\b|schtasks\b|at\b|systemd-run\b|/etc/cron\.|cron\s+add\b|--cron\b)'
+
+  - id: shell.persistence_and_startup_control.startup_or_logon_persistence
+    languages: [bash]
+    message: Shell startup or logon persistence
+    severity: WARNING
+    metadata:
+      malskills_subtype: system_configuration_modify
+      malskills_sso_category: system_configuration
+      malskills_resource_class: startup_configuration
+    pattern-regex: '(?i)(\.bashrc|\.profile|XDG_AUTOSTART|LaunchAgents|Startup|RunOnce|Run\\)'
+
+  - id: shell.persistence_and_startup_control.service_or_daemon_persistence
+    languages: [bash]
+    message: Shell service or daemon persistence
+    severity: WARNING
+    metadata:
+      malskills_subtype: system_configuration_modify
+      malskills_sso_category: system_configuration
+      malskills_resource_class: startup_configuration
+    pattern-regex: '(?i)\b(systemctl\s+enable|service\s+.*start|sc\s+create|launchctl\s+load)\b'

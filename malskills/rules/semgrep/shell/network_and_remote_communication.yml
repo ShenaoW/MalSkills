@@ -1,0 +1,55 @@
+rules:
+  - id: shell.network_and_remote_communication.remote_data_receive
+    languages: [bash]
+    message: Shell receives data from a remote endpoint
+    severity: WARNING
+    metadata:
+      malskills_subtype: data_receive
+      malskills_sso_category: network_access
+    pattern-regex: '(?i)\b(curl|wget)\b'
+
+  - id: shell.network_and_remote_communication.connection_create
+    languages: [bash]
+    message: Shell creates a remote network connection
+    severity: WARNING
+    metadata:
+      malskills_subtype: connection_create
+      malskills_sso_category: network_access
+    pattern-regex: '(?i)\b(nc|ncat|openssl\s+s_client|ssh)\b'
+
+  - id: shell.network_and_remote_communication.listener
+    languages: [bash]
+    message: Shell listener or inbound receive channel
+    severity: WARNING
+    metadata:
+      malskills_subtype: server_listen
+      malskills_sso_category: network_access
+    pattern-regex: '(?i)\b(nc|ncat|socat)\b.*\s(-l|--listen)\b'
+
+  - id: shell.network_and_remote_communication.tunneling
+    languages: [bash]
+    message: Shell tunneling or forwarding
+    severity: WARNING
+    metadata:
+      malskills_subtype: network_configuration
+      malskills_sso_category: network_access
+    pattern-regex: '(?i)\bssh\b.*\s(-L|-R|-D)\b|\bsshuttle\b|\bsocat\b'
+
+  - id: shell.network_and_remote_communication.encrypted_comm
+    languages: [bash]
+    message: Shell encrypted or encapsulated communication
+    severity: WARNING
+    metadata:
+      malskills_subtype: connection_create
+      malskills_sso_category: network_access
+    pattern-regex: >-
+      (?im)^(?!\s*#)\s*openssl\s+s_client\b[^\n#]*|(?:^|[|;&]{1,2}\s*)openssl\s+s_client\b[^\n#]*
+
+  - id: shell.network_and_remote_communication.traffic_capture
+    languages: [bash]
+    message: Shell traffic capture and observation
+    severity: WARNING
+    metadata:
+      malskills_subtype: data_receive
+      malskills_sso_category: network_access
+    pattern-regex: '(?i)\b(tcpdump|tshark|ngrep|wireshark)\b'

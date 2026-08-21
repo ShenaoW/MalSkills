@@ -1,0 +1,168 @@
+rules:
+- id: sso.python.file_or_system_operation.shutil.0001.no-shutil-_RmtreeType-__call__
+  languages:
+  - python
+  message: Avoid using shutil._RmtreeType.__call__(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: shutil._RmtreeType.__call__()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: shutil._RmtreeType.__call__(...)
+  - pattern: $VAR = shutil._RmtreeType.__call__
+  - pattern: _RmtreeType.__call__(...)
+  - pattern: $VAR = _RmtreeType.__call__
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.python.file_or_system_operation.shutil.0002.no-shutil-chown
+  languages:
+  - python
+  message: Avoid using shutil.chown(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: shutil.chown()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
+  pattern-either:
+  - pattern: shutil.chown(...)
+  - pattern: $VAR = shutil.chown
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.python.file_or_system_operation.shutil.0003.no-shutil-copy
+  languages:
+  - python
+  message: Avoid using shutil.copy(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: shutil.copy()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: shutil.copy(...)
+  - pattern: $VAR = shutil.copy
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.python.file_or_system_operation.shutil.0004.no-shutil-copy2
+  languages:
+  - python
+  message: Avoid using shutil.copy2(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: shutil.copy2()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: shutil.copy2(...)
+  - pattern: $VAR = shutil.copy2
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.python.file_or_system_operation.shutil.0005.no-shutil-copyfile
+  languages:
+  - python
+  message: Avoid using shutil.copyfile(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: shutil.copyfile()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: shutil.copyfile(...)
+  - pattern: $VAR = shutil.copyfile
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.python.file_or_system_operation.shutil.0006.no-shutil-copymode
+  languages:
+  - python
+  message: Avoid using shutil.copymode(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: shutil.copymode()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: shutil.copymode(...)
+  - pattern: $VAR = shutil.copymode
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.python.file_or_system_operation.shutil.0007.no-shutil-copystat
+  languages:
+  - python
+  message: Avoid using shutil.copystat(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: shutil.copystat()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: shutil.copystat(...)
+  - pattern: $VAR = shutil.copystat
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.python.file_or_system_operation.shutil.0008.no-shutil-copytree
+  languages:
+  - python
+  message: Avoid using shutil.copytree(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: shutil.copytree()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: shutil.copytree(...)
+  - pattern: $VAR = shutil.copytree
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.python.file_or_system_operation.shutil.0009.no-shutil-make_archive
+  languages:
+  - python
+  message: Avoid using shutil.make_archive(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: shutil.make_archive()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: shutil.make_archive(...)
+  - pattern: $VAR = shutil.make_archive
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.python.file_or_system_operation.shutil.0010.no-shutil-move
+  languages:
+  - python
+  message: Avoid using shutil.move(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: shutil.move()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: shutil.move(...)
+  - pattern: $VAR = shutil.move
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.python.file_or_system_operation.shutil.0011.no-shutil-unpack_archive
+  languages:
+  - python
+  message: Avoid using shutil.unpack_archive(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: shutil.unpack_archive()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: shutil.unpack_archive(...)
+  - pattern: $VAR = shutil.unpack_archive
+  severity: WARNING
+  tags:
+  - File or System Operation

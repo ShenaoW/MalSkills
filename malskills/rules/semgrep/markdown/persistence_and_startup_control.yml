@@ -1,0 +1,16 @@
+rules:
+  - id: markdown.persistence_and_startup_control.crontab_or_scheduler_command
+    languages: [generic]
+    paths:
+      include:
+        - '*.md'
+        - '*.markdown'
+        - 'README*'
+        - 'SKILL.md'
+    message: Markdown contains an explicit scheduler or cron command
+    severity: WARNING
+    metadata:
+      malskills_subtype: system_configuration_modify
+      malskills_sso_category: system_configuration
+      malskills_resource_class: startup_configuration
+    pattern-regex: '(?im)^\s*(?:[-*]\s+|`+)?(?:sudo\s+)?(?:crontab\b|schtasks\b|systemd-run\b|launchctl\s+load\b|at\s+(?:now|\d{1,2}:\d{2}|\d{1,2}(?:am|pm)|[A-Za-z]{3}\s+\d{1,2}:\d{2}))\b'

@@ -1,0 +1,1454 @@
+rules:
+- id: sso.typescript.file_or_system_operation.fs.0001.no-fs-Dir
+  languages:
+  - typescript
+  message: Avoid using fs.Dir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.Dir()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.Dir(...)
+  - pattern: $VAR = fs.Dir
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0002.no-fs-Dirent
+  languages:
+  - typescript
+  message: Avoid using fs.Dirent(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.Dirent()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.Dirent(...)
+  - pattern: $VAR = fs.Dirent
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0003.no-fs-FileReadStream
+  languages:
+  - typescript
+  message: Avoid using fs.FileReadStream(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.FileReadStream()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
+  pattern-either:
+  - pattern: fs.FileReadStream(...)
+  - pattern: $VAR = fs.FileReadStream
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0004.no-fs-FileWriteStream
+  languages:
+  - typescript
+  message: Avoid using fs.FileWriteStream(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.FileWriteStream()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: fs.FileWriteStream(...)
+  - pattern: $VAR = fs.FileWriteStream
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0005.no-fs-ReadStream
+  languages:
+  - typescript
+  message: Avoid using fs.ReadStream(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.ReadStream()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
+  pattern-either:
+  - pattern: fs.ReadStream(...)
+  - pattern: $VAR = fs.ReadStream
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0006.no-fs-Stats
+  languages:
+  - typescript
+  message: Avoid using fs.Stats(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.Stats()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.Stats(...)
+  - pattern: $VAR = fs.Stats
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0007.no-fs-WriteStream
+  languages:
+  - typescript
+  message: Avoid using fs.WriteStream(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.WriteStream()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: fs.WriteStream(...)
+  - pattern: $VAR = fs.WriteStream
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0008.no-fs-_toUnixTimestamp
+  languages:
+  - typescript
+  message: Avoid using fs._toUnixTimestamp(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs._toUnixTimestamp()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs._toUnixTimestamp(...)
+  - pattern: $VAR = fs._toUnixTimestamp
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0009.no-fs-access
+  languages:
+  - typescript
+  message: Avoid using fs.access(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.access()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.access(...)
+  - pattern: $VAR = fs.access
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0010.no-fs-accessSync
+  languages:
+  - typescript
+  message: Avoid using fs.accessSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.accessSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.accessSync(...)
+  - pattern: $VAR = fs.accessSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0011.no-fs-appendFile
+  languages:
+  - typescript
+  message: Avoid using fs.appendFile(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.appendFile()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: fs.appendFile(...)
+  - pattern: $VAR = fs.appendFile
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0012.no-fs-appendFileSync
+  languages:
+  - typescript
+  message: Avoid using fs.appendFileSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.appendFileSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: fs.appendFileSync(...)
+  - pattern: $VAR = fs.appendFileSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0013.no-fs-chmod
+  languages:
+  - typescript
+  message: Avoid using fs.chmod(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.chmod()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
+  pattern-either:
+  - pattern: fs.chmod(...)
+  - pattern: $VAR = fs.chmod
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0014.no-fs-chmodSync
+  languages:
+  - typescript
+  message: Avoid using fs.chmodSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.chmodSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
+  pattern-either:
+  - pattern: fs.chmodSync(...)
+  - pattern: $VAR = fs.chmodSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0015.no-fs-chown
+  languages:
+  - typescript
+  message: Avoid using fs.chown(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.chown()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
+  pattern-either:
+  - pattern: fs.chown(...)
+  - pattern: $VAR = fs.chown
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0016.no-fs-chownSync
+  languages:
+  - typescript
+  message: Avoid using fs.chownSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.chownSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
+  pattern-either:
+  - pattern: fs.chownSync(...)
+  - pattern: $VAR = fs.chownSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0017.no-fs-close
+  languages:
+  - typescript
+  message: Avoid using fs.close(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.close()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.close(...)
+  - pattern: $VAR = fs.close
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0018.no-fs-closeSync
+  languages:
+  - typescript
+  message: Avoid using fs.closeSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.closeSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.closeSync(...)
+  - pattern: $VAR = fs.closeSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0019.no-fs-copyFile
+  languages:
+  - typescript
+  message: Avoid using fs.copyFile(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.copyFile()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: fs.copyFile(...)
+  - pattern: $VAR = fs.copyFile
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0020.no-fs-copyFileSync
+  languages:
+  - typescript
+  message: Avoid using fs.copyFileSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.copyFileSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: fs.copyFileSync(...)
+  - pattern: $VAR = fs.copyFileSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0021.no-fs-cp
+  languages:
+  - typescript
+  message: Avoid using fs.cp(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.cp()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.cp(...)
+  - pattern: $VAR = fs.cp
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0022.no-fs-cpSync
+  languages:
+  - typescript
+  message: Avoid using fs.cpSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.cpSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.cpSync(...)
+  - pattern: $VAR = fs.cpSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0023.no-fs-createReadStream
+  languages:
+  - typescript
+  message: Avoid using fs.createReadStream(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.createReadStream()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
+  pattern-either:
+  - pattern: fs.createReadStream(...)
+  - pattern: $VAR = fs.createReadStream
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0024.no-fs-createWriteStream
+  languages:
+  - typescript
+  message: Avoid using fs.createWriteStream(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.createWriteStream()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
+  pattern-either:
+  - pattern: fs.createWriteStream(...)
+  - pattern: $VAR = fs.createWriteStream
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0025.no-fs-exists
+  languages:
+  - typescript
+  message: Avoid using fs.exists(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.exists()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.exists(...)
+  - pattern: $VAR = fs.exists
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0026.no-fs-existsSync
+  languages:
+  - typescript
+  message: Avoid using fs.existsSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.existsSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.existsSync(...)
+  - pattern: $VAR = fs.existsSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0027.no-fs-fchmod
+  languages:
+  - typescript
+  message: Avoid using fs.fchmod(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.fchmod()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
+  pattern-either:
+  - pattern: fs.fchmod(...)
+  - pattern: $VAR = fs.fchmod
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0028.no-fs-fchmodSync
+  languages:
+  - typescript
+  message: Avoid using fs.fchmodSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.fchmodSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
+  pattern-either:
+  - pattern: fs.fchmodSync(...)
+  - pattern: $VAR = fs.fchmodSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0029.no-fs-fchown
+  languages:
+  - typescript
+  message: Avoid using fs.fchown(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.fchown()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
+  pattern-either:
+  - pattern: fs.fchown(...)
+  - pattern: $VAR = fs.fchown
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0030.no-fs-fchownSync
+  languages:
+  - typescript
+  message: Avoid using fs.fchownSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.fchownSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
+  pattern-either:
+  - pattern: fs.fchownSync(...)
+  - pattern: $VAR = fs.fchownSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0031.no-fs-fdatasync
+  languages:
+  - typescript
+  message: Avoid using fs.fdatasync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.fdatasync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.fdatasync(...)
+  - pattern: $VAR = fs.fdatasync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0032.no-fs-fdatasyncSync
+  languages:
+  - typescript
+  message: Avoid using fs.fdatasyncSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.fdatasyncSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.fdatasyncSync(...)
+  - pattern: $VAR = fs.fdatasyncSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0033.no-fs-fstat
+  languages:
+  - typescript
+  message: Avoid using fs.fstat(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.fstat()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.fstat(...)
+  - pattern: $VAR = fs.fstat
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0034.no-fs-fstatSync
+  languages:
+  - typescript
+  message: Avoid using fs.fstatSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.fstatSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.fstatSync(...)
+  - pattern: $VAR = fs.fstatSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0035.no-fs-fsync
+  languages:
+  - typescript
+  message: Avoid using fs.fsync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.fsync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.fsync(...)
+  - pattern: $VAR = fs.fsync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0036.no-fs-fsyncSync
+  languages:
+  - typescript
+  message: Avoid using fs.fsyncSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.fsyncSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.fsyncSync(...)
+  - pattern: $VAR = fs.fsyncSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0037.no-fs-ftruncate
+  languages:
+  - typescript
+  message: Avoid using fs.ftruncate(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.ftruncate()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
+  pattern-either:
+  - pattern: fs.ftruncate(...)
+  - pattern: $VAR = fs.ftruncate
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0038.no-fs-ftruncateSync
+  languages:
+  - typescript
+  message: Avoid using fs.ftruncateSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.ftruncateSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
+  pattern-either:
+  - pattern: fs.ftruncateSync(...)
+  - pattern: $VAR = fs.ftruncateSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0039.no-fs-futimes
+  languages:
+  - typescript
+  message: Avoid using fs.futimes(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.futimes()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.futimes(...)
+  - pattern: $VAR = fs.futimes
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0040.no-fs-futimesSync
+  languages:
+  - typescript
+  message: Avoid using fs.futimesSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.futimesSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.futimesSync(...)
+  - pattern: $VAR = fs.futimesSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0041.no-fs-lchown
+  languages:
+  - typescript
+  message: Avoid using fs.lchown(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.lchown()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
+  pattern-either:
+  - pattern: fs.lchown(...)
+  - pattern: $VAR = fs.lchown
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0042.no-fs-lchownSync
+  languages:
+  - typescript
+  message: Avoid using fs.lchownSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.lchownSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_permission_modify
+  pattern-either:
+  - pattern: fs.lchownSync(...)
+  - pattern: $VAR = fs.lchownSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0043.no-fs-link
+  languages:
+  - typescript
+  message: Avoid using fs.link(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.link()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: link_operation
+  pattern-either:
+  - pattern: fs.link(...)
+  - pattern: $VAR = fs.link
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0044.no-fs-linkSync
+  languages:
+  - typescript
+  message: Avoid using fs.linkSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.linkSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.linkSync(...)
+  - pattern: $VAR = fs.linkSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0045.no-fs-lstat
+  languages:
+  - typescript
+  message: Avoid using fs.lstat(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.lstat()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.lstat(...)
+  - pattern: $VAR = fs.lstat
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0046.no-fs-lstatSync
+  languages:
+  - typescript
+  message: Avoid using fs.lstatSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.lstatSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.lstatSync(...)
+  - pattern: $VAR = fs.lstatSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0047.no-fs-lutimes
+  languages:
+  - typescript
+  message: Avoid using fs.lutimes(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.lutimes()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.lutimes(...)
+  - pattern: $VAR = fs.lutimes
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0048.no-fs-lutimesSync
+  languages:
+  - typescript
+  message: Avoid using fs.lutimesSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.lutimesSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.lutimesSync(...)
+  - pattern: $VAR = fs.lutimesSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0049.no-fs-mkdir
+  languages:
+  - typescript
+  message: Avoid using fs.mkdir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.mkdir()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
+  pattern-either:
+  - pattern: fs.mkdir(...)
+  - pattern: $VAR = fs.mkdir
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0050.no-fs-mkdirSync
+  languages:
+  - typescript
+  message: Avoid using fs.mkdirSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.mkdirSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_create
+  pattern-either:
+  - pattern: fs.mkdirSync(...)
+  - pattern: $VAR = fs.mkdirSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0051.no-fs-mkdtemp
+  languages:
+  - typescript
+  message: Avoid using fs.mkdtemp(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.mkdtemp()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.mkdtemp(...)
+  - pattern: $VAR = fs.mkdtemp
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0052.no-fs-mkdtempSync
+  languages:
+  - typescript
+  message: Avoid using fs.mkdtempSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.mkdtempSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.mkdtempSync(...)
+  - pattern: $VAR = fs.mkdtempSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0053.no-fs-open
+  languages:
+  - typescript
+  message: Avoid using fs.open(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.open()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.open(...)
+  - pattern: $VAR = fs.open
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0054.no-fs-openAsBlob
+  languages:
+  - typescript
+  message: Avoid using fs.openAsBlob(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.openAsBlob()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.openAsBlob(...)
+  - pattern: $VAR = fs.openAsBlob
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0055.no-fs-openSync
+  languages:
+  - typescript
+  message: Avoid using fs.openSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.openSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.openSync(...)
+  - pattern: $VAR = fs.openSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0056.no-fs-opendir
+  languages:
+  - typescript
+  message: Avoid using fs.opendir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.opendir()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.opendir(...)
+  - pattern: $VAR = fs.opendir
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0057.no-fs-opendirSync
+  languages:
+  - typescript
+  message: Avoid using fs.opendirSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.opendirSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.opendirSync(...)
+  - pattern: $VAR = fs.opendirSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0058.no-fs-read
+  languages:
+  - typescript
+  message: Avoid using fs.read(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.read()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
+  pattern-either:
+  - pattern: fs.read(...)
+  - pattern: $VAR = fs.read
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0059.no-fs-readFile
+  languages:
+  - typescript
+  message: Avoid using fs.readFile(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.readFile()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
+  pattern-either:
+  - pattern: fs.readFile(...)
+  - pattern: $VAR = fs.readFile
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0060.no-fs-readFileSync
+  languages:
+  - typescript
+  message: Avoid using fs.readFileSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.readFileSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
+  pattern-either:
+  - pattern: fs.readFileSync(...)
+  - pattern: $VAR = fs.readFileSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0061.no-fs-readSync
+  languages:
+  - typescript
+  message: Avoid using fs.readSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.readSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
+  pattern-either:
+  - pattern: fs.readSync(...)
+  - pattern: $VAR = fs.readSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0062.no-fs-readdir
+  languages:
+  - typescript
+  message: Avoid using fs.readdir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.readdir()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_search
+  pattern-either:
+  - pattern: fs.readdir(...)
+  - pattern: $VAR = fs.readdir
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0063.no-fs-readdirSync
+  languages:
+  - typescript
+  message: Avoid using fs.readdirSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.readdirSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_search
+  pattern-either:
+  - pattern: fs.readdirSync(...)
+  - pattern: $VAR = fs.readdirSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0064.no-fs-readlink
+  languages:
+  - typescript
+  message: Avoid using fs.readlink(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.readlink()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: link_operation
+  pattern-either:
+  - pattern: fs.readlink(...)
+  - pattern: $VAR = fs.readlink
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0065.no-fs-readlinkSync
+  languages:
+  - typescript
+  message: Avoid using fs.readlinkSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.readlinkSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: link_operation
+  pattern-either:
+  - pattern: fs.readlinkSync(...)
+  - pattern: $VAR = fs.readlinkSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0066.no-fs-readv
+  languages:
+  - typescript
+  message: Avoid using fs.readv(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.readv()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
+  pattern-either:
+  - pattern: fs.readv(...)
+  - pattern: $VAR = fs.readv
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0067.no-fs-readvSync
+  languages:
+  - typescript
+  message: Avoid using fs.readvSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.readvSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_read
+  pattern-either:
+  - pattern: fs.readvSync(...)
+  - pattern: $VAR = fs.readvSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0068.no-fs-realpath
+  languages:
+  - typescript
+  message: Avoid using fs.realpath(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.realpath()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.realpath(...)
+  - pattern: $VAR = fs.realpath
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0069.no-fs-realpathSync
+  languages:
+  - typescript
+  message: Avoid using fs.realpathSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.realpathSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.realpathSync(...)
+  - pattern: $VAR = fs.realpathSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0070.no-fs-rename
+  languages:
+  - typescript
+  message: Avoid using fs.rename(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.rename()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: fs.rename(...)
+  - pattern: $VAR = fs.rename
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0071.no-fs-renameSync
+  languages:
+  - typescript
+  message: Avoid using fs.renameSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.renameSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: fs.renameSync(...)
+  - pattern: $VAR = fs.renameSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0072.no-fs-rm
+  languages:
+  - typescript
+  message: Avoid using fs.rm(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.rm()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.rm(...)
+  - pattern: $VAR = fs.rm
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0073.no-fs-rmSync
+  languages:
+  - typescript
+  message: Avoid using fs.rmSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.rmSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.rmSync(...)
+  - pattern: $VAR = fs.rmSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0074.no-fs-rmdir
+  languages:
+  - typescript
+  message: Avoid using fs.rmdir(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.rmdir()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
+  pattern-either:
+  - pattern: fs.rmdir(...)
+  - pattern: $VAR = fs.rmdir
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0075.no-fs-rmdirSync
+  languages:
+  - typescript
+  message: Avoid using fs.rmdirSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.rmdirSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
+  pattern-either:
+  - pattern: fs.rmdirSync(...)
+  - pattern: $VAR = fs.rmdirSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0076.no-fs-stat
+  languages:
+  - typescript
+  message: Avoid using fs.stat(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.stat()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.stat(...)
+  - pattern: $VAR = fs.stat
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0077.no-fs-statSync
+  languages:
+  - typescript
+  message: Avoid using fs.statSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.statSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.statSync(...)
+  - pattern: $VAR = fs.statSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0078.no-fs-statfs
+  languages:
+  - typescript
+  message: Avoid using fs.statfs(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.statfs()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.statfs(...)
+  - pattern: $VAR = fs.statfs
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0079.no-fs-statfsSync
+  languages:
+  - typescript
+  message: Avoid using fs.statfsSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.statfsSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.statfsSync(...)
+  - pattern: $VAR = fs.statfsSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0080.no-fs-symlink
+  languages:
+  - typescript
+  message: Avoid using fs.symlink(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.symlink()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: link_operation
+  pattern-either:
+  - pattern: fs.symlink(...)
+  - pattern: $VAR = fs.symlink
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0081.no-fs-symlinkSync
+  languages:
+  - typescript
+  message: Avoid using fs.symlinkSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.symlinkSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: link_operation
+  pattern-either:
+  - pattern: fs.symlinkSync(...)
+  - pattern: $VAR = fs.symlinkSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0082.no-fs-truncate
+  languages:
+  - typescript
+  message: Avoid using fs.truncate(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.truncate()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
+  pattern-either:
+  - pattern: fs.truncate(...)
+  - pattern: $VAR = fs.truncate
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0083.no-fs-truncateSync
+  languages:
+  - typescript
+  message: Avoid using fs.truncateSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.truncateSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
+  pattern-either:
+  - pattern: fs.truncateSync(...)
+  - pattern: $VAR = fs.truncateSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0084.no-fs-unlink
+  languages:
+  - typescript
+  message: Avoid using fs.unlink(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.unlink()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: link_operation
+  pattern-either:
+  - pattern: fs.unlink(...)
+  - pattern: $VAR = fs.unlink
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0085.no-fs-unlinkSync
+  languages:
+  - typescript
+  message: Avoid using fs.unlinkSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.unlinkSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_delete
+  pattern-either:
+  - pattern: fs.unlinkSync(...)
+  - pattern: $VAR = fs.unlinkSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0086.no-fs-unwatchFile
+  languages:
+  - typescript
+  message: Avoid using fs.unwatchFile(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.unwatchFile()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.unwatchFile(...)
+  - pattern: $VAR = fs.unwatchFile
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0087.no-fs-utimes
+  languages:
+  - typescript
+  message: Avoid using fs.utimes(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.utimes()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.utimes(...)
+  - pattern: $VAR = fs.utimes
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0088.no-fs-utimesSync
+  languages:
+  - typescript
+  message: Avoid using fs.utimesSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.utimesSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.utimesSync(...)
+  - pattern: $VAR = fs.utimesSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0089.no-fs-watch
+  languages:
+  - typescript
+  message: Avoid using fs.watch(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.watch()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.watch(...)
+  - pattern: $VAR = fs.watch
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0090.no-fs-watchFile
+  languages:
+  - typescript
+  message: Avoid using fs.watchFile(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.watchFile()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: fs.watchFile(...)
+  - pattern: $VAR = fs.watchFile
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0091.no-fs-write
+  languages:
+  - typescript
+  message: Avoid using fs.write(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.write()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: fs.write(...)
+  - pattern: $VAR = fs.write
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0092.no-fs-writeFile
+  languages:
+  - typescript
+  message: Avoid using fs.writeFile(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.writeFile()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: fs.writeFile(...)
+  - pattern: $VAR = fs.writeFile
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0093.no-fs-writeFileSync
+  languages:
+  - typescript
+  message: Avoid using fs.writeFileSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.writeFileSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: fs.writeFileSync(...)
+  - pattern: $VAR = fs.writeFileSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0094.no-fs-writeSync
+  languages:
+  - typescript
+  message: Avoid using fs.writeSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.writeSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: fs.writeSync(...)
+  - pattern: $VAR = fs.writeSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0095.no-fs-writev
+  languages:
+  - typescript
+  message: Avoid using fs.writev(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.writev()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: fs.writev(...)
+  - pattern: $VAR = fs.writev
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0096.no-fs-writevSync
+  languages:
+  - typescript
+  message: Avoid using fs.writevSync(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: fs.writevSync()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_write
+  pattern-either:
+  - pattern: fs.writevSync(...)
+  - pattern: $VAR = fs.writevSync
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.typescript.file_or_system_operation.fs.0097.no-require-fs
+  languages:
+  - typescript
+  message: Avoid using require('fs'), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: require('fs')
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern: require('fs')
+  severity: WARNING
+  tags:
+  - File or System Operation

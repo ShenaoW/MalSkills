@@ -1,0 +1,58 @@
+rules:
+- id: sso.java.dynamic_execution.bsh.0001.no-bsh-Interpreter-eval
+  languages:
+  - java
+  message: Avoid using bsh.Interpreter.eval(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: bsh.Interpreter.eval()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: new bsh.Interpreter.eval(...)
+  - pattern: bsh.Interpreter.eval(...)
+  - pattern: $VAR = bsh.Interpreter.eval
+  - pattern: new Interpreter.eval(...)
+  - pattern: Interpreter.eval(...)
+  - pattern: $VAR = Interpreter.eval
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.java.dynamic_execution.bsh.0002.no-bsh-Interpreter-get
+  languages:
+  - java
+  message: Avoid using bsh.Interpreter.get(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: bsh.Interpreter.get()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: new bsh.Interpreter.get(...)
+  - pattern: bsh.Interpreter.get(...)
+  - pattern: $VAR = bsh.Interpreter.get
+  - pattern: new Interpreter.get(...)
+  - pattern: Interpreter.get(...)
+  - pattern: $VAR = Interpreter.get
+  severity: WARNING
+  tags:
+  - Dynamic Execution
+- id: sso.java.dynamic_execution.bsh.0003.no-bsh-Interpreter-set
+  languages:
+  - java
+  message: Avoid using bsh.Interpreter.set(), as it can lead to potential issues with dynamic code execution.
+  metadata:
+    api: bsh.Interpreter.set()
+    category: Dynamic Execution
+    malskills_sso_category: payload_execution
+    malskills_subtype: dynamic_code_execution
+  pattern-either:
+  - pattern: new bsh.Interpreter.set(...)
+  - pattern: bsh.Interpreter.set(...)
+  - pattern: $VAR = bsh.Interpreter.set
+  - pattern: new Interpreter.set(...)
+  - pattern: Interpreter.set(...)
+  - pattern: $VAR = Interpreter.set
+  severity: WARNING
+  tags:
+  - Dynamic Execution

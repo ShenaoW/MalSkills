@@ -1,0 +1,61 @@
+rules:
+- id: sso.ruby.cryptography.SecureRandom.0001.no-SecureRandom.base64
+  languages:
+  - ruby
+  message: Avoid using SecureRandom.base64(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: SecureRandom.base64()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: SecureRandom.base64(...)
+  - pattern: $VAR = SecureRandom.base64
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.ruby.cryptography.SecureRandom.0002.no-SecureRandom.hex
+  languages:
+  - ruby
+  message: Avoid using SecureRandom.hex(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: SecureRandom.hex()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: SecureRandom.hex(...)
+  - pattern: $VAR = SecureRandom.hex
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.ruby.cryptography.SecureRandom.0003.no-SecureRandom.random_bytes
+  languages:
+  - ruby
+  message: Avoid using SecureRandom.random_bytes(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: SecureRandom.random_bytes()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: SecureRandom.random_bytes(...)
+  - pattern: $VAR = SecureRandom.random_bytes
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.ruby.cryptography.SecureRandom.0004.no-SecureRandom.uuid
+  languages:
+  - ruby
+  message: Avoid using SecureRandom.uuid(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: SecureRandom.uuid()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: SecureRandom.uuid(...)
+  - pattern: $VAR = SecureRandom.uuid
+  severity: WARNING
+  tags:
+  - Cryptography

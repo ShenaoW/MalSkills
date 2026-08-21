@@ -1,0 +1,131 @@
+rules:
+- id: sso.cpp.cryptography.CryptoPP.0001.no-CryptoPP-AutoSeededRandomPool-GenerateBlock
+  languages:
+  - cpp
+  message: Avoid using CryptoPP::AutoSeededRandomPool::GenerateBlock(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: CryptoPP::AutoSeededRandomPool::GenerateBlock()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cipher_object_creation
+  pattern-either:
+  - pattern: CryptoPP::AutoSeededRandomPool::GenerateBlock(...)
+  - pattern: $VAR = CryptoPP::AutoSeededRandomPool::GenerateBlock
+  - pattern: AutoSeededRandomPool::GenerateBlock(...)
+  - pattern: $VAR = AutoSeededRandomPool::GenerateBlock
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.CryptoPP.0002.no-CryptoPP-CBC_Mode_ExternalCipher-Decryption
+  languages:
+  - cpp
+  message: Avoid using CryptoPP::CBC_Mode_ExternalCipher::Decryption(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: CryptoPP::CBC_Mode_ExternalCipher::Decryption()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: CryptoPP::CBC_Mode_ExternalCipher::Decryption(...)
+  - pattern: $VAR = CryptoPP::CBC_Mode_ExternalCipher::Decryption
+  - pattern: CBC_Mode_ExternalCipher::Decryption(...)
+  - pattern: $VAR = CBC_Mode_ExternalCipher::Decryption
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.CryptoPP.0003.no-CryptoPP-ECB_Mode_ExternalCipher-Encryption
+  languages:
+  - cpp
+  message: Avoid using CryptoPP::ECB_Mode_ExternalCipher::Encryption(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: CryptoPP::ECB_Mode_ExternalCipher::Encryption()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: CryptoPP::ECB_Mode_ExternalCipher::Encryption(...)
+  - pattern: $VAR = CryptoPP::ECB_Mode_ExternalCipher::Encryption
+  - pattern: ECB_Mode_ExternalCipher::Encryption(...)
+  - pattern: $VAR = ECB_Mode_ExternalCipher::Encryption
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.CryptoPP.0004.no-CryptoPP-HexDecoder
+  languages:
+  - cpp
+  message: Avoid using CryptoPP::HexDecoder(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: CryptoPP::HexDecoder()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decoding
+  pattern-either:
+  - pattern: CryptoPP::HexDecoder(...)
+  - pattern: $VAR = CryptoPP::HexDecoder
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.CryptoPP.0005.no-CryptoPP-HexEncoder
+  languages:
+  - cpp
+  message: Avoid using CryptoPP::HexEncoder(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: CryptoPP::HexEncoder()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encoding
+  pattern-either:
+  - pattern: CryptoPP::HexEncoder(...)
+  - pattern: $VAR = CryptoPP::HexEncoder
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.CryptoPP.0006.no-CryptoPP-RSA-Decryptor
+  languages:
+  - cpp
+  message: Avoid using CryptoPP::RSA::Decryptor(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: CryptoPP::RSA::Decryptor()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: decryption
+  pattern-either:
+  - pattern: CryptoPP::RSA::Decryptor(...)
+  - pattern: $VAR = CryptoPP::RSA::Decryptor
+  - pattern: RSA::Decryptor(...)
+  - pattern: $VAR = RSA::Decryptor
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.CryptoPP.0007.no-CryptoPP-RSA-Encryptor
+  languages:
+  - cpp
+  message: Avoid using CryptoPP::RSA::Encryptor(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: CryptoPP::RSA::Encryptor()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: encryption
+  pattern-either:
+  - pattern: CryptoPP::RSA::Encryptor(...)
+  - pattern: $VAR = CryptoPP::RSA::Encryptor
+  - pattern: RSA::Encryptor(...)
+  - pattern: $VAR = RSA::Encryptor
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.cpp.cryptography.CryptoPP.0008.no-CryptoPP-StreamTransformationFilter
+  languages:
+  - cpp
+  message: Avoid using CryptoPP::StreamTransformationFilter(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: CryptoPP::StreamTransformationFilter()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: cryptographic_operation
+  pattern-either:
+  - pattern: CryptoPP::StreamTransformationFilter(...)
+  - pattern: $VAR = CryptoPP::StreamTransformationFilter
+  severity: WARNING
+  tags:
+  - Cryptography

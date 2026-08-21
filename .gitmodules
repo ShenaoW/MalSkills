@@ -1,0 +1,66 @@
+[submodule "baseline/AI-Infra-Guard"]
+	path = baseline/AI-Infra-Guard
+	url = https://github.com/ShenaoW/AI-Infra-Guard.git
+[submodule "baseline/agentguard"]
+	path = baseline/agentguard
+	url = https://github.com/GoPlusSecurity/agentguard.git
+[submodule "baseline/caterpillar"]
+	path = baseline/caterpillar
+	url = https://github.com/alice-dot-io/caterpillar.git
+[submodule "baseline/clawscan"]
+	path = baseline/clawscan
+	url = https://github.com/sggolakiya/clawscan.git
+[submodule "baseline/nova-proximity"]
+	path = baseline/nova-proximity
+	url = https://github.com/Nova-Hunting/nova-proximity.git
+[submodule "baseline/skill-scanner"]
+	path = baseline/skill-scanner
+	url = https://github.com/cisco-ai-defense/skill-scanner.git
+[submodule "baseline/skill-security-audit"]
+	path = baseline/skill-security-audit
+	url = https://github.com/smartchainark/skill-security-audit.git
+[submodule "baseline/skill-security-scan"]
+	path = baseline/skill-security-scan
+	url = https://github.com/huifer/skill-security-scan.git
+[submodule "baseline/skills_security_audit"]
+	path = baseline/skills_security_audit
+	url = https://github.com/DaverLabs/skills_security_audit.git
+[submodule "baseline/skillspector"]
+	path = baseline/skillspector
+	url = https://github.com/NVIDIA/SkillSpector.git
+[submodule "baseline/openclaw-clawscan"]
+	path = baseline/openclaw-clawscan
+	url = https://github.com/openclaw/clawscan.git
+[submodule "baseline/agentverus-scanner"]
+	path = baseline/agentverus-scanner
+	url = https://github.com/agentverus/agentverus-scanner.git
+[submodule "baseline/skillsieve"]
+	path = baseline/skillsieve
+	url = https://github.com/xiaohou521/skillsieve.git
+[submodule "baseline/skillward"]
+	path = baseline/skillward
+	url = https://github.com/Fangcun-AI/SkillWard.git
+[submodule "baseline/runtime-skill-audit"]
+	path = baseline/runtime-skill-audit
+	url = https://github.com/ShenaoW/Runtime-Skill-Audit.git
+[submodule "baseline/skillfortify"]
+	path = baseline/skillfortify
+	url = https://github.com/qualixar/skillfortify.git
+[submodule "baseline/skill-sentinel"]
+	path = baseline/skill-sentinel
+	url = https://github.com/enkryptai/skill-sentinel.git
+[submodule "baseline/skilltotal"]
+	path = baseline/skilltotal
+	url = https://github.com/pezhik/skilltotal.git
+[submodule "baseline/clawvet"]
+	path = baseline/clawvet
+	url = https://github.com/MohibShaikh/clawvet.git
+[submodule "baseline/razin"]
+	path = baseline/razin
+	url = https://github.com/theinfosecguy/razin.git
+[submodule "baseline/agent-scan"]
+	path = baseline/agent-scan
+	url = https://github.com/snyk/agent-scan.git
+[submodule "vendor/yasa"]
+	path = vendor/yasa
+	url = https://github.com/antgroup/YASA-Engine.git

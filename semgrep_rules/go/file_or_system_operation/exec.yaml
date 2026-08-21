@@ -1,0 +1,35 @@
+rules:
+- id: sso.go.file_or_system_operation.exec.0001.no-exec.Command_x__x_.CombinedOutput
+  languages:
+  - go
+  message: Avoid using exec.Command().CombinedOutput(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: exec.Command().CombinedOutput()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: exec.Command().CombinedOutput(...)
+  - pattern: $VAR = exec.Command().CombinedOutput
+  - pattern: Command().CombinedOutput(...)
+  - pattern: $VAR = Command().CombinedOutput
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.go.file_or_system_operation.exec.0002.no-exec.Command_x__x_.Start
+  languages:
+  - go
+  message: Avoid using exec.Command().Start(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: exec.Command().Start()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: exec.Command().Start(...)
+  - pattern: $VAR = exec.Command().Start
+  - pattern: Command().Start(...)
+  - pattern: $VAR = Command().Start
+  severity: WARNING
+  tags:
+  - File or System Operation

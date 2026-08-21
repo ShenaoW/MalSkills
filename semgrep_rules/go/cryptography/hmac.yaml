@@ -1,0 +1,31 @@
+rules:
+- id: sso.go.cryptography.hmac.0001.no-hmac.Equal
+  languages:
+  - go
+  message: Avoid using hmac.Equal(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: hmac.Equal()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: hmac.Equal(...)
+  - pattern: $VAR = hmac.Equal
+  severity: WARNING
+  tags:
+  - Cryptography
+- id: sso.go.cryptography.hmac.0002.no-hmac.New
+  languages:
+  - go
+  message: Avoid using hmac.New(), as it can lead to potential issues with cryptography.
+  metadata:
+    api: hmac.New()
+    category: Cryptography
+    malskills_sso_category: cryptography
+    malskills_subtype: hashing
+  pattern-either:
+  - pattern: hmac.New(...)
+  - pattern: $VAR = hmac.New
+  severity: WARNING
+  tags:
+  - Cryptography

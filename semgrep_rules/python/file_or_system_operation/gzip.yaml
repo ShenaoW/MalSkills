@@ -1,0 +1,33 @@
+rules:
+- id: sso.python.file_or_system_operation.gzip.0001.no-gzip-GzipFile-__init__
+  languages:
+  - python
+  message: Avoid using gzip.GzipFile.__init__(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: gzip.GzipFile.__init__()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: gzip.GzipFile.__init__(...)
+  - pattern: $VAR = gzip.GzipFile.__init__
+  - pattern: GzipFile.__init__(...)
+  - pattern: $VAR = GzipFile.__init__
+  severity: WARNING
+  tags:
+  - File or System Operation
+- id: sso.python.file_or_system_operation.gzip.0002.no-gzip-open
+  languages:
+  - python
+  message: Avoid using gzip.open(), as it can lead to potential issues with file or system operation.
+  metadata:
+    api: gzip.open()
+    category: File or System Operation
+    malskills_sso_category: file_operation
+    malskills_subtype: file_access
+  pattern-either:
+  - pattern: gzip.open(...)
+  - pattern: $VAR = gzip.open
+  severity: WARNING
+  tags:
+  - File or System Operation
