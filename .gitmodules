@@ -1,6 +1,6 @@
 [submodule "baseline/AI-Infra-Guard"]
 	path = baseline/AI-Infra-Guard
-	url = https://github.com/Tencent/AI-Infra-Guard.git
+	url = https://github.com/ShenaoW/AI-Infra-Guard.git
 [submodule "baseline/agentguard"]
 	path = baseline/agentguard
 	url = https://github.com/GoPlusSecurity/agentguard.git
@@ -42,7 +42,7 @@
 	url = https://github.com/Fangcun-AI/SkillWard.git
 [submodule "baseline/runtime-skill-audit"]
 	path = baseline/runtime-skill-audit
-	url = https://github.com/tu-tuing/Runtime-Skill-Audit.git
+	url = https://github.com/ShenaoW/Runtime-Skill-Audit.git
 [submodule "baseline/skillfortify"]
 	path = baseline/skillfortify
 	url = https://github.com/qualixar/skillfortify.git

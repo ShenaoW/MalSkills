@@ -1,15 +1,12 @@
 [llm]
 # MalSkills and every LLM-backed baseline reuse this runtime.
-# For an OpenAI-compatible API, set mode = "api" and provide
+# Keep this repository-relative file for either backend. For an
+# OpenAI-compatible API, set mode = "api", choose its model, and provide
 # MALSKILLS_LLM_BASE_URL and MALSKILLS_LLM_API_KEY in the environment.
 
-#mode = "codex_cli"
-#model = "gpt-5.6-luna"
-#reasoning_effort = "low"
-#timeout_sec = 300
-
-mode = "api"
-model = "DeepSeek-V4-Flash-0731"
+mode = "codex_cli"
+model = "gpt-5.6-luna"
+reasoning_effort = "low"
 timeout_sec = 300
 enable_thinking = false
 

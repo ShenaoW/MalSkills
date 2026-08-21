@@ -14,7 +14,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import TextIO
 
-from .llm_runtime import LLM_STAGES, describe_llm_runtime
+from .llm_runtime import describe_llm_runtime
 from .models import AnalysisResult, to_jsonable
 from .pipeline import AnalyzerConfig, SkillAnalyzer
 from .utils import ensure_dir
@@ -296,8 +296,6 @@ class CorpusScanner:
             else destination / "learned_rules"
         )
         if profile == "full":
-            for stage in LLM_STAGES:
-                os.environ[f"MALSKILLS_LLM_{stage.upper()}_ENABLED"] = "true"
             cache_paths = {
                 "MALSKILLS_LLM_CACHE": destination / "llm_cache" / "sso_findings",
                 "MALSKILLS_LLM_OBJECT_CACHE": destination / "llm_cache" / "objects",
@@ -376,17 +374,18 @@ class CorpusScanner:
             f"workers={workers} profile={profile} retain={retain} output={destination}"
         )
         scan_started_at = time.perf_counter()
+        full_profile = profile == "full"
         config = AnalyzerConfig(
-            enable_llm_sso_extraction=profile == "full",
-            enable_llm_object_analysis=profile == "full",
+            enable_llm_sso_extraction=None if full_profile else False,
+            enable_llm_object_analysis=None if full_profile else False,
             enable_semgrep=True,
             enable_yasa=enable_yasa,
             enable_cross_artifact_resolution=enable_cross_artifact_resolution,
-            reasoning_mode="hybrid" if profile == "full" else "formal",
+            reasoning_mode=None if full_profile else "formal",
             max_artifacts=max_artifacts,
             max_total_text_bytes=max_total_text_bytes,
-            rule_store_dir=resolved_rule_store if profile == "full" else None,
-            collect_rule_candidates=profile == "full",
+            rule_store_dir=resolved_rule_store if full_profile else None,
+            collect_rule_candidates=None if full_profile else False,
         )
 
         context = multiprocessing.get_context("spawn")

@@ -62,8 +62,7 @@ git clone --recurse-submodules https://github.com/ShenaoW/MalSkills.git
 cd MalSkills
 
 python3 -m venv .venv
-.venv/bin/pip install -e .
-.venv/bin/pip install semgrep
+.venv/bin/pip install -e '.[analysis]'
 .venv/bin/semgrep --version
 # Codex CLI mode only:
 codex login
@@ -79,6 +78,10 @@ git submodule status --recursive
 
 Third-party baseline dependencies are not installed by the root package. Use an
 isolated environment for each Python baseline and follow its upstream README.
+The AI-Infra-Guard and Runtime-Skill-Audit submodules point to
+MalSkills-maintained forks with minimal compatibility fixes, pinned to exact
+commits so a fresh clone reproduces the adapters without local patches. Their
+upstream projects remain credited in the baseline table and Git history.
 
 ## Quick start
 
@@ -113,11 +116,12 @@ Render an existing result directory:
 
 ## LLM configuration
 
-The checked-in [malskills.toml](malskills.toml) routes MalSkills and all
-LLM-backed baselines through one shared runtime. It defaults to the
-authenticated Codex CLI. Global settings are in `[llm]`; each MalSkills stage
-can override `enabled`, `mode`, `model`, `reasoning_effort`, `enable_thinking`,
-and `timeout_sec`.
+The single checked-in [malskills.toml](malskills.toml) routes MalSkills and all
+LLM-backed baselines through one shared runtime. Commands refer to it by the
+repository-relative path `malskills.toml`, so the configuration is portable
+across checkouts. It defaults to the authenticated Codex CLI. Global settings
+are in `[llm]`; each MalSkills stage can override `enabled`, `mode`, `model`,
+`reasoning_effort`, `enable_thinking`, and `timeout_sec`.
 
 ```toml
 [llm]
@@ -140,14 +144,16 @@ enabled = true
 enabled = false
 ```
 
-To use an OpenAI-compatible API instead, change only the global mode and model
-in TOML. Keep credentials out of the file:
+To use an OpenAI-compatible API instead, edit the global mode and model in the
+same `malskills.toml`; no second configuration file is needed. Keep credentials
+out of TOML:
 
 ```toml
 [llm]
 mode = "api"
 model = "gpt-5.6-luna"
 timeout_sec = 300
+enable_thinking = false
 ```
 
 ```bash
@@ -245,12 +251,13 @@ The expected layout is `<corpus-root>/<source>/<package>/.../SKILL.md`.
 | Profile | Extraction | Reasoning | Rule candidates |
 |---|---|---|---|
 | `static` | Semgrep and built-in static extraction | formal SDG rules | disabled |
-| `full` | Static extraction plus batched LLM semantics | hybrid | collected in the rule store |
+| `full` | Static extraction plus TOML-enabled LLM stages | selected by `pattern_reasoning.enabled` | when `rule_feedback.enabled` |
 
-The `full` profile explicitly enables all four LLM stages, including
-`rule_feedback`, regardless of the per-stage `enabled` values in the checked-in
-configuration. It uses the configured model and stores learned-rule state under
-`<output>/learned_rules` unless `--rule-store` is provided.
+The `full` profile respects every per-stage `enabled` value in
+`malskills.toml`. It prepares stage caches and stores learned-rule state under
+`<output>/learned_rules` unless `--rule-store` is provided; disabled stages are
+not invoked. Explicit ablation variants may still override individual stages
+as part of their experiment definition.
 
 The scanner selects one primary Skill tree per package and removes exact
 duplicate primary `SKILL.md` content unless `--keep-content-duplicates` is
@@ -432,7 +439,10 @@ poisoning controls.
 - [Guarded rule learning](docs/RULE_LEARNING.md)
 - [Reproduction and delivery guide](docs/DEMO_REPRODUCTION.md)
 
-Third-party code remains under each upstream project's license. In particular,
-review the current AgentVerus licensing terms and SkillFortify's Elastic License
-2.0 before redistribution or commercial use; a submodule does not relicense its
+## License
+
+MalSkills is licensed under the [Apache License 2.0](LICENSE). Third-party code
+remains under each upstream project's license. In particular, review the
+current AgentVerus licensing terms and SkillFortify's Elastic License 2.0
+before redistribution or commercial use; a submodule does not relicense its
 contents under MalSkills.

@@ -47,7 +47,7 @@ from .utils import ensure_dir
 
 
 VARIANTS: dict[str, AnalyzerConfig | str] = {
-    "full": AnalyzerConfig(enable_llm_sso_extraction=True),
+    "full": AnalyzerConfig(),
     "semgrep_findings_only": AnalyzerConfig(enable_llm_sso_extraction=False),
     "llm_findings_only": AnalyzerConfig(enable_semgrep=False, enable_llm_sso_extraction=True),
     "formal_reasoning_only": AnalyzerConfig(enable_llm_sso_extraction=True, reasoning_mode="formal"),
@@ -61,7 +61,7 @@ VARIANTS: dict[str, AnalyzerConfig | str] = {
         enable_cross_artifact_resolution=False,
         reasoning_mode="formal",
     ),
-    "benchmark_full": AnalyzerConfig(enable_llm_sso_extraction=True, max_artifacts=600, max_total_text_bytes=2_000_000),
+    "benchmark_full": AnalyzerConfig(max_artifacts=600, max_total_text_bytes=2_000_000),
     "benchmark_semgrep_findings_only": AnalyzerConfig(enable_llm_sso_extraction=False, max_artifacts=600, max_total_text_bytes=2_000_000),
     "benchmark_llm_findings_only": AnalyzerConfig(
         enable_semgrep=False,
