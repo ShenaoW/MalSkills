@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from ..utils import ensure_dir
-from .codex_bridge import resolve_baseline_codex_config
+from .codex_bridge import llm_api_bridge
 from .external_tools import (
     DEFAULT_TIMEOUT_SEC,
     _extract_json_object,
@@ -30,30 +30,29 @@ def run_skillspector_baseline(skill_path: str | Path, output_dir: str | Path) ->
     ensure_dir(destination)
 
     repo_root = _baseline_repo("skillspector", "SkillSpector")
-    llm_runtime = resolve_baseline_codex_config()
-    command, env_overrides = _python_tool_command(
-        repo_root=repo_root,
-        source_root=repo_root / "src",
-        module="skillspector.cli",
-        entry_file=repo_root / "src" / "skillspector" / "cli.py",
-        executable="skillspector",
-        args=["scan", str(skill_root), "--format", "json"],
-    )
-    env_overrides = dict(env_overrides or {})
-    env_overrides.update(
-        {
-            "SKILLSPECTOR_PROVIDER": "codex_cli",
-            "SKILLSPECTOR_MODEL": llm_runtime.model,
-            "PATH": os.pathsep.join(
-                [str(Path(llm_runtime.cli_path).resolve().parent), os.environ.get("PATH", "")]
-            ),
-        }
-    )
-    payload = _run_required_json_baseline_command(
-        command,
-        env_overrides=env_overrides,
-        timeout_sec=MODERN_TOOLS_TIMEOUT_SEC,
-    )
+    with llm_api_bridge(cwd=skill_root) as bridge:
+        command, env_overrides = _python_tool_command(
+            repo_root=repo_root,
+            source_root=repo_root / "src",
+            module="skillspector.cli",
+            entry_file=repo_root / "src" / "skillspector" / "cli.py",
+            executable="skillspector",
+            args=["scan", str(skill_root), "--format", "json"],
+        )
+        env_overrides = dict(env_overrides or {})
+        env_overrides.update(
+            {
+                "SKILLSPECTOR_PROVIDER": "openai",
+                "SKILLSPECTOR_MODEL": bridge.model,
+                "OPENAI_API_KEY": bridge.api_key,
+                "OPENAI_BASE_URL": bridge.base_url,
+            }
+        )
+        payload = _run_required_json_baseline_command(
+            command,
+            env_overrides=env_overrides,
+            timeout_sec=MODERN_TOOLS_TIMEOUT_SEC,
+        )
     predicted, score, patterns = _normalize_skillspector(payload)
     return _finalize_baseline_result(
         destination=destination,
@@ -63,8 +62,8 @@ def run_skillspector_baseline(skill_path: str | Path, output_dir: str | Path) ->
         runtime={
             "tool": "skillspector",
             "command": command,
-            "llm_backend": "codex_cli",
-            "llm_model": llm_runtime.model,
+            "llm_backend": bridge.backend,
+            "llm_model": bridge.model,
         },
         predicted=predicted,
         score=score,

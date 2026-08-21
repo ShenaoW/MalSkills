@@ -13,6 +13,7 @@ from .llm_runtime import describe_llm_runtime
 from .pipeline import AnalyzerConfig, SkillAnalyzer
 from .rule_learning.registry import RuleRegistry
 from .rule_learning.validation import HeldOutRuleValidator
+from .utils import load_env_file
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -130,6 +131,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> int:
+    load_env_file(Path(__file__).resolve().parents[1])
     parser = build_parser()
     args = parser.parse_args(argv)
     llm_config = getattr(args, "llm_config", None)

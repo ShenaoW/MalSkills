@@ -15,7 +15,7 @@ from .external_tools import (
     _run_baseline_command,
     _run_json_baseline_command,
 )
-from .codex_bridge import codex_cli_api_bridge
+from .codex_bridge import llm_api_bridge
 
 
 LLM_BASELINE_TIMEOUT_SEC = 900
@@ -76,7 +76,7 @@ def run_ai_infra_guard_baseline(skill_path: str | Path, output_dir: str | Path) 
 
     source_root = _baseline_root() / "AI-Infra-Guard" / "skill-scan"
     raw_report = destination / "ai_infra_guard_raw.sarif.json"
-    with codex_cli_api_bridge(cwd=skill_root) as bridge:
+    with llm_api_bridge(cwd=skill_root) as bridge:
         command = [
             _resolve_tool_python(source_root),
             "-m",
@@ -128,7 +128,7 @@ def run_ai_infra_guard_baseline(skill_path: str | Path, output_dir: str | Path) 
             "tool": "aig-skill-scan",
             "attribution": "Tencent Zhuque Lab (https://github.com/Tencent/AI-Infra-Guard)",
             "command": command,
-            "llm_backend": "codex_cli",
+            "llm_backend": bridge.backend,
             "llm_model": bridge.model,
         },
         predicted=predicted,

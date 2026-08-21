@@ -97,9 +97,8 @@ bash scripts/demo_reproduce.sh --single-demo
 
 ```bash
 docker run --rm \
-  -e MALSKILLS_LLM_MODE=openai_api \
-  -e OPENAI_API_KEY="$OPENAI_API_KEY" \
-  -e OPENAI_MODEL="${OPENAI_MODEL:-gpt-5.3-codex-medium}" \
+  --env-file .env \
+  -e MALSKILLS_LLM_MODE=api \
   -v "$PWD/output:/app/output" \
   malskills-demo:latest \
   bash scripts/demo_reproduce.sh --no-pause

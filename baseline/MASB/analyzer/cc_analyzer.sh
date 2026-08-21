@@ -80,21 +80,17 @@ analyze_single_skill() {
         return
     fi
 
-    local custom_prompt=$(cat "$prompt_file")
+    local llm_model="${OPENAI_MODEL:-${LLM_MODEL:-gpt-5.6-luna}}"
 
-    local codex_model="${OPENAI_MODEL:-${LLM_MODEL:-gpt-5.6-luna}}"
-    local codex_cli="${MALSKILLS_CODEX_CLI:-codex}"
-
-    # Execute Codex analysis
-    "$codex_cli" exec \
-        --skip-git-repo-check \
-        --dangerously-bypass-approvals-and-sandbox \
-        --model "$codex_model" \
-        -C "$skill_dir" \
-        --output-last-message "$tmp_out" \
-        "$custom_prompt
-
-Analyze the current skill directory using static analysis only. Return strict JSON only." > /dev/null 2>&1 < /dev/null
+    # The MalSkills adapter exposes one OpenAI-compatible endpoint for either
+    # Codex CLI or a configured upstream API.
+    "${MALSKILLS_MASB_PYTHON:-python3}" -m malskills.baselines.masb_llm \
+        "$skill_dir" \
+        "$prompt_file" \
+        "$tmp_out" \
+        "$MALSKILLS_MASB_LLM_BASE_URL" \
+        "$MALSKILLS_MASB_LLM_API_KEY" \
+        "$llm_model" > /dev/null 2>&1 < /dev/null
 
     local exit_code=$?
 
@@ -190,7 +186,8 @@ except:
     rm -f "$tmp_out"
 }
 
-export OUTPUT_DIR OUTPUT_SUFFIX PROJECT_ROOT OPENAI_MODEL LLM_MODEL MALSKILLS_CODEX_CLI
+export OUTPUT_DIR OUTPUT_SUFFIX PROJECT_ROOT OPENAI_MODEL LLM_MODEL
+export MALSKILLS_MASB_PYTHON MALSKILLS_MASB_LLM_BASE_URL MALSKILLS_MASB_LLM_API_KEY
 export -f analyze_single_skill
 
 # Main execution

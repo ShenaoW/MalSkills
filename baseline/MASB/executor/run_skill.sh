@@ -50,7 +50,7 @@ HOST_UID=$(id -u)
 HOST_GID=$(id -g)
 CONTAINER_NAME="skill-exec-${SKILL_NAME}-${REPO_ID}-$$"
 HOST_CODEX_DIR="${CODEX_HOME:-${HOME:-$(getent passwd "$(id -u)" | cut -d: -f6)}/.codex}"
-if [ ! -f "$HOST_CODEX_DIR/auth.json" ]; then
+if [ "${MALSKILLS_MASB_LLM_MODE:-codex_cli}" != "api" ] && [ ! -f "$HOST_CODEX_DIR/auth.json" ]; then
     echo "Error: Codex CLI authentication not found in $HOST_CODEX_DIR/auth.json"
     echo "Run 'codex login' on the host before executing the MASB dynamic stage"
     exit 1
@@ -81,11 +81,15 @@ docker run --rm \
     "${CODEX_MOUNT_ARGS[@]}" \
     -v "${PROJECT_ROOT}/executor/nova_setup.sh:/nova_setup.sh:ro" \
     -v "${PROJECT_ROOT}/executor/smart_monitor.py:/smart_monitor.py:ro" \
+    -v "${PROJECT_ROOT}/executor/api_agent.py:/api_agent.py:ro" \
     -v "$SKILL_PATH:/skill_source:ro" \
     -w /tmp \
     -e HOST_UID="$HOST_UID" \
     -e HOST_GID="$HOST_GID" \
     -e LLM_MODEL="$API_MODEL" \
+    -e MALSKILLS_MASB_LLM_MODE="${MALSKILLS_MASB_LLM_MODE:-codex_cli}" \
+    -e MALSKILLS_MASB_LLM_BASE_URL="${MALSKILLS_MASB_LLM_BASE_URL:-}" \
+    -e MALSKILLS_MASB_LLM_API_KEY="${MALSKILLS_MASB_LLM_API_KEY:-}" \
     -e SKILL_NAME="$SKILL_NAME" \
     -e USER_PROMPT="$USER_PROMPT" \
     -e EXECUTION_REQUEST="Read the current skill directory and execute it according to this user request: $USER_PROMPT" \
@@ -174,8 +178,13 @@ PY
     STRACE_LOG="$TEST_DIR/strace.log"
     STRACE_OPTS="-f -s 2000 -e trace=open,openat,creat,write,unlink,rename,mkdir,rmdir,execve,connect,accept,sendto,recvfrom"
 
+    if [ "$MALSKILLS_MASB_LLM_MODE" = "api" ]; then
+      AGENT_COMMAND="python3 /api_agent.py \"$PROMPT_FILE\" \"$TEST_DIR/final_message.txt\""
+    else
+      AGENT_COMMAND="codex exec --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox --model \"$LLM_MODEL\" -C \"$WORK_DIR/skill\" --output-last-message \"$TEST_DIR/final_message.txt\" - < \"$PROMPT_FILE\""
+    fi
     strace $STRACE_OPTS -o "$STRACE_LOG" \
-      su appuser -c "cd \"$WORK_DIR/skill\" && timeout ${TIMEOUT}s codex exec --skip-git-repo-check --dangerously-bypass-approvals-and-sandbox --model \"$LLM_MODEL\" -C \"$WORK_DIR/skill\" --output-last-message \"$TEST_DIR/final_message.txt\" - < \"$PROMPT_FILE\"" 2>&1 | tee -a "$TEST_DIR/codex_output.txt"
+      su appuser -c "cd \"$WORK_DIR/skill\" && timeout ${TIMEOUT}s $AGENT_COMMAND" 2>&1 | tee -a "$TEST_DIR/llm_output.txt"
 
     EXIT_CODE=${PIPESTATUS[0]}
     kill $TCPDUMP_PID 2>/dev/null

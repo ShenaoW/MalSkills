@@ -41,6 +41,7 @@ class LlmRuntimeConfig:
     api_provider: str
     resolved_env: dict[str, str | None]
     reasoning_effort: str = ""
+    enable_thinking: bool | None = None
     config_path: str = ""
 
 
@@ -62,6 +63,7 @@ LLM_CONFIG_KEYS = {
     "model",
     "timeout_sec",
     "reasoning_effort",
+    "enable_thinking",
     "base_url",
     "codex_cli",
     "claude_cli",
@@ -138,7 +140,7 @@ def build_llm_runtime_config(stage: str = "general") -> LlmRuntimeConfig:
         requested_mode=requested_mode,
         codex_available=bool(codex_cli_path),
         claude_available=bool(claude_cli_path),
-        api_available=bool(api_key_env.value),
+        api_available=bool(api_key_env.value and configured_base_url),
         api_provider=api_provider,
     )
     configured_effort = reasoning_effort_env.value or _config_text(
@@ -154,6 +156,12 @@ def build_llm_runtime_config(stage: str = "general") -> LlmRuntimeConfig:
         stage_config,
         global_config,
         "timeout_sec",
+    )
+    configured_thinking = _config_value(stage_config, global_config, "enable_thinking")
+    enable_thinking = (
+        None
+        if configured_thinking == ""
+        else _parse_bool(configured_thinking, "malskills.toml LLM setting 'enable_thinking'")
     )
 
     return LlmRuntimeConfig(
@@ -181,6 +189,7 @@ def build_llm_runtime_config(stage: str = "general") -> LlmRuntimeConfig:
             "reasoning_effort": reasoning_effort_env.name,
         },
         reasoning_effort=reasoning_effort,
+        enable_thinking=enable_thinking,
         config_path=str(config_path) if config_path is not None else "",
     )
 
@@ -249,6 +258,7 @@ def _describe_runtime(runtime: LlmRuntimeConfig) -> dict[str, Any]:
         "model": runtime.model,
         "timeout_sec": runtime.timeout_sec,
         "reasoning_effort": runtime.reasoning_effort or None,
+        "enable_thinking": runtime.enable_thinking,
         "local_cli": {
             "codex_cli": runtime.codex_cli,
             "codex_cli_path": runtime.codex_cli_path or None,
@@ -390,6 +400,13 @@ def invoke_structured_json(
         return _invoke_anthropic_api(runtime, prompt=prompt, system_prompt=system_prompt)
     if runtime.backend == "openai_api":
         return _invoke_openai_api(runtime, prompt=prompt, system_prompt=system_prompt)
+    if runtime.backend == "unavailable" and runtime.requested_mode != "auto":
+        if runtime.requested_mode in {"api", "openai_api", "anthropic", "anthropic_api"}:
+            raise RuntimeError(
+                "LLM API mode requires MALSKILLS_LLM_BASE_URL and "
+                "MALSKILLS_LLM_API_KEY in the environment"
+            )
+        raise RuntimeError(f"requested LLM mode is unavailable: {runtime.requested_mode}")
     return None
 
 
@@ -505,6 +522,10 @@ def _invoke_openai_api(
             {"role": "user", "content": prompt},
         ],
     }
+    if runtime.reasoning_effort:
+        payload["reasoning_effort"] = runtime.reasoning_effort
+    if runtime.enable_thinking is not None:
+        payload["enable_thinking"] = runtime.enable_thinking
     try:
         response_payload = _post_json(
             endpoint,
@@ -536,7 +557,7 @@ def _invoke_anthropic_api(
 ) -> dict[str, Any] | None:
     if not runtime.api_key:
         return None
-    endpoint = (runtime.base_url or "https://api.anthropic.com").rstrip("/") + "/v1/messages"
+    endpoint = _resolve_anthropic_endpoint(runtime.base_url or "https://api.anthropic.com")
     payload = {
         "model": runtime.model,
         "max_tokens": 1200,
@@ -560,6 +581,15 @@ def _invoke_anthropic_api(
     except (KeyError, TypeError, ValueError):
         return None
     return _coerce_json_payload("\n".join(text_blocks))
+
+
+def _resolve_anthropic_endpoint(base_url: str) -> str:
+    normalized = base_url.rstrip("/")
+    if normalized.endswith("/messages"):
+        return normalized
+    if normalized.endswith("/v1"):
+        return normalized + "/messages"
+    return normalized + "/v1/messages"
 
 
 def _post_json(endpoint: str, payload: dict[str, Any], headers: dict[str, str], *, timeout_sec: int) -> dict[str, Any]:
@@ -626,12 +656,14 @@ def _resolve_backend(
         "anthropic_api": "anthropic_api",
     }
     explicit_backend = explicit_map.get(requested_mode, "")
-    if explicit_backend == "codex_cli" and codex_available:
-        return explicit_backend
-    if explicit_backend == "claude_cli" and claude_available:
-        return explicit_backend
-    if explicit_backend in {"openai_api", "anthropic_api"} and api_available:
-        return explicit_backend
+    if explicit_backend:
+        available = {
+            "codex_cli": codex_available,
+            "claude_cli": claude_available,
+            "openai_api": api_available,
+            "anthropic_api": api_available,
+        }
+        return explicit_backend if available[explicit_backend] else "unavailable"
     if codex_available:
         return "codex_cli"
     if claude_available:

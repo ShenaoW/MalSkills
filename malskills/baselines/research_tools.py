@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from ..utils import ensure_dir
-from .codex_bridge import codex_cli_api_bridge
+from .codex_bridge import llm_api_bridge
 from .external_tools import (
     DEFAULT_TIMEOUT_SEC,
     _extract_json_object,
@@ -52,11 +52,11 @@ def run_skillsieve_baseline(skill_path: str | Path, output_dir: str | Path) -> d
 
     tool_root = _BASELINE_ROOT / "skillsieve"
     python = _resolve_tool_executable("skillsieve", "python", fallback=sys.executable)
-    with codex_cli_api_bridge(cwd=skill_root) as bridge:
+    with llm_api_bridge(cwd=skill_root) as bridge:
         command = [
             python,
             "-m",
-            "malskills.baselines.skillsieve_codex",
+            "malskills.baselines.skillsieve_llm",
             str(skill_root),
             bridge.base_url,
             bridge.api_key,
@@ -84,7 +84,7 @@ def run_skillsieve_baseline(skill_path: str | Path, output_dir: str | Path) -> d
         runtime={
             "tool": "skillsieve",
             "command": command,
-            "llm_backend": "codex_cli",
+            "llm_backend": bridge.backend,
             "llm_model": bridge.model,
         },
         predicted=predicted,
@@ -123,7 +123,7 @@ def run_skillward_baseline(skill_path: str | Path, output_dir: str | Path) -> di
     ]
     isolated_home = destination / "skillward_home"
     ensure_dir(isolated_home)
-    with codex_cli_api_bridge(cwd=skill_root) as bridge:
+    with llm_api_bridge(cwd=skill_root) as bridge:
         completed = _run_baseline_command(
             command,
             env_overrides={
@@ -134,7 +134,7 @@ def run_skillward_baseline(skill_path: str | Path, output_dir: str | Path) -> di
                 "LLM_API_KEY": bridge.api_key,
                 "AGENT_PROVIDER": "deepseek",
                 # The pinned OpenClaw image rejects unknown future model IDs;
-                # the bridge still executes the configured Codex model.
+                # The bridge still executes the configured model.
                 "AGENT_ID": SKILLWARD_OPENCLAW_MODEL_ALIAS,
                 "AGENT_API_BASE": bridge.docker_base_url,
                 "AGENT_API_KEY": bridge.api_key,
@@ -168,7 +168,7 @@ def run_skillward_baseline(skill_path: str | Path, output_dir: str | Path) -> di
             "command": command,
             "native_report": str(report_path),
             "returncode": completed.returncode,
-            "llm_backend": "codex_cli",
+            "llm_backend": bridge.backend,
             "llm_model": bridge.model,
             "openclaw_model_alias": SKILLWARD_OPENCLAW_MODEL_ALIAS,
         },
@@ -184,9 +184,9 @@ def run_runtime_skill_audit_baseline(skill_path: str | Path, output_dir: str | P
     ensure_dir(destination)
 
     tool_root = _BASELINE_ROOT / "runtime-skill-audit"
-    with codex_cli_api_bridge(cwd=skill_root) as bridge:
-        config_path = destination / "runtime_skill_audit_codex.yaml"
-        _write_runtime_skill_audit_codex_config(
+    with llm_api_bridge(cwd=skill_root) as bridge:
+        config_path = destination / "runtime_skill_audit_llm.yaml"
+        _write_runtime_skill_audit_llm_config(
             source=tool_root / "configs" / "default.yaml",
             destination=config_path,
             model=bridge.model,
@@ -209,7 +209,7 @@ def run_runtime_skill_audit_baseline(skill_path: str | Path, output_dir: str | P
                     "PATH": os.pathsep.join(
                         [str(tool_root / ".openclaw" / "tools" / "node_modules" / ".bin"), os.environ.get("PATH", "")]
                     ),
-                    "MALSKILLS_CODEX_BRIDGE_API_KEY": bridge.api_key,
+                    "MALSKILLS_LLM_BRIDGE_API_KEY": bridge.api_key,
                 },
                 timeout_sec=RESEARCH_BASELINE_TIMEOUT_SEC,
             )
@@ -241,7 +241,7 @@ def run_runtime_skill_audit_baseline(skill_path: str | Path, output_dir: str | P
             "command": command,
             "cwd": str(tool_root),
             "returncode": completed.returncode,
-            "llm_backend": "codex_cli",
+            "llm_backend": bridge.backend,
             "llm_model": bridge.model,
         },
         predicted=predicted,
@@ -339,7 +339,7 @@ def run_skill_sentinel_baseline(skill_path: str | Path, output_dir: str | Path) 
 
     native_report = destination / "skill_sentinel_native_report.json"
     native_report.unlink(missing_ok=True)
-    with codex_cli_api_bridge(cwd=skill_root) as bridge:
+    with llm_api_bridge(cwd=skill_root) as bridge:
         command = [
             _resolve_tool_executable("skill-sentinel", "skill-sentinel"),
             "scan",
@@ -387,7 +387,7 @@ def run_skill_sentinel_baseline(skill_path: str | Path, output_dir: str | Path) 
             "command": command,
             "native_report": str(native_report),
             "returncode": completed.returncode,
-            "llm_backend": "codex_cli",
+            "llm_backend": bridge.backend,
             "llm_model": bridge.model,
         },
         predicted=predicted,
@@ -396,7 +396,7 @@ def run_skill_sentinel_baseline(skill_path: str | Path, output_dir: str | Path) 
     )
 
 
-def _write_runtime_skill_audit_codex_config(
+def _write_runtime_skill_audit_llm_config(
     *,
     source: Path,
     destination: Path,
@@ -414,7 +414,7 @@ def _write_runtime_skill_audit_codex_config(
         {
             "model": model,
             "base_url": ollama_chat_url,
-            "api_key_env": "MALSKILLS_CODEX_BRIDGE_API_KEY",
+            "api_key_env": "MALSKILLS_LLM_BRIDGE_API_KEY",
             "timeout": 900,
         }
     )
@@ -426,7 +426,7 @@ def _write_runtime_skill_audit_codex_config(
             "providers": {
                 "malskills": {
                     "baseUrl": openai_base_url,
-                    "apiKey": "${MALSKILLS_CODEX_BRIDGE_API_KEY}",
+                    "apiKey": "${MALSKILLS_LLM_BRIDGE_API_KEY}",
                     "api": "openai-completions",
                     "models": [{"id": model, "name": model}],
                 }

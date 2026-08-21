@@ -14,6 +14,7 @@ from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any, Iterator
+from urllib import error, request
 from urllib.parse import urlparse
 
 from ..llm_runtime import build_llm_runtime_config
@@ -24,19 +25,25 @@ DEFAULT_BASELINE_MODEL = "gpt-5.6-luna"
 
 
 @dataclass(frozen=True)
-class BaselineCodexConfig:
+class BaselineLlmConfig:
+    backend: str
     cli_path: str
     model: str
     reasoning_effort: str
     timeout_sec: int
+    base_url: str
+    api_key: str
+    api_provider: str
+    enable_thinking: bool | None
 
 
 @dataclass(frozen=True)
-class CodexBridgeEndpoint:
+class LlmBridgeEndpoint:
     base_url: str
     docker_base_url: str
     api_key: str
     model: str
+    backend: str
 
     @property
     def chat_completions_url(self) -> str:
@@ -47,40 +54,65 @@ class CodexBridgeEndpoint:
         return f"{self.base_url.removesuffix('/v1')}/api/chat"
 
 
-def resolve_baseline_codex_config() -> BaselineCodexConfig:
+def resolve_baseline_llm_config() -> BaselineLlmConfig:
     runtime = build_llm_runtime_config()
-    if not runtime.codex_cli_path:
+    if runtime.requested_mode in {"codex", "codex_cli"} and not runtime.codex_cli_path:
         raise FileNotFoundError(
             "LLM baselines require Codex CLI; configure MALSKILLS_CODEX_CLI or install `codex`"
         )
-    return BaselineCodexConfig(
+    if runtime.requested_mode in {"api", "openai_api", "anthropic", "anthropic_api"}:
+        missing = []
+        if not runtime.base_url:
+            missing.append("MALSKILLS_LLM_BASE_URL")
+        if not runtime.api_key:
+            missing.append("MALSKILLS_LLM_API_KEY")
+        if missing:
+            raise RuntimeError(
+                f"LLM API mode requires {', '.join(missing)} in the environment"
+            )
+    if runtime.backend not in {"codex_cli", "openai_api", "anthropic_api"}:
+        raise RuntimeError(
+            "No usable LLM backend; set [llm].mode to codex_cli or api and configure its credentials"
+        )
+    return BaselineLlmConfig(
+        backend=runtime.backend,
         cli_path=runtime.codex_cli_path,
         model=runtime.model or DEFAULT_BASELINE_MODEL,
-        reasoning_effort=runtime.reasoning_effort or "low",
+        reasoning_effort=runtime.reasoning_effort or ("low" if runtime.backend == "codex_cli" else ""),
         timeout_sec=max(runtime.timeout_sec, 900),
+        base_url=runtime.base_url,
+        api_key=runtime.api_key,
+        api_provider=runtime.api_provider,
+        enable_thinking=runtime.enable_thinking,
     )
 
 
+def resolve_baseline_codex_config() -> BaselineLlmConfig:
+    """Backward-compatible alias for integrations outside this repository."""
+    return resolve_baseline_llm_config()
+
+
 @contextmanager
-def codex_cli_api_bridge(*, cwd: str | Path) -> Iterator[CodexBridgeEndpoint]:
-    config = resolve_baseline_codex_config()
+def llm_api_bridge(*, cwd: str | Path) -> Iterator[LlmBridgeEndpoint]:
+    config = resolve_baseline_llm_config()
     # A leading '-' is parsed as another option by baselines that pass the key
     # as a CLI argument (for example AI-Infra-Guard).
     api_key = f"malskills_{secrets.token_urlsafe(32)}"
-    server = _CodexBridgeServer(
+    server = _LlmBridgeServer(
         ("0.0.0.0", 0),
         config=config,
         cwd=Path(cwd).resolve(),
         api_key=api_key,
     )
-    thread = threading.Thread(target=server.serve_forever, name="malskills-codex-bridge", daemon=True)
+    thread = threading.Thread(target=server.serve_forever, name="malskills-llm-bridge", daemon=True)
     thread.start()
     port = int(server.server_address[1])
-    endpoint = CodexBridgeEndpoint(
+    endpoint = LlmBridgeEndpoint(
         base_url=f"http://127.0.0.1:{port}/v1",
         docker_base_url=f"http://{_docker_bridge_gateway()}:{port}/v1",
         api_key=api_key,
         model=config.model,
+        backend=config.backend,
     )
     try:
         yield endpoint
@@ -90,23 +122,34 @@ def codex_cli_api_bridge(*, cwd: str | Path) -> Iterator[CodexBridgeEndpoint]:
         thread.join(timeout=5)
 
 
-class _CodexBridgeServer(ThreadingHTTPServer):
+@contextmanager
+def codex_cli_api_bridge(*, cwd: str | Path) -> Iterator[LlmBridgeEndpoint]:
+    """Backward-compatible alias; the bridge may use Codex CLI or an API."""
+    with llm_api_bridge(cwd=cwd) as endpoint:
+        yield endpoint
+
+
+class _LlmBridgeServer(ThreadingHTTPServer):
     daemon_threads = True
 
     def __init__(
         self,
         address: tuple[str, int],
         *,
-        config: BaselineCodexConfig,
+        config: BaselineLlmConfig,
         cwd: Path,
         api_key: str,
     ) -> None:
-        super().__init__(address, _CodexBridgeHandler)
+        super().__init__(address, _LlmBridgeHandler)
         self.config = config
         self.cwd = cwd
         self.api_key = api_key
 
     def invoke(self, payload: dict[str, Any]) -> dict[str, Any]:
+        if self.config.backend == "openai_api":
+            return _invoke_openai_compatible_api(self.config, payload)
+        if self.config.backend == "anthropic_api":
+            return _invoke_anthropic_compatible_api(self.config, payload)
         messages = _request_messages(payload)
         tools = payload.get("tools") if isinstance(payload.get("tools"), list) else []
         prompt = _render_messages(messages, [] if tools else tools)
@@ -134,13 +177,13 @@ class _CodexBridgeServer(ThreadingHTTPServer):
         }
 
 
-class _CodexBridgeHandler(BaseHTTPRequestHandler):
-    server: _CodexBridgeServer
+class _LlmBridgeHandler(BaseHTTPRequestHandler):
+    server: _LlmBridgeServer
 
     def do_GET(self) -> None:  # noqa: N802
         path = urlparse(self.path).path.rstrip("/")
         if path in {"", "/health"}:
-            self._json(HTTPStatus.OK, {"status": "ok", "backend": "codex_cli"})
+            self._json(HTTPStatus.OK, {"status": "ok", "backend": self.server.config.backend})
             return
         if path == "/v1/models":
             if not self._authorized():
@@ -176,14 +219,14 @@ class _CodexBridgeHandler(BaseHTTPRequestHandler):
                 self._json(HTTPStatus.OK, _ollama_response(self.server.config.model, result))
                 return
             self._json(HTTPStatus.NOT_FOUND, {"error": {"message": "unknown endpoint"}})
-        except subprocess.TimeoutExpired:
-            self._json(HTTPStatus.GATEWAY_TIMEOUT, {"error": {"message": "Codex CLI timed out"}})
+        except (subprocess.TimeoutExpired, TimeoutError):
+            self._json(HTTPStatus.GATEWAY_TIMEOUT, {"error": {"message": "LLM request timed out"}})
         except (BrokenPipeError, ConnectionResetError):
             return
         except Exception as exc:
             self._json(
                 HTTPStatus.BAD_GATEWAY,
-                {"error": {"message": f"Codex CLI bridge failed: {type(exc).__name__}: {exc}"}},
+                {"error": {"message": f"LLM bridge failed: {type(exc).__name__}: {exc}"}},
             )
 
     def log_message(self, format: str, *args: object) -> None:
@@ -238,8 +281,266 @@ class _CodexBridgeHandler(BaseHTTPRequestHandler):
         self.wfile.write(encoded)
 
 
+def _invoke_openai_compatible_api(
+    config: BaselineLlmConfig,
+    payload: dict[str, Any],
+) -> dict[str, Any]:
+    messages = _openai_messages(_request_messages(payload))
+    upstream: dict[str, Any] = {
+        "model": config.model,
+        "messages": messages,
+        "stream": False,
+    }
+    tools = _openai_tools(payload.get("tools"))
+    if tools:
+        upstream["tools"] = tools
+        if payload.get("tool_choice") is not None:
+            upstream["tool_choice"] = payload["tool_choice"]
+    for key in ("max_tokens", "max_completion_tokens", "temperature", "top_p", "response_format"):
+        if payload.get(key) is not None:
+            upstream[key] = payload[key]
+    if config.reasoning_effort:
+        upstream["reasoning_effort"] = config.reasoning_effort
+    if config.enable_thinking is not None:
+        upstream["enable_thinking"] = config.enable_thinking
+    decoded = _post_upstream_json(
+        _openai_chat_endpoint(config.base_url),
+        upstream,
+        {"Authorization": f"Bearer {config.api_key}"},
+        config.timeout_sec,
+    )
+    message = decoded.get("choices", [{}])[0].get("message", {})
+    if not isinstance(message, dict):
+        raise ValueError("upstream API response has no assistant message")
+    return {
+        "content": _content_text(message.get("content")),
+        "tool_calls": _result_tool_calls(message.get("tool_calls")),
+    }
+
+
+def _invoke_anthropic_compatible_api(
+    config: BaselineLlmConfig,
+    payload: dict[str, Any],
+) -> dict[str, Any]:
+    request_messages = _request_messages(payload)
+    system = "\n\n".join(
+        _content_text(item.get("content"))
+        for item in request_messages
+        if str(item.get("role", "")) in {"system", "developer"}
+    )
+    messages = [
+        {
+            "role": "assistant" if str(item.get("role", "")) == "assistant" else "user",
+            "content": _content_text(item.get("content")),
+        }
+        for item in request_messages
+        if str(item.get("role", "")) not in {"system", "developer"}
+    ]
+    upstream: dict[str, Any] = {
+        "model": config.model,
+        "max_tokens": int(payload.get("max_tokens") or payload.get("max_completion_tokens") or 4096),
+        "messages": messages,
+    }
+    if system:
+        upstream["system"] = system
+    tools = _anthropic_tools(payload.get("tools"))
+    if tools:
+        upstream["tools"] = tools
+    decoded = _post_upstream_json(
+        _anthropic_messages_endpoint(config.base_url),
+        upstream,
+        {"x-api-key": config.api_key, "anthropic-version": "2023-06-01"},
+        config.timeout_sec,
+    )
+    blocks = decoded.get("content", [])
+    if not isinstance(blocks, list):
+        raise ValueError("upstream API response has no content blocks")
+    return {
+        "content": "\n".join(
+            str(block.get("text", ""))
+            for block in blocks
+            if isinstance(block, dict) and block.get("type") == "text"
+        ),
+        "tool_calls": [
+            {"name": str(block.get("name", "")), "arguments": block.get("input", {})}
+            for block in blocks
+            if isinstance(block, dict) and block.get("type") == "tool_use"
+        ],
+    }
+
+
+def _post_upstream_json(
+    endpoint: str,
+    payload: dict[str, Any],
+    headers: dict[str, str],
+    timeout_sec: int,
+) -> dict[str, Any]:
+    upstream_request = request.Request(
+        endpoint,
+        data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
+        headers={"Content-Type": "application/json", **headers},
+        method="POST",
+    )
+    try:
+        with request.urlopen(upstream_request, timeout=timeout_sec) as response:
+            decoded = json.loads(response.read().decode("utf-8"))
+    except error.HTTPError as exc:
+        detail = exc.read().decode("utf-8", errors="replace")[-2000:]
+        raise RuntimeError(f"upstream API returned HTTP {exc.code}: {detail}") from exc
+    except (error.URLError, json.JSONDecodeError) as exc:
+        raise RuntimeError(f"upstream API request failed: {exc}") from exc
+    if not isinstance(decoded, dict):
+        raise ValueError("upstream API response must be a JSON object")
+    return decoded
+
+
+def _openai_chat_endpoint(base_url: str) -> str:
+    normalized = base_url.rstrip("/")
+    if normalized.endswith("/chat/completions"):
+        return normalized
+    return f"{normalized}/chat/completions"
+
+
+def _anthropic_messages_endpoint(base_url: str) -> str:
+    normalized = base_url.rstrip("/")
+    if normalized.endswith("/messages"):
+        return normalized
+    if normalized.endswith("/v1"):
+        return f"{normalized}/messages"
+    return f"{normalized}/v1/messages"
+
+
+def _openai_tools(value: Any) -> list[dict[str, Any]]:
+    if not isinstance(value, list):
+        return []
+    normalized: list[dict[str, Any]] = []
+    for tool in value:
+        if not isinstance(tool, dict):
+            continue
+        function = tool.get("function") if isinstance(tool.get("function"), dict) else tool
+        name = str(function.get("name", "")).strip()
+        if not name:
+            continue
+        normalized.append(
+            {
+                "type": "function",
+                "function": {
+                    "name": name,
+                    "description": str(function.get("description", "")),
+                    "parameters": function.get("parameters") or function.get("input_schema") or {"type": "object"},
+                },
+            }
+        )
+    return normalized
+
+
+def _openai_messages(messages: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    normalized: list[dict[str, Any]] = []
+    for message in messages:
+        message_type = str(message.get("type", ""))
+        if message_type == "function_call_output":
+            normalized.append(
+                {
+                    "role": "tool",
+                    "tool_call_id": str(message.get("call_id", "")),
+                    "content": _content_text(message.get("output")),
+                }
+            )
+            continue
+        role = str(message.get("role", "user"))
+        if message_type == "function_call":
+            role = "assistant"
+        if role == "developer":
+            role = "system"
+        content = message.get("content")
+        if isinstance(content, list):
+            tool_results = [
+                block
+                for block in content
+                if isinstance(block, dict) and block.get("type") == "tool_result"
+            ]
+            for block in tool_results:
+                normalized.append(
+                    {
+                        "role": "tool",
+                        "tool_call_id": str(block.get("tool_use_id", "")),
+                        "content": _content_text(block.get("content")),
+                    }
+                )
+            if tool_results and len(tool_results) == len(content):
+                continue
+        item: dict[str, Any] = {
+            "role": role,
+            "content": _content_text(content),
+        }
+        for key in ("name", "tool_call_id"):
+            if message.get(key) not in (None, ""):
+                item[key] = message[key]
+        if isinstance(message.get("tool_calls"), list):
+            item["tool_calls"] = message["tool_calls"]
+        elif isinstance(content, list):
+            calls = [
+                {
+                    "id": str(block.get("id", f"call_{uuid.uuid4().hex}")),
+                    "type": "function",
+                    "function": {
+                        "name": str(block.get("name", "")),
+                        "arguments": json.dumps(block.get("input", {}), ensure_ascii=False),
+                    },
+                }
+                for block in content
+                if isinstance(block, dict) and block.get("type") == "tool_use"
+            ]
+            if calls:
+                item["tool_calls"] = calls
+        elif message_type == "function_call":
+            item["tool_calls"] = [
+                {
+                    "id": str(message.get("call_id", f"call_{uuid.uuid4().hex}")),
+                    "type": "function",
+                    "function": {
+                        "name": str(message.get("name", "")),
+                        "arguments": str(message.get("arguments", "{}")),
+                    },
+                }
+            ]
+        normalized.append(item)
+    return normalized
+
+
+def _anthropic_tools(value: Any) -> list[dict[str, Any]]:
+    return [
+        {
+            "name": item["function"]["name"],
+            "description": item["function"].get("description", ""),
+            "input_schema": item["function"].get("parameters", {"type": "object"}),
+        }
+        for item in _openai_tools(value)
+    ]
+
+
+def _result_tool_calls(value: Any) -> list[dict[str, Any]]:
+    if not isinstance(value, list):
+        return []
+    calls: list[dict[str, Any]] = []
+    for item in value:
+        if not isinstance(item, dict):
+            continue
+        function = item.get("function") if isinstance(item.get("function"), dict) else item
+        name = str(function.get("name", "")).strip()
+        arguments = function.get("arguments", {})
+        if isinstance(arguments, str):
+            try:
+                arguments = json.loads(arguments)
+            except json.JSONDecodeError:
+                arguments = {"raw": arguments}
+        if name and isinstance(arguments, dict):
+            calls.append({"name": name, "arguments": arguments})
+    return calls
+
+
 def _invoke_codex_text(
-    config: BaselineCodexConfig,
+    config: BaselineLlmConfig,
     *,
     cwd: Path,
     prompt: str,
@@ -270,7 +571,7 @@ def _invoke_codex_text(
 
 
 def _invoke_codex_for_tools(
-    config: BaselineCodexConfig,
+    config: BaselineLlmConfig,
     *,
     cwd: Path,
     prompt: str,
@@ -361,7 +662,7 @@ def _run_codex_command(
 
 
 def _codex_command(
-    config: BaselineCodexConfig,
+    config: BaselineLlmConfig,
     *,
     output_path: Path,
     system_prompt: str,
@@ -538,10 +839,21 @@ def _anthropic_response(model: str, result: dict[str, Any]) -> dict[str, Any]:
 
 
 def _ollama_response(model: str, result: dict[str, Any]) -> dict[str, Any]:
+    message: dict[str, Any] = {"role": "assistant", "content": str(result.get("content", ""))}
+    if result.get("tool_calls"):
+        message["tool_calls"] = [
+            {
+                "function": {
+                    "name": str(item["name"]),
+                    "arguments": item["arguments"],
+                }
+            }
+            for item in result["tool_calls"]
+        ]
     return {
         "model": model,
         "created_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
-        "message": {"role": "assistant", "content": str(result.get("content", ""))},
+        "message": message,
         "done": True,
         "done_reason": "stop",
     }
@@ -562,3 +874,8 @@ def _docker_bridge_gateway() -> str:
     except (OSError, subprocess.SubprocessError):
         pass
     return "172.17.0.1"
+
+
+# Compatibility names retained for external adapter imports.
+BaselineCodexConfig = BaselineLlmConfig
+CodexBridgeEndpoint = LlmBridgeEndpoint

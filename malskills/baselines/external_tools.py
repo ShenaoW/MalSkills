@@ -11,7 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from ..utils import ensure_dir
-from .codex_bridge import codex_cli_api_bridge, resolve_baseline_codex_config
+from .codex_bridge import llm_api_bridge, resolve_baseline_llm_config
 
 
 DEFAULT_TIMEOUT_SEC = 120
@@ -82,32 +82,52 @@ def run_masb_baseline(skill_path: str | Path, output_dir: str | Path) -> dict[st
         raise RuntimeError(f"MASB static scan did not produce a usable risk level: {static_level}")
     normalized: dict[str, Any]
     llm_runtime = None
+    dynamic_validation = "not_used"
     if static_level in {"CRITICAL", "HIGH"}:
-        llm_runtime = resolve_baseline_codex_config()
-        audit_commands = [
-            ["bash", "scripts/05_gen_cc_queue.sh"],
-            ["bash", "scripts/06_cc_analyze.sh"],
-        ]
-        command_results.extend(
-            _run_masb_native_pipeline(
-                runtime_root,
-                audit_commands,
-                env_overrides={
-                    "OPENAI_MODEL": llm_runtime.model,
-                    "LLM_MODEL": llm_runtime.model,
-                    "MALSKILLS_CODEX_CLI": llm_runtime.cli_path,
-                },
+        llm_runtime = resolve_baseline_llm_config()
+        with llm_api_bridge(cwd=skill_root) as bridge:
+            audit_commands = [
+                ["bash", "scripts/05_gen_cc_queue.sh"],
+                ["bash", "scripts/06_cc_analyze.sh"],
+            ]
+            command_results.extend(
+                _run_masb_native_pipeline(
+                    runtime_root,
+                    audit_commands,
+                    env_overrides={
+                        "OPENAI_MODEL": bridge.model,
+                        "LLM_MODEL": bridge.model,
+                        "MALSKILLS_MASB_PYTHON": sys.executable,
+                        "MALSKILLS_MASB_LLM_BASE_URL": bridge.base_url,
+                        "MALSKILLS_MASB_LLM_API_KEY": bridge.api_key,
+                    },
+                )
             )
-        )
         normalized = _collect_masb_runtime_payload_from_static(runtime_root, skill_root, static_payload)
         if str(normalized.get("risk_level", "ERROR")).upper() == "MALICIOUS":
+            dynamic_validation = "codex_sandbox" if llm_runtime.backend == "codex_cli" else "api_sandbox"
             queue_commands = [["bash", "scripts/07_gen_run_queue.sh"]]
             command_results.extend(_run_masb_native_pipeline(runtime_root, queue_commands))
             run_queue = runtime_root / "runtime_tasks" / "run_queue.txt"
             if run_queue.is_file() and run_queue.stat().st_size > 0:
-                command_results.extend(
-                    _run_masb_native_pipeline(runtime_root, [["bash", "scripts/08_execute.sh"]])
-                )
+                if llm_runtime.backend == "codex_cli":
+                    command_results.extend(
+                        _run_masb_native_pipeline(runtime_root, [["bash", "scripts/08_execute.sh"]])
+                    )
+                else:
+                    with llm_api_bridge(cwd=skill_root) as execution_bridge:
+                        command_results.extend(
+                            _run_masb_native_pipeline(
+                                runtime_root,
+                                [["bash", "scripts/08_execute.sh"]],
+                                env_overrides={
+                                    "OPENAI_MODEL": execution_bridge.model,
+                                    "MALSKILLS_MASB_LLM_MODE": "api",
+                                    "MALSKILLS_MASB_LLM_BASE_URL": execution_bridge.docker_base_url,
+                                    "MALSKILLS_MASB_LLM_API_KEY": execution_bridge.api_key,
+                                },
+                            )
+                        )
                 normalized = _collect_masb_runtime_payload_from_static(runtime_root, skill_root, static_payload)
     else:
         normalized = _normalize_masb_static_payload(static_payload, skill_root)
@@ -123,8 +143,9 @@ def run_masb_baseline(skill_path: str | Path, output_dir: str | Path) -> dict[st
             "commands": [item["command"] for item in command_results],
             "results": command_results,
             "runtime_root": str(runtime_root),
-            "llm_backend": "codex_cli" if llm_runtime else "not_used",
+            "llm_backend": llm_runtime.backend if llm_runtime else "not_used",
             "llm_model": llm_runtime.model if llm_runtime else None,
+            "dynamic_validation": dynamic_validation,
         },
         predicted=_map_masb_prediction(normalized),
         score=_map_masb_score(normalized),
@@ -226,7 +247,7 @@ def run_caterpillar_baseline(skill_path: str | Path, output_dir: str | Path) -> 
     destination = Path(output_dir)
     ensure_dir(destination)
 
-    with codex_cli_api_bridge(cwd=skill_root) as bridge:
+    with llm_api_bridge(cwd=skill_root) as bridge:
         command = _resolve_caterpillar_command(skill_root)
         fetch_shim = (_PROJECT_ROOT / "malskills" / "baselines" / "openai_fetch_bridge.cjs").resolve()
         node_options = " ".join(
@@ -254,7 +275,7 @@ def run_caterpillar_baseline(skill_path: str | Path, output_dir: str | Path) -> 
         runtime={
             "tool": "caterpillar",
             "command": command,
-            "llm_backend": "codex_cli",
+            "llm_backend": bridge.backend,
             "llm_model": bridge.model,
         },
         predicted=_map_caterpillar_prediction(normalized),
@@ -314,7 +335,7 @@ def run_skill_scanner_baseline(skill_path: str | Path, output_dir: str | Path) -
     ensure_dir(destination)
 
     python_bin = _resolve_skill_scanner_python()
-    with codex_cli_api_bridge(cwd=skill_root) as bridge:
+    with llm_api_bridge(cwd=skill_root) as bridge:
         command = [
             str(python_bin),
             "-m",
@@ -353,7 +374,7 @@ def run_skill_scanner_baseline(skill_path: str | Path, output_dir: str | Path) -
         runtime={
             "tool": "skill-scanner",
             "command": command,
-            "llm_backend": "codex_cli",
+            "llm_backend": bridge.backend,
             "llm_model": bridge.model,
         },
         predicted=_map_skill_scanner_prediction(normalized),
@@ -379,7 +400,7 @@ def run_nova_proximity_baseline(skill_path: str | Path, output_dir: str | Path) 
     for stale_report in native_output.glob("nova_proximity_*.json"):
         stale_report.unlink()
     tool_root = _PROJECT_ROOT / "baseline" / "nova-proximity"
-    with codex_cli_api_bridge(cwd=skill_root) as bridge:
+    with llm_api_bridge(cwd=skill_root) as bridge:
         command = [
             _resolve_tool_python(tool_root),
             str((tool_root / "novaprox.py").resolve()),
@@ -424,7 +445,7 @@ def run_nova_proximity_baseline(skill_path: str | Path, output_dir: str | Path) 
             "tool": "nova-proximity",
             "command": command,
             "native_report": str(report_paths[-1]),
-            "llm_backend": "codex_cli",
+            "llm_backend": bridge.backend,
             "llm_model": bridge.model,
         },
         predicted=_map_nova_proximity_prediction(normalized),
