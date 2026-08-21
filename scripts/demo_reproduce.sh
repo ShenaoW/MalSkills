@@ -320,7 +320,6 @@ fi
 echo "Reproduction and deployment files:"
 for file in \
   "scripts/demo_reproduce.sh" \
-  "docs/DEMO_REPRODUCTION.md" \
   "Dockerfile" \
   ".dockerignore" \
   "pyproject.toml" \
@@ -730,7 +729,6 @@ lines = [
     "",
     "- Source code: `malskills/`",
     "- Reproduction script: `scripts/demo_reproduce.sh`",
-    "- Deployment document: `docs/DEMO_REPRODUCTION.md`",
     "- Containerization files: `Dockerfile`, `.dockerignore`",
     "- Benchmark data: `data/ground_truth/`",
     "",

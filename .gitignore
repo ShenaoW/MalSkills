@@ -150,6 +150,7 @@ baseline/MASB/tasks/
 
 /paper/
 /motivating_example/
+/docs/
 
 .pytest_cache/
 .ralphy/

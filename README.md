@@ -35,8 +35,8 @@ Code Execution, Malware Delivery, Persistence, Reverse Shell, Ransomware,
 Resource Abuse, and Privilege Escalation. Malware Delivery has two built-in
 workflow rules, which is why there are 10 rules for 9 classes.
 
-See [SSO taxonomy](docs/SSO_TAXONOMY.md) and
-[SDG behavior rules](docs/BEHAVIOR_RULES.md) for the formal definitions.
+The checked-in SSO taxonomy and workflow rule files are the authoritative
+machine-readable definitions.
 
 ## Requirements
 
@@ -315,8 +315,6 @@ Available MalSkills variants:
 | `benchmark_static_only` | Disable LLM, YASA, and cross-artifact resolution |
 
 The RQ3 driver is [experiments/run_rq3_llm_comparison.py](experiments/run_rq3_llm_comparison.py).
-Paper-reproduction guidance is in
-[docs/DEMO_REPRODUCTION.md](docs/DEMO_REPRODUCTION.md).
 
 ## Baseline integrations
 
@@ -414,9 +412,7 @@ produced them.
 ```
 
 Promotion, deactivation, and rollback are explicit, validated, and retained in
-the content-addressed rule store. See
-[docs/RULE_LEARNING.md](docs/RULE_LEARNING.md) for validation gates and
-poisoning controls.
+the content-addressed rule store.
 
 ## Repository layout
 
@@ -427,17 +423,11 @@ poisoning controls.
 - `data/`: benchmark source data and analysis inputs
 - `baseline/`: pinned third-party baseline implementations
 - `vendor/yasa/`: pinned YASA value-flow engine
-- `docs/`: taxonomy, behavior rules, rule learning, and reproduction notes
 - `assets/`: paper artifacts and figures
 - `output/`: generated indexes, scan outputs, and evaluation results
 
-## Further documentation
+## Project policies
 
-- [Paper-to-implementation alignment](docs/PAPER_ALIGNMENT.md)
-- [SSO taxonomy](docs/SSO_TAXONOMY.md)
-- [SDG behavior rules](docs/BEHAVIOR_RULES.md)
-- [Guarded rule learning](docs/RULE_LEARNING.md)
-- [Reproduction and delivery guide](docs/DEMO_REPRODUCTION.md)
 - [Contributing](CONTRIBUTING.md)
 - [Security policy](SECURITY.md)
 

@@ -60,4 +60,4 @@ result summary in the pull request. Do not commit generated output directories.
 
 Keep each pull request focused. Explain the problem, the reasoning behind the
 change, validation performed, and any remaining limitations. Update README or
-the formal rule documentation when user-visible behavior changes.
+the machine-readable rule files when user-visible behavior changes.
