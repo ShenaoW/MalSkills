@@ -119,6 +119,7 @@ class PatternMatch:
     explanation: str
     source: str = "formal"
     generator: dict[str, Any] = field(default_factory=dict)
+    explanation_chain: list[dict[str, Any]] = field(default_factory=list)
 
 
 @dataclass
@@ -140,6 +141,7 @@ class SkillVerdict:
     label: str
     malicious_patterns: list[str]
     summary: str
+    decision_chain: list[dict[str, Any]] = field(default_factory=list)
 
 
 @dataclass

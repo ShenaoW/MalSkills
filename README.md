@@ -438,6 +438,29 @@ poisoning controls.
 - [SDG behavior rules](docs/BEHAVIOR_RULES.md)
 - [Guarded rule learning](docs/RULE_LEARNING.md)
 - [Reproduction and delivery guide](docs/DEMO_REPRODUCTION.md)
+- [Contributing](CONTRIBUTING.md)
+- [Security policy](SECURITY.md)
+
+## Citation
+
+MalSkills was accepted at ASE '26. The paper is distributed under
+[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/); the
+repository's software license is stated separately below.
+
+```bibtex
+@inproceedings{wang2026malskills,
+  author    = {Wang, Shenao and Wang, Yayi and Wang, Haoyu},
+  title     = {{MalSkills}: Detecting Malicious Skills in the Agentic Supply Chain via Neuro-Symbolic Reasoning},
+  booktitle = {Proceedings of the 41st IEEE/ACM International Conference on Automated Software Engineering (ASE '26)},
+  year      = {2026},
+  month     = oct,
+  address   = {Munich, Germany},
+  publisher = {Association for Computing Machinery},
+  isbn      = {979-8-4007-2882-2},
+  doi       = {10.1145/3832783.3834375},
+  url       = {https://doi.org/10.1145/3832783.3834375}
+}
+```
 
 ## License
 

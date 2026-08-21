@@ -162,19 +162,15 @@ class PatternReasoner:
     def _finalize_patterns(self, patterns: list[PatternMatch]) -> list[PatternMatch]:
         deduped = self._verdicts.dedupe_patterns(patterns)
         for pattern in deduped:
-            if not getattr(pattern, "explanation_chain", None):
-                setattr(
-                    pattern,
-                    "explanation_chain",
-                    self._build_pattern_chain(
-                        pattern_id=pattern.pattern_id,
-                        name=pattern.name,
-                        severity=pattern.severity,
-                        rule_ids=pattern.rule_ids,
-                        sso_ids=pattern.sso_ids,
-                        finding_ids=pattern.finding_ids,
-                        source=pattern.source,
-                    ),
+            if not pattern.explanation_chain:
+                pattern.explanation_chain = self._build_pattern_chain(
+                    pattern_id=pattern.pattern_id,
+                    name=pattern.name,
+                    severity=pattern.severity,
+                    rule_ids=pattern.rule_ids,
+                    sso_ids=pattern.sso_ids,
+                    finding_ids=pattern.finding_ids,
+                    source=pattern.source,
                 )
         return deduped
 

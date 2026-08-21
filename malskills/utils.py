@@ -1,9 +1,8 @@
 from __future__ import annotations
 
 import hashlib
-import json
-import re
 import os
+import re
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -48,28 +47,6 @@ def flatten_mapping(value: Any, prefix: str = "") -> list[tuple[str, Any]]:
     return items
 
 
-def safe_json_loads(text: str) -> Any | None:
-    try:
-        return json.loads(text)
-    except json.JSONDecodeError:
-        return None
-
-
-def load_key_value_lines(text: str) -> list[tuple[str, str]]:
-    pairs: list[tuple[str, str]] = []
-    for line in text.splitlines():
-        stripped = line.strip()
-        if not stripped or stripped.startswith("#"):
-            continue
-        if "=" in stripped:
-            key, value = stripped.split("=", 1)
-            pairs.append((key.strip(), value.strip().strip('"').strip("'")))
-        elif ":" in stripped and not stripped.startswith("http"):
-            key, value = stripped.split(":", 1)
-            pairs.append((key.strip(), value.strip().strip('"').strip("'")))
-    return pairs
-
-
 def iter_code_fences(text: str) -> Iterable[tuple[str, str, int, int]]:
     pattern = re.compile(r"```([A-Za-z0-9_+-]*)\r?\n(.*?)```", re.DOTALL)
     for match in pattern.finditer(text):
@@ -98,10 +75,6 @@ def _normalize_quoted_fence_body(text: str, fence_start: int, body: str) -> str:
     return "".join(normalized)
 
 
-def find_urls(text: str) -> list[str]:
-    return re.findall(r"https?://[^\s)>'\"]+", text)
-
-
 def dotted_name(node: Any) -> str | None:
     name_parts: list[str] = []
     while node is not None:
@@ -119,15 +92,6 @@ def dotted_name(node: Any) -> str | None:
     if not name_parts:
         return None
     return ".".join(reversed(name_parts))
-
-
-def literal_string(node: Any) -> str | None:
-    value = getattr(node, "value", None)
-    if isinstance(value, str):
-        return value
-    if hasattr(node, "s") and isinstance(node.s, str):
-        return node.s
-    return None
 
 
 def ensure_dir(path: Path) -> None:

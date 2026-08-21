@@ -139,7 +139,7 @@ class ResultWriter:
                     "sso_ids": sso_ids,
                     "finding_ids": finding_ids,
                     "explanation": first.explanation,
-                    "explanation_chain": getattr(first, "explanation_chain", []),
+                    "explanation_chain": first.explanation_chain,
                 }
             )
         return summaries
@@ -157,14 +157,13 @@ class ResultWriter:
                     "finding_ids": pattern.finding_ids,
                     "explanation": pattern.explanation,
                     "source": pattern.source,
-                    "explanation_chain": getattr(pattern, "explanation_chain", []),
+                    "explanation_chain": pattern.explanation_chain,
                 }
             )
         return proofs
 
     def _build_verdict_payload(self, result: AnalysisResult) -> dict[str, object]:
         payload = to_jsonable(result.verdict)
-        payload["decision_chain"] = getattr(result.verdict, "decision_chain", [])
         payload["supporting_patterns"] = self._build_pattern_proofs(result)
         return payload
 

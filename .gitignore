@@ -149,6 +149,7 @@ baseline/MASB/workspace/
 baseline/MASB/tasks/
 
 /paper/
+/motivating_example/
 
 .pytest_cache/
 .ralphy/

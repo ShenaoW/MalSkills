@@ -13,7 +13,6 @@ import tarfile
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable
 
 DEFAULT_REMOTE = "https://github.com/openclaw/skills.git"
 
@@ -45,20 +44,6 @@ def parse_skill_from_path(path: str) -> SkillSlug | None:
     if not author or not skill:
         return None
     return SkillSlug(author=author, skill=skill)
-
-
-def iter_paths_from_name_status(line: str) -> Iterable[str]:
-    line = line.strip("\n")
-    if not line:
-        return []
-    parts = line.split("\t")
-    if len(parts) < 2:
-        return []
-    # Format examples:
-    # A\tpath
-    # M\tpath
-    # R100\told\tnew
-    return parts[1:]
 
 
 def parse_name_status_paths(line: str) -> list[tuple[str, bool]]:

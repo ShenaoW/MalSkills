@@ -20,7 +20,6 @@ from urllib.parse import urlparse
 from ..llm_runtime import build_llm_runtime_config
 
 
-PAPER_BASELINE_MODEL = "gpt-5.3-codex-medium"
 DEFAULT_BASELINE_MODEL = "gpt-5.6-luna"
 
 
@@ -87,11 +86,6 @@ def resolve_baseline_llm_config() -> BaselineLlmConfig:
     )
 
 
-def resolve_baseline_codex_config() -> BaselineLlmConfig:
-    """Backward-compatible alias for integrations outside this repository."""
-    return resolve_baseline_llm_config()
-
-
 @contextmanager
 def llm_api_bridge(*, cwd: str | Path) -> Iterator[LlmBridgeEndpoint]:
     config = resolve_baseline_llm_config()
@@ -120,13 +114,6 @@ def llm_api_bridge(*, cwd: str | Path) -> Iterator[LlmBridgeEndpoint]:
         server.shutdown()
         server.server_close()
         thread.join(timeout=5)
-
-
-@contextmanager
-def codex_cli_api_bridge(*, cwd: str | Path) -> Iterator[LlmBridgeEndpoint]:
-    """Backward-compatible alias; the bridge may use Codex CLI or an API."""
-    with llm_api_bridge(cwd=cwd) as endpoint:
-        yield endpoint
 
 
 class _LlmBridgeServer(ThreadingHTTPServer):
@@ -874,8 +861,3 @@ def _docker_bridge_gateway() -> str:
     except (OSError, subprocess.SubprocessError):
         pass
     return "172.17.0.1"
-
-
-# Compatibility names retained for external adapter imports.
-BaselineCodexConfig = BaselineLlmConfig
-CodexBridgeEndpoint = LlmBridgeEndpoint

@@ -43,11 +43,6 @@ Issues = "https://github.com/ShenaoW/MalSkills/issues"
 
 [project.scripts]
 malskills = "malskills.cli:main"
-analyze-skill = "malskills.cli:main"
-build-benchmark-index = "malskills.cli:main"
-run-eval = "malskills.cli:main"
-gen-mutations = "malskills.cli:main"
-render-report = "malskills.cli:main"
 
 [tool.setuptools.packages.find]
 include = ["malskills*"]
