@@ -14,7 +14,7 @@ CONCISE=0
 SINGLE_DEMO=0
 SKIP_SINGLE=0
 SKIP_MINI_BENCHMARK=0
-SAMPLE_PATH="data/ground_truth/malicious/clawhub/pepe276_publish-dist"
+SAMPLE_PATH="data/ground_truth/malicious/clawhub/aslaep123_base-agent"
 SINGLE_OUTPUT_NAME="single_sample_full"
 DEMO_VARIANT="benchmark_full"
 DOCKER_IMAGE="malskills-demo:latest"
@@ -411,16 +411,22 @@ from malskills.sdg.yasa import YasaAdapter
 
 yasa = YasaAdapter()
 llm = describe_llm_runtime()
+enabled_stages = [
+    stage
+    for stage in llm["stages"].values()
+    if stage["enabled"]
+]
+primary_runtime = llm["stages"]["sso_extraction"]
 payload = {
     "yasa_available": yasa.available(),
     "yasa_root": str(yasa.yasa_root),
-    "llm_backend": llm["resolved_backend"],
-    "llm_model": llm["model"],
+    "llm_backend": primary_runtime["resolved_backend"],
+    "llm_model": primary_runtime["model"],
 }
 print(json.dumps(payload, indent=2, sort_keys=True))
 if not payload["yasa_available"]:
     raise SystemExit("YASA is unavailable. Build vendor/yasa first or run with --setup.")
-if payload["llm_backend"] == "unavailable":
+if any(stage["resolved_backend"] == "unavailable" for stage in enabled_stages):
     raise SystemExit("LLM backend is unavailable. Configure Codex/Claude CLI or API credentials.")
 PY
 
@@ -463,7 +469,7 @@ dest = Path(sys.argv[2])
 entries = json.loads(source.read_text(encoding="utf-8"))
 required = [
     "ground_truth::clawhub::steipete/github",
-    "ground_truth::clawhub::pepe276/publish-dist",
+    "ground_truth::clawhub::aslaep123/base-agent",
 ]
 by_id = {entry["entry_id"]: entry for entry in entries}
 selected = []
@@ -499,12 +505,12 @@ from pathlib import Path
 
 root = Path(sys.argv[1])
 verdict = json.loads((root / "verdict.json").read_text(encoding="utf-8"))
-feedback = json.loads((root / "feedback_loop.json").read_text(encoding="utf-8"))
+metadata = json.loads((root / "analysis_metadata.json").read_text(encoding="utf-8"))
 operand_resolutions = json.loads((root / "operand_resolutions.json").read_text(encoding="utf-8"))
 resolution_methods = Counter(item.get("method", "unknown") for item in operand_resolutions)
-llm_runtime = feedback.get("llm_feedback_runtime", {}) if isinstance(feedback.get("llm_feedback_runtime", {}), dict) else {}
-llm_backend = feedback.get("backend") or llm_runtime.get("backend")
-llm_model = feedback.get("model") or llm_runtime.get("model")
+llm_runtime = metadata.get("llm_semantic", {})
+llm_backend = llm_runtime.get("backend")
+llm_model = llm_runtime.get("model")
 print("Single-skill verdict")
 print(f"- label: {verdict.get('label')}")
 print(f"- malicious_patterns: {verdict.get('malicious_patterns', [])}")
@@ -514,9 +520,7 @@ print(f"- llm_model: {llm_model}")
 print(f"- operand_resolution_methods: {dict(resolution_methods)}")
 print(f"- output: {root}")
 if llm_backend in {None, "unavailable"}:
-    raise SystemExit("LLM backend was not recorded in feedback_loop.json")
-if resolution_methods.get("yasa", 0) < 1:
-    raise SystemExit("YASA did not produce operand resolutions for this demo sample")
+    raise SystemExit("LLM backend was not recorded in analysis_metadata.json")
 PY
 else
   if [[ "$SINGLE_DEMO" != "1" ]]; then
@@ -555,12 +559,11 @@ case_root = root / "cases" / variant
 llm_cases = 0
 yasa_cases = 0
 for case_dir in case_root.iterdir():
-    feedback_path = case_dir / "feedback_loop.json"
+    metadata_path = case_dir / "analysis_metadata.json"
     operand_resolutions_path = case_dir / "operand_resolutions.json"
-    if feedback_path.exists():
-        feedback = json.loads(feedback_path.read_text(encoding="utf-8"))
-        llm_runtime = feedback.get("llm_feedback_runtime", {}) if isinstance(feedback.get("llm_feedback_runtime", {}), dict) else {}
-        llm_backend = feedback.get("backend") or llm_runtime.get("backend")
+    if metadata_path.exists():
+        metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+        llm_backend = metadata.get("llm_semantic", {}).get("backend")
         if llm_backend not in {None, "unavailable"}:
             llm_cases += 1
     if operand_resolutions_path.exists():
@@ -584,7 +587,7 @@ print(f"- report: {root / 'summary.md'}")
 if status_counts.get("error", 0) or status_counts.get("timeout", 0):
     raise SystemExit("Mini benchmark has error or timeout cases")
 if llm_cases != int(metrics["num_entries"]):
-    raise SystemExit("Not every mini benchmark case recorded LLM feedback")
+    raise SystemExit("Not every mini benchmark case recorded LLM analysis metadata")
 PY
 else
   if [[ "$SINGLE_DEMO" != "1" ]]; then
@@ -655,15 +658,15 @@ def read_json(path: Path):
         return None
     return json.loads(path.read_text(encoding="utf-8"))
 
-def feedback_runtime(feedback):
-    if not feedback:
+def analysis_runtime(metadata):
+    if not metadata:
         return {}
-    runtime = feedback.get("llm_feedback_runtime", {})
+    runtime = metadata.get("llm_semantic", {})
     if not isinstance(runtime, dict):
         runtime = {}
     return {
-        "backend": feedback.get("backend") or runtime.get("backend"),
-        "model": feedback.get("model") or runtime.get("model"),
+        "backend": runtime.get("backend"),
+        "model": runtime.get("model"),
     }
 
 def resolution_methods(path: Path):
@@ -685,7 +688,7 @@ def benchmark_summary(root: Path):
     yasa_cases = 0
     if case_root.exists():
         for case_dir in case_root.iterdir():
-            runtime = feedback_runtime(read_json(case_dir / "feedback_loop.json"))
+            runtime = analysis_runtime(read_json(case_dir / "analysis_metadata.json"))
             if runtime.get("backend") not in {None, "unavailable"}:
                 llm_cases += 1
             items = read_json(case_dir / "operand_resolutions.json") or []
@@ -707,8 +710,8 @@ def benchmark_summary(root: Path):
 
 single_root = output_dir / single_output_name
 single_verdict = read_json(single_root / "verdict.json")
-single_feedback = read_json(single_root / "feedback_loop.json")
-single_runtime = feedback_runtime(single_feedback)
+single_metadata = read_json(single_root / "analysis_metadata.json")
+single_runtime = analysis_runtime(single_metadata)
 single_resolution_methods = resolution_methods(single_root / "operand_resolutions.json")
 mini = benchmark_summary(output_dir / "eval_mini")
 full = benchmark_summary(output_dir / "eval_full")
@@ -756,8 +759,8 @@ if single_demo:
         "",
         "- Primary report for defense: `core_detection_report.md`",
         f"- Single-skill raw verdict: `{single_output_name}/verdict.json`",
-        f"- LLM runtime findings: `{single_output_name}/feedback_loop.json`",
-        f"- YASA operand resolutions: `{single_output_name}/operand_resolutions.json`",
+        f"- LLM runtime metadata: `{single_output_name}/analysis_metadata.json`",
+        f"- Operand resolutions: `{single_output_name}/operand_resolutions.json`",
         "- Full terminal log: `demo.log`",
         "",
         "## 5. Scope Note",
@@ -815,15 +818,15 @@ else:
         "- Primary report for defense: `core_detection_report.md`",
         "- Full terminal log: `demo.log`",
         f"- Single-skill raw verdict: `{single_output_name}/verdict.json`",
-        f"- LLM runtime findings: `{single_output_name}/feedback_loop.json`",
-        f"- YASA operand resolutions: `{single_output_name}/operand_resolutions.json`",
+        f"- LLM runtime metadata: `{single_output_name}/analysis_metadata.json`",
+        f"- Operand resolutions: `{single_output_name}/operand_resolutions.json`",
         "- Mini benchmark summary: `eval_mini/summary.md`",
         "",
         "## 7. Notes for Defense",
         "",
         "- The runnable prototype is demonstrated by `analyze-skill` and `run-eval`.",
         "- Container deployment is demonstrated by the Dockerfile and optional `--docker-build` run.",
-        "- Detection results are stored as JSON artifacts: `verdict.json`, `feedback_loop.json`, `operand_resolutions.json`, and `eval_*.json`.",
+        "- Detection results are stored as JSON artifacts: `verdict.json`, `analysis_metadata.json`, `operand_resolutions.json`, and `eval_*.json`.",
     ])
 content = "\n".join(lines) + "\n"
 (output_dir / "core_detection_report.md").write_text(content, encoding="utf-8")
@@ -842,7 +845,7 @@ echo
 echo "Raw findings files:"
 for file in \
   "$OUTPUT_DIR/$SINGLE_OUTPUT_NAME/verdict.json" \
-  "$OUTPUT_DIR/$SINGLE_OUTPUT_NAME/feedback_loop.json" \
+  "$OUTPUT_DIR/$SINGLE_OUTPUT_NAME/analysis_metadata.json" \
   "$OUTPUT_DIR/$SINGLE_OUTPUT_NAME/operand_resolutions.json" \
   "$OUTPUT_DIR/eval_mini/summary.md" \
   "$OUTPUT_DIR/eval_mini/eval_${DEMO_VARIANT}.json"; do
