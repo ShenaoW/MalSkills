@@ -12,9 +12,6 @@ and reasoning proofs behind the decision.
 > **Extended baseline reproduction notice.** The paper's RQ1 compared MalSkills
 > with five baselines using `gpt-5.3-codex-medium`. This repository integrates
 > 22 baseline adapters and defaults LLM-backed analysis to `gpt-5.6-luna`.
-> Current results are an updated extended study and need not match the original
-> RQ1 table. Report the model, baseline revision, mode, coverage, errors, and
-> `suspicious` policy with new results.
 
 ## How it works
 
@@ -27,11 +24,8 @@ and reasoning proofs behind the decision.
 3. **Behavior reasoning** executes 10 connected graph rules covering Data
    Exfiltration, Credential Theft, Remote Code Execution, Malware Delivery,
    Persistence, Reverse Shell, Ransomware, Resource Abuse, and Privilege
-   Escalation. Hybrid mode asks the LLM only about uncovered connected
-   multi-SSO workflows.
+   Escalation.
 
-The checked-in taxonomy and workflow rule files are the authoritative
-machine-readable definitions.
 
 ## Repository layout
 
@@ -305,9 +299,6 @@ connected workflows without changing active rules during the producing scan.
   --approved-by <reviewer>
 ```
 
-Promotion, deactivation, and rollback are explicit and retained in the
-content-addressed rule store.
-
 ## Citation
 
 MalSkills was accepted at ASE '26. The paper is distributed under
@@ -327,13 +318,10 @@ MalSkills was accepted at ASE '26. The paper is distributed under
   url       = {https://doi.org/10.1145/3832783.3834375}
 }
 ```
+If you have any questions, please contact shenaowang@hust.edu.cn.
 
 ## Project
 
 - [Contributing](CONTRIBUTING.md)
 - [Security policy](SECURITY.md)
-- [Apache License 2.0](LICENSE) for MalSkills code
-
-Third-party code remains under its upstream license. Review AgentVerus and
-SkillFortify licensing terms before redistribution or commercial use; a
-submodule does not relicense its contents under MalSkills.
+- [Apache License 2.0](LICENSE)
