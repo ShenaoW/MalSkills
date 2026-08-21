@@ -74,7 +74,11 @@ class RuleRegistry:
         self.current_path = self.root / "current"
         self.activation_journal_path = self.root / "activation.json"
         self.policy = policy or RuleGatePolicy()
-        self._initialize_database()
+        # Corpus workers construct registries concurrently. SQLite's WAL pragma
+        # and schema setup still require an exclusive writer, so serialize the
+        # one-time initialization across processes.
+        with self._initialization_lock():
+            self._initialize_database()
         with self._bundle_lock():
             self._reconcile_active_state()
 
@@ -1413,6 +1417,16 @@ class RuleRegistry:
                     (status, active_bundle, candidate_id),
                 )
             connection.commit()
+
+    @contextmanager
+    def _initialization_lock(self):
+        lock_path = self.root / ".initialization.lock"
+        with lock_path.open("a+", encoding="utf-8") as handle:
+            fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
+            try:
+                yield
+            finally:
+                fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
 
     @contextmanager
     def _bundle_lock(self):

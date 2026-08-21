@@ -363,7 +363,12 @@ class CorpusScanner:
             self._write_json_atomic(sample_path, sample_payload)
             self._write_json_atomic(scan_config_path, scan_config)
 
-        completed = self._load_checkpoint(results_path)
+        checkpoint_results = self._load_checkpoint(results_path)
+        completed = {
+            entry_id: result
+            for entry_id, result in checkpoint_results.items()
+            if result.get("status") == "ok"
+        }
         completed_before_run = len(completed)
         pending = [entry for entry in entries if entry.entry_id not in completed]
         self._emit(
