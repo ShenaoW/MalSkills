@@ -2,7 +2,7 @@
 
 MalSkills is a neuro-symbolic analyzer for detecting malicious agent Skills
 across prompts, source code, manifests, configuration files, and setup scripts.
-It produces a binary `malicious` or `benign` verdict together with the
+It reports a binary `malicious` or `benign` verdict with the
 Security-Sensitive Operations (SSOs), dependency graph, matched behavior rules,
 and reasoning proofs behind the decision.
 
@@ -10,52 +10,45 @@ and reasoning proofs behind the decision.
 
 > [!IMPORTANT]
 > **Extended baseline reproduction notice.** The paper's RQ1 compared MalSkills
-> with five baselines using `gpt-5.3-codex-medium`. The current repository
-> integrates 22 baseline adapters and defaults all LLM-backed analysis to
-> `gpt-5.6-luna`. Results produced by the current setup are an updated extended
-> study and are not expected to match the original RQ1 table exactly. Record the
-> model, baseline revision, enabled mode, `suspicious`/error policy, and coverage
-> when reporting new results.
+> with five baselines using `gpt-5.3-codex-medium`. This repository integrates
+> 22 baseline adapters and defaults LLM-backed analysis to `gpt-5.6-luna`.
+> Current results are an updated extended study and need not match the original
+> RQ1 table. Report the model, baseline revision, mode, coverage, errors, and
+> `suspicious` policy with new results.
 
 ## How it works
 
-1. **SSO extraction** identifies behavior-neutral sensitive operations. The
-   code extractor uses 2,665 Semgrep rules across 10 languages; Markdown and
-   Shell rules and a batched LLM semantic pass cover non-code and implicit
-   operations.
+1. **SSO extraction** identifies behavior-neutral sensitive operations using
+   2,665 Semgrep rules across 10 languages, Markdown/Shell rules, and an
+   optional batched LLM semantic pass.
 2. **SDG construction** builds a Skill Dependency Graph over Artifacts, SSOs,
    Operands, and Values. YASA and cross-artifact resolution recover object
    identity and directional value flow.
-3. **Behavior reasoning** executes 10 connected SDG workflow rules covering 9
-   malicious behavior classes. In hybrid mode, the LLM is called only for an
-   uncovered connected multi-SSO workflow.
+3. **Behavior reasoning** executes 10 connected graph rules covering Data
+   Exfiltration, Credential Theft, Remote Code Execution, Malware Delivery,
+   Persistence, Reverse Shell, Ransomware, Resource Abuse, and Privilege
+   Escalation. Hybrid mode asks the LLM only about uncovered connected
+   multi-SSO workflows.
 
-The built-in behavior classes are Data Exfiltration, Credential Theft, Remote
-Code Execution, Malware Delivery, Persistence, Reverse Shell, Ransomware,
-Resource Abuse, and Privilege Escalation. Malware Delivery has two built-in
-workflow rules, which is why there are 10 rules for 9 classes.
-
-The checked-in SSO taxonomy and workflow rule files are the authoritative
+The checked-in taxonomy and workflow rule files are the authoritative
 machine-readable definitions.
 
-## Requirements
+## Repository layout
 
-- Python `>= 3.10` for the complete setup (the core package supports 3.9, but
-  current Semgrep releases require 3.10)
-- Semgrep for default analysis, `full` corpus scans, and benchmark reproduction
-- Either Codex CLI authenticated with `codex login`, or an OpenAI-compatible
-  API endpoint and key, for LLM stages
-- Git submodules for the YASA engine and baseline implementations
-- Baseline-specific Python, Node.js, Go, Docker, sandbox, or API dependencies
-  when running those tools
-
-Semgrep is a soft dependency at runtime only to support deliberate reduced
-analysis. If it is unavailable while enabled, MalSkills records
-`semgrep.status=unavailable` in `analysis_metadata.json` and continues without
-code-rule findings. Such a run is not the complete pipeline and is not a valid
-paper benchmark reproduction.
+- `malskills/`: analyzer, CLI, SDG compiler, reasoning, and adapters
+- `malskills/rules/`: Markdown/Shell SSO rules and SDG workflow rules
+- `semgrep_rules/`: 2,665 neutral code-level SSO rules
+- `experiments/`: benchmark, ablation, and LLM comparison drivers
+- `data/ground_truth/`: checked-in benchmark inputs
+- `baseline/`: pinned third-party baseline implementations
+- `vendor/yasa/`: pinned YASA value-flow engine
+- `assets/`: paper artifacts and figures
 
 ## Installation
+
+The complete setup requires Python 3.10+, Semgrep, Git submodules, and either
+an authenticated Codex CLI or an OpenAI-compatible API. Individual baselines
+may additionally require Node.js, Go, Docker, sandboxes, or service tokens.
 
 ```bash
 git clone --recurse-submodules https://github.com/ShenaoW/MalSkills.git
@@ -68,24 +61,19 @@ python3 -m venv .venv
 codex login
 ```
 
-For an existing checkout, synchronize the pinned dependencies:
+Synchronize submodules in an existing checkout with:
 
 ```bash
 git submodule sync --recursive
 git submodule update --init --recursive
-git submodule status --recursive
 ```
 
-Third-party baseline dependencies are not installed by the root package. Use an
-isolated environment for each Python baseline and follow its upstream README.
-The AI-Infra-Guard and Runtime-Skill-Audit submodules point to
-MalSkills-maintained forks with minimal compatibility fixes, pinned to exact
-commits so a fresh clone reproduces the adapters without local patches. Their
-upstream projects remain credited in the baseline table and Git history.
+Baseline dependencies are not installed by the root package; use an isolated
+environment for each baseline and follow its upstream installation guidance.
 
 ## Quick start
 
-Run the complete analyzer on one Skill:
+Analyze one Skill with the configured complete pipeline:
 
 ```bash
 .venv/bin/malskills analyze-skill path/to/skill \
@@ -93,7 +81,7 @@ Run the complete analyzer on one Skill:
   --llm-config malskills.toml
 ```
 
-Run Semgrep and formal graph reasoning without LLM or deep value-flow analysis:
+Run a reduced static analysis without LLM or deep value-flow analysis:
 
 ```bash
 .venv/bin/malskills analyze-skill path/to/skill \
@@ -105,9 +93,6 @@ Run Semgrep and formal graph reasoning without LLM or deep value-flow analysis:
   --reasoning-mode formal
 ```
 
-Use `--disable-semgrep` only for an intentional reduced run. It removes the
-2,665 code-rule corpus from the analysis.
-
 Render an existing result directory:
 
 ```bash
@@ -116,12 +101,8 @@ Render an existing result directory:
 
 ## LLM configuration
 
-The single checked-in [malskills.toml](malskills.toml) routes MalSkills and all
-LLM-backed baselines through one shared runtime. Commands refer to it by the
-repository-relative path `malskills.toml`, so the configuration is portable
-across checkouts. It defaults to the authenticated Codex CLI. Global settings
-are in `[llm]`; each MalSkills stage can override `enabled`, `mode`, `model`,
-`reasoning_effort`, `enable_thinking`, and `timeout_sec`.
+The single repository-relative [malskills.toml](malskills.toml) configures
+MalSkills and every LLM-backed baseline. Its default is:
 
 ```toml
 [llm]
@@ -144,65 +125,33 @@ enabled = true
 enabled = false
 ```
 
-To use an OpenAI-compatible API instead, edit the global mode and model in the
-same `malskills.toml`; no second configuration file is needed. Keep credentials
-out of TOML:
-
-```toml
-[llm]
-mode = "api"
-model = "gpt-5.6-luna"
-timeout_sec = 300
-enable_thinking = false
-```
+For an OpenAI-compatible API, change `mode` and `model` in the same TOML
+file, then initialize the ignored environment file:
 
 ```bash
 cp .env.example .env
 chmod 600 .env
-# Edit .env and set MALSKILLS_LLM_BASE_URL and MALSKILLS_LLM_API_KEY.
+# Set MALSKILLS_LLM_BASE_URL and MALSKILLS_LLM_API_KEY in .env.
 ```
 
-`OPENAI_BASE_URL` and `OPENAI_API_KEY` are accepted as compatibility aliases.
-The `MALSKILLS_*` names take precedence. In API mode, the URL and key are
-required environment variables; `show-llm-config` reports only whether a key
-is configured and never prints its value. The same global backend and model
-are used by every LLM-backed baseline adapter.
+`OPENAI_BASE_URL` and `OPENAI_API_KEY` are compatibility aliases; the
+`MALSKILLS_*` names take precedence. Keep credentials and machine-specific
+paths in `.env`, while model selection, timeouts, reasoning effort, and stage
+enablement belong in `malskills.toml`.
 
-Keep persistent environment-specific values in `.env`; do not duplicate them
-in shell startup files. The committed [.env.example](.env.example) contains all
-supported long-lived settings:
-
-| Group | Variables |
-|---|---|
-| Shared LLM API | `MALSKILLS_LLM_BASE_URL`, `MALSKILLS_LLM_API_KEY` |
-| External baselines | `SNYK_TOKEN`, `VIRUSTOTAL_API_KEY` |
-| Local tools | `MALSKILLS_CODEX_CLI`, `MALSKILLS_CLAUDE_CLI`, `MALSKILLS_YASA_UAST_SDK` |
-| RQ3 profiles | `RQ3_*_MODEL`, `RQ3_*_API_KEY`, and the corresponding `*_API_URL` |
-| Performance tuning | LLM batch/worker/prompt limits and Semgrep timeout |
-
-Mode, model, timeout, reasoning effort, and stage enablement belong in
-`malskills.toml`. Per-run paths such as `MALSKILLS_CONFIG`, cache directories,
-and internal bridge credentials are generated or supplied by the CLI and
-should not be stored in `.env`.
-
-| Stage | Purpose | Current default |
+| Stage | Purpose | Default |
 |---|---|---:|
-| `sso_extraction` | Supplement static SSO findings and batch operand bindings | enabled |
-| `object_analysis` | Resolve remaining sink operands as a fallback | enabled |
+| `sso_extraction` | Supplement static findings and operand bindings | enabled |
+| `object_analysis` | Resolve remaining sink operands | enabled |
 | `pattern_reasoning` | Review uncovered connected SDG workflows | enabled |
-| `rule_feedback` | Review LLM-only findings for reusable rules | disabled |
+| `rule_feedback` | Propose reusable rules from LLM-only findings | disabled |
 
-Inspect the effective configuration before a long run:
+Environment variables can override global or stage TOML settings. Inspect the
+effective configuration before a long run:
 
 ```bash
 .venv/bin/malskills show-llm-config --llm-config malskills.toml
 ```
-
-Environment variables override TOML settings. Use `MALSKILLS_LLM_*` globally or
-the stage prefixes `MALSKILLS_LLM_SSO_EXTRACTION_*`,
-`MALSKILLS_LLM_OBJECT_ANALYSIS_*`, `MALSKILLS_LLM_PATTERN_REASONING_*`, and
-`MALSKILLS_LLM_RULE_FEEDBACK_*`. The precedence order is stage environment,
-global environment, stage TOML, global TOML, then the built-in default.
 
 ## Analysis outputs
 
@@ -212,30 +161,26 @@ The canonical analysis path is:
 SSOFinding -> SSO -> Operand -> Value -> Pattern -> Verdict
 ```
 
-`SSOFinding` is a source-grounded extractor record, not an SDG node. The SDG
-contains `Artifact -> SSO -> Operand -> Value` relations plus directional
-`Value -> Value` propagation edges.
+`SSOFinding` is a source-grounded extractor record rather than an SDG node.
+The SDG contains `Artifact -> SSO -> Operand -> Value` relations and
+directional `Value -> Value` propagation.
 
 | Output | Contents |
 |---|---|
-| `verdict.json` | Binary verdict, matched behaviors, and decision chain |
-| `human_report.md` | Human-readable result summary |
+| `verdict.json`, `human_report.md` | Verdict, behavior matches, and summary |
 | `artifacts.json` | Normalized artifact inventory |
 | `sso_findings.json`, `ssos.json` | Source findings and normalized SSOs |
-| `operands.json`, `values.json` | Operation objects and bound values |
-| `operand_resolutions.json` | Binding provenance and proven flow steps |
+| `operands.json`, `values.json`, `operand_resolutions.json` | Bound objects, values, and flow provenance |
 | `sdg.json`, `sdg.dot` | Machine-readable and Graphviz SDG |
-| `pattern_summary.json`, `proofs.json` | Matched graph rules and reasoning traces |
-| `workflow_discoveries.json` | LLM-nominated reusable workflows |
-| `feedback_loop.json` | Rule-feedback observations and candidates |
-| `analysis_metadata.json` | Stage status, model use, and ruleset digest |
-| `output_manifest.json` | Output schema version and file map |
+| `pattern_summary.json`, `proofs.json` | Graph matches and reasoning traces |
+| `analysis_metadata.json`, `output_manifest.json` | Runtime metadata and output schema |
+| `workflow_discoveries.json`, `feedback_loop.json` | Optional LLM discoveries and rule candidates |
 
 ## Large-corpus scanning
 
 `scan-corpus` deterministically samples a registry-style corpus, supports
-parallel workers and resume, and retains detailed results according to policy.
-The expected layout is `<corpus-root>/<source>/<package>/.../SKILL.md`.
+parallel workers and resume, and expects
+`<corpus-root>/<source>/<package>/.../SKILL.md`.
 
 ```bash
 .venv/bin/malskills scan-corpus \
@@ -248,42 +193,26 @@ The expected layout is `<corpus-root>/<source>/<package>/.../SKILL.md`.
   --llm-config malskills.toml
 ```
 
-| Profile | Extraction | Reasoning | Rule candidates |
-|---|---|---|---|
-| `static` | Semgrep and built-in static extraction | formal SDG rules | disabled |
-| `full` | Static extraction plus TOML-enabled LLM stages | selected by `pattern_reasoning.enabled` | when `rule_feedback.enabled` |
+| Profile | Extraction and reasoning | Rule candidates |
+|---|---|---|
+| `static` | Static extraction and formal graph rules | disabled |
+| `full` | Static analysis plus TOML-enabled LLM stages | controlled by `rule_feedback.enabled` |
 
-The `full` profile respects every per-stage `enabled` value in
-`malskills.toml`. It prepares stage caches and stores learned-rule state under
-`<output>/learned_rules` unless `--rule-store` is provided; disabled stages are
-not invoked. Explicit ablation variants may still override individual stages
-as part of their experiment definition.
-
-The scanner selects one primary Skill tree per package and removes exact
-duplicate primary `SKILL.md` content unless `--keep-content-duplicates` is
-used. Results are appended to `scan_results.jsonl`; rerun with `--resume` after
-an interruption. `sample_manifest.json` records the exact sample,
-`scan_config.json` protects resume compatibility, and `scan_summary.json`
-reports throughput, verdicts, behavior distribution, and candidate counts.
-
-By default, complete per-Skill outputs are retained for malicious results and
-errors. Change this with `--retain all` or `--retain none`. Because the corpus is
-unlabeled, flag rate must not be reported as precision or malware prevalence.
+The `full` profile respects every TOML stage switch. Results are checkpointed
+in `scan_results.jsonl`; use `--resume` after interruption and
+`--retain all|malicious|none` to control detailed case outputs. Exact duplicate
+primary Skill content is removed by default. Because the corpus is unlabeled,
+flag rate is neither precision nor malware prevalence.
 
 ## Benchmark reproduction
 
-The labeled benchmark contains 100 malicious and 100 benign Skills. Generate
-its index from the checked-in ground truth when needed:
+The checked-in benchmark contains 100 malicious and 100 benign Skills:
 
 ```bash
 .venv/bin/malskills build-benchmark-index \
   --root . \
   --output output/ground_truth_final_benchmark.json
-```
 
-Run the current full configuration:
-
-```bash
 .venv/bin/malskills run-eval \
   --benchmark output/ground_truth_final_benchmark.json \
   --output output/rq1_malskills_current \
@@ -291,21 +220,15 @@ Run the current full configuration:
   --llm-config malskills.toml
 ```
 
-The evaluator prints colored ingest, SSO, SDG, reasoning, and result events for
-every sample, with a `WAIT` heartbeat every 30 seconds. Use
-`--progress-interval`, `--color`, or `--quiet` to control the output.
+The evaluator prints colored per-sample stage events and a 30-second `WAIT`
+heartbeat. Use `--progress-interval`, `--color`, or `--quiet` to adjust it.
+`suspicious` baseline results are excluded from the confusion matrix and
+reported through coverage; errors remain non-malicious predictions. Always
+report coverage, suspicious results, and errors with precision, recall, FPR,
+and F1.
 
-Malicious is the positive class. A baseline prediction of `suspicious` is
-excluded from TP/TN/FP/FN, and coverage is the non-suspicious fraction. An
-`error` remains in the evaluated set as a non-malicious prediction: it is an FN
-for a malicious sample and a TN for a benign sample. Always report coverage,
-`suspicious` count, and error count beside precision, recall, FPR, and F1.
-
-Available MalSkills variants:
-
-| Variant | Change from the full pipeline |
+| Variant | Change from `benchmark_full` |
 |---|---|
-| `benchmark_full` | Complete benchmark configuration |
 | `benchmark_semgrep_findings_only` | Disable LLM SSO extraction |
 | `benchmark_llm_findings_only` | Disable Semgrep findings |
 | `benchmark_formal_reasoning_only` | Force formal graph reasoning |
@@ -314,58 +237,41 @@ Available MalSkills variants:
 | `benchmark_no_cross_artifact_resolution` | Disable cross-artifact resolution |
 | `benchmark_static_only` | Disable LLM, YASA, and cross-artifact resolution |
 
-The RQ3 driver is [experiments/run_rq3_llm_comparison.py](experiments/run_rq3_llm_comparison.py).
+The RQ3 driver is
+[experiments/run_rq3_llm_comparison.py](experiments/run_rq3_llm_comparison.py).
 
 ## Baseline integrations
 
-Every adapter preserves the upstream report and writes a normalized
-`output_manifest.json` with `predicted`, `score`, and `patterns`. LLM-backed
-adapters share the backend and model configured in `malskills.toml`.
+Every adapter preserves its upstream report and emits a normalized manifest.
+LLM-backed adapters share the backend and model in `malskills.toml`.
 
-The default benchmark driver includes these 15 adapters:
-
-| Variant suffix | Tool | Runtime |
+| Tool | Availability | Additional runtime |
 |---|---|---|
-| `skill_security_audit_baseline` | skill-security-audit | Python |
-| `skill_security_scan_baseline` | skill-security-scan | Python |
-| `skills_security_audit_baseline` | skills_security_audit | Python |
-| `caterpillar_baseline` | Caterpillar | Node.js + configured LLM |
-| `clawscan_baseline` | ClawScan by ClawGuard | Node.js |
-| `skill_scanner_baseline` | Cisco AI Defense Skill Scanner | Python + configured LLM |
-| `nova_proximity_baseline` | Nova Proximity | Python + configured LLM |
-| `agentguard_baseline` | GoPlus AgentGuard | Node.js |
-| `skillspector_baseline` | NVIDIA SkillSpector | Python + configured LLM |
-| `agentverus_baseline` | AgentVerus Scanner | Node.js 22+ |
-| `skilltotal_baseline` | SkillTotal | Python 3.10+ |
-| `clawvet_baseline` | ClawVet | Node.js 22+ |
-| `razin_baseline` | Razin | Python 3.12+ |
-| `openclaw_clawscan_baseline` | OpenClaw ClawScan | Go |
-| `skillfortify_baseline` | SkillFortify | Python 3.11+ |
+| skill-security-audit | default | Python |
+| skill-security-scan | default | Python |
+| skills_security_audit | default | Python |
+| Caterpillar | default | Node.js + LLM |
+| ClawScan by ClawGuard | default | Node.js |
+| Cisco AI Defense Skill Scanner | default | Python + LLM |
+| Nova Proximity | default | Python + LLM |
+| GoPlus AgentGuard | default | Node.js |
+| NVIDIA SkillSpector | default | Python + LLM |
+| AgentVerus Scanner | default | Node.js 22+ |
+| SkillTotal | default | Python 3.10+ |
+| ClawVet | default | Node.js 22+ |
+| Razin | default | Python 3.12+ |
+| OpenClaw ClawScan | default | Go |
+| SkillFortify | default | Python 3.11+ |
+| MaliciousAgentSkillsBench | opt-in | LLM + `codex-skill-sandbox` |
+| Snyk Agent Scan | opt-in | `SNYK_TOKEN` |
+| Tencent AI-Infra-Guard | opt-in | LLM |
+| SkillSieve | opt-in | LLM |
+| SkillWard | opt-in | LLM + Docker sandbox |
+| Runtime Skill Audit | opt-in | LLM + OpenClaw + Docker |
+| Enkrypt AI Skill Sentinel | opt-in | LLM; optional VirusTotal |
 
-These 7 adapters are opt-in because they require an external service, sandbox,
-or heavier runtime setup:
-
-| Variant suffix | Tool | Additional requirement |
-|---|---|---|
-| `masb_baseline` | MaliciousAgentSkillsBench | Configured LLM and `codex-skill-sandbox` dynamic validation |
-| `snyk_agent_scan_baseline` | Snyk Agent Scan | `SNYK_TOKEN` |
-| `ai_infra_guard_baseline` | Tencent AI-Infra-Guard | Configured LLM |
-| `skillsieve_baseline` | SkillSieve | Configured LLM |
-| `skillward_baseline` | SkillWard | Configured LLM, Docker, and its sandbox image |
-| `runtime_skill_audit_baseline` | Runtime Skill Audit | Configured LLM, OpenClaw, Docker, and `rsa_sandbox` |
-| `skill_sentinel_baseline` | Enkrypt AI Skill Sentinel | Configured LLM; optional `VIRUSTOTAL_API_KEY` |
-
-Run one baseline on the complete benchmark:
-
-```bash
-.venv/bin/malskills run-eval \
-  --benchmark output/ground_truth_final_benchmark.json \
-  --output output/skillspector_baseline \
-  --variant benchmark_skillspector_baseline \
-  --llm-config malskills.toml
-```
-
-Run MalSkills ablations and the default baseline set:
+Run the default study, adding `--include-optional-baselines` only after the
+additional dependencies are ready:
 
 ```bash
 .venv/bin/python experiments/run_benchmark_study.py \
@@ -373,27 +279,15 @@ Run MalSkills ablations and the default baseline set:
   --output output/benchmark_study
 ```
 
-Add the opt-in adapters only after their dependencies are ready:
+AI-Infra-Guard and Runtime-Skill-Audit are pinned to MalSkills-maintained forks
+with minimal compatibility fixes; attribution and upstream history are
+preserved. LLM-backed tools use a short-lived local bridge so Codex CLI and API
+mode share one configuration without exposing the upstream key in reports.
 
-```bash
-.venv/bin/python experiments/run_benchmark_study.py \
-  --benchmark output/ground_truth_final_benchmark.json \
-  --output output/benchmark_study_all \
-  --include-optional-baselines
-```
+## Rule learning
 
-Snyk Agent Scan continues to call the Snyk service. Other LLM-backed adapters
-use a short-lived local compatibility bridge. In Codex mode it translates
-OpenAI-, Anthropic-, or Ollama-compatible requests into `codex exec` calls; in
-API mode it forwards them to the configured upstream without exposing the
-upstream key to baseline command arguments or reports. MASB uses the same
-backend for both its static audit and its monitored dynamic sandbox agent.
-
-## Guarded rule learning
-
-Rule learning is opt-in. It accumulates LLM-only SSO findings and uncovered
-connected workflows without changing the active rules during the scan that
-produced them.
+Rule learning is opt-in. It accumulates recurring LLM-only SSOs and uncovered
+connected workflows without changing active rules during the producing scan.
 
 ```bash
 .venv/bin/malskills analyze-skill path/to/skill \
@@ -411,36 +305,18 @@ produced them.
   --approved-by <reviewer>
 ```
 
-Promotion, deactivation, and rollback are explicit, validated, and retained in
-the content-addressed rule store.
-
-## Repository layout
-
-- `malskills/`: analyzer, CLI, SDG compiler, reasoning, and adapters
-- `semgrep_rules/`: 2,665 neutral code-level SSO rules
-- `malskills/rules/`: Markdown/Shell SSO rules and SDG workflow rules
-- `experiments/`: benchmark, ablation, and LLM-comparison drivers
-- `data/`: benchmark source data and analysis inputs
-- `baseline/`: pinned third-party baseline implementations
-- `vendor/yasa/`: pinned YASA value-flow engine
-- `assets/`: paper artifacts and figures
-- `output/`: generated indexes, scan outputs, and evaluation results
-
-## Project policies
-
-- [Contributing](CONTRIBUTING.md)
-- [Security policy](SECURITY.md)
+Promotion, deactivation, and rollback are explicit and retained in the
+content-addressed rule store.
 
 ## Citation
 
 MalSkills was accepted at ASE '26. The paper is distributed under
-[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/); the
-repository's software license is stated separately below.
+[CC BY-NC-ND 4.0](https://creativecommons.org/licenses/by-nc-nd/4.0/).
 
 ```bibtex
 @inproceedings{wang2026malskills,
-  author    = {Wang, Shenao and Wang, Yayi and Wang, Haoyu},
-  title     = {{MalSkills}: Detecting Malicious Skills in the Agentic Supply Chain via Neuro-Symbolic Reasoning},
+  author    = {Wang, Shenao and He, Junjie and Zhao, Yanjie and Wang, Yayi and Yu, Kan and Wang, Haoyu},
+  title     = {{MalSkills}: Detecting Malicious Skills in the Agentic Supply Chain via Neuro-symbolic Reasoning},
   booktitle = {Proceedings of the 41st IEEE/ACM International Conference on Automated Software Engineering (ASE '26)},
   year      = {2026},
   month     = oct,
@@ -452,10 +328,12 @@ repository's software license is stated separately below.
 }
 ```
 
-## License
+## Project
 
-MalSkills is licensed under the [Apache License 2.0](LICENSE). Third-party code
-remains under each upstream project's license. In particular, review the
-current AgentVerus licensing terms and SkillFortify's Elastic License 2.0
-before redistribution or commercial use; a submodule does not relicense its
-contents under MalSkills.
+- [Contributing](CONTRIBUTING.md)
+- [Security policy](SECURITY.md)
+- [Apache License 2.0](LICENSE) for MalSkills code
+
+Third-party code remains under its upstream license. Review AgentVerus and
+SkillFortify licensing terms before redistribution or commercial use; a
+submodule does not relicense its contents under MalSkills.
