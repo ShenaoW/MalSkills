@@ -14,7 +14,7 @@ modified baseline revisions are not supported.
 ## Reporting a Vulnerability
 
 Do not open a public issue for a vulnerability. Use
-[GitHub private vulnerability reporting](https://github.com/ShenaoW/MalSkills/security/advisories/new).
+[GitHub private vulnerability reporting](https://github.com/security-pride/MalSkills/security/advisories/new).
 If that channel is unavailable, email `shenaowang@hust.edu.cn` with the subject
 `[MalSkills Security]`.
 

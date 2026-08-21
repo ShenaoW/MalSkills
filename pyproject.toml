@@ -40,9 +40,9 @@ analysis = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/ShenaoW/MalSkills"
-Repository = "https://github.com/ShenaoW/MalSkills.git"
-Issues = "https://github.com/ShenaoW/MalSkills/issues"
+Homepage = "https://github.com/security-pride/MalSkills"
+Repository = "https://github.com/security-pride/MalSkills.git"
+Issues = "https://github.com/security-pride/MalSkills/issues"
 
 [project.scripts]
 malskills = "malskills.cli:main"

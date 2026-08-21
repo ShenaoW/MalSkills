@@ -45,7 +45,7 @@ an authenticated Codex CLI or an OpenAI-compatible API. Individual baselines
 may additionally require Node.js, Go, Docker, sandboxes, or service tokens.
 
 ```bash
-git clone --recurse-submodules https://github.com/ShenaoW/MalSkills.git
+git clone --recurse-submodules https://github.com/security-pride/MalSkills.git
 cd MalSkills
 
 python3 -m venv .venv
@@ -307,7 +307,7 @@ MalSkills was accepted at ASE '26. The paper is distributed under
 ```bibtex
 @inproceedings{wang2026malskills,
   author    = {Wang, Shenao and He, Junjie and Zhao, Yanjie and Wang, Yayi and Yu, Kan and Wang, Haoyu},
-  title     = {{MalSkills}: Detecting Malicious Skills in the Agentic Supply Chain via Neuro-symbolic Reasoning},
+  title     = {{MalSkills}: Detecting Malicious Skills in the Agentic Supply Chain via Neuro-Symbolic Reasoning},
   booktitle = {Proceedings of the 41st IEEE/ACM International Conference on Automated Software Engineering (ASE '26)},
   year      = {2026},
   month     = oct,
@@ -325,3 +325,4 @@ If you have any questions, please contact shenaowang@hust.edu.cn.
 - [Contributing](CONTRIBUTING.md)
 - [Security policy](SECURITY.md)
 - [Apache License 2.0](LICENSE)
+- [Third-party and dataset notices](THIRD_PARTY_NOTICES.md)

@@ -16,7 +16,7 @@ not through a public issue.
 ## Development Setup
 
 ```bash
-git clone --recurse-submodules https://github.com/ShenaoW/MalSkills.git
+git clone --recurse-submodules https://github.com/security-pride/MalSkills.git
 cd MalSkills
 python3 -m venv .venv
 .venv/bin/pip install -e '.[analysis]'
